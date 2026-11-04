@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T22:21:58Z",
+ "updated": "2026-11-04T22:40:00Z",
  "asof": "2026-11-04",
  "rows": [
   {
@@ -906,27 +906,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "NESN.SW",
-   "name": "NESTLE N",
-   "sector": "Consumer Defensive",
-   "marketCap": 270733466492,
-   "currency": "CHF",
-   "usd": 1.22529507,
-   "pe": 29.7,
-   "ai": false,
-   "price": 85.9,
-   "d1": 1.77,
-   "m1": 14.87,
-   "m3": 6.5,
-   "ytd": 13.55,
-   "y1": 13.32,
-   "y5": -18.62,
-   "high52": 87.09,
-   "fromHigh": 1.37,
-   "rank": 44,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "NFLX",
    "name": "Netflix, Inc.",
    "sector": "Communication Services",
@@ -944,6 +923,27 @@
    "y5": 2.82,
    "high52": 116.73,
    "fromHigh": 43.13,
+   "rank": 44,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "NESN.SW",
+   "name": "NESTLE N",
+   "sector": "Consumer Defensive",
+   "marketCap": 270670435513,
+   "currency": "CHF",
+   "usd": 1.2250098,
+   "pe": 29.7,
+   "ai": false,
+   "price": 85.9,
+   "d1": 1.77,
+   "m1": 14.87,
+   "m3": 6.5,
+   "ytd": 13.55,
+   "y1": 13.32,
+   "y5": -18.62,
+   "high52": 87.09,
+   "fromHigh": 1.37,
    "rank": 45,
    "rating": "HOLD"
   },
@@ -1130,7 +1130,7 @@
    "m3": 8.63,
    "ytd": 24.28,
    "y1": 27.26,
-   "y5": 69.13,
+   "y5": 69.12,
    "high52": 546.4,
    "fromHigh": 3.96,
    "rank": 54,
@@ -1161,9 +1161,9 @@
    "ticker": "SIE.DE",
    "name": "SIEMENS AG                    N",
    "sector": "Industrials",
-   "marketCap": 236612153895,
+   "marketCap": 236691910017,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 27.6,
    "ai": false,
    "price": 275.65,
@@ -1497,9 +1497,9 @@
    "ticker": "ALV.DE",
    "name": "Allianz SE                    v",
    "sector": "Financial Services",
-   "marketCap": 195287908507,
+   "marketCap": 195353735245,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 15.0,
    "ai": false,
    "price": 458.4,
@@ -1518,9 +1518,9 @@
    "ticker": "CBA.AX",
    "name": "CWLTH BANK FPO [CBA]",
    "sector": "Financial Services",
-   "marketCap": 194785256117,
+   "marketCap": 194757969245,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 25.5,
    "ai": false,
    "price": 166.26,
@@ -1959,9 +1959,9 @@
    "ticker": "AIR.PA",
    "name": "AIRBUS SE",
    "sector": "Industrials",
-   "marketCap": 177363982224,
+   "marketCap": 177423767248,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 25.7,
    "ai": false,
    "price": 200.1,
@@ -1980,9 +1980,9 @@
    "ticker": "6857.T",
    "name": "ADVANTEST CORP",
    "sector": "Technology",
-   "marketCap": 157618469612,
+   "marketCap": 157640369922,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 43.9,
    "ai": true,
    "price": 34570.0,
@@ -2001,9 +2001,9 @@
    "ticker": "ABBN.SW",
    "name": "ABB LTD N",
    "sector": "Industrials",
-   "marketCap": 155934051766,
+   "marketCap": 155897747883,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 32.0,
    "ai": false,
    "price": 70.46,
@@ -2043,9 +2043,9 @@
    "ticker": "IBE.MC",
    "name": "ACCIONES IBERDROLA",
    "sector": "Utilities",
-   "marketCap": 169368652976,
+   "marketCap": 169425742972,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 30.5,
    "ai": false,
    "price": 22.6,
@@ -2148,9 +2148,9 @@
    "ticker": "6098.T",
    "name": "RECRUIT HOLDINGS CO LTD",
    "sector": "Communication Services",
-   "marketCap": 153902793573,
+   "marketCap": 153924177608,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 42.9,
    "ai": false,
    "price": 17550.0,
@@ -2232,9 +2232,9 @@
    "ticker": "SU.PA",
    "name": "SCHNEIDER ELECTRIC SE",
    "sector": "Industrials",
-   "marketCap": 152853266667,
+   "marketCap": 152904789733,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 27.8,
    "ai": false,
    "price": 231.55,
@@ -2379,9 +2379,9 @@
    "ticker": "RR.L",
    "name": "ROLLS-ROYCE HOLDINGS PLC ORD SH",
    "sector": "Industrials",
-   "marketCap": 139491196475,
+   "marketCap": 139494949034,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 35.1,
    "ai": false,
    "price": 1262.8,
@@ -2394,27 +2394,6 @@
    "high52": 1586.0,
    "fromHigh": 20.38,
    "rank": 114,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "BBVA",
-   "name": "Banco Bilbao Vizcaya Argentaria",
-   "sector": "Financial Services",
-   "marketCap": 140084558604,
-   "currency": "USD",
-   "usd": 1.0,
-   "pe": 11.2,
-   "ai": false,
-   "price": 25.47,
-   "d1": 6.12,
-   "m1": -4.08,
-   "m3": -7.97,
-   "ytd": 14.48,
-   "y1": 35.75,
-   "y5": 403.15,
-   "high52": 29.17,
-   "fromHigh": 12.69,
-   "rank": 115,
    "rating": "HOLD"
   },
   {
@@ -2435,7 +2414,7 @@
    "y5": 97.21,
    "high52": 110.16,
    "fromHigh": 23.24,
-   "rank": 116,
+   "rank": 115,
    "rating": "HOLD"
   },
   {
@@ -2456,16 +2435,16 @@
    "y5": 122.74,
    "high52": 478.0,
    "fromHigh": 26.13,
-   "rank": 117,
+   "rank": 116,
    "rating": "HOLD"
   },
   {
    "ticker": "INVE-B.ST",
    "name": "Investor AB ser. B",
    "sector": "Financial Services",
-   "marketCap": 136875900549,
+   "marketCap": 136928157236,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 6.2,
    "ai": false,
    "price": 434.4,
@@ -2477,7 +2456,7 @@
    "y5": 128.3,
    "high52": 436.85,
    "fromHigh": 0.56,
-   "rank": 118,
+   "rank": 117,
    "rating": "HOLD"
   },
   {
@@ -2498,7 +2477,7 @@
    "y5": 173.57,
    "high52": 239.38,
    "fromHigh": 1.9,
-   "rank": 119,
+   "rank": 118,
    "rating": "HOLD"
   },
   {
@@ -2519,16 +2498,16 @@
    "y5": 165.01,
    "high52": 65.33,
    "fromHigh": 3.62,
-   "rank": 120,
+   "rank": 119,
    "rating": "HOLD"
   },
   {
    "ticker": "6501.T",
    "name": "HITACHI",
    "sector": "Industrials",
-   "marketCap": 137728225693,
+   "marketCap": 137747362351,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 29.4,
    "ai": false,
    "price": 4894.0,
@@ -2540,7 +2519,7 @@
    "y5": 283.26,
    "high52": 5983.0,
    "fromHigh": 18.2,
-   "rank": 121,
+   "rank": 120,
    "rating": "HOLD"
   },
   {
@@ -2561,16 +2540,16 @@
    "y5": 0.15,
    "high52": 105.72,
    "fromHigh": 0.72,
-   "rank": 122,
+   "rank": 121,
    "rating": "HOLD"
   },
   {
    "ticker": "8035.T",
    "name": "TOKYO ELECTRON",
    "sector": "Technology",
-   "marketCap": 138105092552,
+   "marketCap": 138124281574,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 54.2,
    "ai": true,
    "price": 9663.0,
@@ -2582,16 +2561,16 @@
    "y5": 190.02,
    "high52": 16132.24,
    "fromHigh": 40.1,
-   "rank": 123,
+   "rank": 122,
    "rating": "HOLD"
   },
   {
    "ticker": "UCG.MI",
    "name": "UNICREDIT",
    "sector": "Financial Services",
-   "marketCap": 131803976977,
+   "marketCap": 131848404847,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 11.2,
    "ai": false,
    "price": 78.32,
@@ -2603,7 +2582,7 @@
    "y5": 789.58,
    "high52": 86.42,
    "fromHigh": 9.37,
-   "rank": 124,
+   "rank": 123,
    "rating": "HOLD"
   },
   {
@@ -2624,16 +2603,16 @@
    "y5": 32.8,
    "high52": 67.94,
    "fromHigh": 5.51,
-   "rank": 125,
+   "rank": 124,
    "rating": "HOLD"
   },
   {
    "ticker": "AI.PA",
    "name": "AIR LIQUIDE",
    "sector": "Basic Materials",
-   "marketCap": 134299118603,
+   "marketCap": 134344387523,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 33.8,
    "ai": false,
    "price": 187.36,
@@ -2645,7 +2624,7 @@
    "y5": 83.07,
    "high52": 188.62,
    "fromHigh": 0.67,
-   "rank": 126,
+   "rank": 125,
    "rating": "HOLD"
   },
   {
@@ -2666,7 +2645,7 @@
    "y5": 106.89,
    "high52": 374.6,
    "fromHigh": 0.11,
-   "rank": 127,
+   "rank": 126,
    "rating": "HOLD"
   },
   {
@@ -2687,7 +2666,7 @@
    "y5": 153.42,
    "high52": 79.81,
    "fromHigh": 2.26,
-   "rank": 128,
+   "rank": 127,
    "rating": "HOLD"
   },
   {
@@ -2708,7 +2687,7 @@
    "y5": 7.58,
    "high52": 288.04,
    "fromHigh": 20.37,
-   "rank": 129,
+   "rank": 128,
    "rating": "HOLD"
   },
   {
@@ -2729,7 +2708,7 @@
    "y5": 333.37,
    "high52": 98.66,
    "fromHigh": 21.06,
-   "rank": 130,
+   "rank": 129,
    "rating": "SELL"
   },
   {
@@ -2750,7 +2729,7 @@
    "y5": 67.07,
    "high52": 219.22,
    "fromHigh": 22.01,
-   "rank": 131,
+   "rank": 130,
    "rating": "NO RATING"
   },
   {
@@ -2771,7 +2750,7 @@
    "y5": 563.49,
    "high52": 1143.27,
    "fromHigh": 51.27,
-   "rank": 132,
+   "rank": 131,
    "rating": "HOLD"
   },
   {
@@ -2792,7 +2771,7 @@
    "y5": 3.76,
    "high52": 152.14,
    "fromHigh": 13.66,
-   "rank": 133,
+   "rank": 132,
    "rating": "HOLD"
   },
   {
@@ -2813,7 +2792,7 @@
    "y5": 5.64,
    "high52": 109.88,
    "fromHigh": 0.16,
-   "rank": 134,
+   "rank": 133,
    "rating": "SELL"
   },
   {
@@ -2834,16 +2813,16 @@
    "y5": 395.0,
    "high52": 1073.95,
    "fromHigh": 0.42,
-   "rank": 135,
+   "rank": 134,
    "rating": "HOLD"
   },
   {
    "ticker": "CFR.SW",
    "name": "RICHEMONT N",
    "sector": "Consumer Cyclical",
-   "marketCap": 123980903468,
+   "marketCap": 123952038777,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 31.5,
    "ai": false,
    "price": 172.1,
@@ -2855,16 +2834,16 @@
    "y5": 68.62,
    "high52": 197.08,
    "fromHigh": 12.68,
-   "rank": 136,
+   "rank": 135,
    "rating": "HOLD"
   },
   {
    "ticker": "DTE.DE",
    "name": "DEUTSCHE TELEKOM AG           N",
    "sector": "Communication Services",
-   "marketCap": 143752279685,
+   "marketCap": 143800735033,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 15.0,
    "ai": false,
    "price": 26.76,
@@ -2876,7 +2855,7 @@
    "y5": 89.69,
    "high52": 33.28,
    "fromHigh": 19.59,
-   "rank": 137,
+   "rank": 136,
    "rating": "HOLD"
   },
   {
@@ -2897,7 +2876,7 @@
    "y5": 94.65,
    "high52": 185.92,
    "fromHigh": 4.54,
-   "rank": 138,
+   "rank": 137,
    "rating": "SELL"
   },
   {
@@ -2918,7 +2897,7 @@
    "y5": 140.48,
    "high52": 135.01,
    "fromHigh": 12.52,
-   "rank": 139,
+   "rank": 138,
    "rating": "HOLD"
   },
   {
@@ -2939,7 +2918,7 @@
    "y5": 45.48,
    "high52": 256.64,
    "fromHigh": 19.61,
-   "rank": 140,
+   "rank": 139,
    "rating": "HOLD"
   },
   {
@@ -2960,7 +2939,7 @@
    "y5": 666.33,
    "high52": 799.61,
    "fromHigh": 59.5,
-   "rank": 141,
+   "rank": 140,
    "rating": "HOLD"
   },
   {
@@ -2981,16 +2960,16 @@
    "y5": 47.81,
    "high52": 309.4,
    "fromHigh": 1.89,
-   "rank": 142,
+   "rank": 141,
    "rating": "HOLD"
   },
   {
    "ticker": "8058.T",
    "name": "MITSUBISHI CORP",
    "sector": "Industrials",
-   "marketCap": 119054850846,
+   "marketCap": 119071392931,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 21.5,
    "ai": false,
    "price": 5148.0,
@@ -3002,7 +2981,7 @@
    "y5": 395.41,
    "high52": 5934.64,
    "fromHigh": 13.25,
-   "rank": 143,
+   "rank": 142,
    "rating": "HOLD"
   },
   {
@@ -3023,7 +3002,7 @@
    "y5": 284.53,
    "high52": 11.49,
    "fromHigh": 14.71,
-   "rank": 144,
+   "rank": 143,
    "rating": "HOLD"
   },
   {
@@ -3044,7 +3023,7 @@
    "y5": 100.12,
    "high52": 683.27,
    "fromHigh": 12.91,
-   "rank": 145,
+   "rank": 144,
    "rating": "HOLD"
   },
   {
@@ -3065,7 +3044,7 @@
    "y5": 110.12,
    "high52": 51.49,
    "fromHigh": 11.42,
-   "rank": 146,
+   "rank": 145,
    "rating": "HOLD"
   },
   {
@@ -3086,7 +3065,7 @@
    "y5": 29.65,
    "high52": 386.02,
    "fromHigh": 12.01,
-   "rank": 147,
+   "rank": 146,
    "rating": "HOLD"
   },
   {
@@ -3107,16 +3086,16 @@
    "y5": 86.5,
    "high52": 96.51,
    "fromHigh": 0.09,
-   "rank": 148,
+   "rank": 147,
    "rating": "HOLD"
   },
   {
    "ticker": "OR.PA",
    "name": "L'OREAL",
    "sector": "Consumer Defensive",
-   "marketCap": 266417875221,
+   "marketCap": 266507678116,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 37.8,
    "ai": false,
    "price": 444.75,
@@ -3128,16 +3107,16 @@
    "y5": 17.97,
    "high52": 448.1,
    "fromHigh": 0.75,
-   "rank": 149,
+   "rank": 148,
    "rating": "HOLD"
   },
   {
    "ticker": "ZURN.SW",
    "name": "ZURICH INSURANCE N",
    "sector": "Financial Services",
-   "marketCap": 116694456625,
+   "marketCap": 116667288333,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 16.3,
    "ai": false,
    "price": 637.6,
@@ -3149,7 +3128,7 @@
    "y5": 102.48,
    "high52": 640.6,
    "fromHigh": 0.47,
-   "rank": 150,
+   "rank": 149,
    "rating": "HOLD"
   },
   {
@@ -3170,16 +3149,16 @@
    "y5": 197.6,
    "high52": 1097.73,
    "fromHigh": 17.08,
-   "rank": 151,
+   "rank": 150,
    "rating": "HOLD"
   },
   {
    "ticker": "D05.SI",
    "name": "DBS",
    "sector": "Financial Services",
-   "marketCap": 157514149745,
+   "marketCap": 157491964858,
    "currency": "SGD",
-   "usd": 0.78249103,
+   "usd": 0.78238082,
    "pe": 11.8,
    "ai": false,
    "price": 70.78,
@@ -3191,16 +3170,16 @@
    "y5": 218.85,
    "high52": 79.05,
    "fromHigh": 10.46,
-   "rank": 152,
+   "rank": 151,
    "rating": "HOLD"
   },
   {
    "ticker": "MC.PA",
    "name": "LVMH",
    "sector": "Consumer Cyclical",
-   "marketCap": 230480474701,
+   "marketCap": 230558163984,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 19.0,
    "ai": false,
    "price": 416.25,
@@ -3212,7 +3191,7 @@
    "y5": -33.78,
    "high52": 643.8,
    "fromHigh": 35.35,
-   "rank": 153,
+   "rank": 152,
    "rating": "HOLD"
   },
   {
@@ -3233,16 +3212,16 @@
    "y5": -21.38,
    "high52": 178.52,
    "fromHigh": 39.05,
-   "rank": 154,
+   "rank": 153,
    "rating": "HOLD"
   },
   {
    "ticker": "ISP.MI",
    "name": "INTESA SANPAOLO",
    "sector": "Financial Services",
-   "marketCap": 119503287127,
+   "marketCap": 119543568737,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 11.0,
    "ai": false,
    "price": 6.28,
@@ -3254,7 +3233,7 @@
    "y5": 276.33,
    "high52": 6.94,
    "fromHigh": 9.44,
-   "rank": 155,
+   "rank": 154,
    "rating": "HOLD"
   },
   {
@@ -3275,7 +3254,7 @@
    "y5": 71.54,
    "high52": 318.32,
    "fromHigh": 3.16,
-   "rank": 156,
+   "rank": 155,
    "rating": "HOLD"
   },
   {
@@ -3296,16 +3275,16 @@
    "y5": 146.35,
    "high52": 124.03,
    "fromHigh": 3.35,
-   "rank": 157,
+   "rank": 156,
    "rating": "HOLD"
   },
   {
    "ticker": "BNP.PA",
    "name": "BNP PARIBAS ACT.A",
    "sector": "Financial Services",
-   "marketCap": 112886889184,
+   "marketCap": 112924940571,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 8.0,
    "ai": false,
    "price": 91.7,
@@ -3317,7 +3296,7 @@
    "y5": 122.72,
    "high52": 110.15,
    "fromHigh": 16.75,
-   "rank": 158,
+   "rank": 157,
    "rating": "HOLD"
   },
   {
@@ -3338,7 +3317,7 @@
    "y5": 566.99,
    "high52": 493.98,
    "fromHigh": 20.51,
-   "rank": 159,
+   "rank": 158,
    "rating": "SELL"
   },
   {
@@ -3359,7 +3338,7 @@
    "y5": 77.17,
    "high52": 98.45,
    "fromHigh": 5.41,
-   "rank": 160,
+   "rank": 159,
    "rating": "HOLD"
   },
   {
@@ -3380,16 +3359,16 @@
    "y5": 52.49,
    "high52": 57.66,
    "fromHigh": 15.4,
-   "rank": 161,
+   "rank": 160,
    "rating": "SELL"
   },
   {
    "ticker": "ENR.DE",
    "name": "Siemens Energy AG             N",
    "sector": "Industrials",
-   "marketCap": 114166425635,
+   "marketCap": 114204908321,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 38.5,
    "ai": false,
    "price": 119.46,
@@ -3401,7 +3380,7 @@
    "y5": 416.0,
    "high52": 191.66,
    "fromHigh": 37.67,
-   "rank": 162,
+   "rank": 161,
    "rating": "HOLD"
   },
   {
@@ -3422,16 +3401,16 @@
    "y5": 48.92,
    "high52": 1118.65,
    "fromHigh": 5.77,
-   "rank": 163,
+   "rank": 162,
    "rating": "HOLD"
   },
   {
    "ticker": "8766.T",
    "name": "TOKIO MARINE HOLDINGS INC",
    "sector": "Financial Services",
-   "marketCap": 103100919768,
+   "marketCap": 103115245133,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 49.9,
    "ai": false,
    "price": 578.7,
@@ -3443,7 +3422,7 @@
    "y5": 552.3,
    "high52": 588.4,
    "fromHigh": 1.65,
-   "rank": 164,
+   "rank": 163,
    "rating": "HOLD"
   },
   {
@@ -3464,7 +3443,7 @@
    "y5": 14.68,
    "high52": 49.91,
    "fromHigh": 4.89,
-   "rank": 165,
+   "rank": 164,
    "rating": "HOLD"
   },
   {
@@ -3485,7 +3464,7 @@
    "y5": -12.52,
    "high52": 193.45,
    "fromHigh": 8.83,
-   "rank": 166,
+   "rank": 165,
    "rating": "HOLD"
   },
   {
@@ -3506,7 +3485,7 @@
    "y5": 0.78,
    "high52": 109.22,
    "fromHigh": 26.79,
-   "rank": 167,
+   "rank": 166,
    "rating": "SELL"
   },
   {
@@ -3527,7 +3506,7 @@
    "y5": 447.35,
    "high52": 461.52,
    "fromHigh": 20.84,
-   "rank": 168,
+   "rank": 167,
    "rating": "SELL"
   },
   {
@@ -3548,16 +3527,16 @@
    "y5": 138.48,
    "high52": 49.08,
    "fromHigh": 12.8,
-   "rank": 169,
+   "rank": 168,
    "rating": "HOLD"
   },
   {
    "ticker": "SAF.PA",
    "name": "SAFRAN",
    "sector": "Industrials",
-   "marketCap": 135984132820,
+   "marketCap": 136029969717,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 31.4,
    "ai": false,
    "price": 292.5,
@@ -3569,7 +3548,7 @@
    "y5": 167.59,
    "high52": 366.5,
    "fromHigh": 20.19,
-   "rank": 170,
+   "rank": 169,
    "rating": "HOLD"
   },
   {
@@ -3590,16 +3569,16 @@
    "y5": 300.29,
    "high52": 299.39,
    "fromHigh": 13.28,
-   "rank": 171,
+   "rank": 170,
    "rating": "SELL"
   },
   {
    "ticker": "1299.HK",
    "name": "AIA",
    "sector": "Financial Services",
-   "marketCap": 101067835182,
+   "marketCap": 101066417498,
    "currency": "HKD",
-   "usd": 0.12747785,
+   "usd": 0.12747607,
    "pe": 13.0,
    "ai": false,
    "price": 76.95,
@@ -3611,7 +3590,7 @@
    "y5": 1.24,
    "high52": 89.95,
    "fromHigh": 14.45,
-   "rank": 172,
+   "rank": 171,
    "rating": "HOLD"
   },
   {
@@ -3632,7 +3611,7 @@
    "y5": 54.53,
    "high52": 132.18,
    "fromHigh": 1.96,
-   "rank": 173,
+   "rank": 172,
    "rating": "HOLD"
   },
   {
@@ -3653,7 +3632,7 @@
    "y5": 190.6,
    "high52": 56.27,
    "fromHigh": 11.78,
-   "rank": 174,
+   "rank": 173,
    "rating": "HOLD"
   },
   {
@@ -3674,7 +3653,7 @@
    "y5": -20.34,
    "high52": 384.56,
    "fromHigh": 24.43,
-   "rank": 175,
+   "rank": 174,
    "rating": "SELL"
   },
   {
@@ -3695,7 +3674,7 @@
    "y5": 43.99,
    "high52": 60.11,
    "fromHigh": 14.91,
-   "rank": 176,
+   "rank": 175,
    "rating": "HOLD"
   },
   {
@@ -3716,16 +3695,16 @@
    "y5": 117.15,
    "high52": 668.49,
    "fromHigh": 6.11,
-   "rank": 177,
+   "rank": 176,
    "rating": "HOLD"
   },
   {
    "ticker": "9984.T",
    "name": "SOFTBANK GROUP CORP",
    "sector": "Communication Services",
-   "marketCap": 153616008765,
+   "marketCap": 153637352952,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 5.0,
    "ai": true,
    "price": 4269.0,
@@ -3737,7 +3716,7 @@
    "y5": 181.67,
    "high52": 9066.01,
    "fromHigh": 52.91,
-   "rank": 178,
+   "rank": 177,
    "rating": "SELL"
   },
   {
@@ -3758,7 +3737,7 @@
    "y5": -30.46,
    "high52": 116.86,
    "fromHigh": 2.18,
-   "rank": 179,
+   "rank": 178,
    "rating": "HOLD"
   },
   {
@@ -3779,7 +3758,7 @@
    "y5": 37.29,
    "high52": 175.05,
    "fromHigh": 0.07,
-   "rank": 180,
+   "rank": 179,
    "rating": "HOLD"
   },
   {
@@ -3800,7 +3779,7 @@
    "y5": -62.51,
    "high52": 362.71,
    "fromHigh": 31.49,
-   "rank": 181,
+   "rank": 180,
    "rating": "HOLD"
   },
   {
@@ -3821,7 +3800,7 @@
    "y5": 57.3,
    "high52": 53.45,
    "fromHigh": 2.63,
-   "rank": 182,
+   "rank": 181,
    "rating": "HOLD"
   },
   {
@@ -3842,7 +3821,7 @@
    "y5": 25.29,
    "high52": 65.47,
    "fromHigh": 6.78,
-   "rank": 183,
+   "rank": 182,
    "rating": "HOLD"
   },
   {
@@ -3863,7 +3842,7 @@
    "y5": 92.14,
    "high52": 172.0,
    "fromHigh": 0.91,
-   "rank": 184,
+   "rank": 183,
    "rating": "HOLD"
   },
   {
@@ -3884,7 +3863,7 @@
    "y5": 61.4,
    "high52": 246.06,
    "fromHigh": 3.08,
-   "rank": 185,
+   "rank": 184,
    "rating": "HOLD"
   },
   {
@@ -3905,7 +3884,7 @@
    "y5": 35.14,
    "high52": 370.35,
    "fromHigh": 28.02,
-   "rank": 186,
+   "rank": 185,
    "rating": "NO RATING"
   },
   {
@@ -3926,7 +3905,7 @@
    "y5": 251.07,
    "high52": 271.27,
    "fromHigh": 56.22,
-   "rank": 187,
+   "rank": 186,
    "rating": "HOLD"
   },
   {
@@ -3947,16 +3926,16 @@
    "y5": 164.41,
    "high52": 433.3,
    "fromHigh": 1.95,
-   "rank": 188,
+   "rank": 187,
    "rating": "SELL"
   },
   {
    "ticker": "9983.T",
    "name": "FAST RETAILING CO LTD",
    "sector": "Consumer Cyclical",
-   "marketCap": 149906384100,
+   "marketCap": 149927212853,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 43.8,
    "ai": false,
    "price": 77370.0,
@@ -3968,7 +3947,7 @@
    "y5": 208.08,
    "high52": 88032.95,
    "fromHigh": 12.11,
-   "rank": 189,
+   "rank": 188,
    "rating": "HOLD"
   },
   {
@@ -3989,6 +3968,27 @@
    "y5": 10.67,
    "high52": 450.69,
    "fromHigh": 3.66,
+   "rank": 189,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "ATCO-A.ST",
+   "name": "Atlas Copco AB ser. A",
+   "sector": "Industrials",
+   "marketCap": 93309968140,
+   "currency": "SEK",
+   "usd": 0.1028849,
+   "pe": 32.8,
+   "ai": false,
+   "price": 185.9,
+   "d1": -1.48,
+   "m1": -10.73,
+   "m3": -10.22,
+   "ytd": 14.42,
+   "y1": 20.79,
+   "y5": 47.06,
+   "high52": 212.51,
+   "fromHigh": 12.52,
    "rank": 190,
    "rating": "HOLD"
   },
@@ -4014,27 +4014,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "ATCO-A.ST",
-   "name": "Atlas Copco AB ser. A",
-   "sector": "Industrials",
-   "marketCap": 93274357715,
-   "currency": "SEK",
-   "usd": 0.10284563,
-   "pe": 32.8,
-   "ai": false,
-   "price": 185.9,
-   "d1": -1.48,
-   "m1": -10.73,
-   "m3": -10.22,
-   "ytd": 14.42,
-   "y1": 20.79,
-   "y5": 47.06,
-   "high52": 212.51,
-   "fromHigh": 12.52,
-   "rank": 192,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "INTU",
    "name": "Intuit Inc.",
    "sector": "Technology",
@@ -4052,7 +4031,7 @@
    "y5": -39.65,
    "high52": 672.79,
    "fromHigh": 46.99,
-   "rank": 193,
+   "rank": 192,
    "rating": "HOLD"
   },
   {
@@ -4073,7 +4052,7 @@
    "y5": 101.38,
    "high52": 398.07,
    "fromHigh": 8.34,
-   "rank": 194,
+   "rank": 193,
    "rating": "HOLD"
   },
   {
@@ -4094,7 +4073,7 @@
    "y5": 283.96,
    "high52": 254.05,
    "fromHigh": 27.79,
-   "rank": 195,
+   "rank": 194,
    "rating": "HOLD"
   },
   {
@@ -4115,16 +4094,16 @@
    "y5": 35.83,
    "high52": 256.6,
    "fromHigh": 9.02,
-   "rank": 196,
+   "rank": 195,
    "rating": "HOLD"
   },
   {
    "ticker": "8001.T",
    "name": "ITOCHU CORP",
    "sector": "Industrials",
-   "marketCap": 99022485708,
+   "marketCap": 99036244394,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 17.8,
    "ai": false,
    "price": 2271.0,
@@ -4136,7 +4115,7 @@
    "y5": 286.13,
    "high52": 2386.5,
    "fromHigh": 4.84,
-   "rank": 197,
+   "rank": 196,
    "rating": "HOLD"
   },
   {
@@ -4157,7 +4136,7 @@
    "y5": 53.62,
    "high52": 991.73,
    "fromHigh": 6.16,
-   "rank": 198,
+   "rank": 197,
    "rating": "HOLD"
   },
   {
@@ -4178,7 +4157,7 @@
    "y5": -17.5,
    "high52": 202.5,
    "fromHigh": 3.77,
-   "rank": 199,
+   "rank": 198,
    "rating": "HOLD"
   },
   {
@@ -4199,7 +4178,7 @@
    "y5": 85.12,
    "high52": 416.69,
    "fromHigh": 20.92,
-   "rank": 200,
+   "rank": 199,
    "rating": "HOLD"
   },
   {
@@ -4220,16 +4199,16 @@
    "y5": 136.13,
    "high52": 504.68,
    "fromHigh": 18.66,
-   "rank": 201,
+   "rank": 200,
    "rating": "HOLD"
   },
   {
    "ticker": "6861.T",
    "name": "KEYENCE CORP",
    "sector": "Technology",
-   "marketCap": 115644868504,
+   "marketCap": 115660936789,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 33.7,
    "ai": false,
    "price": 75520.0,
@@ -4241,7 +4220,7 @@
    "y5": 5.34,
    "high52": 87543.53,
    "fromHigh": 13.73,
-   "rank": 202,
+   "rank": 201,
    "rating": "HOLD"
   },
   {
@@ -4262,16 +4241,16 @@
    "y5": 112.81,
    "high52": 50.17,
    "fromHigh": 2.83,
-   "rank": 203,
+   "rank": 202,
    "rating": "NO RATING"
   },
   {
    "ticker": "NAB.AX",
    "name": "NAT. BANK FPO [NAB]",
    "sector": "Financial Services",
-   "marketCap": 88321764719,
+   "marketCap": 88309391992,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 20.6,
    "ai": false,
    "price": 41.17,
@@ -4283,7 +4262,7 @@
    "y5": 82.79,
    "high52": 48.4,
    "fromHigh": 14.94,
-   "rank": 204,
+   "rank": 203,
    "rating": "NO RATING"
   },
   {
@@ -4304,7 +4283,7 @@
    "y5": 35.86,
    "high52": 539.48,
    "fromHigh": 14.19,
-   "rank": 205,
+   "rank": 204,
    "rating": "SELL"
   },
   {
@@ -4325,7 +4304,7 @@
    "y5": 44.44,
    "high52": 315.58,
    "fromHigh": 0.18,
-   "rank": 206,
+   "rank": 205,
    "rating": "HOLD"
   },
   {
@@ -4346,7 +4325,7 @@
    "y5": -41.46,
    "high52": 31.56,
    "fromHigh": 21.25,
-   "rank": 207,
+   "rank": 206,
    "rating": "HOLD"
   },
   {
@@ -4367,16 +4346,16 @@
    "y5": 81.09,
    "high52": 80.07,
    "fromHigh": 21.82,
-   "rank": 208,
+   "rank": 207,
    "rating": "HOLD"
   },
   {
    "ticker": "PRX.AS",
    "name": "PROSUS",
    "sector": "Consumer Cyclical",
-   "marketCap": 86833057693,
+   "marketCap": 86862326975,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 8.2,
    "ai": false,
    "price": 36.99,
@@ -4388,7 +4367,7 @@
    "y5": 7.64,
    "high52": 63.94,
    "fromHigh": 42.14,
-   "rank": 209,
+   "rank": 208,
    "rating": "HOLD"
   },
   {
@@ -4409,7 +4388,7 @@
    "y5": null,
    "high52": 379.1,
    "fromHigh": 35.18,
-   "rank": 210,
+   "rank": 209,
    "rating": "HOLD"
   },
   {
@@ -4430,16 +4409,16 @@
    "y5": 398.0,
    "high52": 788.63,
    "fromHigh": 26.4,
-   "rank": 211,
+   "rank": 210,
    "rating": "SELL"
   },
   {
    "ticker": "WBC.AX",
    "name": "WESTPAC FPO [WBC]",
    "sector": "Financial Services",
-   "marketCap": 86736350630,
+   "marketCap": 86724199999,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 18.1,
    "ai": false,
    "price": 36.24,
@@ -4451,7 +4430,7 @@
    "y5": 107.98,
    "high52": 41.59,
    "fromHigh": 12.86,
-   "rank": 212,
+   "rank": 211,
    "rating": "NO RATING"
   },
   {
@@ -4472,7 +4451,7 @@
    "y5": 74.81,
    "high52": 235.97,
    "fromHigh": 3.16,
-   "rank": 213,
+   "rank": 212,
    "rating": "HOLD"
   },
   {
@@ -4493,16 +4472,16 @@
    "y5": 79.87,
    "high52": 92.22,
    "fromHigh": 7.59,
-   "rank": 214,
+   "rank": 213,
    "rating": "HOLD"
   },
   {
    "ticker": "ANZ.AX",
    "name": "ANZ GROUP FPO [ANZ]",
    "sector": "Financial Services",
-   "marketCap": 85161306013,
+   "marketCap": 85149376025,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 20.5,
    "ai": false,
    "price": 40.36,
@@ -4514,7 +4493,7 @@
    "y5": 87.79,
    "high52": 41.33,
    "fromHigh": 2.35,
-   "rank": 215,
+   "rank": 214,
    "rating": "HOLD"
   },
   {
@@ -4535,7 +4514,7 @@
    "y5": 23.91,
    "high52": 68.14,
    "fromHigh": 1.12,
-   "rank": 216,
+   "rank": 215,
    "rating": "HOLD"
   },
   {
@@ -4556,7 +4535,7 @@
    "y5": 30.18,
    "high52": 97.38,
    "fromHigh": 20.35,
-   "rank": 217,
+   "rank": 216,
    "rating": "SELL"
   },
   {
@@ -4577,7 +4556,7 @@
    "y5": 106.48,
    "high52": 160.41,
    "fromHigh": 12.39,
-   "rank": 218,
+   "rank": 217,
    "rating": "SELL"
   },
   {
@@ -4598,7 +4577,7 @@
    "y5": 196.0,
    "high52": 78.92,
    "fromHigh": 14.01,
-   "rank": 219,
+   "rank": 218,
    "rating": "SELL"
   },
   {
@@ -4619,7 +4598,7 @@
    "y5": 228.66,
    "high52": 80.25,
    "fromHigh": 10.23,
-   "rank": 220,
+   "rank": 219,
    "rating": "HOLD"
   },
   {
@@ -4640,7 +4619,7 @@
    "y5": 548.27,
    "high52": 309.85,
    "fromHigh": 31.08,
-   "rank": 221,
+   "rank": 220,
    "rating": "HOLD"
   },
   {
@@ -4661,7 +4640,7 @@
    "y5": 181.98,
    "high52": 409.3,
    "fromHigh": 0.01,
-   "rank": 222,
+   "rank": 221,
    "rating": "HOLD"
   },
   {
@@ -4682,16 +4661,16 @@
    "y5": 42.43,
    "high52": 543.25,
    "fromHigh": 2.75,
-   "rank": 223,
+   "rank": 222,
    "rating": "HOLD"
   },
   {
    "ticker": "MUV2.DE",
    "name": "MUENCHENER RUECKVERS.-GES. AG N",
    "sector": "Financial Services",
-   "marketCap": 82585617660,
+   "marketCap": 82613455235,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 11.0,
    "ai": false,
    "price": 584.4,
@@ -4703,7 +4682,7 @@
    "y5": 172.92,
    "high52": 586.0,
    "fromHigh": 0.27,
-   "rank": 224,
+   "rank": 223,
    "rating": "NO RATING"
   },
   {
@@ -4724,7 +4703,7 @@
    "y5": 151.44,
    "high52": 377.76,
    "fromHigh": 0.33,
-   "rank": 225,
+   "rank": 224,
    "rating": "SELL"
   },
   {
@@ -4745,16 +4724,16 @@
    "y5": 113.01,
    "high52": 499.0,
    "fromHigh": 0.4,
-   "rank": 226,
+   "rank": 225,
    "rating": "HOLD"
   },
   {
    "ticker": "ENEL.MI",
    "name": "ENEL",
    "sector": "Utilities",
-   "marketCap": 108048383638,
+   "marketCap": 108084804083,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 23.0,
    "ai": false,
    "price": 9.68,
@@ -4766,7 +4745,7 @@
    "y5": 82.67,
    "high52": 10.1,
    "fromHigh": 4.19,
-   "rank": 227,
+   "rank": 226,
    "rating": "HOLD"
   },
   {
@@ -4787,7 +4766,7 @@
    "y5": 19.23,
    "high52": 375.09,
    "fromHigh": 3.09,
-   "rank": 228,
+   "rank": 227,
    "rating": "HOLD"
   },
   {
@@ -4808,16 +4787,16 @@
    "y5": -0.05,
    "high52": 241.51,
    "fromHigh": 17.77,
-   "rank": 229,
+   "rank": 228,
    "rating": "NO RATING"
   },
   {
    "ticker": "CS.PA",
    "name": "AXA",
    "sector": "Financial Services",
-   "marketCap": 102674604013,
+   "marketCap": 102709213090,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 12.2,
    "ai": false,
    "price": 45.18,
@@ -4829,7 +4808,7 @@
    "y5": 137.54,
    "high52": 45.66,
    "fromHigh": 1.05,
-   "rank": 230,
+   "rank": 229,
    "rating": "HOLD"
   },
   {
@@ -4850,7 +4829,7 @@
    "y5": 256.48,
    "high52": 350.59,
    "fromHigh": 4.97,
-   "rank": 231,
+   "rank": 230,
    "rating": "HOLD"
   },
   {
@@ -4871,7 +4850,7 @@
    "y5": 56.53,
    "high52": 316.27,
    "fromHigh": 3.43,
-   "rank": 232,
+   "rank": 231,
    "rating": "HOLD"
   },
   {
@@ -4892,7 +4871,7 @@
    "y5": 89.62,
    "high52": 197.13,
    "fromHigh": 34.36,
-   "rank": 233,
+   "rank": 232,
    "rating": "HOLD"
   },
   {
@@ -4913,7 +4892,7 @@
    "y5": 175.97,
    "high52": 738.01,
    "fromHigh": 63.18,
-   "rank": 234,
+   "rank": 233,
    "rating": "HOLD"
   },
   {
@@ -4934,16 +4913,16 @@
    "y5": 647.68,
    "high52": 379.76,
    "fromHigh": 45.87,
-   "rank": 235,
+   "rank": 234,
    "rating": "HOLD"
   },
   {
    "ticker": "8031.T",
    "name": "MITSUI & CO",
    "sector": "Industrials",
-   "marketCap": 87746610996,
+   "marketCap": 87758802955,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 14.9,
    "ai": false,
    "price": 4900.0,
@@ -4955,7 +4934,7 @@
    "y5": 350.49,
    "high52": 6581.94,
    "fromHigh": 25.55,
-   "rank": 236,
+   "rank": 235,
    "rating": "SELL"
   },
   {
@@ -4976,7 +4955,7 @@
    "y5": 136.18,
    "high52": 144.77,
    "fromHigh": 39.62,
-   "rank": 237,
+   "rank": 236,
    "rating": "HOLD"
   },
   {
@@ -4997,7 +4976,7 @@
    "y5": 64.79,
    "high52": 93.7,
    "fromHigh": 1.36,
-   "rank": 238,
+   "rank": 237,
    "rating": "SELL"
   },
   {
@@ -5018,7 +4997,7 @@
    "y5": 27.94,
    "high52": 96.69,
    "fromHigh": 2.36,
-   "rank": 239,
+   "rank": 238,
    "rating": "HOLD"
   },
   {
@@ -5039,7 +5018,7 @@
    "y5": 117.19,
    "high52": 230.7,
    "fromHigh": 0.72,
-   "rank": 240,
+   "rank": 239,
    "rating": "HOLD"
   },
   {
@@ -5060,7 +5039,7 @@
    "y5": 7.19,
    "high52": 130.84,
    "fromHigh": 1.43,
-   "rank": 241,
+   "rank": 240,
    "rating": "HOLD"
   },
   {
@@ -5081,7 +5060,7 @@
    "y5": 34.11,
    "high52": 357.19,
    "fromHigh": 3.65,
-   "rank": 242,
+   "rank": 241,
    "rating": "HOLD"
   },
   {
@@ -5102,16 +5081,16 @@
    "y5": 96.2,
    "high52": 165.93,
    "fromHigh": 11.37,
-   "rank": 243,
+   "rank": 242,
    "rating": "HOLD"
   },
   {
    "ticker": "BA.L",
    "name": "BAE SYSTEMS PLC ORD 2.5P",
    "sector": "Industrials",
-   "marketCap": 78320298024,
+   "marketCap": 78322404977,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 28.4,
    "ai": false,
    "price": 1988.0,
@@ -5123,7 +5102,7 @@
    "y5": 251.04,
    "high52": 2359.56,
    "fromHigh": 15.75,
-   "rank": 244,
+   "rank": 243,
    "rating": "HOLD"
   },
   {
@@ -5144,7 +5123,7 @@
    "y5": 116.92,
    "high52": 256.5,
    "fromHigh": 4.2,
-   "rank": 245,
+   "rank": 244,
    "rating": "HOLD"
   },
   {
@@ -5165,7 +5144,7 @@
    "y5": 191.73,
    "high52": 46.04,
    "fromHigh": 0.1,
-   "rank": 246,
+   "rank": 245,
    "rating": "SELL"
   },
   {
@@ -5186,7 +5165,7 @@
    "y5": 71.83,
    "high52": 60.15,
    "fromHigh": 14.28,
-   "rank": 247,
+   "rank": 246,
    "rating": "HOLD"
   },
   {
@@ -5207,7 +5186,7 @@
    "y5": 71.4,
    "high52": 437.15,
    "fromHigh": 1.08,
-   "rank": 248,
+   "rank": 247,
    "rating": "HOLD"
   },
   {
@@ -5228,7 +5207,7 @@
    "y5": 41.17,
    "high52": 299.98,
    "fromHigh": 2.18,
-   "rank": 249,
+   "rank": 248,
    "rating": "HOLD"
   },
   {
@@ -5249,7 +5228,7 @@
    "y5": 36.47,
    "high52": 221.19,
    "fromHigh": 28.04,
-   "rank": 250,
+   "rank": 249,
    "rating": "HOLD"
   },
   {
@@ -5270,7 +5249,7 @@
    "y5": 35.56,
    "high52": 49.31,
    "fromHigh": 12.6,
-   "rank": 251,
+   "rank": 250,
    "rating": "SELL"
   },
   {
@@ -5291,7 +5270,7 @@
    "y5": 96.75,
    "high52": 249.37,
    "fromHigh": 1.59,
-   "rank": 252,
+   "rank": 251,
    "rating": "HOLD"
   },
   {
@@ -5312,7 +5291,7 @@
    "y5": 168.09,
    "high52": 28.37,
    "fromHigh": 16.46,
-   "rank": 253,
+   "rank": 252,
    "rating": "HOLD"
   },
   {
@@ -5333,7 +5312,7 @@
    "y5": 56.37,
    "high52": 767.12,
    "fromHigh": 31.52,
-   "rank": 254,
+   "rank": 253,
    "rating": "HOLD"
   },
   {
@@ -5354,7 +5333,7 @@
    "y5": -25.04,
    "high52": 170.75,
    "fromHigh": 4.48,
-   "rank": 255,
+   "rank": 254,
    "rating": "HOLD"
   },
   {
@@ -5375,16 +5354,16 @@
    "y5": 42.89,
    "high52": 99.69,
    "fromHigh": 0.93,
-   "rank": 256,
+   "rank": 255,
    "rating": "HOLD"
   },
   {
    "ticker": "ITX.MC",
    "name": "Industria de Diseño Textil, S.A.",
    "sector": "Consumer Cyclical",
-   "marketCap": 206640954726,
+   "marketCap": 206710608295,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 28.0,
    "ai": false,
    "price": 59.06,
@@ -5396,7 +5375,7 @@
    "y5": 119.53,
    "high52": 59.3,
    "fromHigh": 0.4,
-   "rank": 257,
+   "rank": 256,
    "rating": "HOLD"
   },
   {
@@ -5417,16 +5396,16 @@
    "y5": 117.07,
    "high52": 102.46,
    "fromHigh": 9.88,
-   "rank": 258,
+   "rank": 257,
    "rating": "HOLD"
   },
   {
    "ticker": "IFX.DE",
    "name": "INFINEON TECHNOLOGIES AG      N",
    "sector": "Technology",
-   "marketCap": 73331307873,
+   "marketCap": 73356026049,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 54.6,
    "ai": false,
    "price": 50.24,
@@ -5438,7 +5417,7 @@
    "y5": 25.03,
    "high52": 88.83,
    "fromHigh": 43.44,
-   "rank": 259,
+   "rank": 258,
    "rating": "SELL"
   },
   {
@@ -5459,7 +5438,7 @@
    "y5": 89.49,
    "high52": 289.93,
    "fromHigh": 0.53,
-   "rank": 260,
+   "rank": 259,
    "rating": "HOLD"
   },
   {
@@ -5480,7 +5459,7 @@
    "y5": 23.95,
    "high52": 380.5,
    "fromHigh": 9.42,
-   "rank": 261,
+   "rank": 260,
    "rating": "HOLD"
   },
   {
@@ -5501,7 +5480,7 @@
    "y5": 31.64,
    "high52": 144.02,
    "fromHigh": 29.63,
-   "rank": 262,
+   "rank": 261,
    "rating": "SELL"
   },
   {
@@ -5522,7 +5501,7 @@
    "y5": 43.74,
    "high52": 43.59,
    "fromHigh": 5.75,
-   "rank": 263,
+   "rank": 262,
    "rating": "HOLD"
   },
   {
@@ -5543,7 +5522,7 @@
    "y5": 86.08,
    "high52": 342.73,
    "fromHigh": 3.89,
-   "rank": 264,
+   "rank": 263,
    "rating": "HOLD"
   },
   {
@@ -5564,7 +5543,7 @@
    "y5": 157.93,
    "high52": 6.25,
    "fromHigh": 15.68,
-   "rank": 265,
+   "rank": 264,
    "rating": "HOLD"
   },
   {
@@ -5585,7 +5564,7 @@
    "y5": 16.24,
    "high52": 319.98,
    "fromHigh": 0.35,
-   "rank": 266,
+   "rank": 265,
    "rating": "SELL"
   },
   {
@@ -5606,7 +5585,7 @@
    "y5": 81.92,
    "high52": 139.52,
    "fromHigh": 7.37,
-   "rank": 267,
+   "rank": 266,
    "rating": "HOLD"
   },
   {
@@ -5627,16 +5606,16 @@
    "y5": 114.5,
    "high52": 553.56,
    "fromHigh": 7.74,
-   "rank": 268,
+   "rank": 267,
    "rating": "HOLD"
   },
   {
    "ticker": "O39.SI",
    "name": "OCBC Bank",
    "sector": "Financial Services",
-   "marketCap": 97969786172,
+   "marketCap": 97955987738,
    "currency": "SGD",
-   "usd": 0.78249103,
+   "usd": 0.78238082,
    "pe": 16.0,
    "ai": false,
    "price": 27.85,
@@ -5648,7 +5627,7 @@
    "y5": 204.91,
    "high52": 32.57,
    "fromHigh": 14.49,
-   "rank": 269,
+   "rank": 268,
    "rating": "HOLD"
   },
   {
@@ -5669,16 +5648,16 @@
    "y5": 197.83,
    "high52": 1202.12,
    "fromHigh": 6.52,
-   "rank": 270,
+   "rank": 269,
    "rating": "NO RATING"
   },
   {
    "ticker": "7011.T",
    "name": "MITSUBISHI HEAVY INDUSTRIES",
    "sector": "Industrials",
-   "marketCap": 68996137407,
+   "marketCap": 69005724080,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 37.1,
    "ai": false,
    "price": 3252.0,
@@ -5690,7 +5669,7 @@
    "y5": 1104.19,
    "high52": 5174.5,
    "fromHigh": 37.15,
-   "rank": 271,
+   "rank": 270,
    "rating": "NO RATING"
   },
   {
@@ -5711,7 +5690,7 @@
    "y5": 13.31,
    "high52": 258.09,
    "fromHigh": 11.48,
-   "rank": 272,
+   "rank": 271,
    "rating": "HOLD"
   },
   {
@@ -5732,7 +5711,7 @@
    "y5": 158.49,
    "high52": 276.07,
    "fromHigh": 2.54,
-   "rank": 273,
+   "rank": 272,
    "rating": "HOLD"
   },
   {
@@ -5753,7 +5732,7 @@
    "y5": 40.95,
    "high52": 206.06,
    "fromHigh": 10.28,
-   "rank": 274,
+   "rank": 273,
    "rating": "HOLD"
   },
   {
@@ -5774,7 +5753,7 @@
    "y5": 1.73,
    "high52": 300.68,
    "fromHigh": 37.24,
-   "rank": 275,
+   "rank": 274,
    "rating": "NO RATING"
   },
   {
@@ -5795,7 +5774,7 @@
    "y5": 120.12,
    "high52": 1463.03,
    "fromHigh": 16.82,
-   "rank": 276,
+   "rank": 275,
    "rating": "HOLD"
   },
   {
@@ -5816,16 +5795,16 @@
    "y5": 29.55,
    "high52": 337.28,
    "fromHigh": 21.43,
-   "rank": 277,
+   "rank": 276,
    "rating": "HOLD"
   },
   {
    "ticker": "4063.T",
    "name": "SHIN-ETSU CHEMICAL CO",
    "sector": "Basic Materials",
-   "marketCap": 66483354018,
+   "marketCap": 66492591552,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 23.0,
    "ai": false,
    "price": 5799.0,
@@ -5837,16 +5816,16 @@
    "y5": 58.37,
    "high52": 7902.72,
    "fromHigh": 26.62,
-   "rank": 278,
+   "rank": 277,
    "rating": "HOLD"
   },
   {
    "ticker": "4502.T",
    "name": "TAKEDA PHARMACEUTICAL CO LTD",
    "sector": "Healthcare",
-   "marketCap": 66449005518,
+   "marketCap": 66458238280,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 295.2,
    "ai": false,
    "price": 6588.0,
@@ -5858,7 +5837,7 @@
    "y5": 149.66,
    "high52": 6797.0,
    "fromHigh": 3.07,
-   "rank": 279,
+   "rank": 278,
    "rating": "SELL"
   },
   {
@@ -5879,7 +5858,7 @@
    "y5": 6.16,
    "high52": 105.65,
    "fromHigh": 56.63,
-   "rank": 280,
+   "rank": 279,
    "rating": "HOLD"
   },
   {
@@ -5900,16 +5879,16 @@
    "y5": 271.06,
    "high52": 73.56,
    "fromHigh": 31.91,
-   "rank": 281,
+   "rank": 280,
    "rating": "SELL"
   },
   {
    "ticker": "CSL.AX",
    "name": "CSL FPO [CSL]",
    "sector": "Healthcare",
-   "marketCap": 66363254887,
+   "marketCap": 66353958261,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": null,
    "ai": false,
    "price": 197.34,
@@ -5921,16 +5900,16 @@
    "y5": -31.25,
    "high52": 202.85,
    "fromHigh": 2.72,
-   "rank": 282,
+   "rank": 281,
    "rating": "SELL"
   },
   {
    "ticker": "6981.T",
    "name": "MURATA MANUFACTURING CO",
    "sector": "Technology",
-   "marketCap": 68932823086,
+   "marketCap": 68942400962,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 47.3,
    "ai": false,
    "price": 6032.0,
@@ -5942,7 +5921,7 @@
    "y5": 129.96,
    "high52": 12838.61,
    "fromHigh": 53.02,
-   "rank": 283,
+   "rank": 282,
    "rating": "HOLD"
   },
   {
@@ -5963,7 +5942,7 @@
    "y5": 133.99,
    "high52": 53.8,
    "fromHigh": 25.41,
-   "rank": 284,
+   "rank": 283,
    "rating": "HOLD"
   },
   {
@@ -5984,7 +5963,7 @@
    "y5": 127.53,
    "high52": 130.09,
    "fromHigh": 24.05,
-   "rank": 285,
+   "rank": 284,
    "rating": "HOLD"
   },
   {
@@ -6005,16 +5984,16 @@
    "y5": 283.34,
    "high52": 19.21,
    "fromHigh": 13.85,
-   "rank": 286,
+   "rank": 285,
    "rating": "HOLD"
   },
   {
    "ticker": "VOLV-B.ST",
    "name": "Volvo, AB ser. B",
    "sector": "Industrials",
-   "marketCap": 65144512498,
+   "marketCap": 65169383468,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 16.2,
    "ai": false,
    "price": 311.5,
@@ -6026,7 +6005,7 @@
    "y5": 107.66,
    "high52": 374.5,
    "fromHigh": 16.82,
-   "rank": 287,
+   "rank": 286,
    "rating": "HOLD"
   },
   {
@@ -6047,7 +6026,7 @@
    "y5": 123.2,
    "high52": 735.02,
    "fromHigh": 35.81,
-   "rank": 288,
+   "rank": 287,
    "rating": "HOLD"
   },
   {
@@ -6068,7 +6047,7 @@
    "y5": 229.81,
    "high52": 1521.41,
    "fromHigh": 2.1,
-   "rank": 289,
+   "rank": 288,
    "rating": "HOLD"
   },
   {
@@ -6089,16 +6068,16 @@
    "y5": 194.89,
    "high52": 375.33,
    "fromHigh": 5.68,
-   "rank": 290,
+   "rank": 289,
    "rating": "HOLD"
   },
   {
    "ticker": "DB1.DE",
    "name": "DEUTSCHE BOERSE AG            N",
    "sector": "Financial Services",
-   "marketCap": 63785700400,
+   "marketCap": 63807200987,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 26.3,
    "ai": false,
    "price": 318.7,
@@ -6110,16 +6089,16 @@
    "y5": 134.14,
    "high52": 321.5,
    "fromHigh": 0.87,
-   "rank": 291,
+   "rank": 290,
    "rating": "HOLD"
   },
   {
    "ticker": "MQG.AX",
    "name": "MACQ GROUP FPO [MQG]",
    "sector": "Financial Services",
-   "marketCap": 66737945604,
+   "marketCap": 66728596489,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 25.7,
    "ai": false,
    "price": 249.87,
@@ -6131,7 +6110,7 @@
    "y5": 47.18,
    "high52": 267.9,
    "fromHigh": 6.73,
-   "rank": 292,
+   "rank": 291,
    "rating": "HOLD"
   },
   {
@@ -6152,7 +6131,7 @@
    "y5": 49.88,
    "high52": 250.61,
    "fromHigh": 12.13,
-   "rank": 293,
+   "rank": 292,
    "rating": "HOLD"
   },
   {
@@ -6173,16 +6152,16 @@
    "y5": 55.51,
    "high52": 70.15,
    "fromHigh": 10.75,
-   "rank": 294,
+   "rank": 293,
    "rating": "SELL"
   },
   {
    "ticker": "WES.AX",
    "name": "WESFARMER FPO [WES]",
    "sector": "Consumer Cyclical",
-   "marketCap": 62579779362,
+   "marketCap": 62571012752,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 31.1,
    "ai": false,
    "price": 78.66,
@@ -6194,7 +6173,7 @@
    "y5": 60.77,
    "high52": 91.84,
    "fromHigh": 14.35,
-   "rank": 295,
+   "rank": 294,
    "rating": "HOLD"
   },
   {
@@ -6215,16 +6194,16 @@
    "y5": 147.23,
    "high52": 129.57,
    "fromHigh": 3.29,
-   "rank": 296,
+   "rank": 295,
    "rating": "HOLD"
   },
   {
    "ticker": "GLEN.L",
    "name": "GLENCORE PLC ORD USD0.01",
    "sector": "Basic Materials",
-   "marketCap": 79046359570,
+   "marketCap": 79048486057,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 14.7,
    "ai": false,
    "price": 500.9,
@@ -6236,16 +6215,16 @@
    "y5": 41.82,
    "high52": 707.13,
    "fromHigh": 29.16,
-   "rank": 297,
+   "rank": 296,
    "rating": "SELL"
   },
   {
    "ticker": "DHL.DE",
    "name": "DHL AG                        N",
    "sector": "Industrials",
-   "marketCap": 75130400956,
+   "marketCap": 75155725561,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 18.5,
    "ai": false,
    "price": 60.26,
@@ -6257,16 +6236,16 @@
    "y5": 31.9,
    "high52": 60.86,
    "fromHigh": 0.99,
-   "rank": 298,
+   "rank": 297,
    "rating": "HOLD"
   },
   {
    "ticker": "DBK.DE",
    "name": "DEUTSCHE BANK AG              N",
    "sector": "Financial Services",
-   "marketCap": 67808035364,
+   "marketCap": 67830891780,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 9.8,
    "ai": false,
    "price": 32.56,
@@ -6278,7 +6257,7 @@
    "y5": 240.06,
    "high52": 35.85,
    "fromHigh": 9.18,
-   "rank": 299,
+   "rank": 298,
    "rating": "HOLD"
   },
   {
@@ -6299,7 +6278,7 @@
    "y5": 14.14,
    "high52": 72.26,
    "fromHigh": 3.47,
-   "rank": 300,
+   "rank": 299,
    "rating": "HOLD"
   },
   {
@@ -6320,7 +6299,7 @@
    "y5": 142.05,
    "high52": 34.44,
    "fromHigh": 8.49,
-   "rank": 301,
+   "rank": 300,
    "rating": "SELL"
   },
   {
@@ -6341,16 +6320,16 @@
    "y5": 106.16,
    "high52": 53.85,
    "fromHigh": 1.2,
-   "rank": 302,
+   "rank": 301,
    "rating": "HOLD"
   },
   {
    "ticker": "6503.T",
    "name": "MITSUBISHI ELECTRIC CORP",
    "sector": "Industrials",
-   "marketCap": 62177841156,
+   "marketCap": 62186480460,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 24.3,
    "ai": false,
    "price": 4811.0,
@@ -6362,16 +6341,16 @@
    "y5": 243.31,
    "high52": 6647.52,
    "fromHigh": 27.63,
-   "rank": 303,
+   "rank": 302,
    "rating": "HOLD"
   },
   {
    "ticker": "7974.T",
    "name": "NINTENDO CO LTD",
    "sector": "Communication Services",
-   "marketCap": 60803967398,
+   "marketCap": 60812415810,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 20.4,
    "ai": false,
    "price": 8353.0,
@@ -6383,7 +6362,7 @@
    "y5": 91.52,
    "high52": 14348.99,
    "fromHigh": 41.79,
-   "rank": 304,
+   "rank": 303,
    "rating": "HOLD"
   },
   {
@@ -6404,7 +6383,7 @@
    "y5": 0.66,
    "high52": 54.52,
    "fromHigh": 6.69,
-   "rank": 305,
+   "rank": 304,
    "rating": "HOLD"
   },
   {
@@ -6425,7 +6404,7 @@
    "y5": 483.96,
    "high52": 262.2,
    "fromHigh": 0.1,
-   "rank": 306,
+   "rank": 305,
    "rating": "HOLD"
   },
   {
@@ -6446,7 +6425,7 @@
    "y5": 459.99,
    "high52": 316.6,
    "fromHigh": 9.98,
-   "rank": 307,
+   "rank": 306,
    "rating": "SELL"
   },
   {
@@ -6467,16 +6446,16 @@
    "y5": 78.73,
    "high52": 255.36,
    "fromHigh": 44.18,
-   "rank": 308,
+   "rank": 307,
    "rating": "SELL"
   },
   {
    "ticker": "BAYN.DE",
    "name": "Bayer AG                      N",
    "sector": "Healthcare",
-   "marketCap": 59852500733,
+   "marketCap": 59872675535,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": null,
    "ai": false,
    "price": 54.24,
@@ -6488,7 +6467,7 @@
    "y5": 18.22,
    "high52": 54.24,
    "fromHigh": 0.0,
-   "rank": 309,
+   "rank": 308,
    "rating": "SELL"
   },
   {
@@ -6509,7 +6488,7 @@
    "y5": 156.8,
    "high52": 287.7,
    "fromHigh": 6.88,
-   "rank": 310,
+   "rank": 309,
    "rating": "SELL"
   },
   {
@@ -6530,7 +6509,7 @@
    "y5": 237.57,
    "high52": 165.03,
    "fromHigh": 20.32,
-   "rank": 311,
+   "rank": 310,
    "rating": "HOLD"
   },
   {
@@ -6551,7 +6530,7 @@
    "y5": 139.46,
    "high52": 1708.95,
    "fromHigh": 26.21,
-   "rank": 312,
+   "rank": 311,
    "rating": "HOLD"
   },
   {
@@ -6572,7 +6551,7 @@
    "y5": 183.79,
    "high52": 330.73,
    "fromHigh": 11.7,
-   "rank": 313,
+   "rank": 312,
    "rating": "HOLD"
   },
   {
@@ -6593,7 +6572,7 @@
    "y5": -75.0,
    "high52": 67.36,
    "fromHigh": 39.89,
-   "rank": 314,
+   "rank": 313,
    "rating": "HOLD"
   },
   {
@@ -6614,16 +6593,16 @@
    "y5": 190.22,
    "high52": 1072.75,
    "fromHigh": 13.18,
-   "rank": 315,
+   "rank": 314,
    "rating": "NO RATING"
   },
   {
    "ticker": "EL.PA",
    "name": "ESSILORLUXOTTICA",
    "sector": "Healthcare",
-   "marketCap": 97358435042,
+   "marketCap": 97391252169,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 35.3,
    "ai": false,
    "price": 189.1,
@@ -6635,7 +6614,7 @@
    "y5": 12.28,
    "high52": 316.32,
    "fromHigh": 40.22,
-   "rank": 316,
+   "rank": 315,
    "rating": "HOLD"
   },
   {
@@ -6656,16 +6635,16 @@
    "y5": 141.86,
    "high52": 34.83,
    "fromHigh": 1.38,
-   "rank": 317,
+   "rank": 316,
    "rating": "HOLD"
   },
   {
    "ticker": "0388.HK",
    "name": "HKEX",
    "sector": "Financial Services",
-   "marketCap": 61874628443,
+   "marketCap": 61873760524,
    "currency": "HKD",
-   "usd": 0.12747785,
+   "usd": 0.12747607,
    "pe": 24.6,
    "ai": false,
    "price": 384.0,
@@ -6677,16 +6656,16 @@
    "y5": -4.45,
    "high52": 430.19,
    "fromHigh": 10.74,
-   "rank": 318,
+   "rank": 317,
    "rating": "HOLD"
   },
   {
    "ticker": "LSEG.L",
    "name": "LONDON STOCK EXCHANGE GROUP PLC",
    "sector": "Financial Services",
-   "marketCap": 63152137310,
+   "marketCap": 63153836214,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 35.2,
    "ai": false,
    "price": 9790.0,
@@ -6698,7 +6677,7 @@
    "y5": 38.37,
    "high52": 10139.36,
    "fromHigh": 3.45,
-   "rank": 319,
+   "rank": 318,
    "rating": "HOLD"
   },
   {
@@ -6719,7 +6698,7 @@
    "y5": 32.67,
    "high52": 343.63,
    "fromHigh": 0.25,
-   "rank": 320,
+   "rank": 319,
    "rating": "HOLD"
   },
   {
@@ -6740,7 +6719,7 @@
    "y5": 205.69,
    "high52": 21.84,
    "fromHigh": 10.9,
-   "rank": 321,
+   "rank": 320,
    "rating": "HOLD"
   },
   {
@@ -6761,7 +6740,7 @@
    "y5": -16.25,
    "high52": 100.25,
    "fromHigh": 0.88,
-   "rank": 322,
+   "rank": 321,
    "rating": "HOLD"
   },
   {
@@ -6782,7 +6761,7 @@
    "y5": 84.4,
    "high52": 66.83,
    "fromHigh": 14.22,
-   "rank": 323,
+   "rank": 322,
    "rating": "SELL"
   },
   {
@@ -6803,16 +6782,16 @@
    "y5": 22.42,
    "high52": 209.84,
    "fromHigh": 0.31,
-   "rank": 324,
+   "rank": 323,
    "rating": "HOLD"
   },
   {
    "ticker": "LONN.SW",
    "name": "LONZA N",
    "sector": "Healthcare",
-   "marketCap": 56619588774,
+   "marketCap": 56606406849,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 43.8,
    "ai": false,
    "price": 661.6,
@@ -6824,16 +6803,16 @@
    "y5": -10.95,
    "high52": 666.2,
    "fromHigh": 0.69,
-   "rank": 325,
+   "rank": 324,
    "rating": "SELL"
   },
   {
    "ticker": "NDA-FI.HE",
    "name": "Nordea Bank Abp",
    "sector": "Financial Services",
-   "marketCap": 60304596296,
+   "marketCap": 60324923488,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 11.5,
    "ai": false,
    "price": 15.82,
@@ -6845,7 +6824,7 @@
    "y5": 117.72,
    "high52": 18.11,
    "fromHigh": 12.62,
-   "rank": 326,
+   "rank": 325,
    "rating": "HOLD"
   },
   {
@@ -6866,7 +6845,7 @@
    "y5": -16.77,
    "high52": 320.0,
    "fromHigh": 15.6,
-   "rank": 327,
+   "rank": 326,
    "rating": "HOLD"
   },
   {
@@ -6887,7 +6866,7 @@
    "y5": 10.56,
    "high52": 65.93,
    "fromHigh": 10.18,
-   "rank": 328,
+   "rank": 327,
    "rating": "HOLD"
   },
   {
@@ -6908,7 +6887,7 @@
    "y5": 75.78,
    "high52": 151.39,
    "fromHigh": 18.91,
-   "rank": 329,
+   "rank": 328,
    "rating": "SELL"
   },
   {
@@ -6929,7 +6908,7 @@
    "y5": 78.8,
    "high52": 98.75,
    "fromHigh": 10.28,
-   "rank": 330,
+   "rank": 329,
    "rating": "HOLD"
   },
   {
@@ -6950,7 +6929,7 @@
    "y5": 9.59,
    "high52": 769.98,
    "fromHigh": 9.28,
-   "rank": 331,
+   "rank": 330,
    "rating": "HOLD"
   },
   {
@@ -6971,7 +6950,7 @@
    "y5": 112.54,
    "high52": 138.87,
    "fromHigh": 23.56,
-   "rank": 332,
+   "rank": 331,
    "rating": "HOLD"
   },
   {
@@ -6992,7 +6971,7 @@
    "y5": 88.01,
    "high52": 103.43,
    "fromHigh": 0.52,
-   "rank": 333,
+   "rank": 332,
    "rating": "HOLD"
   },
   {
@@ -7013,7 +6992,7 @@
    "y5": -45.22,
    "high52": 100.41,
    "fromHigh": 2.7,
-   "rank": 334,
+   "rank": 333,
    "rating": "SELL"
   },
   {
@@ -7034,7 +7013,7 @@
    "y5": 52.26,
    "high52": 99.49,
    "fromHigh": 16.67,
-   "rank": 335,
+   "rank": 334,
    "rating": "SELL"
   },
   {
@@ -7055,7 +7034,7 @@
    "y5": 65.65,
    "high52": 110.23,
    "fromHigh": 0.48,
-   "rank": 336,
+   "rank": 335,
    "rating": "HOLD"
   },
   {
@@ -7076,7 +7055,7 @@
    "y5": 73.77,
    "high52": 260.78,
    "fromHigh": 9.08,
-   "rank": 337,
+   "rank": 336,
    "rating": "HOLD"
   },
   {
@@ -7097,7 +7076,7 @@
    "y5": 82.93,
    "high52": 3996.25,
    "fromHigh": 16.78,
-   "rank": 338,
+   "rank": 337,
    "rating": "HOLD"
   },
   {
@@ -7118,16 +7097,16 @@
    "y5": 155.7,
    "high52": 117.75,
    "fromHigh": 4.97,
-   "rank": 339,
+   "rank": 338,
    "rating": "HOLD"
   },
   {
    "ticker": "9433.T",
    "name": "KDDI CORPORATION",
    "sector": "Communication Services",
-   "marketCap": 65736724373,
+   "marketCap": 65745858167,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 14.5,
    "ai": false,
    "price": 2817.5,
@@ -7139,7 +7118,7 @@
    "y5": 92.2,
    "high52": 3077.03,
    "fromHigh": 8.43,
-   "rank": 340,
+   "rank": 339,
    "rating": "HOLD"
   },
   {
@@ -7160,16 +7139,16 @@
    "y5": 130.67,
    "high52": 39.12,
    "fromHigh": 6.16,
-   "rank": 341,
+   "rank": 340,
    "rating": "HOLD"
   },
   {
    "ticker": "DG.PA",
    "name": "VINCI",
    "sector": "Industrials",
-   "marketCap": 68883055656,
+   "marketCap": 68906274435,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 12.4,
    "ai": false,
    "price": 111.45,
@@ -7181,16 +7160,16 @@
    "y5": 45.87,
    "high52": 137.6,
    "fromHigh": 19.0,
-   "rank": 342,
+   "rank": 341,
    "rating": "HOLD"
   },
   {
    "ticker": "RMS.PA",
    "name": "HERMES INTL",
    "sector": "Consumer Cyclical",
-   "marketCap": 161461914737,
+   "marketCap": 161516339566,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 31.9,
    "ai": false,
    "price": 1372.5,
@@ -7200,18 +7179,18 @@
    "ytd": -34.67,
    "y1": -33.48,
    "y5": -0.37,
-   "high52": 2277.06,
+   "high52": 2277.05,
    "fromHigh": 39.72,
-   "rank": 343,
+   "rank": 342,
    "rating": "HOLD"
   },
   {
    "ticker": "RHM.DE",
    "name": "RHEINMETALL AG                I",
    "sector": "Industrials",
-   "marketCap": 52596581591,
+   "marketCap": 52614310602,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 39.0,
    "ai": false,
    "price": 1003.4,
@@ -7223,16 +7202,16 @@
    "y5": 1146.19,
    "high52": 1946.54,
    "fromHigh": 48.45,
-   "rank": 344,
+   "rank": 343,
    "rating": "HOLD"
   },
   {
    "ticker": "BAS.DE",
    "name": "BASF SE                       N",
    "sector": "Basic Materials",
-   "marketCap": 52508206816,
+   "marketCap": 52525906038,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 24.1,
    "ai": false,
    "price": 54.3,
@@ -7244,16 +7223,16 @@
    "y5": 19.92,
    "high52": 54.63,
    "fromHigh": 0.6,
-   "rank": 345,
+   "rank": 344,
    "rating": "SELL"
   },
   {
    "ticker": "SREN.SW",
    "name": "SWISS RE N",
    "sector": "Financial Services",
-   "marketCap": 56408843982,
+   "marketCap": 56395711122,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 12.0,
    "ai": false,
    "price": 156.1,
@@ -7265,16 +7244,16 @@
    "y5": 136.5,
    "high52": 156.25,
    "fromHigh": 0.1,
-   "rank": 346,
+   "rank": 345,
    "rating": "HOLD"
   },
   {
    "ticker": "ENGI.PA",
    "name": "ENGIE",
    "sector": "Utilities",
-   "marketCap": 68687443251,
+   "marketCap": 68710596094,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 14.8,
    "ai": false,
    "price": 24.07,
@@ -7286,7 +7265,7 @@
    "y5": 181.35,
    "high52": 28.45,
    "fromHigh": 15.41,
-   "rank": 347,
+   "rank": 346,
    "rating": "HOLD"
   },
   {
@@ -7307,16 +7286,16 @@
    "y5": 48.17,
    "high52": 82.56,
    "fromHigh": 2.49,
-   "rank": 348,
+   "rank": 347,
    "rating": "HOLD"
   },
   {
    "ticker": "GLE.PA",
    "name": "SOCIETE GENERALE",
    "sector": "Financial Services",
-   "marketCap": 51429904821,
+   "marketCap": 51447240574,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 7.8,
    "ai": false,
    "price": 63.89,
@@ -7328,16 +7307,16 @@
    "y5": 171.87,
    "high52": 83.86,
    "fromHigh": 23.81,
-   "rank": 349,
+   "rank": 348,
    "rating": "HOLD"
   },
   {
    "ticker": "9432.T",
    "name": "NTT INC",
    "sector": "Communication Services",
-   "marketCap": 83643315985,
+   "marketCap": 83654937811,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 12.8,
    "ai": false,
    "price": 164.0,
@@ -7349,16 +7328,16 @@
    "y5": 47.5,
    "high52": 181.3,
    "fromHigh": 9.54,
-   "rank": 350,
+   "rank": 349,
    "rating": "NO RATING"
   },
   {
    "ticker": "7741.T",
    "name": "HOYA CORP",
    "sector": "Healthcare",
-   "marketCap": 51263688316,
+   "marketCap": 51270811153,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 29.1,
    "ai": false,
    "price": 24415.0,
@@ -7370,16 +7349,16 @@
    "y5": 43.45,
    "high52": 30193.81,
    "fromHigh": 19.14,
-   "rank": 351,
+   "rank": 350,
    "rating": "HOLD"
   },
   {
    "ticker": "2914.T",
    "name": "JAPAN TOBACCO INC",
    "sector": "Consumer Defensive",
-   "marketCap": 82764529364,
+   "marketCap": 82776029088,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 21.6,
    "ai": false,
    "price": 7383.0,
@@ -7391,16 +7370,16 @@
    "y5": 311.76,
    "high52": 7705.0,
    "fromHigh": 4.18,
-   "rank": 352,
+   "rank": 351,
    "rating": "HOLD"
   },
   {
    "ticker": "6752.T",
    "name": "PANASONIC HOLDINGS CORP",
    "sector": "Technology",
-   "marketCap": 51618537841,
+   "marketCap": 51625709982,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 25.2,
    "ai": false,
    "price": 3501.0,
@@ -7412,7 +7391,7 @@
    "y5": 181.15,
    "high52": 4951.9,
    "fromHigh": 29.3,
-   "rank": 353,
+   "rank": 352,
    "rating": "SELL"
   },
   {
@@ -7433,16 +7412,16 @@
    "y5": -10.43,
    "high52": 17.59,
    "fromHigh": 27.97,
-   "rank": 354,
+   "rank": 353,
    "rating": "SELL"
   },
   {
    "ticker": "CSU.TO",
    "name": "CONSTELLATION SOFTWARE INC.",
    "sector": "Technology",
-   "marketCap": 52569011013,
+   "marketCap": 52562238361,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 55.3,
    "ai": false,
    "price": 3465.98,
@@ -7454,7 +7433,7 @@
    "y5": 61.79,
    "high52": 3593.03,
    "fromHigh": 3.54,
-   "rank": 355,
+   "rank": 354,
    "rating": "HOLD"
   },
   {
@@ -7475,16 +7454,16 @@
    "y5": -3.19,
    "high52": 455.53,
    "fromHigh": 8.37,
-   "rank": 356,
+   "rank": 355,
    "rating": "HOLD"
   },
   {
    "ticker": "STAN.L",
    "name": "STANDARD CHARTERED PLC ORD USD0",
    "sector": "Financial Services",
-   "marketCap": 62229947340,
+   "marketCap": 62231621435,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 12.2,
    "ai": false,
    "price": 2134.0,
@@ -7496,7 +7475,7 @@
    "y5": 377.76,
    "high52": 2364.0,
    "fromHigh": 9.73,
-   "rank": 357,
+   "rank": 356,
    "rating": "HOLD"
   },
   {
@@ -7517,7 +7496,7 @@
    "y5": -73.04,
    "high52": 67.46,
    "fromHigh": 10.76,
-   "rank": 358,
+   "rank": 357,
    "rating": "BUY"
   },
   {
@@ -7538,7 +7517,7 @@
    "y5": 15.49,
    "high52": 37.31,
    "fromHigh": 1.41,
-   "rank": 359,
+   "rank": 358,
    "rating": "HOLD"
   },
   {
@@ -7559,7 +7538,7 @@
    "y5": 17.39,
    "high52": 182.99,
    "fromHigh": 3.18,
-   "rank": 360,
+   "rank": 359,
    "rating": "HOLD"
   },
   {
@@ -7580,7 +7559,7 @@
    "y5": 49.9,
    "high52": 59.01,
    "fromHigh": 7.27,
-   "rank": 361,
+   "rank": 360,
    "rating": "HOLD"
   },
   {
@@ -7601,16 +7580,16 @@
    "y5": 123.93,
    "high52": 69.92,
    "fromHigh": 28.67,
-   "rank": 362,
+   "rank": 361,
    "rating": "HOLD"
   },
   {
    "ticker": "8053.T",
    "name": "SUMITOMO CORP",
    "sector": "Industrials",
-   "marketCap": 49350967513,
+   "marketCap": 49357824587,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 12.2,
    "ai": false,
    "price": 1654.0,
@@ -7622,7 +7601,7 @@
    "y5": 388.04,
    "high52": 1919.83,
    "fromHigh": 13.85,
-   "rank": 363,
+   "rank": 362,
    "rating": "HOLD"
   },
   {
@@ -7643,7 +7622,7 @@
    "y5": 80.83,
    "high52": 126.55,
    "fromHigh": 1.11,
-   "rank": 364,
+   "rank": 363,
    "rating": "HOLD"
   },
   {
@@ -7664,7 +7643,7 @@
    "y5": 42.35,
    "high52": 495.83,
    "fromHigh": 10.48,
-   "rank": 365,
+   "rank": 364,
    "rating": "SELL"
   },
   {
@@ -7685,7 +7664,7 @@
    "y5": 221.87,
    "high52": 306.32,
    "fromHigh": 3.71,
-   "rank": 366,
+   "rank": 365,
    "rating": "HOLD"
   },
   {
@@ -7706,16 +7685,16 @@
    "y5": 153.64,
    "high52": 62.16,
    "fromHigh": 9.04,
-   "rank": 367,
+   "rank": 366,
    "rating": "SELL"
   },
   {
    "ticker": "AAL.L",
    "name": "ANGLO AMERICAN PLC ORD USD0.623",
    "sector": "Basic Materials",
-   "marketCap": 54878520750,
+   "marketCap": 54879997079,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": null,
    "ai": false,
    "price": 3802.0,
@@ -7727,7 +7706,7 @@
    "y5": 41.03,
    "high52": 4643.8,
    "fromHigh": 18.13,
-   "rank": 368,
+   "rank": 367,
    "rating": "SELL"
   },
   {
@@ -7748,7 +7727,7 @@
    "y5": 5.05,
    "high52": 495.68,
    "fromHigh": 0.7,
-   "rank": 369,
+   "rank": 368,
    "rating": "HOLD"
   },
   {
@@ -7769,7 +7748,7 @@
    "y5": 55.63,
    "high52": 389.93,
    "fromHigh": 26.69,
-   "rank": 370,
+   "rank": 369,
    "rating": "HOLD"
   },
   {
@@ -7790,7 +7769,7 @@
    "y5": -30.38,
    "high52": 236.8,
    "fromHigh": 14.76,
-   "rank": 371,
+   "rank": 370,
    "rating": "HOLD"
   },
   {
@@ -7811,7 +7790,7 @@
    "y5": 28.27,
    "high52": 52.28,
    "fromHigh": 15.61,
-   "rank": 372,
+   "rank": 371,
    "rating": "HOLD"
   },
   {
@@ -7832,16 +7811,16 @@
    "y5": 28.13,
    "high52": 374.59,
    "fromHigh": 30.66,
-   "rank": 373,
+   "rank": 372,
    "rating": "HOLD"
   },
   {
    "ticker": "BN.PA",
    "name": "DANONE",
    "sector": "Consumer Defensive",
-   "marketCap": 48934758595,
+   "marketCap": 48951253295,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 22.4,
    "ai": false,
    "price": 67.64,
@@ -7853,16 +7832,16 @@
    "y5": 39.67,
    "high52": 77.44,
    "fromHigh": 12.65,
-   "rank": 374,
+   "rank": 373,
    "rating": "HOLD"
   },
   {
    "ticker": "MAERSK-B.CO",
    "name": "A.P. Møller - Mærsk B A/S",
    "sector": "Industrials",
-   "marketCap": 47966555329,
+   "marketCap": 47973113827,
    "currency": "DKK",
-   "usd": 0.150286,
+   "usd": 0.15030655,
    "pe": 22.2,
    "ai": false,
    "price": 22200.0,
@@ -7874,7 +7853,7 @@
    "y5": 106.18,
    "high52": 25380.0,
    "fromHigh": 12.53,
-   "rank": 375,
+   "rank": 374,
    "rating": "SELL"
   },
   {
@@ -7895,7 +7874,7 @@
    "y5": 78.13,
    "high52": 268.59,
    "fromHigh": 7.47,
-   "rank": 376,
+   "rank": 375,
    "rating": "HOLD"
   },
   {
@@ -7916,7 +7895,7 @@
    "y5": 47.73,
    "high52": 192.63,
    "fromHigh": 0.43,
-   "rank": 377,
+   "rank": 376,
    "rating": "HOLD"
   },
   {
@@ -7937,7 +7916,7 @@
    "y5": 43.05,
    "high52": 49.7,
    "fromHigh": 6.97,
-   "rank": 378,
+   "rank": 377,
    "rating": "HOLD"
   },
   {
@@ -7958,7 +7937,7 @@
    "y5": -56.87,
    "high52": 229.96,
    "fromHigh": 17.43,
-   "rank": 379,
+   "rank": 378,
    "rating": "HOLD"
   },
   {
@@ -7979,7 +7958,7 @@
    "y5": 126.36,
    "high52": 313.07,
    "fromHigh": 7.64,
-   "rank": 380,
+   "rank": 379,
    "rating": "HOLD"
   },
   {
@@ -8000,7 +7979,7 @@
    "y5": 94.94,
    "high52": 100.99,
    "fromHigh": 11.68,
-   "rank": 381,
+   "rank": 380,
    "rating": "HOLD"
   },
   {
@@ -8021,16 +8000,16 @@
    "y5": 77.02,
    "high52": 284.12,
    "fromHigh": 14.78,
-   "rank": 382,
+   "rank": 381,
    "rating": "NO RATING"
   },
   {
    "ticker": "CABK.MC",
    "name": "CAIXABANK, S.A.",
    "sector": "Financial Services",
-   "marketCap": 92785950222,
+   "marketCap": 92817226078,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 12.9,
    "ai": false,
    "price": 11.9,
@@ -8042,7 +8021,7 @@
    "y5": 574.27,
    "high52": 13.34,
    "fromHigh": 10.76,
-   "rank": 383,
+   "rank": 382,
    "rating": "HOLD"
   },
   {
@@ -8063,16 +8042,16 @@
    "y5": -2.57,
    "high52": 325.99,
    "fromHigh": 4.71,
-   "rank": 384,
+   "rank": 383,
    "rating": "HOLD"
   },
   {
    "ticker": "GIVN.SW",
    "name": "GIVAUDAN N",
    "sector": "Basic Materials",
-   "marketCap": 46070058128,
+   "marketCap": 46059332299,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 39.7,
    "ai": false,
    "price": 4073.0,
@@ -8084,7 +8063,7 @@
    "y5": 1.05,
    "high52": 4073.0,
    "fromHigh": 0.0,
-   "rank": 385,
+   "rank": 384,
    "rating": "HOLD"
   },
   {
@@ -8105,7 +8084,7 @@
    "y5": 36.3,
    "high52": 482.28,
    "fromHigh": 3.04,
-   "rank": 386,
+   "rank": 385,
    "rating": "HOLD"
   },
   {
@@ -8126,7 +8105,7 @@
    "y5": 9.29,
    "high52": 677.62,
    "fromHigh": 0.49,
-   "rank": 387,
+   "rank": 386,
    "rating": "HOLD"
   },
   {
@@ -8147,7 +8126,7 @@
    "y5": 35.95,
    "high52": 35.42,
    "fromHigh": 0.56,
-   "rank": 388,
+   "rank": 387,
    "rating": "SELL"
   },
   {
@@ -8168,7 +8147,7 @@
    "y5": 358.38,
    "high52": 43.34,
    "fromHigh": 3.44,
-   "rank": 389,
+   "rank": 388,
    "rating": "HOLD"
   },
   {
@@ -8189,7 +8168,7 @@
    "y5": 85.17,
    "high52": 572.56,
    "fromHigh": 7.89,
-   "rank": 390,
+   "rank": 389,
    "rating": "HOLD"
   },
   {
@@ -8210,16 +8189,16 @@
    "y5": 74.76,
    "high52": 83.65,
    "fromHigh": 1.99,
-   "rank": 391,
+   "rank": 390,
    "rating": "HOLD"
   },
   {
    "ticker": "EOAN.DE",
    "name": "E.ON SE                       N",
    "sector": "Utilities",
-   "marketCap": 55413804162,
+   "marketCap": 55432482788,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 14.4,
    "ai": false,
    "price": 18.88,
@@ -8231,16 +8210,16 @@
    "y5": 105.2,
    "high52": 19.79,
    "fromHigh": 4.6,
-   "rank": 392,
+   "rank": 391,
    "rating": "HOLD"
   },
   {
    "ticker": "HOLN.SW",
    "name": "HOLCIM N",
    "sector": "Basic Materials",
-   "marketCap": 49705557604,
+   "marketCap": 49693985373,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 104.8,
    "ai": false,
    "price": 73.34,
@@ -8252,16 +8231,16 @@
    "y5": 88.64,
    "high52": 80.6,
    "fromHigh": 9.01,
-   "rank": 393,
+   "rank": 392,
    "rating": "HOLD"
   },
   {
    "ticker": "ATD.TO",
    "name": "ALIMENTATION COUCHE-TARD INC",
    "sector": "Consumer Cyclical",
-   "marketCap": 55648034549,
+   "marketCap": 55640865215,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 17.8,
    "ai": false,
    "price": 84.7,
@@ -8273,16 +8252,16 @@
    "y5": 77.96,
    "high52": 94.68,
    "fromHigh": 10.54,
-   "rank": 394,
+   "rank": 393,
    "rating": "HOLD"
   },
   {
    "ticker": "8725.T",
    "name": "MS&AD INS GP HLDGS",
    "sector": "Financial Services",
-   "marketCap": 46482268657,
+   "marketCap": 46488727139,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 8.5,
    "ai": false,
    "price": 5185.0,
@@ -8294,7 +8273,7 @@
    "y5": 416.88,
    "high52": 5358.0,
    "fromHigh": 3.23,
-   "rank": 395,
+   "rank": 394,
    "rating": "HOLD"
   },
   {
@@ -8315,16 +8294,16 @@
    "y5": 44.37,
    "high52": 169.29,
    "fromHigh": 1.76,
-   "rank": 396,
+   "rank": 395,
    "rating": "HOLD"
   },
   {
    "ticker": "TSCO.L",
    "name": "TESCO PLC ORD 6 1/3P",
    "sector": "Consumer Defensive",
-   "marketCap": 46192734274,
+   "marketCap": 46193976939,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 18.4,
    "ai": false,
    "price": 553.4,
@@ -8336,7 +8315,7 @@
    "y5": 101.19,
    "high52": 622.5,
    "fromHigh": 11.1,
-   "rank": 397,
+   "rank": 396,
    "rating": "HOLD"
   },
   {
@@ -8357,7 +8336,7 @@
    "y5": 110.95,
    "high52": 195.93,
    "fromHigh": 11.49,
-   "rank": 398,
+   "rank": 397,
    "rating": "HOLD"
   },
   {
@@ -8378,7 +8357,7 @@
    "y5": 87.61,
    "high52": 173.99,
    "fromHigh": 21.35,
-   "rank": 399,
+   "rank": 398,
    "rating": "NO RATING"
   },
   {
@@ -8399,7 +8378,7 @@
    "y5": 82.83,
    "high52": 120.93,
    "fromHigh": 0.52,
-   "rank": 400,
+   "rank": 399,
    "rating": "HOLD"
   },
   {
@@ -8420,16 +8399,16 @@
    "y5": -1.91,
    "high52": 41.42,
    "fromHigh": 15.02,
-   "rank": 401,
+   "rank": 400,
    "rating": "HOLD"
   },
   {
    "ticker": "ASSA-B.ST",
    "name": "ASSA ABLOY AB ser. B",
    "sector": "Industrials",
-   "marketCap": 45546888207,
+   "marketCap": 45564277167,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 26.1,
    "ai": false,
    "price": 398.7,
@@ -8441,7 +8420,7 @@
    "y5": 68.32,
    "high52": 401.9,
    "fromHigh": 0.8,
-   "rank": 402,
+   "rank": 401,
    "rating": "HOLD"
   },
   {
@@ -8462,7 +8441,7 @@
    "y5": 45.66,
    "high52": 127.79,
    "fromHigh": 0.91,
-   "rank": 403,
+   "rank": 402,
    "rating": "SELL"
   },
   {
@@ -8483,16 +8462,16 @@
    "y5": 13.4,
    "high52": 76.16,
    "fromHigh": 26.92,
-   "rank": 404,
+   "rank": 403,
    "rating": "HOLD"
   },
   {
    "ticker": "DSV.CO",
    "name": "DSV A/S",
    "sector": "Industrials",
-   "marketCap": 52423721225,
+   "marketCap": 52430889154,
    "currency": "DKK",
-   "usd": 0.150286,
+   "usd": 0.15030655,
    "pe": 43.6,
    "ai": false,
    "price": 1461.5,
@@ -8504,7 +8483,7 @@
    "y5": -4.21,
    "high52": 1905.06,
    "fromHigh": 23.28,
-   "rank": 405,
+   "rank": 404,
    "rating": "SELL"
   },
   {
@@ -8525,16 +8504,16 @@
    "y5": 55.39,
    "high52": 85.64,
    "fromHigh": 4.59,
-   "rank": 406,
+   "rank": 405,
    "rating": "HOLD"
   },
   {
    "ticker": "SSE.L",
    "name": "SSE PLC ORD 50P",
    "sector": "Utilities",
-   "marketCap": 42840248760,
+   "marketCap": 42841401238,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 25.0,
    "ai": false,
    "price": 2620.0,
@@ -8546,16 +8525,16 @@
    "y5": 58.01,
    "high52": 2766.98,
    "fromHigh": 5.31,
-   "rank": 407,
+   "rank": 406,
    "rating": "HOLD"
   },
   {
    "ticker": "DOL.TO",
    "name": "DOLLARAMA INC",
    "sector": "Consumer Defensive",
-   "marketCap": 42256863946,
+   "marketCap": 42251419844,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 44.2,
    "ai": false,
    "price": 220.0,
@@ -8567,7 +8546,7 @@
    "y5": 288.26,
    "high52": 220.16,
    "fromHigh": 0.07,
-   "rank": 408,
+   "rank": 407,
    "rating": "HOLD"
   },
   {
@@ -8588,7 +8567,7 @@
    "y5": 6.72,
    "high52": 284.5,
    "fromHigh": 7.28,
-   "rank": 409,
+   "rank": 408,
    "rating": "HOLD"
   },
   {
@@ -8609,7 +8588,7 @@
    "y5": null,
    "high52": 11.06,
    "fromHigh": 16.54,
-   "rank": 410,
+   "rank": 409,
    "rating": "HOLD"
   },
   {
@@ -8630,7 +8609,7 @@
    "y5": 81.65,
    "high52": 75.66,
    "fromHigh": 8.84,
-   "rank": 411,
+   "rank": 410,
    "rating": "SELL"
   },
   {
@@ -8651,7 +8630,7 @@
    "y5": 32.27,
    "high52": 174.27,
    "fromHigh": 19.03,
-   "rank": 412,
+   "rank": 411,
    "rating": "NO RATING"
   },
   {
@@ -8672,16 +8651,16 @@
    "y5": -2.02,
    "high52": 104.75,
    "fromHigh": 28.08,
-   "rank": 413,
+   "rank": 412,
    "rating": "SELL"
   },
   {
    "ticker": "VOW3.DE",
    "name": "VOLKSWAGEN AG                 V",
    "sector": "Consumer Cyclical",
-   "marketCap": 40090104007,
+   "marketCap": 40103617393,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 33.7,
    "ai": false,
    "price": 71.2,
@@ -8693,7 +8672,7 @@
    "y5": -38.64,
    "high52": 102.32,
    "fromHigh": 30.42,
-   "rank": 414,
+   "rank": 413,
    "rating": "NO RATING"
   },
   {
@@ -8714,16 +8693,16 @@
    "y5": -55.05,
    "high52": 324.8,
    "fromHigh": 53.36,
-   "rank": 415,
+   "rank": 414,
    "rating": "HOLD"
   },
   {
    "ticker": "TLS.AX",
    "name": "TELSTRA FPO [TLS]",
    "sector": "Communication Services",
-   "marketCap": 39255031064,
+   "marketCap": 39249531946,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 25.2,
    "ai": false,
    "price": 5.05,
@@ -8735,7 +8714,7 @@
    "y5": 59.3,
    "high52": 5.46,
    "fromHigh": 7.43,
-   "rank": 416,
+   "rank": 415,
    "rating": "HOLD"
   },
   {
@@ -8756,7 +8735,7 @@
    "y5": -34.44,
    "high52": 92.63,
    "fromHigh": 0.49,
-   "rank": 417,
+   "rank": 416,
    "rating": "SELL"
   },
   {
@@ -8777,7 +8756,7 @@
    "y5": 28.37,
    "high52": 33.49,
    "fromHigh": 6.48,
-   "rank": 418,
+   "rank": 417,
    "rating": "HOLD"
   },
   {
@@ -8798,7 +8777,7 @@
    "y5": 98.61,
    "high52": 216.9,
    "fromHigh": 15.68,
-   "rank": 419,
+   "rank": 418,
    "rating": "SELL"
   },
   {
@@ -8819,7 +8798,7 @@
    "y5": 11.59,
    "high52": 265.94,
    "fromHigh": 21.45,
-   "rank": 420,
+   "rank": 419,
    "rating": "NO RATING"
   },
   {
@@ -8840,7 +8819,7 @@
    "y5": 54.17,
    "high52": 118.87,
    "fromHigh": 0.64,
-   "rank": 421,
+   "rank": 420,
    "rating": "HOLD"
   },
   {
@@ -8861,16 +8840,16 @@
    "y5": null,
    "high52": 89.59,
    "fromHigh": 4.22,
-   "rank": 422,
+   "rank": 421,
    "rating": "HOLD"
   },
   {
    "ticker": "SAND.ST",
    "name": "Sandvik AB",
    "sector": "Industrials",
-   "marketCap": 46713837286,
+   "marketCap": 46731671765,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 23.8,
    "ai": false,
    "price": 362.1,
@@ -8882,16 +8861,16 @@
    "y5": 93.47,
    "high52": 413.1,
    "fromHigh": 12.35,
-   "rank": 423,
+   "rank": 422,
    "rating": "HOLD"
   },
   {
    "ticker": "UCB.BR",
    "name": "UCB",
    "sector": "Healthcare",
-   "marketCap": 60520324004,
+   "marketCap": 60540723913,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 25.0,
    "ai": false,
    "price": 282.6,
@@ -8903,7 +8882,7 @@
    "y5": 180.66,
    "high52": 287.68,
    "fromHigh": 1.77,
-   "rank": 424,
+   "rank": 423,
    "rating": "HOLD"
   },
   {
@@ -8924,7 +8903,7 @@
    "y5": 58.0,
    "high52": 329.2,
    "fromHigh": 9.57,
-   "rank": 425,
+   "rank": 424,
    "rating": "SELL"
   },
   {
@@ -8945,7 +8924,7 @@
    "y5": 17.51,
    "high52": 18.97,
    "fromHigh": 29.37,
-   "rank": 426,
+   "rank": 425,
    "rating": "NO RATING"
   },
   {
@@ -8966,7 +8945,7 @@
    "y5": 78.79,
    "high52": 170.28,
    "fromHigh": 7.81,
-   "rank": 427,
+   "rank": 426,
    "rating": "HOLD"
   },
   {
@@ -8987,16 +8966,16 @@
    "y5": 11.77,
    "high52": 126.69,
    "fromHigh": 6.3,
-   "rank": 428,
+   "rank": 427,
    "rating": "HOLD"
   },
   {
    "ticker": "FFH.TO",
    "name": "FAIRFAX FINANCIAL HOLDINGS LTD.",
    "sector": "Financial Services",
-   "marketCap": 44105994934,
+   "marketCap": 44100312602,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 9.8,
    "ai": false,
    "price": 2754.57,
@@ -9008,7 +8987,7 @@
    "y5": 480.08,
    "high52": 2788.02,
    "fromHigh": 1.2,
-   "rank": 429,
+   "rank": 428,
    "rating": "HOLD"
   },
   {
@@ -9029,16 +9008,16 @@
    "y5": 8.15,
    "high52": 89.92,
    "fromHigh": 14.44,
-   "rank": 430,
+   "rank": 429,
    "rating": "HOLD"
   },
   {
    "ticker": "GMG.AX",
    "name": "GOOD GROUP STAPLED [GMG]",
    "sector": "Real Estate",
-   "marketCap": 38690440370,
+   "marketCap": 38685020344,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 20.2,
    "ai": false,
    "price": 26.87,
@@ -9050,7 +9029,7 @@
    "y5": 21.0,
    "high52": 33.01,
    "fromHigh": 18.61,
-   "rank": 431,
+   "rank": 430,
    "rating": "HOLD"
   },
   {
@@ -9071,7 +9050,7 @@
    "y5": 539.39,
    "high52": 195.66,
    "fromHigh": 38.52,
-   "rank": 432,
+   "rank": 431,
    "rating": "HOLD"
   },
   {
@@ -9092,16 +9071,16 @@
    "y5": 75.8,
    "high52": 341.51,
    "fromHigh": 7.5,
-   "rank": 433,
+   "rank": 432,
    "rating": "HOLD"
   },
   {
    "ticker": "HEN3.DE",
    "name": "Henkel AG & Co. KGaA          I",
    "sector": "Consumer Defensive",
-   "marketCap": 37479289376,
+   "marketCap": 37491922720,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 17.6,
    "ai": false,
    "price": 82.42,
@@ -9113,7 +9092,7 @@
    "y5": 19.09,
    "high52": 82.6,
    "fromHigh": 0.22,
-   "rank": 434,
+   "rank": 433,
    "rating": "HOLD"
   },
   {
@@ -9134,16 +9113,16 @@
    "y5": -8.69,
    "high52": 258.78,
    "fromHigh": 1.67,
-   "rank": 435,
+   "rank": 434,
    "rating": "HOLD"
   },
   {
    "ticker": "LR.PA",
    "name": "LEGRAND",
    "sector": "Industrials",
-   "marketCap": 37596209171,
+   "marketCap": 37608881926,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 25.7,
    "ai": false,
    "price": 127.7,
@@ -9155,7 +9134,7 @@
    "y5": 46.44,
    "high52": 164.28,
    "fromHigh": 22.27,
-   "rank": 436,
+   "rank": 435,
    "rating": "HOLD"
   },
   {
@@ -9176,16 +9155,16 @@
    "y5": -8.08,
    "high52": 87.21,
    "fromHigh": 11.35,
-   "rank": 437,
+   "rank": 436,
    "rating": "HOLD"
   },
   {
    "ticker": "G.MI",
    "name": "GENERALI",
    "sector": "Financial Services",
-   "marketCap": 74183205003,
+   "marketCap": 74208210332,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 14.9,
    "ai": false,
    "price": 44.02,
@@ -9197,16 +9176,16 @@
    "y5": 201.27,
    "high52": 46.24,
    "fromHigh": 4.8,
-   "rank": 438,
+   "rank": 437,
    "rating": "HOLD"
   },
   {
    "ticker": "8630.T",
    "name": "SOMPO HOLDINGS INC",
    "sector": "Financial Services",
-   "marketCap": 39883563129,
+   "marketCap": 39889104753,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 21.9,
    "ai": false,
    "price": 7147.0,
@@ -9218,16 +9197,16 @@
    "y5": 414.87,
    "high52": 7305.71,
    "fromHigh": 2.17,
-   "rank": 439,
+   "rank": 438,
    "rating": "HOLD"
   },
   {
    "ticker": "SGO.PA",
    "name": "SAINT GOBAIN",
    "sector": "Industrials",
-   "marketCap": 39878402968,
+   "marketCap": 39891844994,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 13.5,
    "ai": false,
    "price": 72.74,
@@ -9239,7 +9218,7 @@
    "y5": 38.08,
    "high52": 88.58,
    "fromHigh": 17.88,
-   "rank": 440,
+   "rank": 439,
    "rating": "HOLD"
   },
   {
@@ -9260,7 +9239,7 @@
    "y5": -56.22,
    "high52": 130.12,
    "fromHigh": 31.45,
-   "rank": 441,
+   "rank": 440,
    "rating": "HOLD"
   },
   {
@@ -9281,16 +9260,16 @@
    "y5": 112.4,
    "high52": 145.43,
    "fromHigh": 5.03,
-   "rank": 442,
+   "rank": 441,
    "rating": "HOLD"
   },
   {
    "ticker": "6367.T",
    "name": "DAIKIN INDUSTRIES",
    "sector": "Industrials",
-   "marketCap": 36730237831,
+   "marketCap": 36735341317,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 22.2,
    "ai": false,
    "price": 20900.0,
@@ -9302,16 +9281,16 @@
    "y5": -13.5,
    "high52": 26212.5,
    "fromHigh": 20.27,
-   "rank": 443,
+   "rank": 442,
    "rating": "HOLD"
   },
   {
    "ticker": "SIKA.SW",
    "name": "SIKA N",
    "sector": "Basic Materials",
-   "marketCap": 36643521038,
+   "marketCap": 36634989854,
    "currency": "CHF",
-   "usd": 1.22529507,
+   "usd": 1.2250098,
    "pe": 28.8,
    "ai": false,
    "price": 186.4,
@@ -9323,16 +9302,16 @@
    "y5": -37.26,
    "high52": 197.6,
    "fromHigh": 5.67,
-   "rank": 444,
+   "rank": 443,
    "rating": "HOLD"
   },
   {
    "ticker": "EXPN.L",
    "name": "EXPERIAN PLC ORD USD0.10",
    "sector": "Industrials",
-   "marketCap": 36522426574,
+   "marketCap": 36523409091,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 25.4,
    "ai": false,
    "price": 3095.0,
@@ -9344,7 +9323,7 @@
    "y5": -11.0,
    "high52": 3615.32,
    "fromHigh": 14.39,
-   "rank": 445,
+   "rank": 444,
    "rating": "HOLD"
   },
   {
@@ -9365,7 +9344,7 @@
    "y5": 34.91,
    "high52": 85.4,
    "fromHigh": 14.27,
-   "rank": 446,
+   "rank": 445,
    "rating": "HOLD"
   },
   {
@@ -9386,7 +9365,7 @@
    "y5": 0.01,
    "high52": 115.43,
    "fromHigh": 5.76,
-   "rank": 447,
+   "rank": 446,
    "rating": "HOLD"
   },
   {
@@ -9407,16 +9386,16 @@
    "y5": -77.59,
    "high52": 159.8,
    "fromHigh": 49.82,
-   "rank": 448,
+   "rank": 447,
    "rating": "HOLD"
   },
   {
    "ticker": "ASM.AS",
    "name": "ASM International N.V.",
    "sector": "Technology",
-   "marketCap": 37471341673,
+   "marketCap": 37483972338,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 33.7,
    "ai": true,
    "price": 683.6,
@@ -9428,16 +9407,16 @@
    "y5": 67.55,
    "high52": 1092.5,
    "fromHigh": 37.43,
-   "rank": 449,
+   "rank": 448,
    "rating": "HOLD"
   },
   {
    "ticker": "IFC.TO",
    "name": "INTACT FINANCIAL CORPORATION",
    "sector": "Financial Services",
-   "marketCap": 35595481811,
+   "marketCap": 35590895918,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 15.6,
    "ai": false,
    "price": 282.02,
@@ -9449,16 +9428,16 @@
    "y5": 89.18,
    "high52": 303.79,
    "fromHigh": 7.17,
-   "rank": 450,
+   "rank": 449,
    "rating": "HOLD"
   },
   {
    "ticker": "SWED-A.ST",
    "name": "Swedbank AB ser A",
    "sector": "Financial Services",
-   "marketCap": 46481910744,
+   "marketCap": 46499656678,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 14.8,
    "ai": false,
    "price": 402.2,
@@ -9470,7 +9449,7 @@
    "y5": 209.21,
    "high52": 416.1,
    "fromHigh": 3.34,
-   "rank": 451,
+   "rank": 450,
    "rating": "HOLD"
   },
   {
@@ -9491,16 +9470,16 @@
    "y5": 2.48,
    "high52": 77.05,
    "fromHigh": 1.35,
-   "rank": 452,
+   "rank": 451,
    "rating": "SELL"
   },
   {
    "ticker": "III.L",
    "name": "3I GROUP PLC ORD 73 19/22P",
    "sector": "Financial Services",
-   "marketCap": 35942997191,
+   "marketCap": 35943964121,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 4.9,
    "ai": false,
    "price": 2632.0,
@@ -9512,16 +9491,16 @@
    "y5": 90.52,
    "high52": 4376.6,
    "fromHigh": 39.86,
-   "rank": 453,
+   "rank": 452,
    "rating": "BUY"
   },
   {
    "ticker": "6702.T",
    "name": "FUJITSU",
    "sector": "Technology",
-   "marketCap": 37033922128,
+   "marketCap": 37039067809,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 22.1,
    "ai": false,
    "price": 3397.0,
@@ -9533,7 +9512,7 @@
    "y5": 73.19,
    "high52": 4629.0,
    "fromHigh": 26.61,
-   "rank": 454,
+   "rank": 453,
    "rating": "HOLD"
   },
   {
@@ -9554,16 +9533,16 @@
    "y5": 200.95,
    "high52": 133.64,
    "fromHigh": 11.21,
-   "rank": 455,
+   "rank": 454,
    "rating": "HOLD"
   },
   {
    "ticker": "DSY.PA",
    "name": "DASSAULT SYSTEMES",
    "sector": "Technology",
-   "marketCap": 38139878052,
+   "marketCap": 38152734064,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 26.1,
    "ai": false,
    "price": 25.84,
@@ -9575,7 +9554,7 @@
    "y5": -50.69,
    "high52": 25.91,
    "fromHigh": 0.27,
-   "rank": 456,
+   "rank": 455,
    "rating": "HOLD"
   },
   {
@@ -9596,16 +9575,16 @@
    "y5": 12.85,
    "high52": 235.8,
    "fromHigh": 26.0,
-   "rank": 457,
+   "rank": 456,
    "rating": "HOLD"
   },
   {
    "ticker": "U11.SI",
    "name": "UOB",
    "sector": "Financial Services",
-   "marketCap": 49586980795,
+   "marketCap": 49579996778,
    "currency": "SGD",
-   "usd": 0.78249103,
+   "usd": 0.78238082,
    "pe": 6.8,
    "ai": false,
    "price": 38.44,
@@ -9617,7 +9596,7 @@
    "y5": 80.48,
    "high52": 44.2,
    "fromHigh": 13.03,
-   "rank": 458,
+   "rank": 457,
    "rating": "HOLD"
   },
   {
@@ -9638,16 +9617,16 @@
    "y5": 168.44,
    "high52": 110.73,
    "fromHigh": 0.05,
-   "rank": 459,
+   "rank": 458,
    "rating": "HOLD"
   },
   {
    "ticker": "WOW.AX",
    "name": "WOOLWORTHS FPO [WOW]",
    "sector": "Consumer Defensive",
-   "marketCap": 34593429963,
+   "marketCap": 34588583875,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 43.0,
    "ai": false,
    "price": 40.41,
@@ -9659,7 +9638,7 @@
    "y5": 20.01,
    "high52": 42.0,
    "fromHigh": 3.79,
-   "rank": 460,
+   "rank": 459,
    "rating": "HOLD"
   },
   {
@@ -9680,7 +9659,7 @@
    "y5": 25.21,
    "high52": 83.34,
    "fromHigh": 13.53,
-   "rank": 461,
+   "rank": 460,
    "rating": "HOLD"
   },
   {
@@ -9701,16 +9680,16 @@
    "y5": 13.48,
    "high52": 1737.99,
    "fromHigh": 0.85,
-   "rank": 462,
+   "rank": 461,
    "rating": "HOLD"
   },
   {
    "ticker": "6301.T",
    "name": "KOMATSU",
    "sector": "Industrials",
-   "marketCap": 34732009922,
+   "marketCap": 34736835764,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 15.0,
    "ai": false,
    "price": 6207.0,
@@ -9722,7 +9701,7 @@
    "y5": 143.41,
    "high52": 7980.0,
    "fromHigh": 22.22,
-   "rank": 463,
+   "rank": 462,
    "rating": "HOLD"
   },
   {
@@ -9743,7 +9722,7 @@
    "y5": 22.35,
    "high52": 13.54,
    "fromHigh": 18.31,
-   "rank": 464,
+   "rank": 463,
    "rating": "HOLD"
   },
   {
@@ -9764,7 +9743,7 @@
    "y5": 26.53,
    "high52": 88.75,
    "fromHigh": 20.18,
-   "rank": 465,
+   "rank": 464,
    "rating": "SELL"
   },
   {
@@ -9785,16 +9764,16 @@
    "y5": -36.77,
    "high52": 108.29,
    "fromHigh": 54.46,
-   "rank": 466,
+   "rank": 465,
    "rating": "NO RATING"
   },
   {
    "ticker": "MBG.DE",
    "name": "Mercedes-Benz Group AG        N",
    "sector": "Consumer Cyclical",
-   "marketCap": 45131982829,
+   "marketCap": 45147195707,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 7.3,
    "ai": false,
    "price": 42.33,
@@ -9806,7 +9785,7 @@
    "y5": -14.45,
    "high52": 58.25,
    "fromHigh": 27.34,
-   "rank": 467,
+   "rank": 466,
    "rating": "SELL"
   },
   {
@@ -9827,16 +9806,16 @@
    "y5": -3.4,
    "high52": 275.42,
    "fromHigh": 12.67,
-   "rank": 468,
+   "rank": 467,
    "rating": "HOLD"
   },
   {
    "ticker": "4568.T",
    "name": "DAIICHI SANKYO COMPANY LIMITED",
    "sector": "Healthcare",
-   "marketCap": 33472668679,
+   "marketCap": 33477319541,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 19.0,
    "ai": false,
    "price": 2909.5,
@@ -9848,8 +9827,29 @@
    "y5": 11.42,
    "high52": 3792.7,
    "fromHigh": 23.29,
-   "rank": 469,
+   "rank": 468,
    "rating": "NO RATING"
+  },
+  {
+   "ticker": "AD.AS",
+   "name": "KONINKLIJKE AHOLD DELHAIZE N.V.",
+   "sector": "Consumer Defensive",
+   "marketCap": 33635483594,
+   "currency": "EUR",
+   "usd": 1.12359548,
+   "pe": 13.6,
+   "ai": false,
+   "price": 34.29,
+   "d1": 6.62,
+   "m1": 8.86,
+   "m3": 1.23,
+   "ytd": 1.59,
+   "y1": -0.69,
+   "y5": 41.35,
+   "high52": 41.21,
+   "fromHigh": 16.8,
+   "rank": 469,
+   "rating": "HOLD"
   },
   {
    "ticker": "ODFL",
@@ -9873,33 +9873,12 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "AD.AS",
-   "name": "KONINKLIJKE AHOLD DELHAIZE N.V.",
-   "sector": "Consumer Defensive",
-   "marketCap": 33624149722,
-   "currency": "EUR",
-   "usd": 1.12321687,
-   "pe": 13.6,
-   "ai": false,
-   "price": 34.29,
-   "d1": 6.62,
-   "m1": 8.86,
-   "m3": 1.23,
-   "ytd": 1.59,
-   "y1": -0.69,
-   "y5": 41.35,
-   "high52": 41.21,
-   "fromHigh": 16.8,
-   "rank": 471,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "LDO.MI",
    "name": "LEONARDO",
    "sector": "Industrials",
-   "marketCap": 33119039277,
+   "marketCap": 33130202888,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 25.6,
    "ai": false,
    "price": 51.12,
@@ -9911,16 +9890,16 @@
    "y5": 722.72,
    "high52": 65.47,
    "fromHigh": 21.92,
-   "rank": 472,
+   "rank": 471,
    "rating": "HOLD"
   },
   {
    "ticker": "ADS.DE",
    "name": "adidas AG                     N",
    "sector": "Consumer Cyclical",
-   "marketCap": 33487856395,
+   "marketCap": 33499144325,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 19.0,
    "ai": false,
    "price": 176.35,
@@ -9932,7 +9911,7 @@
    "y5": -36.74,
    "high52": 188.8,
    "fromHigh": 6.59,
-   "rank": 473,
+   "rank": 472,
    "rating": "HOLD"
   },
   {
@@ -9953,16 +9932,16 @@
    "y5": -44.3,
    "high52": 92.59,
    "fromHigh": 4.44,
-   "rank": 474,
+   "rank": 473,
    "rating": "HOLD"
   },
   {
    "ticker": "6954.T",
    "name": "FANUC CORPORATION",
    "sector": "Industrials",
-   "marketCap": 32878909056,
+   "marketCap": 32883477418,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 29.2,
    "ai": false,
    "price": 5630.0,
@@ -9974,7 +9953,7 @@
    "y5": 37.76,
    "high52": 8771.61,
    "fromHigh": 35.82,
-   "rank": 475,
+   "rank": 474,
    "rating": "HOLD"
   },
   {
@@ -9995,16 +9974,16 @@
    "y5": 132.25,
    "high52": 665.07,
    "fromHigh": 36.22,
-   "rank": 476,
+   "rank": 475,
    "rating": "SELL"
   },
   {
    "ticker": "ORA.PA",
    "name": "ORANGE",
    "sector": "Communication Services",
-   "marketCap": 45256497311,
+   "marketCap": 45271752161,
    "currency": "EUR",
-   "usd": 1.12321687,
+   "usd": 1.12359548,
    "pe": 3.7,
    "ai": false,
    "price": 15.16,
@@ -10016,16 +9995,16 @@
    "y5": 118.67,
    "high52": 18.34,
    "fromHigh": 17.32,
-   "rank": 477,
+   "rank": 476,
    "rating": "HOLD"
   },
   {
    "ticker": "SEB-A.ST",
    "name": "Skandinaviska Enskilda Banken s",
    "sector": "Financial Services",
-   "marketCap": 42930175818,
+   "marketCap": 42946565765,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 13.7,
    "ai": false,
    "price": 214.7,
@@ -10037,7 +10016,7 @@
    "y5": 121.77,
    "high52": 238.5,
    "fromHigh": 9.98,
-   "rank": 478,
+   "rank": 477,
    "rating": "HOLD"
   },
   {
@@ -10058,7 +10037,7 @@
    "y5": 174.07,
    "high52": 67.84,
    "fromHigh": 22.58,
-   "rank": 479,
+   "rank": 478,
    "rating": "HOLD"
   },
   {
@@ -10079,7 +10058,7 @@
    "y5": 47.9,
    "high52": 100.89,
    "fromHigh": 16.56,
-   "rank": 480,
+   "rank": 479,
    "rating": "HOLD"
   },
   {
@@ -10100,7 +10079,7 @@
    "y5": 26.39,
    "high52": 18.9,
    "fromHigh": 15.05,
-   "rank": 481,
+   "rank": 480,
    "rating": "HOLD"
   },
   {
@@ -10121,16 +10100,16 @@
    "y5": 69.5,
    "high52": 254.31,
    "fromHigh": 11.67,
-   "rank": 482,
+   "rank": 481,
    "rating": "HOLD"
   },
   {
    "ticker": "EQT.ST",
    "name": "EQT AB",
    "sector": "Financial Services",
-   "marketCap": 40991243641,
+   "marketCap": 41006893340,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 32.9,
    "ai": false,
    "price": 319.9,
@@ -10142,7 +10121,7 @@
    "y5": -30.8,
    "high52": 379.85,
    "fromHigh": 15.78,
-   "rank": 483,
+   "rank": 482,
    "rating": "SELL"
   },
   {
@@ -10163,7 +10142,7 @@
    "y5": 297.33,
    "high52": 287.4,
    "fromHigh": 16.45,
-   "rank": 484,
+   "rank": 483,
    "rating": "SELL"
   },
   {
@@ -10184,16 +10163,16 @@
    "y5": 67.07,
    "high52": 194.86,
    "fromHigh": 8.64,
-   "rank": 485,
+   "rank": 484,
    "rating": "HOLD"
   },
   {
    "ticker": "TCL.AX",
    "name": "TRANSURBAN STAPLED [TCL]",
    "sector": "Industrials",
-   "marketCap": 31145461906,
+   "marketCap": 31141098834,
    "currency": "AUD",
-   "usd": 0.70077085,
+   "usd": 0.70067269,
    "pe": 118.7,
    "ai": false,
    "price": 14.24,
@@ -10205,7 +10184,7 @@
    "y5": 28.69,
    "high52": 15.26,
    "fromHigh": 6.71,
-   "rank": 486,
+   "rank": 485,
    "rating": "SELL"
   },
   {
@@ -10226,7 +10205,7 @@
    "y5": 53.26,
    "high52": 117.49,
    "fromHigh": 3.75,
-   "rank": 487,
+   "rank": 486,
    "rating": "HOLD"
   },
   {
@@ -10247,7 +10226,7 @@
    "y5": -31.53,
    "high52": 155.91,
    "fromHigh": 9.15,
-   "rank": 488,
+   "rank": 487,
    "rating": "HOLD"
   },
   {
@@ -10268,7 +10247,7 @@
    "y5": 55.94,
    "high52": 350.34,
    "fromHigh": 3.7,
-   "rank": 489,
+   "rank": 488,
    "rating": "HOLD"
   },
   {
@@ -10289,16 +10268,16 @@
    "y5": 154.57,
    "high52": 72.46,
    "fromHigh": 11.04,
-   "rank": 490,
+   "rank": 489,
    "rating": "SELL"
   },
   {
    "ticker": "5108.T",
    "name": "BRIDGESTONE CORP",
    "sector": "Consumer Cyclical",
-   "marketCap": 31247246105,
+   "marketCap": 31251587755,
    "currency": "JPY",
-   "usd": 0.00631405,
+   "usd": 0.00631493,
    "pe": 20.3,
    "ai": false,
    "price": 4010.0,
@@ -10310,16 +10289,16 @@
    "y5": 88.13,
    "high52": 4393.0,
    "fromHigh": 8.72,
-   "rank": 491,
+   "rank": 490,
    "rating": "HOLD"
   },
   {
    "ticker": "L.TO",
    "name": "LOBLAW CO",
    "sector": "Consumer Defensive",
-   "marketCap": 58251496962,
+   "marketCap": 58243992215,
    "currency": "CAD",
-   "usd": 0.71571714,
+   "usd": 0.71562493,
    "pe": 31.7,
    "ai": false,
    "price": 70.43,
@@ -10331,7 +10310,7 @@
    "y5": 212.95,
    "high52": 71.07,
    "fromHigh": 0.9,
-   "rank": 492,
+   "rank": 491,
    "rating": "HOLD"
   },
   {
@@ -10352,7 +10331,7 @@
    "y5": 18.64,
    "high52": 59.97,
    "fromHigh": 8.09,
-   "rank": 493,
+   "rank": 492,
    "rating": "HOLD"
   },
   {
@@ -10373,7 +10352,7 @@
    "y5": -26.75,
    "high52": 32.19,
    "fromHigh": 3.5,
-   "rank": 494,
+   "rank": 493,
    "rating": "NO RATING"
   },
   {
@@ -10394,16 +10373,16 @@
    "y5": 6.11,
    "high52": 93.43,
    "fromHigh": 14.6,
-   "rank": 495,
+   "rank": 494,
    "rating": "HOLD"
   },
   {
    "ticker": "EPI-A.ST",
    "name": "Epiroc AB ser. A",
    "sector": "Industrials",
-   "marketCap": 30269355771,
+   "marketCap": 30280912051,
    "currency": "SEK",
-   "usd": 0.10284563,
+   "usd": 0.1028849,
    "pe": 31.6,
    "ai": false,
    "price": 243.3,
@@ -10415,16 +10394,16 @@
    "y5": 22.71,
    "high52": 282.22,
    "fromHigh": 13.79,
-   "rank": 496,
+   "rank": 495,
    "rating": "HOLD"
   },
   {
    "ticker": "IMB.L",
    "name": "IMPERIAL BRANDS PLC ORD 10P",
    "sector": "Consumer Defensive",
-   "marketCap": 29983162172,
+   "marketCap": 29983968771,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 14.0,
    "ai": false,
    "price": 2978.0,
@@ -10436,7 +10415,7 @@
    "y5": 90.95,
    "high52": 3630.47,
    "fromHigh": 17.97,
-   "rank": 497,
+   "rank": 496,
    "rating": "HOLD"
   },
   {
@@ -10457,16 +10436,16 @@
    "y5": 64.27,
    "high52": 371.0,
    "fromHigh": 0.87,
-   "rank": 498,
+   "rank": 497,
    "rating": "HOLD"
   },
   {
    "ticker": "VWS.CO",
    "name": "Vestas Wind Systems A/S",
    "sector": "Industrials",
-   "marketCap": 29661658568,
+   "marketCap": 29665714226,
    "currency": "DKK",
-   "usd": 0.150286,
+   "usd": 0.15030655,
    "pe": 24.7,
    "ai": false,
    "price": 203.1,
@@ -10478,16 +10457,16 @@
    "y5": -6.63,
    "high52": 220.2,
    "fromHigh": 7.77,
-   "rank": 499,
+   "rank": 498,
    "rating": "HOLD"
   },
   {
    "ticker": "AV.L",
    "name": "AVIVA PLC ORD 32 17/19P",
    "sector": "Financial Services",
-   "marketCap": 30122853390,
+   "marketCap": 30123663748,
    "currency": "GBp",
-   "usd": 0.0134711,
+   "usd": 0.01347146,
    "pe": 44.0,
    "ai": false,
    "price": 747.6,
@@ -10499,8 +10478,29 @@
    "y5": 91.65,
    "high52": 748.0,
    "fromHigh": 0.05,
-   "rank": 500,
+   "rank": 499,
    "rating": "SELL"
+  },
+  {
+   "ticker": "KBC.BR",
+   "name": "KBC",
+   "sector": "Financial Services",
+   "marketCap": 52058929834,
+   "currency": "EUR",
+   "usd": 1.12359548,
+   "pe": 12.9,
+   "ai": false,
+   "price": 116.8,
+   "d1": 3.73,
+   "m1": -5.54,
+   "m3": -6.85,
+   "ytd": 9.96,
+   "y1": 18.03,
+   "y5": 111.82,
+   "high52": 133.76,
+   "fromHigh": 12.68,
+   "rank": 500,
+   "rating": "HOLD"
   }
  ],
  "extras": [
@@ -10636,17 +10636,17 @@
     70169.0,
     68533.0,
     69030.0,
-    71724.0
+    71925.0
    ],
-   "price": 71724.0,
-   "d1": 3.9,
-   "m1": -6.72,
-   "m3": 29.13,
-   "ytd": -3.69,
-   "y1": -18.85,
+   "price": 71925.0,
+   "d1": 4.19,
+   "m1": -6.45,
+   "m3": 29.49,
+   "ytd": -3.42,
+   "y1": -18.62,
    "y5": null,
    "high52": 92989.0,
-   "fromHigh": 22.87
+   "fromHigh": 22.65
   }
  ],
  "assets": [
@@ -10687,32 +10687,32 @@
    "name": "Bitcoin",
    "kind": "crypto",
    "icon": "₿",
-   "marketCap": 1619240026112,
-   "price": 80523.89,
-   "d1": 4.11,
-   "m1": -6.89,
-   "m3": 25.71,
-   "ytd": -7.98,
-   "y1": -20.74,
-   "y5": 31.03,
+   "marketCap": 1624122195968,
+   "price": 80787.09,
+   "d1": 4.45,
+   "m1": -6.58,
+   "m3": 26.12,
+   "ytd": -7.68,
+   "y1": -20.48,
+   "y5": 31.46,
    "high52": 107428.26,
-   "fromHigh": 25.04
+   "fromHigh": 24.8
   },
   {
    "ticker": "ETH-USD",
    "name": "Ethereum",
    "kind": "crypto",
    "icon": "Ξ",
-   "marketCap": 296795176960,
-   "price": 2430.18,
-   "d1": 6.93,
-   "m1": -10.87,
-   "m3": 30.07,
-   "ytd": -18.09,
-   "y1": -26.19,
-   "y5": -46.44,
+   "marketCap": 298126344192,
+   "price": 2439.4,
+   "d1": 7.33,
+   "m1": -10.53,
+   "m3": 30.56,
+   "ytd": -17.78,
+   "y1": -25.91,
+   "y5": -46.24,
    "high52": 3656.15,
-   "fromHigh": 33.53
+   "fromHigh": 33.28
   },
   {
    "ticker": "TSM",
@@ -10751,7 +10751,7 @@
    "name": "TENCENT",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 460991858576,
+   "marketCap": 460985392216,
    "price": 401.6,
    "d1": 1.11,
    "m1": -4.65,
@@ -10783,7 +10783,7 @@
    "name": "SamsungElec",
    "kind": "bedrijf",
    "country": "South Korea",
-   "marketCap": 1058659761200,
+   "marketCap": 1058912448470,
    "price": 218000.0,
    "d1": -0.68,
    "m1": -21.01,
@@ -10791,7 +10791,7 @@
    "ytd": 85.56,
    "y1": 113.12,
    "y5": 245.58,
-   "high52": 367712.72,
+   "high52": 367712.75,
    "fromHigh": 40.71
   },
   {
@@ -10799,7 +10799,7 @@
    "name": "SK hynix",
    "kind": "bedrijf",
    "country": "South Korea",
-   "marketCap": 734128280911,
+   "marketCap": 734303507058,
    "price": 1396000.0,
    "d1": -0.14,
    "m1": -24.17,
@@ -10847,7 +10847,7 @@
    "name": "ICBC",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 355293135626,
+   "marketCap": 355288151908,
    "price": 7.82,
    "d1": 1.03,
    "m1": 7.41,
@@ -10895,7 +10895,7 @@
    "name": "HON HAI PRECISION INDUSTRY",
    "kind": "bedrijf",
    "country": "Taiwan",
-   "marketCap": 102835060111,
+   "marketCap": 102922797673,
    "price": 240.0,
    "d1": -2.24,
    "m1": -4.38,
@@ -10927,7 +10927,7 @@
    "name": "CHINA MOBILE",
    "kind": "bedrijf",
    "country": "Hong Kong",
-   "marketCap": 222517371144,
+   "marketCap": 222514249880,
    "price": 80.5,
    "d1": -0.12,
    "m1": 2.09,
@@ -10959,7 +10959,7 @@
    "name": "XIAOMI-W",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 94347506454,
+   "marketCap": 94346183036,
    "price": 28.76,
    "d1": 0.56,
    "m1": 18.65,
@@ -11007,7 +11007,7 @@
    "name": "MEITUAN-W",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 59165329437,
+   "marketCap": 59164499521,
    "price": 75.2,
    "d1": 1.14,
    "m1": 7.12,
@@ -11039,7 +11039,7 @@
    "name": "CCB",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 341819612004,
+   "marketCap": 341814817280,
    "price": 10.25,
    "d1": 1.38,
    "m1": 7.27,
@@ -11055,7 +11055,7 @@
    "name": "MEDIATEK INC",
    "kind": "bedrijf",
    "country": "Taiwan",
-   "marketCap": 180635595676,
+   "marketCap": 180789711663,
    "price": 3715.0,
    "d1": 1.09,
    "m1": -24.95,
@@ -11071,7 +11071,7 @@
    "name": "ABC",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 299813378169,
+   "marketCap": 299809172669,
    "price": 6.72,
    "d1": 1.59,
    "m1": 6.48,
@@ -11099,7 +11099,7 @@
    "fromHigh": 3.2
   }
  ],
- "eurusd": 1.123217,
+ "eurusd": 1.123595,
  "macro": {
   "ecb_deposit": {
    "value": 2.5,

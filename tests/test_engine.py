@@ -374,3 +374,25 @@ def test_normalize_pence_market_cap():
     fin = normalize("X.L", info, fake_raw(), 3000.0, None, TODAY, 100.0, 0.04, str(TODAY), str(TODAY))
     assert fin["mcap"] == pytest.approx(300000.0)          # 100 aandelen × 3000 pence
     assert fin["s"]["revenue"][0] == pytest.approx(120000.0)  # £1200 -> 120.000 pence
+
+
+def test_growth_not_above_analyst_expectations():
+    f = make_fin(s={"revenue": [1600.0, 1100.0, 800.0, 500.0], "fcf": [400.0, 260.0, 180.0, 110.0]})
+    f["est"] = {"fwd_rev": 0.06, "fwd_eps": 0.08}
+    assert dcf.run(f)["scenarios"]["neutral"]["growth_y1"] == pytest.approx(0.08)
+
+
+def test_fcf_capped_when_far_above_earnings():
+    f = make_fin(s={"fcf": [1200.0, 1100.0, 1000.0, 900.0]})  # FCF ~4,5× de winst
+    neu = dcf.run(f)["scenarios"]["neutral"]
+    ni_avg = sum(f["s"]["net_income"][:3]) / 3
+    assert neu["base_fcf"] <= 1.5 * ni_avg + 1
+    assert "begrensd" in neu["fcf_basis"]
+
+
+def test_country_risk_premium_raises_discount_rate():
+    dev, em = make_fin(), make_fin()
+    em["fin_currency"] = "CNY"
+    r_dev = dcf.run(dev)["scenarios"]["neutral"]["cost_of_equity"]
+    r_em = dcf.run(em)["scenarios"]["neutral"]["cost_of_equity"]
+    assert r_em == pytest.approx(r_dev + 0.01)

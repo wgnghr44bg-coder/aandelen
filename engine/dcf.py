@@ -19,12 +19,23 @@ Aannames:
   - groei jaar 1 = mediaan van historische FCF-groei, omzetgroei en analistenverwachtingen,
     begrensd; daalt lineair naar halverwege de terminal groei in jaar 5
   - stock-based compensation telt als kosten: conservatief 100%, neutraal 50%, optimistisch 0%
+  - groei nooit hoger dan de analistenverwachting (indien beschikbaar)
+  - vrije kasstroom max. 1,5× de gemiddelde winst (kasstroomkwaliteit)
+  - landenrisicopremie voor bedrijven die in de valuta van een opkomende markt rapporteren
 """
 from .sectors import CYCLICAL, MODEL
 from .series import roe_series, ser, span_cagr
 from .util import at, avail, clamp, div, mean, median, num, rnd
 
 ERP = 0.045  # impliciete aandelenrisicopremie (Damodaran ~4,3–4,6%)
+
+# Landenrisicopremie op basis van de rapportagevaluta (benadering van Damodaran's country risk premiums).
+# Ontwikkelde markten: 0. Opkomende markten: extra opslag op de disconteringsvoet.
+COUNTRY_RISK = {"CNY": 0.010, "HKD": 0.008, "INR": 0.020, "BRL": 0.030, "MXN": 0.025, "IDR": 0.022,
+                "ZAR": 0.035, "TRY": 0.045, "ARS": 0.080, "KRW": 0.006, "TWD": 0.006, "SAR": 0.009,
+                "AED": 0.008, "QAR": 0.008, "THB": 0.015, "MYR": 0.012, "PHP": 0.020, "CLP": 0.010,
+                "COP": 0.025, "PLN": 0.008}
+MAX_FCF_TO_EARNINGS = 1.5  # vrije kasstroom hoger dan 1,5× de gemiddelde winst = begrensd
 DEFAULT_RF = 0.0425
 YEARS = 5
 
@@ -48,7 +59,10 @@ def cost_of_equity(fin, notes=None):
             notes.append("bèta onbekend: 1,0 aangenomen")
     # Blume-correctie: bèta's neigen op termijn naar 1 (0,67 × β + 0,33)
     adj = clamp(0.67 * beta + 0.33, 0.8, 1.6)
-    return max(rf + adj * ERP, 0.07), rf, adj
+    crp = COUNTRY_RISK.get(fin.get("fin_currency"), 0.0)
+    if crp and notes is not None:
+        notes.append(f"landenrisicopremie {crp:.1%} ({fin.get('fin_currency')})")
+    return max(rf + adj * ERP + crp, 0.07), rf, adj
 
 
 def wacc(fin, re, notes):
@@ -71,9 +85,15 @@ def _fade(g1, tg, t):
     return g1 + (end - g1) * (t - 1) / (YEARS - 1)
 
 
-def _growth_start(cands):
+def _growth_start(cands, forward=()):
+    """Mediaan van alle groei-inputs, maar nooit hoger dan wat analisten verwachten (als die er zijn):
+    historische groei wordt niet zomaar doorgetrokken bij een bedrijf dat afremt."""
     v = [clamp(c, -0.10, 0.30) for c in avail(cands)]
-    return median(v), len(v)
+    g = median(v)
+    fwd = avail(forward)
+    if g is not None and fwd:
+        g = min(g, max(fwd))
+    return g, len(v)
 
 
 def _per_share(fin, equity):
@@ -116,6 +136,13 @@ def _fcf_model(fin, sc, notes):
         pairs = [(fcf[i], w[i]) for i in range(min(3, len(fcf))) if fcf[i] is not None]
         base = sum(v * ww for v, ww in pairs) / sum(ww for _, ww in pairs)
         basis = "gewogen FCF laatste 3 jaar (50/30/20)"
+    # Kasstroomkwaliteit: is de vrije kasstroom structureel veel hoger dan de winst (bv. klantgeld bij
+    # betaal-/fintechbedrijven of tijdelijk werkkapitaal), dan begrenzen op 1,5× de gemiddelde winst.
+    ni_avg = mean(s("net_income")[:3])
+    if ni_avg is not None and ni_avg > 0 and base > MAX_FCF_TO_EARNINGS * ni_avg:
+        notes.append(f"vrije kasstroom {base / ni_avg:.1f}× de winst: begrensd op {MAX_FCF_TO_EARNINGS}×")
+        base = MAX_FCF_TO_EARNINGS * ni_avg
+        basis += f", begrensd op {MAX_FCF_TO_EARNINGS}× gemiddelde winst"
     sbc0 = at(sbc, 0)
     if sbc0 is None:
         sbc0 = 0.0
@@ -131,8 +158,8 @@ def _fcf_model(fin, sc, notes):
     re, rf, beta = cost_of_equity(fin, notes)
     r = max(wacc(fin, re, notes) + sc["dr"], 0.07)
     tg = min(sc["tg"], r - 0.03)
-    g1, n = _growth_start([span_cagr(fcf, 3), span_cagr(s("revenue"), 3),
-                           fin["est"].get("fwd_rev"), fin["est"].get("fwd_eps")])
+    fwd = [fin["est"].get("fwd_rev"), fin["est"].get("fwd_eps")]
+    g1, n = _growth_start([span_cagr(fcf, 3), span_cagr(s("revenue"), 3)] + fwd, fwd)
     if g1 is None:
         return None, "geen groeigegevens voor prognose"
     g1 = clamp(clamp(g1, -0.05, 0.25) + sc["dg"], -0.08, 0.30)
@@ -168,7 +195,8 @@ def _ddm_model(fin, sc, notes):
     r = max(re + sc["dr"], 0.07)
     tg = min(sc["tg"], r - 0.03)
     eps = s("ffo") if fin["profile"] == "reit" else s("diluted_eps")
-    g1, n = _growth_start([span_cagr(divs, 3), span_cagr(eps, 3), fin["est"].get("fwd_eps")])
+    g1, n = _growth_start([span_cagr(divs, 3), span_cagr(eps, 3), fin["est"].get("fwd_eps")],
+                          [fin["est"].get("fwd_eps")])
     if g1 is None:
         return None, "geen groeigegevens voor prognose"
     g1 = clamp(clamp(g1, 0.0, 0.07) + sc["dg"] * 0.5, -0.02, 0.09)

@@ -33,7 +33,7 @@ ROWS = {
         "gross_profit": ["Gross Profit"],
         "operating_income": ["Operating Income", "Total Operating Income As Reported"],
         "ebit": ["EBIT"],
-        "ebitda": ["EBITDA", "Normalized EBITDA"],
+        "ebitda": ["Normalized EBITDA", "EBITDA"],  # genormaliseerd = zonder eenmalige posten
         "net_income": ["Net Income Common Stockholders", "Net Income", "Net Income Continuous Operations"],
         "interest_expense": ["Interest Expense", "Interest Expense Non Operating"],
         "diluted_eps": ["Diluted EPS"],

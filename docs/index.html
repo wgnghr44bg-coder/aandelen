@@ -225,6 +225,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   renderPeriods();
   fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
     rows=data.rows||[];
+    if(!rows.length||!data.asof){$("asof").textContent="Nog geen gegevens. De eerste update volgt na het sluiten van de beurs.";$("list").innerHTML="";return}
     $("asof").textContent="Slotkoersen van "+fmtDate(data.asof)+" · de 100 grootste bedrijven op beurswaarde";
     var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});
     Object.keys(secs).sort(function(a,b){return a.localeCompare(b,"nl")}).forEach(function(n){

@@ -186,62 +186,191 @@ ul{list-style:none;margin:0;padding:0}
 .info p{margin:0 0 10px;color:var(--muted)}
 footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 .empty{color:var(--muted);text-align:center;padding:30px 0}
+
+/* ================= StockHunter thema v2 ================= */
+:root{
+  --bg:#eef3fb;--card:#ffffff;--card2:#f5f8fd;--text:#0c1a33;--muted:#5d6b85;--line:#d6e0f0;
+  --accent:#2f7bff;--down:#e0482f;--down-strong:#d42b2b;--up:#16a34a;--chip:#e7eef9;--glow:rgba(47,123,255,.18);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#050b17;--card:#0d182c;--card2:#101e36;--text:#eaf1ff;--muted:#8fa2c4;--line:#1e3358;
+  --accent:#3b86ff;--down:#ff6a4d;--down-strong:#ff4d4d;--up:#2fd26b;--chip:#16264a;--glow:rgba(59,134,255,.25);
+  --warn-bg:#3a2414;--warn-text:#ffc078;
+}}
+body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,system-ui,sans-serif}
+html,body{overflow-x:hidden}
+.glowbox{position:absolute;inset:0 0 auto 0;height:420px;overflow:hidden;pointer-events:none;z-index:0}
+.glow{position:absolute;top:-120px;right:-140px;width:420px;height:420px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 40% 60%,rgba(59,134,255,.45),rgba(20,60,140,.18) 45%,transparent 70%);filter:blur(6px);z-index:0}
+.wrap{position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:44px;height:36px;flex:0 0 auto}
+.top h1{font-size:1.75rem;font-weight:800;letter-spacing:-.02em;line-height:1;margin:0}
+.top h1 span{color:var(--accent)}
+.tag{margin:4px 0 0;color:var(--muted);font-size:.75rem;white-space:nowrap}
+.ibtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:color-mix(in oklab,var(--card) 80%,transparent);color:var(--text);display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.ic.blue{color:var(--accent)}.ic.red{color:var(--down-strong)}
+.updrow{margin:6px 0 4px}
+.bar{background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:8px 0}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:8px 2px 7px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
+.tabs button .ic{width:22px;height:22px}
+.tabs button[aria-pressed=true]{background:linear-gradient(180deg,#3b8bff,#1f63e0);border-color:#3b8bff;color:#fff;box-shadow:0 4px 18px var(--glow)}
+.periods button{background:var(--card);border-color:var(--line);font-size:.8rem;padding:6px 12px}
+.pane[hidden]{display:none}
+.panel{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:12px;margin:12px 0;
+  box-shadow:0 0 0 1px color-mix(in oklab,var(--accent) 8%,transparent),0 10px 30px rgba(0,0,0,.18)}
+.ph{display:flex;align-items:center;gap:8px;margin:0 0 10px;min-width:0}
+.ph h2{font-size:1.05rem;font-weight:700;margin:0;white-space:nowrap}
+.ph .pmeta{color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph .more{margin-left:auto;border:0;background:none;color:var(--text);font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;padding:2px 4px}
+.ph .emo{font-size:1.2rem}
+.panel .heat-h{display:none}
+.extras{margin:0;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:color-mix(in oklab,var(--bg) 40%,var(--card))}
+.xt{border:0;border-radius:0;background:none;padding:10px 10px 8px;position:relative}
+.xt+.xt{border-left:1px solid var(--line)}
+.xt .xl b{font-size:.95rem}
+.xt .xp{font-size:1.15rem}
+.xt .spark{display:block;width:100%;height:26px;margin-top:4px}
+.stats{margin:12px 0}
+.stat{display:flex;align-items:center;justify-content:space-between;gap:4px;border-radius:16px;background:linear-gradient(180deg,var(--card2),var(--card));padding:10px}
+.stat .sv{min-width:0}
+.stat b{font-size:1.35rem;color:var(--text)}
+.ring{width:40px;height:40px;flex:0 0 auto}
+.ring text{font-size:10px;font-weight:700;fill:var(--text);font-family:inherit}
+.stat.hot{background:linear-gradient(160deg,color-mix(in oklab,var(--down-strong) 38%,var(--card)),color-mix(in oklab,var(--down-strong) 14%,var(--card)));border-color:color-mix(in oklab,var(--down-strong) 60%,var(--line))}
+.stat.hot span{color:color-mix(in oklab,var(--text) 80%,transparent)}
+.ovchips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.ovchips button{border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:7px 4px;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.ovchips button .n{font-weight:500;opacity:.8}
+.ovchips .c-all{background:linear-gradient(180deg,#3b8bff,#1f63e0);border-color:#3b8bff;color:#fff}
+.ovchips .c-BUY{border-color:var(--up);color:var(--up)}
+.ovchips .c-SELL{border-color:var(--down-strong);color:var(--down-strong)}
+.heat .ht{display:flex;flex-direction:column;justify-content:center;border-radius:12px;position:relative;padding:8px 6px 8px 36px;min-height:60px}
+.heat .ht .hn{font-size:.7rem;hyphens:manual;overflow-wrap:normal;word-break:normal}
+.heat .ht .si{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+.heat.mini .ht{min-height:54px}
+.heat.mini .ht .hc{display:none}
+.heat .ht .hv{font-size:1rem;white-space:nowrap}
+.alist{background:none;border:0}
+.alist li{border-top:1px solid var(--line)}
+.alist.prev li{padding:8px 2px}
+.av-ic{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:.62rem;font-weight:800;color:#fff;margin-right:6px;vertical-align:middle;flex:0 0 auto}
+.tlist{list-style:none;margin:0;padding:0}
+.tlist li{display:grid;grid-template-columns:20px 28px 1fr auto 58px 64px;align-items:center;gap:6px;padding:9px 2px;border-top:1px solid var(--line);cursor:pointer}
+.tlist li:first-child{border-top:0}
+.tlist .tr{color:var(--muted);font-size:.8rem;text-align:center}
+.tlist .tn2{min-width:0;font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tlist .tn2 small{color:var(--muted);font-weight:500;margin-left:4px}
+.tlist .tp{text-align:right;font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums}
+.tlist .tb{height:5px;background:var(--chip);border-radius:3px;overflow:hidden}
+.tlist .tb span{display:block;height:100%;background:var(--down-strong);border-radius:3px}
+.tlist .tb span.upb{background:var(--up)}
+.card{border-radius:14px;background:linear-gradient(180deg,var(--card2),var(--card))}
+.mode{background:var(--card);border:1px solid var(--line)}
+.mode button[aria-pressed=true]{background:linear-gradient(180deg,#3b8bff,#1f63e0);color:#fff}
+.filters select,.filters input{background:var(--card)}
+footer{padding:8px 0 32px}
+@media (max-width:360px){.tabs button{font-size:.7rem}.ovchips button{font-size:.74rem}}
 </style>
 </head>
 <body>
+<div class="glowbox" aria-hidden="true"><div class="glow"></div></div>
 <div class="wrap">
-  <header>
-    <h1 id="title">StockHunter</h1>
-    <div class="updrow">
-      <p class="upd" id="upd">Laden…</p>
-      <button type="button" class="rbtn" id="refresh" aria-label="Vernieuwen"><span class="ri">↻</span></button>
-      <a class="rbtn" href="https://github.com/wgnghr44bg-coder/aandelen/actions/workflows/update.yml" target="_blank" rel="noopener" aria-label="Nieuwe update starten op GitHub">▶ Update</a>
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="24" width="6" height="10" rx="1.5" fill="#1fbf6a"/><rect x="11" y="18" width="6" height="16" rx="1.5" fill="#1fbf6a"/><rect x="20" y="12" width="6" height="22" rx="1.5" fill="#22c55e"/><rect x="29" y="16" width="6" height="18" rx="1.5" fill="#2f7bff"/><path d="M3 20L16 9l7 5L39 2" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 2h7v7" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><h1 id="title">Stock<span>Hunter</span></h1><p class="tag">Aandelen · ETF's · Sectoren · Markttrend</p></div>
     </div>
-    <div class="extras" id="extras" hidden></div>
-    <div id="xpanel"></div>
-    <div class="stats">
-      <button type="button" class="stat" data-st="s1" aria-pressed="false"><b id="sDown">–</b><span id="sDownL">gedaald</span></button>
-      <button type="button" class="stat" data-st="s2" aria-pressed="false"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></button>
-      <button type="button" class="stat" data-st="top"><b id="sTop">–</b><span><span id="sTopT">grootste daler</span><i id="sTopL" class="clamp">–</i></span></button>
-    </div>
+    <button type="button" class="ibtn" id="searchBtn" aria-label="Zoeken"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
   </header>
+  <div class="updrow">
+    <p class="upd" id="upd">Laden…</p>
+    <button type="button" class="rbtn" id="refresh" aria-label="Vernieuwen"><span class="ri">↻</span></button>
+    <a class="rbtn" href="https://github.com/wgnghr44bg-coder/aandelen/actions/workflows/update.yml" target="_blank" rel="noopener" aria-label="Nieuwe update starten op GitHub">▶ Update</a>
+  </div>
 </div>
 <div class="bar">
   <div class="wrap">
+    <nav class="tabs" id="tabs" aria-label="Onderdelen">
+      <button type="button" data-tab="overzicht"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Overzicht</span></button>
+      <button type="button" data-tab="aandelen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Aandelen</span></button>
+      <button type="button" data-tab="sectoren"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Sectoren</span></button>
+      <button type="button" data-tab="grootste"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span>Grootste</span></button>
+    </nav>
+    <div class="periods" id="periods" role="group" aria-label="Periode"></div>
+  </div>
+</div>
+<div class="wrap">
+  <section class="pane" data-pane="overzicht">
+    <div class="panel">
+      <div class="ph"><svg class="ic blue" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><h2>Markt overzicht</h2><span class="pmeta" id="mdate"></span></div>
+      <div class="extras" id="extras" hidden></div>
+      <div id="xpanel"></div>
+    </div>
+    <div class="stats">
+      <button type="button" class="stat" data-st="s1" aria-pressed="false"><span class="sv"><b id="sDown">–</b><span id="sDownL">gedaald</span></span><svg class="ring" id="ring1" viewBox="0 0 44 44"></svg></button>
+      <button type="button" class="stat" data-st="s2" aria-pressed="false"><span class="sv"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></span><svg class="ring" id="ring2" viewBox="0 0 44 44"></svg></button>
+      <button type="button" class="stat hot" data-st="top"><span class="sv"><b id="sTop">–</b><span><span id="sTopT">grootste daler</span><i id="sTopL" class="clamp">–</i></span></span></button>
+    </div>
+    <div class="panel">
+      <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><h2>Marktfilter</h2><span class="pmeta" id="nAll"></span><button type="button" class="more" data-go="aandelen" aria-label="Naar aandelen">»</button></div>
+      <div class="ovchips" id="ovchips"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><svg class="ic blue" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M14.5 3.3A9 9 0 0 1 20.7 9.5h-6.2z"/></svg><h2>Sector prestaties</h2><span class="pmeta" id="secPer"></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
+      <div class="heat mini" id="heatmini"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste" aria-label="Naar grootste assets">›</button></div>
+      <ol class="alist prev" id="aprev"></ol>
+    </div>
+    <div class="panel">
+      <div class="ph"><svg class="ic red" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M21 17v-5M21 17h-5"/></svg><h2 id="topTitle">Top dalers</h2><span class="pmeta" id="topPer"></span><button type="button" class="more" data-go="aandelen" data-mode="down">Top 50 ›</button></div>
+      <ol class="tlist" id="topprev"></ol>
+    </div>
+  </section>
+
+  <section class="pane" data-pane="aandelen" hidden>
     <div class="mode" id="mode" role="group" aria-label="Weergave">
       <button type="button" data-m="down" aria-pressed="true">📉 Dalers</button>
       <button type="button" data-m="up" aria-pressed="false">📈 Stijgers</button>
       <button type="button" data-m="size" aria-pressed="false">🏆 Grootste</button>
     </div>
-    <div class="periods" id="periods" role="group" aria-label="Periode"></div>
     <div class="rfilter" id="rfilter" role="group" aria-label="Advies" hidden></div>
     <div class="rfilter" id="cfilter" role="group" aria-label="Beurswaarde" hidden></div>
     <div class="filters">
       <select id="sector" aria-label="Sector"><option value="">Alle sectoren</option></select>
       <input id="q" type="search" placeholder="Naam of ticker" aria-label="Zoeken" autocomplete="off">
     </div>
-  </div>
-</div>
-<div class="wrap">
-  <section id="assetwrap" hidden>
-    <div class="heat-h ah"><h2>🌍 Grootste assets ter wereld</h2>
-      <div class="seg2" id="aview" role="group" aria-label="Weergave"><button type="button" data-v="map">Kaart</button><button type="button" data-v="list">Lijst</button></div>
-    </div>
-    <div class="afilt" id="afilt" role="group" aria-label="Soort"></div>
-    <div class="asum" id="asum"></div>
-    <div class="amap" id="amap" role="img" aria-label="Kaart van de grootste assets"></div>
-    <div class="akey" id="akey"><span>−</span><i></i><span>+</span><em id="akeyl"></em></div>
-    <ol class="alist" id="alist"></ol>
-    <button type="button" class="amore" id="amore"></button>
+    <div class="grp" id="grp" hidden></div>
+    <p class="count" id="count"></p>
+    <ul id="list"></ul>
   </section>
-  <section id="heatwrap" hidden>
-    <div class="heat-h"><h2>Hoe gaan de sectoren?</h2></div>
-    <div class="heat" id="heat"></div>
-    <div class="heat-key"><span>−</span><i></i><span>+</span></div>
+
+  <section class="pane" data-pane="sectoren" hidden>
+    <section id="heatwrap" class="panel" hidden>
+      <div class="ph"><svg class="ic blue" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><h2>Hoe gaan de sectoren?</h2><span class="pmeta" id="secPer2"></span></div>
+      <div class="heat" id="heat"></div>
+      <div class="heat-key"><span>−</span><i></i><span>+</span></div>
+    </section>
   </section>
-  <div class="grp" id="grp" hidden></div>
-  <p class="count" id="count"></p>
-  <ul id="list"></ul>
+
+  <section class="pane" data-pane="grootste" hidden>
+    <section id="assetwrap" class="panel" hidden>
+      <div class="ph ah"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2>
+        <div class="seg2" id="aview" role="group" aria-label="Weergave"><button type="button" data-v="map">Kaart</button><button type="button" data-v="list">Lijst</button></div>
+      </div>
+      <div class="afilt" id="afilt" role="group" aria-label="Soort"></div>
+      <div class="asum" id="asum"></div>
+      <div class="amap" id="amap" role="img" aria-label="Kaart van de grootste assets"></div>
+      <div class="akey" id="akey"><span>−</span><i></i><span>+</span><em id="akeyl"></em></div>
+      <ol class="alist" id="alist"></ol>
+      <button type="button" class="amore" id="amore"></button>
+    </section>
+  </section>
   <footer id="foot"></footer>
 </div>
 <script>
@@ -401,18 +530,21 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     $("sDown").textContent=vals.filter(function(x){return d1.f(x.d)}).length;
     $("sDownL").textContent="van "+vals.length+" "+d1.l;
     $("s20").textContent=vals.filter(function(x){return d2.f(x.d)}).length;$("s20L").textContent=d2.l;
+    var n1=vals.filter(function(x){return d1.f(x.d)}).length,n2=vals.filter(function(x){return d2.f(x.d)}).length;
+    ring("ring1",vals.length?n1/vals.length:0,"var(--up)");ring("ring2",vals.length?n2/vals.length:0,"var(--down-strong)");
     $("sTopT").textContent=mode!=="up"?"grootste daler":(period==="fromHigh"?"dichtst bij top":"grootste stijger");
     $("sTop").textContent=top?fmtPct(top.r[period],period):"–";
     $("sTopL").textContent=top?top.r.name:"–";
     topTicker=top?top.r.ticker:null;
     Array.prototype.forEach.call(document.querySelectorAll(".stat[data-st^=s]"),function(b){b.setAttribute("aria-pressed",statFilter===b.dataset.st)});
   }
-  function scrollToGrp(){var g=$("grp");g.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";g.scrollIntoView({behavior:"smooth",block:"start"});}
+  function scrollToGrp(){showTab("aandelen");var g=$("grp");g.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";g.scrollIntoView({behavior:"smooth",block:"start"});}
   document.querySelector(".stats").addEventListener("click",function(e){
     var b=e.target.closest(".stat");if(!b)return;
     var k=b.dataset.st;
     if(k==="top"){
       if(!topTicker)return;
+      showTab("aandelen");
       statFilter=null;$("sector").value="";$("q").value="";openTicker=topTicker;render();
       var c=document.querySelector('.card[data-t="'+topTicker+'"]');
       if(c){c.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";c.scrollIntoView({behavior:"smooth",block:"start"});}
@@ -534,6 +666,13 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   var extras=[],openExtra=null;
   function fmtEur(v){return v==null?"–":"€ "+(v>=10000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v))}
   function chgCls(v){return v==null||Math.abs(v)<0.05?"flat":v<0?"down":"up"}
+  function spark(v){
+    if(!v||v.length<2)return "";
+    var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v),sp=(hi-lo)||1,up=v[v.length-1]>=v[0];
+    var pts=v.map(function(y,i){return (i/(v.length-1)*100).toFixed(1)+","+(24-(y-lo)/sp*20).toFixed(1)}).join(" ");
+    var col=up?"var(--up)":"var(--down-strong)";
+    return '<svg class="spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>';
+  }
   function renderExtras(){
     var el=$("extras");
     if(!extras.length){el.hidden=true;return}
@@ -542,7 +681,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
         '<span class="xl"><b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b>'+esc(x.beurs)+'</span>'+
         '<span class="xp">'+fmtEur(x.price)+'</span>'+
-        '<span class="xc '+chgCls(x.d1)+'">'+fmtPct(x.d1)+(x.ticker==="BTC-EUR"?' <span class="meta">24u</span>':' <span class="meta">dag</span>')+'</span></button>';
+        '<span class="xc '+chgCls(x.d1)+'">'+(x.d1>0?"▲ ":x.d1<0?"▼ ":"")+fmtPct(x.d1)+'</span>'+spark(x.spark)+'</button>';
     }).join("");
     var x=null;for(var i=0;i<extras.length;i++)if(extras[i].ticker===openExtra)x=extras[i];
     if(!x){$("xpanel").innerHTML="";return}
@@ -685,6 +824,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   $("aview").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aView=b.dataset.v;try{localStorage.setItem("aview",aView)}catch(err){}renderAssets()});
   $("afilt").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aKind=b.dataset.k;renderAssets()});
   function gotoCard(t){
+    showTab("aandelen");
     statFilter=null;ratingFilter=null;capFilter=null;$("sector").value="";$("q").value="";openTicker=t;render();
     var c=document.querySelector('.card[data-t="'+t+'"]');
     if(c){c.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";c.scrollIntoView({behavior:"smooth",block:"start"});}
@@ -714,21 +854,106 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     $("heat").innerHTML=tiles.map(function(t){
       var a=Math.min(1,Math.abs(t.score)/maxA),pctMix=Math.round(8+a*52);
       var bg=Math.abs(t.score)<0.3?"var(--card)":"color-mix(in oklab,"+(t.score>0?"var(--up)":"var(--down-strong)")+" "+pctMix+"%,var(--card))";
-      var name=t.k==="AI"?"🤖 AI":t.k;
+      var name=t.k==="AI"?"AI":t.k;
+      var SOFT={"Basisconsumptie":"Basis\u00adconsumptie","Gezondheidszorg":"Gezondheids\u00adzorg","Nutsbedrijven":"Nuts\u00adbedrijven",
+        "Grondstoffen":"Grond\u00adstoffen","Technologie":"Techno\u00adlogie","Communicatie":"Communi\u00adcatie","Financiële diensten":"Financiële diensten"};
+      name=SOFT[name]||name;
       var cnt=period==="fromHigh"?t.up+"/"+t.n+" bij top":t.up+"/"+t.n+" gestegen";
       return '<button type="button" class="ht'+(t.k==="AI"?' ai':'')+'" data-s="'+esc(t.k)+'" aria-pressed="'+(cur===t.k)+'" style="background:'+bg+'">'+
-        '<span class="hn">'+esc(name)+'</span><span class="hv">'+fmtPct(t.v,period)+'</span><span class="hc">'+cnt+'</span></button>';
+        secIcon(t.k)+'<span class="hn">'+esc(name)+'</span><span class="hv">'+fmtPct(t.v,period)+'</span><span class="hc">'+cnt+'</span></button>';
     }).join("");
+    $("heatmini").innerHTML=$("heat").innerHTML;
+    var pl="("+periodLabel(period).toLowerCase()+")";$("secPer").textContent=pl;$("secPer2").textContent=pl;
   }
-  $("heat").addEventListener("click",function(e){
+  var SICON={
+    "Technologie":'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+    "Gezondheidszorg":'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+    "Financiële diensten":'<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/>',
+    "Cyclische consumptie":'<path d="M20 11a8 8 0 0 0-14.6-4.5M4 13a8 8 0 0 0 14.6 4.5"/><path d="M5 3v4h4M19 21v-4h-4"/>',
+    "Basisconsumptie":'<path d="M3 4h2.2l2.3 10.5h10.3L20 8H6.4"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>',
+    "Communicatie":'<circle cx="12" cy="10" r="1.6"/><path d="M12 12l-3 9M12 12l3 9M8.5 6.5a5 5 0 0 0 0 7M15.5 6.5a5 5 0 0 1 0 7M5.6 3.6a9 9 0 0 0 0 12.8M18.4 3.6a9 9 0 0 1 0 12.8"/>',
+    "Energie":'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    "Industrie":'<path d="M3 21V10l6 4V10l6 4V7l6-3v17z"/><path d="M3 21h18"/>',
+    "Grondstoffen":'<path d="M5 19C5 10 11 5 20 5c0 9-5.5 14-14.5 14"/><path d="M5 19l8-8"/>',
+    "Nutsbedrijven":'<path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/>',
+    "Vastgoed":'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    "AI":'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5"/><circle cx="12" cy="3.5" r="1"/>'
+  };
+  function secIcon(k){return '<svg class="si" viewBox="0 0 24 24" aria-hidden="true">'+(SICON[k]||'<circle cx="12" cy="12" r="4"/>')+'</svg>'}
+  function heatClick(e){
     var b=e.target.closest(".ht");if(!b)return;
     var sel=$("sector");sel.value=sel.value===b.dataset.s?"":b.dataset.s;
     render();
-    if(sel.value)scrollToGrp();
+    if(sel.value)scrollToGrp();else showTab("aandelen");
+  }
+  $("heat").addEventListener("click",heatClick);
+  $("heatmini").addEventListener("click",heatClick);
+
+  // ---------- Tabbladen ----------
+  var tab="overzicht";
+  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste"].indexOf(st)>=0)tab=st;}catch(e){}
+  function showTab(t){
+    tab=t;try{localStorage.setItem("tab",t)}catch(e){}
+    Array.prototype.forEach.call(document.querySelectorAll(".pane"),function(p){p.hidden=p.dataset.pane!==t});
+    Array.prototype.forEach.call($("tabs").querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.tab===t)});
+    if(t==="grootste")renderAssets();
+  }
+  $("tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;showTab(b.dataset.tab);window.scrollTo({top:0})});
+  document.addEventListener("click",function(e){
+    var b=e.target.closest(".more[data-go]");if(!b)return;
+    if(b.dataset.mode){mode=b.dataset.mode;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
+    showTab(b.dataset.go);window.scrollTo({top:0,behavior:"smooth"});
   });
+  $("searchBtn").addEventListener("click",function(){showTab("aandelen");setTimeout(function(){$("q").focus();$("q").scrollIntoView({block:"center"})},50)});
+
+  // ---------- Overzicht ----------
+  function avatar(name,t){
+    var w=String(name).replace(/[^A-Za-z0-9 ]/g," ").trim().split(/\s+/),ini=((w[0]||"?")[0]+((w[1]||"")[0]||"")).toUpperCase();
+    var h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%360;
+    return '<span class="av-ic" style="background:hsl('+h+' 55% 38%)">'+esc(ini)+'</span>';
+  }
+  function ring(id,frac,col){
+    var r=18,c=2*Math.PI*r,f=Math.max(0,Math.min(1,frac||0));
+    $(id).innerHTML='<circle cx="22" cy="22" r="'+r+'" fill="none" stroke="var(--chip)" stroke-width="4.5"/>'+
+      '<circle cx="22" cy="22" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="'+(c*f).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 22 22)"/>'+
+      '<text x="22" y="25.5" text-anchor="middle">'+nf1.format(f*100).replace(/,0$/,"")+'%</text>';
+  }
+  function renderOverview(){
+    var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
+    $("nAll").textContent="("+rows.length+" aandelen)";
+    $("ovchips").innerHTML='<button type="button" class="c-all" data-r="">Alle <span class="n">('+rows.length+')</span></button>'+
+      ["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="c-'+k+'" data-r="'+k+'">'+k+' <span class="n">('+(cnt[k]||0)+')</span></button>'}).join("");
+    // grootste assets: top 3
+    var all=allAssets().slice(0,3),max=all.length?all[0].cap:1;
+    $("aprev").innerHTML=all.map(function(x){
+      var c=cls(drop(x.r,period)),sub=x.k==="metaal"?"(edelmetaal)":x.k==="crypto"?"(crypto)":x.k==="bedrijf"?"🌏":esc(x.t);
+      var av=x.icon?'<span class="av-ic" style="background:none;font-size:1rem">'+x.icon+'</span>':avatar(x.name,x.t);
+      return '<li class="'+(x.k==="co"?"co":x.k)+'" data-t="'+esc(x.t)+'"><span class="ar">'+x.rank+'</span>'+
+        '<span class="an">'+av+esc(x.name)+'<span class="ak">'+sub+'</span></span>'+
+        '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(x.r[period],period)+'</span></span>'+
+        '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
+    }).join("");
+    // top dalers in de gekozen periode
+    var tl=rows.filter(function(r){return drop(r,period)!=null}).sort(function(a,b){return drop(b,period)-drop(a,period)}).slice(0,3);
+    var mx=Math.max.apply(null,tl.map(function(r){return Math.abs(drop(r,period))}).concat([1]));
+    $("topPer").textContent="("+periodLabel(period).toLowerCase()+")";
+    $("topprev").innerHTML=tl.map(function(r,i){
+      var d=drop(r,period);
+      return '<li data-t="'+esc(r.ticker)+'"><span class="tr">'+(i+1)+'</span>'+avatar(r.name,r.ticker)+
+        '<span class="tn2">'+esc(shortName(r.name))+'<small>'+esc(r.ticker)+'</small></span>'+ratingTag(r)+
+        '<span class="tp '+cls(d)+'">'+fmtPct(r[period],period)+'</span>'+
+        '<span class="tb"><span style="width:'+Math.min(100,Math.abs(d)/mx*100).toFixed(0)+'%"></span></span></li>';
+    }).join("");
+  }
+  $("ovchips").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    ratingFilter=b.dataset.r||null;render();scrollToGrp();
+  });
+  $("aprev").addEventListener("click",function(e){var li=e.target.closest("li.co");if(li)gotoCard(li.dataset.t);else showTab("grootste")});
+  $("topprev").addEventListener("click",function(e){var li=e.target.closest("li");if(li)gotoCard(li.dataset.t)});
 
   function render(){
-    renderHeat();renderRatingFilter();renderCapFilter();renderAssets();
+    renderHeat();renderRatingFilter();renderCapFilter();if(tab==="grootste")renderAssets();renderOverview();
     stats();
     var s=$("sector").value,q=$("q").value.trim().toLowerCase(),sf=statFilter?statDef(statFilter):null;
     var list=rows.filter(function(r){
@@ -775,7 +1000,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     if(openTicker){var oc=document.querySelector('.card.open .chart');if(oc)drawChart(oc);}
   }
 
-  renderPeriods();renderMode();
+  renderPeriods();renderMode();showTab(tab);
   var sectorsDone=false;
   // Gegevens rechtstreeks uit de repo halen: nieuwe updates zijn dan meteen zichtbaar,
   // ook als GitHub Pages nog bezig is met klaarzetten. Lukt dat niet, dan de kopie op de site zelf.
@@ -809,6 +1034,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       var u=new Date(data.updated);
       $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
       $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo";
+      $("mdate").textContent="📅 "+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
       if(manual)histP=null;
       render();
     }).catch(function(){
@@ -820,7 +1046,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-8";
+  var BUILD="2026-11-04-9";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

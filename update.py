@@ -196,6 +196,11 @@ def http_json(url, pogingen=3):
     return None
 
 
+def spark(close, n=30):
+    """Laatste n slotkoersen voor een mini-grafiekje."""
+    return [schoon(v, 4) for v in close.dropna().iloc[-n:].tolist()]
+
+
 def bitcoin():
     """BTC-EUR dagkoersen van Bitvavo (gratis, zonder sleutel). Geeft (rij, slotkoersen) of (None, None)."""
     candles = http_json(f"{BITVAVO}/BTC-EUR/candles?interval=1d&limit=1440")
@@ -213,7 +218,7 @@ def bitcoin():
         return None, None
     stats.pop("_date")
     return {"ticker": "BTC-EUR", "label": "Bitcoin", "beurs": "Bitvavo", "name": "Bitcoin",
-            "currency": "EUR", **stats}, df["Close"]
+            "currency": "EUR", "spark": spark(df["Close"]), **stats}, df["Close"]
 
 
 def haal_extras():
@@ -240,7 +245,8 @@ def haal_extras():
                 pass
             naam = info.get("shortName") or info.get("longName") or e["label"]
             print(f"  extra {e['ticker']}: {naam} ({info.get('currency')}, {info.get('exchange')}) {stats['price']}")
-            rijen.append({**e, "name": naam, "currency": info.get("currency") or "EUR", **stats})
+            rijen.append({**e, "name": naam, "currency": info.get("currency") or "EUR",
+                          "spark": spark(df["Close"]), **stats})
             closes[e["ticker"]] = df["Close"]
         except Exception as ex:  # noqa: BLE001
             print(f"  extra {e['ticker']}: overgeslagen ({ex})")

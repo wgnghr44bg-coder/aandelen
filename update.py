@@ -20,7 +20,7 @@ TICKERS_FILE = ROOT / "tickers.txt"
 AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
-TOP_N = 100
+TOP_N = 500
 
 # Extra koersen bovenaan de site (in euro's).
 EXTRAS = [
@@ -263,6 +263,7 @@ def main():
     fund.refresh(cache, tickers)
 
     rijen, prijzen, alle_closes = [], {}, {}
+    rf, fx = fund.market_data(cache)
     for t in tickers:
         try:
             if isinstance(data.columns, pd.MultiIndex):
@@ -282,15 +283,21 @@ def main():
                 continue
             prijzen[t] = stats["price"]
             alle_closes[t] = df["Close"].dropna()
-            # Beurswaarde en K/W meeschalen met de koers sinds het ophalen van de info
+            # Beurswaarde (omgerekend naar USD voor een eerlijke rangschikking) en K/W, meegeschaald
+            # met de koers sinds het ophalen van de info
             p_info = info.get("currentPrice") or info.get("regularMarketPrice")
             schaal = stats["price"] / p_info if (p_info and stats["price"]) else 1.0
             pe = schoon((info.get("trailingPE") or 0) * schaal, 1)
+            mcap_q, usd = fund.market_cap_quote(info, stats["price"]), fund.usd_rate(info, fx)
+            if not mcap_q or not usd:
+                print(f"  {t}: beurswaarde of wisselkoers onbekend")
+                continue
             rijen.append({
                 "ticker": t,
                 "name": info.get("shortName") or info.get("longName") or t,
                 "sector": info.get("sector") or ("Financial Services" if t == "BRK-B" else "Overig"),
-                "marketCap": int(info["marketCap"] * schaal),
+                "marketCap": int(mcap_q * usd),
+                "currency": info.get("currency") or "USD",
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,
                 **stats,
@@ -319,7 +326,6 @@ def main():
     # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
     analyse = None
     try:
-        rf, fx = fund.market_data(cache)
         analyse = fund.run_engine(cache, prijzen, alle_closes, pd.Timestamp(asof).date(), rf, fx)
     except Exception as e:  # noqa: BLE001
         print(f"waarderingsengine mislukt: {e}")

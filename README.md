@@ -1,13 +1,13 @@
 # StockHunter
 
-Een simpele website die de 100 grootste beursgenoteerde bedrijven (VS-genoteerd, inclusief ADR's) laat zien,
+Een simpele website die de 500 grootste beursgenoteerde bedrijven ter wereld laat zien (beurswaarde omgerekend naar USD),
 gesorteerd op hoeveel hun koers gezakt is. Handig om snel te zien welke grote bedrijven flink gedaald zijn.
 
 **Geen financieel advies.** Bron: Yahoo Finance (via `yfinance`).
 
 ## Hoe het werkt
 
-- `tickers.txt` – ongeveer 150 kandidaten. Het script kiest hieruit elke keer de top 100 op beurswaarde.
+- `tickers.txt` – ongeveer 560 kandidaten wereldwijd (Yahoo-notatie). Het script kiest hieruit elke keer de top 500 op beurswaarde.
 - `update.py` – haalt 5 jaar dagkoersen en bedrijfsgegevens op en schrijft `docs/data.json`.
 - `docs/index.html` – de website (één bestand), die `data.json` laadt.
 - `.github/workflows/update.yml` – draait elke werkdag om 22:45 UTC en commit `docs/data.json` als die veranderd is.

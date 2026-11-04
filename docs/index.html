@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>StockHunter</title>
-<meta name="description" content="StockHunter: de 100 grootste beursgenoteerde bedrijven, gesorteerd op koersdaling of -stijging.">
+<meta name="description" content="StockHunter: de 500 grootste beursgenoteerde bedrijven ter wereld, gesorteerd op koersdaling of -stijging.">
 <meta name="apple-mobile-web-app-title" content="StockHunter">
 <style>
 :root{
@@ -222,6 +222,14 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     return (v>0?"+":v<0?"−":"")+nf1.format(Math.abs(v))+"%";
   }
   function cls(d){if(d==null||Math.abs(d)<0.05)return "flat";if(d<0)return "up";return d>=20?"down2":"down"}
+  var CUR={USD:"$",EUR:"€ ",GBP:"£",GBp:"p ",JPY:"¥",CNY:"¥",HKD:"HK$",KRW:"₩",TWD:"NT$",INR:"₹",CHF:"CHF ",
+    CAD:"C$",AUD:"A$",DKK:"kr ",SEK:"kr ",NOK:"kr ",SAR:"SAR ",SGD:"S$",BRL:"R$",MXN:"MX$"};
+  function sym(c){return CUR[c||"USD"]||((c||"")+" ")}
+  function fmtPrice(v,c){
+    if(v==null)return "–";
+    var big=v>=10000;
+    return sym(c)+(big?Math.round(v).toLocaleString("nl-NL"):nf2.format(v));
+  }
   function fmtCap(n){
     if(!n)return "–";
     if(n>=1e12)return "$"+nf2.format(n/1e12)+" bln";
@@ -270,7 +278,11 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     Array.prototype.forEach.call(document.querySelectorAll(".card.open"),function(c){if(c!==li){c.classList.remove("open");c.querySelector(".row").setAttribute("aria-expanded","false")}});
     li.classList.toggle("open",openTicker===t);
     b.setAttribute("aria-expanded",openTicker===t);
-    if(openTicker===t)drawChart(li.querySelector(".chart"));
+    if(openTicker===t){
+      var r=null;for(var i=0;i<rows.length;i++)if(rows[i].ticker===t){r=rows[i];break}
+      var dv=li.querySelector(".detail");if(r&&!dv.innerHTML)dv.innerHTML=detail(r);
+      drawChart(li.querySelector(".chart"));
+    }
   });
 
   function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
@@ -337,14 +349,14 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   function detail(r){
     var items=[
-      ["Koers","$"+nf2.format(r.price)],["Beurswaarde",fmtCap(r.marketCap)],
+      ["Koers",fmtPrice(r.price,r.currency)],["Beurswaarde",fmtCap(r.marketCap)],
       ["K/W",r.pe!=null?nf1.format(r.pe):"–"],["Rang in grootte","#"+r.rank],
       ["Vandaag",fmtPct(r.d1)],["Onder jaartop",fmtPct(r.fromHigh,"fromHigh")],
       ["1 maand",fmtPct(r.m1)],["3 maanden",fmtPct(r.m3)],
       ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
-      ["5 jaar",fmtPct(r.y5)],["Jaartop","$"+(r.high52!=null?nf2.format(r.high52):"–")]
+      ["5 jaar",fmtPct(r.y5)],["Jaartop",fmtPrice(r.high52,r.currency)]
     ];
-    var h=(r.rating?'<div class="advies">Advies '+ratingTag(r)+'</div>':'')+'<div class="chart" data-t="'+esc(r.ticker)+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var h=(r.rating?'<div class="advies">Advies '+ratingTag(r)+'</div>':'')+'<div class="chart" data-t="'+esc(r.ticker)+'" data-cur="'+esc(r.currency||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
     var d=drop(r,period);
     if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
     if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
@@ -375,7 +387,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   function drawChart(box){
     if(!box)return;
-    var t=box.dataset.t,cur=box.dataset.cur==="EUR"?"€ ":"$";
+    var t=box.dataset.t,cur=sym(box.dataset.cur||"USD");
     loadHist().then(function(h){
       var pts=pickSeries(h,t);
       var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
@@ -550,7 +562,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
           '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+fmtPct(r[period],period)+'</span>'+
           '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
-        '</button><div class="detail">'+detail(r)+'</div></li>';
+        '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
     }).join("");
     if(openTicker){var oc=document.querySelector('.card.open .chart');if(oc)drawChart(oc);}
   }

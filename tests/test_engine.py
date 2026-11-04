@@ -347,3 +347,30 @@ def test_normalize_then_full_analysis_runs():
     res = analyze_universe({"OK": fin})["OK"]
     assert res["rating"] in ("BUY", "HOLD", "SELL", "NO RATING")
     assert res["data"]["dates"]["statements"] == fin["years"][0]
+
+
+# ------------------------------------------------------------------ valuta (wereldwijd)
+
+def test_currency_conversion_helpers():
+    import fundamentals as fund
+    fx = {"GBPUSD=X": 1.25, "JPYUSD=X": 0.0067, "TWDUSD=X": 0.031, "USDGBP=X": 0.8}
+    lse = {"currency": "GBp", "financialCurrency": "GBP", "sharesOutstanding": 1_000_000, "marketCap": 50_000}
+    # koers 5000 pence = £50 -> beurswaarde 5.000.000.000 pence = $62,5 mln
+    assert fund.market_cap_quote(lse, 5000.0) == 5_000_000_000
+    assert fund.usd_rate(lse, fx) == pytest.approx(0.0125)
+    assert fund.fx_rate(lse, fx) == 100.0                      # jaarcijfers in GBP -> pence
+    lse_usd = dict(lse, financialCurrency="USD")
+    assert fund.fx_rate(lse_usd, fx) == pytest.approx(80.0)    # USD -> GBP -> pence
+    jp = {"currency": "JPY", "financialCurrency": "JPY", "marketCap": 1e13, "currentPrice": 1000.0}
+    assert fund.fx_rate(jp, fx) == 1.0 and fund.usd_rate(jp, fx) == pytest.approx(0.0067)
+    assert fund.market_cap_quote(jp, 1100.0) == pytest.approx(1.1e13)
+    adr = {"currency": "USD", "financialCurrency": "TWD"}
+    assert fund.fx_rate(adr, {"TWDUSD=X": 0.031}) == 0.031
+    assert fund.usd_rate({"currency": "XYZ"}, fx) is None      # onbekende valuta -> overslaan
+
+
+def test_normalize_pence_market_cap():
+    info = dict(fake_info(fin_cur="GBP"), currency="GBp", sharesOutstanding=100.0, currentPrice=3000.0)
+    fin = normalize("X.L", info, fake_raw(), 3000.0, None, TODAY, 100.0, 0.04, str(TODAY), str(TODAY))
+    assert fin["mcap"] == pytest.approx(300000.0)          # 100 aandelen × 3000 pence
+    assert fin["s"]["revenue"][0] == pytest.approx(120000.0)  # £1200 -> 120.000 pence

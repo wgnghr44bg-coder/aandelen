@@ -167,6 +167,10 @@ def normalize(ticker, info, raw, price, price_on, asof, fx, rf, fetched=None, in
     price_info = num(info.get("currentPrice")) or num(info.get("regularMarketPrice"))
     mcap_info = num(info.get("marketCap"))
     mcap = mcap_info * price / price_info if (mcap_info and price and price_info) else None
+    if cur in ("GBp", "GBX", "ZAc", "ILA"):
+        # koers in subeenheden (pence/cents): beurswaarde in dezelfde eenheid via aantal aandelen
+        sh_out = num(info.get("sharesOutstanding"))
+        mcap = sh_out * price if (sh_out and price) else None
     scale = price / price_info if (price and price_info) else None
 
     fin = {

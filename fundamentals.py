@@ -25,6 +25,15 @@ ANALYSIS = ROOT / "analyse" / "analysis.json"
 INFO_MAX_AGE = timedelta(hours=23)
 RAW_MAX_AGE = timedelta(days=7)
 RAW_BUDGET_S = 540  # max. 9 minuten jaarcijfers ophalen per run
+INFO_BUDGET = 250   # max. info-aanroepen per run (spreiden, zodat Yahoo ons niet blokkeert)
+
+# Koersen in subeenheden: Londen noteert in pence (GBp), Johannesburg in cents (ZAc), Tel Aviv in agorot (ILA)
+SUBUNITS = {"GBp": ("GBP", 100.0), "GBX": ("GBP", 100.0), "ZAc": ("ZAR", 100.0), "ILA": ("ILS", 100.0)}
+
+
+def base_currency(cur):
+    """(hoofdvaluta, aantal subeenheden per hoofdeenheid)."""
+    return SUBUNITS.get(cur, (cur, 1.0))
 
 
 def now():
@@ -65,10 +74,16 @@ def _retry(fn, label, tries=3):
 def refresh(cache, tickers):
     """Werkt de cache bij: eerst ontbrekende/verouderde info (nodig voor de top 100), dan jaarcijfers."""
     n_info = 0
-    for t in tickers:
+    # ontbrekende info eerst, daarna de oudste
+    order = sorted(tickers, key=lambda t: (bool((cache.get(t) or {}).get("info")),
+                                           (cache.get(t) or {}).get("info_fetched") or ""))
+    for t in order:
         c = cache.setdefault(t, {})
         if c.get("info") and _age(c.get("info_fetched")) < INFO_MAX_AGE:
             continue
+        if n_info >= INFO_BUDGET:
+            print(f"info-budget op ({INFO_BUDGET}); rest volgende run")
+            break
         info = _retry(lambda: yf.Ticker(t).info or {}, f"info {t}")
         if info and info.get("marketCap"):
             c["info"] = extract_info(info)
@@ -107,9 +122,12 @@ def market_data(cache):
     pairs = set()
     for c in cache.values():
         i = c.get("info") or {}
-        cur, fcur = i.get("currency"), i.get("financialCurrency") or i.get("currency")
+        cur = base_currency(i.get("currency"))[0]
+        fcur = base_currency(i.get("financialCurrency") or i.get("currency"))[0]
         if cur and fcur and cur != fcur:
-            pairs.add(f"{fcur}{cur}=X")
+            pairs.add(f"{fcur}{cur}=X")      # jaarcijfers -> beursvaluta
+        if cur and cur != "USD":
+            pairs.add(f"{cur}USD=X")         # beursvaluta -> USD (rangschikking)
     symbols = ["^TNX"] + sorted(pairs)
     rf, fx = None, {}
     try:
@@ -134,12 +152,33 @@ def market_data(cache):
 
 
 def fx_rate(info, fx):
-    cur, fcur = info.get("currency"), info.get("financialCurrency") or info.get("currency")
-    if not cur:
+    """Wisselkoers van de valuta van de jaarcijfers naar de beursvaluta (incl. pence e.d.)."""
+    if not info.get("currency"):
         return None
-    if cur == fcur:
-        return 1.0
-    return fx.get(f"{fcur}{cur}=X")
+    cur, sub = base_currency(info["currency"])
+    fcur = base_currency(info.get("financialCurrency") or info["currency"])[0]
+    rate = 1.0 if cur == fcur else fx.get(f"{fcur}{cur}=X")
+    return None if rate is None else rate * sub
+
+
+def usd_rate(info, fx):
+    """Wisselkoers van de beursvaluta naar USD (per eenheid waarin de koers noteert)."""
+    if not info.get("currency"):
+        return None
+    cur, sub = base_currency(info["currency"])
+    rate = 1.0 if cur == "USD" else fx.get(f"{cur}USD=X")
+    return None if rate is None else rate / sub
+
+
+def market_cap_quote(info, price):
+    """Beurswaarde in de valuta van de koers. Bij pence e.d. via aantal aandelen × koers
+    (Yahoo geeft de beurswaarde daar in de hoofdvaluta)."""
+    p_info = info.get("currentPrice") or info.get("regularMarketPrice")
+    if info.get("currency") in SUBUNITS:
+        sh = info.get("sharesOutstanding")
+        return sh * price if (sh and price) else None
+    mc = info.get("marketCap")
+    return mc * price / p_info if (mc and price and p_info) else mc
 
 
 def _price_lookup(close):

@@ -787,7 +787,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       x.price=last;if(open>0)x.d1=(last/open-1)*100;x.live=true;
       if(x.high52&&last>x.high52)x.high52=last;
       if(x.high52)x.fromHigh=Math.max(0,(1-last/x.high52)*100);
-      renderExtras();
+      renderExtras();if(rows.length)renderOverview();
     }).catch(function(){});
   }
 
@@ -1006,20 +1006,22 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   }
   var eurusd=null;
   function renderOverview(){
-    // Markt vandaag: dagverandering van de top 500, gewogen naar beurswaarde
-    var w=0,sum=0;rows.forEach(function(r){if(r.d1!=null&&r.marketCap){w+=r.marketCap;sum+=r.d1*r.marketCap}});
-    var mt=w?sum/w:null;
+    // Markt vandaag: gemiddelde dagverandering van WEBN, VALL en Bitcoin (gelijk gewogen)
+    var ds=extras.map(function(x){return x.d1}).filter(function(d){return d!=null});
+    var mt=ds.length?ds.reduce(function(a,b){return a+b},0)/ds.length:null;
     $("mToday").textContent=mt==null?"–":fmtPct(mt);$("mToday").className=cls(mt==null?null:-mt);
-    $("mSub").textContent="top 500, gewogen naar beurswaarde";
-    var web=null;extras.forEach(function(x){if(x.ticker==="WEBN.DE")web=x});
-    var v=web&&web.spark;
+    $("mSub").textContent="gemiddelde van WEBN, VALL en Bitcoin";
+    // lijn: gemiddelde van de drie over 30 dagen (elk geïndexeerd op 100 bij de start)
+    var sp=extras.map(function(x){return x.spark}).filter(function(a){return a&&a.length>1});
+    var len=sp.length?Math.min.apply(null,sp.map(function(a){return a.length})):0,v=null;
+    if(len>1){v=[];for(var k=0;k<len;k++){var t=0;sp.forEach(function(a){var b=a.slice(-len);t+=b[k]/b[0]*100});v.push(t/sp.length)}}
     if(v&&v.length>1){
       var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v),sp=(hi-lo)||1,up=v[v.length-1]>=v[0],col=up?"var(--up)":"var(--down-strong)";
       var pts=v.map(function(y,i){return [(i/(v.length-1)*200).toFixed(1),(56-(y-lo)/sp*46).toFixed(1)]});
       var line=pts.map(function(p){return p.join(",")}).join(" ");
       $("hspark").innerHTML='<defs><linearGradient id="hg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".35"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
         '<polygon points="0,60 '+line+' 200,60" fill="url(#hg)"/><polyline points="'+line+'" fill="none" stroke="'+col+'" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
-      $("mSub").textContent="top 500 · lijn: WEBN 30d";
+      $("mSub").textContent="gem. WEBN, VALL en Bitcoin · lijn: 30 dagen";
     }
     // grote advies-knoppen
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
@@ -1203,7 +1205,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-11";
+  var BUILD="2026-11-04-12";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

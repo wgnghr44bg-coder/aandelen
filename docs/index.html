@@ -78,7 +78,7 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .ht.ai{border-width:2px}
 .heat-key{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.7rem;margin-top:6px}
 .heat-key i{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in oklab,var(--down-strong) 60%,var(--card)),var(--card),color-mix(in oklab,var(--up) 60%,var(--card)));border:1px solid var(--line)}
-.rfilter{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px}
+.rfilter{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:6px}
 .rfilter::-webkit-scrollbar{display:none}
 .rfilter[hidden]{display:none}
 .rfilter button{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:4px 10px 4px 5px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
@@ -169,6 +169,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     </div>
     <div class="periods" id="periods" role="group" aria-label="Periode"></div>
     <div class="rfilter" id="rfilter" role="group" aria-label="Advies" hidden></div>
+    <div class="rfilter" id="cfilter" role="group" aria-label="Beurswaarde" hidden></div>
     <div class="filters">
       <select id="sector" aria-label="Sector"><option value="">Alle sectoren</option></select>
       <input id="q" type="search" placeholder="Naam of ticker" aria-label="Zoeken" autocomplete="off">
@@ -259,6 +260,12 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     renderMode();render();window.scrollTo({top:0,behavior:"smooth"});
   });
   $("sector").addEventListener("change",render);
+  $("cfilter").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    capFilter=b.dataset.c&&capFilter!==b.dataset.c?b.dataset.c:null;
+    render();
+    if(capFilter)scrollToGrp();
+  });
   $("rfilter").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     ratingFilter=b.dataset.r&&ratingFilter!==b.dataset.r?b.dataset.r:null;
@@ -267,7 +274,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   });
   $("grp").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
-    if(b.classList.contains("x")){$("sector").value="";statFilter=null;ratingFilter=null;render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
+    if(b.classList.contains("x")){$("sector").value="";statFilter=null;ratingFilter=null;capFilter=null;render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
     if(b.dataset.m){mode=b.dataset.m;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
   });
   $("q").addEventListener("input",render);
@@ -289,6 +296,21 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   var statFilter=null,topTicker=null,ratingFilter=null;
   var RATINGS=["BUY","HOLD","SELL","NO RATING"];
+  var CAPS=[{k:"xl",l:"> $500 mld",min:5e11,max:Infinity},{k:"l",l:"$100–500 mld",min:1e11,max:5e11},
+            {k:"m",l:"$50–100 mld",min:5e10,max:1e11},{k:"s",l:"< $50 mld",min:0,max:5e10}];
+  var capFilter=null;
+  function capDef(k){for(var i=0;i<CAPS.length;i++)if(CAPS[i].k===k)return CAPS[i];return null}
+  function inCap(r,c){return r.marketCap>=c.min&&r.marketCap<c.max}
+  function renderCapFilter(){
+    var el=$("cfilter");
+    if(!rows.length){el.hidden=true;return}
+    el.hidden=false;
+    el.innerHTML='<button type="button" class="all" data-c="" aria-pressed="'+(!capFilter)+'">💰 Alle</button>'+
+      CAPS.map(function(c){
+        var n=rows.filter(function(r){return inCap(r,c)}).length;
+        return '<button type="button" class="all" data-c="'+c.k+'" aria-pressed="'+(capFilter===c.k)+'">'+c.l+' <span class="n">'+n+'</span></button>';
+      }).join("");
+  }
   function renderRatingFilter(){
     var el=$("rfilter");
     if(!rows.some(function(r){return r.rating})){el.hidden=true;return}
@@ -525,13 +547,14 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   });
 
   function render(){
-    renderHeat();renderRatingFilter();
+    renderHeat();renderRatingFilter();renderCapFilter();
     stats();
     var s=$("sector").value,q=$("q").value.trim().toLowerCase(),sf=statFilter?statDef(statFilter):null;
     var list=rows.filter(function(r){
       if(s==="AI"){if(!r.ai)return false}else if(s&&sec(r.sector)!==s)return false;
       if(sf){var dd=drop(r,period);if(dd==null||!sf.f(dd))return false}
       if(ratingFilter&&r.rating!==ratingFilter)return false;
+      if(capFilter&&!inCap(r,capDef(capFilter)))return false;
       if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
       return true;
     }).sort(function(a,b){
@@ -540,9 +563,9 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     });
     var max=Math.max.apply(null,rows.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
     var best=mode==="down"?"slechtste eerst":"beste eerst";
-    if(s||sf||ratingFilter){
+    if(s||sf||ratingFilter||capFilter){
       $("grp").hidden=false;$("count").textContent="";
-      var gname=[ratingFilter?ratingTag({rating:ratingFilter}):"",sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
+      var gname=[ratingFilter?ratingTag({rating:ratingFilter}):"",capFilter?"💰 "+capDef(capFilter).l:"",sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
       $("grp").innerHTML='<div class="gt">'+gname+'<span>'+list.length+' · '+best+'</span></div>'+
         '<div class="seg"><button type="button" data-m="down" aria-pressed="'+(mode==="down")+'">📉</button><button type="button" data-m="up" aria-pressed="'+(mode==="up")+'">📈</button></div>'+
         '<button type="button" class="x" aria-label="Filter wissen">✕</button>';

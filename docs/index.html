@@ -316,7 +316,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   try{var sr=localStorage.getItem("bereik");if(sr&&RANGES.some(function(x){return x.k===sr}))range=sr;}catch(e){}
   var histP=null;
   function loadHist(){
-    if(!histP)histP=fetch("history.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()});
+    if(!histP)histP=getJSON("history.json");
     return histP;
   }
   var MON3=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
@@ -514,9 +514,22 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   renderPeriods();renderMode();
   var sectorsDone=false;
+  // Gegevens rechtstreeks uit de repo halen: nieuwe updates zijn dan meteen zichtbaar,
+  // ook als GitHub Pages nog bezig is met klaarzetten. Lukt dat niet, dan de kopie op de site zelf.
+  var RAW="https://raw.githubusercontent.com/wgnghr44bg-coder/aandelen/main/docs/";
+  function getJSON(name){
+    var t="?t="+Date.now();
+    function get(u){return fetch(u+t,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+    return Promise.all([get(RAW+name).catch(function(){return null}),get(name).catch(function(){return null})]).then(function(a){
+      var x=a[0],y=a[1];
+      if(!x&&!y)throw new Error("laden mislukt");
+      if(!x||!y)return x||y;
+      return (x.updated||"")>=(y.updated||"")?x:y; // de nieuwste van de twee
+    });
+  }
   function load(manual){
     var btn=$("refresh");btn.classList.add("busy");btn.disabled=true;
-    return fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
+    return getJSON("data.json").then(function(data){
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
       extras=data.extras||[];renderExtras();liveBitcoin();

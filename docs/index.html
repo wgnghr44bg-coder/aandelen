@@ -25,7 +25,8 @@ header{padding:20px 0 8px}
 h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .sub{color:var(--muted);font-size:.85rem;margin:0}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 4px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.stat[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
 .stat b{display:block;font-size:1.1rem;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stat span{color:var(--muted);font-size:.75rem;line-height:1.2;display:block}
 .bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
@@ -135,9 +136,9 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     <div class="extras" id="extras" hidden></div>
     <div id="xpanel"></div>
     <div class="stats">
-      <div class="stat"><b id="sDown">–</b><span id="sDownL">gedaald</span></div>
-      <div class="stat"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></div>
-      <div class="stat"><b id="sTop">–</b><span><span id="sTopT">grootste daler</span><i id="sTopL" class="clamp">–</i></span></div>
+      <button type="button" class="stat" data-st="s1" aria-pressed="false"><b id="sDown">–</b><span id="sDownL">gedaald</span></button>
+      <button type="button" class="stat" data-st="s2" aria-pressed="false"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></button>
+      <button type="button" class="stat" data-st="top"><b id="sTop">–</b><span><span id="sTopT">grootste daler</span><i id="sTopL" class="clamp">–</i></span></button>
     </div>
   </header>
 </div>
@@ -232,7 +233,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   $("sector").addEventListener("change",render);
   $("grp").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
-    if(b.classList.contains("x")){$("sector").value="";render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
+    if(b.classList.contains("x")){$("sector").value="";statFilter=null;render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
     if(b.dataset.m){mode=b.dataset.m;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
   });
   $("q").addEventListener("input",render);
@@ -248,32 +249,49 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
 
-  function stats(){
-    var vals=rows.map(function(r){return {r:r,d:drop(r,period)}}).filter(function(x){return x.d!=null});
-    var down=vals.filter(function(x){return x.d>0.05}).length;
-    var big=vals.filter(function(x){return x.d>=20}).length;
-    var sign=mode==="down"?1:-1;
-    var top=vals.slice().sort(function(a,b){return (b.d-a.d)*sign})[0];
+  var statFilter=null,topTicker=null;
+  // Wat de kerncijfers tellen; dezelfde regels gebruikt het filter als je op een vakje tikt.
+  function statDef(k){
     var pl=periodLabel(period).toLowerCase();
     if(mode==="down"){
-      $("sDown").textContent=down;
-      $("sDownL").textContent="van "+vals.length+(period==="fromHigh"?" onder jaartop":" gedaald ("+pl+")");
-      $("s20").textContent=big;$("s20L").textContent="20%+ gezakt";
-      $("sTopT").textContent="grootste daler";
-    }else if(period==="fromHigh"){
-      $("sDown").textContent=vals.filter(function(x){return x.d<=5}).length;
-      $("sDownL").textContent="van "+vals.length+" binnen 5% van jaartop";
-      $("s20").textContent=vals.filter(function(x){return x.d<0.5}).length;$("s20L").textContent="op jaartop";
-      $("sTopT").textContent="dichtst bij top";
-    }else{
-      $("sDown").textContent=vals.filter(function(x){return x.d<-0.05}).length;
-      $("sDownL").textContent="van "+vals.length+" gestegen ("+pl+")";
-      $("s20").textContent=vals.filter(function(x){return x.d<=-20}).length;$("s20L").textContent="20%+ gestegen";
-      $("sTopT").textContent="grootste stijger";
+      if(k==="s1")return {f:function(d){return d>0.05},l:period==="fromHigh"?"onder jaartop":"gedaald ("+pl+")",t:period==="fromHigh"?"Onder jaartop":"Gedaald · "+pl};
+      return {f:function(d){return d>=20},l:"20%+ gezakt",t:"20%+ gezakt · "+pl};
     }
+    if(period==="fromHigh"){
+      if(k==="s1")return {f:function(d){return d<=5},l:"binnen 5% van jaartop",t:"Binnen 5% van jaartop"};
+      return {f:function(d){return d<0.5},l:"op jaartop",t:"Op jaartop"};
+    }
+    if(k==="s1")return {f:function(d){return d<-0.05},l:"gestegen ("+pl+")",t:"Gestegen · "+pl};
+    return {f:function(d){return d<=-20},l:"20%+ gestegen",t:"20%+ gestegen · "+pl};
+  }
+  function stats(){
+    var vals=rows.map(function(r){return {r:r,d:drop(r,period)}}).filter(function(x){return x.d!=null});
+    var sign=mode==="down"?1:-1;
+    var top=vals.slice().sort(function(a,b){return (b.d-a.d)*sign})[0];
+    var d1=statDef("s1"),d2=statDef("s2");
+    $("sDown").textContent=vals.filter(function(x){return d1.f(x.d)}).length;
+    $("sDownL").textContent="van "+vals.length+" "+d1.l;
+    $("s20").textContent=vals.filter(function(x){return d2.f(x.d)}).length;$("s20L").textContent=d2.l;
+    $("sTopT").textContent=mode==="down"?"grootste daler":(period==="fromHigh"?"dichtst bij top":"grootste stijger");
     $("sTop").textContent=top?fmtPct(top.r[period],period):"–";
     $("sTopL").textContent=top?top.r.name:"–";
+    topTicker=top?top.r.ticker:null;
+    Array.prototype.forEach.call(document.querySelectorAll(".stat[data-st^=s]"),function(b){b.setAttribute("aria-pressed",statFilter===b.dataset.st)});
   }
+  function scrollToGrp(){var g=$("grp");g.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";g.scrollIntoView({behavior:"smooth",block:"start"});}
+  document.querySelector(".stats").addEventListener("click",function(e){
+    var b=e.target.closest(".stat");if(!b)return;
+    var k=b.dataset.st;
+    if(k==="top"){
+      if(!topTicker)return;
+      statFilter=null;$("sector").value="";$("q").value="";openTicker=topTicker;render();
+      var c=document.querySelector('.card[data-t="'+topTicker+'"]');
+      if(c){c.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";c.scrollIntoView({behavior:"smooth",block:"start"});}
+      return;
+    }
+    statFilter=statFilter===k?null:k;render();
+    if(statFilter)scrollToGrp();
+  });
 
   function detail(r){
     var items=[
@@ -449,15 +467,16 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     var b=e.target.closest(".ht");if(!b)return;
     var sel=$("sector");sel.value=sel.value===b.dataset.s?"":b.dataset.s;
     render();
-    if(sel.value){var g=$("grp");g.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";g.scrollIntoView({behavior:"smooth",block:"start"});}
+    if(sel.value)scrollToGrp();
   });
 
   function render(){
     renderHeat();
     stats();
-    var s=$("sector").value,q=$("q").value.trim().toLowerCase();
+    var s=$("sector").value,q=$("q").value.trim().toLowerCase(),sf=statFilter?statDef(statFilter):null;
     var list=rows.filter(function(r){
       if(s==="AI"){if(!r.ai)return false}else if(s&&sec(r.sector)!==s)return false;
+      if(sf){var dd=drop(r,period);if(dd==null||!sf.f(dd))return false}
       if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
       return true;
     }).sort(function(a,b){
@@ -466,9 +485,10 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     });
     var max=Math.max.apply(null,rows.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
     var best=mode==="down"?"slechtste eerst":"beste eerst";
-    if(s){
+    if(s||sf){
       $("grp").hidden=false;$("count").textContent="";
-      $("grp").innerHTML='<div class="gt">'+(s==="AI"?"🤖 AI":esc(s))+'<span>'+list.length+' · '+best+'</span></div>'+
+      var gname=[sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
+      $("grp").innerHTML='<div class="gt">'+gname+'<span>'+list.length+' · '+best+'</span></div>'+
         '<div class="seg"><button type="button" data-m="down" aria-pressed="'+(mode==="down")+'">📉</button><button type="button" data-m="up" aria-pressed="'+(mode==="up")+'">📈</button></div>'+
         '<button type="button" class="x" aria-label="Filter wissen">✕</button>';
     }else{

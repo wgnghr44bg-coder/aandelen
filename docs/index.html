@@ -307,8 +307,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .xt .spark{height:28px}
 .heat.mini{grid-template-columns:repeat(3,minmax(0,1fr))}
 .bigr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
-.bigr button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:16px;padding:12px 4px;font:inherit;font-size:1rem;font-weight:800;cursor:pointer;color:#fff;border:1.5px solid}
-.bigr button .n{display:inline-grid;place-items:center;min-width:30px;height:26px;padding:0 6px;border-radius:13px;background:rgba(0,0,0,.28);font-size:.85rem}
+.bigr button{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:16px;padding:12px 3px;font:inherit;font-size:.95rem;min-width:0;font-weight:800;cursor:pointer;color:#fff;border:1.5px solid}
+.bigr button .n{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 5px;border-radius:12px;background:rgba(0,0,0,.28);font-size:.78rem}
 .bigr button .ic{width:20px;height:20px;stroke-width:2.6}
 .bigr .b-BUY{background:linear-gradient(180deg,#1fbf6a,#0f7a40);border-color:#2fd26b;box-shadow:0 0 18px rgba(47,210,107,.3)}
 .bigr .b-HOLD{background:linear-gradient(180deg,#2a3c5f,#1a2742);border-color:#3c5580}
@@ -365,6 +365,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     </div>
     <div class="extras" id="extras" hidden></div>
     <div id="xpanel"></div>
+    <div class="bigr" id="ovchips"></div>
     <div class="panel">
       <div class="ph"><h2>Sectoren</h2><span class="pmeta">– beste <span id="secPer"></span></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
       <div class="heat mini" id="heatmini"></div>
@@ -373,7 +374,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste">Top 5 ›</button></div>
       <ol class="alist prev" id="aprev"></ol>
     </div>
-    <div class="bigr" id="ovchips"></div>
     <p class="upd mdate" id="mdate"></p>
   </section>
 
@@ -1019,7 +1019,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       var line=pts.map(function(p){return p.join(",")}).join(" ");
       $("hspark").innerHTML='<defs><linearGradient id="hg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".35"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
         '<polygon points="0,60 '+line+' 200,60" fill="url(#hg)"/><polyline points="'+line+'" fill="none" stroke="'+col+'" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
-      $("mSub").textContent="top 500 · lijn: WEBN 30 dagen";
+      $("mSub").textContent="top 500 · lijn: WEBN 30d";
     }
     // grote advies-knoppen
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
@@ -1203,7 +1203,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-10";
+  var BUILD="2026-11-04-11";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

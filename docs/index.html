@@ -53,6 +53,17 @@ h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
 .plot .hl{fill:var(--muted);font-size:10px;font-family:inherit}
 .plot .cross{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
 .chart-msg{color:var(--muted);font-size:.8rem;padding:20px 0;text-align:center}
+.extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 0}
+.xt{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.xt[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.xt .xl{display:block;font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xt .xl b{color:var(--text);font-size:.85rem;display:block}
+.xt .xp{display:block;font-weight:700;font-variant-numeric:tabular-nums;font-size:1rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xt .xc{display:block;white-space:nowrap;font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums}
+.xpanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:8px}
+.xpanel h3{margin:0 0 6px;font-size:.92rem}
+.xpanel .grid{margin-top:4px}
+.live{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--up);margin-left:4px;vertical-align:middle}
 .upd{color:var(--muted);font-size:.8rem;margin:2px 0 0}
 .upd b{color:var(--text);font-weight:600}
 .count{color:var(--muted);font-size:.8rem;margin:10px 0 6px}
@@ -89,6 +100,8 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     <h1 id="title">Top 100 aandelen: wat is er gezakt?</h1>
     <p class="sub" id="asof">Gegevens laden…</p>
     <p class="upd" id="upd"></p>
+    <div class="extras" id="extras" hidden></div>
+    <div id="xpanel"></div>
     <div class="stats">
       <div class="stat"><b id="sDown">–</b><span id="sDownL">gedaald</span></div>
       <div class="stat"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></div>
@@ -270,7 +283,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   function drawChart(box){
     if(!box)return;
-    var t=box.dataset.t;
+    var t=box.dataset.t,cur=box.dataset.cur==="EUR"?"€ ":"$";
     loadHist().then(function(h){
       var pts=pickSeries(h,t);
       var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
@@ -315,7 +328,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
         cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.style.display="";
         dot.setAttribute("cx",cx);dot.setAttribute("cy",cy);dot.style.display="";
         var fh=(1-p.v/hi)*100;
-        read.innerHTML='<b>$'+nf2.format(p.v)+'</b>'+shortDate(p.d,true)+' · '+fmtPct(c)+' t.o.v. begin'+(fh>0.5?' · '+fmtPct(fh,"fromHigh")+' onder top':'');
+        read.innerHTML='<b>'+cur+nf2.format(p.v)+'</b>'+shortDate(p.d,true)+' · '+fmtPct(c)+' t.o.v. begin'+(fh>0.5?' · '+fmtPct(fh,"fromHigh")+' onder top':'');
       }
       showDefault();
       var plot=box.querySelector(".plot");
@@ -332,6 +345,46 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     range=b.dataset.r;try{localStorage.setItem("bereik",range)}catch(err){}
     drawChart(b.closest(".chart"));
   },true);
+
+  // ---------- Extra koersen bovenaan ----------
+  var extras=[],openExtra=null;
+  function fmtEur(v){return v==null?"–":"€ "+(v>=10000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v))}
+  function chgCls(v){return v==null||Math.abs(v)<0.05?"flat":v<0?"down":"up"}
+  function renderExtras(){
+    var el=$("extras");
+    if(!extras.length){el.hidden=true;return}
+    el.hidden=false;
+    el.innerHTML=extras.map(function(x){
+      return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
+        '<span class="xl"><b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b>'+esc(x.beurs)+'</span>'+
+        '<span class="xp">'+fmtEur(x.price)+'</span>'+
+        '<span class="xc '+chgCls(x.d1)+'">'+fmtPct(x.d1)+(x.ticker==="BTC-EUR"?' <span class="meta">24u</span>':' <span class="meta">dag</span>')+'</span></button>';
+    }).join("");
+    var x=null;for(var i=0;i<extras.length;i++)if(extras[i].ticker===openExtra)x=extras[i];
+    if(!x){$("xpanel").innerHTML="";return}
+    var items=[["1 maand",fmtPct(x.m1)],["3 maanden",fmtPct(x.m3)],["Sinds 1 jan",fmtPct(x.ytd)],["1 jaar",fmtPct(x.y1)],
+      ["Onder jaartop",fmtPct(x.fromHigh,"fromHigh")],["Jaartop",fmtEur(x.high52)]];
+    $("xpanel").innerHTML='<div class="xpanel"><h3>'+esc(x.name)+' <span class="meta">· '+esc(x.label)+' · '+esc(x.beurs)+'</span></h3>'+
+      '<div class="chart" data-t="'+esc(x.ticker)+'" data-cur="EUR"><div class="chart-msg">Grafiek laden…</div></div>'+
+      '<dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl></div>';
+    drawChart($("xpanel").querySelector(".chart"));
+  }
+  $("extras").addEventListener("click",function(e){
+    var b=e.target.closest(".xt");if(!b)return;
+    openExtra=openExtra===b.dataset.x?null:b.dataset.x;renderExtras();
+  });
+  function liveBitcoin(){
+    // Live prijs rechtstreeks van Bitvavo; lukt dat niet, dan blijft de prijs van de laatste update staan.
+    fetch("https://api.bitvavo.com/v2/ticker/24h?market=BTC-EUR").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+      var x=null;for(var i=0;i<extras.length;i++)if(extras[i].ticker==="BTC-EUR")x=extras[i];
+      var last=parseFloat(j.last),open=parseFloat(j.open);
+      if(!x||!(last>0))return;
+      x.price=last;if(open>0)x.d1=(last/open-1)*100;x.live=true;
+      if(x.high52&&last>x.high52)x.high52=last;
+      if(x.high52)x.fromHigh=Math.max(0,(1-last/x.high52)*100);
+      renderExtras();
+    }).catch(function(){});
+  }
 
   function render(){
     stats();
@@ -366,6 +419,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   renderPeriods();renderMode();
   fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
     rows=data.rows||[];
+    extras=data.extras||[];renderExtras();liveBitcoin();
     if(!rows.length||!data.asof){$("asof").textContent="Nog geen gegevens. De eerste update volgt na het sluiten van de beurs.";$("list").innerHTML="";return}
     $("asof").textContent="Slotkoersen van "+fmtDate(data.asof)+" · de 100 grootste bedrijven op beurswaarde";
     var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});

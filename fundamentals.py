@@ -31,6 +31,21 @@ INFO_BUDGET = 250   # max. info-aanroepen per run (spreiden, zodat Yahoo ons nie
 SUBUNITS = {"GBp": ("GBP", 100.0), "GBX": ("GBP", 100.0), "ZAc": ("ZAR", 100.0), "ILA": ("ILS", 100.0)}
 
 
+# Opkomende en frontiermarkten (MSCI-indeling): deze landen doen niet mee (alleen ontwikkelde landen).
+EMERGING_COUNTRIES = {
+    "China", "India", "Brazil", "Mexico", "Taiwan", "South Korea", "Korea", "Saudi Arabia", "Indonesia",
+    "South Africa", "Turkey", "Argentina", "Uruguay", "Chile", "Colombia", "Peru", "Thailand", "Malaysia",
+    "Philippines", "United Arab Emirates", "Qatar", "Kuwait", "Egypt", "Poland", "Greece", "Hungary",
+    "Czech Republic", "Russia", "Vietnam", "Kazakhstan", "Nigeria", "Pakistan", "Macau",
+}
+
+
+def is_developed(info):
+    """False als het land van vestiging een opkomende markt is. Onbekend land = toegestaan
+    (de kandidatenlijst bevat al alleen ontwikkelde landen)."""
+    return (info or {}).get("country") not in EMERGING_COUNTRIES
+
+
 def base_currency(cur):
     """(hoofdvaluta, aantal subeenheden per hoofdeenheid)."""
     return SUBUNITS.get(cur, (cur, 1.0))
@@ -79,7 +94,7 @@ def refresh(cache, tickers):
                                            (cache.get(t) or {}).get("info_fetched") or ""))
     for t in order:
         c = cache.setdefault(t, {})
-        if c.get("info") and _age(c.get("info_fetched")) < INFO_MAX_AGE:
+        if c.get("info") and "country" in c["info"] and _age(c.get("info_fetched")) < INFO_MAX_AGE:
             continue
         if n_info >= INFO_BUDGET:
             print(f"info-budget op ({INFO_BUDGET}); rest volgende run")

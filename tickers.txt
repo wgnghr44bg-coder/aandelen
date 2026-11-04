@@ -1,4 +1,4 @@
-# Kandidaat-tickers wereldwijd (Yahoo-notatie). Het script kiest hieruit elke keer de top 500 op beurswaarde (in USD).
+# Kandidaat-tickers: alleen ontwikkelde landen (MSCI-indeling). Het script kiest hieruit de top 500 op beurswaarde (USD).
 # Bedrijven met een notering in de VS staan alleen met die notering in de lijst (geen dubbele).
 
 # VS (incl. ADR's)
@@ -11,7 +11,6 @@ META
 AVGO
 TSLA
 BRK-B
-TSM
 LLY
 JPM
 WMT
@@ -36,7 +35,6 @@ GE
 CSCO
 AMD
 TM
-BABA
 PM
 WFC
 IBM
@@ -82,7 +80,6 @@ SONY
 MUFG
 ACN
 BSX
-HDB
 NEE
 SYK
 PGR
@@ -129,14 +126,12 @@ BUD
 WELL
 ICE
 SO
-IBN
 CEG
 PLD
 BMY
 AMT
 SPOT
 RIO
-MELI
 VRTX
 DUK
 MMC
@@ -360,11 +355,6 @@ CRH
 MSTR
 
 # Internationaal – genoteerd in de VS (ADR)
-PDD
-JD
-BIDU
-NTES
-TCOM
 BP
 DEO
 NGG
@@ -373,11 +363,6 @@ BCS
 ING
 MFG
 HMC
-INFY
-PBR
-VALE
-ITUB
-NU
 BN
 CNQ
 CP
@@ -390,7 +375,6 @@ CM
 MFC
 TRP
 WCN
-AMX
 E
 EQNR
 ERIC
@@ -400,7 +384,6 @@ CPNG
 CHKP
 HLN
 NWG
-KB
 WDS
 FER
 TEF
@@ -508,60 +491,10 @@ STAN.L
 6902.T
 
 # China en Hongkong
-0700.HK
 1299.HK
-3690.HK
-0939.HK
-1398.HK
-3988.HK
-0941.HK
-1810.HK
-2318.HK
-0883.HK
-0857.HK
 0388.HK
-1211.HK
-1288.HK
-600519.SS
-300750.SZ
-600036.SS
-000858.SZ
-600900.SS
-601899.SS
-601138.SS
 
-# Korea en Taiwan
-005930.KS
-000660.KS
-373220.KS
-207940.KS
-005380.KS
-000270.KS
-012450.KS
-2317.TW
-2454.TW
-2308.TW
-2382.TW
 
-# India
-RELIANCE.NS
-TCS.NS
-BHARTIARTL.NS
-SBIN.NS
-HINDUNILVR.NS
-ITC.NS
-LT.NS
-BAJFINANCE.NS
-HCLTECH.NS
-SUNPHARMA.NS
-MARUTI.NS
-KOTAKBANK.NS
-AXISBANK.NS
-NTPC.NS
-M&M.NS
-ULTRACEMCO.NS
-TITAN.NS
-ONGC.NS
 
 # Australië, Canada en overig
 CBA.AX
@@ -575,6 +508,145 @@ GMG.AX
 FMG.AX
 ATD.TO
 CSU.TO
-2222.SR
-1120.SR
 D05.SI
+
+# VS – aanvulling
+CVNA
+ALNY
+CRWV
+RDDT
+EIX
+DTE
+AEE
+PPL
+CNP
+ES
+FE
+ADM
+VEEV
+BRO
+ACGL
+MKL
+TROW
+NTRS
+RJF
+FCNCA
+HBAN
+RF
+SYF
+LPLA
+WAB
+EFX
+TSCO
+ULTA
+DRI
+LVS
+EXPE
+CPAY
+FSLR
+GRMN
+ZBH
+PODD
+LH
+DGX
+CNC
+VTR
+IRM
+SBAC
+WY
+STLD
+LYB
+IP
+PKG
+CF
+CTRA
+DVN
+FANG
+EQT
+MPLX
+TEVA
+ARGX
+GMAB
+
+# Canada – aanvulling
+AEM
+B
+WPM
+FNV
+TECK
+NTR
+SLF
+IMO
+IFC.TO
+L.TO
+WSP.TO
+DOL.TO
+FFH.TO
+
+# Europa – aanvulling
+UMG.AS
+KNEBV.HE
+SAMPO.HE
+MTX.DE
+SHL.DE
+BAYN.DE
+HEN3.DE
+VNA.DE
+P911.DE
+PGHN.SW
+SREN.SW
+GIVN.SW
+KER.PA
+RI.PA
+ACA.PA
+GLE.PA
+ORA.PA
+ML.PA
+LR.PA
+AENA.MC
+AMS.MC
+NSIS-B.CO
+MAERSK-B.CO
+VWS.CO
+SAAB-B.ST
+HM-B.ST
+SEB-A.ST
+SHB-A.ST
+SWED-A.ST
+HEXA-B.ST
+SAND.ST
+EPI-A.ST
+ALFA.ST
+UCB.BR
+SSE.L
+TSCO.L
+IMB.L
+AV.L
+AAL.L
+
+# Japan – aanvulling
+4661.T
+6273.T
+6954.T
+6752.T
+8053.T
+4901.T
+6301.T
+3382.T
+2914.T
+8725.T
+8630.T
+9020.T
+5108.T
+
+# Australië en Singapore – aanvulling
+TLS.AX
+WOW.AX
+TCL.AX
+QBE.AX
+COL.AX
+XRO.AX
+ALL.AX
+REA.AX
+O39.SI
+U11.SI

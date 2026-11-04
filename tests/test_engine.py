@@ -404,3 +404,15 @@ def test_exchange_clearing_cash_not_counted():
     f["industry"] = "Financial Data & Stock Exchanges"
     exch = dcf.run(f)["scenarios"]["neutral"]
     assert exch["net_debt"] == 200.0 and exch["upside"] < normal
+
+
+def test_only_developed_countries():
+    import fundamentals as fund
+    assert fund.is_developed({"country": "United States"})
+    assert fund.is_developed({"country": "Japan"}) and fund.is_developed({"country": "Hong Kong"})
+    for c in ("China", "India", "Taiwan", "South Korea", "Brazil", "Saudi Arabia"):
+        assert not fund.is_developed({"country": c})
+    tickers = [l.strip() for l in open(Path(__file__).resolve().parents[1] / "tickers.txt")
+               if l.strip() and not l.startswith("#")]
+    assert not any(t.endswith((".SS", ".SZ", ".NS", ".SR", ".KS", ".TW")) for t in tickers)
+    assert not {"TSM", "BABA", "PDD", "NTES", "INFY", "PBR"} & set(tickers)

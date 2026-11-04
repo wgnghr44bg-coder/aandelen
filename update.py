@@ -281,6 +281,9 @@ def main():
             if not info or not info.get("marketCap"):
                 print(f"  {t}: geen info")
                 continue
+            if not fund.is_developed(info):
+                print(f"  {t}: opkomende markt ({info.get('country')}), overgeslagen")
+                continue
             prijzen[t] = stats["price"]
             alle_closes[t] = df["Close"].dropna()
             # Beurswaarde (omgerekend naar USD voor een eerlijke rangschikking) en K/W, meegeschaald

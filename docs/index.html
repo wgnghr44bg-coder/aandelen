@@ -78,6 +78,14 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .ht.ai{border-width:2px}
 .heat-key{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.7rem;margin-top:6px}
 .heat-key i{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in oklab,var(--down-strong) 60%,var(--card)),var(--card),color-mix(in oklab,var(--up) 60%,var(--card)));border:1px solid var(--line)}
+.rfilter{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px}
+.rfilter::-webkit-scrollbar{display:none}
+.rfilter[hidden]{display:none}
+.rfilter button{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:4px 10px 4px 5px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
+.rfilter button.all{padding-left:10px}
+.rfilter button[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.rfilter button .rt{margin:0}
+.rfilter .n{color:var(--muted);font-variant-numeric:tabular-nums}
 .rt{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.03em;padding:1px 6px;border-radius:4px;margin-right:4px;vertical-align:1px;white-space:nowrap}
 .rt-BUY{background:var(--up);color:#fff}
 .rt-SELL{background:var(--down-strong);color:#fff}
@@ -90,6 +98,9 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .grp{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 12px;margin:12px 0 4px}
 .grp .gt{flex:1;min-width:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .grp .gt span{display:block;font-weight:500;font-size:.75rem;color:var(--muted)}
+.grp .gt span.rt{display:inline-block;font-size:.72rem;font-weight:800;vertical-align:2px}
+.grp .gt span.rt-BUY,.grp .gt span.rt-SELL{color:#fff}
+.grp .gt span.rt-HOLD{color:var(--text)}
 .grp .seg{display:flex;gap:2px;background:var(--chip);border-radius:8px;padding:2px}
 .grp .seg button,.grp .x{border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;font-weight:600;padding:6px 8px;border-radius:6px;cursor:pointer}
 .grp .seg button[aria-pressed=true]{background:var(--bg);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
@@ -157,6 +168,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       <button type="button" data-m="up" aria-pressed="false">📈 Stijgers</button>
     </div>
     <div class="periods" id="periods" role="group" aria-label="Periode"></div>
+    <div class="rfilter" id="rfilter" role="group" aria-label="Advies" hidden></div>
     <div class="filters">
       <select id="sector" aria-label="Sector"><option value="">Alle sectoren</option></select>
       <input id="q" type="search" placeholder="Naam of ticker" aria-label="Zoeken" autocomplete="off">
@@ -239,9 +251,15 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     renderMode();render();window.scrollTo({top:0,behavior:"smooth"});
   });
   $("sector").addEventListener("change",render);
+  $("rfilter").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    ratingFilter=b.dataset.r&&ratingFilter!==b.dataset.r?b.dataset.r:null;
+    render();
+    if(ratingFilter)scrollToGrp();
+  });
   $("grp").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
-    if(b.classList.contains("x")){$("sector").value="";statFilter=null;render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
+    if(b.classList.contains("x")){$("sector").value="";statFilter=null;ratingFilter=null;render();$("heatwrap").scrollIntoView({behavior:"smooth",block:"center"});return}
     if(b.dataset.m){mode=b.dataset.m;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
   });
   $("q").addEventListener("input",render);
@@ -257,7 +275,18 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
 
-  var statFilter=null,topTicker=null;
+  var statFilter=null,topTicker=null,ratingFilter=null;
+  var RATINGS=["BUY","HOLD","SELL","NO RATING"];
+  function renderRatingFilter(){
+    var el=$("rfilter");
+    if(!rows.some(function(r){return r.rating})){el.hidden=true;return}
+    el.hidden=false;
+    var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
+    el.innerHTML='<button type="button" class="all" data-r="" aria-pressed="'+(!ratingFilter)+'">Alle <span class="n">'+rows.length+'</span></button>'+
+      RATINGS.map(function(k){
+        return '<button type="button" data-r="'+k+'" aria-pressed="'+(ratingFilter===k)+'">'+ratingTag({rating:k})+'<span class="n">'+(cnt[k]||0)+'</span></button>';
+      }).join("");
+  }
   // Wat de kerncijfers tellen; dezelfde regels gebruikt het filter als je op een vakje tikt.
   function statDef(k){
     var pl=periodLabel(period).toLowerCase();
@@ -484,12 +513,13 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   });
 
   function render(){
-    renderHeat();
+    renderHeat();renderRatingFilter();
     stats();
     var s=$("sector").value,q=$("q").value.trim().toLowerCase(),sf=statFilter?statDef(statFilter):null;
     var list=rows.filter(function(r){
       if(s==="AI"){if(!r.ai)return false}else if(s&&sec(r.sector)!==s)return false;
       if(sf){var dd=drop(r,period);if(dd==null||!sf.f(dd))return false}
+      if(ratingFilter&&r.rating!==ratingFilter)return false;
       if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
       return true;
     }).sort(function(a,b){
@@ -498,9 +528,9 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     });
     var max=Math.max.apply(null,rows.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
     var best=mode==="down"?"slechtste eerst":"beste eerst";
-    if(s||sf){
+    if(s||sf||ratingFilter){
       $("grp").hidden=false;$("count").textContent="";
-      var gname=[sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
+      var gname=[ratingFilter?ratingTag({rating:ratingFilter}):"",sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
       $("grp").innerHTML='<div class="gt">'+gname+'<span>'+list.length+' · '+best+'</span></div>'+
         '<div class="seg"><button type="button" data-m="down" aria-pressed="'+(mode==="down")+'">📉</button><button type="button" data-m="up" aria-pressed="'+(mode==="up")+'">📈</button></div>'+
         '<button type="button" class="x" aria-label="Filter wissen">✕</button>';

@@ -138,6 +138,10 @@ def test_debt_free_company_rated():
     assert fin["s"]["total_debt"] == [0.0] * 4
     res = analyze_universe({"NODEBT": fin})["NODEBT"]
     assert res["categories"]["health"]["score"] is not None
+    raw2 = fake_raw()
+    raw2["balance"]["rows"]["Total Debt"] = [None] * 4  # rij aanwezig maar leeg
+    fin2 = normalize("EMPTY", fake_info(), raw2, 30.0, None, TODAY, 1.0, 0.04, str(TODAY), str(TODAY))
+    assert fin2["s"]["total_debt"] == [0.0] * 4
 
 
 def test_cyclical_decline_not_structural():

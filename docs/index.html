@@ -285,7 +285,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   border-radius:14px;padding:6px 0 5px;font:inherit;font-size:.72rem;font-weight:600;cursor:pointer}
 .bnav button .ic{width:24px;height:24px}
 .bnav button[aria-pressed=true]{color:#fff;background:linear-gradient(180deg,#1fbf6a,#118a4a);border-color:#2fd26b;box-shadow:0 0 16px rgba(47,210,107,.35)}
-.bnav button[aria-pressed=true] .ic{fill:currentColor;stroke:currentColor}
+.bnav button[aria-pressed=true] .ic{fill:none;stroke:currentColor;stroke-width:2.4}
+.bnav button[data-tab=overzicht][aria-pressed=true] .ic,.bnav button[data-tab=watchlist][aria-pressed=true] .ic,.bnav button[data-tab=portfolio][aria-pressed=true] .ic{fill:currentColor}
 .hero{position:relative;display:flex;align-items:center;gap:8px;min-height:104px;margin:12px 0;padding:14px 16px;border-radius:18px;overflow:hidden;
   border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(59,134,255,.35),transparent 55%),linear-gradient(180deg,var(--card2),var(--card));
   box-shadow:0 10px 30px rgba(0,0,0,.2)}
@@ -334,6 +335,42 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .padd input{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px 10px;font:inherit;font-size:16px;min-width:0}
 .prow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .padd button{border:0;border-radius:12px;padding:11px;font:inherit;font-weight:700;color:#fff;background:linear-gradient(180deg,#3b8bff,#1f63e0);cursor:pointer}
+
+/* ================= rentes, inflatie, vastgoed ================= */
+.bnav{grid-template-columns:repeat(8,1fr);gap:2px;padding-left:4px;padding-right:4px}
+.bnav button{font-size:.58rem;padding:6px 0 4px;border-radius:12px}
+.bnav button .ic{width:21px;height:21px}
+.t-rentes .bar,.t-inflatie .bar,.t-vastgoed .bar{display:none}
+.mtiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.mtiles[hidden],.mpanels[hidden]{display:none}
+.mt{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--card2),var(--card));padding:9px 10px;min-width:0}
+.mt .ml{display:block;font-size:.76rem;font-weight:700;line-height:1.2}
+.mt .mv{display:block;font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
+.mt .ms{display:block;color:var(--muted);font-size:.66rem;line-height:1.3}
+.mt .ms .pp{margin-top:4px}
+.pp{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:0 6px;font-weight:700;font-size:.66rem;white-space:nowrap}
+.mpanels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+.mpanels .panel{margin:0;padding:10px;min-width:0}
+.mpanels .rt2{table-layout:fixed}
+.mpanels .rt2 td:nth-child(2){width:48px}
+#vgmini td:nth-child(2){width:52px}
+.mpanels .rt2 td:nth-child(3){width:38px}
+.mpanels .pp{padding:0 4px;font-size:.62rem}
+.mp .ph h2{font-size:.84rem}
+.rt2{width:100%;border-collapse:collapse;font-size:.74rem;font-variant-numeric:tabular-nums}
+.rt2 td{padding:4px 0;border-top:1px solid var(--line);white-space:nowrap}
+.rt2 tr:first-child td{border-top:0}
+.rt2 td:nth-child(2){text-align:right;font-weight:700;padding-left:6px}
+.rt2 td:nth-child(3){text-align:right;padding-left:6px;font-size:.92em}
+.rt2 td:first-child{white-space:normal}
+.rt2.big{font-size:.9rem}.rt2.big td{padding:8px 0}
+.rt2 small{display:block;color:var(--muted);font-size:.72em;font-weight:400}
+.lchart svg{display:block;width:100%;height:auto;overflow:visible}
+.lchart .ax{fill:var(--muted);font-size:9px;font-family:inherit}
+.lchart .gl{stroke:var(--line);stroke-width:1}
+.lchart .tg{stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1}
+.lleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;margin:6px 0 4px}
+.lleg i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -342,7 +379,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <header class="top">
     <div class="brand">
       <svg class="logo" viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="24" width="6" height="10" rx="1.5" fill="#1fbf6a"/><rect x="11" y="18" width="6" height="16" rx="1.5" fill="#1fbf6a"/><rect x="20" y="12" width="6" height="22" rx="1.5" fill="#22c55e"/><rect x="29" y="16" width="6" height="18" rx="1.5" fill="#2f7bff"/><path d="M3 20L16 9l7 5L39 2" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 2h7v7" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><h1 id="title">Stock<span>Hunter</span></h1><p class="tag">Aandelen · ETF's · Markt</p></div>
+      <div><h1 id="title">Stock<span>Hunter</span></h1><p class="tag">Aandelen · ETF's · Rentes · Inflatie · Vastgoed</p></div>
     </div>
     <button type="button" class="ibtn" id="searchBtn" aria-label="Zoeken"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
   </header>
@@ -366,6 +403,11 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="extras" id="extras" hidden></div>
     <div id="xpanel"></div>
     <div class="bigr" id="ovchips"></div>
+    <div class="mtiles" id="mtiles" hidden></div>
+    <div class="mpanels" id="mpanels" hidden>
+      <div class="panel mp"><div class="ph"><h2>🏠 Hypotheek</h2><button type="button" class="more" data-go="rentes" aria-label="Naar rentes">›</button></div><table class="rt2" id="hypmini"></table></div>
+      <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table></div>
+    </div>
     <div class="panel">
       <div class="ph"><h2>Sectoren</h2><span class="pmeta">– beste <span id="secPer"></span></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
       <div class="heat mini" id="heatmini"></div>
@@ -397,6 +439,30 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="grp" id="grp" hidden></div>
     <p class="count" id="count"></p>
     <ul id="list"></ul>
+  </section>
+
+  <section class="pane" data-pane="rentes" hidden>
+    <div class="panel"><div class="ph"><span class="emo">🇪🇺</span><h2>ECB-rente</h2></div><table class="rt2 big" id="r_ecb"></table></div>
+    <div class="panel"><div class="ph"><span class="emo">📈</span><h2>Marktrentes</h2></div><table class="rt2 big" id="r_mkt"></table></div>
+    <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Hypotheekrente NL</h2></div><table class="rt2 big" id="r_hyp"></table>
+      <p class="hint">Gemiddelde rente op <b>nieuwe</b> hypotheken in Nederland, per rentevaste periode (alle banken, met en zonder NHG). Bron: DNB/ECB, maandelijks. De rente van jouw bank kan afwijken.</p></div>
+    <div class="panel"><div class="ph"><span class="emo">🏭</span><h2>Zakelijke leningen NL</h2></div><table class="rt2 big" id="r_nfc"></table>
+      <p class="hint">Gemiddelde rente op nieuwe leningen aan bedrijven in Nederland. Bron: DNB/ECB.</p></div>
+  </section>
+
+  <section class="pane" data-pane="inflatie" hidden>
+    <div class="panel"><div class="ph"><span class="emo">📊</span><h2>Inflatie</h2><span class="pmeta">jaar op jaar (HICP)</span></div>
+      <div class="mtiles" id="itiles"></div>
+      <div class="lchart" id="ichart"></div>
+      <p class="hint">Prijsstijging ten opzichte van een jaar eerder (geharmoniseerde index, HICP). De ECB streeft naar 2% in de eurozone (stippellijn). Bron: Eurostat, maandelijks.</p></div>
+  </section>
+
+  <section class="pane" data-pane="vastgoed" hidden>
+    <div class="panel"><div class="ph"><span class="emo">🏘️</span><h2>Woningprijzen NL</h2><span class="pmeta">jaar op jaar</span></div>
+      <div class="lchart" id="hchart"></div>
+      <p class="hint">Verandering van de prijzen van woningen in Nederland ten opzichte van een jaar eerder, per kwartaal. Bron: Eurostat.</p></div>
+    <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Rente &amp; financiering</h2></div><table class="rt2 big" id="v_rt"></table></div>
+    <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Vastgoed-aandelen</h2><span class="pmeta" id="vgcount"></span></div><ul id="vlist"></ul></div>
   </section>
 
   <section class="pane" data-pane="watchlist" hidden>
@@ -450,6 +516,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <button type="button" data-tab="overzicht"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Overzicht</span></button>
   <button type="button" data-tab="aandelen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Aandelen</span></button>
   <button type="button" data-tab="sectoren"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Sectoren</span></button>
+  <button type="button" data-tab="rentes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9.5 9.5h.01M14.5 14.5h.01"/></svg><span>Rentes</span></button>
+  <button type="button" data-tab="inflatie"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V14M10 20V10M15 20V12M20 20V5"/></svg><span>Inflatie</span></button>
+  <button type="button" data-tab="vastgoed"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/></svg><span>Vastgoed</span></button>
   <button type="button" data-tab="watchlist"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Watchlist</span></button>
   <button type="button" data-tab="portfolio"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Portfolio</span></button>
 </nav>
@@ -974,7 +1043,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Tabbladen ----------
   var tab="overzicht";
-  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste","watchlist","portfolio"].indexOf(st)>=0)tab=st;}catch(e){}
+  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste","rentes","inflatie","vastgoed","watchlist","portfolio"].indexOf(st)>=0)tab=st;}catch(e){}
   function showTab(t){
     tab=t;try{localStorage.setItem("tab",t)}catch(e){}
     Array.prototype.forEach.call(document.querySelectorAll(".pane"),function(p){p.hidden=p.dataset.pane!==t});
@@ -1039,12 +1108,99 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }).join("");
     if(tab==="watchlist")renderWatch();
     if(tab==="portfolio")renderPortfolio();
+    renderMacro();
   }
   $("ovchips").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     ratingFilter=b.dataset.r||null;render();scrollToGrp();
   });
   $("aprev").addEventListener("click",function(e){var li=e.target.closest("li.co");if(li)gotoCard(li.dataset.t);else showTab("grootste")});
+
+  // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
+  var macro={};
+  var MON3L=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
+  function pct2(v){return v==null?"–":nf2.format(v)+"%"}
+  function pdate(d){if(!d)return "";var p=String(d).split("-");
+    if(/^\d{4}-Q\d$/.test(d))return d.replace("-"," ");
+    return p.length>=2?MON3L[+p[1]-1]+" "+p[0]:d}
+  function ppTag(cur,prev,goodDown,short){
+    if(cur==null||prev==null)return "";
+    var d=cur-prev,txt=(d>0?"+":d<0?"−":"±")+nf2.format(Math.abs(d)).replace(/0$/,"")+(short?"":" pp");
+    var c=Math.abs(d)<0.005?"flat":(goodDown?(d<0?"up":"down2"):(d>0?"up":"down2"));
+    return '<span class="pp '+c+'">'+txt+'</span>';
+  }
+  function last(arr){return arr&&arr.length?arr[arr.length-1]:null}
+  function prevOf(arr){return arr&&arr.length>1?arr[arr.length-2]:null}
+  var SHORTFIX={F:"tot 1 jaar",I:"1–5 jaar",O:"5–10 jaar",P:"> 10 jaar"};
+  function renderMacro(){
+    var m=macro||{},h=m.hicp||{},nl=h.NL,ea=h.EA20,eu=h.EU27_2020,dep=m.ecb_deposit;
+    var tiles=[];
+    if(last(nl))tiles.push(['🇳🇱 Inflatie NL',pct2(last(nl)[1]),'jaar op jaar · '+pdate(last(nl)[0]),ppTag(last(nl)[1],prevOf(nl)&&prevOf(nl)[1],true)]);
+    if(last(ea))tiles.push(['🇪🇺 Inflatie eurozone',pct2(last(ea)[1]),'jaar op jaar · '+pdate(last(ea)[0]),ppTag(last(ea)[1],prevOf(ea)&&prevOf(ea)[1],true)]);
+    if(dep)tiles.push(['🏦 ECB-rente',pct2(dep.value),'depositorente',ppTag(dep.value,dep.prev,true)]);
+    var th=tiles.map(function(t){return '<div class="mt"><span class="ml">'+t[0]+'</span><span class="mv">'+t[1]+'</span><span class="ms">'+t[2]+(t[3]?'<br>'+t[3]:'')+'</span></div>'}).join("");
+    $("mtiles").innerHTML=th;$("mtiles").hidden=!tiles.length;
+    // mini-panelen
+    var hyp=m.mortgage_nl||[];
+    $("hypmini").innerHTML=hyp.map(function(x){return '<tr><td>'+SHORTFIX[x.code]+'</td><td>'+pct2(x.value)+'</td><td>'+ppTag(x.value,x.prev,true,true)+'</td></tr>'}).join("");
+    var vg=[];
+    if(last(m.house_prices_nl))vg.push(["Woningprijzen NL",(last(m.house_prices_nl)[1]>0?"+":"")+pct2(last(m.house_prices_nl)[1])]);
+    if(m.nfc_loans_nl)vg.push(["Zakelijke lening",pct2(m.nfc_loans_nl.value)]);
+    if(m.nl10y)vg.push(["Staatsrente 10j",pct2(m.nl10y.value)]);
+    if(m.euribor3m)vg.push(["Euribor 3 mnd",pct2(m.euribor3m.value)]);
+    $("vgmini").innerHTML=vg.map(function(x){return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td></tr>'}).join("");
+    $("mpanels").hidden=!(hyp.length||vg.length);
+    // tabblad Rentes
+    function row(l,v,sub,tag){return '<tr><td>'+l+(sub?'<small>'+sub+'</small>':'')+'</td><td>'+v+'</td><td>'+(tag||"")+'</td></tr>'}
+    var ecb=[];
+    function fdate(d){var p=String(d||"").slice(0,10).split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]:""}
+    if(dep)ecb.push(row("Depositorente",pct2(dep.value),dep.since?"sinds "+fdate(dep.since):"",ppTag(dep.value,dep.prev,true)));
+    if(m.ecb_mro)ecb.push(row("Herfinancieringsrente",pct2(m.ecb_mro.value),"",ppTag(m.ecb_mro.value,m.ecb_mro.prev,true)));
+    $("r_ecb").innerHTML=ecb.join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    var mk=[];
+    if(m.euribor3m)mk.push(row("Euribor 3 maanden",pct2(m.euribor3m.value),pdate(m.euribor3m.date),ppTag(m.euribor3m.value,m.euribor3m.prev,true)));
+    if(m.nl10y)mk.push(row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),pdate(m.nl10y.date),ppTag(m.nl10y.value,m.nl10y.prev,true)));
+    if(m.us10y)mk.push(row("Staatsrente VS 10 jaar",pct2(m.us10y.value),"actueel",""));
+    $("r_mkt").innerHTML=mk.join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    $("r_hyp").innerHTML=hyp.map(function(x){return row(x.label,pct2(x.value),pdate(x.date)+(x.prev!=null?" · vorige maand "+pct2(x.prev):""),ppTag(x.value,x.prev,true))}).join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    $("r_nfc").innerHTML=m.nfc_loans_nl?row("Nieuwe leningen aan bedrijven",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),ppTag(m.nfc_loans_nl.value,m.nfc_loans_nl.prev,true)):'<tr><td>Nog geen gegevens</td></tr>';
+    // tabblad Inflatie
+    $("itiles").innerHTML=th;
+    var ser=[];if(nl)ser.push({n:"Nederland",c:"#ff8a00",d:nl});if(ea)ser.push({n:"Eurozone",c:"#3b86ff",d:ea});if(eu)ser.push({n:"EU",c:"#a78bfa",d:eu});
+    $("ichart").innerHTML=lineChart(ser,{target:2,suffix:"%"});
+    // tabblad Vastgoed
+    var hp=m.house_prices_nl;
+    $("hchart").innerHTML=hp?lineChart([{n:"Woningprijzen NL",c:"#2fd26b",d:hp}],{zero:true,suffix:"%"}):'<p class="hint">Nog geen gegevens.</p>';
+    $("v_rt").innerHTML=(hyp.map(function(x){return row("Hypotheek "+x.label,pct2(x.value),pdate(x.date),ppTag(x.value,x.prev,true))}).join("")+
+      (m.nfc_loans_nl?row("Zakelijke lening (bedrijven)",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),""):"")+
+      (m.nl10y?row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),"basis voor lange rentes",""):""))||'<tr><td>Nog geen gegevens</td></tr>';
+    var re=rows.filter(function(r){return r.sector==="Real Estate"}).sort(function(a,b){return b.marketCap-a.marketCap});
+    $("vgcount").textContent="("+re.length+")";
+    var mx=Math.max.apply(null,re.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
+    $("vlist").innerHTML=re.map(function(r,i){return cardHtml(r,i,mx,0)}).join("");
+  }
+  // Eenvoudige lijngrafiek (meerdere reeksen) als SVG
+  function lineChart(series,o){
+    o=o||{};var W=340,H=170,pl=6,pr=34,pt=10,pb=22;
+    var all=[];series.forEach(function(s){s.d.forEach(function(p){all.push(p[1])})});
+    if(!all.length)return "";
+    if(o.target!=null)all.push(o.target);if(o.zero)all.push(0);
+    var lo=Math.min.apply(null,all),hi=Math.max.apply(null,all),sp=(hi-lo)||1;lo-=sp*.08;hi+=sp*.08;
+    var n=Math.max.apply(null,series.map(function(s){return s.d.length}));
+    var X=function(i){return pl+i/(n-1||1)*(W-pl-pr)},Y=function(v){return pt+(1-(v-lo)/(hi-lo))*(H-pt-pb)};
+    var g="";for(var k=0;k<4;k++){var v=lo+(hi-lo)*k/3,y=Y(v);g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(y+3).toFixed(1)+'">'+nf1.format(v)+(o.suffix||"")+'</text>'}
+    if(o.target!=null)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(o.target).toFixed(1)+'" y2="'+Y(o.target).toFixed(1)+'"/>';
+    if(o.zero&&lo<0)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'"/>';
+    var ref=series[0].d,lab='<text class="ax" x="'+pl+'" y="'+(H-6)+'">'+pdate(ref[0][0])+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-6)+'">'+pdate(ref[ref.length-1][0])+'</text>';
+    var lines=series.map(function(s){var off=n-s.d.length;
+      var pts=s.d.map(function(p,i){return X(i+off).toFixed(1)+","+Y(p[1]).toFixed(1)}).join(" ");
+      var lp=s.d[s.d.length-1];
+      return '<polyline points="'+pts+'" fill="none" stroke="'+s.c+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>'+
+        '<circle cx="'+X(n-1).toFixed(1)+'" cy="'+Y(lp[1]).toFixed(1)+'" r="3.5" fill="'+s.c+'" stroke="var(--card)" stroke-width="2"/>'}).join("");
+    var leg=series.length>1?'<div class="lleg">'+series.map(function(s){var lp=s.d[s.d.length-1];return '<span><i style="background:'+s.c+'"></i>'+esc(s.n)+' <b>'+nf1.format(lp[1])+(o.suffix||"")+'</b></span>'}).join("")+'</div>':"";
+    return leg+'<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Grafiek">'+g+lines+lab+'</svg>';
+  }
+  $("vlist").addEventListener("click",cardClick);
 
   // ---------- Watchlist (alleen op dit apparaat) ----------
   var watch=[];
@@ -1180,7 +1336,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
       extras=data.extras||[];renderExtras();liveBitcoin();
-      assets=data.assets||[];eurusd=data.eurusd||null;
+      assets=data.assets||[];eurusd=data.eurusd||null;macro=data.macro||{};
       if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
       if(!sectorsDone){
         sectorsDone=true;
@@ -1205,7 +1361,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-12";
+  var BUILD="2026-11-04-13";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

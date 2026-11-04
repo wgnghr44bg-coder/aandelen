@@ -39,6 +39,7 @@ def test_macro_parsing(monkeypatch):
     monkeypatch.setattr(macro, "_get", fake_get)
     m = macro.haal_macro({"euribor3m": {"value": 2.0}})
     assert m["ecb_deposit"]["value"] == 2.0 and m["ecb_deposit"]["prev"] == 2.25
+    assert m["ecb_deposit"]["since"] == "2025-06-11"
     hyp = {h["code"]: h for h in m["mortgage_nl"]}
     assert set(hyp) == {"F", "P"}                      # 'A' (totaal) niet als vaste periode
     assert hyp["P"]["value"] == 3.65 and hyp["P"]["prev"] == 3.70

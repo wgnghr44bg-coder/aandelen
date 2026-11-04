@@ -125,9 +125,10 @@ def haal_macro(vorige=None):
         if st and st["obs"]:
             obs = st["obs"]
             cur = obs[-1]
-            prev = next((o for o in reversed(obs) if o[1] != cur[1]), None)
-            since = next((o[0] for o in reversed(obs) if o[1] != cur[1]), None)
-            zet(naam, {"value": cur[1], "date": cur[0], "prev": prev[1] if prev else None, "changed_after": since})
+            idx = next((i for i in range(len(obs) - 1, -1, -1) if obs[i][1] != cur[1]), None)
+            prev = obs[idx] if idx is not None else None
+            since = obs[idx + 1][0] if idx is not None else None  # eerste dag van de huidige rente
+            zet(naam, {"value": cur[1], "date": cur[0], "prev": prev[1] if prev else None, "since": since})
         else:
             zet(naam, None)
 

@@ -30,14 +30,15 @@ jobs:
       - name: Haal koersen op
         run: python update.py
 
-      - name: Commit data.json als die veranderd is
+      - name: Commit data als die veranderd is
         run: |
-          if git diff --quiet -- docs/data.json; then
+          git add docs/data.json
+          if [ -f docs/history.json ]; then git add docs/history.json; fi
+          if git diff --cached --quiet; then
             echo "Geen wijzigingen."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data.json
           git commit -m "Koersen bijgewerkt $(date -u +%Y-%m-%d)"
           git push

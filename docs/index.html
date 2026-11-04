@@ -38,6 +38,21 @@ h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
 .mode button{border:0;background:none;color:var(--muted);border-radius:8px;padding:7px 0;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}
 .mode button[aria-pressed=true]{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:normal;color:var(--text);margin-top:2px}
+.chart{margin:0 0 12px}
+.chart-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-height:38px}
+.chart-read{font-size:.8rem;color:var(--muted);line-height:1.25}
+.chart-read b{display:block;color:var(--text);font-size:.95rem;font-variant-numeric:tabular-nums}
+.ranges{display:flex;gap:2px;background:var(--chip);border-radius:8px;padding:2px;flex:0 0 auto}
+.ranges button{border:0;background:none;color:var(--muted);font:inherit;font-size:.78rem;font-weight:600;padding:5px 9px;border-radius:6px;cursor:pointer}
+.ranges button[aria-pressed=true]{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.plot{position:relative;touch-action:pan-y;margin-top:6px}
+.plot svg{display:block;width:100%;height:170px;overflow:visible}
+.plot .grid-l{stroke:var(--line);stroke-width:1}
+.plot .ax{fill:var(--muted);font-size:10px;font-family:inherit}
+.plot .hi{fill:var(--card);stroke-width:2}
+.plot .hl{fill:var(--muted);font-size:10px;font-family:inherit}
+.plot .cross{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.chart-msg{color:var(--muted);font-size:.8rem;padding:20px 0;text-align:center}
 .upd{color:var(--muted);font-size:.8rem;margin:2px 0 0}
 .upd b{color:var(--text);font-weight:600}
 .count{color:var(--muted);font-size:.8rem;margin:10px 0 6px}
@@ -183,6 +198,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     Array.prototype.forEach.call(document.querySelectorAll(".card.open"),function(c){if(c!==li){c.classList.remove("open");c.querySelector(".row").setAttribute("aria-expanded","false")}});
     li.classList.toggle("open",openTicker===t);
     b.setAttribute("aria-expanded",openTicker===t);
+    if(openTicker===t)drawChart(li.querySelector(".chart"));
   });
 
   function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
@@ -223,13 +239,99 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
       ["5 jaar",fmtPct(r.y5)],["Jaartop","$"+(r.high52!=null?nf2.format(r.high52):"–")]
     ];
-    var h='<dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var h='<div class="chart" data-t="'+esc(r.ticker)+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
     var d=drop(r,period);
     if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
     if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
     h+='<a class="ext" href="https://finance.yahoo.com/quote/'+encodeURIComponent(r.ticker)+'" target="_blank" rel="noopener">Bekijk op Yahoo Finance →</a>';
     return h;
   }
+
+  // ---------- Grafiek ----------
+  var RANGES=[{k:"1M",m:1},{k:"3M",m:3},{k:"1J",m:12},{k:"5J",m:60}];
+  var range="1J";
+  try{var sr=localStorage.getItem("bereik");if(sr&&RANGES.some(function(x){return x.k===sr}))range=sr;}catch(e){}
+  var histP=null;
+  function loadHist(){
+    if(!histP)histP=fetch("history.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()});
+    return histP;
+  }
+  var MON3=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
+  function shortDate(s,withYear){var p=s.split("-");return (+p[2])+" "+MON3[+p[1]-1]+(withYear?" "+p[0]:"")}
+  function pickSeries(h,t){
+    var s=h.series[t];if(!s)return null;
+    var useW=range==="5J",dates=useW?h.weeks:h.days,vals=useW?s.w:s.d;
+    var m=0;for(var i=0;i<RANGES.length;i++)if(RANGES[i].k===range)m=RANGES[i].m;
+    var end=dates[dates.length-1].split("-"),cut=new Date(+end[0],+end[1]-1-m,+end[2]);
+    var cs=cut.getFullYear()+"-"+String(cut.getMonth()+1).padStart(2,"0")+"-"+String(cut.getDate()).padStart(2,"0");
+    var out=[];
+    for(var j=0;j<dates.length;j++){if(dates[j]>=cs&&vals[j]!=null)out.push({d:dates[j],v:vals[j]})}
+    return out.length>1?out:null;
+  }
+  function drawChart(box){
+    if(!box)return;
+    var t=box.dataset.t;
+    loadHist().then(function(h){
+      var pts=pickSeries(h,t);
+      var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
+        RANGES.map(function(x){return '<button type="button" data-r="'+x.k+'" aria-pressed="'+(x.k===range)+'">'+x.k+'</button>'}).join("")+'</div></div>';
+      if(!pts){box.innerHTML=head+'<div class="chart-msg">Geen koersgeschiedenis beschikbaar.</div>';return}
+      var W=Math.max(260,box.clientWidth||320),H=170,padL=4,padR=40,padT=14,padB=20;
+      var lo=Infinity,hi=-Infinity,hiI=0,loI=0;
+      pts.forEach(function(p,i){if(p.v<lo){lo=p.v;loI=i}if(p.v>hi){hi=p.v;hiI=i}});
+      var span=(hi-lo)||hi*0.02||1,y0=lo-span*0.08,y1=hi+span*0.12;
+      var X=function(i){return padL+i/(pts.length-1)*(W-padL-padR)};
+      var Y=function(v){return padT+(1-(v-y0)/(y1-y0))*(H-padT-padB)};
+      var first=pts[0].v,last=pts[pts.length-1].v,chg=(last/first-1)*100;
+      var col=chg<-0.05?"var(--down)":chg>0.05?"var(--up)":"var(--muted)";
+      var d=pts.map(function(p,i){return (i?"L":"M")+X(i).toFixed(1)+" "+Y(p.v).toFixed(1)}).join("");
+      var area=d+"L"+X(pts.length-1).toFixed(1)+" "+(H-padB)+"L"+X(0).toFixed(1)+" "+(H-padB)+"Z";
+      // 3 horizontale rasterlijnen met prijs rechts
+      var g="";for(var k=0;k<3;k++){var v=lo+(hi-lo)*k/2,yy=Y(v);
+        g+='<line class="grid-l" x1="'+padL+'" x2="'+(W-padR)+'" y1="'+yy.toFixed(1)+'" y2="'+yy.toFixed(1)+'"/>'+
+           '<text class="ax" x="'+(W-padR+6)+'" y="'+(yy+3).toFixed(1)+'">'+(v>=1000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v).replace(/,00$/,""))+'</text>';}
+      var lbl=[0,Math.floor((pts.length-1)/2),pts.length-1].map(function(i,n){
+        var anchor=n===0?"start":n===2?"end":"middle";
+        return '<text class="ax" text-anchor="'+anchor+'" x="'+X(i).toFixed(1)+'" y="'+(H-4)+'">'+shortDate(pts[i].d,range==="5J"||range==="1J")+'</text>'}).join("");
+      var hx=X(hiI),hy=Y(hi),ha=hx>W*0.7?"end":hx<W*0.3?"start":"middle";
+      var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Koersgrafiek '+esc(t)+' ('+range+')">'+
+        '<defs><linearGradient id="gf-'+esc(t)+'" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".18"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
+        g+'<path d="'+area+'" fill="url(#gf-'+esc(t)+')"/>'+
+        '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'+
+        '<circle class="hi" cx="'+hx.toFixed(1)+'" cy="'+hy.toFixed(1)+'" r="4" stroke="'+col+'"/>'+
+        '<text class="hl" text-anchor="'+ha+'" x="'+hx.toFixed(1)+'" y="'+(hy-8).toFixed(1)+'">top '+nf2.format(hi)+'</text>'+
+        lbl+'<line class="cross" y1="'+padT+'" y2="'+(H-padB)+'" style="display:none"/>'+
+        '<circle class="dot" r="4" fill="'+col+'" stroke="var(--card)" stroke-width="2" style="display:none"/></svg>';
+      box.innerHTML=head+'<div class="plot">'+svg+'</div>';
+      var read=box.querySelector(".chart-read"),svgEl=box.querySelector("svg"),cross=box.querySelector(".cross"),dot=box.querySelector(".dot");
+      function showDefault(){
+        read.innerHTML='<b class="'+(chg<-0.05?"down":chg>0.05?"up":"flat")+'">'+fmtPct(chg)+'</b>'+range.replace("M"," maand").replace("J"," jaar")+' · van '+nf2.format(first)+' naar '+nf2.format(last);
+        cross.style.display="none";dot.style.display="none";
+      }
+      function show(clientX){
+        var rc=svgEl.getBoundingClientRect(),x=(clientX-rc.left)*W/rc.width;
+        var i=Math.round((x-padL)/(W-padL-padR)*(pts.length-1));i=Math.max(0,Math.min(pts.length-1,i));
+        var p=pts[i],cx=X(i),cy=Y(p.v),c=(p.v/first-1)*100;
+        cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.style.display="";
+        dot.setAttribute("cx",cx);dot.setAttribute("cy",cy);dot.style.display="";
+        var fh=(1-p.v/hi)*100;
+        read.innerHTML='<b>$'+nf2.format(p.v)+'</b>'+shortDate(p.d,true)+' · '+fmtPct(c)+' t.o.v. begin'+(fh>0.5?' · '+fmtPct(fh,"fromHigh")+' onder top':'');
+      }
+      showDefault();
+      var plot=box.querySelector(".plot");
+      plot.addEventListener("pointermove",function(e){show(e.clientX)});
+      plot.addEventListener("pointerdown",function(e){show(e.clientX)});
+      plot.addEventListener("pointerleave",showDefault);
+      plot.addEventListener("touchmove",function(e){if(e.touches[0])show(e.touches[0].clientX)},{passive:true});
+      plot.addEventListener("touchend",function(){setTimeout(showDefault,1200)});
+    }).catch(function(){box.innerHTML='<div class="chart-msg">Grafiek kon niet worden geladen.</div>'});
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest(".ranges button");if(!b)return;
+    e.stopPropagation();
+    range=b.dataset.r;try{localStorage.setItem("bereik",range)}catch(err){}
+    drawChart(b.closest(".chart"));
+  },true);
 
   function render(){
     stats();
@@ -258,6 +360,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
           '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
         '</button><div class="detail">'+detail(r)+'</div></li>';
     }).join("");
+    if(openTicker){var oc=document.querySelector('.card.open .chart');if(oc)drawChart(oc);}
   }
 
   renderPeriods();renderMode();

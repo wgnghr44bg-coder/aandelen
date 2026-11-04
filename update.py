@@ -14,6 +14,7 @@ import yfinance as yf
 ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
 OUT = ROOT / "docs" / "data.json"
+HIST = ROOT / "docs" / "history.json"
 TOP_N = 100
 
 
@@ -121,6 +122,40 @@ def download(tickers, pogingen=3):
     raise SystemExit("Kon geen koersen downloaden.")
 
 
+def reeks(close, index):
+    """Koersen op de gegeven datums (laatst bekende koers), None als er nog geen koers was."""
+    s = close.reindex(index, method="ffill")
+    s[index < close.index[0]] = float("nan")
+    return [schoon(v) for v in s.tolist()]
+
+
+def schrijf_historie(data, tickers, asof):
+    """Schrijft docs/history.json: dagkoersen van 1 jaar en weekkoersen van 5 jaar voor de grafieken."""
+    alles = data.index
+    alles = alles[alles <= asof]
+    dagen = alles[alles > asof - pd.DateOffset(years=1, days=7)]
+    weken = pd.Series(alles, index=alles).resample("W-FRI").last().dropna()
+    weken = pd.DatetimeIndex(weken.values)
+    if len(weken) and weken[-1] != alles[-1]:
+        weken = weken.append(pd.DatetimeIndex([alles[-1]]))
+    uit = {
+        "days": [d.strftime("%Y-%m-%d") for d in dagen],
+        "weeks": [d.strftime("%Y-%m-%d") for d in weken],
+        "series": {},
+    }
+    for t in tickers:
+        try:
+            df = data[t] if isinstance(data.columns, pd.MultiIndex) else data
+            close = df["Close"].dropna()
+            if close.empty:
+                continue
+            uit["series"][t] = {"d": reeks(close, dagen), "w": reeks(close, weken)}
+        except Exception as e:  # noqa: BLE001
+            print(f"  historie {t}: overgeslagen ({e})")
+    HIST.write_text(json.dumps(uit, separators=(",", ":")) + "\n")
+    print(f"historie geschreven ({len(uit['series'])} aandelen, {HIST.stat().st_size // 1024} kB)")
+
+
 def main():
     tickers = lees_tickers()
     print(f"{len(tickers)} tickers")
@@ -174,6 +209,10 @@ def main():
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(uit, ensure_ascii=False, indent=1) + "\n")
+    try:
+        schrijf_historie(data, [r["ticker"] for r in rijen], pd.Timestamp(asof))
+    except Exception as e:  # noqa: BLE001
+        print(f"historie mislukt: {e}")
     print(f"{len(rijen)} rijen geschreven naar {OUT} (slotkoersen {uit['asof']})")
 
 

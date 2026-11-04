@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Top 100 gezakt</title>
+<meta name="description" content="De 100 grootste beursgenoteerde bedrijven, gesorteerd op koersdaling.">
+<style>
+:root{
+  --bg:#f6f7f9;--card:#fff;--text:#16181d;--muted:#6b7280;--line:#e5e7eb;
+  --accent:#2563eb;--down:#d9480f;--down-strong:#c92a2a;--up:#2b8a3e;--chip:#eef0f3;
+  --warn-bg:#fff4e6;--warn-text:#9a3412;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1115;--card:#181b21;--text:#e8eaed;--muted:#9aa1ac;--line:#2a2f37;
+  --accent:#6ea8fe;--down:#ff8a4c;--down-strong:#ff6b6b;--up:#51cf66;--chip:#232831;
+  --warn-bg:#3a2414;--warn-text:#ffc078;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header{padding:20px 0 8px}
+h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--muted);font-size:.85rem;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 4px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.stat b{display:block;font-size:1.1rem;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stat span{color:var(--muted);font-size:.75rem;line-height:1.2;display:block}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
+.periods{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.periods::-webkit-scrollbar{display:none}
+.periods button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:7px 13px;font:inherit;font-size:.85rem;cursor:pointer}
+.periods button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.filters{display:flex;gap:8px;margin-top:8px}
+.filters select,.filters input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font:inherit;font-size:16px}
+.count{color:var(--muted);font-size:.8rem;margin:10px 0 6px}
+ul{list-style:none;margin:0;padding:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px;padding:11px 12px;cursor:pointer;width:100%;border:0;background:none;color:inherit;font:inherit;text-align:left}
+.pos{width:24px;flex:0 0 24px;color:var(--muted);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
+.main{flex:1;min-width:0}
+.name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{color:var(--muted);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk{font-weight:600;color:var(--text);opacity:.8}
+.val{text-align:right;flex:0 0 auto;width:84px}
+.pct{font-weight:700;font-variant-numeric:tabular-nums;font-size:1.02rem}
+.down{color:var(--down)}.down2{color:var(--down-strong)}.up{color:var(--up)}.flat{color:var(--muted)}
+.track{height:4px;background:var(--chip);border-radius:2px;margin-top:5px;overflow:hidden}
+.fill{height:100%;border-radius:2px;margin-left:auto}
+.detail{display:none;border-top:1px solid var(--line);padding:12px;font-size:.88rem}
+.card.open .detail{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px}
+.grid div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:3px 0}
+.grid dt{color:var(--muted)}.grid dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+.warn{background:var(--warn-bg);color:var(--warn-text);border-radius:8px;padding:7px 10px;margin-top:8px;font-size:.82rem}
+.ext{display:inline-block;margin-top:10px;color:var(--accent);font-size:.82rem}
+.info{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 16px;margin:20px 0;font-size:.88rem}
+.info h2{font-size:1rem;margin:12px 0 4px}
+.info p{margin:0 0 10px;color:var(--muted)}
+footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Top 100 aandelen: wat is er gezakt?</h1>
+    <p class="sub" id="asof">Gegevens laden…</p>
+    <div class="stats">
+      <div class="stat"><b id="sDown">–</b><span id="sDownL">gedaald</span></div>
+      <div class="stat"><b id="s20">–</b><span>20%+ gezakt</span></div>
+      <div class="stat"><b id="sTop">–</b><span>grootste daler: <i id="sTopL" style="font-style:normal">–</i></span></div>
+    </div>
+  </header>
+</div>
+<div class="bar">
+  <div class="wrap">
+    <div class="periods" id="periods" role="group" aria-label="Periode"></div>
+    <div class="filters">
+      <select id="sector" aria-label="Sector"><option value="">Alle sectoren</option></select>
+      <input id="q" type="search" placeholder="Naam of ticker" aria-label="Zoeken" autocomplete="off">
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <p class="count" id="count"></p>
+  <ul id="list"></ul>
+  <section class="info">
+    <h2>Een daling is geen koopsignaal</h2>
+    <p>Een aandeel dat flink gezakt is, kan goedkoop zijn, maar vaak is er een reden voor de daling: tegenvallende winst, problemen of minder groei. Kijk altijd eerst waarom de koers is gezakt.</p>
+    <h2>Wat is K/W?</h2>
+    <p>De koers-winstverhouding: de koers gedeeld door de winst per aandeel van de afgelopen 12 maanden. Een K/W van 20 betekent dat je 20 keer de jaarwinst betaalt. Een hoge K/W betekent dat beleggers veel groei verwachten; zonder winst is er geen K/W.</p>
+    <h2>Wat is "Onder jaartop"?</h2>
+    <p>Hoeveel procent de koers nu lager staat dan de hoogste koers van de afgelopen 52 weken (op basis van de hoogste dagkoers).</p>
+    <h2>Geen financieel advies</h2>
+    <p>Deze site is alleen ter informatie en is geen financieel advies. Gegevens kunnen vertraagd of onjuist zijn. Bron: Yahoo Finance. De lijst wordt elke werkdag na het sluiten van de Amerikaanse beurs bijgewerkt.</p>
+  </section>
+  <footer id="foot"></footer>
+</div>
+<script>
+(function(){
+  var PERIODS=[
+    {k:"fromHigh",l:"Onder jaartop"},
+    {k:"m1",l:"1 maand"},
+    {k:"m3",l:"3 maanden"},
+    {k:"ytd",l:"Sinds 1 jan"},
+    {k:"y1",l:"1 jaar"}
+  ];
+  var SECTORS={
+    "Technology":"Technologie","Healthcare":"Gezondheidszorg","Financial Services":"Financiële diensten",
+    "Consumer Cyclical":"Cyclische consumptie","Consumer Defensive":"Basisconsumptie","Communication Services":"Communicatie",
+    "Energy":"Energie","Industrials":"Industrie","Basic Materials":"Grondstoffen","Utilities":"Nutsbedrijven",
+    "Real Estate":"Vastgoed","Overig":"Overig"
+  };
+  var MONTHS=["januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"];
+  var nf1=new Intl.NumberFormat("nl-NL",{minimumFractionDigits:1,maximumFractionDigits:1});
+  var nf2=new Intl.NumberFormat("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2});
+  var $=function(id){return document.getElementById(id)};
+
+  var period="fromHigh";
+  try{var saved=localStorage.getItem("periode");if(saved&&PERIODS.some(function(p){return p.k===saved}))period=saved;}catch(e){}
+
+  var rows=[],openTicker=null;
+
+  function sec(s){return SECTORS[s]||s||"Overig"}
+  // "Daling" als positief getal: voor fromHigh is de waarde al een daling.
+  function drop(r,k){var v=r[k];if(v==null)return null;return k==="fromHigh"?v:-v}
+  function fmtPct(v,k){
+    if(v==null)return "–";
+    if(k==="fromHigh")return v===0?"0,0%":"−"+nf1.format(v)+"%";
+    return (v>0?"+":v<0?"−":"")+nf1.format(Math.abs(v))+"%";
+  }
+  function cls(d){if(d==null||Math.abs(d)<0.05)return "flat";if(d<0)return "up";return d>=20?"down2":"down"}
+  function fmtCap(n){
+    if(!n)return "–";
+    if(n>=1e12)return "$"+nf2.format(n/1e12)+" bln";
+    return "$"+nf1.format(n/1e9)+" mld";
+  }
+  function fmtDate(s){var p=s.split("-");return (+p[2])+" "+MONTHS[+p[1]-1]+" "+p[0]}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  function renderPeriods(){
+    $("periods").innerHTML=PERIODS.map(function(p){
+      return '<button type="button" data-k="'+p.k+'" aria-pressed="'+(p.k===period)+'">'+p.l+'</button>';
+    }).join("");
+  }
+  $("periods").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    period=b.dataset.k;
+    try{localStorage.setItem("periode",period)}catch(err){}
+    renderPeriods();render();
+  });
+  $("sector").addEventListener("change",render);
+  $("q").addEventListener("input",render);
+  $("list").addEventListener("click",function(e){
+    var b=e.target.closest(".row");if(!b)return;
+    var li=b.parentNode,t=li.dataset.t;
+    openTicker=openTicker===t?null:t;
+    Array.prototype.forEach.call(document.querySelectorAll(".card.open"),function(c){if(c!==li){c.classList.remove("open");c.querySelector(".row").setAttribute("aria-expanded","false")}});
+    li.classList.toggle("open",openTicker===t);
+    b.setAttribute("aria-expanded",openTicker===t);
+  });
+
+  function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
+
+  function stats(){
+    var vals=rows.map(function(r){return {r:r,d:drop(r,period)}}).filter(function(x){return x.d!=null});
+    var down=vals.filter(function(x){return x.d>0.05}).length;
+    var big=vals.filter(function(x){return x.d>=20}).length;
+    var top=vals.slice().sort(function(a,b){return b.d-a.d})[0];
+    $("sDown").textContent=down;
+    $("sDownL").textContent="van "+vals.length+(period==="fromHigh"?" onder jaartop":" gedaald ("+periodLabel(period).toLowerCase()+")");
+    $("s20").textContent=big;
+    $("sTop").textContent=top?fmtPct(top.r[period],period):"–";
+    $("sTopL").textContent=top?top.r.name:"grootste daler";
+  }
+
+  function detail(r){
+    var items=[
+      ["Koers","$"+nf2.format(r.price)],["Beurswaarde",fmtCap(r.marketCap)],
+      ["K/W",r.pe!=null?nf1.format(r.pe):"–"],["Rang in grootte","#"+r.rank],
+      ["Vandaag",fmtPct(r.d1)],["Onder jaartop",fmtPct(r.fromHigh,"fromHigh")],
+      ["1 maand",fmtPct(r.m1)],["3 maanden",fmtPct(r.m3)],
+      ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
+      ["5 jaar",fmtPct(r.y5)],["Jaartop","$"+(r.high52!=null?nf2.format(r.high52):"–")]
+    ];
+    var h='<dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var d=drop(r,period);
+    if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
+    if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
+    h+='<a class="ext" href="https://finance.yahoo.com/quote/'+encodeURIComponent(r.ticker)+'" target="_blank" rel="noopener">Bekijk op Yahoo Finance →</a>';
+    return h;
+  }
+
+  function render(){
+    stats();
+    var s=$("sector").value,q=$("q").value.trim().toLowerCase();
+    var list=rows.filter(function(r){
+      if(s&&sec(r.sector)!==s)return false;
+      if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
+      return true;
+    }).sort(function(a,b){
+      var da=drop(a,period),db=drop(b,period);
+      if(da==null)return 1;if(db==null)return -1;return db-da;
+    });
+    var max=Math.max.apply(null,rows.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
+    $("count").textContent=list.length+" aandelen · gesorteerd op "+periodLabel(period).toLowerCase()+", grootste daler bovenaan";
+    if(!list.length){$("list").innerHTML='<li class="empty">Geen aandelen gevonden.</li>';return}
+    $("list").innerHTML=list.map(function(r,i){
+      var d=drop(r,period),c=cls(d),w=d==null?0:Math.min(100,Math.abs(d)/max*100);
+      var col=c==="up"?"var(--up)":c==="down2"?"var(--down-strong)":c==="down"?"var(--down)":"var(--muted)";
+      var open=openTicker===r.ticker;
+      return '<li class="card'+(open?' open':'')+'" data-t="'+esc(r.ticker)+'">'+
+        '<button type="button" class="row" aria-expanded="'+open+'">'+
+          '<span class="pos">'+(i+1)+'</span>'+
+          '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
+          '<span class="meta" style="display:block"><span class="tk">'+esc(r.ticker)+'</span> · '+esc(sec(r.sector))+' · #'+r.rank+' in grootte</span></span>'+
+          '<span class="val"><span class="pct '+c+'" style="display:block">'+fmtPct(r[period],period)+'</span>'+
+          '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
+        '</button><div class="detail">'+detail(r)+'</div></li>';
+    }).join("");
+  }
+
+  renderPeriods();
+  fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
+    rows=data.rows||[];
+    $("asof").textContent="Slotkoersen van "+fmtDate(data.asof)+" · de 100 grootste bedrijven op beurswaarde";
+    var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});
+    Object.keys(secs).sort(function(a,b){return a.localeCompare(b,"nl")}).forEach(function(n){
+      var o=document.createElement("option");o.value=n;o.textContent=n;$("sector").appendChild(o);
+    });
+    var u=new Date(data.updated);
+    $("foot").textContent="Bijgewerkt op "+u.toLocaleString("nl-NL",{dateStyle:"long",timeStyle:"short"})+" · Bron: Yahoo Finance";
+    render();
+  }).catch(function(){
+    $("asof").textContent="De gegevens konden niet worden geladen. Probeer het later opnieuw.";
+  });
+})();
+</script>
+</body>
+</html>

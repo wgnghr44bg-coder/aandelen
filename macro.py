@@ -143,7 +143,8 @@ def haal_macro(vorige=None):
         code = parts[parts.index("A2C") + 1] if "A2C" in parts and parts.index("A2C") + 1 < len(parts) else ""
         last = _last(s)
         if last and code in FIXATIE:
-            hyp.append({"code": code, "label": FIXATIE[code], **last})
+            hyp.append({"code": code, "label": FIXATIE[code], "title": s.get("title") or "", **last})
+            print(f"  hypotheek {code}: {s.get('title')!r} -> {last['value']} ({last['date']})")
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
     zet("mortgage_nl", hyp)

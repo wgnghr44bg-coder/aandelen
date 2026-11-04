@@ -378,6 +378,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .xlink span{grid-column:1;color:var(--muted);font-size:.78rem;line-height:1.3}
 .xlink i{grid-row:1/3;grid-column:2;font-style:normal;font-size:1.2rem;color:var(--accent)}
 .mlink{display:block;margin:6px 0 0 auto;font-size:.72rem!important;color:var(--accent)!important}
+.hsub{color:var(--muted);font-size:.66rem;margin:-6px 0 4px}
 </style>
 </head>
 <body>
@@ -412,7 +413,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="bigr" id="ovchips"></div>
     <div class="mtiles" id="mtiles" hidden></div>
     <div class="mpanels" id="mpanels" hidden>
-      <div class="panel mp"><div class="ph"><h2>🏠 Hypotheek</h2><button type="button" class="more" data-go="rentes" aria-label="Naar rentes">›</button></div><table class="rt2" id="hypmini"></table></div>
+      <div class="panel mp"><div class="ph"><h2>🏠 Hypotheek</h2><button type="button" class="more" data-go="rentes" aria-label="Naar rentes">›</button></div><p class="hsub" id="hypsub">gem. afgesloten</p><table class="rt2" id="hypmini"></table></div>
       <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table><button type="button" class="more mlink" data-go="vastgoed">Rentes per aanbieder ›</button></div>
     </div>
     <div class="panel">
@@ -452,7 +453,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="panel"><div class="ph"><span class="emo">🇪🇺</span><h2>ECB-rente</h2></div><table class="rt2 big" id="r_ecb"></table></div>
     <div class="panel"><div class="ph"><span class="emo">📈</span><h2>Marktrentes</h2></div><table class="rt2 big" id="r_mkt"></table></div>
     <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Hypotheekrente NL</h2></div><table class="rt2 big" id="r_hyp"></table>
-      <p class="hint">Gemiddelde rente op <b>nieuwe</b> hypotheken in Nederland, per rentevaste periode (alle banken, met en zonder NHG). Bron: DNB/ECB, maandelijks. De rente van jouw bank kan afwijken.</p></div>
+      <p class="hint">Dit is de <b>gemiddelde rente op afgesloten</b> nieuwe hypotheken in Nederland in die maand (alle banken, met en zonder NHG, alle LTV's, inclusief rente-aanpassingen). Bron: DNB/ECB, maandelijks, ±6 weken vertraging. Dit is <b>niet</b> de rente die banken nu aanbieden.</p>
+      <div class="xlinks"><a class="xlink" href="https://www.hypotheekrente.nl/" target="_blank" rel="noopener"><b>Hypotheekrente.nl</b><span>Actuele aangeboden rentes per bank, met en zonder NHG, per rentevaste periode</span><i>↗</i></a></div></div>
     <div class="panel"><div class="ph"><span class="emo">🏭</span><h2>Zakelijke leningen NL</h2></div><table class="rt2 big" id="r_nfc"></table>
       <p class="hint">Gemiddelde rente op nieuwe leningen aan bedrijven in Nederland. Bron: DNB/ECB.</p></div>
   </section>
@@ -1155,6 +1157,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("mtiles").innerHTML=th;$("mtiles").hidden=!tiles.length;
     // mini-panelen
     var hyp=m.mortgage_nl||[];
+    if(hyp.length)$("hypsub").textContent="gem. afgesloten · "+pdate(hyp[0].date);
     $("hypmini").innerHTML=hyp.map(function(x){return '<tr><td>'+SHORTFIX[x.code]+'</td><td>'+pct2(x.value)+'</td><td>'+ppTag(x.value,x.prev,true,true)+'</td></tr>'}).join("");
     var vg=[];
     if(last(m.house_prices_nl))vg.push(["Woningprijzen NL",(last(m.house_prices_nl)[1]>0?"+":"")+pct2(last(m.house_prices_nl)[1])]);
@@ -1374,7 +1377,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-14";
+  var BUILD="2026-11-04-15";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

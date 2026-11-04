@@ -78,7 +78,15 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .ht.ai{border-width:2px}
 .heat-key{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.7rem;margin-top:6px}
 .heat-key i{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in oklab,var(--down-strong) 60%,var(--card)),var(--card),color-mix(in oklab,var(--up) 60%,var(--card)));border:1px solid var(--line)}
+.rt{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.03em;padding:1px 6px;border-radius:4px;margin-right:4px;vertical-align:1px;white-space:nowrap}
+.rt-BUY{background:var(--up);color:#fff}
+.rt-SELL{background:var(--down-strong);color:#fff}
+.rt-HOLD{background:var(--chip);color:var(--text);border:1px solid var(--line)}
+.rt-NO{background:none;color:var(--muted);border:1px dashed var(--line)}
+.advies{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:.85rem;color:var(--muted)}
+.advies .rt{font-size:.9rem;padding:3px 10px}
 .aitag{display:inline-block;font-size:.68rem;font-weight:700;padding:0 5px;border-radius:4px;background:var(--chip);color:var(--text);margin-left:2px}
+.grp[hidden],#extras[hidden],#heatwrap[hidden]{display:none}
 .grp{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 12px;margin:12px 0 4px}
 .grp .gt{flex:1;min-width:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .grp .gt span{display:block;font-weight:500;font-size:.75rem;color:var(--muted)}
@@ -293,6 +301,11 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     if(statFilter)scrollToGrp();
   });
 
+  function ratingTag(r){
+    if(!r.rating)return "";
+    var c=r.rating==="NO RATING"?"NO":r.rating;
+    return '<span class="rt rt-'+c+'">'+r.rating+'</span>';
+  }
   function detail(r){
     var items=[
       ["Koers","$"+nf2.format(r.price)],["Beurswaarde",fmtCap(r.marketCap)],
@@ -302,7 +315,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
       ["5 jaar",fmtPct(r.y5)],["Jaartop","$"+(r.high52!=null?nf2.format(r.high52):"–")]
     ];
-    var h='<div class="chart" data-t="'+esc(r.ticker)+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var h=(r.rating?'<div class="advies">Advies '+ratingTag(r)+'</div>':'')+'<div class="chart" data-t="'+esc(r.ticker)+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
     var d=drop(r,period);
     if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
     if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
@@ -504,7 +517,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
         '<button type="button" class="row" aria-expanded="'+open+'">'+
           '<span class="pos">'+(i+1)+'</span>'+
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
-          '<span class="meta" style="display:block"><span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
+          '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+fmtPct(r[period],period)+'</span>'+
           '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
         '</button><div class="detail">'+detail(r)+'</div></li>';

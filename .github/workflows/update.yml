@@ -17,7 +17,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +27,18 @@ jobs:
           cache: pip
 
       - name: Installeer pakketten
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt pytest
+
+      - name: Test de waarderingsengine
+        run: python -m pytest -q
+
+      # Fundamentele data (jaarcijfers, info) bewaren tussen runs, niet in de repo
+      - name: Cache fundamentele data ophalen
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache
+          key: fundamentals-${{ github.run_id }}
+          restore-keys: fundamentals-
 
       - name: Haal koersen op
         env:
@@ -35,10 +46,18 @@ jobs:
           VOLLEDIG: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '45 22 * * 1-5' }}
         run: python update.py
 
+      - name: Cache fundamentele data bewaren
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .cache
+          key: fundamentals-${{ github.run_id }}-${{ github.run_attempt }}
+
       - name: Commit data als die veranderd is
         run: |
           git add docs/data.json
           if [ -f docs/history.json ]; then git add docs/history.json; fi
+          if [ -f analyse/analysis.json ]; then git add analyse/analysis.json; fi
           if git diff --cached --quiet; then
             echo "Geen wijzigingen."
             exit 0

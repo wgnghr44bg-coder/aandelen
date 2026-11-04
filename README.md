@@ -27,3 +27,20 @@ cd docs && python -m http.server 8000
 ## Tickers aanpassen
 
 Zet één ticker per regel in `tickers.txt` (Yahoo-notatie, bijvoorbeeld `BRK-B`). Regels met `#` worden genegeerd.
+
+## Waarderingsengine (BUY / HOLD / SELL / NO RATING)
+
+Op de site staat per aandeel alleen het advies. De volledige analyse draait op de achtergrond
+(`engine/`) en wordt dagelijks intern opgeslagen in `analyse/analysis.json` (alle ratio's, scores,
+DCF-aannames en de datum van de gebruikte cijfers).
+
+- **Fundamental Score** = Financial Health 20% + Profitability 20% + Growth 20% + Valuation 25% +
+  Competitive Advantage 15%, met eigen normen per sector (`engine/sectors.py`).
+- **Intrinsieke waarde**: 5-jaars DCF op vrije kasstroom met terminal value (conservatief / neutraal /
+  optimistisch). Banken/verzekeraars: residual income; nutsbedrijven en vastgoed: dividend discount.
+- **Upside** = intrinsiek / koers − 1; **Margin of Safety** = (intrinsiek − koers) / intrinsiek.
+- **BUY** alleen bij sterke fundamenten, aantrekkelijke waardering en ≥ 20% veiligheidsmarge;
+  **SELL** bij structurele verslechtering of extreme overwaardering (niet bij alleen "duur");
+  **NO RATING** bij ontbrekende, verouderde of onbetrouwbare data.
+- Jaarcijfers worden max. 1× per week per aandeel opgehaald (cache), het advies elk uur herberekend.
+- Tests: `python -m pytest -q`

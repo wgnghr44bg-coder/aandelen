@@ -13,6 +13,8 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
+import fundamentals as fund
+
 ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
 AI_FILE = ROOT / "ai.txt"
@@ -105,18 +107,6 @@ def bereken(df):
         "fromHigh": onder_top,
         "_date": laatste_datum,
     }
-
-
-def haal_info(ticker, pogingen=3):
-    for poging in range(pogingen):
-        try:
-            info = yf.Ticker(ticker).info or {}
-            if info.get("marketCap"):
-                return info
-        except Exception as e:  # noqa: BLE001
-            print(f"  info {ticker} poging {poging + 1} mislukt: {e}")
-        time.sleep(1.5 * (poging + 1))
-    return None
 
 
 def download(tickers, pogingen=3):
@@ -268,7 +258,11 @@ def main():
     print(f"{len(tickers)} tickers")
     data = download(tickers)
 
-    rijen = []
+    # Fundamentele data (info dagelijks, jaarcijfers wekelijks) uit de cache, aangevuld waar nodig
+    cache = fund.load_cache()
+    fund.refresh(cache, tickers)
+
+    rijen, prijzen, alle_closes = [], {}, {}
     for t in tickers:
         try:
             if isinstance(data.columns, pd.MultiIndex):
@@ -282,17 +276,21 @@ def main():
             if not stats:
                 print(f"  {t}: te weinig data")
                 continue
-            info = haal_info(t)
-            time.sleep(0.3)
-            if not info:
+            info = (cache.get(t) or {}).get("info")
+            if not info or not info.get("marketCap"):
                 print(f"  {t}: geen info")
                 continue
-            pe = schoon(info.get("trailingPE"), 1)
+            prijzen[t] = stats["price"]
+            alle_closes[t] = df["Close"].dropna()
+            # Beurswaarde en K/W meeschalen met de koers sinds het ophalen van de info
+            p_info = info.get("currentPrice") or info.get("regularMarketPrice")
+            schaal = stats["price"] / p_info if (p_info and stats["price"]) else 1.0
+            pe = schoon((info.get("trailingPE") or 0) * schaal, 1)
             rijen.append({
                 "ticker": t,
                 "name": info.get("shortName") or info.get("longName") or t,
                 "sector": info.get("sector") or ("Financial Services" if t == "BRK-B" else "Overig"),
-                "marketCap": int(info["marketCap"]),
+                "marketCap": int(info["marketCap"] * schaal),
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,
                 **stats,
@@ -317,9 +315,22 @@ def main():
     }
     extras, extra_closes = haal_extras()
     uit["extras"] = extras
+
+    # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
+    analyse = None
+    try:
+        rf, fx = fund.market_data(cache)
+        analyse = fund.run_engine(cache, prijzen, alle_closes, pd.Timestamp(asof).date(), rf, fx)
+    except Exception as e:  # noqa: BLE001
+        print(f"waarderingsengine mislukt: {e}")
+    for r in rijen:
+        r["rating"] = (analyse or {}).get(r["ticker"], {}).get("rating", "NO RATING")
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(uit, ensure_ascii=False, indent=1) + "\n")
-    if historie_nodig(uit["asof"]):
+    nieuwe_dag = historie_nodig(uit["asof"])
+    if analyse and (nieuwe_dag or not fund.ANALYSIS.exists()):
+        fund.write_analysis(analyse, uit["asof"])
+    if nieuwe_dag:
       try:
         closes = {r["ticker"]: slotkoersen(data, r["ticker"]) for r in rijen}
         closes.update(extra_closes)

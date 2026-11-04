@@ -29,6 +29,17 @@ EXTRAS = [
 ]
 BITVAVO = "https://api.bitvavo.com/v2"
 
+# Grote assets naast aandelen (zoals "assets by market cap"). Edelmetalen: prijs (USD/troy ounce) ×
+# geschatte bovengrondse voorraad. Bronnen/aannames: goud ±216.265 ton (World Gold Council, eind 2024),
+# zilver ±1.751.000 ton (gangbare schatting). 1 ton = 32.150,75 troy ounce.
+OZ_PER_TONNE = 32150.7466
+ASSETS = [
+    {"ticker": "GC=F", "name": "Goud", "kind": "metaal", "icon": "🥇", "ounces": 216265 * OZ_PER_TONNE},
+    {"ticker": "SI=F", "name": "Zilver", "kind": "metaal", "icon": "🥈", "ounces": 1751000 * OZ_PER_TONNE},
+    {"ticker": "BTC-USD", "name": "Bitcoin", "kind": "crypto", "icon": "₿"},
+    {"ticker": "ETH-USD", "name": "Ethereum", "kind": "crypto", "icon": "Ξ"},
+]
+
 
 def lees_tickers(bestand=TICKERS_FILE):
     tickers = []
@@ -240,6 +251,38 @@ def haal_extras():
     return rijen, closes
 
 
+def haal_assets():
+    """Goud, zilver, bitcoin en ethereum met marktwaarde in USD en koersveranderingen."""
+    uit = []
+    try:
+        data = yf.download([a["ticker"] for a in ASSETS], period="5y", interval="1d",
+                           auto_adjust=True, group_by="ticker", progress=False)
+    except Exception as e:  # noqa: BLE001
+        print(f"assets download mislukt: {e}")
+        return uit
+    for a in ASSETS:
+        try:
+            stats = bereken(data[a["ticker"]])
+            if not stats:
+                continue
+            stats.pop("_date")
+            if a.get("ounces"):
+                mcap = stats["price"] * a["ounces"]
+            else:
+                info = yf.Ticker(a["ticker"]).info or {}
+                p_info = info.get("regularMarketPrice") or info.get("previousClose")
+                mc = info.get("marketCap")
+                mcap = mc * stats["price"] / p_info if (mc and p_info) else mc
+            if not mcap:
+                continue
+            uit.append({"ticker": a["ticker"], "name": a["name"], "kind": a["kind"], "icon": a["icon"],
+                        "marketCap": int(mcap), **stats})
+            print(f"  asset {a['name']}: ${mcap / 1e12:.2f} bln")
+        except Exception as e:  # noqa: BLE001
+            print(f"  asset {a['ticker']}: overgeslagen ({e})")
+    return uit
+
+
 def historie_nodig(asof):
     """De grafiekdata (groot bestand) alleen vernieuwen bij een nieuwe beursdag,
     bij de avond-update of handmatig (VOLLEDIG=true). Zo blijft de repo klein bij de uurlijkse updates."""
@@ -329,6 +372,7 @@ def main():
     }
     extras, extra_closes = haal_extras()
     uit["extras"] = extras
+    uit["assets"] = haal_assets()
 
     # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
     analyse = None

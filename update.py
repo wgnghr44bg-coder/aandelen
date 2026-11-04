@@ -39,6 +39,10 @@ ASSETS = [
     {"ticker": "BTC-USD", "name": "Bitcoin", "kind": "crypto", "icon": "₿"},
     {"ticker": "ETH-USD", "name": "Ethereum", "kind": "crypto", "icon": "Ξ"},
 ]
+# Grootste bedrijven uit opkomende markten: alleen in "Grootste assets ter wereld" (niet in de top 500)
+WERELD_EXTRA = ["TSM", "2222.SR", "0700.HK", "BABA", "005930.KS", "000660.KS", "RELIANCE.NS", "HDB",
+                "1398.HK", "600519.SS", "PDD", "2317.TW", "300750.SZ", "0941.HK", "MELI", "1810.HK",
+                "BHARTIARTL.NS", "TCS.NS", "3690.HK", "IBN", "0939.HK", "2454.TW", "1288.HK", "601857.SS"]
 
 
 def lees_tickers(bestand=TICKERS_FILE):
@@ -251,6 +255,33 @@ def haal_extras():
     return rijen, closes
 
 
+def haal_wereld_bedrijven(cache, fx):
+    """Grote bedrijven uit opkomende markten voor het wereldoverzicht (marktwaarde in USD)."""
+    uit = []
+    try:
+        data = yf.download(WERELD_EXTRA, period="5y", interval="1d", auto_adjust=True,
+                           group_by="ticker", progress=False)
+    except Exception as e:  # noqa: BLE001
+        print(f"wereldbedrijven download mislukt: {e}")
+        return uit
+    for t in WERELD_EXTRA:
+        try:
+            info = (cache.get(t) or {}).get("info") or {}
+            stats = bereken(data[t]) if t in data.columns.get_level_values(0) else None
+            if not info or not stats:
+                continue
+            stats.pop("_date")
+            mcap_q, usd = fund.market_cap_quote(info, stats["price"]), fund.usd_rate(info, fx)
+            if not mcap_q or not usd:
+                continue
+            uit.append({"ticker": t, "name": info.get("shortName") or info.get("longName") or t,
+                        "kind": "bedrijf", "country": info.get("country"), "marketCap": int(mcap_q * usd), **stats})
+        except Exception as e:  # noqa: BLE001
+            print(f"  wereld {t}: overgeslagen ({e})")
+    print(f"wereldbedrijven (opkomende markten): {len(uit)}")
+    return uit
+
+
 def haal_assets():
     """Goud, zilver, bitcoin en ethereum met marktwaarde in USD en koersveranderingen."""
     uit = []
@@ -303,7 +334,7 @@ def main():
 
     # Fundamentele data (info dagelijks, jaarcijfers wekelijks) uit de cache, aangevuld waar nodig
     cache = fund.load_cache()
-    fund.refresh(cache, tickers)
+    fund.refresh(cache, tickers, info_only=WERELD_EXTRA)
 
     rijen, prijzen, alle_closes = [], {}, {}
     rf, fx = fund.market_data(cache)
@@ -372,7 +403,7 @@ def main():
     }
     extras, extra_closes = haal_extras()
     uit["extras"] = extras
-    uit["assets"] = haal_assets()
+    uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
 
     # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
     analyse = None

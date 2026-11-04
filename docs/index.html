@@ -82,6 +82,7 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .alist .ab span{display:block;height:100%;border-radius:2px;background:var(--accent)}
 .alist li.metaal .ab span{background:#d4a017}
 .alist li.crypto .ab span{background:#f7931a}
+.alist li.bedrijf .ab span{background:var(--muted)}
 .amore{display:block;width:100%;margin-top:6px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px;font:inherit;font-size:.85rem;cursor:pointer}
 .heat-h{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 6px}
 .heat-h h2{font-size:1rem;margin:0}
@@ -545,11 +546,11 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       .concat(rows.map(function(r){return {k:"co",name:r.name,t:r.ticker,cap:r.marketCap,r:r}}))
       .filter(function(x){return x.cap>0}).sort(function(a,b){return b.cap-a.cap});
     var n=assetsAll?50:10,top=all.slice(0,n),max=top.length?top[0].cap:1;
-    var kindName={metaal:"edelmetaal",crypto:"crypto"};
+    var kindName={metaal:"edelmetaal",crypto:"crypto",bedrijf:"🌏 "};
     $("alist").innerHTML=top.map(function(x,i){
       var v=x.r[period],c=cls(drop(x.r,period));
       return '<li class="'+(x.k==="co"?"co":x.k)+'" data-t="'+esc(x.t)+'"><span class="ar">'+(i+1)+'</span>'+
-        '<span class="an">'+(x.icon?'<i>'+x.icon+'</i>':'')+esc(x.name)+(x.k!=="co"?'<span class="ak">'+kindName[x.k]+'</span>':'<span class="ak">'+esc(x.t)+'</span>')+'</span>'+
+        '<span class="an">'+(x.icon?'<i>'+x.icon+'</i>':'')+esc(x.name)+(x.k==="bedrijf"?'<span class="ak">🌏 '+esc(x.r.country||x.t)+'</span>':x.k!=="co"?'<span class="ak">'+kindName[x.k]+'</span>':'<span class="ak">'+esc(x.t)+'</span>')+'</span>'+
         '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(v,period)+'</span></span>'+
         '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
     }).join("");
@@ -690,7 +691,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-5";
+  var BUILD="2026-11-04-6";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

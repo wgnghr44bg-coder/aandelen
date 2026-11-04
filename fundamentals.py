@@ -97,12 +97,16 @@ def _retry(fn, label, tries=3):
     return None
 
 
-def refresh(cache, tickers):
+def refresh(cache, tickers, info_only=()):
     """Werkt de cache bij: eerst ontbrekende/verouderde info (nodig voor de top 100), dan jaarcijfers."""
     n_info = 0
     # ontbrekende info eerst, daarna de oudste
     order = sorted(tickers, key=lambda t: (bool((cache.get(t) or {}).get("info")),
                                            (cache.get(t) or {}).get("info_fetched") or ""))
+    # wereldbedrijven (alleen info nodig) zonder info eerst, de rest achteraan
+    extra = [t for t in info_only if t not in tickers]
+    order = [t for t in extra if not (cache.get(t) or {}).get("info")] + order + \
+        [t for t in extra if (cache.get(t) or {}).get("info")]
     for t in order:
         c = cache.setdefault(t, {})
         if c.get("info") and "country" in c["info"] and "floatShares" in c["info"] \

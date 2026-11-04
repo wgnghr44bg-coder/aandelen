@@ -371,6 +371,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .lchart .tg{stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1}
 .lleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;margin:6px 0 4px}
 .lleg i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+.xlinks{display:grid;gap:8px;margin:0 0 8px}
+.xlink{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--card)}
+.xlink b{font-size:.95rem}
+.xlink span{grid-column:1;color:var(--muted);font-size:.78rem;line-height:1.3}
+.xlink i{grid-row:1/3;grid-column:2;font-style:normal;font-size:1.2rem;color:var(--accent)}
+.mlink{display:block;margin:6px 0 0 auto;font-size:.72rem!important;color:var(--accent)!important}
 </style>
 </head>
 <body>
@@ -406,7 +413,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="mtiles" id="mtiles" hidden></div>
     <div class="mpanels" id="mpanels" hidden>
       <div class="panel mp"><div class="ph"><h2>🏠 Hypotheek</h2><button type="button" class="more" data-go="rentes" aria-label="Naar rentes">›</button></div><table class="rt2" id="hypmini"></table></div>
-      <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table></div>
+      <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table><button type="button" class="more mlink" data-go="vastgoed">Rentes per aanbieder ›</button></div>
     </div>
     <div class="panel">
       <div class="ph"><h2>Sectoren</h2><span class="pmeta">– beste <span id="secPer"></span></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
@@ -461,6 +468,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="panel"><div class="ph"><span class="emo">🏘️</span><h2>Woningprijzen NL</h2><span class="pmeta">jaar op jaar</span></div>
       <div class="lchart" id="hchart"></div>
       <p class="hint">Verandering van de prijzen van woningen in Nederland ten opzichte van een jaar eerder, per kwartaal. Bron: Eurostat.</p></div>
+    <div class="panel"><div class="ph"><span class="emo">🏦</span><h2>Vastgoedrentes per aanbieder</h2></div>
+      <div class="xlinks">
+        <a class="xlink" href="https://www.realtyinsights.nl/" target="_blank" rel="noopener"><b>Realty Insights</b><span>Verhuurhypotheek vergelijken · o.a. NIBC, RNHB, Domivest, Nestr, DCMF, Mogelijk, SolidBriq</span><i>↗</i></a>
+        <a class="xlink" href="https://www.financieren.nl/" target="_blank" rel="noopener"><b>Financieren.nl</b><span>Actuele vastgoedrentes per geldverstrekker en financieringspercentage</span><i>↗</i></a>
+      </div>
+      <p class="hint">Rentes voor verhuur- en vastgoedfinanciering verschillen per geldverstrekker, LTV, leningbedrag en aflossingsvorm. Deze vergelijkers tonen de actuele tarieven; ze openen in een nieuw venster.</p></div>
     <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Rente &amp; financiering</h2></div><table class="rt2 big" id="v_rt"></table></div>
     <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Vastgoed-aandelen</h2><span class="pmeta" id="vgcount"></span></div><ul id="vlist"></ul></div>
   </section>
@@ -1361,7 +1374,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-13";
+  var BUILD="2026-11-04-14";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

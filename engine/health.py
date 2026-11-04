@@ -22,6 +22,8 @@ def values(fin):
     if ca is not None and cl and inv is not None:
         vals["quick"] = (ca - inv) / cl
     # Interest Coverage
+    if fin["profile"] in ("reit", "utility") and ebitda is not None:
+        ebit = ebitda  # vastgoed/nuts: dekking op EBITDA (zware afschrijvingen)
     if ebit is not None:
         if ie is not None and abs(ie) > 0:
             vals["int_cov"] = ebit / abs(ie)

@@ -247,6 +247,10 @@ def normalize(ticker, info, raw, price, price_on, asof, fx, rf, fetched=None, in
             t = div(g("tax_provision")[i], g("pretax_income")[i])
         tax.append(None if t is None else max(0.0, min(0.40, t)))
     s["tax_rate"] = tax
+    # Schuld: rij volledig afwezig terwijl de balans er wel is = bedrijf zonder rentedragende schuld
+    if s.get("total_debt") is None and stmts["balance"] and s.get("total_assets"):
+        s["total_debt"] = [0.0] * n
+        notes.append("geen schuldpost op de balans: schuldvrij")
     # Inventaris: rij volledig afwezig = bedrijf zonder voorraad (bv. software) -> 0 is hier correct.
     if s.get("inventory") is None and stmts["balance"]:
         s["inventory"] = [0.0] * n

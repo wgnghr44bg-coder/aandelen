@@ -13,18 +13,18 @@ kasstroom naar aandeelhouders:
   - banken/verzekeraars:       residual income (geen zinvolle vrije kasstroom of netto schuld)
 
 Aannames:
-  - disconteringsvoet: CAPM (r_f + β × 5% marktpremie), voor FCF-DCF gewogen tot WACC
+  - disconteringsvoet: CAPM (r_f + Blume-gecorrigeerde β × 4,5% marktpremie), voor FCF-DCF gewogen tot WACC
   - terminal groei 2,0 / 2,5 / 3,0% (conservatief / neutraal / optimistisch), lange-termijn nominale
     groei van ontwikkelde economieën; altijd minimaal 3%-punt onder de disconteringsvoet
   - groei jaar 1 = mediaan van historische FCF-groei, omzetgroei en analistenverwachtingen,
-    begrensd; daalt lineair naar de terminal groei in jaar 5
+    begrensd; daalt lineair naar halverwege de terminal groei in jaar 5
   - stock-based compensation telt als kosten: conservatief 100%, neutraal 50%, optimistisch 0%
 """
 from .sectors import CYCLICAL, MODEL
 from .series import roe_series, ser, span_cagr
 from .util import at, avail, clamp, div, mean, median, num, rnd
 
-ERP = 0.05
+ERP = 0.045  # impliciete aandelenrisicopremie (Damodaran ~4,3–4,6%)
 DEFAULT_RF = 0.0425
 YEARS = 5
 
@@ -46,7 +46,9 @@ def cost_of_equity(fin, notes=None):
         beta = 1.0
         if notes is not None:
             notes.append("bèta onbekend: 1,0 aangenomen")
-    return max(rf + clamp(beta, 0.7, 1.8) * ERP, 0.075), rf, clamp(beta, 0.7, 1.8)
+    # Blume-correctie: bèta's neigen op termijn naar 1 (0,67 × β + 0,33)
+    adj = clamp(0.67 * beta + 0.33, 0.8, 1.6)
+    return max(rf + adj * ERP, 0.07), rf, adj
 
 
 def wacc(fin, re, notes):
@@ -60,6 +62,13 @@ def wacc(fin, re, notes):
         notes.append("rente of belasting onbekend: kostenvoet schuld 5% / belasting 21% aangenomen")
     w = (mcap * re + debt * rd * (1 - t)) / (mcap + debt)
     return max(w, 0.07)
+
+
+def _fade(g1, tg, t):
+    """Groei daalt lineair van g1 (jaar 1) naar halverwege g1 en de terminal groei (jaar 5);
+    daarna geldt de terminal groei."""
+    end = (g1 + tg) / 2
+    return g1 + (end - g1) * (t - 1) / (YEARS - 1)
 
 
 def _growth_start(cands):
@@ -126,11 +135,11 @@ def _fcf_model(fin, sc, notes):
                            fin["est"].get("fwd_rev"), fin["est"].get("fwd_eps")])
     if g1 is None:
         return None, "geen groeigegevens voor prognose"
-    g1 = clamp(clamp(g1, -0.05, 0.20) + sc["dg"], -0.08, 0.25)
+    g1 = clamp(clamp(g1, -0.05, 0.25) + sc["dg"], -0.08, 0.30)
 
     flows, pv, f = [], 0.0, base
     for t in range(1, YEARS + 1):
-        g = g1 + (tg - g1) * (t - 1) / (YEARS - 1)
+        g = _fade(g1, tg, t)
         f *= 1 + g
         flows.append(round(f, 0))
         pv += f / (1 + r) ** t
@@ -165,7 +174,7 @@ def _ddm_model(fin, sc, notes):
     g1 = clamp(clamp(g1, 0.0, 0.07) + sc["dg"] * 0.5, -0.02, 0.09)
     flows, pv, d = [], 0.0, d0
     for t in range(1, YEARS + 1):
-        g = g1 + (tg - g1) * (t - 1) / (YEARS - 1)
+        g = _fade(g1, tg, t)
         d *= 1 + g
         flows.append(round(d, 0))
         pv += d / (1 + r) ** t

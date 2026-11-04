@@ -26,6 +26,9 @@ def profile_for(sector, industry, ticker):
         return "utility"
     if sector == "Communication Services" and ind.startswith("Telecom"):
         return "telecom"
+    if ind.startswith(("Farm & Heavy Construction Machinery", "Oil & Gas", "Steel", "Copper", "Gold",
+                       "Auto Manufacturers", "Chemicals", "Specialty Chemicals")):
+        return "cyclical"
     if sector in ("Technology", "Communication Services"):
         return "tech"
     return {
@@ -98,7 +101,7 @@ PROFILE_NORMS = {
                 "ev_ebitda": (16, 9), "roe": (0.05, 0.12), "roa": (0.01, 0.04), "om": (0.10, 0.30),
                 "rev3": (0.0, 0.06), "eps3": (0.0, 0.08), "fwd_rev": (0.0, 0.05), "fwd_eps": (0.0, 0.08),
                 "div_yield": (0.02, 0.05), "roic": (0.03, 0.08), "roic_min": (0.02, 0.07)},
-    "reit": {"nd_ebitda": (8.0, 4.5), "de": (2.0, 0.7), "int_cov": (1.5, 4.0), "debt_assets": (0.6, 0.3),
+    "reit": {"nd_ebitda": (8.0, 4.5), "de": (2.0, 0.7), "int_cov": (2.0, 5.0), "debt_assets": (0.6, 0.3),
              "om": (0.15, 0.45), "roe": (0.02, 0.10), "roa": (0.01, 0.05), "rev3": (0.0, 0.08),
              "fwd_rev": (0.0, 0.06), "ev_ebitda": (28, 15), "div_yield": (0.02, 0.05), "pb": (3.0, 1.0)},
     "bank": {"pe": (18, 8), "fpe": (16, 7), "pb": (2.5, 0.9), "roe": (0.06, 0.16), "roa": (0.004, 0.015),

@@ -110,16 +110,45 @@ def test_strong_company_overvalued_is_hold_not_sell():
 
 
 def test_extreme_overvaluation_is_sell():
-    # gewoon bedrijf (lage groei) tegen een absurde prijs
+    # middelmatig bedrijf (lage marges, lage groei) tegen een absurde prijs
     slow = [1000.0, 990.0, 985.0, 980.0]
-    f = make_fin(mcap=60000.0, s={"revenue": slow, "net_income": [r * 0.22 for r in slow],
-                                  "diluted_eps": [r * 0.0022 for r in slow], "fcf": [r * 0.25 for r in slow],
-                                  "operating_income": [r * 0.30 for r in slow], "ebit": [r * 0.30 for r in slow],
-                                  "ebitda": [r * 0.35 for r in slow], "gross_profit": [r * 0.6 for r in slow]})
+    f = make_fin(mcap=60000.0, s={"revenue": slow, "net_income": [r * 0.04 for r in slow],
+                                  "diluted_eps": [r * 0.0004 for r in slow], "fcf": [r * 0.04 for r in slow],
+                                  "operating_income": [r * 0.07 for r in slow], "ebit": [r * 0.07 for r in slow],
+                                  "ebitda": [r * 0.10 for r in slow], "gross_profit": [r * 0.22 for r in slow],
+                                  "equity": [900.0] * 4, "total_assets": [2500.0] * 4})
     f["est"] = {"fwd_rev": 0.01, "fwd_eps": 0.01}
     r = run_one(f)
     assert r["rating"] == "SELL", r["reasons"]
     assert any("extreem overgewaardeerd" in x for x in r["reasons"])
+
+
+def test_debt_heavy_but_solvent_is_not_sell():
+    # veel schuld, maar rente ruim te betalen (geen financiële nood) -> geen SELL op gezondheid
+    f = make_fin(s={"total_debt": [1400.0] * 4, "cash": [20.0] * 4, "equity": [100.0] * 4,
+                    "current_assets": [250.0] * 4, "current_liabilities": [400.0] * 4})
+    r = run_one(f)
+    assert not any("gezondheid" in x for x in r["reasons"]), r["reasons"]
+
+
+def test_debt_free_company_rated():
+    raw = fake_raw()
+    del raw["balance"]["rows"]["Total Debt"]
+    fin = normalize("NODEBT", fake_info(), raw, 30.0, lambda d: 25.0, TODAY, 1.0, 0.04, str(TODAY), str(TODAY))
+    assert fin["s"]["total_debt"] == [0.0] * 4
+    res = analyze_universe({"NODEBT": fin})["NODEBT"]
+    assert res["categories"]["health"]["score"] is not None
+
+
+def test_cyclical_decline_not_structural():
+    from engine.decision import deterioration_flags
+    rev = [900.0, 1000.0, 1200.0, 1000.0]
+    f = make_fin(profile="cyclical", s={"revenue": rev})
+    f["est"]["fwd_eps"] = -0.2
+    assert deterioration_flags(f, {}) == []
+    g = make_fin(profile="industrial", s={"revenue": rev})
+    g["est"]["fwd_eps"] = -0.2
+    assert "omzet krimpt al twee jaar" in deterioration_flags(g, {})
 
 
 def test_exceptional_company_extremely_priced_is_hold():
@@ -172,8 +201,8 @@ def test_unrealistic_growth_is_capped():
     f["s"]["fcf"] = [1200.0, 300.0, 100.0, 10.0]  # +390%/jaar
     d = dcf.run(f)
     neu = d["scenarios"]["neutral"]
-    assert neu["growth_y1"] <= 0.20
-    assert d["scenarios"]["optimistic"]["growth_y1"] <= 0.25
+    assert neu["growth_y1"] <= 0.25
+    assert d["scenarios"]["optimistic"]["growth_y1"] <= 0.30
     assert math.isfinite(neu["equity_value"])
 
 

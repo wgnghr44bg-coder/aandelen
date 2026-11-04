@@ -126,7 +126,7 @@ ul{list-style:none;margin:0;padding:0}
 .tk{font-weight:600;color:var(--text);opacity:.8}
 .val{text-align:right;flex:0 0 auto;width:84px}
 .pct{font-weight:700;font-variant-numeric:tabular-nums;font-size:1.02rem}
-.pct.cap{font-size:.88rem;white-space:nowrap;color:var(--text)}
+.capl{display:block;font-size:.75rem;color:var(--muted);white-space:nowrap;margin-top:2px;font-variant-numeric:tabular-nums}
 .down{color:var(--down)}.down2{color:var(--down-strong)}.up{color:var(--up)}.flat{color:var(--muted)}
 .track{height:4px;background:var(--chip);border-radius:2px;margin-top:5px;overflow:hidden}
 .fill{height:100%;border-radius:2px;margin-left:auto}
@@ -575,14 +575,14 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
         '<button type="button" class="x" aria-label="Filter wissen">✕</button>';
     }else{
       $("grp").hidden=true;
-      $("count").textContent=list.length+" aandelen · "+(mode==="size"?"op beurswaarde":periodLabel(period).toLowerCase())+" · "+best;
+      $("count").textContent=list.length+" aandelen · "+(mode==="size"?"op beurswaarde, % = "+periodLabel(period).toLowerCase():periodLabel(period).toLowerCase())+" · "+best;
     }
     if(!list.length){$("list").innerHTML='<li class="empty">Geen aandelen gevonden.</li>';return}
     $("list").innerHTML=list.map(function(r,i){
       var d=drop(r,period),c=cls(d),w=d==null?0:Math.min(100,Math.abs(d)/max*100);
       var col=c==="up"?"var(--up)":c==="down2"?"var(--down-strong)":c==="down"?"var(--down)":"var(--muted)";
       var valTxt=fmtPct(r[period],period);
-      if(mode==="size"){c="cap";valTxt=fmtCap(r.marketCap);w=Math.max(2,r.marketCap/maxCap*100);col="var(--accent)";}
+      var capLine=mode==="size"?'<span class="capl">'+fmtCap(r.marketCap)+'</span>':'';
       var open=openTicker===r.ticker;
       return '<li class="card'+(open?' open':'')+'" data-t="'+esc(r.ticker)+'">'+
         '<button type="button" class="row" aria-expanded="'+open+'">'+
@@ -590,7 +590,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
           '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
-          '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
+          (capLine||'<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span>')+'</span>'+
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
     }).join("");
     if(openTicker){var oc=document.querySelector('.card.open .chart');if(oc)drawChart(oc);}
@@ -640,7 +640,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-3";
+  var BUILD="2026-11-04-4";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

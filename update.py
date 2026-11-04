@@ -3,6 +3,7 @@
 Gebruik: python update.py
 """
 import json
+import os
 import urllib.request
 import math
 import time
@@ -249,6 +250,18 @@ def haal_extras():
     return rijen, closes
 
 
+def historie_nodig(asof):
+    """De grafiekdata (groot bestand) alleen vernieuwen bij een nieuwe beursdag,
+    bij de avond-update of handmatig (VOLLEDIG=true). Zo blijft de repo klein bij de uurlijkse updates."""
+    if os.environ.get("VOLLEDIG", "").lower() == "true" or not HIST.exists():
+        return True
+    try:
+        dagen = json.loads(HIST.read_text()).get("days") or []
+        return not dagen or dagen[-1] != asof
+    except Exception:  # noqa: BLE001
+        return True
+
+
 def main():
     tickers = lees_tickers()
     ai = set(lees_tickers(AI_FILE))
@@ -306,12 +319,15 @@ def main():
     uit["extras"] = extras
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(uit, ensure_ascii=False, indent=1) + "\n")
-    try:
+    if historie_nodig(uit["asof"]):
+      try:
         closes = {r["ticker"]: slotkoersen(data, r["ticker"]) for r in rijen}
         closes.update(extra_closes)
         schrijf_historie(data.index, closes, pd.Timestamp(asof))
-    except Exception as e:  # noqa: BLE001
+      except Exception as e:  # noqa: BLE001
         print(f"historie mislukt: {e}")
+    else:
+        print("historie ongewijzigd (zelfde beursdag)")
     print(f"{len(rijen)} rijen geschreven naar {OUT} (slotkoersen {uit['asof']})")
 
 

@@ -2,7 +2,8 @@ name: Koersen bijwerken
 
 on:
   schedule:
-    - cron: "45 22 * * 1-5"   # elke werkdag 22:45 UTC, na sluiting van de Amerikaanse beurs
+    - cron: "17 * * * *"      # elk uur (koersen, ETF's en bitcoin)
+    - cron: "45 22 * * 1-5"   # elke werkdag 22:45 UTC, na sluiting van de Amerikaanse beurs: ook de grafieken
   workflow_dispatch:
 
 permissions:
@@ -29,6 +30,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Haal koersen op
+        env:
+          # Grafieken altijd vernieuwen bij de avond-update en bij handmatig starten
+          VOLLEDIG: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '45 22 * * 1-5' }}
         run: python update.py
 
       - name: Commit data als die veranderd is
@@ -41,7 +45,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Koersen bijgewerkt $(date -u +%Y-%m-%d)"
+          git commit -m "Koersen bijgewerkt $(date -u +'%Y-%m-%d %H:%M') UTC"
           for i in 1 2 3; do
             git pull --rebase -X theirs origin main && git push && exit 0
             sleep 5

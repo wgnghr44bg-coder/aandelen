@@ -32,6 +32,8 @@ def fake_get(url, tries=3):
         return MIR_CSV
     if "prc_hicp" in url:
         return json.dumps(STAT)
+    if "ICP/M.NL" in url:
+        return "KEY,TIME_PERIOD,OBS_VALUE\nICP.M.NL.N.000000.4.ANR,2026-10,2.8\nICP.M.NL.N.000000.4.ANR,2026-09,2.9\n"
     return None  # overige bronnen 'falen'
 
 
@@ -43,7 +45,7 @@ def test_macro_parsing(monkeypatch):
     hyp = {h["code"]: h for h in m["mortgage_nl"]}
     assert set(hyp) == {"F", "P"}                      # 'A' (totaal) niet als vaste periode
     assert hyp["P"]["value"] == 3.65 and hyp["P"]["prev"] == 3.70
-    assert m["hicp"]["NL"] == [["2026-08", 3.0], ["2026-09", 2.9]]
+    assert m["hicp"]["NL"] == [["2026-09", 2.9], ["2026-10", 2.8]]   # ECB (actueler) wint
     assert m["hicp"]["EA20"][-1] == ["2026-09", 2.2]
     assert m["euribor3m"] == {"value": 2.0}            # bron faalde -> vorige waarde
     assert "nl10y" not in m                            # geen vorige -> ontbreekt (niet verzonnen)

@@ -148,8 +148,20 @@ def haal_macro(vorige=None):
     hyp.sort(key=lambda h: order.index(h["code"]))
     zet("mortgage_nl", hyp)
 
-    # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek
-    hicp = eurostat("prc_hicp_manr", {"geo": ["NL", "EA20", "EU27_2020"], "coicop": "CP00"}, 25)
+    # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Eerst via de ECB (actueel),
+    # anders Eurostat. Eurozone = U2 (wisselende samenstelling, zoals de ECB zelf rapporteert).
+    hicp = {}
+    for geo, key in (("NL", "ICP/M.NL.N.000000.4.ANR"), ("EA20", "ICP/M.U2.N.000000.4.ANR")):
+        st = next(iter(ecb_series(key, 25).values()), None)
+        if st and st["obs"]:
+            hicp[geo] = st["obs"]
+    es = eurostat("prc_hicp_manr", {"geo": ["NL", "EA20", "EU27_2020"], "coicop": "CP00"}, 25)
+    for geo, serie in es.items():
+        if serie and (geo not in hicp or serie[-1][0] > hicp[geo][-1][0]):
+            hicp[geo] = serie
+    # EU alleen tonen als die net zo actueel is als NL (anders misleidend)
+    if "EU27_2020" in hicp and "NL" in hicp and hicp["EU27_2020"][-1][0] < hicp["NL"][-1][0]:
+        hicp.pop("EU27_2020")
     zet("hicp", hicp if any(hicp.values()) else None)
 
     # Woningprijzen NL (jaar op jaar, per kwartaal)

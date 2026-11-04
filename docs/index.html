@@ -83,6 +83,32 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .alist li.metaal .ab span{background:#d4a017}
 .alist li.crypto .ab span{background:#f7931a}
 .alist li.bedrijf .ab span{background:var(--muted)}
+.ah{align-items:center}
+.seg2{display:flex;gap:2px;background:var(--chip);border-radius:8px;padding:2px}
+.seg2 button{border:0;background:none;color:var(--muted);font:inherit;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer}
+.seg2 button[aria-pressed=true]{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.afilt{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 8px}
+.afilt::-webkit-scrollbar{display:none}
+.afilt button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:4px 11px;font:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
+.afilt button[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.asum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:8px}
+.asum div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 9px;min-width:0}
+.asum b{display:block;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.asum span{display:block;color:var(--muted);font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.amap{position:relative;width:100%;border-radius:12px;overflow:hidden;background:var(--bg)}
+.amap .tl{position:absolute;box-sizing:border-box;border:1.5px solid var(--bg);border-radius:6px;padding:4px 5px;overflow:hidden;color:var(--text);cursor:default;line-height:1.15}
+.amap .tl.co{cursor:pointer}
+.amap .tl .tn{display:block;font-weight:700;font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.amap .tl .tc{display:block;font-size:.68rem;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.amap .tl.sm .tn{font-size:.7rem}
+.amap .tl.big .tn{font-size:1rem}
+.amap .tl.big .tc{font-size:.8rem}
+.amap .tl.xl .tn{font-size:1.35rem}
+.amap .tl.xl .tc{font-size:.92rem}
+.akey{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.7rem;margin:6px 0 0}
+.akey i{width:90px;height:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in oklab,var(--down-strong) 60%,var(--card)),var(--card),color-mix(in oklab,var(--up) 60%,var(--card)));border:1px solid var(--line)}
+.akey{flex-wrap:wrap}
+.akey em{font-style:normal;flex-basis:100%;order:-1;margin-bottom:2px}
 .amore{display:block;width:100%;margin-top:6px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px;font:inherit;font-size:.85rem;cursor:pointer}
 .heat-h{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 6px}
 .heat-h h2{font-size:1rem;margin:0}
@@ -198,7 +224,13 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 </div>
 <div class="wrap">
   <section id="assetwrap" hidden>
-    <div class="heat-h"><h2>🌍 Grootste assets ter wereld</h2></div>
+    <div class="heat-h ah"><h2>🌍 Grootste assets ter wereld</h2>
+      <div class="seg2" id="aview" role="group" aria-label="Weergave"><button type="button" data-v="map">Kaart</button><button type="button" data-v="list">Lijst</button></div>
+    </div>
+    <div class="afilt" id="afilt" role="group" aria-label="Soort"></div>
+    <div class="asum" id="asum"></div>
+    <div class="amap" id="amap" role="img" aria-label="Kaart van de grootste assets"></div>
+    <div class="akey" id="akey"><span>−</span><i></i><span>+</span><em id="akeyl"></em></div>
     <ol class="alist" id="alist"></ol>
     <button type="button" class="amore" id="amore"></button>
   </section>
@@ -258,6 +290,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   function fmtCap(n){
     if(!n)return "–";
+    if(n>=1e13)return "$"+nf1.format(n/1e12)+" bln";
     if(n>=1e12)return "$"+nf2.format(n/1e12)+" bln";
     return "$"+nf1.format(n/1e9)+" mld";
   }
@@ -538,31 +571,127 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
 
   // ---------- Grootste assets ter wereld (bedrijven + goud, zilver, crypto) ----------
-  var assets=[],assetsAll=false;
+  var assets=[],assetsAll=false,aView="map",aKind="all";
+  try{var av=localStorage.getItem("aview");if(av==="list"||av==="map")aView=av;}catch(e){}
+  var KINDS=[{k:"all",l:"Alle"},{k:"bedrijf",l:"🏢 Bedrijven"},{k:"metaal",l:"🥇 Edelmetalen"},{k:"crypto",l:"₿ Crypto"}];
+  function shortName(n){
+    return String(n).replace(/,?\s+(Inc\.?|Corporation|Corp\.?|plc|PLC|Holdings?|Co\.,? Ltd\.?|Company|Limited|Ltd\.?|N\.V\.|S\.A\.|AG|SE|Group|Incorporated|Platforms|Technology|Manufacturing|Semiconductor Manufacturing Company)\b.*$/,"")
+      .replace(/^The\s+/,"").trim()||n;
+  }
+  var NICK={"GC=F":"Goud","SI=F":"Zilver","BTC-USD":"Bitcoin","ETH-USD":"Ethereum","TSM":"TSMC","2222.SR":"Saudi Aramco",
+    "BRK-B":"Berkshire","GOOGL":"Alphabet","META":"Meta","005930.KS":"Samsung","000660.KS":"SK Hynix","0700.HK":"Tencent",
+    "JPM":"JPMorgan","XOM":"ExxonMobil","LLY":"Eli Lilly","2317.TW":"Foxconn","600519.SS":"Moutai","1398.HK":"ICBC",
+    "BABA":"Alibaba","RELIANCE.NS":"Reliance","HDB":"HDFC Bank","PDD":"PDD","300750.SZ":"CATL","0941.HK":"China Mobile",
+    "MELI":"MercadoLibre","1810.HK":"Xiaomi","BHARTIARTL.NS":"Airtel","TCS.NS":"TCS","3690.HK":"Meituan","IBN":"ICICI",
+    "0939.HK":"CCB","2454.TW":"MediaTek","1288.HK":"ABC","601857.SS":"PetroChina","WMT":"Walmart","V":"Visa","MA":"Mastercard",
+    "JNJ":"J&J","AVGO":"Broadcom","COST":"Costco","ABBV":"AbbVie","ORCL":"Oracle","NFLX":"Netflix","AMD":"AMD","MU":"Micron",
+    "BAC":"BofA","HD":"Home Depot","PG":"P&G","KO":"Coca-Cola","ASML":"ASML","SAP":"SAP","NVO":"Novo","AZN":"AstraZeneca"};
+  var CODE={"GC=F":"Goud","SI=F":"Zilver","BTC-USD":"BTC","ETH-USD":"ETH"};
+  function allAssets(){
+    return assets.map(function(a){return {k:a.kind,icon:a.icon||(a.kind==="bedrijf"?"🌏":""),name:NICK[a.ticker]||shortName(a.name),t:a.ticker,cap:a.marketCap,r:a,land:a.country}})
+      .concat(rows.map(function(r){return {k:"co",name:NICK[r.ticker]||shortName(r.name),t:r.ticker,cap:r.marketCap,r:r}}))
+      .filter(function(x){return x.cap>0}).sort(function(a,b){return b.cap-a.cap})
+      .map(function(x,i){x.rank=i+1;return x});
+  }
+  function kindOk(x){return aKind==="all"||(aKind==="bedrijf"?(x.k==="co"||x.k==="bedrijf"):x.k===aKind)}
+  function heatScore(x){var v=x.r[period];if(v==null)return null;return period==="fromHigh"?10-v:v}
+  function heatBg(sc,maxA){
+    if(sc==null||Math.abs(sc)<0.3)return "var(--chip)";
+    var a=Math.min(1,Math.abs(sc)/maxA),p=Math.round(12+a*50);
+    return "color-mix(in oklab,"+(sc>0?"var(--up)":"var(--down-strong)")+" "+p+"%,var(--card))";
+  }
+  // Squarified treemap: verdeelt een rechthoek in vakjes met oppervlakte ~ marktwaarde
+  function squarify(items,rect){
+    var out=[],row=[],rest=items.slice();
+    function worst(r,side){var s=0,mx=0,mn=Infinity;r.forEach(function(x){s+=x.a;mx=Math.max(mx,x.a);mn=Math.min(mn,x.a)});
+      return Math.max(side*side*mx/(s*s),(s*s)/(side*side*mn))}
+    function place(r){
+      var s=0;r.forEach(function(x){s+=x.a});
+      if(rect.w>=rect.h){var cw=s/rect.h,y=rect.y;r.forEach(function(x){var h=x.a/cw;out.push({x:rect.x,y:y,w:cw,h:h,it:x.it});y+=h});rect={x:rect.x+cw,y:rect.y,w:rect.w-cw,h:rect.h};}
+      else{var rh=s/rect.w,x0=rect.x;r.forEach(function(x){var w=x.a/rh;out.push({x:x0,y:rect.y,w:w,h:rh,it:x.it});x0+=w});rect={x:rect.x,y:rect.y+rh,w:rect.w,h:rect.h-rh};}
+    }
+    while(rest.length){
+      var side=Math.min(rect.w,rect.h),c=rest[0];
+      if(!row.length||worst(row.concat([c]),side)<=worst(row,side)){row.push(c);rest.shift()}
+      else{place(row);row=[]}
+    }
+    if(row.length)place(row);
+    return out;
+  }
   function renderAssets(){
-    if(!assets.length&&!rows.length){$("assetwrap").hidden=true;return}
+    var all=allAssets();
+    if(!all.length){$("assetwrap").hidden=true;return}
     $("assetwrap").hidden=false;
-    var all=assets.map(function(a){return {k:a.kind,icon:a.icon,name:a.name,t:a.ticker,cap:a.marketCap,r:a}})
-      .concat(rows.map(function(r){return {k:"co",name:r.name,t:r.ticker,cap:r.marketCap,r:r}}))
-      .filter(function(x){return x.cap>0}).sort(function(a,b){return b.cap-a.cap});
-    var n=assetsAll?50:10,top=all.slice(0,n),max=top.length?top[0].cap:1;
-    var kindName={metaal:"edelmetaal",crypto:"crypto",bedrijf:"🌏 "};
-    $("alist").innerHTML=top.map(function(x,i){
-      var v=x.r[period],c=cls(drop(x.r,period));
-      return '<li class="'+(x.k==="co"?"co":x.k)+'" data-t="'+esc(x.t)+'"><span class="ar">'+(i+1)+'</span>'+
-        '<span class="an">'+(x.icon?'<i>'+x.icon+'</i>':'')+esc(x.name)+(x.k==="bedrijf"?'<span class="ak">🌏 '+esc(x.r.country||x.t)+'</span>':x.k!=="co"?'<span class="ak">'+kindName[x.k]+'</span>':'<span class="ak">'+esc(x.t)+'</span>')+'</span>'+
-        '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(v,period)+'</span></span>'+
-        '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
-    }).join("");
-    $("amore").textContent=assetsAll?"Toon minder":"Toon top 50";
+    Array.prototype.forEach.call($("aview").querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.v===aView)});
+    $("afilt").innerHTML=KINDS.map(function(k){return '<button type="button" data-k="'+k.k+'" aria-pressed="'+(aKind===k.k)+'">'+k.l+'</button>'}).join("");
+    var list=all.filter(kindOk);
+    // kerncijfers
+    var gold=null,btc=null;all.forEach(function(x){if(x.t==="GC=F")gold=x;if(x.t==="BTC-USD")btc=x});
+    var topCo=all.filter(function(x){return x.k==="co"||x.k==="bedrijf"})[0];
+    $("asum").innerHTML=[gold?['🥇 Goud','nr. '+gold.rank+' · '+fmtCap(gold.cap)]:null,topCo?['🏢 '+esc(topCo.name),'grootste bedrijf · '+fmtCap(topCo.cap)]:null,
+      btc?['₿ Bitcoin','nr. '+btc.rank+' · '+fmtCap(btc.cap)]:null].filter(Boolean).map(function(v){return '<div><b>'+v[0]+'</b><span>'+v[1]+'</span></div>'}).join("");
+    var plbl=period==="fromHigh"?"onder jaartop":periodLabel(period).toLowerCase();
+    $("akeyl").textContent="grootte = marktwaarde · kleur = "+plbl;
+    var showMap=aView==="map";
+    $("amap").style.display=showMap?"":"none";$("akey").style.display=showMap?"":"none";
+    $("alist").style.display=showMap?"none":"";
+    var maxA=Math.min(30,Math.max.apply(null,list.map(function(x){return Math.abs(heatScore(x)||0)}).concat([5])));
+    if(showMap){
+      var items=list.slice(0,assetsAll?60:30),W=$("amap").clientWidth||360,H=Math.round(W*1.15);
+      $("amap").style.height=H+"px";
+      var tot=items.reduce(function(s,x){return s+x.cap},0);
+      var rects=squarify(items.map(function(x){return {a:x.cap/tot*W*H,it:x}}),{x:0,y:0,w:W,h:H});
+      $("amap").innerHTML=rects.map(function(rc){
+        var x=rc.it,tier=rc.w>200&&rc.h>120?"xl":rc.w>110&&rc.h>70?"big":"";
+        var cls="tl"+(x.k==="co"?" co":"")+(tier?" "+tier:"");
+        var fs=tier==="xl"?11.5:tier==="big"?8.8:6.6;            // ~breedte per letter
+        var full=(x.icon?x.icon+" ":"")+x.name, code=CODE[x.t]||(x.k==="co"?x.t:(NICK[x.t]||x.t.split(".")[0]));
+        var first=code.split(" ")[0];
+        var label=full;
+        var lbl="";
+        if(label&&rc.h>18){
+          lbl='<span class="tn">'+esc(label)+'</span>';
+          if(rc.h>40&&rc.w>58)lbl+='<span class="tc">'+fmtCap(x.cap)+'</span>';
+          if(rc.h>56&&rc.w>50)lbl+='<span class="tc">'+fmtPct(x.r[period],period)+'</span>';
+        }
+        return '<div class="'+cls+'" data-alt="'+esc(code+"|"+first)+'" data-t="'+esc(x.t)+'" title="'+esc(x.rank+'. '+x.name+' · '+fmtCap(x.cap)+' · '+fmtPct(x.r[period],period))+'" style="left:'+rc.x.toFixed(1)+'px;top:'+rc.y.toFixed(1)+'px;width:'+rc.w.toFixed(1)+'px;height:'+rc.h.toFixed(1)+'px;background:'+heatBg(heatScore(x),maxA)+'">'+lbl+'</div>';
+      }).join("");
+      // Past de naam niet? Dan een kortere naam (ticker), anders kleiner, anders niets.
+      Array.prototype.forEach.call($("amap").querySelectorAll(".tl"),function(el){
+        var tn=el.querySelector(".tn");if(!tn)return;
+        var alts=el.dataset.alt.split("|"),i=0;
+        function over(){return tn.scrollWidth>tn.clientWidth+1}
+        while(over()&&i<alts.length){tn.textContent=alts[i++]}
+        if(over()){el.classList.add("sm")}
+        if(over()){tn.textContent=""}
+        Array.prototype.forEach.call(el.querySelectorAll(".tc"),function(tc){if(tc.scrollWidth>tc.clientWidth+1)tc.remove()});
+      });
+      $("amore").textContent=assetsAll?"Toon top 30":"Toon top 60";
+    }else{
+      var top=list.slice(0,assetsAll?50:15),max=top.length?top[0].cap:1;
+      var kindName={metaal:"edelmetaal",crypto:"crypto"};
+      $("alist").innerHTML=top.map(function(x){
+        var c=cls(drop(x.r,period));
+        var sub=x.k==="bedrijf"?"🌏 "+esc(x.land||x.t):x.k==="co"?esc(x.t):kindName[x.k];
+        return '<li class="'+(x.k==="co"?"co":x.k)+'" data-t="'+esc(x.t)+'"><span class="ar">'+x.rank+'</span>'+
+          '<span class="an">'+(x.icon?'<i>'+x.icon+'</i>':'')+esc(x.name)+'<span class="ak">'+sub+'</span></span>'+
+          '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(x.r[period],period)+'</span></span>'+
+          '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
+      }).join("");
+      $("amore").textContent=assetsAll?"Toon minder":"Toon top 50";
+    }
   }
   $("amore").addEventListener("click",function(){assetsAll=!assetsAll;renderAssets()});
-  $("alist").addEventListener("click",function(e){
-    var li=e.target.closest("li.co");if(!li)return;
-    statFilter=null;ratingFilter=null;capFilter=null;$("sector").value="";$("q").value="";openTicker=li.dataset.t;render();
-    var c=document.querySelector('.card[data-t="'+li.dataset.t+'"]');
+  $("aview").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aView=b.dataset.v;try{localStorage.setItem("aview",aView)}catch(err){}renderAssets()});
+  $("afilt").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aKind=b.dataset.k;renderAssets()});
+  function gotoCard(t){
+    statFilter=null;ratingFilter=null;capFilter=null;$("sector").value="";$("q").value="";openTicker=t;render();
+    var c=document.querySelector('.card[data-t="'+t+'"]');
     if(c){c.style.scrollMarginTop=(document.querySelector(".bar").offsetHeight+8)+"px";c.scrollIntoView({behavior:"smooth",block:"start"});}
-  });
+  }
+  $("alist").addEventListener("click",function(e){var li=e.target.closest("li.co");if(li)gotoCard(li.dataset.t)});
+  $("amap").addEventListener("click",function(e){var d=e.target.closest(".tl.co");if(d)gotoCard(d.dataset.t)});
+  var rsT=null;window.addEventListener("resize",function(){clearTimeout(rsT);rsT=setTimeout(renderAssets,150)});
 
   // ---------- Sector-heatmap ----------
   function renderHeat(){
@@ -691,7 +820,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-6";
+  var BUILD="2026-11-04-8";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

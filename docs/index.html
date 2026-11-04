@@ -84,6 +84,14 @@ h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
 .grp .seg button,.grp .x{border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;font-weight:600;padding:6px 8px;border-radius:6px;cursor:pointer}
 .grp .seg button[aria-pressed=true]{background:var(--bg);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .grp .x{font-size:1.1rem;padding:4px 8px}
+.updrow{display:flex;flex-wrap:nowrap;align-items:center;gap:6px 8px;margin-top:4px}
+.updrow .upd{margin:0 auto 0 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#refresh{width:34px;height:32px;justify-content:center;padding:0;flex:0 0 auto}
+.updrow a.rbtn{flex:0 0 auto;height:32px}
+.rbtn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:5px 11px;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none}
+.rbtn .ri{display:inline-block;font-size:1rem;line-height:1}
+.rbtn.busy .ri{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 .upd{color:var(--muted);font-size:.8rem;margin:2px 0 0}
 .upd b{color:var(--text);font-weight:600}
 .count{color:var(--muted);font-size:.8rem;margin:10px 0 6px}
@@ -118,7 +126,11 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 <div class="wrap">
   <header>
     <h1 id="title">Top 100 aandelen: wat is er gezakt?</h1>
-    <p class="upd" id="upd">Laden…</p>
+    <div class="updrow">
+      <p class="upd" id="upd">Laden…</p>
+      <button type="button" class="rbtn" id="refresh" aria-label="Vernieuwen"><span class="ri">↻</span></button>
+      <a class="rbtn" href="https://github.com/wgnghr44bg-coder/aandelen/actions/workflows/update.yml" target="_blank" rel="noopener" aria-label="Nieuwe update starten op GitHub">▶ Update</a>
+    </div>
     <div class="extras" id="extras" hidden></div>
     <div id="xpanel"></div>
     <div class="stats">
@@ -286,7 +298,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   try{var sr=localStorage.getItem("bereik");if(sr&&RANGES.some(function(x){return x.k===sr}))range=sr;}catch(e){}
   var histP=null;
   function loadHist(){
-    if(!histP)histP=fetch("history.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()});
+    if(!histP)histP=fetch("history.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()});
     return histP;
   }
   var MON3=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
@@ -481,22 +493,33 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
 
   renderPeriods();renderMode();
-  fetch("data.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
-    rows=data.rows||[];
-    extras=data.extras||[];renderExtras();liveBitcoin();
-    if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
-    var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});
-    if(rows.some(function(r){return r.ai})){var ao=document.createElement("option");ao.value="AI";ao.textContent="🤖 AI";$("sector").appendChild(ao);}
-    Object.keys(secs).sort(function(a,b){return a.localeCompare(b,"nl")}).forEach(function(n){
-      var o=document.createElement("option");o.value=n;o.textContent=n;$("sector").appendChild(o);
-    });
-    var u=new Date(data.updated);
-    $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
-    $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo";
-    render();
-  }).catch(function(){
-    $("upd").textContent="Laden mislukt. Probeer later opnieuw.";
-  });
+  var sectorsDone=false;
+  function load(manual){
+    var btn=$("refresh");btn.classList.add("busy");btn.disabled=true;
+    return fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(data){
+      rows=data.rows||[];
+      var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
+      extras=data.extras||[];renderExtras();liveBitcoin();
+      if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
+      if(!sectorsDone){
+        sectorsDone=true;
+        var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});
+        if(rows.some(function(r){return r.ai})){var ao=document.createElement("option");ao.value="AI";ao.textContent="🤖 AI";$("sector").appendChild(ao);}
+        Object.keys(secs).sort(function(a,b){return a.localeCompare(b,"nl")}).forEach(function(n){
+          var o=document.createElement("option");o.value=n;o.textContent=n;$("sector").appendChild(o);
+        });
+      }
+      var u=new Date(data.updated);
+      $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
+      $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo";
+      if(manual)histP=null;
+      render();
+    }).catch(function(){
+      $("upd").textContent="Laden mislukt. Probeer later opnieuw.";
+    }).then(function(){btn.classList.remove("busy");btn.disabled=false;});
+  }
+  $("refresh").addEventListener("click",function(){load(true)});
+  load(false);
 })();
 </script>
 </body>

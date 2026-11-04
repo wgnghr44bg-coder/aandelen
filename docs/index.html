@@ -631,6 +631,21 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   $("refresh").addEventListener("click",function(){load(true)});
   load(false);
+
+  // ---------- Automatisch nieuwe versie van de pagina laden ----------
+  // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
+  var BUILD="2026-11-04-2";
+  function checkVersion(){
+    fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
+      var m=t.match(/var BUILD="([^"]+)"/);
+      if(m&&m[1]!==BUILD){
+        try{if(sessionStorage.getItem("reloaded")===m[1])return;sessionStorage.setItem("reloaded",m[1]);}catch(e){}
+        location.replace(location.pathname+"?v="+encodeURIComponent(m[1]));
+      }
+    }).catch(function(){});
+  }
+  checkVersion();
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)checkVersion()});
 })();
 </script>
 </body>

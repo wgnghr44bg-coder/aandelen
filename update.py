@@ -382,6 +382,7 @@ def main():
                 "marketCap": int(mcap_q * usd),
                 "_ff": mcap_q * usd * fund.free_float(info),
                 "currency": info.get("currency") or "USD",
+                "usd": schoon(usd, 8),  # koers (beursvaluta) -> USD, voor de portfolio
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,
                 **stats,
@@ -410,6 +411,7 @@ def main():
     extras, extra_closes = haal_extras()
     uit["extras"] = extras
     uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
+    uit["eurusd"] = schoon(fx.get("EURUSD=X"), 6)  # 1 euro in dollar, voor de portfolio in euro's
 
     # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
     analyse = None

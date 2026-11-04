@@ -274,6 +274,66 @@ html,body{overflow-x:hidden}
 .filters select,.filters input{background:var(--card)}
 footer{padding:8px 0 32px}
 @media (max-width:360px){.tabs button{font-size:.7rem}.ovchips button{font-size:.74rem}}
+
+/* ================= ontwerp v3 ================= */
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.t-overzicht .bar,.t-portfolio .bar{display:none}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:color-mix(in oklab,var(--card) 92%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.bnav button{display:flex;flex-direction:column;align-items:center;gap:3px;border:1px solid transparent;background:none;color:var(--muted);
+  border-radius:14px;padding:6px 0 5px;font:inherit;font-size:.72rem;font-weight:600;cursor:pointer}
+.bnav button .ic{width:24px;height:24px}
+.bnav button[aria-pressed=true]{color:#fff;background:linear-gradient(180deg,#1fbf6a,#118a4a);border-color:#2fd26b;box-shadow:0 0 16px rgba(47,210,107,.35)}
+.bnav button[aria-pressed=true] .ic{fill:currentColor;stroke:currentColor}
+.hero{position:relative;display:flex;align-items:center;gap:8px;min-height:104px;margin:12px 0;padding:14px 16px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(59,134,255,.35),transparent 55%),linear-gradient(180deg,var(--card2),var(--card));
+  box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.hero .hv{position:relative;z-index:1;min-width:0}
+.hero .hv span{display:block;font-weight:700;font-size:1rem}
+.hero .hv b{display:block;font-size:2.4rem;font-weight:800;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+.hero .hv small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
+.hero .hspark{position:absolute;right:0;bottom:0;width:56%;height:72%}
+.hero .hv small{max-width:44%}
+.extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border:0;background:none;overflow:visible;margin:0 0 4px}
+.xt{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--card2),var(--card));padding:10px 10px 8px;display:grid;grid-template-columns:1fr;gap:2px}
+.xt+.xt{border-left:1px solid var(--line)}
+.xt .xl{display:flex;align-items:center;gap:6px;font-size:.92rem}
+.xt .xl b{display:inline;font-size:.92rem}
+.xt .xl small{display:none}
+.xt .xico{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:.8rem;font-weight:800;flex:0 0 auto}
+.xt .xico.web{background:#1d4ed8;color:#fff}.xt .xico.vall{background:none;color:var(--up)}.xt .xico.btc{background:#f7931a;color:#fff}
+.xt .xp{font-size:1.12rem}
+.xt .spark{height:28px}
+.heat.mini{grid-template-columns:repeat(3,minmax(0,1fr))}
+.bigr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.bigr button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:16px;padding:12px 4px;font:inherit;font-size:1rem;font-weight:800;cursor:pointer;color:#fff;border:1.5px solid}
+.bigr button .n{display:inline-grid;place-items:center;min-width:30px;height:26px;padding:0 6px;border-radius:13px;background:rgba(0,0,0,.28);font-size:.85rem}
+.bigr button .ic{width:20px;height:20px;stroke-width:2.6}
+.bigr .b-BUY{background:linear-gradient(180deg,#1fbf6a,#0f7a40);border-color:#2fd26b;box-shadow:0 0 18px rgba(47,210,107,.3)}
+.bigr .b-HOLD{background:linear-gradient(180deg,#2a3c5f,#1a2742);border-color:#3c5580}
+.bigr .b-SELL{background:linear-gradient(180deg,#e0483f,#9e1f1f);border-color:#ff5a4d;box-shadow:0 0 18px rgba(255,77,77,.25)}
+.mdate{text-align:center;margin:4px 0 0}
+.hint{color:var(--muted);font-size:.82rem;margin:0 0 8px}
+.star{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:5px 12px;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+.star.on{border-color:#f5b301;color:#f5b301}
+.advies{justify-content:space-between}
+.ptot{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ptot div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.ptot b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.ptot span{color:var(--muted);font-size:.75rem}
+.plist{list-style:none;margin:0 0 10px;padding:0}
+.plist li{display:grid;grid-template-columns:28px 1fr auto 28px;gap:8px;align-items:center;padding:9px 2px;border-top:1px solid var(--line)}
+.plist li:first-child{border-top:0}
+.plist .pn{min-width:0;font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plist .pn small{display:block;color:var(--muted);font-weight:400;font-size:.72rem}
+.plist .pv{text-align:right;font-variant-numeric:tabular-nums;font-size:.88rem;font-weight:700}
+.plist .pv small{display:block;font-size:.75rem;font-weight:600}
+.plist .pdel{border:0;background:none;color:var(--muted);font-size:1.1rem;cursor:pointer}
+.padd{display:grid;gap:8px;margin:6px 0 8px}
+.padd input{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px 10px;font:inherit;font-size:16px;min-width:0}
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.padd button{border:0;border-radius:12px;padding:11px;font:inherit;font-weight:700;color:#fff;background:linear-gradient(180deg,#3b8bff,#1f63e0);cursor:pointer}
 </style>
 </head>
 <body>
@@ -282,7 +342,7 @@ footer{padding:8px 0 32px}
   <header class="top">
     <div class="brand">
       <svg class="logo" viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="24" width="6" height="10" rx="1.5" fill="#1fbf6a"/><rect x="11" y="18" width="6" height="16" rx="1.5" fill="#1fbf6a"/><rect x="20" y="12" width="6" height="22" rx="1.5" fill="#22c55e"/><rect x="29" y="16" width="6" height="18" rx="1.5" fill="#2f7bff"/><path d="M3 20L16 9l7 5L39 2" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 2h7v7" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><h1 id="title">Stock<span>Hunter</span></h1><p class="tag">Aandelen · ETF's · Sectoren · Markttrend</p></div>
+      <div><h1 id="title">Stock<span>Hunter</span></h1><p class="tag">Aandelen · ETF's · Markt</p></div>
     </div>
     <button type="button" class="ibtn" id="searchBtn" aria-label="Zoeken"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
   </header>
@@ -294,46 +354,35 @@ footer{padding:8px 0 32px}
 </div>
 <div class="bar">
   <div class="wrap">
-    <nav class="tabs" id="tabs" aria-label="Onderdelen">
-      <button type="button" data-tab="overzicht"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Overzicht</span></button>
-      <button type="button" data-tab="aandelen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Aandelen</span></button>
-      <button type="button" data-tab="sectoren"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Sectoren</span></button>
-      <button type="button" data-tab="grootste"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span>Grootste</span></button>
-    </nav>
     <div class="periods" id="periods" role="group" aria-label="Periode"></div>
   </div>
 </div>
 <div class="wrap">
   <section class="pane" data-pane="overzicht">
-    <div class="panel">
-      <div class="ph"><svg class="ic blue" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><h2>Markt overzicht</h2><span class="pmeta" id="mdate"></span></div>
-      <div class="extras" id="extras" hidden></div>
-      <div id="xpanel"></div>
+    <div class="hero" id="hero">
+      <div class="hv"><span>Markt vandaag</span><b id="mToday">–</b><small id="mSub"></small></div>
+      <svg class="hspark" id="hspark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"></svg>
     </div>
+    <div class="extras" id="extras" hidden></div>
+    <div id="xpanel"></div>
+    <div class="panel">
+      <div class="ph"><h2>Sectoren</h2><span class="pmeta">– beste <span id="secPer"></span></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
+      <div class="heat mini" id="heatmini"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste">Top 5 ›</button></div>
+      <ol class="alist prev" id="aprev"></ol>
+    </div>
+    <div class="bigr" id="ovchips"></div>
+    <p class="upd mdate" id="mdate"></p>
+  </section>
+
+  <section class="pane" data-pane="aandelen" hidden>
     <div class="stats">
       <button type="button" class="stat" data-st="s1" aria-pressed="false"><span class="sv"><b id="sDown">–</b><span id="sDownL">gedaald</span></span><svg class="ring" id="ring1" viewBox="0 0 44 44"></svg></button>
       <button type="button" class="stat" data-st="s2" aria-pressed="false"><span class="sv"><b id="s20">–</b><span id="s20L">20%+ gezakt</span></span><svg class="ring" id="ring2" viewBox="0 0 44 44"></svg></button>
       <button type="button" class="stat hot" data-st="top"><span class="sv"><b id="sTop">–</b><span><span id="sTopT">grootste daler</span><i id="sTopL" class="clamp">–</i></span></span></button>
     </div>
-    <div class="panel">
-      <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><h2>Marktfilter</h2><span class="pmeta" id="nAll"></span><button type="button" class="more" data-go="aandelen" aria-label="Naar aandelen">»</button></div>
-      <div class="ovchips" id="ovchips"></div>
-    </div>
-    <div class="panel">
-      <div class="ph"><svg class="ic blue" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M14.5 3.3A9 9 0 0 1 20.7 9.5h-6.2z"/></svg><h2>Sector prestaties</h2><span class="pmeta" id="secPer"></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
-      <div class="heat mini" id="heatmini"></div>
-    </div>
-    <div class="panel">
-      <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste" aria-label="Naar grootste assets">›</button></div>
-      <ol class="alist prev" id="aprev"></ol>
-    </div>
-    <div class="panel">
-      <div class="ph"><svg class="ic red" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M21 17v-5M21 17h-5"/></svg><h2 id="topTitle">Top dalers</h2><span class="pmeta" id="topPer"></span><button type="button" class="more" data-go="aandelen" data-mode="down">Top 50 ›</button></div>
-      <ol class="tlist" id="topprev"></ol>
-    </div>
-  </section>
-
-  <section class="pane" data-pane="aandelen" hidden>
     <div class="mode" id="mode" role="group" aria-label="Weergave">
       <button type="button" data-m="down" aria-pressed="true">📉 Dalers</button>
       <button type="button" data-m="up" aria-pressed="false">📈 Stijgers</button>
@@ -348,6 +397,30 @@ footer{padding:8px 0 32px}
     <div class="grp" id="grp" hidden></div>
     <p class="count" id="count"></p>
     <ul id="list"></ul>
+  </section>
+
+  <section class="pane" data-pane="watchlist" hidden>
+    <div class="panel">
+      <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><h2>Watchlist</h2><span class="pmeta" id="wcount"></span></div>
+      <p class="hint" id="whint">Tik bij een aandeel op <b>☆ Volgen</b> om het hier te zien. Je watchlist wordt alleen op dit apparaat bewaard.</p>
+      <ul id="wlist"></ul>
+    </div>
+  </section>
+
+  <section class="pane" data-pane="portfolio" hidden>
+    <div class="panel">
+      <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h2>Portfolio</h2></div>
+      <div class="ptot" id="ptot"></div>
+      <ul class="plist" id="plist"></ul>
+      <form class="padd" id="padd" autocomplete="off">
+        <input id="pa" list="palist" placeholder="Zoek: WEBN, Bitcoin, Apple…" aria-label="Asset" required>
+        <datalist id="palist"></datalist>
+        <div class="prow"><input id="pq" type="number" step="any" min="0" inputmode="decimal" placeholder="Aantal" aria-label="Aantal" required>
+        <input id="pc" type="number" step="any" min="0" inputmode="decimal" placeholder="Aankoopprijs (optioneel)" aria-label="Aankoopprijs per stuk"></div>
+        <button type="submit">+ Toevoegen</button>
+      </form>
+      <p class="hint">Je portfolio wordt alleen op dit apparaat bewaard (niet online). Waarde in euro's, omgerekend met de actuele wisselkoers.</p>
+    </div>
   </section>
 
   <section class="pane" data-pane="sectoren" hidden>
@@ -373,6 +446,13 @@ footer{padding:8px 0 32px}
   </section>
   <footer id="foot"></footer>
 </div>
+<nav class="bnav" id="tabs" aria-label="Menu">
+  <button type="button" data-tab="overzicht"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Overzicht</span></button>
+  <button type="button" data-tab="aandelen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Aandelen</span></button>
+  <button type="button" data-tab="sectoren"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Sectoren</span></button>
+  <button type="button" data-tab="watchlist"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Watchlist</span></button>
+  <button type="button" data-tab="portfolio"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Portfolio</span></button>
+</nav>
 <script>
 (function(){
   var PERIODS=[
@@ -465,7 +545,7 @@ footer{padding:8px 0 32px}
     if(b.dataset.m){mode=b.dataset.m;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
   });
   $("q").addEventListener("input",render);
-  $("list").addEventListener("click",function(e){
+  function cardClick(e){
     var b=e.target.closest(".row");if(!b)return;
     var li=b.parentNode,t=li.dataset.t;
     openTicker=openTicker===t?null:t;
@@ -477,7 +557,9 @@ footer{padding:8px 0 32px}
       var dv=li.querySelector(".detail");if(r&&!dv.innerHTML)dv.innerHTML=detail(r);
       drawChart(li.querySelector(".chart"));
     }
-  });
+  }
+  $("list").addEventListener("click",cardClick);
+  $("wlist").addEventListener("click",cardClick);
 
   function periodLabel(k){for(var i=0;i<PERIODS.length;i++)if(PERIODS[i].k===k)return PERIODS[i].l;return k}
 
@@ -568,7 +650,7 @@ footer{padding:8px 0 32px}
       ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
       ["5 jaar",fmtPct(r.y5)],["Jaartop",fmtPrice(r.high52,r.currency)]
     ];
-    var h=(r.rating?'<div class="advies">Advies '+ratingTag(r)+'</div>':'')+'<div class="chart" data-t="'+esc(r.ticker)+'" data-cur="'+esc(r.currency||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var h='<div class="advies"><span>'+(r.rating?'Advies '+ratingTag(r):'')+'</span>'+starBtn(r.ticker)+'</div>'+'<div class="chart" data-t="'+esc(r.ticker)+'" data-cur="'+esc(r.currency||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
     var d=drop(r,period);
     if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
     if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
@@ -679,7 +761,7 @@ footer{padding:8px 0 32px}
     el.hidden=false;
     el.innerHTML=extras.map(function(x){
       return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
-        '<span class="xl"><b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b>'+esc(x.beurs)+'</span>'+
+        '<span class="xl">'+(x.ticker==="BTC-EUR"?'<span class="xico btc">₿</span>':x.ticker==="WEBN.DE"?'<span class="xico web">🌐</span>':'<span class="xico vall"><svg class="ic" viewBox="0 0 24 24"><path d="M5 20V12M12 20V7M19 20V4"/></svg></span>')+'<b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b><small>'+esc(x.beurs)+'</small></span>'+
         '<span class="xp">'+fmtEur(x.price)+'</span>'+
         '<span class="xc '+chgCls(x.d1)+'">'+(x.d1>0?"▲ ":x.d1<0?"▼ ":"")+fmtPct(x.d1)+'</span>'+spark(x.spark)+'</button>';
     }).join("");
@@ -862,7 +944,8 @@ footer{padding:8px 0 32px}
       return '<button type="button" class="ht'+(t.k==="AI"?' ai':'')+'" data-s="'+esc(t.k)+'" aria-pressed="'+(cur===t.k)+'" style="background:'+bg+'">'+
         secIcon(t.k)+'<span class="hn">'+esc(name)+'</span><span class="hv">'+fmtPct(t.v,period)+'</span><span class="hc">'+cnt+'</span></button>';
     }).join("");
-    $("heatmini").innerHTML=$("heat").innerHTML;
+    var tmp=document.createElement("div");tmp.innerHTML=$("heat").innerHTML;
+    $("heatmini").innerHTML=Array.prototype.slice.call(tmp.children,0,3).map(function(n){return n.outerHTML}).join("");
     var pl="("+periodLabel(period).toLowerCase()+")";$("secPer").textContent=pl;$("secPer2").textContent=pl;
   }
   var SICON={
@@ -891,12 +974,15 @@ footer{padding:8px 0 32px}
 
   // ---------- Tabbladen ----------
   var tab="overzicht";
-  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste"].indexOf(st)>=0)tab=st;}catch(e){}
+  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste","watchlist","portfolio"].indexOf(st)>=0)tab=st;}catch(e){}
   function showTab(t){
     tab=t;try{localStorage.setItem("tab",t)}catch(e){}
     Array.prototype.forEach.call(document.querySelectorAll(".pane"),function(p){p.hidden=p.dataset.pane!==t});
     Array.prototype.forEach.call($("tabs").querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.tab===t)});
+    document.body.className="t-"+t;
     if(t==="grootste")renderAssets();
+    if(t==="watchlist")renderWatch();
+    if(t==="portfolio")renderPortfolio();
   }
   $("tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;showTab(b.dataset.tab);window.scrollTo({top:0})});
   document.addEventListener("click",function(e){
@@ -904,11 +990,11 @@ footer{padding:8px 0 32px}
     if(b.dataset.mode){mode=b.dataset.mode;try{localStorage.setItem("modus",mode)}catch(err){}renderMode();render();}
     showTab(b.dataset.go);window.scrollTo({top:0,behavior:"smooth"});
   });
-  $("searchBtn").addEventListener("click",function(){showTab("aandelen");setTimeout(function(){$("q").focus();$("q").scrollIntoView({block:"center"})},50)});
+  $("searchBtn").addEventListener("click",function(){showTab("aandelen");window.scrollTo({top:0});setTimeout(function(){$("q").focus();$("q").scrollIntoView({block:"center"})},50)});
 
   // ---------- Overzicht ----------
   function avatar(name,t){
-    var w=String(name).replace(/[^A-Za-z0-9 ]/g," ").trim().split(/\s+/),ini=((w[0]||"?")[0]+((w[1]||"")[0]||"")).toUpperCase();
+    var w=String(shortName(name)).replace(/[^A-Za-z0-9 ]/g," ").trim().split(/\s+/),ini=((w[0]||"?")[0]+((w[1]||"")[0]||"")).toUpperCase();
     var h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%360;
     return '<span class="av-ic" style="background:hsl('+h+' 55% 38%)">'+esc(ini)+'</span>';
   }
@@ -918,13 +1004,29 @@ footer{padding:8px 0 32px}
       '<circle cx="22" cy="22" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="'+(c*f).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 22 22)"/>'+
       '<text x="22" y="25.5" text-anchor="middle">'+nf1.format(f*100).replace(/,0$/,"")+'%</text>';
   }
+  var eurusd=null;
   function renderOverview(){
+    // Markt vandaag: dagverandering van de top 500, gewogen naar beurswaarde
+    var w=0,sum=0;rows.forEach(function(r){if(r.d1!=null&&r.marketCap){w+=r.marketCap;sum+=r.d1*r.marketCap}});
+    var mt=w?sum/w:null;
+    $("mToday").textContent=mt==null?"–":fmtPct(mt);$("mToday").className=cls(mt==null?null:-mt);
+    $("mSub").textContent="top 500, gewogen naar beurswaarde";
+    var web=null;extras.forEach(function(x){if(x.ticker==="WEBN.DE")web=x});
+    var v=web&&web.spark;
+    if(v&&v.length>1){
+      var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v),sp=(hi-lo)||1,up=v[v.length-1]>=v[0],col=up?"var(--up)":"var(--down-strong)";
+      var pts=v.map(function(y,i){return [(i/(v.length-1)*200).toFixed(1),(56-(y-lo)/sp*46).toFixed(1)]});
+      var line=pts.map(function(p){return p.join(",")}).join(" ");
+      $("hspark").innerHTML='<defs><linearGradient id="hg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".35"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
+        '<polygon points="0,60 '+line+' 200,60" fill="url(#hg)"/><polyline points="'+line+'" fill="none" stroke="'+col+'" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
+      $("mSub").textContent="top 500 · lijn: WEBN 30 dagen";
+    }
+    // grote advies-knoppen
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
-    $("nAll").textContent="("+rows.length+" aandelen)";
-    $("ovchips").innerHTML='<button type="button" class="c-all" data-r="">Alle <span class="n">('+rows.length+')</span></button>'+
-      ["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="c-'+k+'" data-r="'+k+'">'+k+' <span class="n">('+(cnt[k]||0)+')</span></button>'}).join("");
-    // grootste assets: top 3
-    var all=allAssets().slice(0,3),max=all.length?all[0].cap:1;
+    var BI={BUY:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',HOLD:'<path d="M8 5v14M16 5v14"/>',SELL:'<path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/>'};
+    $("ovchips").innerHTML=["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="b-'+k+'" data-r="'+k+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+BI[k]+'</svg>'+k+' <span class="n">'+(cnt[k]||0)+'</span></button>'}).join("");
+    // grootste assets: top 5
+    var all=allAssets().slice(0,5),max=all.length?all[0].cap:1;
     $("aprev").innerHTML=all.map(function(x){
       var c=cls(drop(x.r,period)),sub=x.k==="metaal"?"(edelmetaal)":x.k==="crypto"?"(crypto)":x.k==="bedrijf"?"🌏":esc(x.t);
       var av=x.icon?'<span class="av-ic" style="background:none;font-size:1rem">'+x.icon+'</span>':avatar(x.name,x.t);
@@ -933,24 +1035,78 @@ footer{padding:8px 0 32px}
         '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(x.r[period],period)+'</span></span>'+
         '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
     }).join("");
-    // top dalers in de gekozen periode
-    var tl=rows.filter(function(r){return drop(r,period)!=null}).sort(function(a,b){return drop(b,period)-drop(a,period)}).slice(0,3);
-    var mx=Math.max.apply(null,tl.map(function(r){return Math.abs(drop(r,period))}).concat([1]));
-    $("topPer").textContent="("+periodLabel(period).toLowerCase()+")";
-    $("topprev").innerHTML=tl.map(function(r,i){
-      var d=drop(r,period);
-      return '<li data-t="'+esc(r.ticker)+'"><span class="tr">'+(i+1)+'</span>'+avatar(r.name,r.ticker)+
-        '<span class="tn2">'+esc(shortName(r.name))+'<small>'+esc(r.ticker)+'</small></span>'+ratingTag(r)+
-        '<span class="tp '+cls(d)+'">'+fmtPct(r[period],period)+'</span>'+
-        '<span class="tb"><span style="width:'+Math.min(100,Math.abs(d)/mx*100).toFixed(0)+'%"></span></span></li>';
-    }).join("");
+    if(tab==="watchlist")renderWatch();
+    if(tab==="portfolio")renderPortfolio();
   }
   $("ovchips").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     ratingFilter=b.dataset.r||null;render();scrollToGrp();
   });
   $("aprev").addEventListener("click",function(e){var li=e.target.closest("li.co");if(li)gotoCard(li.dataset.t);else showTab("grootste")});
-  $("topprev").addEventListener("click",function(e){var li=e.target.closest("li");if(li)gotoCard(li.dataset.t)});
+
+  // ---------- Watchlist (alleen op dit apparaat) ----------
+  var watch=[];
+  try{watch=JSON.parse(localStorage.getItem("watch")||"[]")||[];}catch(e){watch=[]}
+  function isWatched(t){return watch.indexOf(t)>=0}
+  function toggleWatch(t){
+    if(isWatched(t))watch=watch.filter(function(x){return x!==t});else watch.push(t);
+    try{localStorage.setItem("watch",JSON.stringify(watch))}catch(e){}
+  }
+  function starBtn(t){return '<button type="button" class="star'+(isWatched(t)?' on':'')+'" data-star="'+esc(t)+'">'+(isWatched(t)?'★ Gevolgd':'☆ Volgen')+'</button>'}
+  document.addEventListener("click",function(e){
+    var b=e.target.closest(".star[data-star]");if(!b)return;
+    var t=b.dataset.star;toggleWatch(t);
+    Array.prototype.forEach.call(document.querySelectorAll('.star[data-star="'+t+'"]'),function(x){x.outerHTML=starBtn(t)});
+    if(tab==="watchlist")renderWatch();
+  });
+  function renderWatch(){
+    var list=rows.filter(function(r){return isWatched(r.ticker)}).sort(function(a,b){
+      var da=drop(a,period),db=drop(b,period);if(da==null)return 1;if(db==null)return -1;return db-da});
+    $("wcount").textContent=list.length?"("+list.length+")":"";
+    $("whint").hidden=list.length>0;
+    var max=Math.max.apply(null,list.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
+    $("wlist").innerHTML=list.map(function(r,i){return cardHtml(r,i,max,0)}).join("");
+    if(openTicker){var oc=document.querySelector('#wlist .card.open .chart');if(oc)drawChart(oc);}
+  }
+
+  // ---------- Portfolio (alleen op dit apparaat) ----------
+  var port=[];
+  try{port=JSON.parse(localStorage.getItem("portfolio")||"[]")||[];}catch(e){port=[]}
+  function savePort(){try{localStorage.setItem("portfolio",JSON.stringify(port))}catch(e){}}
+  function universe(){
+    var u={};
+    rows.forEach(function(r){u[r.ticker]={t:r.ticker,name:r.name,price:r.price,cur:r.currency,usd:r.usd,d1:r.d1}});
+    extras.forEach(function(x){u[x.ticker]={t:x.ticker,name:x.label+" · "+x.name,price:x.price,cur:"EUR",usd:eurusd,d1:x.d1,icon:x.ticker==="BTC-EUR"?"₿":"🌐"}});
+    assets.forEach(function(a){if(a.kind==="crypto"||a.kind==="metaal")u[a.ticker]={t:a.ticker,name:a.name+(a.kind==="metaal"?" (per ons)":""),price:a.price,cur:"USD",usd:1,d1:a.d1,icon:a.icon}});
+    return u;
+  }
+  function toEur(amount,a){if(amount==null||!a||a.usd==null||!eurusd)return null;return amount*a.usd/eurusd}
+  function fmtEurS(v){return v==null?"–":(v<0?"−":"")+"€ "+Math.abs(v).toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function renderPortfolio(){
+    var u=universe(),tot=0,cost=0,costVal=0,ok=true;
+    $("palist").innerHTML=Object.keys(u).map(function(t){return '<option value="'+esc(u[t].name+" ("+t+")")+'"></option>'}).join("");
+    $("plist").innerHTML=port.map(function(p,i){
+      var a=u[p.t];if(!a)return '<li><span></span><span class="pn">'+esc(p.t)+'<small>niet meer in de lijst</small></span><span></span><button type="button" class="pdel" data-i="'+i+'" aria-label="Verwijderen">×</button></li>';
+      var val=toEur(p.q*a.price,a);if(val==null)ok=false;else tot+=val;
+      var pl=null,plp=null;
+      if(p.c){pl=toEur(p.q*(a.price-p.c),a);plp=(a.price/p.c-1)*100;if(pl!=null){cost+=pl;costVal+=val-pl}}
+      var av=a.icon?'<span class="av-ic" style="background:none;font-size:1.1rem">'+a.icon+'</span>':avatar(a.name,a.t);
+      return '<li>'+av+'<span class="pn">'+esc(a.name)+'<small>'+nf2.format(p.q).replace(/,00$/,"")+' × '+fmtPrice(a.price,a.cur)+'</small></span>'+
+        '<span class="pv">'+fmtEurS(val)+(pl!=null?'<small class="'+(pl>=0?"up":"down2")+'">'+(pl>=0?"+":"")+fmtEurS(pl)+' ('+fmtPct(plp)+')</small>':'<small class="'+chgCls(a.d1)+'">'+fmtPct(a.d1)+' vandaag</small>')+'</span>'+
+        '<button type="button" class="pdel" data-i="'+i+'" aria-label="Verwijderen">×</button></li>';
+    }).join("");
+    var plTxt=costVal?'<b class="'+(cost>=0?"up":"down2")+'">'+(cost>=0?"+":"")+fmtEurS(cost)+'</b><span>winst/verlies ('+fmtPct(cost/costVal*100)+')</span>':'<b>–</b><span>vul een aankoopprijs in voor winst/verlies</span>';
+    $("ptot").innerHTML=port.length?'<div><b>'+(ok?fmtEurS(tot):"–")+'</b><span>totale waarde</span></div><div>'+plTxt+'</div>':'';
+  }
+  $("padd").addEventListener("submit",function(e){
+    e.preventDefault();
+    var u=universe(),txt=$("pa").value.trim(),m=txt.match(/\(([^)]+)\)\s*$/),t=m?m[1]:txt.toUpperCase();
+    if(!u[t]){var low=txt.toLowerCase();for(var k in u){if(u[k].name.toLowerCase()===low||k.toLowerCase()===low){t=k;break}}}
+    var q=parseFloat(String($("pq").value).replace(",",".")),c=parseFloat(String($("pc").value).replace(",","."));
+    if(!u[t]||!(q>0)){$("pa").setCustomValidity(!u[t]?"Kies een asset uit de lijst":"");$("pa").reportValidity();$("pa").setCustomValidity("");return}
+    port.push({t:t,q:q,c:c>0?c:null});savePort();$("pa").value="";$("pq").value="";$("pc").value="";renderPortfolio();
+  });
+  $("plist").addEventListener("click",function(e){var b=e.target.closest(".pdel");if(!b)return;port.splice(+b.dataset.i,1);savePort();renderPortfolio()});
 
   function render(){
     renderHeat();renderRatingFilter();renderCapFilter();if(tab==="grootste")renderAssets();renderOverview();
@@ -982,7 +1138,10 @@ footer{padding:8px 0 32px}
       $("count").textContent=list.length+" aandelen · "+(mode==="size"?"op beurswaarde, % = "+periodLabel(period).toLowerCase():periodLabel(period).toLowerCase())+" · "+best;
     }
     if(!list.length){$("list").innerHTML='<li class="empty">Geen aandelen gevonden.</li>';return}
-    $("list").innerHTML=list.map(function(r,i){
+    $("list").innerHTML=list.map(function(r,i){return cardHtml(r,i,max,maxCap)}).join("");
+    if(openTicker){var oc=document.querySelector('#list .card.open .chart');if(oc)drawChart(oc);}
+  }
+  function cardHtml(r,i,max,maxCap){
       var d=drop(r,period),c=cls(d),w=d==null?0:Math.min(100,Math.abs(d)/max*100);
       var col=c==="up"?"var(--up)":c==="down2"?"var(--down-strong)":c==="down"?"var(--down)":"var(--muted)";
       var valTxt=fmtPct(r[period],period);
@@ -996,8 +1155,6 @@ footer{padding:8px 0 32px}
           '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
           (capLine||'<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span>')+'</span>'+
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
-    }).join("");
-    if(openTicker){var oc=document.querySelector('.card.open .chart');if(oc)drawChart(oc);}
   }
 
   renderPeriods();renderMode();showTab(tab);
@@ -1021,7 +1178,7 @@ footer{padding:8px 0 32px}
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
       extras=data.extras||[];renderExtras();liveBitcoin();
-      assets=data.assets||[];
+      assets=data.assets||[];eurusd=data.eurusd||null;
       if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
       if(!sectorsDone){
         sectorsDone=true;
@@ -1034,7 +1191,7 @@ footer{padding:8px 0 32px}
       var u=new Date(data.updated);
       $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
       $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo";
-      $("mdate").textContent="📅 "+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+      $("mdate").textContent="Bijgewerkt: "+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
       if(manual)histP=null;
       render();
     }).catch(function(){
@@ -1046,7 +1203,7 @@ footer{padding:8px 0 32px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-9";
+  var BUILD="2026-11-04-10";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -1,0 +1,37 @@
+# AI-aandelen: bedrijven die veel verdienen aan kunstmatige intelligentie.
+# Ze krijgen op de site het label "AI" en vormen een eigen groep in de heatmap en het filter.
+# Een ticker toevoegen of weghalen kan gewoon hier (één per regel).
+
+# AI-chips en chipontwerp
+NVDA
+AMD
+AVGO
+TSM
+ARM
+MU
+INTC
+QCOM
+# Machines om AI-chips te maken
+ASML
+AMAT
+LRCX
+KLAC
+# Software voor chipontwerp
+SNPS
+CDNS
+# Cloud en grote AI-modellen
+MSFT
+GOOGL
+AMZN
+META
+ORCL
+IBM
+# AI-software
+PLTR
+NOW
+CRM
+APP
+# Netwerk en stroom voor datacenters
+ANET
+GEV
+CEG

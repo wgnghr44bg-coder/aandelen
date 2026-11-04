@@ -64,6 +64,19 @@ h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
 .xpanel h3{margin:0 0 6px;font-size:.92rem}
 .xpanel .grid{margin-top:4px}
 .live{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--up);margin-left:4px;vertical-align:middle}
+.heat-h{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 6px}
+.heat-h h2{font-size:1rem;margin:0}
+.heat-h span{color:var(--muted);font-size:.75rem}
+.heat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ht{border:1px solid var(--line);border-radius:10px;padding:8px 9px;text-align:left;font:inherit;color:var(--text);cursor:pointer;min-width:0;min-height:64px}
+.ht[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:1px}
+.ht .hn{display:block;font-size:.74rem;font-weight:600;line-height:1.2;hyphens:auto;overflow-wrap:anywhere}
+.ht .hv{display:block;font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.ht .hc{display:block;font-size:.68rem;opacity:.75}
+.ht.ai{border-width:2px}
+.heat-key{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.7rem;margin-top:6px}
+.heat-key i{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in oklab,var(--down-strong) 60%,var(--card)),var(--card),color-mix(in oklab,var(--up) 60%,var(--card)));border:1px solid var(--line)}
+.aitag{display:inline-block;font-size:.68rem;font-weight:700;padding:0 5px;border-radius:4px;background:var(--chip);color:var(--text);margin-left:2px}
 .upd{color:var(--muted);font-size:.8rem;margin:2px 0 0}
 .upd b{color:var(--text);font-weight:600}
 .count{color:var(--muted);font-size:.8rem;margin:10px 0 6px}
@@ -123,6 +136,12 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   </div>
 </div>
 <div class="wrap">
+  <section id="heatwrap" hidden>
+    <div class="heat-h"><h2>Hoe gaan de sectoren?</h2></div>
+    <p class="count" id="heatsub" style="margin:0 0 6px"></p>
+    <div class="heat" id="heat"></div>
+    <div class="heat-key"><span>slechter</span><i></i><span>beter</span></div>
+  </section>
   <p class="count" id="count"></p>
   <ul id="list"></ul>
   <section class="info">
@@ -130,6 +149,10 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     <p>Een aandeel dat flink gezakt is, kan goedkoop zijn, maar vaak is er een reden voor de daling: tegenvallende winst, problemen of minder groei. Kijk altijd eerst waarom de koers is gezakt.</p>
     <h2>Wat is K/W?</h2>
     <p>De koers-winstverhouding: de koers gedeeld door de winst per aandeel van de afgelopen 12 maanden. Een K/W van 20 betekent dat je 20 keer de jaarwinst betaalt. Een hoge K/W betekent dat beleggers veel groei verwachten; zonder winst is er geen K/W.</p>
+    <h2>Hoe werkt de sector-heatmap?</h2>
+    <p>Per sector staat de gemiddelde koersverandering voor de gekozen periode. Grote bedrijven tellen zwaarder mee (gewogen naar beurswaarde). Groen gaat goed, rood slecht. Bij "Onder jaartop" is groen: dicht bij de hoogste koers van het jaar.</p>
+    <h2>Wat is de AI-groep?</h2>
+    <p>Bedrijven die veel verdienen aan kunstmatige intelligentie: makers van AI-chips en de machines daarvoor, cloudbedrijven met grote AI-modellen, AI-software en netwerk/stroom voor datacenters. Deze aandelen horen ook bij hun gewone sector. De keuze is een inschatting en staat in <code>ai.txt</code>.</p>
     <h2>Wat is "Onder jaartop"?</h2>
     <p>Hoeveel procent de koers nu lager staat dan de hoogste koers van de afgelopen 52 weken (op basis van de hoogste dagkoers).</p>
     <h2>Geen financieel advies</h2>
@@ -386,11 +409,47 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     }).catch(function(){});
   }
 
+  // ---------- Sector-heatmap ----------
+  function renderHeat(){
+    var groups={};
+    rows.forEach(function(r){
+      var keys=[sec(r.sector)];if(r.ai)keys.push("AI");
+      keys.forEach(function(k){(groups[k]=groups[k]||[]).push(r)});
+    });
+    var tiles=Object.keys(groups).map(function(k){
+      var g=groups[k],w=0,sum=0,up=0,n=0;
+      g.forEach(function(r){var v=r[period];if(v==null)return;w+=r.marketCap;sum+=v*r.marketCap;n++;if(period==="fromHigh"?v<5:v>0)up++});
+      return {k:k,n:n,up:up,v:w?sum/w:null};
+    }).filter(function(t){return t.v!=null});
+    // score: positief = goed. Bij "Onder jaartop" geldt: minder dan 10% onder de top is goed.
+    tiles.forEach(function(t){t.score=period==="fromHigh"?10-t.v:t.v});
+    tiles.sort(function(a,b){return b.score-a.score});
+    var maxA=Math.max.apply(null,tiles.map(function(t){return Math.abs(t.score)}).concat([5]));
+    var cur=$("sector").value;
+    $("heatwrap").hidden=!tiles.length;
+    $("heatsub").textContent=(period==="fromHigh"?"Gemiddeld onder jaartop":periodLabel(period))+", gewogen naar beurswaarde · tik op een vakje om te filteren";
+    $("heat").innerHTML=tiles.map(function(t){
+      var a=Math.min(1,Math.abs(t.score)/maxA),pctMix=Math.round(8+a*52);
+      var bg=Math.abs(t.score)<0.3?"var(--card)":"color-mix(in oklab,"+(t.score>0?"var(--up)":"var(--down-strong)")+" "+pctMix+"%,var(--card))";
+      var name=t.k==="AI"?"🤖 AI":t.k;
+      var cnt=period==="fromHigh"?t.up+"/"+t.n+" bij top":t.up+"/"+t.n+" gestegen";
+      return '<button type="button" class="ht'+(t.k==="AI"?' ai':'')+'" data-s="'+esc(t.k)+'" aria-pressed="'+(cur===t.k)+'" style="background:'+bg+'">'+
+        '<span class="hn">'+esc(name)+'</span><span class="hv">'+fmtPct(t.v,period)+'</span><span class="hc">'+cnt+'</span></button>';
+    }).join("");
+  }
+  $("heat").addEventListener("click",function(e){
+    var b=e.target.closest(".ht");if(!b)return;
+    var sel=$("sector");sel.value=sel.value===b.dataset.s?"":b.dataset.s;
+    render();
+    if(sel.value)$("count").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+
   function render(){
+    renderHeat();
     stats();
     var s=$("sector").value,q=$("q").value.trim().toLowerCase();
     var list=rows.filter(function(r){
-      if(s&&sec(r.sector)!==s)return false;
+      if(s==="AI"){if(!r.ai)return false}else if(s&&sec(r.sector)!==s)return false;
       if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
       return true;
     }).sort(function(a,b){
@@ -408,7 +467,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
         '<button type="button" class="row" aria-expanded="'+open+'">'+
           '<span class="pos">'+(i+1)+'</span>'+
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
-          '<span class="meta" style="display:block"><span class="tk">'+esc(r.ticker)+'</span> · '+esc(sec(r.sector))+' · #'+r.rank+' in grootte</span></span>'+
+          '<span class="meta" style="display:block"><span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+' in grootte</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+fmtPct(r[period],period)+'</span>'+
           '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
         '</button><div class="detail">'+detail(r)+'</div></li>';
@@ -423,6 +482,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     if(!rows.length||!data.asof){$("asof").textContent="Nog geen gegevens. De eerste update volgt na het sluiten van de beurs.";$("list").innerHTML="";return}
     $("asof").textContent="Slotkoersen van "+fmtDate(data.asof)+" · de 100 grootste bedrijven op beurswaarde";
     var secs={};rows.forEach(function(r){secs[sec(r.sector)]=1});
+    if(rows.some(function(r){return r.ai})){var ao=document.createElement("option");ao.value="AI";ao.textContent="🤖 AI (kunstmatige intelligentie)";$("sector").appendChild(ao);}
     Object.keys(secs).sort(function(a,b){return a.localeCompare(b,"nl")}).forEach(function(n){
       var o=document.createElement("option");o.value=n;o.textContent=n;$("sector").appendChild(o);
     });

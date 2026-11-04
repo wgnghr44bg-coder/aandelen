@@ -17,7 +17,8 @@
    "y5": 596.62,
    "high52": 243.37,
    "fromHigh": 15.07,
-   "rank": 1
+   "rank": 1,
+   "ai": true
   },
   {
    "ticker": "AAPL",
@@ -34,7 +35,8 @@
    "y5": 125.41,
    "high52": 351.73,
    "fromHigh": 5.64,
-   "rank": 2
+   "rank": 2,
+   "ai": false
   },
   {
    "ticker": "MSFT",
@@ -51,7 +53,8 @@
    "y5": 61.35,
    "high52": 551.15,
    "fromHigh": 5.47,
-   "rank": 3
+   "rank": 3,
+   "ai": true
   },
   {
    "ticker": "GOOGL",
@@ -68,7 +71,8 @@
    "y5": 90.67,
    "high52": 408.1,
    "fromHigh": 31.38,
-   "rank": 4
+   "rank": 4,
+   "ai": true
   },
   {
    "ticker": "AMZN",
@@ -85,7 +89,8 @@
    "y5": 44.2,
    "high52": 287.2,
    "fromHigh": 12.71,
-   "rank": 5
+   "rank": 5,
+   "ai": true
   },
   {
    "ticker": "TSM",
@@ -102,7 +107,8 @@
    "y5": 272.29,
    "high52": 487.47,
    "fromHigh": 16.96,
-   "rank": 6
+   "rank": 6,
+   "ai": true
   },
   {
    "ticker": "META",
@@ -119,7 +125,8 @@
    "y5": 86.68,
    "high52": 779.82,
    "fromHigh": 20.36,
-   "rank": 7
+   "rank": 7,
+   "ai": true
   },
   {
    "ticker": "AVGO",
@@ -136,7 +143,8 @@
    "y5": 561.35,
    "high52": 493.32,
    "fromHigh": 32.67,
-   "rank": 8
+   "rank": 8,
+   "ai": true
   },
   {
    "ticker": "TSLA",
@@ -153,7 +161,8 @@
    "y5": -2.8,
    "high52": 498.83,
    "fromHigh": 20.11,
-   "rank": 9
+   "rank": 9,
+   "ai": false
   },
   {
    "ticker": "LLY",
@@ -170,7 +179,8 @@
    "y5": 444.22,
    "high52": 1449.68,
    "fromHigh": 2.78,
-   "rank": 10
+   "rank": 10,
+   "ai": false
   },
   {
    "ticker": "BRK-B",
@@ -187,7 +197,8 @@
    "y5": 93.64,
    "high52": 559.58,
    "fromHigh": 0.45,
-   "rank": 11
+   "rank": 11,
+   "ai": false
   },
   {
    "ticker": "WMT",
@@ -204,7 +215,8 @@
    "y5": 163.59,
    "high52": 134.84,
    "fromHigh": 7.4,
-   "rank": 12
+   "rank": 12,
+   "ai": false
   },
   {
    "ticker": "MU",
@@ -221,7 +233,8 @@
    "y5": 1112.37,
    "high52": 1254.61,
    "fromHigh": 31.84,
-   "rank": 13
+   "rank": 13,
+   "ai": true
   },
   {
    "ticker": "JPM",
@@ -238,7 +251,8 @@
    "y5": 127.36,
    "high52": 364.68,
    "fromHigh": 7.32,
-   "rank": 14
+   "rank": 14,
+   "ai": false
   },
   {
    "ticker": "AMD",
@@ -255,7 +269,8 @@
    "y5": 251.93,
    "high52": 658.52,
    "fromHigh": 26.52,
-   "rank": 15
+   "rank": 15,
+   "ai": true
   },
   {
    "ticker": "V",
@@ -272,7 +287,8 @@
    "y5": 109.14,
    "high52": 426.78,
    "fromHigh": 1.49,
-   "rank": 16
+   "rank": 16,
+   "ai": false
   },
   {
    "ticker": "XOM",
@@ -289,7 +305,8 @@
    "y5": 228.3,
    "high52": 188.5,
    "fromHigh": 5.86,
-   "rank": 17
+   "rank": 17,
+   "ai": false
   },
   {
    "ticker": "JNJ",
@@ -306,7 +323,8 @@
    "y5": 85.94,
    "high52": 282.02,
    "fromHigh": 5.62,
-   "rank": 18
+   "rank": 18,
+   "ai": false
   },
   {
    "ticker": "ASML",
@@ -323,7 +341,8 @@
    "y5": 91.04,
    "high52": 1994.75,
    "fromHigh": 22.19,
-   "rank": 19
+   "rank": 19,
+   "ai": true
   },
   {
    "ticker": "MA",
@@ -340,7 +359,8 @@
    "y5": 98.78,
    "high52": 661.34,
    "fromHigh": 2.14,
-   "rank": 20
+   "rank": 20,
+   "ai": false
   },
   {
    "ticker": "ABBV",
@@ -357,7 +377,8 @@
    "y5": 191.8,
    "high52": 298.74,
    "fromHigh": 4.26,
-   "rank": 21
+   "rank": 21,
+   "ai": false
   },
   {
    "ticker": "COST",
@@ -374,7 +395,8 @@
    "y5": 108.56,
    "high52": 1093.14,
    "fromHigh": 6.76,
-   "rank": 22
+   "rank": 22,
+   "ai": false
   },
   {
    "ticker": "CVX",
@@ -391,7 +413,8 @@
    "y5": 142.51,
    "high52": 236.48,
    "fromHigh": 4.74,
-   "rank": 23
+   "rank": 23,
+   "ai": false
   },
   {
    "ticker": "PLTR",
@@ -408,7 +431,8 @@
    "y5": 562.64,
    "high52": 212.94,
    "fromHigh": 17.63,
-   "rank": 24
+   "rank": 24,
+   "ai": true
   },
   {
    "ticker": "KO",
@@ -425,7 +449,8 @@
    "y5": 93.89,
    "high52": 96.26,
    "fromHigh": 1.52,
-   "rank": 25
+   "rank": 25,
+   "ai": false
   },
   {
    "ticker": "CSCO",
@@ -442,7 +467,8 @@
    "y5": 106.72,
    "high52": 129.38,
    "fromHigh": 20.41,
-   "rank": 26
+   "rank": 26,
+   "ai": false
   },
   {
    "ticker": "ORCL",
@@ -459,7 +485,8 @@
    "y5": 41.19,
    "high52": 251.91,
    "fromHigh": 49.91,
-   "rank": 27
+   "rank": 27,
+   "ai": true
   },
   {
    "ticker": "PG",
@@ -476,7 +503,8 @@
    "y5": 26.86,
    "high52": 165.75,
    "fromHigh": 2.23,
-   "rank": 28
+   "rank": 28,
+   "ai": false
   },
   {
    "ticker": "UNH",
@@ -493,7 +521,8 @@
    "y5": -3.08,
    "high52": 458.79,
    "fromHigh": 11.85,
-   "rank": 29
+   "rank": 29,
+   "ai": false
   },
   {
    "ticker": "MRK",
@@ -510,7 +539,8 @@
    "y5": 86.19,
    "high52": 156.0,
    "fromHigh": 7.26,
-   "rank": 30
+   "rank": 30,
+   "ai": false
   },
   {
    "ticker": "BAC",
@@ -527,7 +557,8 @@
    "y5": 18.59,
    "high52": 64.9,
    "fromHigh": 23.48,
-   "rank": 31
+   "rank": 31,
+   "ai": false
   },
   {
    "ticker": "HD",
@@ -544,7 +575,8 @@
    "y5": 1.76,
    "high52": 389.18,
    "fromHigh": 14.27,
-   "rank": 32
+   "rank": 32,
+   "ai": false
   },
   {
    "ticker": "GE",
@@ -561,7 +593,8 @@
    "y5": 401.43,
    "high52": 388.25,
    "fromHigh": 17.41,
-   "rank": 33
+   "rank": 33,
+   "ai": false
   },
   {
    "ticker": "PM",
@@ -578,7 +611,8 @@
    "y5": 179.35,
    "high52": 214.35,
    "fromHigh": 2.95,
-   "rank": 34
+   "rank": 34,
+   "ai": false
   },
   {
    "ticker": "INTC",
@@ -595,7 +629,8 @@
    "y5": 29.77,
    "high52": 142.35,
    "fromHigh": 57.46,
-   "rank": 35
+   "rank": 35,
+   "ai": true
   },
   {
    "ticker": "AMAT",
@@ -612,7 +647,8 @@
    "y5": 165.14,
    "high52": 738.88,
    "fromHigh": 48.31,
-   "rank": 36
+   "rank": 36,
+   "ai": true
   },
   {
    "ticker": "NVS",
@@ -629,7 +665,8 @@
    "y5": 129.47,
    "high52": 165.43,
    "fromHigh": 3.73,
-   "rank": 37
+   "rank": 37,
+   "ai": false
   },
   {
    "ticker": "SHEL",
@@ -646,7 +683,8 @@
    "y5": 179.43,
    "high52": 109.37,
    "fromHigh": 4.73,
-   "rank": 38
+   "rank": 38,
+   "ai": false
   },
   {
    "ticker": "MS",
@@ -663,7 +701,8 @@
    "y5": 118.49,
    "high52": 229.58,
    "fromHigh": 18.94,
-   "rank": 39
+   "rank": 39,
+   "ai": false
   },
   {
    "ticker": "HSBC",
@@ -680,7 +719,8 @@
    "y5": 290.35,
    "high52": 107.43,
    "fromHigh": 21.35,
-   "rank": 40
+   "rank": 40,
+   "ai": false
   },
   {
    "ticker": "LRCX",
@@ -697,7 +737,8 @@
    "y5": 305.37,
    "high52": 438.03,
    "fromHigh": 47.33,
-   "rank": 41
+   "rank": 41,
+   "ai": true
   },
   {
    "ticker": "CAT",
@@ -714,7 +755,8 @@
    "y5": 232.95,
    "high52": 1068.93,
    "fromHigh": 41.63,
-   "rank": 42
+   "rank": 42,
+   "ai": false
   },
   {
    "ticker": "PANW",
@@ -731,7 +773,8 @@
    "y5": 325.49,
    "high52": 432.33,
    "fromHigh": 19.0,
-   "rank": 43
+   "rank": 43,
+   "ai": false
   },
   {
    "ticker": "TXN",
@@ -748,7 +791,8 @@
    "y5": 88.16,
    "high52": 330.71,
    "fromHigh": 5.51,
-   "rank": 44
+   "rank": 44,
+   "ai": false
   },
   {
    "ticker": "AZN",
@@ -765,7 +809,8 @@
    "y5": 58.75,
    "high52": 210.52,
    "fromHigh": 12.65,
-   "rank": 45
+   "rank": 45,
+   "ai": false
   },
   {
    "ticker": "RY",
@@ -782,7 +827,8 @@
    "y5": 125.44,
    "high52": 216.75,
    "fromHigh": 6.06,
-   "rank": 46
+   "rank": 46,
+   "ai": false
   },
   {
    "ticker": "RTX",
@@ -799,7 +845,8 @@
    "y5": 157.69,
    "high52": 226.41,
    "fromHigh": 9.98,
-   "rank": 47
+   "rank": 47,
+   "ai": false
   },
   {
    "ticker": "SAP",
@@ -816,7 +863,8 @@
    "y5": 68.23,
    "high52": 259.59,
    "fromHigh": 11.28,
-   "rank": 48
+   "rank": 48,
+   "ai": false
   },
   {
    "ticker": "NFLX",
@@ -833,7 +881,8 @@
    "y5": -5.12,
    "high52": 116.73,
    "fromHigh": 45.67,
-   "rank": 49
+   "rank": 49,
+   "ai": false
   },
   {
    "ticker": "TMO",
@@ -850,7 +899,8 @@
    "y5": 10.73,
    "high52": 711.85,
    "fromHigh": 1.9,
-   "rank": 50
+   "rank": 50,
+   "ai": false
   },
   {
    "ticker": "GS",
@@ -867,7 +917,8 @@
    "y5": 147.88,
    "high52": 1148.37,
    "fromHigh": 21.97,
-   "rank": 51
+   "rank": 51,
+   "ai": false
   },
   {
    "ticker": "WFC",
@@ -884,7 +935,8 @@
    "y5": 90.12,
    "high52": 96.18,
    "fromHigh": 11.07,
-   "rank": 52
+   "rank": 52,
+   "ai": false
   },
   {
    "ticker": "CRWD",
@@ -901,7 +953,8 @@
    "y5": 250.02,
    "high52": 286.99,
    "fromHigh": 14.74,
-   "rank": 53
+   "rank": 53,
+   "ai": false
   },
   {
    "ticker": "BABA",
@@ -918,7 +971,8 @@
    "y5": -35.28,
    "high52": 179.45,
    "fromHigh": 44.07,
-   "rank": 54
+   "rank": 54,
+   "ai": false
   },
   {
    "ticker": "AMGN",
@@ -935,7 +989,8 @@
    "y5": 150.74,
    "high52": 475.65,
    "fromHigh": 3.03,
-   "rank": 55
+   "rank": 55,
+   "ai": false
   },
   {
    "ticker": "GEV",
@@ -952,7 +1007,8 @@
    "y5": null,
    "high52": 1195.24,
    "fromHigh": 23.18,
-   "rank": 56
+   "rank": 56,
+   "ai": true
   },
   {
    "ticker": "MUFG",
@@ -969,7 +1025,8 @@
    "y5": 297.16,
    "high52": 24.26,
    "fromHigh": 12.32,
-   "rank": 57
+   "rank": 57,
+   "ai": false
   },
   {
    "ticker": "IBM",
@@ -986,7 +1043,8 @@
    "y5": 150.53,
    "high52": 330.09,
    "fromHigh": 24.25,
-   "rank": 58
+   "rank": 58,
+   "ai": true
   },
   {
    "ticker": "LIN",
@@ -1003,7 +1061,8 @@
    "y5": 65.12,
    "high52": 546.4,
    "fromHigh": 6.38,
-   "rank": 59
+   "rank": 59,
+   "ai": false
   },
   {
    "ticker": "TM",
@@ -1020,7 +1079,8 @@
    "y5": 17.44,
    "high52": 248.9,
    "fromHigh": 22.46,
-   "rank": 60
+   "rank": 60,
+   "ai": false
   },
   {
    "ticker": "AXP",
@@ -1037,7 +1097,8 @@
    "y5": 100.61,
    "high52": 383.18,
    "fromHigh": 15.05,
-   "rank": 61
+   "rank": 61,
+   "ai": false
   },
   {
    "ticker": "ARM",
@@ -1054,7 +1115,8 @@
    "y5": null,
    "high52": 452.7,
    "fromHigh": 55.27,
-   "rank": 62
+   "rank": 62,
+   "ai": true
   },
   {
    "ticker": "ANET",
@@ -1071,7 +1133,8 @@
    "y5": 418.95,
    "high52": 217.41,
    "fromHigh": 21.85,
-   "rank": 63
+   "rank": 63,
+   "ai": true
   },
   {
    "ticker": "APH",
@@ -1088,7 +1151,8 @@
    "y5": 345.13,
    "high52": 89.93,
    "fromHigh": 6.38,
-   "rank": 64
+   "rank": 64,
+   "ai": false
   },
   {
    "ticker": "GILD",
@@ -1105,7 +1169,8 @@
    "y5": 201.06,
    "high52": 175.65,
    "fromHigh": 4.66,
-   "rank": 65
+   "rank": 65,
+   "ai": false
   },
   {
    "ticker": "TTE",
@@ -1122,7 +1187,8 @@
    "y5": 144.86,
    "high52": 95.78,
    "fromHigh": 3.22,
-   "rank": 66
+   "rank": 66,
+   "ai": false
   },
   {
    "ticker": "TD",
@@ -1139,7 +1205,8 @@
    "y5": 106.68,
    "high52": 127.96,
    "fromHigh": 2.52,
-   "rank": 67
+   "rank": 67,
+   "ai": false
   },
   {
    "ticker": "KLAC",
@@ -1156,7 +1223,8 @@
    "y5": 300.86,
    "high52": 307.02,
    "fromHigh": 49.12,
-   "rank": 68
+   "rank": 68,
+   "ai": true
   },
   {
    "ticker": "ADI",
@@ -1173,7 +1241,8 @@
    "y5": 152.51,
    "high52": 444.56,
    "fromHigh": 5.57,
-   "rank": 69
+   "rank": 69,
+   "ai": false
   },
   {
    "ticker": "C",
@@ -1190,7 +1259,8 @@
    "y5": 116.86,
    "high52": 146.41,
    "fromHigh": 16.19,
-   "rank": 70
+   "rank": 70,
+   "ai": false
   },
   {
    "ticker": "BHP",
@@ -1207,7 +1277,8 @@
    "y5": 118.12,
    "high52": 96.6,
    "fromHigh": 19.12,
-   "rank": 71
+   "rank": 71,
+   "ai": false
   },
   {
    "ticker": "DIS",
@@ -1224,7 +1295,8 @@
    "y5": -30.84,
    "high52": 115.42,
    "fromHigh": 1.07,
-   "rank": 72
+   "rank": 72,
+   "ai": false
   },
   {
    "ticker": "ABT",
@@ -1241,7 +1313,8 @@
    "y5": -6.38,
    "high52": 128.83,
    "fromHigh": 15.08,
-   "rank": 73
+   "rank": 73,
+   "ai": false
   },
   {
    "ticker": "BLK",
@@ -1258,7 +1331,8 @@
    "y5": 37.42,
    "high52": 1182.61,
    "fromHigh": 1.8,
-   "rank": 74
+   "rank": 74,
+   "ai": false
   },
   {
    "ticker": "VZ",
@@ -1275,7 +1349,8 @@
    "y5": 20.12,
    "high52": 50.88,
    "fromHigh": 11.09,
-   "rank": 75
+   "rank": 75,
+   "ai": false
   },
   {
    "ticker": "PEP",
@@ -1292,7 +1367,8 @@
    "y5": -1.75,
    "high52": 166.41,
    "fromHigh": 17.51,
-   "rank": 76
+   "rank": 76,
+   "ai": false
   },
   {
    "ticker": "MCD",
@@ -1309,7 +1385,8 @@
    "y5": 16.6,
    "high52": 335.18,
    "fromHigh": 21.52,
-   "rank": 77
+   "rank": 77,
+   "ai": false
   },
   {
    "ticker": "SHOP",
@@ -1326,7 +1403,8 @@
    "y5": -7.46,
    "high52": 180.88,
    "fromHigh": 21.18,
-   "rank": 78
+   "rank": 78,
+   "ai": false
   },
   {
    "ticker": "CRM",
@@ -1343,7 +1421,8 @@
    "y5": -26.49,
    "high52": 267.8,
    "fromHigh": 17.03,
-   "rank": 79
+   "rank": 79,
+   "ai": true
   },
   {
    "ticker": "UNP",
@@ -1360,7 +1439,8 @@
    "y5": 43.18,
    "high52": 314.53,
    "fromHigh": 3.53,
-   "rank": 80
+   "rank": 80,
+   "ai": false
   },
   {
    "ticker": "DE",
@@ -1377,7 +1457,8 @@
    "y5": 102.55,
    "high52": 719.5,
    "fromHigh": 7.46,
-   "rank": 81
+   "rank": 81,
+   "ai": false
   },
   {
    "ticker": "NVO",
@@ -1394,7 +1475,8 @@
    "y5": -22.2,
    "high52": 61.11,
    "fromHigh": 34.23,
-   "rank": 82
+   "rank": 82,
+   "ai": false
   },
   {
    "ticker": "WELL",
@@ -1411,7 +1493,8 @@
    "y5": 237.83,
    "high52": 254.24,
    "fromHigh": 5.14,
-   "rank": 83
+   "rank": 83,
+   "ai": false
   },
   {
    "ticker": "NEE",
@@ -1428,7 +1511,8 @@
    "y5": 13.8,
    "high52": 97.3,
    "fromHigh": 13.33,
-   "rank": 84
+   "rank": 84,
+   "ai": false
   },
   {
    "ticker": "QCOM",
@@ -1445,7 +1529,8 @@
    "y5": 17.43,
    "high52": 257.56,
    "fromHigh": 36.16,
-   "rank": 85
+   "rank": 85,
+   "ai": true
   },
   {
    "ticker": "COP",
@@ -1462,7 +1547,8 @@
    "y5": 133.79,
    "high52": 154.28,
    "fromHigh": 6.4,
-   "rank": 86
+   "rank": 86,
+   "ai": false
   },
   {
    "ticker": "PFE",
@@ -1479,7 +1565,8 @@
    "y5": -11.64,
    "high52": 31.06,
    "fromHigh": 3.41,
-   "rank": 87
+   "rank": 87,
+   "ai": false
   },
   {
    "ticker": "TMUS",
@@ -1496,7 +1583,8 @@
    "y5": 32.41,
    "high52": 221.19,
    "fromHigh": 30.19,
-   "rank": 88
+   "rank": 88,
+   "ai": false
   },
   {
    "ticker": "SAN",
@@ -1513,7 +1601,8 @@
    "y5": 259.09,
    "high52": 14.87,
    "fromHigh": 23.72,
-   "rank": 89
+   "rank": 89,
+   "ai": false
   },
   {
    "ticker": "DHR",
@@ -1530,7 +1619,8 @@
    "y5": -12.98,
    "high52": 241.35,
    "fromHigh": 4.66,
-   "rank": 90
+   "rank": 90,
+   "ai": false
   },
   {
    "ticker": "BUD",
@@ -1547,7 +1637,8 @@
    "y5": 46.17,
    "high52": 86.6,
    "fromHigh": 6.29,
-   "rank": 91
+   "rank": 91,
+   "ai": false
   },
   {
    "ticker": "ACN",
@@ -1564,7 +1655,8 @@
    "y5": -24.23,
    "high52": 282.94,
    "fromHigh": 10.03,
-   "rank": 92
+   "rank": 92,
+   "ai": false
   },
   {
    "ticker": "ISRG",
@@ -1581,7 +1673,8 @@
    "y5": 21.31,
    "high52": 603.88,
    "fromHigh": 27.01,
-   "rank": 93
+   "rank": 93,
+   "ai": false
   },
   {
    "ticker": "SCHW",
@@ -1598,7 +1691,8 @@
    "y5": 17.19,
    "high52": 114.53,
    "fromHigh": 22.05,
-   "rank": 94
+   "rank": 94,
+   "ai": false
   },
   {
    "ticker": "ETN",
@@ -1615,7 +1709,8 @@
    "y5": 146.13,
    "high52": 478.0,
    "fromHigh": 18.05,
-   "rank": 95
+   "rank": 95,
+   "ai": false
   },
   {
    "ticker": "TJX",
@@ -1632,7 +1727,8 @@
    "y5": 112.15,
    "high52": 169.47,
    "fromHigh": 18.79,
-   "rank": 96
+   "rank": 96,
+   "ai": false
   },
   {
    "ticker": "SMFG",
@@ -1649,7 +1745,8 @@
    "y5": 275.35,
    "high52": 27.62,
    "fromHigh": 13.54,
-   "rank": 97
+   "rank": 97,
+   "ai": false
   },
   {
    "ticker": "SONY",
@@ -1666,7 +1763,8 @@
    "y5": 5.86,
    "high52": 30.34,
    "fromHigh": 16.32,
-   "rank": 98
+   "rank": 98,
+   "ai": false
   },
   {
    "ticker": "LMT",
@@ -1683,7 +1781,8 @@
    "y5": 117.72,
    "high52": 683.27,
    "fromHigh": 6.48,
-   "rank": 99
+   "rank": 99,
+   "ai": false
   },
   {
    "ticker": "UBS",
@@ -1700,7 +1799,8 @@
    "y5": 202.09,
    "high52": 55.99,
    "fromHigh": 14.26,
-   "rank": 100
+   "rank": 100,
+   "ai": false
   }
  ],
  "extras": [

@@ -14,6 +14,7 @@ import yfinance as yf
 
 ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
+AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
 TOP_N = 100
@@ -26,9 +27,11 @@ EXTRAS = [
 BITVAVO = "https://api.bitvavo.com/v2"
 
 
-def lees_tickers():
+def lees_tickers(bestand=TICKERS_FILE):
     tickers = []
-    for regel in TICKERS_FILE.read_text().splitlines():
+    if not bestand.exists():
+        return tickers
+    for regel in bestand.read_text().splitlines():
         regel = regel.split("#")[0].strip().upper()
         if regel and regel not in tickers:
             tickers.append(regel)
@@ -248,6 +251,7 @@ def haal_extras():
 
 def main():
     tickers = lees_tickers()
+    ai = set(lees_tickers(AI_FILE))
     print(f"{len(tickers)} tickers")
     data = download(tickers)
 
@@ -277,6 +281,7 @@ def main():
                 "sector": info.get("sector") or ("Financial Services" if t == "BRK-B" else "Overig"),
                 "marketCap": int(info["marketCap"]),
                 "pe": pe if pe and pe > 0 else None,
+                "ai": t in ai,
                 **stats,
             })
         except Exception as e:  # noqa: BLE001

@@ -36,7 +36,7 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .periods button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
 .filters{display:flex;gap:8px;margin-top:8px}
 .filters select,.filters input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font:inherit;font-size:16px}
-.mode{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--chip);border-radius:10px;padding:3px;margin-bottom:8px}
+.mode{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:var(--chip);border-radius:10px;padding:3px;margin-bottom:8px}
 .mode button{border:0;background:none;color:var(--muted);border-radius:8px;padding:7px 0;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}
 .mode button[aria-pressed=true]{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:normal;color:var(--text);margin-top:2px}
@@ -126,6 +126,7 @@ ul{list-style:none;margin:0;padding:0}
 .tk{font-weight:600;color:var(--text);opacity:.8}
 .val{text-align:right;flex:0 0 auto;width:84px}
 .pct{font-weight:700;font-variant-numeric:tabular-nums;font-size:1.02rem}
+.pct.cap{font-size:.88rem;white-space:nowrap;color:var(--text)}
 .down{color:var(--down)}.down2{color:var(--down-strong)}.up{color:var(--up)}.flat{color:var(--muted)}
 .track{height:4px;background:var(--chip);border-radius:2px;margin-top:5px;overflow:hidden}
 .fill{height:100%;border-radius:2px;margin-left:auto}
@@ -166,6 +167,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     <div class="mode" id="mode" role="group" aria-label="Weergave">
       <button type="button" data-m="down" aria-pressed="true">📉 Dalers</button>
       <button type="button" data-m="up" aria-pressed="false">📈 Stijgers</button>
+      <button type="button" data-m="size" aria-pressed="false">🏆 Grootste</button>
     </div>
     <div class="periods" id="periods" role="group" aria-label="Periode"></div>
     <div class="rfilter" id="rfilter" role="group" aria-label="Advies" hidden></div>
@@ -211,7 +213,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   try{var saved=localStorage.getItem("periode");if(saved&&PERIODS.some(function(p){return p.k===saved}))period=saved;}catch(e){}
 
   var mode="down";
-  try{if(localStorage.getItem("modus")==="up")mode="up";}catch(e){}
+  try{var sm=localStorage.getItem("modus");if(sm==="up"||sm==="size")mode=sm;}catch(e){}
   var rows=[],openTicker=null;
 
   function sec(s){return SECTORS[s]||s||"Overig"}
@@ -324,7 +326,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   // Wat de kerncijfers tellen; dezelfde regels gebruikt het filter als je op een vakje tikt.
   function statDef(k){
     var pl=periodLabel(period).toLowerCase();
-    if(mode==="down"){
+    if(mode!=="up"){
       if(k==="s1")return {f:function(d){return d>0.05},l:period==="fromHigh"?"onder jaartop":"gedaald ("+pl+")",t:period==="fromHigh"?"Onder jaartop":"Gedaald · "+pl};
       return {f:function(d){return d>=20},l:"20%+ gezakt",t:"20%+ gezakt · "+pl};
     }
@@ -337,13 +339,13 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
   }
   function stats(){
     var vals=rows.map(function(r){return {r:r,d:drop(r,period)}}).filter(function(x){return x.d!=null});
-    var sign=mode==="down"?1:-1;
+    var sign=mode!=="up"?1:-1;
     var top=vals.slice().sort(function(a,b){return (b.d-a.d)*sign})[0];
     var d1=statDef("s1"),d2=statDef("s2");
     $("sDown").textContent=vals.filter(function(x){return d1.f(x.d)}).length;
     $("sDownL").textContent="van "+vals.length+" "+d1.l;
     $("s20").textContent=vals.filter(function(x){return d2.f(x.d)}).length;$("s20L").textContent=d2.l;
-    $("sTopT").textContent=mode==="down"?"grootste daler":(period==="fromHigh"?"dichtst bij top":"grootste stijger");
+    $("sTopT").textContent=mode!=="up"?"grootste daler":(period==="fromHigh"?"dichtst bij top":"grootste stijger");
     $("sTop").textContent=top?fmtPct(top.r[period],period):"–";
     $("sTopL").textContent=top?top.r.name:"–";
     topTicker=top?top.r.ticker:null;
@@ -558,32 +560,36 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
       if(q&&r.name.toLowerCase().indexOf(q)<0&&r.ticker.toLowerCase().indexOf(q)<0)return false;
       return true;
     }).sort(function(a,b){
+      if(mode==="size")return b.marketCap-a.marketCap;
       var da=drop(a,period),db=drop(b,period);
       if(da==null)return 1;if(db==null)return -1;return mode==="down"?db-da:da-db;
     });
     var max=Math.max.apply(null,rows.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
-    var best=mode==="down"?"slechtste eerst":"beste eerst";
+    var best=mode==="size"?"grootste eerst":mode==="down"?"slechtste eerst":"beste eerst";
+    var maxCap=Math.max.apply(null,list.map(function(r){return r.marketCap||0}).concat([1]));
     if(s||sf||ratingFilter||capFilter){
       $("grp").hidden=false;$("count").textContent="";
       var gname=[ratingFilter?ratingTag({rating:ratingFilter}):"",capFilter?"💰 "+capDef(capFilter).l:"",sf?sf.t:"",s?(s==="AI"?"🤖 AI":esc(s)):""].filter(Boolean).join(" · ");
       $("grp").innerHTML='<div class="gt">'+gname+'<span>'+list.length+' · '+best+'</span></div>'+
-        '<div class="seg"><button type="button" data-m="down" aria-pressed="'+(mode==="down")+'">📉</button><button type="button" data-m="up" aria-pressed="'+(mode==="up")+'">📈</button></div>'+
+        '<div class="seg"><button type="button" data-m="down" aria-pressed="'+(mode==="down")+'">📉</button><button type="button" data-m="up" aria-pressed="'+(mode==="up")+'">📈</button><button type="button" data-m="size" aria-pressed="'+(mode==="size")+'">🏆</button></div>'+
         '<button type="button" class="x" aria-label="Filter wissen">✕</button>';
     }else{
       $("grp").hidden=true;
-      $("count").textContent=list.length+" aandelen · "+periodLabel(period).toLowerCase()+" · "+best;
+      $("count").textContent=list.length+" aandelen · "+(mode==="size"?"op beurswaarde":periodLabel(period).toLowerCase())+" · "+best;
     }
     if(!list.length){$("list").innerHTML='<li class="empty">Geen aandelen gevonden.</li>';return}
     $("list").innerHTML=list.map(function(r,i){
       var d=drop(r,period),c=cls(d),w=d==null?0:Math.min(100,Math.abs(d)/max*100);
       var col=c==="up"?"var(--up)":c==="down2"?"var(--down-strong)":c==="down"?"var(--down)":"var(--muted)";
+      var valTxt=fmtPct(r[period],period);
+      if(mode==="size"){c="cap";valTxt=fmtCap(r.marketCap);w=Math.max(2,r.marketCap/maxCap*100);col="var(--accent)";}
       var open=openTicker===r.ticker;
       return '<li class="card'+(open?' open':'')+'" data-t="'+esc(r.ticker)+'">'+
         '<button type="button" class="row" aria-expanded="'+open+'">'+
           '<span class="pos">'+(i+1)+'</span>'+
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
           '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
-          '<span class="val"><span class="pct '+c+'" style="display:block">'+fmtPct(r[period],period)+'</span>'+
+          '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
           '<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span></span>'+
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
     }).join("");
@@ -634,7 +640,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-04-2";
+  var BUILD="2026-11-04-3";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

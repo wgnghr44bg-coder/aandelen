@@ -3,6 +3,7 @@ name: Koersen bijwerken
 on:
   schedule:
     - cron: "17 * * * *"      # elk uur (koersen, ETF's en bitcoin)
+    - cron: "47 * * * *"      # reserve: GitHub slaat geplande runs bij drukte soms over
     - cron: "45 22 * * 1-5"   # elke werkdag 22:45 UTC, na sluiting van de Amerikaanse beurs: ook de grafieken
   workflow_dispatch:
 

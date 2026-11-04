@@ -396,3 +396,11 @@ def test_country_risk_premium_raises_discount_rate():
     r_dev = dcf.run(dev)["scenarios"]["neutral"]["cost_of_equity"]
     r_em = dcf.run(em)["scenarios"]["neutral"]["cost_of_equity"]
     assert r_em == pytest.approx(r_dev + 0.01)
+
+
+def test_exchange_clearing_cash_not_counted():
+    f = make_fin(s={"cash": [50000.0] * 4})  # enorme kas (onderpand clearing)
+    normal = dcf.run(f)["scenarios"]["neutral"]["upside"]
+    f["industry"] = "Financial Data & Stock Exchanges"
+    exch = dcf.run(f)["scenarios"]["neutral"]
+    assert exch["net_debt"] == 200.0 and exch["upside"] < normal

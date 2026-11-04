@@ -154,6 +154,11 @@ def _fcf_model(fin, sc, notes):
     if debt is None or cash is None:
         return None, "schuld of kaspositie ontbreekt"
     mi = at(s("minority_interest"), 0) or 0.0
+    if (fin.get("industry") or "").startswith("Financial Data & Stock Exchanges"):
+        # Beurzen/clearinghuizen: de kas op de balans is grotendeels onderpand van clearingleden,
+        # geen eigen vrij geld. Daarom niet aftrekken van de schuld.
+        cash = 0.0
+        notes.append("beurs/clearinghuis: kas = onderpand van klanten, niet meegeteld")
 
     re, rf, beta = cost_of_equity(fin, notes)
     r = max(wacc(fin, re, notes) + sc["dr"], 0.07)

@@ -300,6 +300,7 @@ def main():
                 "name": info.get("shortName") or info.get("longName") or t,
                 "sector": info.get("sector") or ("Financial Services" if t == "BRK-B" else "Overig"),
                 "marketCap": int(mcap_q * usd),
+                "_ff": mcap_q * usd * fund.free_float(info),
                 "currency": info.get("currency") or "USD",
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,
@@ -311,8 +312,11 @@ def main():
     if not rijen:
         raise SystemExit("Geen enkele ticker gelukt; data.json niet overschreven.")
 
-    rijen.sort(key=lambda r: r["marketCap"], reverse=True)
+    # Rangschikking zoals WEBN: op free-float beurswaarde (alleen vrij verhandelbare aandelen)
+    rijen.sort(key=lambda r: r["_ff"], reverse=True)
     rijen = rijen[:TOP_N]
+    for r in rijen:
+        r.pop("_ff")
     asof = max(r["_date"] for r in rijen)
     for i, r in enumerate(rijen, 1):
         r["rank"] = i

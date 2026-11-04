@@ -46,6 +46,17 @@ def is_developed(info):
     return (info or {}).get("country") not in EMERGING_COUNTRIES
 
 
+def free_float(info):
+    """Aandeel vrij verhandelbare aandelen (zoals indexen als die achter WEBN wegen).
+    Onbekend of onlogisch -> 1,0 (volledige beurswaarde)."""
+    fl, sh = (info or {}).get("floatShares"), (info or {}).get("sharesOutstanding")
+    try:
+        r = float(fl) / float(sh)
+    except (TypeError, ValueError, ZeroDivisionError):
+        return 1.0
+    return r if 0.05 <= r <= 1.0 else 1.0
+
+
 def base_currency(cur):
     """(hoofdvaluta, aantal subeenheden per hoofdeenheid)."""
     return SUBUNITS.get(cur, (cur, 1.0))
@@ -94,7 +105,8 @@ def refresh(cache, tickers):
                                            (cache.get(t) or {}).get("info_fetched") or ""))
     for t in order:
         c = cache.setdefault(t, {})
-        if c.get("info") and "country" in c["info"] and _age(c.get("info_fetched")) < INFO_MAX_AGE:
+        if c.get("info") and "country" in c["info"] and "floatShares" in c["info"] \
+                and _age(c.get("info_fetched")) < INFO_MAX_AGE:
             continue
         if n_info >= INFO_BUDGET:
             print(f"info-budget op ({INFO_BUDGET}); rest volgende run")

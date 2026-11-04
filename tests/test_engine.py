@@ -416,3 +416,10 @@ def test_only_developed_countries():
                if l.strip() and not l.startswith("#")]
     assert not any(t.endswith((".SS", ".SZ", ".NS", ".SR", ".KS", ".TW")) for t in tickers)
     assert not {"TSM", "BABA", "PDD", "NTES", "INFY", "PBR"} & set(tickers)
+
+
+def test_free_float():
+    import fundamentals as fund
+    assert fund.free_float({"floatShares": 55, "sharesOutstanding": 100}) == 0.55
+    assert fund.free_float({"sharesOutstanding": 100}) == 1.0          # onbekend
+    assert fund.free_float({"floatShares": 300, "sharesOutstanding": 100}) == 1.0  # onlogisch

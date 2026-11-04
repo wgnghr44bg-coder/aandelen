@@ -7,7 +7,7 @@ gesorteerd op hoeveel hun koers gezakt is. Handig om snel te zien welke grote be
 
 ## Hoe het werkt
 
-- `tickers.txt` – ongeveer 620 kandidaten uit ontwikkelde landen (Yahoo-notatie). Het script kiest hieruit elke keer de top 500 op beurswaarde.
+- `tickers.txt` – ongeveer 620 kandidaten uit ontwikkelde landen (Yahoo-notatie). Het script kiest hieruit elke keer de top 500 op free-float beurswaarde (zoals de index achter WEBN), alleen ontwikkelde landen.
 - `update.py` – haalt 5 jaar dagkoersen en bedrijfsgegevens op en schrijft `docs/data.json`.
 - `docs/index.html` – de website (één bestand), die `data.json` laadt.
 - `.github/workflows/update.yml` – draait elke werkdag om 22:45 UTC en commit `docs/data.json` als die veranderd is.

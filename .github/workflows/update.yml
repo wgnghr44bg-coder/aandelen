@@ -10,12 +10,13 @@ permissions:
 
 concurrency:
   group: update
-  cancel-in-progress: false
+  # Een nieuwe update breekt een oude (of vastgelopen) update af, zodat er nooit iets blijft wachten.
+  cancel-in-progress: true
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 

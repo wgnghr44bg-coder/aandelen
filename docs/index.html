@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Top 100 gezakt</title>
-<meta name="description" content="De 100 grootste beursgenoteerde bedrijven, gesorteerd op koersdaling.">
+<title>StockHunter</title>
+<meta name="description" content="StockHunter: de 100 grootste beursgenoteerde bedrijven, gesorteerd op koersdaling of -stijging.">
+<meta name="apple-mobile-web-app-title" content="StockHunter">
 <style>
 :root{
   --bg:#f6f7f9;--card:#fff;--text:#16181d;--muted:#6b7280;--line:#e5e7eb;
@@ -21,7 +22,7 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .wrap{max-width:720px;margin:0 auto;padding:0 16px}
 header{padding:20px 0 8px}
-h1{font-size:1.4rem;line-height:1.2;margin:0 0 4px}
+h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .sub{color:var(--muted);font-size:.85rem;margin:0}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 4px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
@@ -125,7 +126,7 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
 <body>
 <div class="wrap">
   <header>
-    <h1 id="title">Top 100 aandelen: wat is er gezakt?</h1>
+    <h1 id="title">StockHunter</h1>
     <div class="updrow">
       <p class="upd" id="upd">Laden…</p>
       <button type="button" class="rbtn" id="refresh" aria-label="Vernieuwen"><span class="ri">↻</span></button>
@@ -220,7 +221,6 @@ footer{color:var(--muted);font-size:.75rem;text-align:center;padding:0 0 28px}
     renderPeriods();render();
   });
   function renderMode(){
-    $("title").textContent="Top 100 aandelen: wat is er "+(mode==="down"?"gezakt?":"gestegen?");
     Array.prototype.forEach.call($("mode").querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.m===mode)});
   }
   $("mode").addEventListener("click",function(e){

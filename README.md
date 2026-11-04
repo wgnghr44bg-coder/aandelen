@@ -1,4 +1,4 @@
-# Top 100 aandelen: wat is er gezakt?
+# StockHunter
 
 Een simpele website die de 100 grootste beursgenoteerde bedrijven (VS-genoteerd, inclusief ADR's) laat zien,
 gesorteerd op hoeveel hun koers gezakt is. Handig om snel te zien welke grote bedrijven flink gedaald zijn.

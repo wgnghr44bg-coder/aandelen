@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T14:38:04Z",
+ "updated": "2026-11-05T14:43:14Z",
  "lenders": [
   {
    "id": "rnhb",
@@ -336,7 +336,7 @@
    "segments": [],
    "facts": [],
    "status": "aanvraag",
-   "reason": "de website staat automatisch uitlezen niet toe (robots.txt)"
+   "reason": "website niet bereikbaar voor automatische controle"
   },
   {
    "id": "nestr",
@@ -455,6 +455,105 @@
         6.4,
         6.6,
         7.5
+       ]
+      }
+     ]
+    },
+    {
+     "seg": "combinatie",
+     "name": "combinatiepanden",
+     "src": "https://www.nestr.nl/rente",
+     "ltv": [
+      50,
+      55,
+      60,
+      65,
+      70,
+      75
+     ],
+     "rows": [
+      {
+       "fix": "var",
+       "label": "Variabel",
+       "rates": [
+        6.57,
+        6.57,
+        6.57,
+        6.57,
+        6.57,
+        6.82
+       ]
+      },
+      {
+       "fix": "1",
+       "label": "1 jaar vast met optie",
+       "rates": [
+        6.15,
+        6.15,
+        6.15,
+        6.2,
+        6.25,
+        6.3
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar vast",
+       "rates": [
+        6.7,
+        6.7,
+        6.7,
+        6.7,
+        6.75,
+        6.8
+       ]
+      },
+      {
+       "fix": "3",
+       "label": "3 jaar vast",
+       "rates": [
+        6.15,
+        6.15,
+        6.15,
+        6.2,
+        6.25,
+        6.4
+       ]
+      },
+      {
+       "fix": "5",
+       "label": "5 jaar vast",
+       "rates": [
+        6.1,
+        6.1,
+        6.1,
+        6.15,
+        6.2,
+        6.35
+       ]
+      },
+      {
+       "fix": "7",
+       "label": "7 jaar vast",
+       "rates": [
+        6.25,
+        6.25,
+        6.25,
+        6.25,
+        6.3,
+        6.35
+       ]
+      },
+      {
+       "fix": "10",
+       "label": "10 jaar vast",
+       "rates": [
+        6.4,
+        6.4,
+        6.4,
+        6.45,
+        6.5,
+        6.6
        ]
       }
      ]
@@ -625,7 +724,115 @@
    "name": "SolidBriq",
    "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
    "checked": "2026-11-05",
-   "segments": [],
+   "segments": [
+    {
+     "seg": "residentieel",
+     "name": "BasiQ Select (nieuwe leningen sinds 1 okt 2026)",
+     "src": "https://www.solidbriq.nl/actuele-rentetarieven/",
+     "ltv": [
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80
+     ],
+     "rows": [
+      {
+       "fix": "var",
+       "label": "1 maand",
+       "rates": [
+        5.3,
+        5.3,
+        5.3,
+        5.35,
+        5.45,
+        5.55,
+        5.65
+       ]
+      },
+      {
+       "fix": "1",
+       "label": "1 jaar",
+       "rates": [
+        5.9,
+        5.9,
+        5.9,
+        5.9,
+        5.95,
+        6.1,
+        6.25
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar",
+       "rates": [
+        6.05,
+        6.05,
+        6.05,
+        6.05,
+        6.1,
+        6.25,
+        6.4
+       ]
+      },
+      {
+       "fix": "3",
+       "label": "3 jaar",
+       "rates": [
+        6.05,
+        6.05,
+        6.05,
+        6.05,
+        6.1,
+        6.25,
+        6.4
+       ]
+      },
+      {
+       "fix": "5",
+       "label": "5 jaar",
+       "rates": [
+        6.05,
+        6.05,
+        6.05,
+        6.05,
+        6.1,
+        6.25,
+        6.4
+       ]
+      },
+      {
+       "fix": "7",
+       "label": "7 jaar",
+       "rates": [
+        6.1,
+        6.1,
+        6.1,
+        6.1,
+        6.15,
+        6.3,
+        6.45
+       ]
+      },
+      {
+       "fix": "10",
+       "label": "10 jaar",
+       "rates": [
+        6.15,
+        6.15,
+        6.15,
+        6.15,
+        6.2,
+        6.35,
+        6.5
+       ]
+      }
+     ]
+    }
+   ],
    "facts": [
     {
      "t": "Variabele rente = 1-maands Euribor + opslag: woningen 2,90% (t/m 65% LTV) tot 4,00% (t/m 85% LTV); commercieel 3,75–3,85%.",
@@ -636,8 +843,8 @@
      "src": "https://www.solidbriq.nl/hoe-financieren/flexibel-in-de-toekomst/"
     }
    ],
-   "status": "aanvraag",
-   "reason": "geen leesbare rentetabel gepubliceerd"
+   "source_date": "28-10-2026",
+   "status": "ok"
   },
   {
    "id": "mogelijk",

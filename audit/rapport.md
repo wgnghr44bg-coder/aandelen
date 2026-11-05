@@ -1,4 +1,4 @@
-# Data-audit InvestMarket – 2026-11-05 13:15 UTC
+# Data-audit InvestMarket – 2026-11-05 13:24 UTC
 
 Gecontroleerd: 27 cijfers · ✅ 27 kloppen · ❌ 0 wijken af · ⚠️ 0 niet te controleren.
 

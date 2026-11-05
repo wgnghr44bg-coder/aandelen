@@ -9,13 +9,14 @@ De MIR-rentecijfers voor Nederland worden door DNB aan de ECB geleverd; het ECB 
 sleutelvrije bron van dezelfde DNB-cijfers.
 
 Per cijfer bewaren we ook: meetperiode (`date`), vorige periode (`prev`, `prev_date`), frequentie (`freq`),
-soort cijfer (`kind`) en de datum waarop de bron het cijfer heeft bijgewerkt (`upd`, zie `ecb_bijgewerkt`).
+soort cijfer (`kind`) en de datum waarop de bron het cijfer heeft bijgewerkt (`upd`, gezocht door publicatiedata.py met `ecb_bijgewerkt`).
 
 Alles is optioneel: lukt een bron niet, dan blijft de vorige waarde staan (of ontbreekt het onderdeel).
 """
 import csv
 import io
 from datetime import date, timedelta
+from pathlib import Path
 import json
 import re
 import time
@@ -27,6 +28,8 @@ import xml.etree.ElementTree as ET
 ECB = "https://data-api.ecb.europa.eu/service/data/"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
 
+HYP_KEY = "MIR/M.NL.B.A2C..R.A.2250.EUR.N"   # hypotheken NL, nieuwe leningen, per rentevaste periode
+BIZ_KEY = "MIR/M.NL.B.A2A..R..2240.EUR.N"    # bedrijfsleningen NL, per bedrag en rentevaste periode
 # Rentevaste periode in de MIR-statistiek (nieuwe hypotheken)
 FIXATIE = {
     "F": "variabel / tot 1 jaar vast",
@@ -52,7 +55,7 @@ def _status_get(url):
     """Eén poging: (HTTP-status, tekst). Voor vragen waarbij 'geen resultaat' een geldig antwoord is."""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
-        with urllib.request.urlopen(req, timeout=20) as r:
+        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT["s"]) as r:
             return r.status, r.read().decode("utf-8")
     except urllib.error.HTTPError as e:
         return e.code, ""
@@ -61,7 +64,19 @@ def _status_get(url):
         return None, ""
 
 
-UPD_BUDGET = {"s": 90.0}  # max. seconden per run voor het zoeken van publicatiedata (ECB is soms traag)
+UPD_BUDGET = {"s": 90.0}  # max. seconden voor het zoeken van publicatiedata (ECB is soms traag)
+HTTP_TIMEOUT = {"s": 20}
+PUBLICATIE = Path(__file__).parent / "docs" / "publicatie.json"  # gevuld door publicatiedata.py (dagelijks)
+
+
+def publicatiedatum(key, periode):
+    """Datum waarop de ECB de waarde voor `periode` bijwerkte, uit docs/publicatie.json (of None)."""
+    try:
+        r = json.loads(PUBLICATIE.read_text()).get(key) or {}
+    except Exception:  # noqa: BLE001
+        return None
+    return r.get("upd") if r.get("period") == periode else None
+
 
 
 def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
@@ -256,7 +271,7 @@ def zakelijk_nl():
     """Rente op nieuwe bedrijfsleningen NL (hieronder valt ook bancaire vastgoedfinanciering), per
     leningbedrag en rentevaste periode. De omschrijvingen komen uit de officiële ECB-codelijsten;
     zonder die lijsten tonen we niets (niets gokken)."""
-    reeksen = ecb_series("MIR/M.NL.B.A2A..R..2240.EUR.N", 2)
+    reeksen = ecb_series(BIZ_KEY, 2)
     if not reeksen:
         return None
     dims, lijsten = mir_structuur()
@@ -377,14 +392,13 @@ def haal_macro(vorige=None):
         last = _last(st)
         if last:
             last.update({"src": ecb_link(key), "title": st.get("title") or "", "kind": kind, "freq": MAAND,
-                         "upd": ecb_bijgewerkt(key, last["date"], vorige.get(naam)),
-                         "upd_try": date.today().isoformat()})
+                         "upd": publicatiedatum(key, last["date"])})
             print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']}, bijgewerkt {last['upd']})")
         zet(naam, last)
 
     # Hypotheekrente NL, nieuwe leningen per rentevaste periode
     hyp = []
-    for k, s in sorted(ecb_series("MIR/M.NL.B.A2C..R.A.2250.EUR.N", 2).items()):
+    for k, s in sorted(ecb_series(HYP_KEY, 2).items()):
         parts = k.split(".")
         code = parts[parts.index("A2C") + 1] if "A2C" in parts and parts.index("A2C") + 1 < len(parts) else ""
         last = _last(s)
@@ -395,21 +409,17 @@ def haal_macro(vorige=None):
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
     if hyp:
-        oud = (vorige.get("mortgage_nl") or [{}])[0]
-        upd = ecb_bijgewerkt("MIR/M.NL.B.A2C..R.A.2250.EUR.N", hyp[0]["date"], oud)
+        upd = publicatiedatum(HYP_KEY, hyp[0]["date"])
         for h in hyp:
-            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd,
-                      "upd_try": date.today().isoformat()})
+            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd})
     zet("mortgage_nl", hyp)
 
     # Bedrijfsleningen NL per bedrag en rentevaste periode (basis voor bancaire vastgoedfinanciering)
     biz = zakelijk_nl()
     if biz:
-        oud = (vorige.get("business_nl") or [{}])[0]
-        upd = ecb_bijgewerkt("MIR/M.NL.B.A2A..R..2240.EUR.N", biz[0]["date"], oud)
+        upd = publicatiedatum(BIZ_KEY, biz[0]["date"])
         for b in biz:
-            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd,
-                      "upd_try": date.today().isoformat()})
+            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd})
     zet("business_nl", biz)
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP

@@ -1,10 +1,10 @@
-name: Data-audit
+name: Data-audit en publicatiedata
 
 # Controleert ieder rente-, inflatie- en woningprijscijfer op de site tegen de originele bron
 # (ECB/DNB, Eurostat, CBS) en zet het resultaat in audit/rapport.md.
 on:
   schedule:
-    - cron: "13 5 * * 1"   # elke maandag 05:13 UTC
+    - cron: "13 5 * * *"   # elke dag 05:13 UTC
   workflow_dispatch:
 
 permissions:
@@ -17,17 +17,20 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Publicatiedata van de ECB zoeken
+        continue-on-error: true   # lukt het niet (ECB traag), dan toch de audit
+        run: python -u publicatiedata.py
       - name: Controleer de cijfers tegen de bronnen
         run: python -u audit.py
       - name: Rapport bewaren
         run: |
-          git add audit/rapport.md
+          git add audit/rapport.md docs/publicatie.json
           if git diff --cached --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

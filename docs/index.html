@@ -1119,7 +1119,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var first=null,last=null;
     extras.forEach(function(x){if(x.h&&x.h.length){var f=+x.h[0][0].slice(0,4),l=+x.h[x.h.length-1][0].slice(0,4);first=first==null?f:Math.min(first,f);last=last==null?l:Math.max(last,l)}});
     var out=[];if(first==null)return out;
-    for(var y=last-1;y>=first;y--)out.push(String(y));   // volledige kalenderjaren (huidig jaar = YTD)
+    // alleen volledige kalenderjaren waarvoor minstens één van de drie al op 31 dec van het jaar ervoor bestond
+    for(var y=last-1;y>=first;y--){var st=(y-1)+"-12-31";
+      if(extras.some(function(x){return x.h&&x.h.length&&x.h[0][0]<=st}))out.push(String(y))}
     return out;
   }
   function dstr(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
@@ -1468,7 +1470,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-3";
+  var BUILD="2026-11-05-4";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

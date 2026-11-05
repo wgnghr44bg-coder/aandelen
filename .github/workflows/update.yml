@@ -69,6 +69,7 @@ jobs:
           if [ -f docs/markt_hist.json ]; then git add docs/markt_hist.json; fi
           if [ -f docs/grond_hist.json ]; then git add docs/grond_hist.json; fi
           if [ -f analyse/analysis.json ]; then git add analyse/analysis.json; fi
+          if [ -f sp500.txt ]; then git add sp500.txt; fi
           if git diff --cached --quiet; then
             echo "Geen wijzigingen."
             exit 0

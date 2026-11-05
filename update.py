@@ -2,6 +2,8 @@
 
 Gebruik: python update.py
 """
+import csv
+import io
 import json
 import os
 import urllib.request
@@ -19,6 +21,8 @@ import macro
 
 ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
+SP500_FILE = ROOT / "sp500.txt"   # huidige S&P 500-samenstelling (bijgewerkt bij elke run, terugval op dit bestand)
+SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
 AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
@@ -447,8 +451,28 @@ def historie_nodig(asof):
         return True
 
 
+def sp500_tickers():
+    """Huidige S&P 500-leden (Yahoo-notatie: BRK.B -> BRK-B). Lukt ophalen niet, dan het vorige bestand."""
+    try:
+        req = urllib.request.Request(SP500_URL, headers={"User-Agent": "investmarket/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            rijen = list(csv.DictReader(io.StringIO(r.read().decode("utf-8"))))
+        sym = sorted({(x.get("Symbol") or "").strip().replace(".", "-") for x in rijen} - {""})
+        if len(sym) >= 480:  # anders onvolledig antwoord: niet gebruiken
+            SP500_FILE.write_text("# S&P 500-leden, bron: github.com/datasets/s-and-p-500-companies "
+                                  f"(opgehaald {datetime.now(timezone.utc):%Y-%m-%d})\n" + "\n".join(sym) + "\n")
+            print(f"S&P 500: {len(sym)} leden opgehaald")
+            return sym
+        print(f"S&P 500: onvolledige lijst ({len(sym)}), vorige gebruikt")
+    except Exception as e:  # noqa: BLE001
+        print(f"S&P 500 ophalen mislukt ({e}), vorige lijst gebruikt")
+    return lees_tickers(SP500_FILE) if SP500_FILE.exists() else []
+
+
 def main():
+    sp500 = set(sp500_tickers())
     tickers = lees_tickers()
+    tickers += [t for t in sorted(sp500) if t not in set(tickers)]
     ai = set(lees_tickers(AI_FILE))
     print(f"{len(tickers)} tickers")
     data = download(tickers)
@@ -510,12 +534,19 @@ def main():
 
     # Rangschikking zoals WEBN: op free-float beurswaarde (alleen vrij verhandelbare aandelen)
     rijen.sort(key=lambda r: r["_ff"], reverse=True)
-    rijen = rijen[:TOP_N]
+    for i, r in enumerate(rijen, 1):
+        r["rank"] = i  # plaats op free-float beurswaarde binnen alle kandidaten
+    # top 500 plus alle S&P 500-leden die daar buiten vallen
+    rijen = [r for r in rijen if r["rank"] <= TOP_N or r["ticker"] in sp500]
     for r in rijen:
         r.pop("_ff")
+        r["top"] = r["rank"] <= TOP_N
+        if r["ticker"] in sp500:
+            r["sp"] = True
+    print(f"{sum(r['top'] for r in rijen)} in de top {TOP_N}, {len(rijen)} totaal "
+          f"(S&P 500: {sum(1 for r in rijen if r.get('sp'))} van {len(sp500)})")
     asof = max(r["_date"] for r in rijen)
-    for i, r in enumerate(rijen, 1):
-        r["rank"] = i
+    for r in rijen:
         r.pop("_date")
 
     uit = {

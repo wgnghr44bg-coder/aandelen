@@ -407,6 +407,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .b3d summary span{color:var(--muted);font-size:.72rem}.b3d ul{margin:6px 0 0;padding-left:18px;font-size:.74rem}.b3d li{margin:3px 0}
 .b3src{list-style:none;margin-left:-18px!important;color:var(--muted);font-size:.68rem}
 .tcr{margin:0 0 4px}.tcread{min-height:1.1em;font-size:.68rem;color:var(--muted);text-align:center}
+.sptag{font-size:.6rem;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 3px;color:var(--muted)}
 .vgh{margin:14px 4px 6px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .rt2 tr.bgrp td{padding-top:12px;font-size:.68em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .more.inl{display:inline;padding:0;border:0;background:none;cursor:pointer;font-weight:600;font-size:inherit!important;color:var(--accent)!important}
@@ -705,11 +706,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   var statFilter=null,topTicker=null,ratingFilter=null;
   var RATINGS=["BUY","HOLD","SELL","NO RATING"];
-  var CAPS=[{k:"xl",l:"> $500 mld",min:5e11,max:Infinity},{k:"l",l:"$100–500 mld",min:1e11,max:5e11},
+  var CAPS=[{k:"top",l:"🌍 Top 500",test:function(r){return r.top!==false}},{k:"sp",l:"🇺🇸 S&P 500",test:function(r){return !!r.sp}},
+            {k:"xl",l:"> $500 mld",min:5e11,max:Infinity},{k:"l",l:"$100–500 mld",min:1e11,max:5e11},
             {k:"m",l:"$50–100 mld",min:5e10,max:1e11},{k:"s",l:"< $50 mld",min:0,max:5e10}];
   var capFilter=null;
   function capDef(k){for(var i=0;i<CAPS.length;i++)if(CAPS[i].k===k)return CAPS[i];return null}
-  function inCap(r,c){return r.marketCap>=c.min&&r.marketCap<c.max}
+  function inCap(r,c){return c.test?c.test(r):r.marketCap>=c.min&&r.marketCap<c.max}
   function renderCapFilter(){
     var el=$("cfilter");
     if(!rows.length){el.hidden=true;return}
@@ -1624,7 +1626,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         '<button type="button" class="row" aria-expanded="'+open+'">'+
           '<span class="pos">'+(i+1)+'</span>'+
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
-          '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
+          '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+(r.sp?' <span class="sptag">S&amp;P</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
           (capLine||'<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span>')+'</span>'+
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
@@ -1676,7 +1678,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-18";
+  var BUILD="2026-11-05-19";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

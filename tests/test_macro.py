@@ -39,7 +39,6 @@ def fake_get(url, tries=3):
 
 def test_macro_parsing(monkeypatch):
     monkeypatch.setattr(macro, "_get", fake_get)
-    monkeypatch.setattr(macro, "_status_get", lambda url: (404, ""))   # geen echte netwerkvragen in tests
     m = macro.haal_macro({"euribor3m": {"value": 2.0}})
     assert m["ecb_deposit"]["value"] == 2.0 and m["ecb_deposit"]["prev"] == 2.25
     assert m["ecb_deposit"]["since"] == "2025-06-11"
@@ -119,27 +118,12 @@ def test_zakelijk_zonder_codelijst_toont_niets(monkeypatch):
     assert macro.nl_label("Over EUR 0.25 million and up to and including EUR 1 million") == "boven €0,25 mln – €1 mln"
 
 
-def test_ecb_bijgewerkt_binair_zoeken(monkeypatch):
+def test_eerst_gezien(monkeypatch):
     from datetime import date
-    gezien = []
-
-    def fake(url):
-        d = date.fromisoformat(url.split("updatedAfter=")[1][:10])
-        gezien.append(d)
-        # waarde voor 2026-09 is bijgewerkt op 3 nov 2026 (10:00 UTC)
-        return (200, "KEY,TIME_PERIOD,OBS_VALUE\nX,2026-09,3.1\n") if d <= date(2026, 11, 3) else (404, "")
-    monkeypatch.setattr(macro, "_status_get", fake)
-    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", vandaag=date(2026, 11, 5)) == "2026-11-03"
-    assert len(gezien) <= 10
-    # cache: zelfde periode -> geen nieuwe vragen
-    gezien.clear()
-    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", {"date": "2026-09", "upd": "2026-11-03"}) == "2026-11-03"
-    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", {"date": "2026-09", "upd": None, "upd_try": "2026-11-05"},
-                                vandaag=date(2026, 11, 5)) is None   # vandaag al gezocht
-    assert not gezien
-    # ouder dan het zoekvenster -> onbekend (niet gokken)
-    monkeypatch.setattr(macro, "_status_get", lambda url: (404, ""))
-    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", vandaag=date(2026, 11, 5)) is None
+    assert macro.eerst_gezien("2026-09", None) is None                                   # niets bekend
+    assert macro.eerst_gezien("2026-09", {"date": "2026-09"}) is None                    # al aanwezig, datum onbekend
+    assert macro.eerst_gezien("2026-09", {"date": "2026-09", "upd": "2026-10-30"}) == "2026-10-30"
+    assert macro.eerst_gezien("2026-10", {"date": "2026-09"}) == date.today().isoformat()  # nieuwe maand: vandaag
 
 
 def test_cbs_woningprijzen(monkeypatch):

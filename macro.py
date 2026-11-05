@@ -9,14 +9,13 @@ De MIR-rentecijfers voor Nederland worden door DNB aan de ECB geleverd; het ECB 
 sleutelvrije bron van dezelfde DNB-cijfers.
 
 Per cijfer bewaren we ook: meetperiode (`date`), vorige periode (`prev`, `prev_date`), frequentie (`freq`),
-soort cijfer (`kind`) en de datum waarop de bron het cijfer heeft bijgewerkt (`upd`, gezocht door publicatiedata.py met `ecb_bijgewerkt`).
+soort cijfer (`kind`) en de datum waarop de bron het cijfer heeft bijgewerkt (`upd`, zie `eerst_gezien`; Eurostat/CBS: hun eigen update-datum).
 
 Alles is optioneel: lukt een bron niet, dan blijft de vorige waarde staan (of ontbreekt het onderdeel).
 """
 import csv
 import io
-from datetime import date, timedelta
-from pathlib import Path
+from datetime import date
 import json
 import re
 import time
@@ -51,74 +50,14 @@ def _get(url, tries=3):
     return None
 
 
-def _status_get(url):
-    """Eén poging: (HTTP-status, tekst). Voor vragen waarbij 'geen resultaat' een geldig antwoord is."""
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
-        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT["s"]) as r:
-            return r.status, r.read().decode("utf-8")
-    except urllib.error.HTTPError as e:
-        return e.code, ""
-    except Exception as e:  # noqa: BLE001
-        print(f"  macro {url[:90]}…: {e}")
-        return None, ""
-
-
-UPD_BUDGET = {"s": 90.0}  # max. seconden voor het zoeken van publicatiedata (ECB is soms traag)
-HTTP_TIMEOUT = {"s": 20}
-PUBLICATIE = Path(__file__).parent / "docs" / "publicatie.json"  # gevuld door publicatiedata.py (dagelijks)
-
-
-def publicatiedatum(key, periode):
-    """Datum waarop de ECB de waarde voor `periode` bijwerkte, uit docs/publicatie.json (of None)."""
-    try:
-        r = json.loads(PUBLICATIE.read_text()).get(key) or {}
-    except Exception:  # noqa: BLE001
-        return None
-    return r.get("upd") if r.get("period") == periode else None
-
-
-
-def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
-    """Dag waarop de ECB-database de waarde voor `periode` het laatst heeft bijgewerkt (≈ publicatiedatum).
-    Gevonden met de officiële API-parameter `updatedAfter` (geeft alleen gewijzigde waarnemingen terug),
-    via binair zoeken op dagen. Eén keer per nieuwe meetperiode; daarna uit `vorige` (cache).
-    Geeft "JJJJ-MM-DD" of None (onbekend)."""
-    vandaag = vandaag or date.today()
-    if vorige and vorige.get("date") == periode and (vorige.get("upd") or vorige.get("upd_try") == vandaag.isoformat()):
-        return vorige.get("upd")  # al bekend, of vandaag al (vergeefs) gezocht
-
-    def gewijzigd_na(d):
-        if UPD_BUDGET["s"] <= 0:
-            raise RuntimeError("tijdsbudget op")
-        t0 = time.time()
-        st, txt = _status_get(f"{ECB}{key}?updatedAfter={d.isoformat()}T00:00:00%2B00:00&format=csvdata"
-                              f"&detail=dataonly")
-        UPD_BUDGET["s"] -= time.time() - t0
-        if st is None:
-            raise RuntimeError("geen antwoord")
-        if st != 200 or not txt:
-            return False
-        return any(r.get("TIME_PERIOD") == periode and _num(r.get("OBS_VALUE")) is not None
-                   for r in csv.DictReader(io.StringIO(txt)))
-
-    try:
-        lo, hi = 0, max_dagen  # gewijzigd_na(vandaag - hi) moet waar zijn, gewijzigd_na(vandaag + 1) onwaar
-        if not gewijzigd_na(vandaag - timedelta(days=hi)):
-            return None
-        if gewijzigd_na(vandaag):
-            return vandaag.isoformat()
-        # invariant: waar bij (vandaag - hi), onwaar bij (vandaag - lo)
-        while hi - lo > 1:
-            mid = (lo + hi) // 2
-            if gewijzigd_na(vandaag - timedelta(days=mid)):
-                hi = mid
-            else:
-                lo = mid
-        return (vandaag - timedelta(days=hi)).isoformat()  # wijziging op deze dag (na 00:00 UTC)
-    except RuntimeError as e:
-        print(f"  publicatiedatum {key} {periode}: niet gevonden ({e})")
-        return None
+def eerst_gezien(periode, vorige):
+    """Dag waarop InvestMarket deze meetperiode voor het eerst in de bron zag (de site kijkt elke 30 min.,
+    dus dit is de publicatiedatum op ±30 minuten). Bij een periode die er al was vóór we dit bijhielden: None.
+    De ECB-API geeft zelf geen betrouwbare publicatiedatum per waarneming."""
+    vorige = vorige or {}
+    if vorige.get("date") == periode:
+        return vorige.get("upd")
+    return date.today().isoformat() if vorige.get("date") else None
 
 
 def _num(x):
@@ -392,7 +331,7 @@ def haal_macro(vorige=None):
         last = _last(st)
         if last:
             last.update({"src": ecb_link(key), "title": st.get("title") or "", "kind": kind, "freq": MAAND,
-                         "upd": publicatiedatum(key, last["date"])})
+                         "upd": eerst_gezien(last["date"], vorige.get(naam)), "upd_how": "gezien"})
             print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']}, bijgewerkt {last['upd']})")
         zet(naam, last)
 
@@ -409,17 +348,17 @@ def haal_macro(vorige=None):
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
     if hyp:
-        upd = publicatiedatum(HYP_KEY, hyp[0]["date"])
+        upd = eerst_gezien(hyp[0]["date"], (vorige.get("mortgage_nl") or [None])[0])
         for h in hyp:
-            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd})
+            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd, "upd_how": "gezien"})
     zet("mortgage_nl", hyp)
 
     # Bedrijfsleningen NL per bedrag en rentevaste periode (basis voor bancaire vastgoedfinanciering)
     biz = zakelijk_nl()
     if biz:
-        upd = publicatiedatum(BIZ_KEY, biz[0]["date"])
+        upd = eerst_gezien(biz[0]["date"], (vorige.get("business_nl") or [None])[0])
         for b in biz:
-            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd})
+            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd, "upd_how": "gezien"})
     zet("business_nl", biz)
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP

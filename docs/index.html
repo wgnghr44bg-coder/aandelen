@@ -1285,7 +1285,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       o=o||{};var a=[];
       a.push((o.per||pdate(x.date))+(x.kind?" · "+esc(x.kind):""));
       if(x.prev!=null)a.push("vorige: "+pct2(x.prev)+(o.prevPer||x.prev_date?" ("+(o.prevPer||pdate(x.prev_date))+")":""));
-      var b=[];if(x.upd)b.push("bijgewerkt door bron "+fdate(x.upd));if(x.freq)b.push(esc(x.freq));
+      var b=[];
+      if(x.upd)b.push((x.upd_how==="gezien"?"gepubliceerd ":"bijgewerkt door bron ")+fdate(x.upd));
+      else if(x.upd_how==="gezien")b.push("publicatiedatum onbekend");
+      if(x.freq)b.push(esc(x.freq));
       if(b.length)a.push(b.join(" · "));
       return a.join("<br>");
     }
@@ -1516,7 +1519,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-11";
+  var BUILD="2026-11-05-12";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -303,6 +303,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .xt .xl b{display:inline;font-size:.92rem}
 .xt .xl small{display:none}
 .xt .xico{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:.8rem;font-weight:800;flex:0 0 auto}
+.xt .xico.flag{background:none;font-size:1rem}
+.extras.idx{margin-top:8px}
 .xt .xico.web{background:#1d4ed8;color:#fff}.xt .xico.vall{background:none;color:var(--up)}.xt .xico.btc{background:#f7931a;color:#fff}
 .xt .xp{font-size:1.12rem}
 .xt .spark{height:28px}
@@ -460,6 +462,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <svg class="hspark" id="hspark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"></svg>
     </div>
     <div class="extras" id="extras" hidden></div>
+    <div class="extras idx" id="indices" hidden></div>
     <div id="xpanel"></div>
     <div class="bigr" id="ovchips"></div>
     <div class="mtiles" id="mtiles" hidden></div>
@@ -824,9 +827,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   }
   function drawChart(box){
     if(!box)return;
-    var t=box.dataset.t,cur=sym(box.dataset.cur||"USD");
+    var t=box.dataset.t,cur=box.dataset.cur==="PT"?"":sym(box.dataset.cur||"USD");
     // WEBN, VALL en Bitcoin hebben ook koersen binnen de dag (1D)
-    var ex=null;if(box.dataset.intra)extras.forEach(function(x){if(x.ticker===t)ex=x});
+    var ex=null;if(box.dataset.intra)allX().forEach(function(x){if(x.ticker===t)ex=x});
     var intra=ex&&ex.i&&ex.i.pts&&ex.i.pts.length>1?ex.i:null;
     var wk=ex&&ex.w&&ex.w.pts&&ex.w.pts.length>1?ex.w:null;
     var RR=box.dataset.intra?[{k:"1D"},{k:"1W"}].concat(RANGES):RANGES;
@@ -897,7 +900,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   },true);
 
   // ---------- Extra koersen bovenaan ----------
-  var extras=[],openExtra=null;
+  var extras=[],indices=[],openExtra=null;
+  function allX(){return extras.concat(indices)}
+  function fmtPts(v){return v==null?"–":(v>=10000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v))}
+  function fmtX(x,v){return x.currency==="PT"?fmtPts(v):fmtEur(v)}
+  var XICO={"BTC-EUR":'<span class="xico btc">₿</span>',"WEBN.DE":'<span class="xico web">🌐</span>',
+    "VALL.AS":'<span class="xico vall"><svg class="ic" viewBox="0 0 24 24"><path d="M5 20V12M12 20V7M19 20V4"/></svg></span>',
+    "^IXIC":'<span class="xico flag">🇺🇸</span>',"^AEX":'<span class="xico flag">🇳🇱</span>',"^GSPC":'<span class="xico flag">🇺🇸</span>'};
   function fmtEur(v){return v==null?"–":"€ "+(v>=10000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v))}
   function chgCls(v){return v==null||Math.abs(v)<0.05?"flat":v<0?"down":"up"}
   function spark(v){
@@ -907,25 +916,29 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var col=up?"var(--up)":"var(--down-strong)";
     return '<svg class="spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>';
   }
+  function tileX(x){
+    return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
+      '<span class="xl">'+(XICO[x.ticker]||'')+'<b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b><small>'+esc(x.beurs)+'</small></span>'+
+      '<span class="xp">'+fmtX(x,x.price)+'</span>'+
+      (function(){var c=chgP(x),sp=seriesP(x);return '<span class="xc '+chgCls(c)+'">'+(c>0?"▲ ":c<0?"▼ ":"")+(c==null?"n.v.t.":fmtPct(c))+' <span class="meta">'+(mper==="D"?(x.ticker==="BTC-EUR"?"24u":"dag"):mper)+'</span></span>'+spark(mper==="D"?x.spark:sp)})()+'</button>';
+  }
   function renderExtras(){
-    var el=$("extras");
-    if(!extras.length){el.hidden=true;return}
-    el.hidden=false;
-    el.innerHTML=extras.map(function(x){
-      return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
-        '<span class="xl">'+(x.ticker==="BTC-EUR"?'<span class="xico btc">₿</span>':x.ticker==="WEBN.DE"?'<span class="xico web">🌐</span>':'<span class="xico vall"><svg class="ic" viewBox="0 0 24 24"><path d="M5 20V12M12 20V7M19 20V4"/></svg></span>')+'<b>'+esc(x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b><small>'+esc(x.beurs)+'</small></span>'+
-        '<span class="xp">'+fmtEur(x.price)+'</span>'+
-        (function(){var c=chgP(x),sp=seriesP(x);return '<span class="xc '+chgCls(c)+'">'+(c>0?"▲ ":c<0?"▼ ":"")+(c==null?"n.v.t.":fmtPct(c))+' <span class="meta">'+(mper==="D"?(x.ticker==="BTC-EUR"?"24u":"dag"):mper)+'</span></span>'+spark(mper==="D"?x.spark:sp)})()+'</button>';
-    }).join("");
-    var x=null;for(var i=0;i<extras.length;i++)if(extras[i].ticker===openExtra)x=extras[i];
+    var el=$("extras"),ei=$("indices");
+    el.hidden=!extras.length;ei.hidden=!indices.length;
+    el.innerHTML=extras.map(tileX).join("");ei.innerHTML=indices.map(tileX).join("");
+    var x=null;allX().forEach(function(y){if(y.ticker===openExtra)x=y});
     if(!x){$("xpanel").innerHTML="";return}
     var items=[["1 maand",fmtPct(x.m1)],["3 maanden",fmtPct(x.m3)],["Sinds 1 jan",fmtPct(x.ytd)],["1 jaar",fmtPct(x.y1)],
-      ["Onder jaartop",fmtPct(x.fromHigh,"fromHigh")],["Jaartop",fmtEur(x.high52)]];
-    $("xpanel").innerHTML='<div class="xpanel"><h3>'+esc(x.name)+' <span class="meta">· '+esc(x.label)+' · '+esc(x.beurs)+'</span></h3>'+
-      '<div class="chart" data-t="'+esc(x.ticker)+'" data-cur="EUR" data-intra="1"><div class="chart-msg">Grafiek laden…</div></div>'+
+      ["Onder jaartop",fmtPct(x.fromHigh,"fromHigh")],["Jaartop",fmtX(x,x.high52)]];
+    $("xpanel").innerHTML='<div class="xpanel"><h3>'+esc(x.name)+' <span class="meta">· '+esc(x.label)+' · '+esc(x.beurs)+(x.currency==="PT"?' · in punten':'')+'</span></h3>'+
+      '<div class="chart" data-t="'+esc(x.ticker)+'" data-cur="'+(x.currency==="PT"?"PT":"EUR")+'" data-intra="1"><div class="chart-msg">Grafiek laden…</div></div>'+
       '<dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl></div>';
     drawChart($("xpanel").querySelector(".chart"));
   }
+  $("indices").addEventListener("click",function(e){
+    var b=e.target.closest(".xt");if(!b)return;
+    openExtra=openExtra===b.dataset.x?null:b.dataset.x;renderExtras();
+  });
   $("extras").addEventListener("click",function(e){
     var b=e.target.closest(".xt");if(!b)return;
     openExtra=openExtra===b.dataset.x?null:b.dataset.x;renderExtras();
@@ -1652,7 +1665,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     return getJSON("data.json").then(function(data){
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
-      extras=data.extras||[];renderExtras();liveBitcoin();
+      extras=data.extras||[];indices=data.indices||[];renderExtras();liveBitcoin();
       assets=data.assets||[];eurusd=data.eurusd||null;macro=data.macro||{};grond=data.commodities||[];
       if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
       if(!sectorsDone){
@@ -1678,7 +1691,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-20";
+  var BUILD="2026-11-05-21";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

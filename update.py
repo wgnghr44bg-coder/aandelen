@@ -43,6 +43,12 @@ EXTRAS = [
     {"ticker": "WEBN.DE", "label": "WEBN", "beurs": "Xetra"},
     {"ticker": "VALL.AS", "label": "VALL", "beurs": "Amsterdam"},
 ]
+# Beursindexen onder WEBN/VALL/Bitcoin (in punten; tellen niet mee in "Markt vandaag")
+INDICES = [
+    {"ticker": "^IXIC", "label": "Nasdaq", "beurs": "Composite · VS"},
+    {"ticker": "^AEX", "label": "AEX", "beurs": "Amsterdam"},
+    {"ticker": "^GSPC", "label": "S&P 500", "beurs": "VS"},
+]
 BITVAVO = "https://api.bitvavo.com/v2"
 
 # Grote assets naast aandelen (zoals "assets by market cap"). Edelmetalen: prijs (USD/troy ounce) ×
@@ -324,15 +330,34 @@ def week_bitcoin():
 
 def haal_extras():
     """Koersen voor de balk bovenaan: ETF's via yfinance, bitcoin via Bitvavo."""
-    rijen, closes = [], {}
-    intra, week = intraday_etfs([e["ticker"] for e in EXTRAS])
+    rijen, closes = reeksen(EXTRAS)
     try:
-        data = yf.download([e["ticker"] for e in EXTRAS], period="5y", interval="1d",
+        btc, btc_close = bitcoin()
+        if btc:
+            print(f"  extra BTC-EUR: {btc['price']}")
+            try:
+                btc["i"] = intraday_bitcoin()
+                btc["w"] = week_bitcoin()
+            except Exception as ex:  # noqa: BLE001
+                print(f"  intraday bitcoin: {ex}")
+            rijen.append(btc)
+            closes["BTC-EUR"] = btc_close
+    except Exception as ex:  # noqa: BLE001
+        print(f"  bitcoin overgeslagen ({ex})")
+    return rijen, closes
+
+
+def reeksen(lijst, index=False):
+    """Dag-, week- en 5-jaarskoersen (+ statistieken) voor een lijst tickers via yfinance."""
+    rijen, closes = [], {}
+    intra, week = intraday_etfs([e["ticker"] for e in lijst])
+    try:
+        data = yf.download([e["ticker"] for e in lijst], period="5y", interval="1d",
                            auto_adjust=True, group_by="ticker", progress=False)
     except Exception as e:  # noqa: BLE001
-        print(f"extras download mislukt: {e}")
+        print(f"download {[e['ticker'] for e in lijst]} mislukt: {e}")
         data = None
-    for e in EXTRAS:
+    for e in lijst:
         try:
             df = data[e["ticker"]] if data is not None else None
             stats = bereken(df) if df is not None else None
@@ -347,24 +372,11 @@ def haal_extras():
                 pass
             naam = info.get("shortName") or info.get("longName") or e["label"]
             print(f"  extra {e['ticker']}: {naam} ({info.get('currency')}, {info.get('exchange')}) {stats['price']}")
-            rijen.append({**e, "name": naam, "currency": info.get("currency") or "EUR",
+            rijen.append({**e, "name": naam, "currency": "PT" if index else (info.get("currency") or "EUR"),
                           "spark": spark(df["Close"]), "h": hist(df["Close"]), "i": intra.get(e["ticker"]), "w": week.get(e["ticker"]), **stats})
             closes[e["ticker"]] = df["Close"]
         except Exception as ex:  # noqa: BLE001
             print(f"  extra {e['ticker']}: overgeslagen ({ex})")
-    try:
-        btc, btc_close = bitcoin()
-        if btc:
-            print(f"  extra BTC-EUR: {btc['price']}")
-            try:
-                btc["i"] = intraday_bitcoin()
-                btc["w"] = week_bitcoin()
-            except Exception as ex:  # noqa: BLE001
-                print(f"  intraday bitcoin: {ex}")
-            rijen.append(btc)
-            closes["BTC-EUR"] = btc_close
-    except Exception as ex:  # noqa: BLE001
-        print(f"  bitcoin overgeslagen ({ex})")
     return rijen, closes
 
 
@@ -579,6 +591,12 @@ def main():
     extras, extra_closes = haal_extras()
     bewaar_markt_hist(extras)
     uit["extras"] = extras
+    try:
+        indices, index_closes = reeksen(INDICES, index=True)
+        uit["indices"] = indices
+        extra_closes.update(index_closes)
+    except Exception as e:  # noqa: BLE001
+        print(f"indexen mislukt: {e}")
     uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
     try:
         uit["commodities"], g_hist = grondstoffen.haal_grondstoffen(bereken, spark)

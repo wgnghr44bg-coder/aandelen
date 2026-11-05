@@ -82,3 +82,15 @@ def test_casarion_en_onvolledig():
     assert [r["fix"] for r in g["rows"]] == ["var", "1"] and g["rows"][1]["label"] == "1 jr + Switch"
     assert v.parse_grid(CASARION.rsplit("\n", 1)[0]) is None     # laatste rente ontbreekt -> niets gebruiken
     assert v.parse_grid("50%\n60%\n1 jaar\n45,00%\n6,00%") is None  # onlogische rente -> niets
+
+
+def test_bron_dag():
+    assert v.bron_dag("22-10-2026", "2026-11-05") == "2026-10-22"
+    assert v.bron_dag("28 okt.", "2026-11-05") == "2026-10-28"
+    assert v.bron_dag("28 dec.", "2027-01-03") == "2026-12-28"     # jaarwisseling
+    assert v.bron_dag(None, "2026-11-05") == "2026-11-05"
+
+
+def test_solidbriq_1_maand_is_variabel():
+    g = v.parse_grid("Rentevaste periode\t≤ 50%\t≤ 55%\n1 maand\t5,30%\t5,30%\n5 jaar\t6,05%\t6,05%")
+    assert [r["fix"] for r in g["rows"]] == ["var", "5"] and g["ltv"] == [50, 55]

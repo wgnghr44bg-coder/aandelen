@@ -63,7 +63,13 @@ AANBIEDERS = [
                 {"t": "Tarieven zonder renteopslagen; kunnen wijzigen tijdens het aanvraagproces.",
                  "check": "zonder renteopslagen"}]},
     {"id": "solidbriq", "naam": "SolidBriq", "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
-     "tabellen": [], "toon_frame": "interests-page",
+     "tabellen": [{"seg": "residentieel", "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
+                   "frame": ("interests-page", "Basiq Select"), "start": "Rentevaste periode", "end": "\n*",
+                   "naam": "BasiQ Select (nieuwe leningen sinds 1 okt 2026)"},
+                  {"seg": "commercieel", "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
+                   "frame": ("interests-page", "Generiq"), "start": "Rentevaste periode", "end": "\n*",
+                   "naam": "GeneriQ (commercieel)"}],
+     "datum": r"Actuele rentetarieven per (\d{2}-\d{2}-\d{4})",
      "feiten": [{"t": "Variabele rente = 1-maands Euribor + opslag: woningen 2,90% (t/m 65% LTV) tot 4,00% (t/m 85% LTV); "
                       "commercieel 3,75–3,85%.", "check": "t/m 85% LTV: 4,00%",
                  "url": "https://www.solidbriq.nl/vaststelling-variabele-rente/"},
@@ -100,6 +106,26 @@ AANBIEDERS = [
                 {"t": "1 jaar vast = '1 jr + Switch' (voorwaarden Casarion SWITCH).", "check": "1 jr + Switch",
                  "url": "https://www.casarion.com/rente-residentieel"}]},
 ]
+
+
+MAAND = {m: i + 1 for i, m in enumerate(["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"])}
+
+
+def bron_dag(d, vandaag):
+    """Datum die de aanbieder zelf noemt ('22-10-2026' of '28 okt.') -> 'JJJJ-MM-DD'; anders vandaag."""
+    if d:
+        m = re.match(r"(\d{2})-(\d{2})-(\d{4})$", d)
+        if m:
+            iso = f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+            return iso if iso <= vandaag else vandaag
+        m = re.match(r"(\d{1,2}) (\w{3})", d)
+        if m and m.group(2).lower() in MAAND:
+            j = int(vandaag[:4])
+            iso = f"{j}-{MAAND[m.group(2).lower()]:02d}-{int(m.group(1)):02d}"
+            if iso > vandaag:
+                iso = f"{j - 1}{iso[4:]}"
+            return iso
+    return vandaag
 
 
 def norm_fix(label):
@@ -160,7 +186,26 @@ def mag(url, cache={}):  # noqa: B006
             print(f"  robots.txt {host}: {e}")
             cache[host] = None
     rp = cache[host]
-    return bool(rp and rp.can_fetch(UA, url))
+    if rp is None:
+        return None  # robots.txt niet bereikbaar (site reageert niet)
+    return rp.can_fetch(UA, url)
+
+
+def t_frame(pg, spec):
+    """Tekst van een tabblad in een iframe: spec = (deel van frame-url, alt-tekst van de tabknop)."""
+    deel, tab = spec
+    f = next((f for f in pg.frames if deel in f.url), None)
+    if not f:
+        raise RuntimeError(f"frame {deel} niet gevonden")
+    knop = f.locator(f'button:has(img[alt="{tab}"])').first
+    if knop.get_attribute("disabled") is None:  # niet al gekozen: aanklikken
+        knop.click(timeout=5000)
+        pg.wait_for_timeout(1200)
+    if knop.get_attribute("disabled") is None:
+        raise RuntimeError(f"tabblad {tab} niet actief geworden")
+    print(f"  frame-tabblad {tab!r} actief")
+    txt = f.inner_text("body")
+    return txt
 
 
 def nibc_historie(pg):
@@ -234,23 +279,17 @@ def main():
             r = {"id": a["id"], "name": a["naam"], "url": a["url"], "checked": vandaag, "segments": [], "facts": []}
             if a.get("reden"):
                 r["status"], r["reason"] = "aanvraag", a["reden"]
+            elif mag(a["url"]) is None:
+                r["status"], r["reason"] = "aanvraag", "website niet bereikbaar voor automatische controle"
             elif not mag(a["url"]):
                 r["status"], r["reason"] = "aanvraag", "de website staat automatisch uitlezen niet toe (robots.txt)"
             else:
                 hoofd, fout = open_pagina(a["url"])
                 if fout:
                     r["status"], r["reason"] = "aanvraag", "website niet bereikbaar voor automatische controle"
-                hoofdtekst = hoofd.inner_text("body") if hoofd else ""
-                if a.get("toon_frame") and hoofd:
-                    for f in hoofd.frames:
-                        if a["toon_frame"] in f.url:
-                            print(f"  {a['naam']} frame {f.url}:\n{f.inner_text('body')[:2500]}")
-                            for sel in f.locator("select").all():
-                                print("   select:", sel.evaluate("s => Array.from(s.options).map(o => "
-                                                               "(o.selected?'*':'') + o.value + '=' + o.text)"))
-                            html = f.content()
-                            i = html.find("Filter")
-                            print("   html rond Filter:", re.sub(r"\s+", " ", html[max(0, i - 300):i + 2500]))
+                hoofdtekst = (hoofd.inner_text("body") if hoofd else "").replace("\xa0", " ")
+                if hoofd:  # datum kan ook in een iframe staan
+                    hoofdtekst += " ".join(f.inner_text("body") for f in hoofd.frames[1:] if "interests" in f.url)
                 if a.get("datum") and hoofdtekst:
                     m = re.search(a["datum"], hoofdtekst)
                     r["source_date"] = m.group(1) if m else None
@@ -258,7 +297,11 @@ def main():
                     pg, fout = open_pagina(t["url"], t.get("klik"))
                     if not pg:
                         continue
-                    tekst = pg.inner_text("body")
+                    try:
+                        tekst = (t_frame(pg, t["frame"]) if t.get("frame") else pg.inner_text("body")).replace("\xa0", " ")
+                    except Exception as e:  # noqa: BLE001
+                        print(f"  {a['naam']} {t['naam']}: {e}")
+                        continue
                     if a.get("datum") and not r.get("source_date"):
                         m = re.search(a["datum"], tekst)
                         r["source_date"] = m.group(1) if m else None
@@ -293,12 +336,18 @@ def main():
                     r["reason"] = "geen leesbare rentetabel gepubliceerd"
             uit["lenders"].append(r)
             # historie: momentopname per dag, alleen bij een wijziging
+            gezien = set()
             for s in r["segments"]:
-                key = f"{a['id']}|{s['seg']}"
+                key = f"{a['id']}|{s['seg']}" + (f"|{s['name']}" if s["seg"] in gezien else "")
+                gezien.add(s["seg"])
                 snap = {row["fix"]: dict(zip(map(str, s["ltv"]), row["rates"])) for row in s["rows"]}
                 reeks = hist.setdefault(key, [])
+                dag = bron_dag(r.get("source_date"), vandaag)
                 if not reeks or reeks[-1][1] != snap:
-                    reeks.append([vandaag, snap])
+                    reeks = [x for x in reeks if x[0] != dag]
+                    reeks.append([dag, snap])
+                    reeks.sort(key=lambda x: x[0])
+                    hist[key] = reeks
             sys.stdout.flush()
         b.close()
     OUT.write_text(json.dumps(uit, ensure_ascii=False, indent=1) + "\n")

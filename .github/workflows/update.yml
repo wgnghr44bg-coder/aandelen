@@ -53,7 +53,7 @@ jobs:
           # (De wekker van cron-job.org start elke 30 min een gewone update; grafieken vernieuwen dan
           # alleen bij een nieuwe beursdag, zodat de repo klein blijft.)
           VOLLEDIG: ${{ github.event.schedule == '45 22 * * 1-5' || inputs.volledig == true }}
-        run: python update.py
+        run: python -u update.py   # -u: log direct zichtbaar
 
       - name: Cache fundamentele data bewaren
         if: always()

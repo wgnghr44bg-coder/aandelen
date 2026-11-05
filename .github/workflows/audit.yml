@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Controleer de cijfers tegen de bronnen
-        run: python audit.py
+        run: python -u audit.py
       - name: Rapport bewaren
         run: |
           git add audit/rapport.md

@@ -52,13 +52,16 @@ def _status_get(url):
     """Eén poging: (HTTP-status, tekst). Voor vragen waarbij 'geen resultaat' een geldig antwoord is."""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
-        with urllib.request.urlopen(req, timeout=25) as r:
+        with urllib.request.urlopen(req, timeout=20) as r:
             return r.status, r.read().decode("utf-8")
     except urllib.error.HTTPError as e:
         return e.code, ""
     except Exception as e:  # noqa: BLE001
         print(f"  macro {url[:90]}…: {e}")
         return None, ""
+
+
+UPD_BUDGET = {"s": 90.0}  # max. seconden per run voor het zoeken van publicatiedata (ECB is soms traag)
 
 
 def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
@@ -71,8 +74,12 @@ def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
         return vorige.get("upd")  # al bekend, of vandaag al (vergeefs) gezocht
 
     def gewijzigd_na(d):
+        if UPD_BUDGET["s"] <= 0:
+            raise RuntimeError("tijdsbudget op")
+        t0 = time.time()
         st, txt = _status_get(f"{ECB}{key}?updatedAfter={d.isoformat()}T00:00:00%2B00:00&format=csvdata"
                               f"&detail=dataonly")
+        UPD_BUDGET["s"] -= time.time() - t0
         if st is None:
             raise RuntimeError("geen antwoord")
         if st != 200 or not txt:
@@ -94,7 +101,8 @@ def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
             else:
                 lo = mid
         return (vandaag - timedelta(days=hi)).isoformat()  # wijziging op deze dag (na 00:00 UTC)
-    except RuntimeError:
+    except RuntimeError as e:
+        print(f"  publicatiedatum {key} {periode}: niet gevonden ({e})")
         return None
 
 

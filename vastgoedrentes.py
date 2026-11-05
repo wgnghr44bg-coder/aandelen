@@ -27,7 +27,7 @@ UA = "Mozilla/5.0 (compatible; InvestMarket/1.0; +https://github.com/wgnghr44bg-
 socket.setdefaulttimeout(20)
 
 PCT = re.compile(r"^(\d{1,2},\d{2})\s?%\*?$")
-LABEL = re.compile(r"^(variabel|\d{1,2}\s*(jaar|jr)\b.*)$", re.I)
+LABEL = re.compile(r"^(variabel|1 maand|\d{1,2}\s*(jaar|jr)\b.*)$", re.I)
 HEAD = re.compile(r"(\d{2})\s?%")
 
 # Per aanbieder: pagina('s) met tabel, begin- en eindtekst van het blok, soort vastgoed.
@@ -35,8 +35,9 @@ AANBIEDERS = [
     {"id": "rnhb", "naam": "RNHB", "url": "https://www.rnhb.nl/rente", "tabellen": []},
     {"id": "nibc", "naam": "NIBC", "url": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
      "tabellen": [{"seg": "residentieel", "url": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
-                   "start": "Actuele rentes sinds", "end": "Let op: deze rentes", "klik": "Tot 1 miljoen",
-                   "naam": "saldo tot € 1 mln"}],
+                   "start": "Actuele rentes sinds", "end": "Let op: deze rentes", "klik": k, "naam": n}
+                  for k, n in (("Tot 1 miljoen", "saldo tot € 1 mln"), ("Tussen 1 en 2,5 miljoen", "saldo € 1–2,5 mln"),
+                               ("Boven 2,5 miljoen", "saldo boven € 2,5 mln"))],
      "datum": r"Actuele rentes sinds (\d{1,2} \w+\.?)",
      "feiten": [{"t": "Tarieven hangen ook af van het totale saldo bij NIBC (tot € 1 mln, € 1–2,5 mln, boven € 2,5 mln); "
                       "hier: saldo tot € 1 mln.", "check": "Tussen 1 en 2,5 miljoen"},
@@ -103,7 +104,7 @@ AANBIEDERS = [
 
 def norm_fix(label):
     t = label.lower()
-    if t.startswith("variabel"):
+    if t.startswith("variabel") or t == "1 maand":  # 1 maand vast = maandelijks herziene (variabele) rente
         return "var"
     m = re.match(r"(\d{1,2})", t)
     return m.group(1) if m else None
@@ -215,8 +216,14 @@ def main():
                 pg.goto(url, wait_until="networkidle", timeout=45000)
                 pg.wait_for_timeout(2500)
                 for k in ([klik] if isinstance(klik, str) else (klik or [])):
-                    pg.get_by_text(k, exact=True).first.click(timeout=5000)
-                    pg.wait_for_timeout(1200)
+                    els = [e for e in pg.get_by_text(k, exact=True).all() if e.is_visible()]
+                    if not els:
+                        raise RuntimeError(f"knop {k!r} niet zichtbaar")
+                    els[0].click(timeout=5000)
+                    pg.wait_for_timeout(1500)
+                    st = els[0].evaluate("e => (e.className||'') + ' ' + (e.getAttribute('aria-selected')||'') + ' ' + "
+                                         "((e.closest('[class]')||{}).className||'')")
+                    print(f"  klik {k!r} op {url}: {st[:120]}")
                 paginas[key] = (pg, None)
             except Exception as e:  # noqa: BLE001
                 print(f"  {url}: {e}")
@@ -237,7 +244,13 @@ def main():
                 if a.get("toon_frame") and hoofd:
                     for f in hoofd.frames:
                         if a["toon_frame"] in f.url:
-                            print(f"  {a['naam']} frame {f.url}:\n{f.inner_text('body')[:4000]}")
+                            print(f"  {a['naam']} frame {f.url}:\n{f.inner_text('body')[:2500]}")
+                            for sel in f.locator("select").all():
+                                print("   select:", sel.evaluate("s => Array.from(s.options).map(o => "
+                                                               "(o.selected?'*':'') + o.value + '=' + o.text)"))
+                            html = f.content()
+                            i = html.find("Filter")
+                            print("   html rond Filter:", re.sub(r"\s+", " ", html[max(0, i - 300):i + 2500]))
                 if a.get("datum") and hoofdtekst:
                     m = re.search(a["datum"], hoofdtekst)
                     r["source_date"] = m.group(1) if m else None
@@ -255,7 +268,8 @@ def main():
                         print(f"  {a['naam']} {t['naam']}: LTV {g['ltv']}, "
                               f"{[(row['label'], row['rates']) for row in g['rows']]}")
                     else:
-                        print(f"  {a['naam']} {t['naam']}: tabel niet volledig leesbaar, niet gebruikt")
+                        print(f"  {a['naam']} {t['naam']}: tabel niet volledig leesbaar, niet gebruikt. Blok: "
+                              f"{(blok(tekst, t['start'], t['end'], t.get('laatste_start')) or '')[:700]!r}")
                     if a["id"] == "nibc" and not hist.get("nibc_backfill"):
                         reeks = hist.setdefault("nibc|residentieel", [])
                         for d, gr in nibc_historie(pg):
@@ -268,8 +282,9 @@ def main():
                 for f in a.get("feiten", []):
                     bron = f.get("url") or a["url"]
                     pg, _ = open_pagina(bron)
-                    txt = (pg.inner_text("body") if pg else "").replace("\xa0", " ")
-                    if f["check"] in txt:
+                    txt = " ".join(((pg.inner_text("body") + " " + re.sub(r"<[^>]+>", " ", pg.content())) if pg else "")
+                                   .replace("\xa0", " ").split())
+                    if " ".join(f["check"].split()) in txt:
                         r["facts"].append({"t": f["t"], "src": bron})
                     else:
                         print(f"  {a['naam']}: kenmerk niet meer gevonden: {f['check']!r}")

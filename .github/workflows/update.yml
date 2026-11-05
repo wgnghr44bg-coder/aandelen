@@ -6,6 +6,11 @@ on:
     - cron: "47 * * * *"      # reserve: GitHub slaat geplande runs bij drukte soms over
     - cron: "45 22 * * 1-5"   # elke werkdag 22:45 UTC, na sluiting van de Amerikaanse beurs: ook de grafieken
   workflow_dispatch:
+    inputs:
+      volledig:
+        description: "Grafieken en analyse ook volledig vernieuwen"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,7 +49,10 @@ jobs:
       - name: Haal koersen op
         env:
           # Grafieken altijd vernieuwen bij de avond-update en bij handmatig starten
-          VOLLEDIG: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '45 22 * * 1-5' }}
+          # Grafieken/analyse volledig: bij de avond-update of als je dat bij handmatig starten aanvinkt.
+          # (De wekker van cron-job.org start elke 30 min een gewone update; grafieken vernieuwen dan
+          # alleen bij een nieuwe beursdag, zodat de repo klein blijft.)
+          VOLLEDIG: ${{ github.event.schedule == '45 22 * * 1-5' || inputs.volledig == true }}
         run: python update.py
 
       - name: Cache fundamentele data bewaren

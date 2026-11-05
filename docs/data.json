@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T09:02:32Z",
+ "updated": "2026-11-05T09:17:14Z",
  "asof": "2026-11-05",
  "rows": [
   {
@@ -909,20 +909,20 @@
    "ticker": "NESN.SW",
    "name": "NESTLE N",
    "sector": "Consumer Defensive",
-   "marketCap": 271614765563,
+   "marketCap": 270964082793,
    "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 29.8,
+   "usd": 1.2256254,
+   "pe": 29.7,
    "ai": false,
-   "price": 86.13,
-   "d1": 0.27,
-   "m1": 15.64,
-   "m3": 5.88,
-   "ytd": 13.85,
-   "y1": 13.42,
-   "y5": -18.29,
+   "price": 85.95,
+   "d1": 0.06,
+   "m1": 15.4,
+   "m3": 5.65,
+   "ytd": 13.61,
+   "y1": 13.18,
+   "y5": -18.46,
    "high52": 87.09,
-   "fromHigh": 1.1,
+   "fromHigh": 1.31,
    "rank": 44,
    "rating": "HOLD"
   },
@@ -1119,20 +1119,20 @@
    "ticker": "SIE.DE",
    "name": "SIEMENS AG                    N",
    "sector": "Industrials",
-   "marketCap": 240552701053,
+   "marketCap": 240315593529,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 28.0,
    "ai": false,
-   "price": 279.8,
-   "d1": 1.51,
-   "m1": 1.75,
-   "m3": -2.15,
-   "ytd": 19.49,
-   "y1": 16.63,
-   "y5": 118.69,
+   "price": 279.65,
+   "d1": 1.45,
+   "m1": 1.69,
+   "m3": -2.2,
+   "ytd": 19.42,
+   "y1": 16.57,
+   "y5": 118.57,
    "high52": 291.7,
-   "fromHigh": 4.08,
+   "fromHigh": 4.13,
    "rank": 54,
    "rating": "HOLD"
   },
@@ -1431,6 +1431,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "ALV.DE",
+   "name": "Allianz SE                    v",
+   "sector": "Financial Services",
+   "marketCap": 197682652613,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 15.2,
+   "ai": false,
+   "price": 463.5,
+   "d1": 1.11,
+   "m1": 10.57,
+   "m3": 6.16,
+   "ytd": 24.16,
+   "y1": 36.07,
+   "y5": 190.72,
+   "high52": 463.6,
+   "fromHigh": 0.02,
+   "rank": 69,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "SHOP",
    "name": "Shopify Inc.",
    "sector": "Technology",
@@ -1448,29 +1469,8 @@
    "y5": 0.15,
    "high52": 180.88,
    "fromHigh": 15.4,
-   "rank": 69,
-   "rating": "SELL"
-  },
-  {
-   "ticker": "ALV.DE",
-   "name": "Allianz SE                    v",
-   "sector": "Financial Services",
-   "marketCap": 197088907878,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 15.1,
-   "ai": false,
-   "price": 461.9,
-   "d1": 0.76,
-   "m1": 10.19,
-   "m3": 5.79,
-   "ytd": 23.73,
-   "y1": 35.6,
-   "y5": 189.72,
-   "high52": 463.0,
-   "fromHigh": 0.24,
    "rank": 70,
-   "rating": "HOLD"
+   "rating": "SELL"
   },
   {
    "ticker": "ADI",
@@ -1494,27 +1494,6 @@
    "rating": "SELL"
   },
   {
-   "ticker": "CBA.AX",
-   "name": "CWLTH BANK FPO [CBA]",
-   "sector": "Financial Services",
-   "marketCap": 195162321200,
-   "currency": "AUD",
-   "usd": 0.70200074,
-   "pe": 25.5,
-   "ai": false,
-   "price": 166.29,
-   "d1": 0.02,
-   "m1": 9.97,
-   "m3": -5.12,
-   "ytd": 6.72,
-   "y1": -2.83,
-   "y5": 81.27,
-   "high52": 182.51,
-   "fromHigh": 8.89,
-   "rank": 72,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "KLAC",
    "name": "KLA Corporation",
    "sector": "Technology",
@@ -1532,6 +1511,27 @@
    "y5": 277.35,
    "high52": 307.02,
    "fromHigh": 51.21,
+   "rank": 72,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "CBA.AX",
+   "name": "CWLTH BANK FPO [CBA]",
+   "sector": "Financial Services",
+   "marketCap": 195025398245,
+   "currency": "AUD",
+   "usd": 0.70150822,
+   "pe": 25.5,
+   "ai": false,
+   "price": 166.29,
+   "d1": 0.02,
+   "m1": 9.97,
+   "m3": -5.12,
+   "ytd": 6.72,
+   "y1": -2.83,
+   "y5": 81.27,
+   "high52": 182.51,
+   "fromHigh": 8.89,
    "rank": 73,
    "rating": "HOLD"
   },
@@ -1938,20 +1938,20 @@
    "ticker": "AIR.PA",
    "name": "AIRBUS SE",
    "sector": "Industrials",
-   "marketCap": 180750535063,
+   "marketCap": 180181174110,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 26.1,
+   "usd": 1.12447989,
+   "pe": 26.0,
    "ai": false,
-   "price": 203.6,
-   "d1": 1.75,
-   "m1": 7.68,
-   "m3": -5.28,
-   "ytd": 4.52,
-   "y1": -2.35,
-   "y5": 94.84,
+   "price": 203.05,
+   "d1": 1.47,
+   "m1": 7.39,
+   "m3": -5.54,
+   "ytd": 4.23,
+   "y1": -2.61,
+   "y5": 94.31,
    "high52": 217.29,
-   "fromHigh": 6.3,
+   "fromHigh": 6.55,
    "rank": 93,
    "rating": "HOLD"
   },
@@ -1980,20 +1980,20 @@
    "ticker": "IBE.MC",
    "name": "ACCIONES IBERDROLA",
    "sector": "Utilities",
-   "marketCap": 170836367142,
+   "marketCap": 171284704245,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 30.8,
+   "usd": 1.12447989,
+   "pe": 30.9,
    "ai": false,
-   "price": 22.76,
-   "d1": 0.71,
-   "m1": 8.38,
-   "m3": 10.59,
-   "ytd": 27.47,
-   "y1": 32.38,
-   "y5": 173.5,
-   "high52": 22.78,
-   "fromHigh": 0.09,
+   "price": 22.83,
+   "d1": 1.02,
+   "m1": 8.71,
+   "m3": 10.93,
+   "ytd": 27.86,
+   "y1": 32.78,
+   "y5": 174.34,
+   "high52": 22.84,
+   "fromHigh": 0.04,
    "rank": 95,
    "rating": "HOLD"
   },
@@ -2022,9 +2022,9 @@
    "ticker": "6098.T",
    "name": "RECRUIT HOLDINGS CO LTD",
    "sector": "Communication Services",
-   "marketCap": 158093434618,
+   "marketCap": 158076452069,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 44.0,
    "ai": false,
    "price": 18010.0,
@@ -2064,20 +2064,20 @@
    "ticker": "ABBN.SW",
    "name": "ABB LTD N",
    "sector": "Industrials",
-   "marketCap": 154429553536,
+   "marketCap": 154293691307,
    "currency": "CHF",
-   "usd": 1.22600102,
+   "usd": 1.2256254,
    "pe": 31.7,
    "ai": false,
-   "price": 69.74,
-   "d1": -1.02,
-   "m1": -14.64,
-   "m3": -15.3,
-   "ytd": 19.51,
-   "y1": 22.32,
-   "y5": 157.82,
+   "price": 69.7,
+   "d1": -1.08,
+   "m1": -14.69,
+   "m3": -15.35,
+   "ytd": 19.44,
+   "y1": 22.25,
+   "y5": 157.67,
    "high52": 89.14,
-   "fromHigh": 21.76,
+   "fromHigh": 21.81,
    "rank": 99,
    "rating": "HOLD"
   },
@@ -2211,20 +2211,20 @@
    "ticker": "SU.PA",
    "name": "SCHNEIDER ELECTRIC SE",
    "sector": "Industrials",
-   "marketCap": 155507282494,
+   "marketCap": 155172982692,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 28.3,
+   "usd": 1.12447989,
+   "pe": 28.2,
    "ai": false,
-   "price": 235.2,
-   "d1": 1.58,
-   "m1": -13.78,
-   "m3": -21.7,
-   "ytd": 1.69,
-   "y1": -1.39,
-   "y5": 68.18,
+   "price": 234.8,
+   "d1": 1.4,
+   "m1": -13.93,
+   "m3": -21.84,
+   "ytd": 1.52,
+   "y1": -1.56,
+   "y5": 67.9,
    "high52": 312.3,
-   "fromHigh": 24.69,
+   "fromHigh": 24.82,
    "rank": 106,
    "rating": "HOLD"
   },
@@ -2271,27 +2271,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "RR.L",
-   "name": "ROLLS-ROYCE HOLDINGS PLC ORD SH",
-   "sector": "Industrials",
-   "marketCap": 143176243331,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 36.0,
-   "ai": false,
-   "price": 1295.2,
-   "d1": 2.57,
-   "m1": -12.37,
-   "m3": -17.52,
-   "ytd": 12.64,
-   "y1": 11.95,
-   "y5": 806.3,
-   "high52": 1586.0,
-   "fromHigh": 18.34,
-   "rank": 109,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "UBER",
    "name": "Uber Technologies, Inc.",
    "sector": "Technology",
@@ -2309,6 +2288,27 @@
    "y5": 48.06,
    "high52": 95.44,
    "fromHigh": 26.79,
+   "rank": 109,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "RR.L",
+   "name": "ROLLS-ROYCE HOLDINGS PLC ORD SH",
+   "sector": "Industrials",
+   "marketCap": 142620625865,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": 35.9,
+   "ai": false,
+   "price": 1291.2,
+   "d1": 2.25,
+   "m1": -12.64,
+   "m3": -17.78,
+   "ytd": 12.29,
+   "y1": 11.61,
+   "y5": 803.5,
+   "high52": 1586.0,
+   "fromHigh": 18.59,
    "rank": 110,
    "rating": "HOLD"
   },
@@ -2400,20 +2400,20 @@
    "ticker": "INVE-B.ST",
    "name": "Investor AB ser. B",
    "sector": "Financial Services",
-   "marketCap": 137785997991,
+   "marketCap": 137979363384,
    "currency": "SEK",
-   "usd": 0.10257315,
+   "usd": 0.10255337,
    "pe": 6.3,
    "ai": false,
-   "price": 438.45,
-   "d1": 0.93,
-   "m1": 8.58,
-   "m3": 3.4,
-   "ytd": 34.13,
-   "y1": 40.67,
-   "y5": 128.94,
-   "high52": 439.35,
-   "fromHigh": 0.2,
+   "price": 439.15,
+   "d1": 1.09,
+   "m1": 8.75,
+   "m3": 3.56,
+   "ytd": 34.35,
+   "y1": 40.9,
+   "y5": 129.31,
+   "high52": 439.55,
+   "fromHigh": 0.09,
    "rank": 115,
    "rating": "HOLD"
   },
@@ -2505,9 +2505,9 @@
    "ticker": "6857.T",
    "name": "ADVANTEST CORP",
    "sector": "Technology",
-   "marketCap": 134567318591,
+   "marketCap": 134552863240,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 37.4,
    "ai": true,
    "price": 29485.0,
@@ -2547,20 +2547,20 @@
    "ticker": "AI.PA",
    "name": "AIR LIQUIDE",
    "sector": "Basic Materials",
-   "marketCap": 136133152683,
+   "marketCap": 136086269058,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 34.2,
    "ai": false,
-   "price": 189.62,
-   "d1": 1.21,
-   "m1": 11.04,
-   "m3": 9.24,
-   "ytd": 32.94,
-   "y1": 26.14,
-   "y5": 84.66,
+   "price": 189.64,
+   "d1": 1.22,
+   "m1": 11.06,
+   "m3": 9.25,
+   "ytd": 32.96,
+   "y1": 26.16,
+   "y5": 84.68,
    "high52": 190.44,
-   "fromHigh": 0.43,
+   "fromHigh": 0.42,
    "rank": 122,
    "rating": "HOLD"
   },
@@ -2568,20 +2568,20 @@
    "ticker": "UCG.MI",
    "name": "UNICREDIT",
    "sector": "Financial Services",
-   "marketCap": 132770061591,
+   "marketCap": 132575556073,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 11.3,
    "ai": false,
-   "price": 78.77,
-   "d1": 0.57,
-   "m1": -1.29,
-   "m3": -7.2,
-   "ytd": 13.8,
-   "y1": 28.23,
-   "y5": 788.94,
+   "price": 78.69,
+   "d1": 0.47,
+   "m1": -1.39,
+   "m3": -7.29,
+   "ytd": 13.68,
+   "y1": 28.1,
+   "y5": 788.04,
    "high52": 86.42,
-   "fromHigh": 8.85,
+   "fromHigh": 8.94,
    "rank": 123,
    "rating": "HOLD"
   },
@@ -2589,9 +2589,9 @@
    "ticker": "6501.T",
    "name": "HITACHI",
    "sector": "Industrials",
-   "marketCap": 134428131550,
+   "marketCap": 134413691151,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 28.7,
    "ai": false,
    "price": 4772.0,
@@ -2754,27 +2754,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "CFR.SW",
-   "name": "RICHEMONT N",
-   "sector": "Consumer Cyclical",
-   "marketCap": 127332045641,
-   "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 32.3,
-   "ai": false,
-   "price": 176.65,
-   "d1": 2.64,
-   "m1": 1.15,
-   "m3": -8.05,
-   "ytd": 5.34,
-   "y1": 14.35,
-   "y5": 67.54,
-   "high52": 197.08,
-   "fromHigh": 10.37,
-   "rank": 132,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "PLD",
    "name": "Prologis, Inc.",
    "sector": "Real Estate",
@@ -2792,6 +2771,27 @@
    "y5": 3.76,
    "high52": 152.14,
    "fromHigh": 13.66,
+   "rank": 132,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "CFR.SW",
+   "name": "RICHEMONT N",
+   "sector": "Consumer Cyclical",
+   "marketCap": 126824646518,
+   "currency": "CHF",
+   "usd": 1.2256254,
+   "pe": 32.2,
+   "ai": false,
+   "price": 176.0,
+   "d1": 2.27,
+   "m1": 0.77,
+   "m3": -8.39,
+   "ytd": 4.95,
+   "y1": 13.93,
+   "y5": 66.92,
+   "high52": 197.08,
+   "fromHigh": 10.7,
    "rank": 133,
    "rating": "HOLD"
   },
@@ -2904,9 +2904,9 @@
    "ticker": "8058.T",
    "name": "MITSUBISHI CORP",
    "sector": "Industrials",
-   "marketCap": 122089811208,
+   "marketCap": 122076696203,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.0,
    "ai": false,
    "price": 5274.0,
@@ -2925,20 +2925,20 @@
    "ticker": "DTE.DE",
    "name": "DEUTSCHE TELEKOM AG           N",
    "sector": "Communication Services",
-   "marketCap": 141288504654,
+   "marketCap": 141063611494,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 14.8,
+   "usd": 1.12447989,
+   "pe": 14.7,
    "ai": false,
-   "price": 26.26,
-   "d1": -1.87,
-   "m1": -2.12,
-   "m3": -4.23,
-   "ytd": -1.98,
-   "y1": 1.88,
-   "y5": 83.71,
+   "price": 26.23,
+   "d1": -1.98,
+   "m1": -2.24,
+   "m3": -4.34,
+   "ytd": -2.1,
+   "y1": 1.77,
+   "y5": 83.5,
    "high52": 33.28,
-   "fromHigh": 21.1,
+   "fromHigh": 21.19,
    "rank": 140,
    "rating": "HOLD"
   },
@@ -2946,9 +2946,9 @@
    "ticker": "8035.T",
    "name": "TOKYO ELECTRON",
    "sector": "Technology",
-   "marketCap": 125223368430,
+   "marketCap": 125209916816,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 49.1,
    "ai": true,
    "price": 8753.0,
@@ -3093,20 +3093,20 @@
    "ticker": "OR.PA",
    "name": "L'OREAL",
    "sector": "Consumer Defensive",
-   "marketCap": 269567355153,
+   "marketCap": 269685978614,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 38.1,
+   "usd": 1.12447989,
+   "pe": 38.2,
    "ai": false,
-   "price": 449.3,
-   "d1": 1.02,
-   "m1": 20.31,
-   "m3": 15.62,
-   "ytd": 24.97,
-   "y1": 26.38,
-   "y5": 18.02,
+   "price": 449.7,
+   "d1": 1.11,
+   "m1": 20.42,
+   "m3": 15.72,
+   "ytd": 25.08,
+   "y1": 26.49,
+   "y5": 18.12,
    "high52": 453.2,
-   "fromHigh": 0.86,
+   "fromHigh": 0.77,
    "rank": 148,
    "rating": "HOLD"
   },
@@ -3132,44 +3132,44 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "MC.PA",
-   "name": "LVMH",
-   "sector": "Consumer Cyclical",
-   "marketCap": 236195168017,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 19.4,
+   "ticker": "ZURN.SW",
+   "name": "ZURICH INSURANCE N",
+   "sector": "Financial Services",
+   "marketCap": 117494813632,
+   "currency": "CHF",
+   "usd": 1.2256254,
+   "pe": 16.4,
    "ai": false,
-   "price": 425.9,
-   "d1": 2.32,
+   "price": 641.8,
+   "d1": 0.66,
    "m1": 11.81,
-   "m3": -11.22,
-   "ytd": -32.89,
-   "y1": -28.76,
-   "y5": -33.81,
-   "high52": 643.8,
-   "fromHigh": 33.85,
+   "m3": 5.7,
+   "ytd": 12.57,
+   "y1": 19.35,
+   "y5": 103.12,
+   "high52": 642.2,
+   "fromHigh": 0.06,
    "rank": 150,
    "rating": "HOLD"
   },
   {
-   "ticker": "ZURN.SW",
-   "name": "ZURICH INSURANCE N",
-   "sector": "Financial Services",
-   "marketCap": 117201194966,
-   "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 16.3,
+   "ticker": "MC.PA",
+   "name": "LVMH",
+   "sector": "Consumer Cyclical",
+   "marketCap": 235423726865,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 19.4,
    "ai": false,
-   "price": 640.0,
-   "d1": 0.38,
+   "price": 424.7,
+   "d1": 2.03,
    "m1": 11.5,
-   "m3": 5.4,
-   "ytd": 12.25,
-   "y1": 19.02,
-   "y5": 102.55,
-   "high52": 642.2,
-   "fromHigh": 0.34,
+   "m3": -11.47,
+   "ytd": -33.08,
+   "y1": -28.96,
+   "y5": -33.99,
+   "high52": 643.8,
+   "fromHigh": 34.03,
    "rank": 151,
    "rating": "HOLD"
   },
@@ -3198,20 +3198,20 @@
    "ticker": "D05.SI",
    "name": "DBS",
    "sector": "Financial Services",
-   "marketCap": 158546026854,
+   "marketCap": 158668557303,
    "currency": "SGD",
-   "usd": 0.78363144,
+   "usd": 0.78357619,
    "pe": 11.9,
    "ai": false,
-   "price": 71.14,
-   "d1": 0.51,
-   "m1": -8.6,
-   "m3": -2.24,
-   "ytd": 31.21,
-   "y1": 40.13,
-   "y5": 220.47,
+   "price": 71.2,
+   "d1": 0.59,
+   "m1": -8.52,
+   "m3": -2.16,
+   "ytd": 31.32,
+   "y1": 40.25,
+   "y5": 220.74,
    "high52": 79.05,
-   "fromHigh": 10.01,
+   "fromHigh": 9.93,
    "rank": 153,
    "rating": "HOLD"
   },
@@ -3240,20 +3240,20 @@
    "ticker": "ISP.MI",
    "name": "INTESA SANPAOLO",
    "sector": "Financial Services",
-   "marketCap": 121025645705,
+   "marketCap": 120971205705,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 11.1,
    "ai": false,
    "price": 6.35,
-   "d1": 1.15,
-   "m1": -1.12,
-   "m3": -6.08,
-   "ytd": 10.99,
-   "y1": 21.22,
-   "y5": 276.51,
+   "d1": 1.1,
+   "m1": -1.17,
+   "m3": -6.12,
+   "ytd": 10.94,
+   "y1": 21.16,
+   "y5": 276.33,
    "high52": 6.94,
-   "fromHigh": 8.4,
+   "fromHigh": 8.45,
    "rank": 155,
    "rating": "HOLD"
   },
@@ -3261,20 +3261,20 @@
    "ticker": "BNP.PA",
    "name": "BNP PARIBAS ACT.A",
    "sector": "Financial Services",
-   "marketCap": 115469005894,
+   "marketCap": 115404741094,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 8.2,
    "ai": false,
-   "price": 93.65,
-   "d1": 2.13,
-   "m1": 0.96,
-   "m3": -13.69,
-   "ytd": 23.33,
-   "y1": 51.01,
-   "y5": 125.82,
+   "price": 93.64,
+   "d1": 2.12,
+   "m1": 0.95,
+   "m3": -13.7,
+   "ytd": 23.32,
+   "y1": 51.0,
+   "y5": 125.79,
    "high52": 110.15,
-   "fromHigh": 14.98,
+   "fromHigh": 14.99,
    "rank": 156,
    "rating": "HOLD"
   },
@@ -3324,9 +3324,9 @@
    "ticker": "8766.T",
    "name": "TOKIO MARINE HOLDINGS INC",
    "sector": "Financial Services",
-   "marketCap": 108071802640,
+   "marketCap": 108060193463,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 52.3,
    "ai": false,
    "price": 606.0,
@@ -3408,42 +3408,21 @@
    "ticker": "ENR.DE",
    "name": "Siemens Energy AG             N",
    "sector": "Industrials",
-   "marketCap": 115877745973,
+   "marketCap": 115902162581,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 39.1,
    "ai": false,
-   "price": 121.06,
-   "d1": 1.34,
-   "m1": -16.77,
-   "m3": -19.75,
-   "ytd": 0.98,
-   "y1": 13.36,
-   "y5": 435.51,
+   "price": 121.14,
+   "d1": 1.41,
+   "m1": -16.72,
+   "m3": -19.7,
+   "ytd": 1.04,
+   "y1": 13.43,
+   "y5": 435.86,
    "high52": 191.66,
-   "fromHigh": 36.84,
+   "fromHigh": 36.79,
    "rank": 163,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "SAF.PA",
-   "name": "SAFRAN",
-   "sector": "Industrials",
-   "marketCap": 140156207285,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 32.3,
-   "ai": false,
-   "price": 301.0,
-   "d1": 2.91,
-   "m1": -8.73,
-   "m3": -16.04,
-   "ytd": 2.35,
-   "y1": -0.82,
-   "y5": 162.19,
-   "high52": 366.5,
-   "fromHigh": 17.87,
-   "rank": 164,
    "rating": "HOLD"
   },
   {
@@ -3464,6 +3443,27 @@
    "y5": 48.92,
    "high52": 1118.65,
    "fromHigh": 5.77,
+   "rank": 164,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "SAF.PA",
+   "name": "SAFRAN",
+   "sector": "Industrials",
+   "marketCap": 139674278729,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 32.2,
+   "ai": false,
+   "price": 300.1,
+   "d1": 2.6,
+   "m1": -9.01,
+   "m3": -16.29,
+   "ytd": 2.04,
+   "y1": -1.12,
+   "y5": 161.4,
+   "high52": 366.5,
+   "fromHigh": 18.12,
    "rank": 165,
    "rating": "HOLD"
   },
@@ -3471,9 +3471,9 @@
    "ticker": "1299.HK",
    "name": "AIA",
    "sector": "Financial Services",
-   "marketCap": 103559378708,
+   "marketCap": 103552635810,
    "currency": "HKD",
-   "usd": 0.12747298,
+   "usd": 0.12746468,
    "pe": 13.3,
    "ai": false,
    "price": 78.85,
@@ -3723,9 +3723,9 @@
    "ticker": "9983.T",
    "name": "FAST RETAILING CO LTD",
    "sector": "Consumer Cyclical",
-   "marketCap": 157134124564,
+   "marketCap": 157117245065,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 45.9,
    "ai": false,
    "price": 81020.0,
@@ -3765,9 +3765,9 @@
    "ticker": "8001.T",
    "name": "ITOCHU CORP",
    "sector": "Industrials",
-   "marketCap": 104554710690,
+   "marketCap": 104543479323,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 18.8,
    "ai": false,
    "price": 2395.5,
@@ -3888,6 +3888,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "ATCO-A.ST",
+   "name": "Atlas Copco AB ser. A",
+   "sector": "Industrials",
+   "marketCap": 94635329770,
+   "currency": "SEK",
+   "usd": 0.10255337,
+   "pe": 33.4,
+   "ai": false,
+   "price": 189.15,
+   "d1": 1.75,
+   "m1": -8.73,
+   "m3": -9.34,
+   "ytd": 16.42,
+   "y1": 21.85,
+   "y5": 51.33,
+   "high52": 212.51,
+   "fromHigh": 10.99,
+   "rank": 186,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "WM",
    "name": "Waste Management, Inc.",
    "sector": "Industrials",
@@ -3905,7 +3926,7 @@
    "y5": 61.4,
    "high52": 246.06,
    "fromHigh": 3.08,
-   "rank": 186,
+   "rank": 187,
    "rating": "HOLD"
   },
   {
@@ -3926,29 +3947,8 @@
    "y5": 35.14,
    "high52": 370.35,
    "fromHigh": 28.02,
-   "rank": 187,
-   "rating": "NO RATING"
-  },
-  {
-   "ticker": "ATCO-A.ST",
-   "name": "Atlas Copco AB ser. A",
-   "sector": "Industrials",
-   "marketCap": 94178189085,
-   "currency": "SEK",
-   "usd": 0.10257315,
-   "pe": 33.2,
-   "ai": false,
-   "price": 188.2,
-   "d1": 1.24,
-   "m1": -9.19,
-   "m3": -9.8,
-   "ytd": 15.84,
-   "y1": 21.24,
-   "y5": 50.57,
-   "high52": 212.51,
-   "fromHigh": 11.44,
    "rank": 188,
-   "rating": "HOLD"
+   "rating": "NO RATING"
   },
   {
    "ticker": "GLW",
@@ -4122,9 +4122,9 @@
    "ticker": "9984.T",
    "name": "SOFTBANK GROUP CORP",
    "sector": "Communication Services",
-   "marketCap": 143358726404,
+   "marketCap": 143343326671,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 4.6,
    "ai": true,
    "price": 3980.0,
@@ -4143,20 +4143,20 @@
    "ticker": "PRX.AS",
    "name": "PROSUS",
    "sector": "Consumer Cyclical",
-   "marketCap": 91883767344,
+   "marketCap": 91724930327,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 8.7,
    "ai": false,
-   "price": 39.08,
-   "d1": 5.65,
-   "m1": 10.77,
-   "m3": -5.98,
-   "ytd": -26.05,
-   "y1": -34.62,
-   "y5": 18.1,
+   "price": 39.03,
+   "d1": 5.51,
+   "m1": 10.63,
+   "m3": -6.1,
+   "ytd": -26.14,
+   "y1": -34.7,
+   "y5": 17.95,
    "high52": 63.94,
-   "fromHigh": 38.87,
+   "fromHigh": 38.95,
    "rank": 198,
    "rating": "HOLD"
   },
@@ -4311,9 +4311,9 @@
    "ticker": "WBC.AX",
    "name": "WESTPAC FPO [WBC]",
    "sector": "Financial Services",
-   "marketCap": 87847611624,
+   "marketCap": 87785979059,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 18.3,
    "ai": false,
    "price": 36.64,
@@ -4458,9 +4458,9 @@
    "ticker": "6861.T",
    "name": "KEYENCE CORP",
    "sector": "Technology",
-   "marketCap": 110961853269,
+   "marketCap": 110949933640,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 32.3,
    "ai": false,
    "price": 72390.0,
@@ -4497,27 +4497,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "ANZ.AX",
-   "name": "ANZ GROUP FPO [ANZ]",
-   "sector": "Financial Services",
-   "marketCap": 84761193851,
-   "currency": "AUD",
-   "usd": 0.70200074,
-   "pe": 20.4,
-   "ai": false,
-   "price": 40.1,
-   "d1": -0.64,
-   "m1": 6.51,
-   "m3": 5.5,
-   "ytd": 12.89,
-   "y1": 13.79,
-   "y5": 86.06,
-   "high52": 41.33,
-   "fromHigh": 2.98,
-   "rank": 215,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "CVNA",
    "name": "Carvana Co.",
    "sector": "Consumer Cyclical",
@@ -4535,8 +4514,29 @@
    "y5": 30.18,
    "high52": 97.38,
    "fromHigh": 20.35,
-   "rank": 216,
+   "rank": 215,
    "rating": "SELL"
+  },
+  {
+   "ticker": "ANZ.AX",
+   "name": "ANZ GROUP FPO [ANZ]",
+   "sector": "Financial Services",
+   "marketCap": 84701726670,
+   "currency": "AUD",
+   "usd": 0.70150822,
+   "pe": 20.4,
+   "ai": false,
+   "price": 40.1,
+   "d1": -0.64,
+   "m1": 6.51,
+   "m3": 5.5,
+   "ytd": 12.89,
+   "y1": 13.79,
+   "y5": 86.06,
+   "high52": 41.33,
+   "fromHigh": 2.98,
+   "rank": 216,
+   "rating": "HOLD"
   },
   {
    "ticker": "JCI",
@@ -4623,12 +4623,33 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "MUV2.DE",
+   "name": "MUENCHENER RUECKVERS.-GES. AG N",
+   "sector": "Financial Services",
+   "marketCap": 83725403856,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 11.1,
+   "ai": false,
+   "price": 591.8,
+   "d1": 1.27,
+   "m1": 15.95,
+   "m3": 14.91,
+   "ytd": 10.29,
+   "y1": 14.02,
+   "y5": 178.13,
+   "high52": 591.8,
+   "fromHigh": 0.0,
+   "rank": 221,
+   "rating": "NO RATING"
+  },
+  {
    "ticker": "NAB.AX",
    "name": "NAT. BANK FPO [NAB]",
    "sector": "Financial Services",
-   "marketCap": 83727351973,
+   "marketCap": 83668610120,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 19.5,
    "ai": false,
    "price": 38.96,
@@ -4640,27 +4661,6 @@
    "y5": 71.6,
    "high52": 48.4,
    "fromHigh": 19.5,
-   "rank": 221,
-   "rating": "NO RATING"
-  },
-  {
-   "ticker": "MUV2.DE",
-   "name": "MUENCHENER RUECKVERS.-GES. AG N",
-   "sector": "Financial Services",
-   "marketCap": 83480003313,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 11.1,
-   "ai": false,
-   "price": 589.8,
-   "d1": 0.92,
-   "m1": 15.56,
-   "m3": 14.52,
-   "ytd": 9.92,
-   "y1": 13.64,
-   "y5": 177.19,
-   "high52": 590.0,
-   "fromHigh": 0.03,
    "rank": 222,
    "rating": "NO RATING"
   },
@@ -4707,6 +4707,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "ENEL.MI",
+   "name": "ENEL",
+   "sector": "Utilities",
+   "marketCap": 108840355151,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 23.2,
+   "ai": false,
+   "price": 9.74,
+   "d1": 0.6,
+   "m1": 11.28,
+   "m3": -2.14,
+   "ytd": 15.39,
+   "y1": 14.63,
+   "y5": 82.71,
+   "high52": 10.1,
+   "fromHigh": 3.61,
+   "rank": 225,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "HLT",
    "name": "Hilton Worldwide Holdings Inc.",
    "sector": "Consumer Cyclical",
@@ -4724,29 +4745,8 @@
    "y5": 151.44,
    "high52": 377.76,
    "fromHigh": 0.33,
-   "rank": 225,
-   "rating": "SELL"
-  },
-  {
-   "ticker": "ENEL.MI",
-   "name": "ENEL",
-   "sector": "Utilities",
-   "marketCap": 108442151840,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 23.1,
-   "ai": false,
-   "price": 9.7,
-   "d1": 0.2,
-   "m1": 10.83,
-   "m3": -2.53,
-   "ytd": 14.93,
-   "y1": 14.17,
-   "y5": 81.98,
-   "high52": 10.1,
-   "fromHigh": 4.0,
    "rank": 226,
-   "rating": "HOLD"
+   "rating": "SELL"
   },
   {
    "ticker": "MSI",
@@ -4773,20 +4773,20 @@
    "ticker": "CS.PA",
    "name": "AXA",
    "sector": "Financial Services",
-   "marketCap": 103769536674,
+   "marketCap": 103995873616,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 12.3,
    "ai": false,
-   "price": 45.59,
-   "d1": 0.91,
-   "m1": 8.16,
-   "m3": 2.06,
-   "ytd": 17.97,
-   "y1": 26.8,
-   "y5": 140.16,
-   "high52": 45.7,
-   "fromHigh": 0.24,
+   "price": 45.71,
+   "d1": 1.17,
+   "m1": 8.45,
+   "m3": 2.33,
+   "ytd": 18.28,
+   "y1": 27.13,
+   "y5": 140.79,
+   "high52": 45.72,
+   "fromHigh": 0.02,
    "rank": 228,
    "rating": "HOLD"
   },
@@ -4857,9 +4857,9 @@
    "ticker": "8031.T",
    "name": "MITSUI & CO",
    "sector": "Industrials",
-   "marketCap": 90325291097,
+   "marketCap": 90315588268,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 15.4,
    "ai": false,
    "price": 5039.0,
@@ -5190,27 +5190,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "ITX.MC",
-   "name": "Industria de Diseño Textil, S.A.",
-   "sector": "Consumer Cyclical",
-   "marketCap": 212222926479,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 28.7,
-   "ai": false,
-   "price": 60.56,
-   "d1": 2.54,
-   "m1": 16.04,
-   "m3": 5.13,
-   "ytd": 11.04,
-   "y1": 30.49,
-   "y5": 124.54,
-   "high52": 60.64,
-   "fromHigh": 0.13,
-   "rank": 248,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "ITW",
    "name": "Illinois Tool Works Inc.",
    "sector": "Industrials",
@@ -5228,6 +5207,27 @@
    "y5": 41.17,
    "high52": 299.98,
    "fromHigh": 2.18,
+   "rank": 248,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "ITX.MC",
+   "name": "Industria de Diseño Textil, S.A.",
+   "sector": "Consumer Cyclical",
+   "marketCap": 211637076799,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 28.6,
+   "ai": false,
+   "price": 60.42,
+   "d1": 2.3,
+   "m1": 15.77,
+   "m3": 4.89,
+   "ytd": 10.78,
+   "y1": 30.19,
+   "y5": 124.02,
+   "high52": 60.64,
+   "fromHigh": 0.36,
    "rank": 249,
    "rating": "HOLD"
   },
@@ -5337,27 +5337,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "BA.L",
-   "name": "BAE SYSTEMS PLC ORD 2.5P",
-   "sector": "Industrials",
-   "marketCap": 75815697845,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 27.5,
-   "ai": false,
-   "price": 1923.0,
-   "d1": -3.27,
-   "m1": -0.56,
-   "m3": -10.8,
-   "ytd": 12.21,
-   "y1": 4.05,
-   "y5": 235.42,
-   "high52": 2359.56,
-   "fromHigh": 18.5,
-   "rank": 255,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "TGT",
    "name": "Target Corporation",
    "sector": "Consumer Defensive",
@@ -5375,6 +5354,27 @@
    "y5": -25.04,
    "high52": 170.75,
    "fromHigh": 4.48,
+   "rank": 255,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "BA.L",
+   "name": "BAE SYSTEMS PLC ORD 2.5P",
+   "sector": "Industrials",
+   "marketCap": 75282707998,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": 27.3,
+   "ai": false,
+   "price": 1911.0,
+   "d1": -3.87,
+   "m1": -1.18,
+   "m3": -11.36,
+   "ytd": 11.51,
+   "y1": 3.4,
+   "y5": 233.33,
+   "high52": 2359.56,
+   "fromHigh": 19.01,
    "rank": 256,
    "rating": "HOLD"
   },
@@ -5445,20 +5445,20 @@
    "ticker": "IFX.DE",
    "name": "INFINEON TECHNOLOGIES AG      N",
    "sector": "Technology",
-   "marketCap": 72671987629,
+   "marketCap": 72317820689,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 54.0,
+   "usd": 1.12447989,
+   "pe": 53.8,
    "ai": false,
-   "price": 49.71,
-   "d1": -1.05,
-   "m1": -21.68,
-   "m3": -17.26,
-   "ytd": 32.77,
-   "y1": 46.26,
-   "y5": 21.27,
+   "price": 49.49,
+   "d1": -1.5,
+   "m1": -22.03,
+   "m3": -17.63,
+   "ytd": 32.16,
+   "y1": 45.59,
+   "y5": 20.72,
    "high52": 88.83,
-   "fromHigh": 44.04,
+   "fromHigh": 44.29,
    "rank": 260,
    "rating": "SELL"
   },
@@ -5613,20 +5613,20 @@
    "ticker": "O39.SI",
    "name": "OCBC Bank",
    "sector": "Financial Services",
-   "marketCap": 98605774011,
+   "marketCap": 98387462688,
    "currency": "SGD",
-   "usd": 0.78363144,
+   "usd": 0.78357619,
    "pe": 16.1,
    "ai": false,
-   "price": 27.99,
-   "d1": 0.5,
-   "m1": -12.2,
-   "m3": -0.77,
-   "ytd": 47.56,
-   "y1": 70.92,
-   "y5": 206.44,
+   "price": 27.93,
+   "d1": 0.29,
+   "m1": -12.39,
+   "m3": -0.98,
+   "ytd": 47.25,
+   "y1": 70.55,
+   "y5": 205.78,
    "high52": 32.57,
-   "fromHigh": 14.06,
+   "fromHigh": 14.25,
    "rank": 268,
    "rating": "HOLD"
   },
@@ -5655,9 +5655,9 @@
    "ticker": "4502.T",
    "name": "TAKEDA PHARMACEUTICAL CO LTD",
    "sector": "Healthcare",
-   "marketCap": 69543856946,
+   "marketCap": 69536386478,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 308.6,
    "ai": false,
    "price": 6888.0,
@@ -5718,9 +5718,9 @@
    "ticker": "CSL.AX",
    "name": "CSL FPO [CSL]",
    "sector": "Healthcare",
-   "marketCap": 68184333520,
+   "marketCap": 68136496416,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": null,
    "ai": false,
    "price": 202.4,
@@ -5844,20 +5844,20 @@
    "ticker": "VOLV-B.ST",
    "name": "Volvo, AB ser. B",
    "sector": "Industrials",
-   "marketCap": 66306812980,
+   "marketCap": 66419148086,
    "currency": "SEK",
-   "usd": 0.10257315,
+   "usd": 0.10255337,
    "pe": 16.5,
    "ai": false,
-   "price": 317.9,
-   "d1": 2.05,
-   "m1": 1.7,
-   "m3": -13.24,
-   "ytd": 11.8,
-   "y1": 25.55,
-   "y5": 110.63,
+   "price": 318.5,
+   "d1": 2.25,
+   "m1": 1.89,
+   "m3": -13.07,
+   "ytd": 12.02,
+   "y1": 25.79,
+   "y5": 111.03,
    "high52": 374.5,
-   "fromHigh": 15.11,
+   "fromHigh": 14.95,
    "rank": 279,
    "rating": "HOLD"
   },
@@ -5907,9 +5907,9 @@
    "ticker": "MQG.AX",
    "name": "MACQ GROUP FPO [MQG]",
    "sector": "Financial Services",
-   "marketCap": 69137355392,
+   "marketCap": 69088849661,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 26.6,
    "ai": false,
    "price": 258.4,
@@ -5991,9 +5991,9 @@
    "ticker": "4063.T",
    "name": "SHIN-ETSU CHEMICAL CO",
    "sector": "Basic Materials",
-   "marketCap": 65332869865,
+   "marketCap": 65325851745,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.5,
    "ai": false,
    "price": 5693.0,
@@ -6012,9 +6012,9 @@
    "ticker": "WES.AX",
    "name": "WESFARMER FPO [WES]",
    "sector": "Consumer Cyclical",
-   "marketCap": 64984881243,
+   "marketCap": 64939288826,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 32.2,
    "ai": false,
    "price": 81.54,
@@ -6033,9 +6033,9 @@
    "ticker": "7974.T",
    "name": "NINTENDO CO LTD",
    "sector": "Communication Services",
-   "marketCap": 64704297360,
+   "marketCap": 64697346762,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 21.7,
    "ai": false,
    "price": 8880.0,
@@ -6075,20 +6075,20 @@
    "ticker": "DB1.DE",
    "name": "DEUTSCHE BOERSE AG            N",
    "sector": "Financial Services",
-   "marketCap": 64447446980,
+   "marketCap": 64638862396,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 26.5,
+   "usd": 1.12447989,
+   "pe": 26.6,
    "ai": false,
-   "price": 321.5,
-   "d1": 0.88,
-   "m1": 10.98,
-   "m3": 19.52,
-   "ytd": 46.22,
-   "y1": 48.75,
-   "y5": 137.87,
-   "high52": 322.1,
-   "fromHigh": 0.19,
+   "price": 322.6,
+   "d1": 1.22,
+   "m1": 11.36,
+   "m3": 19.93,
+   "ytd": 46.72,
+   "y1": 49.26,
+   "y5": 138.68,
+   "high52": 322.6,
+   "fromHigh": 0.0,
    "rank": 290,
    "rating": "HOLD"
   },
@@ -6117,9 +6117,9 @@
    "ticker": "7011.T",
    "name": "MITSUBISHI HEAVY INDUSTRIES",
    "sector": "Industrials",
-   "marketCap": 64817087197,
+   "marketCap": 64810124483,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 34.8,
    "ai": false,
    "price": 3052.0,
@@ -6180,20 +6180,20 @@
    "ticker": "DBK.DE",
    "name": "DEUTSCHE BANK AG              N",
    "sector": "Financial Services",
-   "marketCap": 69666935547,
+   "marketCap": 69447956994,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 10.0,
    "ai": false,
-   "price": 33.4,
-   "d1": 2.58,
-   "m1": 6.76,
-   "m3": 1.72,
-   "ytd": 4.54,
-   "y1": 9.43,
-   "y5": 246.15,
+   "price": 33.31,
+   "d1": 2.32,
+   "m1": 6.49,
+   "m3": 1.46,
+   "ytd": 4.28,
+   "y1": 9.15,
+   "y5": 245.27,
    "high52": 35.85,
-   "fromHigh": 6.83,
+   "fromHigh": 7.07,
    "rank": 295,
    "rating": "HOLD"
   },
@@ -6201,20 +6201,20 @@
    "ticker": "GLEN.L",
    "name": "GLENCORE PLC ORD USD0.01",
    "sector": "Basic Materials",
-   "marketCap": 80194658006,
+   "marketCap": 80067800636,
    "currency": "GBp",
-   "usd": 0.01348109,
+   "usd": 0.01347037,
    "pe": 14.9,
    "ai": false,
-   "price": 507.8,
-   "d1": 1.38,
-   "m1": -10.8,
-   "m3": -11.42,
-   "ytd": 24.93,
-   "y1": 42.69,
-   "y5": 44.02,
+   "price": 507.4,
+   "d1": 1.3,
+   "m1": -10.87,
+   "m3": -11.49,
+   "ytd": 24.83,
+   "y1": 42.58,
+   "y5": 43.91,
    "high52": 707.13,
-   "fromHigh": 28.19,
+   "fromHigh": 28.24,
    "rank": 296,
    "rating": "SELL"
   },
@@ -6261,46 +6261,46 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "BAYN.DE",
-   "name": "Bayer AG                      N",
-   "sector": "Healthcare",
-   "marketCap": 61626692572,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": null,
-   "ai": false,
-   "price": 55.76,
-   "d1": 2.8,
-   "m1": 26.84,
-   "m3": 13.29,
-   "ytd": 51.09,
-   "y1": 111.62,
-   "y5": 22.08,
-   "high52": 55.92,
-   "fromHigh": 0.29,
-   "rank": 299,
-   "rating": "SELL"
-  },
-  {
    "ticker": "DHL.DE",
    "name": "DHL AG                        N",
    "sector": "Industrials",
-   "marketCap": 74924060362,
+   "marketCap": 75065102039,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 18.4,
    "ai": false,
-   "price": 60.0,
-   "d1": -0.43,
-   "m1": 7.3,
-   "m3": 7.95,
-   "ytd": 33.9,
-   "y1": 56.9,
-   "y5": 35.56,
+   "price": 60.14,
+   "d1": -0.2,
+   "m1": 7.55,
+   "m3": 8.2,
+   "ytd": 34.21,
+   "y1": 57.26,
+   "y5": 35.87,
    "high52": 60.86,
-   "fromHigh": 1.41,
-   "rank": 300,
+   "fromHigh": 1.18,
+   "rank": 299,
    "rating": "HOLD"
+  },
+  {
+   "ticker": "BAYN.DE",
+   "name": "Bayer AG                      N",
+   "sector": "Healthcare",
+   "marketCap": 61422216948,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": null,
+   "ai": false,
+   "price": 55.6,
+   "d1": 2.51,
+   "m1": 26.48,
+   "m3": 12.96,
+   "ytd": 50.66,
+   "y1": 111.01,
+   "y5": 21.73,
+   "high52": 55.92,
+   "fromHigh": 0.57,
+   "rank": 300,
+   "rating": "SELL"
   },
   {
    "ticker": "D",
@@ -6411,9 +6411,9 @@
    "ticker": "6503.T",
    "name": "MITSUBISHI ELECTRIC CORP",
    "sector": "Industrials",
-   "marketCap": 61463325217,
+   "marketCap": 61456722768,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 24.0,
    "ai": false,
    "price": 4751.0,
@@ -6495,9 +6495,9 @@
    "ticker": "0388.HK",
    "name": "HKEX",
    "sector": "Financial Services",
-   "marketCap": 63580195633,
+   "marketCap": 63576055836,
    "currency": "HKD",
-   "usd": 0.12747298,
+   "usd": 0.12746468,
    "pe": 25.2,
    "ai": false,
    "price": 394.6,
@@ -6537,20 +6537,20 @@
    "ticker": "EL.PA",
    "name": "ESSILORLUXOTTICA",
    "sector": "Healthcare",
-   "marketCap": 99290810063,
+   "marketCap": 99375004502,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 36.0,
    "ai": false,
-   "price": 192.55,
-   "d1": 1.82,
-   "m1": 33.25,
-   "m3": 12.31,
-   "ytd": -26.97,
-   "y1": -37.69,
-   "y5": 15.13,
+   "price": 192.8,
+   "d1": 1.96,
+   "m1": 33.43,
+   "m3": 12.45,
+   "ytd": -26.88,
+   "y1": -37.6,
+   "y5": 15.28,
    "high52": 316.32,
-   "fromHigh": 39.13,
+   "fromHigh": 39.05,
    "rank": 312,
    "rating": "HOLD"
   },
@@ -6600,20 +6600,20 @@
    "ticker": "NDA-FI.HE",
    "name": "Nordea Bank Abp",
    "sector": "Financial Services",
-   "marketCap": 63072123607,
+   "marketCap": 63158238611,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 12.1,
    "ai": false,
-   "price": 16.52,
-   "d1": 0.95,
-   "m1": -3.36,
-   "m3": -4.59,
-   "ytd": 11.87,
-   "y1": 26.1,
-   "y5": 127.1,
+   "price": 16.55,
+   "d1": 1.07,
+   "m1": -3.25,
+   "m3": -4.47,
+   "ytd": 12.01,
+   "y1": 26.25,
+   "y5": 127.38,
    "high52": 18.11,
-   "fromHigh": 8.75,
+   "fromHigh": 8.64,
    "rank": 315,
    "rating": "HOLD"
   },
@@ -6642,20 +6642,20 @@
    "ticker": "CPG.L",
    "name": "COMPASS GROUP PLC ORD 11 1/20P",
    "sector": "Consumer Cyclical",
-   "marketCap": 59001123072,
+   "marketCap": 58882100633,
    "currency": "USD",
    "usd": 1.0,
-   "pe": 29.2,
+   "pe": 29.1,
    "ai": false,
-   "price": 34.7,
-   "d1": 1.02,
-   "m1": 17.11,
-   "m3": 4.83,
-   "ytd": 49.46,
-   "y1": 38.99,
-   "y5": 136.69,
+   "price": 34.63,
+   "d1": 0.82,
+   "m1": 16.87,
+   "m3": 4.62,
+   "ytd": 49.16,
+   "y1": 38.71,
+   "y5": 136.22,
    "high52": 34.92,
-   "fromHigh": 0.63,
+   "fromHigh": 0.83,
    "rank": 317,
    "rating": "HOLD"
   },
@@ -6684,20 +6684,20 @@
    "ticker": "LSEG.L",
    "name": "LONDON STOCK EXCHANGE GROUP PLC",
    "sector": "Financial Services",
-   "marketCap": 63792865754,
+   "marketCap": 63716362983,
    "currency": "GBp",
-   "usd": 0.01348109,
+   "usd": 0.01347037,
    "pe": 35.5,
    "ai": false,
-   "price": 9882.0,
-   "d1": 0.94,
-   "m1": 19.93,
-   "m3": 14.54,
-   "ytd": 10.41,
-   "y1": 1.54,
-   "y5": 38.93,
+   "price": 9878.0,
+   "d1": 0.9,
+   "m1": 19.88,
+   "m3": 14.49,
+   "ytd": 10.36,
+   "y1": 1.5,
+   "y5": 38.87,
    "high52": 10139.36,
-   "fromHigh": 2.54,
+   "fromHigh": 2.58,
    "rank": 319,
    "rating": "HOLD"
   },
@@ -6723,6 +6723,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "LONN.SW",
+   "name": "LONZA N",
+   "sector": "Healthcare",
+   "marketCap": 57405278675,
+   "currency": "CHF",
+   "usd": 1.2256254,
+   "pe": 44.4,
+   "ai": false,
+   "price": 670.6,
+   "d1": 1.36,
+   "m1": 16.67,
+   "m3": 19.45,
+   "ytd": 26.0,
+   "y1": 25.86,
+   "y5": -2.39,
+   "high52": 670.6,
+   "fromHigh": 0.0,
+   "rank": 321,
+   "rating": "SELL"
+  },
+  {
    "ticker": "ET",
    "name": "Energy Transfer LP",
    "sector": "Energy",
@@ -6740,7 +6761,7 @@
    "y5": 205.69,
    "high52": 21.84,
    "fromHigh": 10.9,
-   "rank": 321,
+   "rank": 322,
    "rating": "HOLD"
   },
   {
@@ -6761,7 +6782,7 @@
    "y5": -16.25,
    "high52": 100.25,
    "fromHigh": 0.88,
-   "rank": 322,
+   "rank": 323,
    "rating": "HOLD"
   },
   {
@@ -6782,27 +6803,6 @@
    "y5": 84.4,
    "high52": 66.83,
    "fromHigh": 14.22,
-   "rank": 323,
-   "rating": "SELL"
-  },
-  {
-   "ticker": "LONN.SW",
-   "name": "LONZA N",
-   "sector": "Healthcare",
-   "marketCap": 57114607441,
-   "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 44.2,
-   "ai": false,
-   "price": 667.0,
-   "d1": 0.82,
-   "m1": 16.04,
-   "m3": 18.81,
-   "ytd": 25.32,
-   "y1": 25.18,
-   "y5": -2.91,
-   "high52": 669.0,
-   "fromHigh": 0.3,
    "rank": 324,
    "rating": "SELL"
   },
@@ -6915,9 +6915,9 @@
    "ticker": "9433.T",
    "name": "KDDI CORPORATION",
    "sector": "Communication Services",
-   "marketCap": 68662909951,
+   "marketCap": 68655534115,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 15.1,
    "ai": false,
    "price": 2940.0,
@@ -6936,9 +6936,9 @@
    "ticker": "6981.T",
    "name": "MURATA MANUFACTURING CO",
    "sector": "Technology",
-   "marketCap": 57562030368,
+   "marketCap": 57555847000,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 39.4,
    "ai": false,
    "price": 5032.0,
@@ -7104,9 +7104,9 @@
    "ticker": "2914.T",
    "name": "JAPAN TOBACCO INC",
    "sector": "Consumer Defensive",
-   "marketCap": 87178068472,
+   "marketCap": 87168703720,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.7,
    "ai": false,
    "price": 7769.0,
@@ -7125,20 +7125,20 @@
    "ticker": "RMS.PA",
    "name": "HERMES INTL",
    "sector": "Consumer Cyclical",
-   "marketCap": 164426215689,
+   "marketCap": 164175593624,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 32.5,
+   "usd": 1.12447989,
+   "pe": 32.4,
    "ai": false,
-   "price": 1395.5,
-   "d1": 1.68,
-   "m1": 8.51,
-   "m3": -9.73,
-   "ytd": -33.57,
-   "y1": -32.81,
-   "y5": 0.05,
+   "price": 1394.0,
+   "d1": 1.57,
+   "m1": 8.4,
+   "m3": -9.83,
+   "ytd": -33.65,
+   "y1": -32.89,
+   "y5": -0.06,
    "high52": 2277.06,
-   "fromHigh": 38.71,
+   "fromHigh": 38.78,
    "rank": 340,
    "rating": "HOLD"
   },
@@ -7146,20 +7146,20 @@
    "ticker": "DG.PA",
    "name": "VINCI",
    "sector": "Industrials",
-   "marketCap": 69889148420,
+   "marketCap": 69795835002,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 12.5,
    "ai": false,
-   "price": 112.9,
-   "d1": 1.3,
-   "m1": 7.46,
-   "m3": -9.33,
-   "ytd": -2.16,
-   "y1": 0.26,
-   "y5": 44.23,
+   "price": 112.8,
+   "d1": 1.21,
+   "m1": 7.36,
+   "m3": -9.41,
+   "ytd": -2.25,
+   "y1": 0.17,
+   "y5": 44.1,
    "high52": 137.6,
-   "fromHigh": 17.95,
+   "fromHigh": 18.02,
    "rank": 341,
    "rating": "HOLD"
   },
@@ -7167,20 +7167,20 @@
    "ticker": "BAS.DE",
    "name": "BASF SE                       N",
    "sector": "Basic Materials",
-   "marketCap": 53423841452,
+   "marketCap": 53419170087,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 25.0,
    "ai": false,
-   "price": 55.16,
-   "d1": 1.58,
-   "m1": 9.79,
-   "m3": 8.8,
-   "ytd": 29.47,
-   "y1": 33.72,
-   "y5": 20.7,
-   "high52": 55.21,
-   "fromHigh": 0.09,
+   "price": 55.18,
+   "d1": 1.62,
+   "m1": 9.83,
+   "m3": 8.84,
+   "ytd": 29.52,
+   "y1": 33.76,
+   "y5": 20.74,
+   "high52": 55.26,
+   "fromHigh": 0.14,
    "rank": 342,
    "rating": "SELL"
   },
@@ -7251,20 +7251,20 @@
    "ticker": "SREN.SW",
    "name": "SWISS RE N",
    "sector": "Financial Services",
-   "marketCap": 56730601475,
+   "marketCap": 57074680994,
    "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 12.0,
+   "usd": 1.2256254,
+   "pe": 12.1,
    "ai": false,
-   "price": 156.9,
-   "d1": 0.51,
-   "m1": 10.96,
-   "m3": 15.16,
-   "ytd": 25.65,
-   "y1": 11.47,
-   "y5": 137.77,
-   "high52": 157.75,
-   "fromHigh": 0.54,
+   "price": 157.9,
+   "d1": 1.15,
+   "m1": 11.67,
+   "m3": 15.89,
+   "ytd": 26.45,
+   "y1": 12.18,
+   "y5": 139.28,
+   "high52": 157.9,
+   "fromHigh": 0.0,
    "rank": 346,
    "rating": "HOLD"
   },
@@ -7272,20 +7272,20 @@
    "ticker": "GLE.PA",
    "name": "SOCIETE GENERALE",
    "sector": "Financial Services",
-   "marketCap": 52550961199,
+   "marketCap": 52535381430,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 8.0,
    "ai": false,
-   "price": 65.18,
-   "d1": 2.02,
-   "m1": -1.23,
-   "m3": -21.33,
-   "ytd": -2.71,
-   "y1": 22.36,
-   "y5": 174.77,
+   "price": 65.19,
+   "d1": 2.03,
+   "m1": -1.21,
+   "m3": -21.32,
+   "ytd": -2.69,
+   "y1": 22.38,
+   "y5": 174.81,
    "high52": 83.86,
-   "fromHigh": 22.28,
+   "fromHigh": 22.26,
    "rank": 347,
    "rating": "HOLD"
   },
@@ -7293,9 +7293,9 @@
    "ticker": "8053.T",
    "name": "SUMITOMO CORP",
    "sector": "Industrials",
-   "marketCap": 51819161934,
+   "marketCap": 51813595470,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 12.8,
    "ai": false,
    "price": 1735.0,
@@ -7314,9 +7314,9 @@
    "ticker": "9432.T",
    "name": "NTT INC",
    "sector": "Communication Services",
-   "marketCap": 84185789497,
+   "marketCap": 84176746179,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 12.9,
    "ai": false,
    "price": 164.9,
@@ -7353,44 +7353,44 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "STAN.L",
-   "name": "STANDARD CHARTERED PLC ORD USD0",
-   "sector": "Financial Services",
-   "marketCap": 63560132670,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 12.4,
+   "ticker": "ENGI.PA",
+   "name": "ENGIE",
+   "sector": "Utilities",
+   "marketCap": 68564699770,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 14.7,
    "ai": false,
-   "price": 2178.0,
-   "d1": 2.06,
-   "m1": -3.03,
-   "m3": -1.53,
-   "ytd": 19.59,
-   "y1": 37.55,
-   "y5": 375.81,
-   "high52": 2364.0,
-   "fromHigh": 7.87,
+   "price": 24.0,
+   "d1": -0.29,
+   "m1": 4.94,
+   "m3": -9.3,
+   "ytd": 12.5,
+   "y1": 20.34,
+   "y5": 179.42,
+   "high52": 28.45,
+   "fromHigh": 15.65,
    "rank": 351,
    "rating": "HOLD"
   },
   {
-   "ticker": "ENGI.PA",
-   "name": "ENGIE",
-   "sector": "Utilities",
-   "marketCap": 67909600005,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 14.6,
+   "ticker": "STAN.L",
+   "name": "STANDARD CHARTERED PLC ORD USD0",
+   "sector": "Financial Services",
+   "marketCap": 63451296985,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": 12.4,
    "ai": false,
-   "price": 23.76,
-   "d1": -1.29,
-   "m1": 3.89,
-   "m3": -10.2,
-   "ytd": 11.37,
-   "y1": 19.14,
-   "y5": 176.63,
-   "high52": 28.45,
-   "fromHigh": 16.5,
+   "price": 2176.0,
+   "d1": 1.97,
+   "m1": -3.12,
+   "m3": -1.62,
+   "ytd": 19.48,
+   "y1": 37.43,
+   "y5": 375.37,
+   "high52": 2364.0,
+   "fromHigh": 7.95,
    "rank": 352,
    "rating": "HOLD"
   },
@@ -7398,9 +7398,9 @@
    "ticker": "7741.T",
    "name": "HOYA CORP",
    "sector": "Healthcare",
-   "marketCap": 50599958006,
+   "marketCap": 50594522510,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 28.7,
    "ai": false,
    "price": 24075.0,
@@ -7440,9 +7440,9 @@
    "ticker": "CSU.TO",
    "name": "CONSTELLATION SOFTWARE INC.",
    "sector": "Technology",
-   "marketCap": 52665509276,
+   "marketCap": 52645125649,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 55.3,
    "ai": false,
    "price": 3465.98,
@@ -7542,27 +7542,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "AAL.L",
-   "name": "ANGLO AMERICAN PLC ORD USD0.623",
-   "sector": "Basic Materials",
-   "marketCap": 55728122077,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": null,
-   "ai": false,
-   "price": 3858.0,
-   "d1": 1.47,
-   "m1": -7.7,
-   "m3": -4.05,
-   "ytd": 25.07,
-   "y1": 38.04,
-   "y5": 44.47,
-   "high52": 4643.8,
-   "fromHigh": 16.92,
-   "rank": 360,
-   "rating": "SELL"
-  },
-  {
    "ticker": "FITB",
    "name": "Fifth Third Bancorp",
    "sector": "Financial Services",
@@ -7580,7 +7559,7 @@
    "y5": 49.9,
    "high52": 59.01,
    "fromHigh": 7.27,
-   "rank": 361,
+   "rank": 360,
    "rating": "HOLD"
   },
   {
@@ -7601,7 +7580,7 @@
    "y5": 123.93,
    "high52": 69.92,
    "fromHigh": 28.67,
-   "rank": 362,
+   "rank": 361,
    "rating": "HOLD"
   },
   {
@@ -7622,8 +7601,29 @@
    "y5": 80.83,
    "high52": 126.55,
    "fromHigh": 1.11,
-   "rank": 363,
+   "rank": 362,
    "rating": "HOLD"
+  },
+  {
+   "ticker": "AAL.L",
+   "name": "ANGLO AMERICAN PLC ORD USD0.623",
+   "sector": "Basic Materials",
+   "marketCap": 55452896884,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": null,
+   "ai": false,
+   "price": 3842.0,
+   "d1": 1.05,
+   "m1": -8.09,
+   "m3": -4.45,
+   "ytd": 24.55,
+   "y1": 37.47,
+   "y5": 43.87,
+   "high52": 4643.8,
+   "fromHigh": 17.27,
+   "rank": 363,
+   "rating": "SELL"
   },
   {
    "ticker": "ROK",
@@ -7689,27 +7689,6 @@
    "rating": "SELL"
   },
   {
-   "ticker": "BN.PA",
-   "name": "DANONE",
-   "sector": "Consumer Defensive",
-   "marketCap": 49533541604,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 22.6,
-   "ai": false,
-   "price": 68.36,
-   "d1": 1.06,
-   "m1": 18.35,
-   "m3": 0.53,
-   "ytd": -7.86,
-   "y1": -8.24,
-   "y5": 40.94,
-   "high52": 77.44,
-   "fromHigh": 11.72,
-   "rank": 367,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "ROP",
    "name": "Roper Technologies, Inc.",
    "sector": "Technology",
@@ -7727,6 +7706,27 @@
    "y5": 4.79,
    "high52": 495.68,
    "fromHigh": 0.7,
+   "rank": 367,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "BN.PA",
+   "name": "DANONE",
+   "sector": "Consumer Defensive",
+   "marketCap": 49409862193,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 22.6,
+   "ai": false,
+   "price": 68.22,
+   "d1": 0.86,
+   "m1": 18.11,
+   "m3": 0.32,
+   "ytd": -8.05,
+   "y1": -8.43,
+   "y5": 40.65,
+   "high52": 77.44,
+   "fromHigh": 11.9,
    "rank": 368,
    "rating": "HOLD"
   },
@@ -7923,20 +7923,20 @@
    "ticker": "CABK.MC",
    "name": "CAIXABANK, S.A.",
    "sector": "Financial Services",
-   "marketCap": 94025406718,
+   "marketCap": 93826993894,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 13.1,
    "ai": false,
-   "price": 12.04,
-   "d1": 1.18,
-   "m1": 0.15,
-   "m3": -4.09,
-   "ytd": 21.04,
-   "y1": 38.81,
-   "y5": 571.59,
+   "price": 12.02,
+   "d1": 0.97,
+   "m1": -0.06,
+   "m3": -4.29,
+   "ytd": 20.79,
+   "y1": 38.52,
+   "y5": 570.19,
    "high52": 13.34,
-   "fromHigh": 9.71,
+   "fromHigh": 9.9,
    "rank": 378,
    "rating": "HOLD"
   },
@@ -7965,20 +7965,20 @@
    "ticker": "GIVN.SW",
    "name": "GIVAUDAN N",
    "sector": "Basic Materials",
-   "marketCap": 46685116944,
+   "marketCap": 46761326411,
    "currency": "CHF",
-   "usd": 1.22600102,
+   "usd": 1.2256254,
    "pe": 40.2,
    "ai": false,
-   "price": 4125.0,
-   "d1": 1.28,
-   "m1": 22.01,
-   "m3": 21.22,
-   "ytd": 34.74,
-   "y1": 27.68,
-   "y5": 4.85,
-   "high52": 4133.0,
-   "fromHigh": 0.19,
+   "price": 4133.0,
+   "d1": 1.47,
+   "m1": 22.24,
+   "m3": 21.45,
+   "ytd": 35.0,
+   "y1": 27.93,
+   "y5": 5.06,
+   "high52": 4134.0,
+   "fromHigh": 0.02,
    "rank": 380,
    "rating": "HOLD"
   },
@@ -8007,9 +8007,9 @@
    "ticker": "HOLN.SW",
    "name": "HOLCIM N",
    "sector": "Basic Materials",
-   "marketCap": 51090459465,
+   "marketCap": 51074806109,
    "currency": "CHF",
-   "usd": 1.22600102,
+   "usd": 1.2256254,
    "pe": 107.6,
    "ai": false,
    "price": 75.34,
@@ -8028,9 +8028,9 @@
    "ticker": "6752.T",
    "name": "PANASONIC HOLDINGS CORP",
    "sector": "Technology",
-   "marketCap": 46755154914,
+   "marketCap": 46750132430,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.8,
    "ai": false,
    "price": 3168.0,
@@ -8067,6 +8067,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "EOAN.DE",
+   "name": "E.ON SE                       N",
+   "sector": "Utilities",
+   "marketCap": 56093169509,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 14.6,
+   "ai": false,
+   "price": 19.09,
+   "d1": 1.11,
+   "m1": 12.53,
+   "m3": 1.6,
+   "ytd": 21.98,
+   "y1": 22.51,
+   "y5": 110.93,
+   "high52": 19.79,
+   "fromHigh": 3.54,
+   "rank": 385,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "WAT",
    "name": "Waters Corporation",
    "sector": "Healthcare",
@@ -8084,7 +8105,7 @@
    "y5": 36.3,
    "high52": 482.28,
    "fromHigh": 3.04,
-   "rank": 385,
+   "rank": 386,
    "rating": "HOLD"
   },
   {
@@ -8105,27 +8126,6 @@
    "y5": 9.29,
    "high52": 677.62,
    "fromHigh": 0.49,
-   "rank": 386,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "EOAN.DE",
-   "name": "E.ON SE                       N",
-   "sector": "Utilities",
-   "marketCap": 55824445217,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 14.5,
-   "ai": false,
-   "price": 18.99,
-   "d1": 0.58,
-   "m1": 11.94,
-   "m3": 1.06,
-   "ytd": 21.34,
-   "y1": 21.87,
-   "y5": 109.83,
-   "high52": 19.79,
-   "fromHigh": 4.04,
    "rank": 387,
    "rating": "HOLD"
   },
@@ -8217,9 +8217,9 @@
    "ticker": "8725.T",
    "name": "MS&AD INS GP HLDGS",
    "sector": "Financial Services",
-   "marketCap": 47048865229,
+   "marketCap": 47043811194,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 8.6,
    "ai": false,
    "price": 5243.0,
@@ -8238,20 +8238,20 @@
    "ticker": "TSCO.L",
    "name": "TESCO PLC ORD 6 1/3P",
    "sector": "Consumer Defensive",
-   "marketCap": 46816725973,
+   "marketCap": 46841281916,
    "currency": "GBp",
-   "usd": 0.01348109,
+   "usd": 0.01347037,
    "pe": 18.7,
    "ai": false,
-   "price": 560.46,
-   "d1": 1.28,
-   "m1": 19.21,
-   "m3": 16.6,
-   "ytd": 26.9,
-   "y1": 20.23,
-   "y5": 103.94,
+   "price": 561.2,
+   "d1": 1.41,
+   "m1": 19.36,
+   "m3": 16.76,
+   "ytd": 27.06,
+   "y1": 20.39,
+   "y5": 104.21,
    "high52": 622.5,
-   "fromHigh": 9.97,
+   "fromHigh": 9.85,
    "rank": 393,
    "rating": "HOLD"
   },
@@ -8259,9 +8259,9 @@
    "ticker": "ATD.TO",
    "name": "ALIMENTATION COUCHE-TARD INC",
    "sector": "Consumer Cyclical",
-   "marketCap": 55750184819,
+   "marketCap": 55728607301,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 17.8,
    "ai": false,
    "price": 84.7,
@@ -8364,20 +8364,20 @@
    "ticker": "ASSA-B.ST",
    "name": "ASSA ABLOY AB ser. B",
    "sector": "Industrials",
-   "marketCap": 45824990167,
+   "marketCap": 45827544177,
    "currency": "SEK",
-   "usd": 0.10257315,
+   "usd": 0.10255337,
    "pe": 26.4,
    "ai": false,
-   "price": 402.2,
-   "d1": 0.88,
-   "m1": 14.13,
-   "m3": 9.89,
-   "ytd": 13.07,
-   "y1": 14.78,
-   "y5": 72.32,
+   "price": 402.3,
+   "d1": 0.9,
+   "m1": 14.16,
+   "m3": 9.92,
+   "ytd": 13.09,
+   "y1": 14.81,
+   "y5": 72.36,
    "high52": 403.8,
-   "fromHigh": 0.4,
+   "fromHigh": 0.37,
    "rank": 399,
    "rating": "HOLD"
   },
@@ -8403,46 +8403,46 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "MAERSK-B.CO",
-   "name": "A.P. Møller - Mærsk B A/S",
-   "sector": "Industrials",
-   "marketCap": 43829485209,
-   "currency": "DKK",
-   "usd": 0.15047346,
-   "pe": 20.3,
-   "ai": false,
-   "price": 20260.0,
-   "d1": -8.74,
-   "m1": -15.58,
-   "m3": 20.81,
-   "ytd": 42.47,
-   "y1": 53.7,
-   "y5": 94.22,
-   "high52": 25380.0,
-   "fromHigh": 20.17,
-   "rank": 401,
-   "rating": "SELL"
-  },
-  {
    "ticker": "RHM.DE",
    "name": "RHEINMETALL AG                I",
    "sector": "Industrials",
-   "marketCap": 43554761616,
+   "marketCap": 44044199555,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 32.2,
+   "usd": 1.12447989,
+   "pe": 32.6,
    "ai": false,
-   "price": 829.6,
-   "d1": -17.32,
-   "m1": -15.36,
-   "m3": -30.9,
-   "ytd": -46.32,
-   "y1": -50.91,
-   "y5": 906.8,
+   "price": 839.3,
+   "d1": -16.35,
+   "m1": -14.37,
+   "m3": -30.09,
+   "ytd": -45.7,
+   "y1": -50.34,
+   "y5": 918.57,
    "high52": 1946.54,
-   "fromHigh": 57.38,
-   "rank": 402,
+   "fromHigh": 56.88,
+   "rank": 401,
    "rating": "HOLD"
+  },
+  {
+   "ticker": "MAERSK-B.CO",
+   "name": "A.P. Møller - Mærsk B A/S",
+   "sector": "Industrials",
+   "marketCap": 43785653000,
+   "currency": "DKK",
+   "usd": 0.15039721,
+   "pe": 20.3,
+   "ai": false,
+   "price": 20250.0,
+   "d1": -8.78,
+   "m1": -15.62,
+   "m3": 20.75,
+   "ytd": 42.4,
+   "y1": 53.63,
+   "y5": 94.13,
+   "high52": 25380.0,
+   "fromHigh": 20.21,
+   "rank": 402,
+   "rating": "SELL"
   },
   {
    "ticker": "PRU",
@@ -8469,20 +8469,20 @@
    "ticker": "DSV.CO",
    "name": "DSV A/S",
    "sector": "Industrials",
-   "marketCap": 52812341960,
+   "marketCap": 52713787727,
    "currency": "DKK",
-   "usd": 0.15047346,
-   "pe": 43.9,
+   "usd": 0.15039721,
+   "pe": 43.8,
    "ai": false,
-   "price": 1470.5,
-   "d1": 0.62,
-   "m1": 26.71,
-   "m3": 10.11,
-   "ytd": -8.54,
-   "y1": 4.98,
-   "y5": -1.96,
+   "price": 1468.5,
+   "d1": 0.48,
+   "m1": 26.54,
+   "m3": 9.96,
+   "ytd": -8.67,
+   "y1": 4.83,
+   "y5": -2.1,
    "high52": 1905.06,
-   "fromHigh": 22.81,
+   "fromHigh": 22.92,
    "rank": 404,
    "rating": "SELL"
   },
@@ -8508,6 +8508,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "SSE.L",
+   "name": "SSE PLC ORD 50P",
+   "sector": "Utilities",
+   "marketCap": 43344801135,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": 25.2,
+   "ai": false,
+   "price": 2651.0,
+   "d1": 1.18,
+   "m1": 7.5,
+   "m3": 13.19,
+   "ytd": 21.68,
+   "y1": 40.53,
+   "y5": 61.04,
+   "high52": 2766.98,
+   "fromHigh": 4.19,
+   "rank": 406,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "AIG",
    "name": "American International Group, I",
    "sector": "Financial Services",
@@ -8525,27 +8546,6 @@
    "y5": 55.39,
    "high52": 85.64,
    "fromHigh": 4.59,
-   "rank": 406,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "SSE.L",
-   "name": "SSE PLC ORD 50P",
-   "sector": "Utilities",
-   "marketCap": 43248371311,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 25.2,
-   "ai": false,
-   "price": 2643.0,
-   "d1": 0.88,
-   "m1": 7.18,
-   "m3": 12.85,
-   "ytd": 21.32,
-   "y1": 40.1,
-   "y5": 60.55,
-   "high52": 2766.98,
-   "fromHigh": 4.48,
    "rank": 407,
    "rating": "HOLD"
   },
@@ -8553,9 +8553,9 @@
    "ticker": "DOL.TO",
    "name": "DOLLARAMA INC",
    "sector": "Consumer Defensive",
-   "marketCap": 42334432724,
+   "marketCap": 42318047631,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 44.2,
    "ai": false,
    "price": 220.0,
@@ -8569,27 +8569,6 @@
    "fromHigh": 0.07,
    "rank": 408,
    "rating": "HOLD"
-  },
-  {
-   "ticker": "VOW3.DE",
-   "name": "VOLKSWAGEN AG                 V",
-   "sector": "Consumer Cyclical",
-   "marketCap": 41348820071,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 34.7,
-   "ai": false,
-   "price": 73.32,
-   "d1": 2.98,
-   "m1": 6.97,
-   "m3": -3.63,
-   "ytd": -24.47,
-   "y1": -16.26,
-   "y5": -38.48,
-   "high52": 102.32,
-   "fromHigh": 28.34,
-   "rank": 409,
-   "rating": "NO RATING"
   },
   {
    "ticker": "IQV",
@@ -8609,8 +8588,29 @@
    "y5": 6.72,
    "high52": 284.5,
    "fromHigh": 7.28,
-   "rank": 410,
+   "rank": 409,
    "rating": "HOLD"
+  },
+  {
+   "ticker": "VOW3.DE",
+   "name": "VOLKSWAGEN AG                 V",
+   "sector": "Consumer Cyclical",
+   "marketCap": 41240029037,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 34.7,
+   "ai": false,
+   "price": 73.16,
+   "d1": 2.75,
+   "m1": 6.74,
+   "m3": -3.84,
+   "ytd": -24.63,
+   "y1": -16.44,
+   "y5": -38.62,
+   "high52": 102.32,
+   "fromHigh": 28.5,
+   "rank": 410,
+   "rating": "NO RATING"
   },
   {
    "ticker": "HLN",
@@ -8658,9 +8658,9 @@
    "ticker": "GMG.AX",
    "name": "GOOD GROUP STAPLED [GMG]",
    "sector": "Real Estate",
-   "marketCap": 41484553973,
+   "marketCap": 41455449033,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 21.6,
    "ai": false,
    "price": 28.76,
@@ -8742,20 +8742,20 @@
    "ticker": "LR.PA",
    "name": "LEGRAND",
    "sector": "Industrials",
-   "marketCap": 39616335973,
+   "marketCap": 39657463966,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 27.0,
+   "usd": 1.12447989,
+   "pe": 27.1,
    "ai": false,
-   "price": 134.35,
-   "d1": 5.21,
-   "m1": -6.11,
-   "m3": -2.36,
-   "ytd": 7.3,
-   "y1": -7.25,
-   "y5": 56.81,
+   "price": 134.55,
+   "d1": 5.36,
+   "m1": -5.97,
+   "m3": -2.22,
+   "ytd": 7.45,
+   "y1": -7.11,
+   "y5": 57.04,
    "high52": 164.28,
-   "fromHigh": 18.22,
+   "fromHigh": 18.1,
    "rank": 417,
    "rating": "HOLD"
   },
@@ -8784,9 +8784,9 @@
    "ticker": "TLS.AX",
    "name": "TELSTRA FPO [TLS]",
    "sector": "Communication Services",
-   "marketCap": 39168186972,
+   "marketCap": 39140707160,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 25.2,
    "ai": false,
    "price": 5.03,
@@ -8865,6 +8865,27 @@
    "rating": "NO RATING"
   },
   {
+   "ticker": "UCB.BR",
+   "name": "UCB",
+   "sector": "Healthcare",
+   "marketCap": 61703237670,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 25.4,
+   "ai": false,
+   "price": 287.8,
+   "d1": 1.84,
+   "m1": 43.26,
+   "m3": 25.57,
+   "ytd": 21.38,
+   "y1": 33.65,
+   "y5": 190.88,
+   "high52": 288.0,
+   "fromHigh": 0.07,
+   "rank": 423,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "WEC",
    "name": "WEC Energy Group, Inc.",
    "sector": "Utilities",
@@ -8882,16 +8903,16 @@
    "y5": 54.17,
    "high52": 118.87,
    "fromHigh": 0.64,
-   "rank": 423,
+   "rank": 424,
    "rating": "HOLD"
   },
   {
    "ticker": "SAND.ST",
    "name": "Sandvik AB",
    "sector": "Industrials",
-   "marketCap": 47374936605,
+   "marketCap": 47365800321,
    "currency": "SEK",
-   "usd": 0.10257315,
+   "usd": 0.10255337,
    "pe": 24.2,
    "ai": false,
    "price": 368.2,
@@ -8903,27 +8924,6 @@
    "y5": 97.17,
    "high52": 413.1,
    "fromHigh": 10.87,
-   "rank": 424,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "UCB.BR",
-   "name": "UCB",
-   "sector": "Healthcare",
-   "marketCap": 61409266551,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 25.3,
-   "ai": false,
-   "price": 286.3,
-   "d1": 1.31,
-   "m1": 42.51,
-   "m3": 24.91,
-   "ytd": 20.75,
-   "y1": 32.95,
-   "y5": 189.37,
-   "high52": 287.68,
-   "fromHigh": 0.48,
    "rank": 425,
    "rating": "HOLD"
   },
@@ -8949,27 +8949,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "SGO.PA",
-   "name": "SAINT GOBAIN",
-   "sector": "Industrials",
-   "marketCap": 41379841808,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 14.0,
-   "ai": false,
-   "price": 75.36,
-   "d1": 3.6,
-   "m1": 13.97,
-   "m3": -11.9,
-   "ytd": -10.68,
-   "y1": -6.03,
-   "y5": 42.58,
-   "high52": 88.58,
-   "fromHigh": 14.93,
-   "rank": 427,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "VMC",
    "name": "Vulcan Materials Company (Holdi",
    "sector": "Basic Materials",
@@ -8987,7 +8966,7 @@
    "y5": 58.0,
    "high52": 329.2,
    "fromHigh": 9.57,
-   "rank": 428,
+   "rank": 427,
    "rating": "SELL"
   },
   {
@@ -9008,7 +8987,7 @@
    "y5": 17.51,
    "high52": 18.97,
    "fromHigh": 29.37,
-   "rank": 429,
+   "rank": 428,
    "rating": "NO RATING"
   },
   {
@@ -9029,6 +9008,27 @@
    "y5": 78.79,
    "high52": 170.28,
    "fromHigh": 7.81,
+   "rank": 429,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "SGO.PA",
+   "name": "SAINT GOBAIN",
+   "sector": "Industrials",
+   "marketCap": 41185596702,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 13.9,
+   "ai": false,
+   "price": 75.04,
+   "d1": 3.16,
+   "m1": 13.49,
+   "m3": -12.27,
+   "ytd": -11.06,
+   "y1": -6.43,
+   "y5": 41.98,
+   "high52": 88.58,
+   "fromHigh": 15.29,
    "rank": 430,
    "rating": "HOLD"
   },
@@ -9036,9 +9036,9 @@
    "ticker": "FFH.TO",
    "name": "FAIRFAX FINANCIAL HOLDINGS LTD.",
    "sector": "Financial Services",
-   "marketCap": 44186958068,
+   "marketCap": 44169855974,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 9.8,
    "ai": false,
    "price": 2754.57,
@@ -9078,9 +9078,9 @@
    "ticker": "HEN3.DE",
    "name": "Henkel AG & Co. KGaA          I",
    "sector": "Consumer Defensive",
-   "marketCap": 37930007592,
+   "marketCap": 37912945839,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 17.8,
    "ai": false,
    "price": 83.28,
@@ -9099,9 +9099,9 @@
    "ticker": "6367.T",
    "name": "DAIKIN INDUSTRIES",
    "sector": "Industrials",
-   "marketCap": 37760617423,
+   "marketCap": 37756561141,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.8,
    "ai": false,
    "price": 21465.0,
@@ -9141,9 +9141,9 @@
    "ticker": "8630.T",
    "name": "SOMPO HOLDINGS INC",
    "sector": "Financial Services",
-   "marketCap": 40755453814,
+   "marketCap": 40751075824,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.3,
    "ai": false,
    "price": 7296.0,
@@ -9180,27 +9180,6 @@
    "rating": "HOLD"
   },
   {
-   "ticker": "SIKA.SW",
-   "name": "SIKA N",
-   "sector": "Basic Materials",
-   "marketCap": 37667796562,
-   "currency": "CHF",
-   "usd": 1.22600102,
-   "pe": 29.6,
-   "ai": false,
-   "price": 191.5,
-   "d1": 2.74,
-   "m1": 9.43,
-   "m3": -2.05,
-   "ytd": 21.13,
-   "y1": 29.11,
-   "y5": -34.93,
-   "high52": 197.6,
-   "fromHigh": 3.09,
-   "rank": 438,
-   "rating": "HOLD"
-  },
-  {
    "ticker": "EXPE",
    "name": "Expedia Group, Inc.",
    "sector": "Consumer Cyclical",
@@ -9218,6 +9197,27 @@
    "y5": 75.8,
    "high52": 341.51,
    "fromHigh": 7.5,
+   "rank": 438,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "SIKA.SW",
+   "name": "SIKA N",
+   "sector": "Basic Materials",
+   "marketCap": 37567768425,
+   "currency": "CHF",
+   "usd": 1.2256254,
+   "pe": 29.5,
+   "ai": false,
+   "price": 191.05,
+   "d1": 2.49,
+   "m1": 9.17,
+   "m3": -2.28,
+   "ytd": 20.85,
+   "y1": 28.81,
+   "y5": -35.08,
+   "high52": 197.6,
+   "fromHigh": 3.31,
    "rank": 439,
    "rating": "HOLD"
   },
@@ -9246,9 +9246,9 @@
    "ticker": "G.MI",
    "name": "GENERALI",
    "sector": "Financial Services",
-   "marketCap": 74924555456,
+   "marketCap": 74890852741,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 15.0,
    "ai": false,
    "price": 44.39,
@@ -9261,27 +9261,6 @@
    "high52": 46.24,
    "fromHigh": 4.0,
    "rank": 441,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "EXPN.L",
-   "name": "EXPERIAN PLC ORD USD0.10",
-   "sector": "Industrials",
-   "marketCap": 37281678279,
-   "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 25.9,
-   "ai": false,
-   "price": 3157.0,
-   "d1": 2.0,
-   "m1": 28.02,
-   "m3": 10.73,
-   "ytd": -6.11,
-   "y1": -12.44,
-   "y5": -8.66,
-   "high52": 3597.33,
-   "fromHigh": 12.24,
-   "rank": 442,
    "rating": "HOLD"
   },
   {
@@ -9302,6 +9281,27 @@
    "y5": -8.08,
    "high52": 87.21,
    "fromHigh": 11.35,
+   "rank": 442,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "EXPN.L",
+   "name": "EXPERIAN PLC ORD USD0.10",
+   "sector": "Industrials",
+   "marketCap": 37204848156,
+   "currency": "GBp",
+   "usd": 0.01347037,
+   "pe": 25.8,
+   "ai": false,
+   "price": 3153.0,
+   "d1": 1.87,
+   "m1": 27.86,
+   "m3": 10.59,
+   "ytd": -6.23,
+   "y1": -12.55,
+   "y5": -8.78,
+   "high52": 3597.33,
+   "fromHigh": 12.35,
    "rank": 443,
    "rating": "HOLD"
   },
@@ -9414,20 +9414,20 @@
    "ticker": "III.L",
    "name": "3I GROUP PLC ORD 73 19/22P",
    "sector": "Financial Services",
-   "marketCap": 36693961020,
+   "marketCap": 36623831050,
    "currency": "GBp",
-   "usd": 0.01348109,
+   "usd": 0.01347037,
    "pe": 5.0,
    "ai": false,
-   "price": 2685.0,
-   "d1": 2.01,
-   "m1": 11.32,
-   "m3": -8.11,
-   "ytd": -17.7,
-   "y1": -38.37,
-   "y5": 95.91,
+   "price": 2682.0,
+   "d1": 1.9,
+   "m1": 11.19,
+   "m3": -8.21,
+   "ytd": -17.79,
+   "y1": -38.44,
+   "y5": 95.69,
    "high52": 4361.6,
-   "fromHigh": 38.44,
+   "fromHigh": 38.51,
    "rank": 449,
    "rating": "BUY"
   },
@@ -9435,9 +9435,9 @@
    "ticker": "WOW.AX",
    "name": "WOOLWORTHS FPO [WOW]",
    "sector": "Consumer Defensive",
-   "marketCap": 35777551129,
+   "marketCap": 35752450136,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 44.4,
    "ai": false,
    "price": 41.72,
@@ -9456,20 +9456,20 @@
    "ticker": "SWED-A.ST",
    "name": "Swedbank AB ser A",
    "sector": "Financial Services",
-   "marketCap": 46727601477,
+   "marketCap": 46764686322,
    "currency": "SEK",
-   "usd": 0.10257315,
+   "usd": 0.10255337,
    "pe": 14.9,
    "ai": false,
-   "price": 405.4,
-   "d1": 0.8,
-   "m1": -0.27,
-   "m3": 5.35,
-   "ytd": 38.88,
-   "y1": 52.93,
-   "y5": 208.91,
+   "price": 405.8,
+   "d1": 0.9,
+   "m1": -0.17,
+   "m3": 5.46,
+   "ytd": 39.02,
+   "y1": 53.08,
+   "y5": 209.22,
    "high52": 416.1,
-   "fromHigh": 2.57,
+   "fromHigh": 2.48,
    "rank": 451,
    "rating": "HOLD"
   },
@@ -9477,9 +9477,9 @@
    "ticker": "IFC.TO",
    "name": "INTACT FINANCIAL CORPORATION",
    "sector": "Financial Services",
-   "marketCap": 35660822628,
+   "marketCap": 35647020484,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 15.6,
    "ai": false,
    "price": 282.02,
@@ -9498,9 +9498,9 @@
    "ticker": "6702.T",
    "name": "FUJITSU",
    "sector": "Technology",
-   "marketCap": 37430792467,
+   "marketCap": 37426771615,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 22.3,
    "ai": false,
    "price": 3430.0,
@@ -9516,12 +9516,33 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "DSY.PA",
+   "name": "DASSAULT SYSTEMES",
+   "sector": "Technology",
+   "marketCap": 38670393351,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 26.4,
+   "ai": false,
+   "price": 26.17,
+   "d1": 1.28,
+   "m1": 22.29,
+   "m3": 22.35,
+   "ytd": 11.25,
+   "y1": 10.6,
+   "y5": -50.1,
+   "high52": 26.26,
+   "fromHigh": 0.34,
+   "rank": 454,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "4568.T",
    "name": "DAIICHI SANKYO COMPANY LIMITED",
    "sector": "Healthcare",
-   "marketCap": 35446334574,
+   "marketCap": 35442526895,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 20.1,
    "ai": false,
    "price": 3078.0,
@@ -9533,50 +9554,8 @@
    "y5": 20.18,
    "high52": 3792.7,
    "fromHigh": 18.84,
-   "rank": 454,
-   "rating": "NO RATING"
-  },
-  {
-   "ticker": "DSY.PA",
-   "name": "DASSAULT SYSTEMES",
-   "sector": "Technology",
-   "marketCap": 38628662926,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 26.4,
-   "ai": false,
-   "price": 26.13,
-   "d1": 1.12,
-   "m1": 22.1,
-   "m3": 22.16,
-   "ytd": 11.08,
-   "y1": 10.43,
-   "y5": -50.18,
-   "high52": 26.15,
-   "fromHigh": 0.08,
    "rank": 455,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "ASM.AS",
-   "name": "ASM International N.V.",
-   "sector": "Technology",
-   "marketCap": 37102130808,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 33.3,
-   "ai": true,
-   "price": 675.8,
-   "d1": -1.14,
-   "m1": -28.7,
-   "m3": -17.61,
-   "ytd": 31.07,
-   "y1": 23.26,
-   "y5": 65.79,
-   "high52": 1092.5,
-   "fromHigh": 38.14,
-   "rank": 456,
-   "rating": "HOLD"
+   "rating": "NO RATING"
   },
   {
    "ticker": "CNC",
@@ -9596,8 +9575,29 @@
    "y5": 2.48,
    "high52": 77.05,
    "fromHigh": 1.35,
-   "rank": 457,
+   "rank": 456,
    "rating": "SELL"
+  },
+  {
+   "ticker": "ASM.AS",
+   "name": "ASM International N.V.",
+   "sector": "Technology",
+   "marketCap": 37019589826,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 33.2,
+   "ai": true,
+   "price": 674.6,
+   "d1": -1.32,
+   "m1": -28.82,
+   "m3": -17.75,
+   "ytd": 30.84,
+   "y1": 23.04,
+   "y5": 65.5,
+   "high52": 1092.5,
+   "fromHigh": 38.25,
+   "rank": 457,
+   "rating": "HOLD"
   },
   {
    "ticker": "IRM",
@@ -9645,9 +9645,9 @@
    "ticker": "6301.T",
    "name": "KOMATSU",
    "sector": "Industrials",
-   "marketCap": 35113747396,
+   "marketCap": 35109975443,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 15.1,
    "ai": false,
    "price": 6269.0,
@@ -9666,20 +9666,20 @@
    "ticker": "MBG.DE",
    "name": "Mercedes-Benz Group AG        N",
    "sector": "Consumer Cyclical",
-   "marketCap": 46345689823,
+   "marketCap": 46186081463,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 7.5,
    "ai": false,
-   "price": 43.4,
-   "d1": 2.54,
-   "m1": 7.96,
-   "m3": -8.17,
-   "ytd": -22.68,
-   "y1": -20.24,
-   "y5": -12.87,
+   "price": 43.27,
+   "d1": 2.23,
+   "m1": 7.64,
+   "m3": -8.44,
+   "ytd": -22.91,
+   "y1": -20.47,
+   "y5": -13.13,
    "high52": 58.25,
-   "fromHigh": 25.49,
+   "fromHigh": 25.72,
    "rank": 461,
    "rating": "SELL"
   },
@@ -9750,21 +9750,42 @@
    "ticker": "U11.SI",
    "name": "UOB",
    "sector": "Financial Services",
-   "marketCap": 49013317732,
+   "marketCap": 48841931355,
    "currency": "SGD",
-   "usd": 0.78363144,
-   "pe": 6.8,
+   "usd": 0.78357619,
+   "pe": 6.7,
    "ai": false,
-   "price": 37.94,
-   "d1": -1.3,
-   "m1": -11.89,
-   "m3": -10.0,
-   "ytd": 12.71,
-   "y1": 13.32,
-   "y5": 78.14,
+   "price": 37.81,
+   "d1": -1.64,
+   "m1": -12.19,
+   "m3": -10.3,
+   "ytd": 12.32,
+   "y1": 12.94,
+   "y5": 77.52,
    "high52": 44.2,
-   "fromHigh": 14.16,
+   "fromHigh": 14.46,
    "rank": 465,
+   "rating": "HOLD"
+  },
+  {
+   "ticker": "ADS.DE",
+   "name": "adidas AG                     N",
+   "sector": "Consumer Cyclical",
+   "marketCap": 34523578455,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 19.6,
+   "ai": false,
+   "price": 181.6,
+   "d1": 2.98,
+   "m1": 27.62,
+   "m3": 11.41,
+   "ytd": 9.44,
+   "y1": 16.17,
+   "y5": -35.8,
+   "high52": 188.8,
+   "fromHigh": 3.81,
+   "rank": 466,
    "rating": "HOLD"
   },
   {
@@ -9785,27 +9806,6 @@
    "y5": 22.35,
    "high52": 13.54,
    "fromHigh": 18.31,
-   "rank": 466,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "ADS.DE",
-   "name": "adidas AG                     N",
-   "sector": "Consumer Cyclical",
-   "marketCap": 34463037563,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 19.5,
-   "ai": false,
-   "price": 181.2,
-   "d1": 2.75,
-   "m1": 27.34,
-   "m3": 11.17,
-   "ytd": 9.2,
-   "y1": 15.92,
-   "y5": -35.94,
-   "high52": 188.8,
-   "fromHigh": 4.03,
    "rank": 467,
    "rating": "HOLD"
   },
@@ -9852,6 +9852,27 @@
    "rating": "NO RATING"
   },
   {
+   "ticker": "AD.AS",
+   "name": "KONINKLIJKE AHOLD DELHAIZE N.V.",
+   "sector": "Consumer Defensive",
+   "marketCap": 34015365427,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 13.8,
+   "ai": false,
+   "price": 34.65,
+   "d1": 1.05,
+   "m1": 10.14,
+   "m3": 2.14,
+   "ytd": 2.66,
+   "y1": -0.37,
+   "y5": 44.53,
+   "high52": 41.21,
+   "fromHigh": 15.92,
+   "rank": 470,
+   "rating": "HOLD"
+  },
+  {
    "ticker": "RMD",
    "name": "ResMed Inc.",
    "sector": "Healthcare",
@@ -9869,27 +9890,6 @@
    "y5": -3.4,
    "high52": 275.42,
    "fromHigh": 12.67,
-   "rank": 470,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "AD.AS",
-   "name": "KONINKLIJKE AHOLD DELHAIZE N.V.",
-   "sector": "Consumer Defensive",
-   "marketCap": 33981566862,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 13.7,
-   "ai": false,
-   "price": 34.6,
-   "d1": 0.9,
-   "m1": 9.98,
-   "m3": 2.0,
-   "ytd": 2.51,
-   "y1": -0.51,
-   "y5": 44.33,
-   "high52": 41.21,
-   "fromHigh": 16.04,
    "rank": 471,
    "rating": "HOLD"
   },
@@ -9918,9 +9918,9 @@
    "ticker": "ORA.PA",
    "name": "ORANGE",
    "sector": "Communication Services",
-   "marketCap": 45716470918,
+   "marketCap": 45695906643,
    "currency": "EUR",
-   "usd": 1.12498593,
+   "usd": 1.12447989,
    "pe": 3.8,
    "ai": false,
    "price": 15.29,
@@ -9939,9 +9939,9 @@
    "ticker": "6954.T",
    "name": "FANUC CORPORATION",
    "sector": "Industrials",
-   "marketCap": 33045987117,
+   "marketCap": 33042437285,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 29.4,
    "ai": false,
    "price": 5653.0,
@@ -9981,20 +9981,20 @@
    "ticker": "SEB-A.ST",
    "name": "Skandinaviska Enskilda Banken s",
    "sector": "Financial Services",
-   "marketCap": 43175399242,
+   "marketCap": 43226888647,
    "currency": "SEK",
-   "usd": 0.10257315,
-   "pe": 13.8,
+   "usd": 0.10255337,
+   "pe": 13.9,
    "ai": false,
-   "price": 216.5,
-   "d1": 0.84,
-   "m1": -6.92,
-   "m3": -3.0,
-   "ytd": 18.26,
-   "y1": 27.37,
-   "y5": 120.53,
+   "price": 216.8,
+   "d1": 0.98,
+   "m1": -6.79,
+   "m3": -2.87,
+   "ytd": 18.42,
+   "y1": 27.54,
+   "y5": 120.83,
    "high52": 238.5,
-   "fromHigh": 9.22,
+   "fromHigh": 9.1,
    "rank": 476,
    "rating": "HOLD"
   },
@@ -10023,9 +10023,9 @@
    "ticker": "5108.T",
    "name": "BRIDGESTONE CORP",
    "sector": "Consumer Cyclical",
-   "marketCap": 33197068476,
+   "marketCap": 33193502415,
    "currency": "JPY",
-   "usd": 0.00632031,
+   "usd": 0.00631963,
    "pe": 21.6,
    "ai": false,
    "price": 4256.0,
@@ -10065,20 +10065,20 @@
    "ticker": "LDO.MI",
    "name": "LEONARDO",
    "sector": "Industrials",
-   "marketCap": 32243290583,
+   "marketCap": 32254730722,
    "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 24.8,
+   "usd": 1.12447989,
+   "pe": 24.9,
    "ai": false,
-   "price": 49.69,
-   "d1": -2.8,
-   "m1": 2.88,
-   "m3": -13.43,
-   "ytd": 2.3,
-   "y1": -0.41,
-   "y5": 711.24,
+   "price": 49.73,
+   "d1": -2.72,
+   "m1": 2.96,
+   "m3": -13.36,
+   "ytd": 2.38,
+   "y1": -0.33,
+   "y5": 711.89,
    "high52": 65.47,
-   "fromHigh": 24.1,
+   "fromHigh": 24.04,
    "rank": 480,
    "rating": "HOLD"
   },
@@ -10104,6 +10104,27 @@
    "rating": "HOLD"
   },
   {
+   "ticker": "EQT.ST",
+   "name": "EQT AB",
+   "sector": "Financial Services",
+   "marketCap": 41258076461,
+   "currency": "SEK",
+   "usd": 0.10255337,
+   "pe": 33.2,
+   "ai": false,
+   "price": 322.9,
+   "d1": 0.94,
+   "m1": 13.94,
+   "m3": -6.46,
+   "ytd": -10.51,
+   "y1": 1.61,
+   "y5": -31.44,
+   "high52": 379.85,
+   "fromHigh": 14.99,
+   "rank": 482,
+   "rating": "SELL"
+  },
+  {
    "ticker": "HBAN",
    "name": "Huntington Bancshares Incorpora",
    "sector": "Financial Services",
@@ -10121,29 +10142,8 @@
    "y5": 26.39,
    "high52": 18.9,
    "fromHigh": 15.05,
-   "rank": 482,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "EQT.ST",
-   "name": "EQT AB",
-   "sector": "Financial Services",
-   "marketCap": 41214915365,
-   "currency": "SEK",
-   "usd": 0.10257315,
-   "pe": 33.1,
-   "ai": false,
-   "price": 322.5,
-   "d1": 0.81,
-   "m1": 13.8,
-   "m3": -6.58,
-   "ytd": -10.62,
-   "y1": 1.49,
-   "y5": -31.52,
-   "high52": 379.85,
-   "fromHigh": 15.1,
    "rank": 483,
-   "rating": "SELL"
+   "rating": "HOLD"
   },
   {
    "ticker": "MTB",
@@ -10212,9 +10212,9 @@
    "ticker": "TCL.AX",
    "name": "TRANSURBAN STAPLED [TCL]",
    "sector": "Industrials",
-   "marketCap": 31616417281,
+   "marketCap": 31594235677,
    "currency": "AUD",
-   "usd": 0.70200074,
+   "usd": 0.70150822,
    "pe": 120.2,
    "ai": false,
    "price": 14.43,
@@ -10317,9 +10317,9 @@
    "ticker": "L.TO",
    "name": "LOBLAW CO",
    "sector": "Consumer Defensive",
-   "marketCap": 58358426275,
+   "marketCap": 58335839265,
    "currency": "CAD",
-   "usd": 0.71703094,
+   "usd": 0.71675342,
    "pe": 31.7,
    "ai": false,
    "price": 70.43,
@@ -10338,20 +10338,20 @@
    "ticker": "EPI-A.ST",
    "name": "Epiroc AB ser. A",
    "sector": "Industrials",
-   "marketCap": 30474547815,
+   "marketCap": 30580323076,
    "currency": "SEK",
-   "usd": 0.10257315,
-   "pe": 31.9,
+   "usd": 0.10255337,
+   "pe": 32.1,
    "ai": false,
-   "price": 245.6,
-   "d1": 0.95,
-   "m1": -6.99,
-   "m3": -2.56,
-   "ytd": 18.72,
-   "y1": 24.97,
-   "y5": 20.84,
+   "price": 246.5,
+   "d1": 1.32,
+   "m1": -6.65,
+   "m3": -2.2,
+   "ytd": 19.15,
+   "y1": 25.43,
+   "y5": 21.28,
    "high52": 282.22,
-   "fromHigh": 12.98,
+   "fromHigh": 12.66,
    "rank": 493,
    "rating": "HOLD"
   },
@@ -10380,20 +10380,20 @@
    "ticker": "IMB.L",
    "name": "IMPERIAL BRANDS PLC ORD 10P",
    "sector": "Consumer Defensive",
-   "marketCap": 30424542633,
+   "marketCap": 30444659526,
    "currency": "GBp",
-   "usd": 0.01348109,
+   "usd": 0.01347037,
    "pe": 14.2,
    "ai": false,
-   "price": 3019.6,
-   "d1": 1.4,
-   "m1": 23.25,
-   "m3": 9.94,
-   "ytd": -3.14,
-   "y1": -3.78,
-   "y5": 93.56,
+   "price": 3024.0,
+   "d1": 1.54,
+   "m1": 23.43,
+   "m3": 10.1,
+   "ytd": -3.0,
+   "y1": -3.64,
+   "y5": 93.84,
    "high52": 3630.47,
-   "fromHigh": 16.83,
+   "fromHigh": 16.7,
    "rank": 495,
    "rating": "HOLD"
   },
@@ -10443,64 +10443,64 @@
    "ticker": "VWS.CO",
    "name": "Vestas Wind Systems A/S",
    "sector": "Industrials",
-   "marketCap": 30122714143,
+   "marketCap": 30253602766,
    "currency": "DKK",
-   "usd": 0.15047346,
-   "pe": 25.1,
+   "usd": 0.15039721,
+   "pe": 25.2,
    "ai": false,
-   "price": 206.0,
-   "d1": 1.43,
-   "m1": 5.72,
-   "m3": 19.77,
-   "ytd": 19.27,
-   "y1": 37.87,
-   "y5": -0.74,
+   "price": 207.0,
+   "d1": 1.92,
+   "m1": 6.24,
+   "m3": 20.35,
+   "ytd": 19.85,
+   "y1": 38.54,
+   "y5": -0.26,
    "high52": 220.2,
-   "fromHigh": 6.45,
+   "fromHigh": 5.99,
    "rank": 498,
-   "rating": "HOLD"
-  },
-  {
-   "ticker": "KBC.BR",
-   "name": "KBC",
-   "sector": "Financial Services",
-   "marketCap": 52748119338,
-   "currency": "EUR",
-   "usd": 1.12498593,
-   "pe": 13.1,
-   "ai": false,
-   "price": 118.2,
-   "d1": 1.2,
-   "m1": -4.41,
-   "m3": -6.62,
-   "ytd": 11.28,
-   "y1": 18.53,
-   "y5": 112.54,
-   "high52": 133.76,
-   "fromHigh": 11.63,
-   "rank": 499,
    "rating": "HOLD"
   },
   {
    "ticker": "AV.L",
    "name": "AVIVA PLC ORD 32 17/19P",
    "sector": "Financial Services",
-   "marketCap": 30475834340,
+   "marketCap": 30516077593,
    "currency": "GBp",
-   "usd": 0.01348109,
-   "pe": 44.5,
+   "usd": 0.01347037,
+   "pe": 44.6,
    "ai": false,
-   "price": 755.8,
-   "d1": 1.1,
-   "m1": 11.61,
-   "m3": 7.81,
-   "ytd": 10.5,
-   "y1": 11.67,
-   "y5": 90.44,
-   "high52": 757.4,
-   "fromHigh": 0.21,
-   "rank": 500,
+   "price": 757.4,
+   "d1": 1.31,
+   "m1": 11.84,
+   "m3": 8.04,
+   "ytd": 10.73,
+   "y1": 11.91,
+   "y5": 90.84,
+   "high52": 757.8,
+   "fromHigh": 0.05,
+   "rank": 499,
    "rating": "SELL"
+  },
+  {
+   "ticker": "KBC.BR",
+   "name": "KBC",
+   "sector": "Financial Services",
+   "marketCap": 52657482946,
+   "currency": "EUR",
+   "usd": 1.12447989,
+   "pe": 13.1,
+   "ai": false,
+   "price": 118.05,
+   "d1": 1.07,
+   "m1": -4.53,
+   "m3": -6.74,
+   "ytd": 11.14,
+   "y1": 18.38,
+   "y5": 112.27,
+   "high52": 133.76,
+   "fromHigh": 11.75,
+   "rank": 500,
+   "rating": "HOLD"
   }
  ],
  "extras": [
@@ -10540,17 +10540,1127 @@
     13.02,
     13.056,
     12.954,
-    13.088
+    13.078
    ],
-   "price": 13.09,
-   "d1": 1.03,
-   "m1": -1.87,
-   "m3": 1.05,
-   "ytd": 16.46,
-   "y1": 16.54,
+   "h": [
+    [
+     "2025-10-01",
+     10.84
+    ],
+    [
+     "2025-10-02",
+     10.882
+    ],
+    [
+     "2025-10-03",
+     10.924
+    ],
+    [
+     "2025-10-06",
+     10.976
+    ],
+    [
+     "2025-10-07",
+     10.95
+    ],
+    [
+     "2025-10-08",
+     11.042
+    ],
+    [
+     "2025-10-09",
+     11.058
+    ],
+    [
+     "2025-10-10",
+     10.838
+    ],
+    [
+     "2025-10-13",
+     10.918
+    ],
+    [
+     "2025-10-14",
+     10.886
+    ],
+    [
+     "2025-10-15",
+     10.93
+    ],
+    [
+     "2025-10-16",
+     10.954
+    ],
+    [
+     "2025-10-17",
+     10.808
+    ],
+    [
+     "2025-10-20",
+     10.984
+    ],
+    [
+     "2025-10-21",
+     11.042
+    ],
+    [
+     "2025-10-22",
+     10.95
+    ],
+    [
+     "2025-10-23",
+     11.034
+    ],
+    [
+     "2025-10-24",
+     12.8736
+    ],
+    [
+     "2025-10-27",
+     11.198
+    ],
+    [
+     "2025-10-28",
+     11.254
+    ],
+    [
+     "2025-10-29",
+     11.222
+    ],
+    [
+     "2025-10-30",
+     11.25
+    ],
+    [
+     "2025-10-31",
+     11.236
+    ],
+    [
+     "2025-11-03",
+     11.236
+    ],
+    [
+     "2025-11-04",
+     11.198
+    ],
+    [
+     "2025-11-05",
+     11.23
+    ],
+    [
+     "2025-11-06",
+     11.07
+    ],
+    [
+     "2025-11-07",
+     10.926
+    ],
+    [
+     "2025-11-10",
+     11.15
+    ],
+    [
+     "2025-11-11",
+     11.188
+    ],
+    [
+     "2025-11-12",
+     11.242
+    ],
+    [
+     "2025-11-13",
+     11.098
+    ],
+    [
+     "2025-11-14",
+     11.08
+    ],
+    [
+     "2025-11-17",
+     11.03
+    ],
+    [
+     "2025-11-18",
+     10.89
+    ],
+    [
+     "2025-11-19",
+     10.906
+    ],
+    [
+     "2025-11-20",
+     10.964
+    ],
+    [
+     "2025-11-21",
+     10.844
+    ],
+    [
+     "2025-11-24",
+     10.988
+    ],
+    [
+     "2025-11-25",
+     10.992
+    ],
+    [
+     "2025-11-26",
+     11.14
+    ],
+    [
+     "2025-11-27",
+     11.122
+    ],
+    [
+     "2025-11-28",
+     11.178
+    ],
+    [
+     "2025-12-01",
+     11.118
+    ],
+    [
+     "2025-12-02",
+     11.132
+    ],
+    [
+     "2025-12-03",
+     11.128
+    ],
+    [
+     "2025-12-04",
+     11.156
+    ],
+    [
+     "2025-12-05",
+     11.202
+    ],
+    [
+     "2025-12-08",
+     11.18
+    ],
+    [
+     "2025-12-09",
+     11.192
+    ],
+    [
+     "2025-12-10",
+     11.172
+    ],
+    [
+     "2025-12-11",
+     11.122
+    ],
+    [
+     "2025-12-12",
+     11.056
+    ],
+    [
+     "2025-12-15",
+     11.074
+    ],
+    [
+     "2025-12-16",
+     10.986
+    ],
+    [
+     "2025-12-17",
+     10.92
+    ],
+    [
+     "2025-12-18",
+     11.072
+    ],
+    [
+     "2025-12-19",
+     11.126
+    ],
+    [
+     "2025-12-22",
+     11.144
+    ],
+    [
+     "2025-12-23",
+     11.15
+    ],
+    [
+     "2025-12-29",
+     11.212
+    ],
+    [
+     "2025-12-30",
+     11.238
+    ],
+    [
+     "2026-01-02",
+     11.202
+    ],
+    [
+     "2026-01-05",
+     11.348
+    ],
+    [
+     "2026-01-06",
+     11.394
+    ],
+    [
+     "2026-01-07",
+     11.42
+    ],
+    [
+     "2026-01-08",
+     11.396
+    ],
+    [
+     "2026-01-09",
+     11.49
+    ],
+    [
+     "2026-01-12",
+     11.502
+    ],
+    [
+     "2026-01-13",
+     11.516
+    ],
+    [
+     "2026-01-14",
+     11.55
+    ],
+    [
+     "2026-01-15",
+     11.6
+    ],
+    [
+     "2026-01-16",
+     11.586
+    ],
+    [
+     "2026-01-19",
+     11.498
+    ],
+    [
+     "2026-01-20",
+     11.382
+    ],
+    [
+     "2026-01-21",
+     11.342
+    ],
+    [
+     "2026-01-22",
+     11.48
+    ],
+    [
+     "2026-01-23",
+     11.422
+    ],
+    [
+     "2026-01-26",
+     11.428
+    ],
+    [
+     "2026-01-27",
+     11.346
+    ],
+    [
+     "2026-01-28",
+     11.458
+    ],
+    [
+     "2026-01-29",
+     11.282
+    ],
+    [
+     "2026-01-30",
+     11.336
+    ],
+    [
+     "2026-02-02",
+     11.464
+    ],
+    [
+     "2026-02-03",
+     11.418
+    ],
+    [
+     "2026-02-04",
+     11.374
+    ],
+    [
+     "2026-02-05",
+     11.27
+    ],
+    [
+     "2026-02-06",
+     11.39
+    ],
+    [
+     "2026-02-09",
+     11.44
+    ],
+    [
+     "2026-02-10",
+     11.472
+    ],
+    [
+     "2026-02-11",
+     11.492
+    ],
+    [
+     "2026-02-12",
+     11.486
+    ],
+    [
+     "2026-02-13",
+     11.38
+    ],
+    [
+     "2026-02-16",
+     11.366
+    ],
+    [
+     "2026-02-17",
+     11.386
+    ],
+    [
+     "2026-02-18",
+     11.516
+    ],
+    [
+     "2026-02-19",
+     11.492
+    ],
+    [
+     "2026-02-20",
+     11.548
+    ],
+    [
+     "2026-02-23",
+     11.456
+    ],
+    [
+     "2026-02-24",
+     11.534
+    ],
+    [
+     "2026-02-25",
+     11.622
+    ],
+    [
+     "2026-02-26",
+     11.582
+    ],
+    [
+     "2026-02-27",
+     11.526
+    ],
+    [
+     "2026-03-02",
+     11.59
+    ],
+    [
+     "2026-03-03",
+     11.464
+    ],
+    [
+     "2026-03-04",
+     11.484
+    ],
+    [
+     "2026-03-05",
+     11.416
+    ],
+    [
+     "2026-03-09",
+     11.27
+    ],
+    [
+     "2026-03-10",
+     11.426
+    ],
+    [
+     "2026-03-11",
+     11.398
+    ],
+    [
+     "2026-03-12",
+     11.314
+    ],
+    [
+     "2026-03-13",
+     11.4
+    ],
+    [
+     "2026-03-16",
+     11.348
+    ],
+    [
+     "2026-03-17",
+     11.388
+    ],
+    [
+     "2026-03-18",
+     11.314
+    ],
+    [
+     "2026-03-19",
+     11.112
+    ],
+    [
+     "2026-03-20",
+     10.998
+    ],
+    [
+     "2026-03-23",
+     11.056
+    ],
+    [
+     "2026-03-24",
+     11.036
+    ],
+    [
+     "2026-03-25",
+     11.142
+    ],
+    [
+     "2026-03-26",
+     11.004
+    ],
+    [
+     "2026-03-27",
+     10.852
+    ],
+    [
+     "2026-03-30",
+     10.926
+    ],
+    [
+     "2026-03-31",
+     10.914
+    ],
+    [
+     "2026-04-01",
+     11.154
+    ],
+    [
+     "2026-04-02",
+     11.136
+    ],
+    [
+     "2026-04-07",
+     11.074
+    ],
+    [
+     "2026-04-08",
+     11.396
+    ],
+    [
+     "2026-04-09",
+     11.402
+    ],
+    [
+     "2026-04-10",
+     11.438
+    ],
+    [
+     "2026-04-13",
+     11.434
+    ],
+    [
+     "2026-04-14",
+     11.576
+    ],
+    [
+     "2026-04-15",
+     11.62
+    ],
+    [
+     "2026-04-16",
+     11.678
+    ],
+    [
+     "2026-04-17",
+     11.84
+    ],
+    [
+     "2026-04-20",
+     11.78
+    ],
+    [
+     "2026-04-21",
+     11.76
+    ],
+    [
+     "2026-04-22",
+     11.822
+    ],
+    [
+     "2026-04-23",
+     11.85
+    ],
+    [
+     "2026-04-24",
+     11.84
+    ],
+    [
+     "2026-04-27",
+     11.836
+    ],
+    [
+     "2026-04-28",
+     11.79
+    ],
+    [
+     "2026-04-29",
+     11.802
+    ],
+    [
+     "2026-04-30",
+     11.872
+    ],
+    [
+     "2026-05-04",
+     11.924
+    ],
+    [
+     "2026-05-05",
+     12.148
+    ],
+    [
+     "2026-05-06",
+     12.186
+    ],
+    [
+     "2026-05-07",
+     12.186
+    ],
+    [
+     "2026-05-08",
+     12.196
+    ],
+    [
+     "2026-05-11",
+     12.234
+    ],
+    [
+     "2026-05-12",
+     12.11
+    ],
+    [
+     "2026-05-13",
+     12.278
+    ],
+    [
+     "2026-05-14",
+     12.424
+    ],
+    [
+     "2026-05-15",
+     12.29
+    ],
+    [
+     "2026-05-18",
+     12.226
+    ],
+    [
+     "2026-05-19",
+     12.194
+    ],
+    [
+     "2026-05-20",
+     12.32
+    ],
+    [
+     "2026-05-21",
+     12.342
+    ],
+    [
+     "2026-05-22",
+     12.472
+    ],
+    [
+     "2026-05-25",
+     12.552
+    ],
+    [
+     "2026-05-26",
+     12.54
+    ],
+    [
+     "2026-05-27",
+     12.52
+    ],
+    [
+     "2026-05-28",
+     12.55
+    ],
+    [
+     "2026-05-29",
+     12.574
+    ],
+    [
+     "2026-06-01",
+     12.644
+    ],
+    [
+     "2026-06-02",
+     12.71
+    ],
+    [
+     "2026-06-03",
+     12.658
+    ],
+    [
+     "2026-06-04",
+     12.628
+    ],
+    [
+     "2026-06-05",
+     12.52
+    ],
+    [
+     "2026-06-08",
+     12.454
+    ],
+    [
+     "2026-06-09",
+     12.292
+    ],
+    [
+     "2026-06-10",
+     12.254
+    ],
+    [
+     "2026-06-11",
+     12.292
+    ],
+    [
+     "2026-06-12",
+     12.516
+    ],
+    [
+     "2026-06-15",
+     12.686
+    ],
+    [
+     "2026-06-16",
+     12.66
+    ],
+    [
+     "2026-06-17",
+     12.688
+    ],
+    [
+     "2026-06-18",
+     12.754
+    ],
+    [
+     "2026-06-19",
+     12.76
+    ],
+    [
+     "2026-06-22",
+     12.818
+    ],
+    [
+     "2026-06-23",
+     12.64
+    ],
+    [
+     "2026-06-24",
+     12.71
+    ],
+    [
+     "2026-06-25",
+     12.658
+    ],
+    [
+     "2026-06-26",
+     12.61
+    ],
+    [
+     "2026-06-29",
+     12.598
+    ],
+    [
+     "2026-06-30",
+     12.74
+    ],
+    [
+     "2026-07-01",
+     12.796
+    ],
+    [
+     "2026-07-02",
+     12.712
+    ],
+    [
+     "2026-07-03",
+     12.79
+    ],
+    [
+     "2026-07-06",
+     12.842
+    ],
+    [
+     "2026-07-07",
+     12.708
+    ],
+    [
+     "2026-07-08",
+     12.634
+    ],
+    [
+     "2026-07-09",
+     12.766
+    ],
+    [
+     "2026-07-10",
+     12.81
+    ],
+    [
+     "2026-07-13",
+     12.784
+    ],
+    [
+     "2026-07-14",
+     12.768
+    ],
+    [
+     "2026-07-15",
+     12.78
+    ],
+    [
+     "2026-07-16",
+     12.762
+    ],
+    [
+     "2026-07-17",
+     12.604
+    ],
+    [
+     "2026-07-20",
+     12.656
+    ],
+    [
+     "2026-07-21",
+     12.732
+    ],
+    [
+     "2026-07-22",
+     12.754
+    ],
+    [
+     "2026-07-23",
+     12.59
+    ],
+    [
+     "2026-07-24",
+     12.65
+    ],
+    [
+     "2026-07-27",
+     12.59
+    ],
+    [
+     "2026-07-28",
+     12.614
+    ],
+    [
+     "2026-07-29",
+     12.514
+    ],
+    [
+     "2026-07-30",
+     12.478
+    ],
+    [
+     "2026-07-31",
+     12.558
+    ],
+    [
+     "2026-08-03",
+     12.726
+    ],
+    [
+     "2026-08-04",
+     12.912
+    ],
+    [
+     "2026-08-05",
+     12.952
+    ],
+    [
+     "2026-08-06",
+     12.936
+    ],
+    [
+     "2026-08-07",
+     12.976
+    ],
+    [
+     "2026-08-10",
+     12.974
+    ],
+    [
+     "2026-08-11",
+     12.98
+    ],
+    [
+     "2026-08-12",
+     13.01
+    ],
+    [
+     "2026-08-13",
+     13.076
+    ],
+    [
+     "2026-08-14",
+     13.018
+    ],
+    [
+     "2026-08-17",
+     13.038
+    ],
+    [
+     "2026-08-18",
+     12.862
+    ],
+    [
+     "2026-08-19",
+     12.828
+    ],
+    [
+     "2026-08-20",
+     12.76
+    ],
+    [
+     "2026-08-21",
+     12.814
+    ],
+    [
+     "2026-08-24",
+     12.762
+    ],
+    [
+     "2026-08-25",
+     12.816
+    ],
+    [
+     "2026-08-26",
+     12.834
+    ],
+    [
+     "2026-08-27",
+     12.88
+    ],
+    [
+     "2026-08-28",
+     12.988
+    ],
+    [
+     "2026-08-31",
+     12.844
+    ],
+    [
+     "2026-09-01",
+     12.842
+    ],
+    [
+     "2026-09-02",
+     12.858
+    ],
+    [
+     "2026-09-03",
+     12.956
+    ],
+    [
+     "2026-09-04",
+     12.94
+    ],
+    [
+     "2026-09-07",
+     12.942
+    ],
+    [
+     "2026-09-08",
+     12.928
+    ],
+    [
+     "2026-09-09",
+     12.822
+    ],
+    [
+     "2026-09-10",
+     12.75
+    ],
+    [
+     "2026-09-11",
+     12.872
+    ],
+    [
+     "2026-09-14",
+     12.816
+    ],
+    [
+     "2026-09-15",
+     12.752
+    ],
+    [
+     "2026-09-16",
+     12.826
+    ],
+    [
+     "2026-09-17",
+     12.924
+    ],
+    [
+     "2026-09-18",
+     12.894
+    ],
+    [
+     "2026-09-21",
+     13.078
+    ],
+    [
+     "2026-09-22",
+     13.156
+    ],
+    [
+     "2026-09-23",
+     13.116
+    ],
+    [
+     "2026-09-24",
+     13.034
+    ],
+    [
+     "2026-09-25",
+     13.098
+    ],
+    [
+     "2026-09-28",
+     13.048
+    ],
+    [
+     "2026-09-29",
+     13.074
+    ],
+    [
+     "2026-09-30",
+     13.094
+    ],
+    [
+     "2026-10-01",
+     13.066
+    ],
+    [
+     "2026-10-02",
+     13.2
+    ],
+    [
+     "2026-10-05",
+     13.338
+    ],
+    [
+     "2026-10-06",
+     13.386
+    ],
+    [
+     "2026-10-07",
+     13.338
+    ],
+    [
+     "2026-10-08",
+     13.262
+    ],
+    [
+     "2026-10-09",
+     13.332
+    ],
+    [
+     "2026-10-12",
+     13.382
+    ],
+    [
+     "2026-10-13",
+     13.314
+    ],
+    [
+     "2026-10-14",
+     13.304
+    ],
+    [
+     "2026-10-15",
+     13.188
+    ],
+    [
+     "2026-10-16",
+     13.144
+    ],
+    [
+     "2026-10-19",
+     13.172
+    ],
+    [
+     "2026-10-20",
+     13.136
+    ],
+    [
+     "2026-10-21",
+     13.21
+    ],
+    [
+     "2026-10-22",
+     13.054
+    ],
+    [
+     "2026-10-23",
+     13.048
+    ],
+    [
+     "2026-10-26",
+     13.106
+    ],
+    [
+     "2026-10-27",
+     13.234
+    ],
+    [
+     "2026-10-28",
+     13.258
+    ],
+    [
+     "2026-10-29",
+     13.21
+    ],
+    [
+     "2026-10-30",
+     13.02
+    ],
+    [
+     "2026-11-02",
+     13.056
+    ],
+    [
+     "2026-11-03",
+     12.954
+    ],
+    [
+     "2026-11-05",
+     13.078
+    ]
+   ],
+   "price": 13.08,
+   "d1": 0.96,
+   "m1": -1.95,
+   "m3": 0.97,
+   "ytd": 16.37,
+   "y1": 16.46,
    "y5": null,
    "high52": 13.42,
-   "fromHigh": 2.46
+   "fromHigh": 2.53
   },
   {
    "ticker": "VALL.AS",
@@ -10588,17 +11698,235 @@
     4.3555,
     4.3695,
     4.34,
-    4.386
+    4.383
    ],
-   "price": 4.39,
-   "d1": 1.06,
-   "m1": -1.53,
+   "h": [
+    [
+     "2026-08-21",
+     4.309
+    ],
+    [
+     "2026-08-24",
+     4.2855
+    ],
+    [
+     "2026-08-25",
+     4.308
+    ],
+    [
+     "2026-08-26",
+     4.31
+    ],
+    [
+     "2026-08-27",
+     4.324
+    ],
+    [
+     "2026-08-28",
+     4.3585
+    ],
+    [
+     "2026-08-31",
+     4.309
+    ],
+    [
+     "2026-09-01",
+     4.3015
+    ],
+    [
+     "2026-09-02",
+     4.3105
+    ],
+    [
+     "2026-09-03",
+     4.336
+    ],
+    [
+     "2026-09-04",
+     4.3365
+    ],
+    [
+     "2026-09-07",
+     4.339
+    ],
+    [
+     "2026-09-08",
+     4.3275
+    ],
+    [
+     "2026-09-09",
+     4.295
+    ],
+    [
+     "2026-09-10",
+     4.268
+    ],
+    [
+     "2026-09-11",
+     4.3085
+    ],
+    [
+     "2026-09-14",
+     4.286
+    ],
+    [
+     "2026-09-15",
+     4.267
+    ],
+    [
+     "2026-09-16",
+     4.291
+    ],
+    [
+     "2026-09-17",
+     4.3245
+    ],
+    [
+     "2026-09-18",
+     4.3095
+    ],
+    [
+     "2026-09-21",
+     4.3685
+    ],
+    [
+     "2026-09-22",
+     4.393
+    ],
+    [
+     "2026-09-23",
+     4.382
+    ],
+    [
+     "2026-09-24",
+     4.3515
+    ],
+    [
+     "2026-09-25",
+     4.371
+    ],
+    [
+     "2026-09-28",
+     4.3555
+    ],
+    [
+     "2026-09-29",
+     4.362
+    ],
+    [
+     "2026-09-30",
+     4.3715
+    ],
+    [
+     "2026-10-01",
+     4.3635
+    ],
+    [
+     "2026-10-02",
+     4.4065
+    ],
+    [
+     "2026-10-05",
+     4.454
+    ],
+    [
+     "2026-10-06",
+     4.4715
+    ],
+    [
+     "2026-10-07",
+     4.447
+    ],
+    [
+     "2026-10-08",
+     4.4255
+    ],
+    [
+     "2026-10-09",
+     4.4505
+    ],
+    [
+     "2026-10-12",
+     4.4625
+    ],
+    [
+     "2026-10-13",
+     4.4435
+    ],
+    [
+     "2026-10-14",
+     4.4395
+    ],
+    [
+     "2026-10-15",
+     4.401
+    ],
+    [
+     "2026-10-16",
+     4.3865
+    ],
+    [
+     "2026-10-19",
+     4.3965
+    ],
+    [
+     "2026-10-20",
+     4.3895
+    ],
+    [
+     "2026-10-21",
+     4.4125
+    ],
+    [
+     "2026-10-22",
+     4.363
+    ],
+    [
+     "2026-10-23",
+     4.361
+    ],
+    [
+     "2026-10-26",
+     4.382
+    ],
+    [
+     "2026-10-27",
+     4.421
+    ],
+    [
+     "2026-10-28",
+     4.427
+    ],
+    [
+     "2026-10-29",
+     4.4225
+    ],
+    [
+     "2026-10-30",
+     4.3555
+    ],
+    [
+     "2026-11-02",
+     4.3695
+    ],
+    [
+     "2026-11-03",
+     4.34
+    ],
+    [
+     "2026-11-05",
+     4.383
+    ]
+   ],
+   "price": 4.38,
+   "d1": 0.99,
+   "m1": -1.59,
    "m3": null,
    "ytd": null,
    "y1": null,
    "y5": null,
    "high52": 4.48,
-   "fromHigh": 2.14
+   "fromHigh": 2.21
   },
   {
    "ticker": "BTC-EUR",
@@ -10636,17 +11964,1623 @@
     68533.0,
     69030.0,
     71600.0,
-    71473.0
+    71431.0
    ],
-   "price": 71473.0,
-   "d1": -0.18,
-   "m1": -6.53,
-   "m3": 27.87,
-   "ytd": -4.02,
-   "y1": -20.92,
+   "h": [
+    [
+     "2025-10-01",
+     101049.0
+    ],
+    [
+     "2025-10-02",
+     102818.0
+    ],
+    [
+     "2025-10-03",
+     104000.0
+    ],
+    [
+     "2025-10-04",
+     103990.0
+    ],
+    [
+     "2025-10-05",
+     105080.0
+    ],
+    [
+     "2025-10-06",
+     106219.0
+    ],
+    [
+     "2025-10-07",
+     104150.0
+    ],
+    [
+     "2025-10-08",
+     106039.0
+    ],
+    [
+     "2025-10-09",
+     105198.0
+    ],
+    [
+     "2025-10-10",
+     98453.0
+    ],
+    [
+     "2025-10-11",
+     96855.0
+    ],
+    [
+     "2025-10-12",
+     99442.0
+    ],
+    [
+     "2025-10-13",
+     99740.0
+    ],
+    [
+     "2025-10-14",
+     97594.0
+    ],
+    [
+     "2025-10-15",
+     95153.0
+    ],
+    [
+     "2025-10-16",
+     92535.0
+    ],
+    [
+     "2025-10-17",
+     91443.0
+    ],
+    [
+     "2025-10-18",
+     92129.0
+    ],
+    [
+     "2025-10-19",
+     93290.0
+    ],
+    [
+     "2025-10-20",
+     94956.0
+    ],
+    [
+     "2025-10-21",
+     93425.0
+    ],
+    [
+     "2025-10-22",
+     92696.0
+    ],
+    [
+     "2025-10-23",
+     94777.0
+    ],
+    [
+     "2025-10-24",
+     95496.0
+    ],
+    [
+     "2025-10-25",
+     96008.0
+    ],
+    [
+     "2025-10-26",
+     98459.0
+    ],
+    [
+     "2025-10-27",
+     97909.0
+    ],
+    [
+     "2025-10-28",
+     96940.0
+    ],
+    [
+     "2025-10-29",
+     94852.0
+    ],
+    [
+     "2025-10-30",
+     93635.0
+    ],
+    [
+     "2025-10-31",
+     94886.0
+    ],
+    [
+     "2025-11-01",
+     95269.0
+    ],
+    [
+     "2025-11-02",
+     95856.0
+    ],
+    [
+     "2025-11-03",
+     92488.0
+    ],
+    [
+     "2025-11-04",
+     88380.0
+    ],
+    [
+     "2025-11-05",
+     90375.0
+    ],
+    [
+     "2025-11-06",
+     87724.0
+    ],
+    [
+     "2025-11-07",
+     89267.0
+    ],
+    [
+     "2025-11-08",
+     88400.0
+    ],
+    [
+     "2025-11-09",
+     90656.0
+    ],
+    [
+     "2025-11-10",
+     91663.0
+    ],
+    [
+     "2025-11-11",
+     88945.0
+    ],
+    [
+     "2025-11-12",
+     87723.0
+    ],
+    [
+     "2025-11-13",
+     85693.0
+    ],
+    [
+     "2025-11-14",
+     81311.0
+    ],
+    [
+     "2025-11-15",
+     82273.0
+    ],
+    [
+     "2025-11-16",
+     81028.0
+    ],
+    [
+     "2025-11-17",
+     79357.0
+    ],
+    [
+     "2025-11-18",
+     80227.0
+    ],
+    [
+     "2025-11-19",
+     79275.0
+    ],
+    [
+     "2025-11-20",
+     75021.0
+    ],
+    [
+     "2025-11-21",
+     73907.0
+    ],
+    [
+     "2025-11-22",
+     73605.0
+    ],
+    [
+     "2025-11-23",
+     75491.0
+    ],
+    [
+     "2025-11-24",
+     76653.0
+    ],
+    [
+     "2025-11-25",
+     75544.0
+    ],
+    [
+     "2025-11-26",
+     78019.0
+    ],
+    [
+     "2025-11-27",
+     78772.0
+    ],
+    [
+     "2025-11-28",
+     78433.0
+    ],
+    [
+     "2025-11-29",
+     78381.0
+    ],
+    [
+     "2025-11-30",
+     77928.0
+    ],
+    [
+     "2025-12-01",
+     74353.0
+    ],
+    [
+     "2025-12-02",
+     78514.0
+    ],
+    [
+     "2025-12-03",
+     80097.0
+    ],
+    [
+     "2025-12-04",
+     79096.0
+    ],
+    [
+     "2025-12-05",
+     76834.0
+    ],
+    [
+     "2025-12-06",
+     76761.0
+    ],
+    [
+     "2025-12-07",
+     77697.0
+    ],
+    [
+     "2025-12-08",
+     77912.0
+    ],
+    [
+     "2025-12-09",
+     79682.0
+    ],
+    [
+     "2025-12-10",
+     78654.0
+    ],
+    [
+     "2025-12-11",
+     78816.0
+    ],
+    [
+     "2025-12-12",
+     76982.0
+    ],
+    [
+     "2025-12-13",
+     76937.0
+    ],
+    [
+     "2025-12-14",
+     75158.0
+    ],
+    [
+     "2025-12-15",
+     73558.0
+    ],
+    [
+     "2025-12-16",
+     74756.0
+    ],
+    [
+     "2025-12-17",
+     73412.0
+    ],
+    [
+     "2025-12-18",
+     72900.0
+    ],
+    [
+     "2025-12-19",
+     75219.0
+    ],
+    [
+     "2025-12-20",
+     75447.0
+    ],
+    [
+     "2025-12-21",
+     75655.0
+    ],
+    [
+     "2025-12-22",
+     75287.0
+    ],
+    [
+     "2025-12-23",
+     74131.0
+    ],
+    [
+     "2025-12-24",
+     74402.0
+    ],
+    [
+     "2025-12-25",
+     74050.0
+    ],
+    [
+     "2025-12-26",
+     74193.0
+    ],
+    [
+     "2025-12-27",
+     74569.0
+    ],
+    [
+     "2025-12-28",
+     74613.0
+    ],
+    [
+     "2025-12-29",
+     74023.0
+    ],
+    [
+     "2025-12-30",
+     75250.0
+    ],
+    [
+     "2025-12-31",
+     74470.0
+    ],
+    [
+     "2026-01-01",
+     75519.0
+    ],
+    [
+     "2026-01-02",
+     76796.0
+    ],
+    [
+     "2026-01-03",
+     77385.0
+    ],
+    [
+     "2026-01-04",
+     78200.0
+    ],
+    [
+     "2026-01-05",
+     80157.0
+    ],
+    [
+     "2026-01-06",
+     80200.0
+    ],
+    [
+     "2026-01-07",
+     78205.0
+    ],
+    [
+     "2026-01-08",
+     78122.0
+    ],
+    [
+     "2026-01-09",
+     77846.0
+    ],
+    [
+     "2026-01-10",
+     77788.0
+    ],
+    [
+     "2026-01-11",
+     78210.0
+    ],
+    [
+     "2026-01-12",
+     78186.0
+    ],
+    [
+     "2026-01-13",
+     81892.0
+    ],
+    [
+     "2026-01-14",
+     83273.0
+    ],
+    [
+     "2026-01-15",
+     82352.0
+    ],
+    [
+     "2026-01-16",
+     82352.0
+    ],
+    [
+     "2026-01-17",
+     82097.0
+    ],
+    [
+     "2026-01-18",
+     80588.0
+    ],
+    [
+     "2026-01-19",
+     79538.0
+    ],
+    [
+     "2026-01-20",
+     75325.0
+    ],
+    [
+     "2026-01-21",
+     76592.0
+    ],
+    [
+     "2026-01-22",
+     76135.0
+    ],
+    [
+     "2026-01-23",
+     75721.0
+    ],
+    [
+     "2026-01-24",
+     75377.0
+    ],
+    [
+     "2026-01-25",
+     73017.0
+    ],
+    [
+     "2026-01-26",
+     74340.0
+    ],
+    [
+     "2026-01-27",
+     74143.0
+    ],
+    [
+     "2026-01-28",
+     74453.0
+    ],
+    [
+     "2026-01-29",
+     70645.0
+    ],
+    [
+     "2026-01-30",
+     71003.0
+    ],
+    [
+     "2026-01-31",
+     66559.0
+    ],
+    [
+     "2026-02-01",
+     64920.0
+    ],
+    [
+     "2026-02-02",
+     66706.0
+    ],
+    [
+     "2026-02-03",
+     64061.0
+    ],
+    [
+     "2026-02-04",
+     61890.0
+    ],
+    [
+     "2026-02-05",
+     53342.0
+    ],
+    [
+     "2026-02-06",
+     59821.0
+    ],
+    [
+     "2026-02-07",
+     58810.0
+    ],
+    [
+     "2026-02-08",
+     59581.0
+    ],
+    [
+     "2026-02-09",
+     58919.0
+    ],
+    [
+     "2026-02-10",
+     57890.0
+    ],
+    [
+     "2026-02-11",
+     56492.0
+    ],
+    [
+     "2026-02-12",
+     55817.0
+    ],
+    [
+     "2026-02-13",
+     58006.0
+    ],
+    [
+     "2026-02-14",
+     58914.0
+    ],
+    [
+     "2026-02-15",
+     58007.0
+    ],
+    [
+     "2026-02-16",
+     58143.0
+    ],
+    [
+     "2026-02-17",
+     56964.0
+    ],
+    [
+     "2026-02-18",
+     56386.0
+    ],
+    [
+     "2026-02-19",
+     56905.0
+    ],
+    [
+     "2026-02-20",
+     57688.0
+    ],
+    [
+     "2026-02-21",
+     57690.0
+    ],
+    [
+     "2026-02-22",
+     57143.0
+    ],
+    [
+     "2026-02-23",
+     54815.0
+    ],
+    [
+     "2026-02-24",
+     54401.0
+    ],
+    [
+     "2026-02-25",
+     57547.0
+    ],
+    [
+     "2026-02-26",
+     57186.0
+    ],
+    [
+     "2026-02-27",
+     55812.0
+    ],
+    [
+     "2026-02-28",
+     56786.0
+    ],
+    [
+     "2026-03-01",
+     55947.0
+    ],
+    [
+     "2026-03-02",
+     58840.0
+    ],
+    [
+     "2026-03-03",
+     58873.0
+    ],
+    [
+     "2026-03-04",
+     62471.0
+    ],
+    [
+     "2026-03-05",
+     61101.0
+    ],
+    [
+     "2026-03-06",
+     58692.0
+    ],
+    [
+     "2026-03-07",
+     58015.0
+    ],
+    [
+     "2026-03-08",
+     57301.0
+    ],
+    [
+     "2026-03-09",
+     58932.0
+    ],
+    [
+     "2026-03-10",
+     60282.0
+    ],
+    [
+     "2026-03-11",
+     60819.0
+    ],
+    [
+     "2026-03-12",
+     61228.0
+    ],
+    [
+     "2026-03-13",
+     62130.0
+    ],
+    [
+     "2026-03-14",
+     62468.0
+    ],
+    [
+     "2026-03-15",
+     63709.0
+    ],
+    [
+     "2026-03-16",
+     65142.0
+    ],
+    [
+     "2026-03-17",
+     64086.0
+    ],
+    [
+     "2026-03-18",
+     62177.0
+    ],
+    [
+     "2026-03-19",
+     60411.0
+    ],
+    [
+     "2026-03-20",
+     60944.0
+    ],
+    [
+     "2026-03-21",
+     59602.0
+    ],
+    [
+     "2026-03-22",
+     58700.0
+    ],
+    [
+     "2026-03-23",
+     61089.0
+    ],
+    [
+     "2026-03-24",
+     60742.0
+    ],
+    [
+     "2026-03-25",
+     61677.0
+    ],
+    [
+     "2026-03-26",
+     59653.0
+    ],
+    [
+     "2026-03-27",
+     57692.0
+    ],
+    [
+     "2026-03-28",
+     57700.0
+    ],
+    [
+     "2026-03-29",
+     57435.0
+    ],
+    [
+     "2026-03-30",
+     58244.0
+    ],
+    [
+     "2026-03-31",
+     58961.0
+    ],
+    [
+     "2026-04-01",
+     58779.0
+    ],
+    [
+     "2026-04-02",
+     57991.0
+    ],
+    [
+     "2026-04-03",
+     58150.0
+    ],
+    [
+     "2026-04-04",
+     58450.0
+    ],
+    [
+     "2026-04-05",
+     59965.0
+    ],
+    [
+     "2026-04-06",
+     59666.0
+    ],
+    [
+     "2026-04-07",
+     61527.0
+    ],
+    [
+     "2026-04-08",
+     61003.0
+    ],
+    [
+     "2026-04-09",
+     61442.0
+    ],
+    [
+     "2026-04-10",
+     62270.0
+    ],
+    [
+     "2026-04-11",
+     62353.0
+    ],
+    [
+     "2026-04-12",
+     60630.0
+    ],
+    [
+     "2026-04-13",
+     63250.0
+    ],
+    [
+     "2026-04-14",
+     62894.0
+    ],
+    [
+     "2026-04-15",
+     63398.0
+    ],
+    [
+     "2026-04-16",
+     63806.0
+    ],
+    [
+     "2026-04-17",
+     65541.0
+    ],
+    [
+     "2026-04-18",
+     64397.0
+    ],
+    [
+     "2026-04-19",
+     62922.0
+    ],
+    [
+     "2026-04-20",
+     64387.0
+    ],
+    [
+     "2026-04-21",
+     65004.0
+    ],
+    [
+     "2026-04-22",
+     66800.0
+    ],
+    [
+     "2026-04-23",
+     66992.0
+    ],
+    [
+     "2026-04-24",
+     66105.0
+    ],
+    [
+     "2026-04-25",
+     66309.0
+    ],
+    [
+     "2026-04-26",
+     67205.0
+    ],
+    [
+     "2026-04-27",
+     66016.0
+    ],
+    [
+     "2026-04-28",
+     65158.0
+    ],
+    [
+     "2026-04-29",
+     64850.0
+    ],
+    [
+     "2026-04-30",
+     65075.0
+    ],
+    [
+     "2026-05-01",
+     66744.0
+    ],
+    [
+     "2026-05-02",
+     67114.0
+    ],
+    [
+     "2026-05-03",
+     66975.0
+    ],
+    [
+     "2026-05-04",
+     68287.0
+    ],
+    [
+     "2026-05-05",
+     69067.0
+    ],
+    [
+     "2026-05-06",
+     69337.0
+    ],
+    [
+     "2026-05-07",
+     68206.0
+    ],
+    [
+     "2026-05-08",
+     68064.0
+    ],
+    [
+     "2026-05-09",
+     68492.0
+    ],
+    [
+     "2026-05-10",
+     69843.0
+    ],
+    [
+     "2026-05-11",
+     69391.0
+    ],
+    [
+     "2026-05-12",
+     68596.0
+    ],
+    [
+     "2026-05-13",
+     67693.0
+    ],
+    [
+     "2026-05-14",
+     69515.0
+    ],
+    [
+     "2026-05-15",
+     68042.0
+    ],
+    [
+     "2026-05-16",
+     67261.0
+    ],
+    [
+     "2026-05-17",
+     66683.0
+    ],
+    [
+     "2026-05-18",
+     66037.0
+    ],
+    [
+     "2026-05-19",
+     66133.0
+    ],
+    [
+     "2026-05-20",
+     66669.0
+    ],
+    [
+     "2026-05-21",
+     66771.0
+    ],
+    [
+     "2026-05-22",
+     65075.0
+    ],
+    [
+     "2026-05-23",
+     66053.0
+    ],
+    [
+     "2026-05-24",
+     66136.0
+    ],
+    [
+     "2026-05-25",
+     66398.0
+    ],
+    [
+     "2026-05-26",
+     65169.0
+    ],
+    [
+     "2026-05-27",
+     63990.0
+    ],
+    [
+     "2026-05-28",
+     63109.0
+    ],
+    [
+     "2026-05-29",
+     62944.0
+    ],
+    [
+     "2026-05-30",
+     63274.0
+    ],
+    [
+     "2026-05-31",
+     63172.0
+    ],
+    [
+     "2026-06-01",
+     61322.0
+    ],
+    [
+     "2026-06-02",
+     57386.0
+    ],
+    [
+     "2026-06-03",
+     55189.0
+    ],
+    [
+     "2026-06-04",
+     54974.0
+    ],
+    [
+     "2026-06-05",
+     53032.0
+    ],
+    [
+     "2026-06-06",
+     52935.0
+    ],
+    [
+     "2026-06-07",
+     54979.0
+    ],
+    [
+     "2026-06-08",
+     54741.0
+    ],
+    [
+     "2026-06-09",
+     53505.0
+    ],
+    [
+     "2026-06-10",
+     53306.0
+    ],
+    [
+     "2026-06-11",
+     54917.0
+    ],
+    [
+     "2026-06-12",
+     54959.0
+    ],
+    [
+     "2026-06-13",
+     55741.0
+    ],
+    [
+     "2026-06-14",
+     56660.0
+    ],
+    [
+     "2026-06-15",
+     57197.0
+    ],
+    [
+     "2026-06-16",
+     56524.0
+    ],
+    [
+     "2026-06-17",
+     56017.0
+    ],
+    [
+     "2026-06-18",
+     54895.0
+    ],
+    [
+     "2026-06-19",
+     55371.0
+    ],
+    [
+     "2026-06-20",
+     56040.0
+    ],
+    [
+     "2026-06-21",
+     55189.0
+    ],
+    [
+     "2026-06-22",
+     55983.0
+    ],
+    [
+     "2026-06-23",
+     55073.0
+    ],
+    [
+     "2026-06-24",
+     53718.0
+    ],
+    [
+     "2026-06-25",
+     52562.0
+    ],
+    [
+     "2026-06-26",
+     52729.0
+    ],
+    [
+     "2026-06-27",
+     52655.0
+    ],
+    [
+     "2026-06-28",
+     52256.0
+    ],
+    [
+     "2026-06-29",
+     52691.0
+    ],
+    [
+     "2026-06-30",
+     51303.0
+    ],
+    [
+     "2026-07-01",
+     52702.0
+    ],
+    [
+     "2026-07-02",
+     53837.0
+    ],
+    [
+     "2026-07-03",
+     54686.0
+    ],
+    [
+     "2026-07-04",
+     55202.0
+    ],
+    [
+     "2026-07-05",
+     55606.0
+    ],
+    [
+     "2026-07-06",
+     55947.0
+    ],
+    [
+     "2026-07-07",
+     55543.0
+    ],
+    [
+     "2026-07-08",
+     54515.0
+    ],
+    [
+     "2026-07-09",
+     55286.0
+    ],
+    [
+     "2026-07-10",
+     56190.0
+    ],
+    [
+     "2026-07-11",
+     55911.0
+    ],
+    [
+     "2026-07-12",
+     55907.0
+    ],
+    [
+     "2026-07-13",
+     54714.0
+    ],
+    [
+     "2026-07-14",
+     56893.0
+    ],
+    [
+     "2026-07-15",
+     56436.0
+    ],
+    [
+     "2026-07-16",
+     55741.0
+    ],
+    [
+     "2026-07-17",
+     55878.0
+    ],
+    [
+     "2026-07-18",
+     56678.0
+    ],
+    [
+     "2026-07-19",
+     56624.0
+    ],
+    [
+     "2026-07-20",
+     57121.0
+    ],
+    [
+     "2026-07-21",
+     58337.0
+    ],
+    [
+     "2026-07-22",
+     57918.0
+    ],
+    [
+     "2026-07-23",
+     57181.0
+    ],
+    [
+     "2026-07-24",
+     56394.0
+    ],
+    [
+     "2026-07-25",
+     56581.0
+    ],
+    [
+     "2026-07-26",
+     57335.0
+    ],
+    [
+     "2026-07-27",
+     56042.0
+    ],
+    [
+     "2026-07-28",
+     56075.0
+    ],
+    [
+     "2026-07-29",
+     55736.0
+    ],
+    [
+     "2026-07-30",
+     56167.0
+    ],
+    [
+     "2026-07-31",
+     54502.0
+    ],
+    [
+     "2026-08-01",
+     54482.0
+    ],
+    [
+     "2026-08-02",
+     55017.0
+    ],
+    [
+     "2026-08-03",
+     55150.0
+    ],
+    [
+     "2026-08-04",
+     55543.0
+    ],
+    [
+     "2026-08-05",
+     55897.0
+    ],
+    [
+     "2026-08-06",
+     55768.0
+    ],
+    [
+     "2026-08-07",
+     56149.0
+    ],
+    [
+     "2026-08-08",
+     56180.0
+    ],
+    [
+     "2026-08-09",
+     56133.0
+    ],
+    [
+     "2026-08-10",
+     55364.0
+    ],
+    [
+     "2026-08-11",
+     55047.0
+    ],
+    [
+     "2026-08-12",
+     55018.0
+    ],
+    [
+     "2026-08-13",
+     54999.0
+    ],
+    [
+     "2026-08-14",
+     54440.0
+    ],
+    [
+     "2026-08-15",
+     54508.0
+    ],
+    [
+     "2026-08-16",
+     54302.0
+    ],
+    [
+     "2026-08-17",
+     55664.0
+    ],
+    [
+     "2026-08-18",
+     55879.0
+    ],
+    [
+     "2026-08-19",
+     59350.0
+    ],
+    [
+     "2026-08-20",
+     62460.0
+    ],
+    [
+     "2026-08-21",
+     66998.0
+    ],
+    [
+     "2026-08-22",
+     65788.0
+    ],
+    [
+     "2026-08-23",
+     66519.0
+    ],
+    [
+     "2026-08-24",
+     67703.0
+    ],
+    [
+     "2026-08-25",
+     67226.0
+    ],
+    [
+     "2026-08-26",
+     67806.0
+    ],
+    [
+     "2026-08-27",
+     68888.0
+    ],
+    [
+     "2026-08-28",
+     67176.0
+    ],
+    [
+     "2026-08-29",
+     67591.0
+    ],
+    [
+     "2026-08-30",
+     67051.0
+    ],
+    [
+     "2026-08-31",
+     67630.0
+    ],
+    [
+     "2026-09-01",
+     66783.0
+    ],
+    [
+     "2026-09-02",
+     66735.0
+    ],
+    [
+     "2026-09-03",
+     69872.0
+    ],
+    [
+     "2026-09-04",
+     68634.0
+    ],
+    [
+     "2026-09-05",
+     68770.0
+    ],
+    [
+     "2026-09-06",
+     69202.0
+    ],
+    [
+     "2026-09-07",
+     68050.0
+    ],
+    [
+     "2026-09-08",
+     67486.0
+    ],
+    [
+     "2026-09-09",
+     67327.0
+    ],
+    [
+     "2026-09-10",
+     65928.0
+    ],
+    [
+     "2026-09-11",
+     66585.0
+    ],
+    [
+     "2026-09-12",
+     66678.0
+    ],
+    [
+     "2026-09-13",
+     66268.0
+    ],
+    [
+     "2026-09-14",
+     67682.0
+    ],
+    [
+     "2026-09-15",
+     65531.0
+    ],
+    [
+     "2026-09-16",
+     66400.0
+    ],
+    [
+     "2026-09-17",
+     66558.0
+    ],
+    [
+     "2026-09-18",
+     70324.0
+    ],
+    [
+     "2026-09-19",
+     70654.0
+    ],
+    [
+     "2026-09-20",
+     70706.0
+    ],
+    [
+     "2026-09-21",
+     75550.0
+    ],
+    [
+     "2026-09-22",
+     75294.0
+    ],
+    [
+     "2026-09-23",
+     74155.0
+    ],
+    [
+     "2026-09-24",
+     74191.0
+    ],
+    [
+     "2026-09-25",
+     73826.0
+    ],
+    [
+     "2026-09-26",
+     74194.0
+    ],
+    [
+     "2026-09-27",
+     74215.0
+    ],
+    [
+     "2026-09-28",
+     73407.0
+    ],
+    [
+     "2026-09-29",
+     73751.0
+    ],
+    [
+     "2026-09-30",
+     73779.0
+    ],
+    [
+     "2026-10-01",
+     75438.0
+    ],
+    [
+     "2026-10-02",
+     75140.0
+    ],
+    [
+     "2026-10-03",
+     75348.0
+    ],
+    [
+     "2026-10-04",
+     76888.0
+    ],
+    [
+     "2026-10-05",
+     76464.0
+    ],
+    [
+     "2026-10-06",
+     76037.0
+    ],
+    [
+     "2026-10-07",
+     74375.0
+    ],
+    [
+     "2026-10-08",
+     72869.0
+    ],
+    [
+     "2026-10-09",
+     73745.0
+    ],
+    [
+     "2026-10-10",
+     74059.0
+    ],
+    [
+     "2026-10-11",
+     74702.0
+    ],
+    [
+     "2026-10-12",
+     73261.0
+    ],
+    [
+     "2026-10-13",
+     74200.0
+    ],
+    [
+     "2026-10-14",
+     72903.0
+    ],
+    [
+     "2026-10-15",
+     73269.0
+    ],
+    [
+     "2026-10-16",
+     72545.0
+    ],
+    [
+     "2026-10-17",
+     72468.0
+    ],
+    [
+     "2026-10-18",
+     73069.0
+    ],
+    [
+     "2026-10-19",
+     72991.0
+    ],
+    [
+     "2026-10-20",
+     73878.0
+    ],
+    [
+     "2026-10-21",
+     74790.0
+    ],
+    [
+     "2026-10-22",
+     72473.0
+    ],
+    [
+     "2026-10-23",
+     72432.0
+    ],
+    [
+     "2026-10-24",
+     72165.0
+    ],
+    [
+     "2026-10-25",
+     71356.0
+    ],
+    [
+     "2026-10-26",
+     71601.0
+    ],
+    [
+     "2026-10-27",
+     72599.0
+    ],
+    [
+     "2026-10-28",
+     72836.0
+    ],
+    [
+     "2026-10-29",
+     69591.0
+    ],
+    [
+     "2026-10-30",
+     69233.0
+    ],
+    [
+     "2026-10-31",
+     69436.0
+    ],
+    [
+     "2026-11-01",
+     70169.0
+    ],
+    [
+     "2026-11-02",
+     68533.0
+    ],
+    [
+     "2026-11-03",
+     69030.0
+    ],
+    [
+     "2026-11-04",
+     71600.0
+    ],
+    [
+     "2026-11-05",
+     71431.0
+    ]
+   ],
+   "price": 71431.0,
+   "d1": -0.24,
+   "m1": -6.58,
+   "m3": 27.79,
+   "ytd": -4.08,
+   "y1": -20.96,
    "y5": null,
    "high52": 92989.0,
-   "fromHigh": 23.14
+   "fromHigh": 23.18
   }
  ],
  "assets": [
@@ -10655,64 +13589,64 @@
    "name": "Goud",
    "kind": "metaal",
    "icon": "🥇",
-   "marketCap": 28769068828766,
-   "price": 4137.6,
-   "d1": 1.59,
-   "m1": -0.46,
-   "m3": -3.89,
-   "ytd": -4.69,
-   "y1": 3.62,
-   "y5": 127.74,
+   "marketCap": 28786451531800,
+   "price": 4140.1,
+   "d1": 1.65,
+   "m1": -0.4,
+   "m3": -3.83,
+   "ytd": -4.63,
+   "y1": 3.69,
+   "y5": 127.88,
    "high52": 5586.2,
-   "fromHigh": 25.93
+   "fromHigh": 25.89
   },
   {
    "ticker": "SI=F",
    "name": "Zilver",
    "kind": "metaal",
    "icon": "🥈",
-   "marketCap": 2970174706968,
-   "price": 52.76,
-   "d1": 1.22,
-   "m1": -13.33,
-   "m3": -15.05,
-   "ytd": -24.78,
-   "y1": 10.22,
-   "y5": 118.43,
+   "marketCap": 2972989504833,
+   "price": 52.81,
+   "d1": 1.33,
+   "m1": -13.23,
+   "m3": -14.95,
+   "ytd": -24.69,
+   "y1": 10.35,
+   "y5": 118.68,
    "high52": 121.3,
-   "fromHigh": 56.51
+   "fromHigh": 56.46
   },
   {
    "ticker": "BTC-USD",
    "name": "Bitcoin",
    "kind": "crypto",
    "icon": "₿",
-   "marketCap": 1617051516928,
-   "price": 80314.93,
-   "d1": -0.11,
-   "m1": -6.38,
-   "m3": 24.33,
-   "ytd": -8.22,
-   "y1": -22.69,
-   "y5": 31.39,
+   "marketCap": 1614442211919,
+   "price": 80272.08,
+   "d1": -0.17,
+   "m1": -6.43,
+   "m3": 24.26,
+   "ytd": -8.27,
+   "y1": -22.73,
+   "y5": 31.32,
    "high52": 107428.26,
-   "fromHigh": 25.24
+   "fromHigh": 25.28
   },
   {
    "ticker": "ETH-USD",
    "name": "Ethereum",
    "kind": "crypto",
    "icon": "Ξ",
-   "marketCap": 295443735830,
-   "price": 2414.02,
-   "d1": -0.34,
-   "m1": -10.96,
-   "m3": 26.62,
-   "ytd": -18.64,
-   "y1": -29.52,
-   "y5": -46.19,
+   "marketCap": 294828638208,
+   "price": 2411.98,
+   "d1": -0.43,
+   "m1": -11.03,
+   "m3": 26.51,
+   "ytd": -18.71,
+   "y1": -29.58,
+   "y5": -46.24,
    "high52": 3656.15,
-   "fromHigh": 33.97
+   "fromHigh": 34.03
   },
   {
    "ticker": "TSM",
@@ -10735,23 +13669,23 @@
    "name": "Saudi Arabian Oil Co.",
    "kind": "bedrijf",
    "country": "Saudi Arabia",
-   "marketCap": 1683484160857,
-   "price": 26.12,
-   "d1": -0.46,
-   "m1": 2.19,
-   "m3": -1.06,
-   "ytd": 13.85,
-   "y1": 7.35,
-   "y5": 5.62,
+   "marketCap": 1682195122449,
+   "price": 26.1,
+   "d1": -0.53,
+   "m1": 2.11,
+   "m3": -1.13,
+   "ytd": 13.76,
+   "y1": 7.27,
+   "y5": 5.54,
    "high52": 27.26,
-   "fromHigh": 4.19
+   "fromHigh": 4.26
   },
   {
    "ticker": "0700.HK",
    "name": "TENCENT",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 494032151209,
+   "marketCap": 493999984074,
    "price": 430.4,
    "d1": 7.17,
    "m1": 1.75,
@@ -10783,7 +13717,7 @@
    "name": "SamsungElec",
    "kind": "bedrijf",
    "country": "South Korea",
-   "marketCap": 978283769945,
+   "marketCap": 978116045341,
    "price": 201500.0,
    "d1": -7.57,
    "m1": -26.99,
@@ -10799,7 +13733,7 @@
    "name": "SK hynix",
    "kind": "bedrijf",
    "country": "South Korea",
-   "marketCap": 664543624525,
+   "marketCap": 664429689980,
    "price": 1264000.0,
    "d1": -9.46,
    "m1": -31.34,
@@ -10815,16 +13749,16 @@
    "name": "RELIANCE INDUSTRIES LTD",
    "kind": "bedrijf",
    "country": "India",
-   "marketCap": 188308411100,
-   "price": 1314.3,
-   "d1": 0.25,
-   "m1": 10.78,
-   "m3": 2.68,
-   "ytd": -15.92,
-   "y1": -10.37,
-   "y5": 15.98,
+   "marketCap": 188559370455,
+   "price": 1316.4,
+   "d1": 0.41,
+   "m1": 10.96,
+   "m3": 2.84,
+   "ytd": -15.79,
+   "y1": -10.22,
+   "y5": 16.17,
    "high52": 1604.38,
-   "fromHigh": 18.08
+   "fromHigh": 17.95
   },
   {
    "ticker": "HDB",
@@ -10847,7 +13781,7 @@
    "name": "ICBC",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 360277093492,
+   "marketCap": 360253635340,
    "price": 7.93,
    "d1": 1.47,
    "m1": 8.99,
@@ -10863,7 +13797,7 @@
    "name": "KWEICHOW MOUTAI",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 272205163186,
+   "marketCap": 272233725212,
    "price": 1452.0,
    "d1": 0.38,
    "m1": 15.36,
@@ -10895,7 +13829,7 @@
    "name": "HON HAI PRECISION INDUSTRY",
    "kind": "bedrijf",
    "country": "Taiwan",
-   "marketCap": 100539621171,
+   "marketCap": 100530448024,
    "price": 235.0,
    "d1": -2.08,
    "m1": -7.48,
@@ -10911,7 +13845,7 @@
    "name": "CATL",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 183238583431,
+   "marketCap": 183257810345,
    "price": 264.06,
    "d1": 4.42,
    "m1": -9.29,
@@ -10927,7 +13861,7 @@
    "name": "CHINA MOBILE",
    "kind": "bedrijf",
    "country": "Hong Kong",
-   "marketCap": 224720133930,
+   "marketCap": 224705502083,
    "price": 81.3,
    "d1": 0.99,
    "m1": 3.04,
@@ -10959,7 +13893,7 @@
    "name": "XIAOMI-W",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 102676080472,
+   "marketCap": 102669395087,
    "price": 31.3,
    "d1": 8.83,
    "m1": 31.07,
@@ -10975,39 +13909,39 @@
    "name": "BHARTI AIRTEL LIMITED",
    "kind": "bedrijf",
    "country": "India",
-   "marketCap": 135916234391,
-   "price": 2057.7,
-   "d1": -0.48,
-   "m1": 15.61,
-   "m3": 4.03,
-   "ytd": -1.04,
-   "y1": -1.41,
-   "y5": 200.69,
+   "marketCap": 136276469940,
+   "price": 2063.7,
+   "d1": -0.19,
+   "m1": 15.94,
+   "m3": 4.33,
+   "ytd": -0.76,
+   "y1": -1.12,
+   "y5": 201.56,
    "high52": 2147.47,
-   "fromHigh": 4.18
+   "fromHigh": 3.9
   },
   {
    "ticker": "TCS.NS",
    "name": "TATA CONSULTANCY SERV LT",
    "kind": "bedrijf",
    "country": "India",
-   "marketCap": 95866871377,
-   "price": 2502.6,
-   "d1": 2.73,
-   "m1": 18.99,
-   "m3": 4.26,
-   "ytd": -18.58,
-   "y1": -12.69,
-   "y5": -17.48,
+   "marketCap": 95738095871,
+   "price": 2499.9,
+   "d1": 2.62,
+   "m1": 18.86,
+   "m3": 4.15,
+   "ytd": -18.66,
+   "y1": -12.79,
+   "y5": -17.56,
    "high52": 3269.78,
-   "fromHigh": 23.46
+   "fromHigh": 23.55
   },
   {
    "ticker": "3690.HK",
    "name": "MEITUAN-W",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 63175456831,
+   "marketCap": 63171343388,
    "price": 80.3,
    "d1": 6.78,
    "m1": 13.66,
@@ -11039,7 +13973,7 @@
    "name": "CCB",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 349476351813,
+   "marketCap": 349453596911,
    "price": 10.48,
    "d1": 2.24,
    "m1": 10.2,
@@ -11055,7 +13989,7 @@
    "name": "MEDIATEK INC",
    "kind": "bedrijf",
    "country": "Taiwan",
-   "marketCap": 167980950350,
+   "marketCap": 167965623914,
    "price": 3460.0,
    "d1": -6.86,
    "m1": -33.01,
@@ -11071,7 +14005,7 @@
    "name": "ABC",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 306940059091,
+   "marketCap": 306920073788,
    "price": 6.88,
    "d1": 2.31,
    "m1": 8.52,
@@ -11087,7 +14021,7 @@
    "name": "PETROCHINA CO",
    "kind": "bedrijf",
    "country": "China",
-   "marketCap": 344183291424,
+   "marketCap": 344219405992,
    "price": 12.54,
    "d1": -7.93,
    "m1": 11.86,
@@ -11099,7 +14033,7 @@
    "fromHigh": 10.87
   }
  ],
- "eurusd": 1.124986,
+ "eurusd": 1.12448,
  "macro": {
   "ecb_deposit": {
    "value": 2.5,

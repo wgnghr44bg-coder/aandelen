@@ -2,15 +2,25 @@
 
 - ECB Data Portal (data-api.ecb.europa.eu): ECB-rentes, Euribor, 10-jaars staatsrente NL,
   hypotheekrente NL (nieuwe leningen per rentevaste periode, MIR) en zakelijke leningen NL.
-- Eurostat (ec.europa.eu/eurostat): HICP-inflatie (NL, eurozone, EU) en woningprijsindex NL.
+- Eurostat (ec.europa.eu/eurostat): HICP-inflatie (NL, eurozone, EU) en woningprijsindex NL (kwartaal).
+- CBS open data (opendata.cbs.nl, CC BY 4.0): prijsindex bestaande koopwoningen (maand).
+
+De MIR-rentecijfers voor Nederland worden door DNB aan de ECB geleverd; het ECB Data Portal is de open,
+sleutelvrije bron van dezelfde DNB-cijfers.
+
+Per cijfer bewaren we ook: meetperiode (`date`), vorige periode (`prev`, `prev_date`), frequentie (`freq`),
+soort cijfer (`kind`) en de datum waarop de bron het cijfer heeft bijgewerkt (`upd`, zie `ecb_bijgewerkt`).
 
 Alles is optioneel: lukt een bron niet, dan blijft de vorige waarde staan (of ontbreekt het onderdeel).
 """
 import csv
 import io
+from datetime import date, timedelta
 import json
 import re
 import time
+import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -36,6 +46,56 @@ def _get(url, tries=3):
             print(f"  macro {url[:90]}… poging {i + 1} mislukt: {e}")
             time.sleep(2 * (i + 1))
     return None
+
+
+def _status_get(url):
+    """Eén poging: (HTTP-status, tekst). Voor vragen waarbij 'geen resultaat' een geldig antwoord is."""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
+        with urllib.request.urlopen(req, timeout=40) as r:
+            return r.status, r.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        return e.code, ""
+    except Exception as e:  # noqa: BLE001
+        print(f"  macro {url[:90]}…: {e}")
+        return None, ""
+
+
+def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
+    """Dag waarop de ECB-database de waarde voor `periode` het laatst heeft bijgewerkt (≈ publicatiedatum).
+    Gevonden met de officiële API-parameter `updatedAfter` (geeft alleen gewijzigde waarnemingen terug),
+    via binair zoeken op dagen. Eén keer per nieuwe meetperiode; daarna uit `vorige` (cache).
+    Geeft "JJJJ-MM-DD" of None (onbekend)."""
+    if vorige and vorige.get("date") == periode and vorige.get("upd"):
+        return vorige["upd"]
+    vandaag = vandaag or date.today()
+
+    def gewijzigd_na(d):
+        st, txt = _status_get(f"{ECB}{key}?updatedAfter={d.isoformat()}T00:00:00%2B00:00&format=csvdata"
+                              f"&detail=dataonly")
+        if st is None:
+            raise RuntimeError("geen antwoord")
+        if st != 200 or not txt:
+            return False
+        return any(r.get("TIME_PERIOD") == periode and _num(r.get("OBS_VALUE")) is not None
+                   for r in csv.DictReader(io.StringIO(txt)))
+
+    try:
+        lo, hi = 0, max_dagen  # gewijzigd_na(vandaag - hi) moet waar zijn, gewijzigd_na(vandaag + 1) onwaar
+        if not gewijzigd_na(vandaag - timedelta(days=hi)):
+            return None
+        if gewijzigd_na(vandaag):
+            return vandaag.isoformat()
+        # invariant: waar bij (vandaag - hi), onwaar bij (vandaag - lo)
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            if gewijzigd_na(vandaag - timedelta(days=mid)):
+                hi = mid
+            else:
+                lo = mid
+        return (vandaag - timedelta(days=hi)).isoformat()  # wijziging op deze dag (na 00:00 UTC)
+    except RuntimeError:
+        return None
 
 
 def _num(x):
@@ -77,6 +137,9 @@ def ecb_one(key, n=2):
     return _last(next(iter(s.values()))) if s else None
 
 
+EUROSTAT_UPDATED = {}  # dataset -> datum laatste update (uit het JSON-stat-veld "updated")
+
+
 def eurostat(dataset, params, n):
     """JSON-stat van Eurostat -> {geo: [[periode, waarde], …]} (oud -> nieuw)."""
     q = "&".join(f"{k}={v}" for k, vals in params.items() for v in (vals if isinstance(vals, list) else [vals]))
@@ -85,6 +148,8 @@ def eurostat(dataset, params, n):
         return {}
     try:
         js = json.loads(txt)
+        if js.get("updated"):
+            EUROSTAT_UPDATED[dataset] = str(js["updated"])[:10]
         ids, sizes, dims = js["id"], js["size"], js["dimension"]
         idx = {d: dims[d]["category"]["index"] for d in ids}
         geos = sorted(idx["geo"], key=lambda g: idx["geo"][g])
@@ -222,6 +287,50 @@ def zakelijk_nl():
     return rijen or None
 
 
+CBS_OData = "https://opendata.cbs.nl/ODataApi/odata/85773NED"
+CBS_LINK = "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85773NED/table"
+
+
+def cbs_woningprijzen(n=25):
+    """CBS 85773NED (bestaande koopwoningen): per maand de verandering t.o.v. een jaar eerder (%).
+    Kolommen worden op hun officiële titel gezocht (niet op een vermoede naam).
+    Geeft {"series": [[JJJJ-MM, %], …], "updated": JJJJ-MM-DD, "title": …} of None."""
+    try:
+        props = json.loads(_get(CBS_OData + "/DataProperties?$format=json") or "{}").get("value") or []
+        topics = [p for p in props if p.get("Type") == "Topic"]
+        sleutel = next((p for p in topics if "jaar eerder" in (p.get("Title") or "").lower()), None)
+        if not sleutel:
+            print(f"  cbs: kolom 'jaar eerder' niet gevonden ({[p.get('Title') for p in topics]})")
+            return None
+        dims = [p["Key"] for p in props if p.get("Type") in ("Dimension", "GeoDimension")]
+        filt = "substringof('MM',Perioden)"
+        for d in dims:  # andere dimensies (bv. regio): kies 'Nederland' / 'Totaal'
+            vals = json.loads(_get(f"{CBS_OData}/{d}?$format=json") or "{}").get("value") or []
+            keuze = next((v for v in vals if (v.get("Title") or "").strip().lower() in ("nederland", "totaal")), None)
+            if not keuze:
+                print(f"  cbs: dimensie {d} zonder 'Nederland/Totaal'")
+                return None
+            filt += f" and {d} eq '{keuze['Key']}'"
+        url = (f"{CBS_OData}/TypedDataSet?$format=json&$select=Perioden,{sleutel['Key']}"
+               f"&$filter={urllib.parse.quote(filt)}")
+        rows = json.loads(_get(url) or "{}").get("value") or []
+        serie = []
+        for r in rows:
+            p, v = (r.get("Perioden") or "").strip(), _num(r.get(sleutel["Key"]))
+            if len(p) == 8 and p[4:6] == "MM" and v is not None:
+                serie.append([f"{p[:4]}-{p[6:]}", v])
+        serie.sort()
+        info = (json.loads(_get(CBS_OData + "/TableInfos?$format=json") or "{}").get("value") or [{}])[0]
+        if not serie:
+            return None
+        print(f"  cbs woningprijzen: {sleutel.get('Title')!r} -> {serie[-1]} (tabel bijgewerkt {info.get('Modified')})")
+        return {"series": serie[-n:], "updated": (info.get("Modified") or "")[:10] or None,
+                "title": sleutel.get("Title"), "table": info.get("Title"), "src": CBS_LINK}
+    except Exception as e:  # noqa: BLE001
+        print(f"  cbs woningprijzen: mislukt ({e})")
+        return None
+
+
 def haal_macro(vorige=None):
     """Alle macro-cijfers. `vorige` = macro van de vorige run (terugval per onderdeel)."""
     vorige = vorige or {}
@@ -245,18 +354,23 @@ def haal_macro(vorige=None):
             prev = obs[idx] if idx is not None else None
             since = obs[idx + 1][0] if idx is not None else None  # eerste dag van de huidige rente
             zet(naam, {"value": cur[1], "date": cur[0], "prev": prev[1] if prev else None, "since": since,
+                       "prev_until": prev[0] if prev else None, "kind": "beleidsrente (geldend niveau)",
+                       "freq": "wijzigt bij een ECB-rentebesluit (±elke 6 weken een vergadering)",
                        "src": ecb_link(key)})
         else:
             zet(naam, None)
 
-    for naam, key in (("euribor3m", "FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA"),
-                      ("nl10y", "IRS/M.NL.L.L40.CI.0000.EUR.N.Z"),
-                      ("nfc_loans_nl", "MIR/M.NL.B.A2A.A.R.A.2240.EUR.N")):
+    MAAND = "maandelijks"
+    for naam, key, kind in (("euribor3m", "FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA", "maandgemiddelde"),
+                            ("nl10y", "IRS/M.NL.L.L40.CI.0000.EUR.N.Z", "maandgemiddelde rendement"),
+                            ("nfc_loans_nl", "MIR/M.NL.B.A2A.A.R.A.2240.EUR.N",
+                             "maandgemiddelde nieuw afgesloten leningen")):
         st = next(iter(ecb_series(key, 2).values()), None)
         last = _last(st)
         if last:
-            last.update({"src": ecb_link(key), "title": st.get("title") or ""})
-            print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']})")
+            last.update({"src": ecb_link(key), "title": st.get("title") or "", "kind": kind, "freq": MAAND,
+                         "upd": ecb_bijgewerkt(key, last["date"], vorige.get(naam))})
+            print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']}, bijgewerkt {last['upd']})")
         zet(naam, last)
 
     # Hypotheekrente NL, nieuwe leningen per rentevaste periode
@@ -271,10 +385,21 @@ def haal_macro(vorige=None):
             print(f"  hypotheek {code}: {s.get('title')!r} -> {last['value']} ({last['date']})")
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
+    if hyp:
+        oud = (vorige.get("mortgage_nl") or [{}])[0]
+        upd = ecb_bijgewerkt("MIR/M.NL.B.A2C..R.A.2250.EUR.N", hyp[0]["date"], oud)
+        for h in hyp:
+            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd})
     zet("mortgage_nl", hyp)
 
     # Bedrijfsleningen NL per bedrag en rentevaste periode (basis voor bancaire vastgoedfinanciering)
-    zet("business_nl", zakelijk_nl())
+    biz = zakelijk_nl()
+    if biz:
+        oud = (vorige.get("business_nl") or [{}])[0]
+        upd = ecb_bijgewerkt("MIR/M.NL.B.A2A..R..2240.EUR.N", biz[0]["date"], oud)
+        for b in biz:
+            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd})
+    zet("business_nl", biz)
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP
     # volgens COICOP 2018 in nieuwe datasets; we proberen nieuw én oud (Eurostat en ECB) en nemen per land
@@ -303,15 +428,23 @@ def haal_macro(vorige=None):
     # EU alleen tonen als die net zo actueel is als NL (anders misleidend)
     if "EU27_2020" in hicp and "NL" in hicp and hicp["EU27_2020"][-1][0] < hicp["NL"][-1][0]:
         hicp.pop("EU27_2020")
-    if hicp:
-        hicp["src"] = EUROSTAT_LINK.format("prc_hicp_minr")
-    zet("hicp", hicp if any(v for g, v in hicp.items() if g != "src") else None)
+    heeft = any(hicp.values())
+    if heeft:
+        hicp.update({"src": EUROSTAT_LINK.format("prc_hicp_minr"), "upd": EUROSTAT_UPDATED.get("prc_hicp_minr"),
+                     "freq": MAAND, "kind": "verandering t.o.v. dezelfde maand een jaar eerder"})
+    zet("hicp", hicp if heeft else None)
 
     # Woningprijzen NL (jaar op jaar, per kwartaal)
     hpi = eurostat("prc_hpi_q", {"geo": "NL", "purchase": "TOTAL", "unit": "RCH_A"}, 12).get("NL")
     zet("house_prices_nl", hpi)
     if hpi:
         m["house_prices_src"] = EUROSTAT_LINK.format("prc_hpi_q")
+        m["house_prices_upd"] = EUROSTAT_UPDATED.get("prc_hpi_q")
+    elif vorige.get("house_prices_src"):
+        m["house_prices_src"], m["house_prices_upd"] = vorige["house_prices_src"], vorige.get("house_prices_upd")
+
+    # Woningprijzen NL volgens CBS (bestaande koopwoningen, per maand)
+    zet("house_prices_cbs", cbs_woningprijzen())
 
     ok = sorted(m)
     print(f"macro: {len(ok)} onderdelen ({', '.join(ok)})")

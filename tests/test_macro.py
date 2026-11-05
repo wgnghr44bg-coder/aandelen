@@ -116,3 +116,40 @@ def test_zakelijk_zonder_codelijst_toont_niets(monkeypatch):
     monkeypatch.setattr(macro, "_get", lambda url, tries=3: None if "references" in url else NFC_CSV)
     assert macro.zakelijk_nl() is None
     assert macro.nl_label("Over EUR 0.25 million and up to and including EUR 1 million") == "boven €0,25 mln – €1 mln"
+
+
+def test_ecb_bijgewerkt_binair_zoeken(monkeypatch):
+    from datetime import date
+    gezien = []
+
+    def fake(url):
+        d = date.fromisoformat(url.split("updatedAfter=")[1][:10])
+        gezien.append(d)
+        # waarde voor 2026-09 is bijgewerkt op 3 nov 2026 (10:00 UTC)
+        return (200, "KEY,TIME_PERIOD,OBS_VALUE\nX,2026-09,3.1\n") if d <= date(2026, 11, 3) else (404, "")
+    monkeypatch.setattr(macro, "_status_get", fake)
+    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", vandaag=date(2026, 11, 5)) == "2026-11-03"
+    assert len(gezien) <= 10
+    # cache: zelfde periode -> geen nieuwe vragen
+    gezien.clear()
+    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", {"date": "2026-09", "upd": "2026-11-03"}) == "2026-11-03"
+    assert not gezien
+    # ouder dan het zoekvenster -> onbekend (niet gokken)
+    monkeypatch.setattr(macro, "_status_get", lambda url: (404, ""))
+    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", vandaag=date(2026, 11, 5)) is None
+
+
+def test_cbs_woningprijzen(monkeypatch):
+    antwoorden = {
+        "/DataProperties": {"value": [{"Type": "TimeDimension", "Key": "Perioden"},
+                                      {"Type": "Topic", "Key": "PrijsindexVerkoopprijzen_1", "Title": "Prijsindex verkoopprijzen"},
+                                      {"Type": "Topic", "Key": "OntwikkelingTOVEenJaarEerder_3",
+                                       "Title": "Ontwikkeling t.o.v. een jaar eerder"}]},
+        "/TypedDataSet": {"value": [{"Perioden": "2026MM09", "OntwikkelingTOVEenJaarEerder_3": 4.1},
+                                    {"Perioden": "2026MM08", "OntwikkelingTOVEenJaarEerder_3": 4.5},
+                                    {"Perioden": "2025JJ00", "OntwikkelingTOVEenJaarEerder_3": 8.0}]},
+        "/TableInfos": {"value": [{"Modified": "2026-10-22T02:00:00", "Title": "Bestaande koopwoningen"}]},
+    }
+    monkeypatch.setattr(macro, "_get", lambda url, tries=3: json.dumps(next(v for k, v in antwoorden.items() if k in url)))
+    r = macro.cbs_woningprijzen()
+    assert r["series"] == [["2026-08", 4.5], ["2026-09", 4.1]] and r["updated"] == "2026-10-22"

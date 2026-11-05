@@ -27,7 +27,7 @@ UA = "Mozilla/5.0 (compatible; InvestMarket/1.0; +https://github.com/wgnghr44bg-
 socket.setdefaulttimeout(20)
 
 PCT = re.compile(r"^(\d{1,2},\d{2})\s?%\*?$")
-LABEL = re.compile(r"^(variabel|1 maand|\d{1,2}\s*(jaar|jr)\b.*)$", re.I)
+LABEL = re.compile(r"^(variabel|1 maand\b.*|\d{1,2}(\s*\+\s*\d{1,2})?\s*(jaar|jr)\b.*)$", re.I)
 HEAD = re.compile(r"(\d{2})\s?%")
 
 # Per aanbieder: pagina('s) met tabel, begin- en eindtekst van het blok, soort vastgoed.
@@ -130,8 +130,11 @@ def bron_dag(d, vandaag):
 
 def norm_fix(label):
     t = label.lower()
-    if t.startswith("variabel") or t == "1 maand":  # 1 maand vast = maandelijks herziene (variabele) rente
+    if t.startswith("variabel") or t.startswith("1 maand"):  # 1 maand vast = maandelijks herziene rente
         return "var"
+    m = re.match(r"(\d{1,2})\s*\+\s*(\d{1,2})", t)
+    if m:
+        return f"{m.group(1)}+{m.group(2)}"  # bv. SolidBriq '3 + 2 jaar': niet gelijk aan 5 jaar vast
     m = re.match(r"(\d{1,2})", t)
     return m.group(1) if m else None
 

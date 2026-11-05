@@ -94,3 +94,10 @@ def test_bron_dag():
 def test_solidbriq_1_maand_is_variabel():
     g = v.parse_grid("Rentevaste periode\t≤ 50%\t≤ 55%\n1 maand\t5,30%\t5,30%\n5 jaar\t6,05%\t6,05%")
     assert [r["fix"] for r in g["rows"]] == ["var", "5"] and g["ltv"] == [50, 55]
+
+
+def test_solidbriq_generiq_labels():
+    t = ("\t≤ 50%\t≤ 55%\n1 maand **\t6,20%\t6,25%\n3 jaar\t7,20%\t7,25%\n3 + 2 jaar (Solid-BreaQ)\t7,30%\t7,35%\n"
+         "5 jaar\t7,20%\t7,25%")
+    g = v.parse_grid(t)
+    assert [r["fix"] for r in g["rows"]] == ["var", "3", "3+2", "5"]

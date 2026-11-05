@@ -106,6 +106,15 @@ def eurostat(dataset, params, n):
         return {}
 
 
+def ecb_link(key):
+    """Officiële pagina van een ECB-reeks in het ECB Data Portal (om het cijfer zelf te controleren)."""
+    ds, rest = key.split("/", 1)
+    return f"https://data.ecb.europa.eu/data/datasets/{ds}/{ds}.{rest}"
+
+
+EUROSTAT_LINK = "https://ec.europa.eu/eurostat/databrowser/view/{}/default/table"
+
+
 def haal_macro(vorige=None):
     """Alle macro-cijfers. `vorige` = macro van de vorige run (terugval per onderdeel)."""
     vorige = vorige or {}
@@ -128,13 +137,20 @@ def haal_macro(vorige=None):
             idx = next((i for i in range(len(obs) - 1, -1, -1) if obs[i][1] != cur[1]), None)
             prev = obs[idx] if idx is not None else None
             since = obs[idx + 1][0] if idx is not None else None  # eerste dag van de huidige rente
-            zet(naam, {"value": cur[1], "date": cur[0], "prev": prev[1] if prev else None, "since": since})
+            zet(naam, {"value": cur[1], "date": cur[0], "prev": prev[1] if prev else None, "since": since,
+                       "src": ecb_link(key)})
         else:
             zet(naam, None)
 
-    zet("euribor3m", ecb_one("FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA"))
-    zet("nl10y", ecb_one("IRS/M.NL.L.L40.CI.0000.EUR.N.Z"))
-    zet("nfc_loans_nl", ecb_one("MIR/M.NL.B.A2A.A.R.A.2240.EUR.N"))
+    for naam, key in (("euribor3m", "FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA"),
+                      ("nl10y", "IRS/M.NL.L.L40.CI.0000.EUR.N.Z"),
+                      ("nfc_loans_nl", "MIR/M.NL.B.A2A.A.R.A.2240.EUR.N")):
+        st = next(iter(ecb_series(key, 2).values()), None)
+        last = _last(st)
+        if last:
+            last.update({"src": ecb_link(key), "title": st.get("title") or ""})
+            print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']})")
+        zet(naam, last)
 
     # Hypotheekrente NL, nieuwe leningen per rentevaste periode
     hyp = []
@@ -143,7 +159,8 @@ def haal_macro(vorige=None):
         code = parts[parts.index("A2C") + 1] if "A2C" in parts and parts.index("A2C") + 1 < len(parts) else ""
         last = _last(s)
         if last and code in FIXATIE:
-            hyp.append({"code": code, "label": FIXATIE[code], "title": s.get("title") or "", **last})
+            hyp.append({"code": code, "label": FIXATIE[code], "title": s.get("title") or "",
+                        "src": ecb_link("MIR/" + ".".join(parts[parts.index("M"):]) if "M" in parts else "MIR/" + k), **last})
             print(f"  hypotheek {code}: {s.get('title')!r} -> {last['value']} ({last['date']})")
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
@@ -176,11 +193,15 @@ def haal_macro(vorige=None):
     # EU alleen tonen als die net zo actueel is als NL (anders misleidend)
     if "EU27_2020" in hicp and "NL" in hicp and hicp["EU27_2020"][-1][0] < hicp["NL"][-1][0]:
         hicp.pop("EU27_2020")
-    zet("hicp", hicp if any(hicp.values()) else None)
+    if hicp:
+        hicp["src"] = EUROSTAT_LINK.format("prc_hicp_minr")
+    zet("hicp", hicp if any(v for g, v in hicp.items() if g != "src") else None)
 
     # Woningprijzen NL (jaar op jaar, per kwartaal)
     hpi = eurostat("prc_hpi_q", {"geo": "NL", "purchase": "TOTAL", "unit": "RCH_A"}, 12).get("NL")
     zet("house_prices_nl", hpi)
+    if hpi:
+        m["house_prices_src"] = EUROSTAT_LINK.format("prc_hpi_q")
 
     ok = sorted(m)
     print(f"macro: {len(ok)} onderdelen ({', '.join(ok)})")

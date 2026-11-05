@@ -393,6 +393,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .hero .mper select{border:0;background:none;color:var(--muted);font:inherit;font-size:.72rem;font-weight:700;padding:4px 4px;border-radius:7px;cursor:pointer;-webkit-appearance:none;appearance:none}
 .hero .mper select.on{background:var(--accent);color:#fff}
 .hero .mper button{padding:4px 6px}
+.src{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+.srcline{font-size:.75rem;color:var(--muted);margin:4px 0 0}
 </style>
 </head>
 <body>
@@ -1260,29 +1262,31 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("vgmini").innerHTML=vg.map(function(x){return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td></tr>'}).join("");
     $("mpanels").hidden=!(hyp.length||vg.length);
     // tabblad Rentes
-    function row(l,v,sub,tag){return '<tr><td>'+l+(sub?'<small>'+sub+'</small>':'')+'</td><td>'+v+'</td><td>'+(tag||"")+'</td></tr>'}
+    function row(l,v,sub,tag,src){
+      var lk=src?' <a class="src" href="'+esc(src)+'" target="_blank" rel="noopener">bron ↗</a>':'';
+      return '<tr><td>'+l+((sub||lk)?'<small>'+(sub||"")+lk+'</small>':'')+'</td><td>'+v+'</td><td>'+(tag||"")+'</td></tr>'}
     var ecb=[];
     function fdate(d){var p=String(d||"").slice(0,10).split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]:""}
-    if(dep)ecb.push(row("Depositorente",pct2(dep.value),dep.since?"sinds "+fdate(dep.since):"",ppTag(dep.value,dep.prev,true)));
-    if(m.ecb_mro)ecb.push(row("Herfinancieringsrente",pct2(m.ecb_mro.value),"",ppTag(m.ecb_mro.value,m.ecb_mro.prev,true)));
+    if(dep)ecb.push(row("Depositorente",pct2(dep.value),dep.since?"sinds "+fdate(dep.since):"",ppTag(dep.value,dep.prev,true),dep.src));
+    if(m.ecb_mro)ecb.push(row("Herfinancieringsrente",pct2(m.ecb_mro.value),"",ppTag(m.ecb_mro.value,m.ecb_mro.prev,true),m.ecb_mro.src));
     $("r_ecb").innerHTML=ecb.join("")||'<tr><td>Nog geen gegevens</td></tr>';
     var mk=[];
-    if(m.euribor3m)mk.push(row("Euribor 3 maanden",pct2(m.euribor3m.value),pdate(m.euribor3m.date),ppTag(m.euribor3m.value,m.euribor3m.prev,true)));
-    if(m.nl10y)mk.push(row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),pdate(m.nl10y.date),ppTag(m.nl10y.value,m.nl10y.prev,true)));
-    if(m.us10y)mk.push(row("Staatsrente VS 10 jaar",pct2(m.us10y.value),"actueel",""));
+    if(m.euribor3m)mk.push(row("Euribor 3 maanden",pct2(m.euribor3m.value),pdate(m.euribor3m.date),ppTag(m.euribor3m.value,m.euribor3m.prev,true),m.euribor3m.src));
+    if(m.nl10y)mk.push(row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),pdate(m.nl10y.date),ppTag(m.nl10y.value,m.nl10y.prev,true),m.nl10y.src));
+    if(m.us10y)mk.push(row("Staatsrente VS 10 jaar",pct2(m.us10y.value),"actueel","","https://finance.yahoo.com/quote/%5ETNX/"));
     $("r_mkt").innerHTML=mk.join("")||'<tr><td>Nog geen gegevens</td></tr>';
-    $("r_hyp").innerHTML=hyp.map(function(x){return row(x.label,pct2(x.value),pdate(x.date)+(x.prev!=null?" · vorige maand "+pct2(x.prev):""),ppTag(x.value,x.prev,true))}).join("")||'<tr><td>Nog geen gegevens</td></tr>';
-    $("r_nfc").innerHTML=m.nfc_loans_nl?row("Nieuwe leningen aan bedrijven",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),ppTag(m.nfc_loans_nl.value,m.nfc_loans_nl.prev,true)):'<tr><td>Nog geen gegevens</td></tr>';
+    $("r_hyp").innerHTML=hyp.map(function(x){return row(x.label,pct2(x.value),pdate(x.date)+(x.prev!=null?" · vorige maand "+pct2(x.prev):""),ppTag(x.value,x.prev,true),x.src)}).join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    $("r_nfc").innerHTML=m.nfc_loans_nl?row("Nieuwe leningen aan bedrijven",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),ppTag(m.nfc_loans_nl.value,m.nfc_loans_nl.prev,true),m.nfc_loans_nl.src):'<tr><td>Nog geen gegevens</td></tr>';
     // tabblad Inflatie
     $("itiles").innerHTML=th;
     var ser=[];if(nl)ser.push({n:"Nederland",c:"#ff8a00",d:nl});if(ea)ser.push({n:"Eurozone",c:"#3b86ff",d:ea});if(eu)ser.push({n:"EU",c:"#a78bfa",d:eu});
-    $("ichart").innerHTML=lineChart(ser,{target:2,suffix:"%"});
+    $("ichart").innerHTML=lineChart(ser,{target:2,suffix:"%"})+(h.src?'<p class="srcline">Cijfers: <a class="src" href="'+esc(h.src)+'" target="_blank" rel="noopener">Eurostat HICP ↗</a></p>':'');
     // tabblad Vastgoed
     var hp=m.house_prices_nl;
-    $("hchart").innerHTML=hp?lineChart([{n:"Woningprijzen NL",c:"#2fd26b",d:hp}],{zero:true,suffix:"%"}):'<p class="hint">Nog geen gegevens.</p>';
-    $("v_rt").innerHTML=(hyp.map(function(x){return row("Hypotheek "+x.label,pct2(x.value),pdate(x.date),ppTag(x.value,x.prev,true))}).join("")+
-      (m.nfc_loans_nl?row("Zakelijke lening (bedrijven)",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),""):"")+
-      (m.nl10y?row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),"basis voor lange rentes",""):""))||'<tr><td>Nog geen gegevens</td></tr>';
+    $("hchart").innerHTML=hp?lineChart([{n:"Woningprijzen NL",c:"#2fd26b",d:hp}],{zero:true,suffix:"%"})+(m.house_prices_src?'<p class="srcline">Cijfers: <a class="src" href="'+esc(m.house_prices_src)+'" target="_blank" rel="noopener">Eurostat woningprijsindex ↗</a></p>':''):'<p class="hint">Nog geen gegevens.</p>';
+    $("v_rt").innerHTML=(hyp.map(function(x){return row("Hypotheek "+x.label,pct2(x.value),pdate(x.date),ppTag(x.value,x.prev,true),x.src)}).join("")+
+      (m.nfc_loans_nl?row("Zakelijke lening (bedrijven)",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),"",m.nfc_loans_nl.src):"")+
+      (m.nl10y?row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),"basis voor lange rentes","",m.nl10y.src):""))||'<tr><td>Nog geen gegevens</td></tr>';
     var re=rows.filter(function(r){return r.sector==="Real Estate"}).sort(function(a,b){return b.marketCap-a.marketCap});
     $("vgcount").textContent="("+re.length+")";
     var mx=Math.max.apply(null,re.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
@@ -1470,7 +1474,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-4";
+  var BUILD="2026-11-05-5";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

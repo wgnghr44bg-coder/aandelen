@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T14:43:14Z",
+ "updated": "2026-11-05T14:47:17Z",
  "lenders": [
   {
    "id": "rnhb",
@@ -828,6 +828,89 @@
         6.2,
         6.35,
         6.5
+       ]
+      }
+     ]
+    },
+    {
+     "seg": "commercieel",
+     "name": "GeneriQ (commercieel)",
+     "src": "https://www.solidbriq.nl/actuele-rentetarieven/",
+     "ltv": [
+      50,
+      55,
+      60,
+      65
+     ],
+     "rows": [
+      {
+       "fix": "var",
+       "label": "1 maand **",
+       "rates": [
+        6.2,
+        6.25,
+        6.3,
+        6.35
+       ]
+      },
+      {
+       "fix": "1",
+       "label": "1 jaar",
+       "rates": [
+        7.05,
+        7.1,
+        7.15,
+        7.2
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar",
+       "rates": [
+        7.2,
+        7.25,
+        7.3,
+        7.35
+       ]
+      },
+      {
+       "fix": "3",
+       "label": "3 jaar",
+       "rates": [
+        7.2,
+        7.25,
+        7.3,
+        7.35
+       ]
+      },
+      {
+       "fix": "3+2",
+       "label": "3 + 2 jaar (Solid-BreaQ)",
+       "rates": [
+        7.3,
+        7.35,
+        7.4,
+        7.45
+       ]
+      },
+      {
+       "fix": "4",
+       "label": "4 jaar",
+       "rates": [
+        7.2,
+        7.25,
+        7.3,
+        7.35
+       ]
+      },
+      {
+       "fix": "5",
+       "label": "5 jaar",
+       "rates": [
+        7.2,
+        7.25,
+        7.3,
+        7.35
        ]
       }
      ]

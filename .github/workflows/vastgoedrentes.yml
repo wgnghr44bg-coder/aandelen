@@ -1,0 +1,43 @@
+name: Vastgoedrentes
+
+# Haalt dagelijks de gepubliceerde rentes van vastgoedfinanciers op (box 3) met een echte browser,
+# omdat een deel van de aanbieders hun tabellen met JavaScript laadt. Uitvoer: docs/vastgoedrentes*.json
+on:
+  schedule:
+    - cron: "41 4 * * *"   # elke dag 04:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastgoedrentes
+  cancel-in-progress: true
+
+jobs:
+  rentes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Browser installeren
+        run: pip install playwright pytest && python -m playwright install --with-deps chromium
+      - name: Test
+        run: python -m pytest -q tests/test_vastgoedrentes.py
+      - name: Rentes ophalen
+        run: python -u vastgoedrentes.py
+      - name: Opslaan
+        run: |
+          git add docs/vastgoedrentes.json docs/vastgoedrentes_hist.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Vastgoedrentes $(date -u +'%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1

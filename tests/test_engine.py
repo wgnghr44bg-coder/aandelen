@@ -423,3 +423,20 @@ def test_free_float():
     assert fund.free_float({"floatShares": 55, "sharesOutstanding": 100}) == 0.55
     assert fund.free_float({"sharesOutstanding": 100}) == 1.0          # onbekend
     assert fund.free_float({"floatShares": 300, "sharesOutstanding": 100}) == 1.0  # onlogisch
+
+
+def test_investment_company_valued_at_nav():
+    """Participatiemaatschappij (zoals 3i): balans ~100% eigen vermogen, 'winst' = waardestijging.
+    Geen residual-income-extrapolatie, maar waarde = NAV: koers 16% onder NAV -> geen BUY-marge."""
+    nav, mcap = 30000.0, 25200.0                                   # koers 0,84 x NAV
+    rev = [6000.0, 5500.0, 5000.0, 4600.0]
+    f = make_fin(profile="bank", mcap=mcap, s={"revenue": rev, "net_income": [r * 0.97 for r in rev],
+                                              "equity": [nav, 26000.0, 22000.0, 19000.0],
+                                              "total_assets": [nav / 0.955, 27000.0, 23000.0, 20000.0]})
+    d = dcf.run(f)
+    assert d["model"] == "nav" and d["valid"]
+    neu, con = d["scenarios"]["neutral"], d["scenarios"]["conservative"]
+    assert neu["equity_value"] == nav and con["equity_value"] == nav     # geen groei verzonnen
+    assert abs(neu["margin_of_safety"] - 0.16) < 0.005
+    assert analyze(f, build_context({f["ticker"]: f}))["rating"] != "BUY"
+    assert dcf.run(make_fin(profile="bank"))["model"] == "ri"            # gewone bank blijft residual income

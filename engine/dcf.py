@@ -258,11 +258,36 @@ def _ri_model(fin, sc, notes):
     }), None
 
 
+def is_investment_company(fin):
+    """Beleggings-/participatiemaatschappij (bv. 3i, investment trusts): de balans bestaat vrijwel geheel uit
+    eigen vermogen en de 'omzet' is vooral waardestijging van de deelnemingen (nettomarge ~100%).
+    Banken (eigen vermogen/activa ~5-10%) en vermogensbeheerders (~30-40%) vallen hier niet onder."""
+    eq, assets = at(ser(fin, "equity"), 0), at(ser(fin, "total_assets"), 0)
+    ni, rev = at(ser(fin, "net_income"), 0), at(ser(fin, "revenue"), 0)
+    if not (eq and assets and ni and rev) or eq <= 0 or assets <= 0 or rev <= 0:
+        return False
+    return eq / assets >= 0.80 and ni / rev >= 0.70
+
+
+def _nav_model(fin, sc, notes):
+    """Intrinsieke waarde = netto vermogenswaarde (NAV, het eigen vermogen tegen reële waarde).
+    Geen groei of toekomstige waardestijgingen aangenomen: die zijn bij een participatiemaatschappij
+    al in de NAV verwerkt en niet als vaste 'winst' door te trekken. Alle scenario's gelijk."""
+    nav = at(ser(fin, "equity"), 0)
+    if nav is None or nav <= 0:
+        return None, "netto vermogenswaarde (NAV) onbekend"
+    if not notes:
+        notes.append("participatiemaatschappij: waarde = netto vermogenswaarde (NAV), geen winstextrapolatie")
+    return _scenario_result(fin, nav, {"model": "Netto vermogenswaarde (NAV)", "book_value": rnd(nav, 0)}), None
+
+
 def run(fin):
     """Berekent alle drie scenario's. `valid` = neutraal scenario betrouwbaar en positief."""
     notes = []
     model = MODEL.get(fin["profile"], "fcf")
-    fn = {"fcf": _fcf_model, "ddm": _ddm_model, "ri": _ri_model}[model]
+    if model == "ri" and is_investment_company(fin):
+        model = "nav"
+    fn = {"fcf": _fcf_model, "ddm": _ddm_model, "ri": _ri_model, "nav": _nav_model}[model]
     out = {"model": model, "scenarios": {}, "valid": False, "reason": None, "notes": notes}
     for name, sc in SCENARIOS.items():
         res, why = fn(fin, sc, notes if name == "neutral" else [])

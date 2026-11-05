@@ -801,7 +801,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   // ---------- Grafiek ----------
   var RANGES=[{k:"1M",m:1},{k:"3M",m:3},{k:"1J",m:12},{k:"5J",m:60}];
   var range="1J";
-  try{var sr=localStorage.getItem("bereik");if(sr&&(sr==="1D"||RANGES.some(function(x){return x.k===sr})))range=sr;}catch(e){}
+  try{var sr=localStorage.getItem("bereik");if(sr&&(sr==="1D"||sr==="1W"||RANGES.some(function(x){return x.k===sr})))range=sr;}catch(e){}
   function chLabel(d,withYear){return /:/.test(d)?d:shortDate(d,withYear)}  // "UU:MM" (binnen de dag) of datum
   var histP=null;
   function loadHist(){
@@ -826,15 +826,17 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     // WEBN, VALL en Bitcoin hebben ook koersen binnen de dag (1D)
     var ex=null;if(box.dataset.intra)extras.forEach(function(x){if(x.ticker===t)ex=x});
     var intra=ex&&ex.i&&ex.i.pts&&ex.i.pts.length>1?ex.i:null;
-    var RR=box.dataset.intra?[{k:"1D"}].concat(RANGES):RANGES;
-    var eff=range==="1D"&&!box.dataset.intra?"1M":range;
+    var wk=ex&&ex.w&&ex.w.pts&&ex.w.pts.length>1?ex.w:null;
+    var RR=box.dataset.intra?[{k:"1D"},{k:"1W"}].concat(RANGES):RANGES;
+    var eff=(range==="1D"||range==="1W")&&!box.dataset.intra?"1M":range;
     (box.dataset.src==="g"?loadGHist().then(function(g){
       var x=g[t],o={};if(!x)return {days:[],weeks:[],series:{}};o[t]={d:x.d,w:x.w};return {days:x.days,weeks:x.weeks,series:o}}):loadHist()).then(function(h){
-      var pts=eff==="1D"?(intra?intra.pts.map(function(p){return {d:p[0],v:p[1]}}):null):pickSeries(h,t,eff);
+      var pts=eff==="1D"?(intra?intra.pts.map(function(p){return {d:p[0],v:p[1]}}):null):
+        eff==="1W"?(wk?wk.pts.map(function(p){return {d:p[0],v:p[1]}}):null):pickSeries(h,t,eff);
       if(pts&&eff==="1D"&&ex.live&&ex.price&&intra.h24){var nu=new Date();pts.push({d:String(nu.getDate()).padStart(2,"0")+"-"+String(nu.getMonth()+1).padStart(2,"0")+" "+String(nu.getHours()).padStart(2,"0")+":"+String(nu.getMinutes()).padStart(2,"0"),v:ex.price})}
       var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
         RR.map(function(x){return '<button type="button" data-r="'+x.k+'" aria-pressed="'+(x.k===eff)+'">'+x.k+'</button>'}).join("")+'</div></div>';
-      if(!pts){box.innerHTML=head+'<div class="chart-msg">'+(eff==="1D"?"Nog geen koersen binnen de dag; ze komen bij de volgende update.":"Geen koersgeschiedenis beschikbaar.")+'</div>';return}
+      if(!pts){box.innerHTML=head+'<div class="chart-msg">'+(eff==="1D"||eff==="1W"?"Nog geen koersen voor deze periode; ze komen bij de volgende update.":"Geen koersgeschiedenis beschikbaar.")+'</div>';return}
       var W=Math.max(260,box.clientWidth||320),H=170,padL=4,padR=40,padT=14,padB=20;
       var lo=Infinity,hi=-Infinity,hiI=0,loI=0;
       pts.forEach(function(p,i){if(p.v<lo){lo=p.v;loI=i}if(p.v>hi){hi=p.v;hiI=i}});
@@ -864,7 +866,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       box.innerHTML=head+'<div class="plot">'+svg+'</div>';
       var read=box.querySelector(".chart-read"),svgEl=box.querySelector("svg"),cross=box.querySelector(".cross"),dot=box.querySelector(".dot");
       function showDefault(){
-        read.innerHTML='<b class="'+(chg<-0.05?"down":chg>0.05?"up":"flat")+'">'+fmtPct(chg)+'</b>'+(eff==="1D"?(intra.h24?"24 uur":"vandaag "+shortDate(intra.date)):eff.replace("M"," maand").replace("J"," jaar"))+' · van '+nf2.format(first)+' naar '+nf2.format(last);
+        read.innerHTML='<b class="'+(chg<-0.05?"down":chg>0.05?"up":"flat")+'">'+fmtPct(chg)+'</b>'+(eff==="1D"?(intra.h24?"24 uur":"vandaag "+shortDate(intra.date)):eff==="1W"?"1 week":eff.replace("M"," maand").replace("J"," jaar"))+' · van '+nf2.format(first)+' naar '+nf2.format(last);
         cross.style.display="none";dot.style.display="none";
       }
       function show(clientX){
@@ -1674,7 +1676,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-17";
+  var BUILD="2026-11-05-18";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

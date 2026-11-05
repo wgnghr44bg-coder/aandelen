@@ -251,9 +251,26 @@ def intraday_reeks(close, label):
     return {"date": str(dag), "pts": [[d.strftime("%H:%M"), schoon(v, 4)] for d, v in c.items()]}
 
 
+def week_reeks(close, label, stap="15min"):
+    """Koersen van de laatste ±7 dagen, per `stap`: {"pts": [["DD-MM UU:MM", koers], …]} (Nederlandse tijd)."""
+    c = close.dropna()
+    if c.empty:
+        return None
+    idx = pd.DatetimeIndex(c.index)
+    c.index = (idx.tz_localize("UTC") if idx.tz is None else idx).tz_convert(TZ_NL)
+    c = c[c.index > c.index[-1] - pd.Timedelta(days=7)]
+    if stap:
+        c = c.resample(stap).last().dropna()
+    if len(c) < 2:
+        return None
+    print(f"  week {label}: {len(c)} punten ({c.index[0]:%d-%m %H:%M} – {c.index[-1]:%d-%m %H:%M})")
+    return {"pts": [[d.strftime("%d-%m %H:%M"), schoon(v, 4)] for d, v in c.items()]}
+
+
 def intraday_etfs(tickers):
-    """5-minutenkoersen van de laatste handelsdag (Yahoo)."""
-    uit = {}
+    """5-minutenkoersen van de laatste handelsdag, en per 15 minuten van de laatste 5 handelsdagen (Yahoo).
+    Geeft ({ticker: dag}, {ticker: week})."""
+    uit, week = {}, {}
     try:
         data = yf.download(tickers, period="5d", interval="5m", auto_adjust=True, group_by="ticker", progress=False)
         for t in tickers:
@@ -261,11 +278,14 @@ def intraday_etfs(tickers):
                 r = intraday_reeks(data[t]["Close"], t)
                 if r:
                     uit[t] = r
+                w = week_reeks(data[t]["Close"], t)
+                if w:
+                    week[t] = w
             except Exception as e:  # noqa: BLE001
                 print(f"  intraday {t}: {e}")
     except Exception as e:  # noqa: BLE001
         print(f"intraday download mislukt: {e}")
-    return uit
+    return uit, week
 
 
 def intraday_bitcoin():
@@ -280,10 +300,20 @@ def intraday_bitcoin():
     return {"date": str(idx[-1].date()), "pts": pts, "h24": True}
 
 
+def week_bitcoin():
+    """Bitcoin per uur over de laatste 7 dagen (Bitvavo)."""
+    candles = http_json(f"{BITVAVO}/BTC-EUR/candles?interval=1h&limit=168")
+    if not candles:
+        return None
+    rij = sorted((int(c[0]), float(c[4])) for c in candles)
+    s = pd.Series([v for _, v in rij], index=pd.to_datetime([t for t, _ in rij], unit="ms", utc=True))
+    return week_reeks(s, "BTC-EUR", stap=None)
+
+
 def haal_extras():
     """Koersen voor de balk bovenaan: ETF's via yfinance, bitcoin via Bitvavo."""
     rijen, closes = [], {}
-    intra = intraday_etfs([e["ticker"] for e in EXTRAS])
+    intra, week = intraday_etfs([e["ticker"] for e in EXTRAS])
     try:
         data = yf.download([e["ticker"] for e in EXTRAS], period="5y", interval="1d",
                            auto_adjust=True, group_by="ticker", progress=False)
@@ -306,7 +336,7 @@ def haal_extras():
             naam = info.get("shortName") or info.get("longName") or e["label"]
             print(f"  extra {e['ticker']}: {naam} ({info.get('currency')}, {info.get('exchange')}) {stats['price']}")
             rijen.append({**e, "name": naam, "currency": info.get("currency") or "EUR",
-                          "spark": spark(df["Close"]), "h": hist(df["Close"]), "i": intra.get(e["ticker"]), **stats})
+                          "spark": spark(df["Close"]), "h": hist(df["Close"]), "i": intra.get(e["ticker"]), "w": week.get(e["ticker"]), **stats})
             closes[e["ticker"]] = df["Close"]
         except Exception as ex:  # noqa: BLE001
             print(f"  extra {e['ticker']}: overgeslagen ({ex})")
@@ -316,6 +346,7 @@ def haal_extras():
             print(f"  extra BTC-EUR: {btc['price']}")
             try:
                 btc["i"] = intraday_bitcoin()
+                btc["w"] = week_bitcoin()
             except Exception as ex:  # noqa: BLE001
                 print(f"  intraday bitcoin: {ex}")
             rijen.append(btc)

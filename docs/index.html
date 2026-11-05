@@ -382,6 +382,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .gper button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
 .glist{list-style:none;margin:0;padding:0}
 .glist li{border-top:1px solid var(--line)}.glist li:first-child{border-top:0}
+.gitem .gr{cursor:pointer}.gitem.open .gr{border-bottom:0}.gitem .chart{margin:0 0 10px}
 .gr{display:grid;grid-template-columns:1fr 64px auto;gap:10px;align-items:center;padding:9px 0;color:var(--text);text-decoration:none}
 .glink{grid-template-columns:1fr auto}
 .gn{font-weight:600;font-size:.88rem;min-width:0}.gn small{display:block;color:var(--muted);font-weight:400;font-size:.68rem;margin-top:1px}
@@ -796,7 +797,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   function drawChart(box){
     if(!box)return;
     var t=box.dataset.t,cur=sym(box.dataset.cur||"USD");
-    loadHist().then(function(h){
+    (box.dataset.src==="g"?loadGHist().then(function(g){
+      var x=g[t],o={};if(!x)return {days:[],weeks:[],series:{}};o[t]={d:x.d,w:x.w};return {days:x.days,weeks:x.weeks,series:o}}):loadHist()).then(function(h){
       var pts=pickSeries(h,t);
       var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
         RANGES.map(function(x){return '<button type="button" data-r="'+x.k+'" aria-pressed="'+(x.k===range)+'">'+x.k+'</button>'}).join("")+'</div></div>';
@@ -1371,12 +1373,28 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
             '<small>'+esc(it.linklabel||"geen betrouwbare gratis koers")+'</small></span><span class="gv gl">koers bekijken ↗</span></a></li>';
           if(it.date)dates.push(it.date);
           var v=it[gper],c=v==null||Math.abs(v)<0.05?"flat":v>0?"up":"down2";
-          return '<li class="gr"><span class="gn">'+esc(it.name)+'<small>'+esc(it.unit)+' · <a class="src" href="'+esc(it.src)+'" target="_blank" rel="noopener">bron ↗</a></small></span>'+
-            '<span class="gs">'+spark(it.spark)+'</span><span class="gv"><b>'+gPrice(it.price,it.currency)+'</b><span class="pp '+c+'">'+fmtPct(v)+'</span></span></li>';
+          var op=openGrond===it.ticker;
+          return '<li class="gitem'+(op?' open':'')+'" data-t="'+esc(it.ticker)+'"><div class="gr" role="button" tabindex="0" aria-expanded="'+op+'"><span class="gn">'+esc(it.name)+'<small>'+esc(it.unit)+' · <a class="src" href="'+esc(it.src)+'" target="_blank" rel="noopener">bron ↗</a></small></span>'+
+            '<span class="gs">'+spark(it.spark)+'</span><span class="gv"><b>'+gPrice(it.price,it.currency)+'</b><span class="pp '+c+'">'+fmtPct(v)+'</span></span></div>'+
+            '<div class="chart" data-src="g" data-t="'+esc(it.ticker)+'" data-cur="'+esc(it.currency||"USD")+'"'+(op?'':' hidden')+'></div></li>';
         }).join("")+'</ul></div>';
     }).join("")||'<div class="panel"><p class="hint">Nog geen gegevens; ze komen bij de volgende update.</p></div>';
     dates.sort();$("gdate").textContent=dates.length?"t/m "+fdateS(dates[dates.length-1]):"";
+    if(openGrond)drawChart(document.querySelector('#glist .gitem.open .chart'));
   }
+  var openGrond=null,gHistP=null;
+  function loadGHist(){if(!gHistP)gHistP=getJSON("grond_hist.json").catch(function(e){gHistP=null;throw e});return gHistP}
+  function grondClick(e){
+    if(e.target.closest("a")||e.target.closest(".chart"))return;
+    var row=e.target.closest(".gr[role=button]");if(!row)return;
+    var li=row.parentNode,t=li.dataset.t;
+    openGrond=openGrond===t?null:t;
+    Array.prototype.forEach.call(document.querySelectorAll("#glist .gitem"),function(x){
+      var on=x.dataset.t===openGrond;x.classList.toggle("open",on);x.querySelector(".gr").setAttribute("aria-expanded",on);x.querySelector(".chart").hidden=!on});
+    if(openGrond)drawChart(li.querySelector(".chart"));
+  }
+  $("glist").addEventListener("click",grondClick);
+  $("glist").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.matches(".gr[role=button]")){e.preventDefault();grondClick(e)}});
   function fdateS(d){var p=String(d).split("-");return p.length===3?(+p[2])+" "+["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"][+p[1]-1]:d}
   $("gper").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;gper=b.dataset.k;try{localStorage.setItem("gper",gper)}catch(err){}renderGrond()});
 
@@ -1475,7 +1493,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-9";
+  var BUILD="2026-11-05-10";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

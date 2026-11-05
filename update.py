@@ -22,6 +22,7 @@ TICKERS_FILE = ROOT / "tickers.txt"
 AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
+GROND_HIST = ROOT / "docs" / "grond_hist.json"  # grafieken grondstoffen
 MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL/Bitcoin (wordt nooit ingekort)
 TOP_N = 500
 
@@ -443,7 +444,9 @@ def main():
     uit["extras"] = extras
     uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
     try:
-        uit["commodities"] = grondstoffen.haal_grondstoffen(bereken, spark)
+        uit["commodities"], g_hist = grondstoffen.haal_grondstoffen(bereken, spark)
+        if g_hist:
+            GROND_HIST.write_text(json.dumps(g_hist, separators=(",", ":")) + "\n")
     except Exception as e:  # noqa: BLE001
         print(f"grondstoffen mislukt: {e}")
         try:

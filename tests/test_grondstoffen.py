@@ -20,7 +20,7 @@ def test_grondstoffen(monkeypatch):
     frames = {"GC=F": _df(4000), "ZW=F": _df(540), "SI=F": _df(4000), "PL=F": _df(1000, dagen_oud=40)}
     data = pd.concat(frames, axis=1)
     monkeypatch.setattr(g.yf, "download", lambda *a, **k: data)
-    uit = g.haal_grondstoffen(update.bereken, update.spark)
+    uit, hist = g.haal_grondstoffen(update.bereken, update.spark)
     items = {it["id"]: it for grp in uit for it in grp["items"]}
     assert [grp["group"] for grp in uit][0] == "Edelmetalen" and len(items) == 31
     assert items["gold"]["price"] == 4000 and items["gold"]["src"].endswith("GC=F/")
@@ -30,3 +30,6 @@ def test_grondstoffen(monkeypatch):
     assert items["nickel"]["link"].endswith("/nickel") and "price" not in items["nickel"]
     assert items["wti"].get("link", "").endswith("/crude-oil")
     assert len(items["gold"]["spark"]) == 30 and items["gold"]["y1"] is not None
+    h = hist["ZW=F"]
+    assert set(hist) == {"GC=F", "ZW=F"} and len(h["days"]) == len(h["d"]) and len(h["weeks"]) == len(h["w"])
+    assert h["d"][-1] == 5.4 and h["w"][-1] == 5.4 and h["weeks"][-1] == h["days"][-1]

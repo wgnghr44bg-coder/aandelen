@@ -75,6 +75,7 @@ def yahoo_link(t):
 
 
 def _stats(df, div, bereken, spark):
+    """(statistieken, slotkoersen) of (None, reden)."""
     df = df.dropna(subset=["Close"])
     if len(df) < 5:
         return None, "te weinig data"
@@ -90,18 +91,31 @@ def _stats(df, div, bereken, spark):
     s.pop("high52", None)
     s["date"] = pd.Timestamp(s.pop("_date")).strftime("%Y-%m-%d")
     s["spark"] = spark(df["Close"])
-    return s, None
+    return s, df["Close"]
+
+
+def historie(close):
+    """Grafiekdata zoals history.json: dagkoersen van 1 jaar en weekkoersen (vrijdag) van 5 jaar."""
+    c = close.dropna()
+    c.index = pd.DatetimeIndex(c.index).tz_localize(None).normalize() if c.index.tz is not None \
+        else pd.DatetimeIndex(c.index).normalize()
+    c = c[~c.index.duplicated(keep="last")]
+    d = c[c.index > c.index[-1] - pd.DateOffset(years=1, days=7)]
+    w = c.resample("W-FRI").last().dropna()
+    w.index = [min(i, c.index[-1]) for i in w.index]
+    return {"days": [i.strftime("%Y-%m-%d") for i in d.index], "weeks": [i.strftime("%Y-%m-%d") for i in w.index],
+            "d": [round(float(v), 4) for v in d.values], "w": [round(float(v), 4) for v in w.values]}
 
 
 def haal_grondstoffen(bereken, spark):
-    """Lijst van groepen met items. bereken/spark komen uit update.py (dezelfde berekening als aandelen)."""
+    """(groepen met items, grafiekdata per ticker). bereken/spark komen uit update.py."""
     alle = sorted({t for _, _, items in GROEPEN for it in items for t in it["tickers"]})
     data = None
     try:
-        data = yf.download(alle, period="2y", interval="1d", auto_adjust=False, group_by="ticker", progress=False)
+        data = yf.download(alle, period="5y", interval="1d", auto_adjust=False, group_by="ticker", progress=False)
     except Exception as e:  # noqa: BLE001
         print(f"grondstoffen download mislukt: {e}")
-    uit, n = [], 0
+    uit, n, hist = [], 0, {}
     for groep, icoon, items in GROEPEN:
         rijen = []
         for it in items:
@@ -112,9 +126,9 @@ def haal_grondstoffen(bereken, spark):
                     if df is None or df.empty:
                         print(f"  grondstof {it['naam']} {t}: geen data")
                         continue
-                    s, fout = _stats(df, it.get("div", 1), bereken, spark)
-                    if fout:
-                        print(f"  grondstof {it['naam']} {t}: {fout}")
+                    s, res = _stats(df, it.get("div", 1), bereken, spark)
+                    if s is None:
+                        print(f"  grondstof {it['naam']} {t}: {res}")
                         continue
                     lo, hi = it["band"]
                     if not lo <= s["price"] <= hi:
@@ -123,6 +137,10 @@ def haal_grondstoffen(bereken, spark):
                     rij.update({"ticker": t, "unit": it["unit"], "currency": it.get("cur", "USD"),
                                 "src": yahoo_link(t), **s})
                     print(f"  grondstof {it['naam']} {t}: {s['price']} {it['unit']} ({s['date']})")
+                    try:
+                        hist[t] = historie(res)  # res = slotkoersen
+                    except Exception as e:  # noqa: BLE001
+                        print(f"  grondstof {it['naam']} {t}: geen grafiek ({e})")
                     n += 1
                     break
                 except Exception as e:  # noqa: BLE001
@@ -134,4 +152,4 @@ def haal_grondstoffen(bereken, spark):
             rijen.append(rij)
         uit.append({"group": groep, "icon": icoon, "items": rijen})
     print(f"grondstoffen: {n} met koers")
-    return uit
+    return uit, hist

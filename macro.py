@@ -29,7 +29,7 @@ FIXATIE = {
 def _get(url, tries=3):
     for i in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "stockhunter/1.0", "Accept": "*/*"})
+            req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
             with urllib.request.urlopen(req, timeout=40) as r:
                 return r.read().decode("utf-8")
         except Exception as e:  # noqa: BLE001

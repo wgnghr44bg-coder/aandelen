@@ -1,4 +1,4 @@
-# StockHunter
+# InvestMarket
 
 Een simpele website die de 500 grootste beursgenoteerde bedrijven uit ontwikkelde landen (MSCI-indeling) laat zien (beurswaarde in USD),
 gesorteerd op hoeveel hun koers gezakt is. Handig om snel te zien welke grote bedrijven flink gedaald zijn.

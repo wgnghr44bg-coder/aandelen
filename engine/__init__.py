@@ -1,4 +1,4 @@
-"""Fundamentele waarderingsengine voor StockHunter.
+"""Fundamentele waarderingsengine voor InvestMarket.
 
 Opbouw (elke stap is een eigen module):
   data.py          – financiële data verwerken (normaliseren, valuta, kwaliteit)

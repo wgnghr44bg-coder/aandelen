@@ -142,8 +142,7 @@ def main():
         rijen.append((label, f"{s['value']}% sinds {s.get('since')}, vorig {s.get('prev')}%",
                       f"{cur}% sinds {since}, vorig {prev}%", f"ECB ({key})", "✅ klopt" if not f else "❌ " + "; ".join(f)))
 
-    for naam, label in (("euribor3m", "Euribor 3 maanden (maandgem.)"), ("nl10y", "Staatsrente NL 10 jaar (maandgem.)"),
-                        ("nfc_loans_nl", "Zakelijke leningen NL, totaal")):
+    for naam, label in (("euribor3m", "Euribor 3 maanden (maandgem.)"), ("nl10y", "Staatsrente NL 10 jaar (maandgem.)")):
         s = m.get(naam)
         key = key_uit_link(s["src"]) if s and s.get("src") else None
         obs, titel = ecb_json(key, 6) if key else (None, None)
@@ -153,11 +152,6 @@ def main():
         key = key_uit_link(h["src"])
         obs, titel = ecb_json(key, 6)
         vergelijk(f"Hypotheek {h['label']}", h, obs, f"DNB via ECB ({key})", f" – “{titel}”" if titel else "")
-
-    for b in m.get("business_nl") or []:
-        key = key_uit_link(b["src"])
-        obs, titel = ecb_json(key, 6)
-        vergelijk(f"Zakelijk {b['amount_label']} / {b['fix_label']}", b, obs, f"DNB via ECB ({key})")
 
     # HICP per land apart
     h = m.get("hicp") or {}

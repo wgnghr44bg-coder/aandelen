@@ -277,7 +277,7 @@ footer{padding:8px 0 32px}
 
 /* ================= ontwerp v3 ================= */
 body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-.t-overzicht .bar,.t-portfolio .bar{display:none}
+.t-overzicht .bar,.t-grondstoffen .bar{display:none}
 .bnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
   padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:color-mix(in oklab,var(--card) 92%,transparent);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
@@ -286,7 +286,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .bnav button .ic{width:24px;height:24px}
 .bnav button[aria-pressed=true]{color:#fff;background:linear-gradient(180deg,#1fbf6a,#118a4a);border-color:#2fd26b;box-shadow:0 0 16px rgba(47,210,107,.35)}
 .bnav button[aria-pressed=true] .ic{fill:none;stroke:currentColor;stroke-width:2.4}
-.bnav button[data-tab=overzicht][aria-pressed=true] .ic,.bnav button[data-tab=watchlist][aria-pressed=true] .ic,.bnav button[data-tab=portfolio][aria-pressed=true] .ic{fill:currentColor}
+.bnav button[data-tab=overzicht][aria-pressed=true] .ic,.bnav button[data-tab=watchlist][aria-pressed=true] .ic{fill:currentColor}
 .hero{position:relative;display:flex;align-items:center;gap:8px;min-height:104px;margin:12px 0;padding:14px 16px;border-radius:18px;overflow:hidden;
   border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(59,134,255,.35),transparent 55%),linear-gradient(180deg,var(--card2),var(--card));
   box-shadow:0 10px 30px rgba(0,0,0,.2)}
@@ -377,6 +377,17 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .xlink b{font-size:.95rem}
 .xlink span{grid-column:1;color:var(--muted);font-size:.78rem;line-height:1.3}
 .xlink i{grid-row:1/3;grid-column:2;font-style:normal;font-size:1.2rem;color:var(--accent)}
+.gper{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 10px}
+.gper button{border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:.72rem;font-weight:600;padding:6px 8px;border-radius:999px;cursor:pointer;white-space:nowrap;flex:0 0 auto}
+.gper button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.glist{list-style:none;margin:0;padding:0}
+.glist li{border-top:1px solid var(--line)}.glist li:first-child{border-top:0}
+.gr{display:grid;grid-template-columns:1fr 64px auto;gap:10px;align-items:center;padding:9px 0;color:var(--text);text-decoration:none}
+.glink{grid-template-columns:1fr auto}
+.gn{font-weight:600;font-size:.88rem;min-width:0}.gn small{display:block;color:var(--muted);font-weight:400;font-size:.68rem;margin-top:1px}
+.gs .spark{display:block;width:64px;height:24px}
+.gv{text-align:right;font-variant-numeric:tabular-nums}.gv b{display:block;font-size:.9rem}.gv .pp{margin-top:3px}
+.gv.gl{color:var(--accent);font-size:.74rem;font-weight:600}
 .vgh{margin:14px 4px 6px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .rt2 tr.bgrp td{padding-top:12px;font-size:.68em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .more.inl{display:inline;padding:0;border:0;background:none;cursor:pointer;font-weight:600;font-size:inherit!important;color:var(--accent)!important}
@@ -515,20 +526,11 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     </div>
   </section>
 
-  <section class="pane" data-pane="portfolio" hidden>
-    <div class="panel">
-      <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h2>Portfolio</h2></div>
-      <div class="ptot" id="ptot"></div>
-      <ul class="plist" id="plist"></ul>
-      <form class="padd" id="padd" autocomplete="off">
-        <input id="pa" list="palist" placeholder="Zoek: WEBN, Bitcoin, Apple…" aria-label="Asset" required>
-        <datalist id="palist"></datalist>
-        <div class="prow"><input id="pq" type="number" step="any" min="0" inputmode="decimal" placeholder="Aantal" aria-label="Aantal" required>
-        <input id="pc" type="number" step="any" min="0" inputmode="decimal" placeholder="Aankoopprijs (optioneel)" aria-label="Aankoopprijs per stuk"></div>
-        <button type="submit">+ Toevoegen</button>
-      </form>
-      <p class="hint">Je portfolio wordt alleen op dit apparaat bewaard (niet online). Waarde in euro's, omgerekend met de actuele wisselkoers.</p>
-    </div>
+  <section class="pane" data-pane="grondstoffen" hidden>
+    <div class="panel"><div class="ph"><span class="emo">⛏️</span><h2>Grondstoffen</h2><span class="pmeta" id="gdate"></span></div>
+      <div class="gper" id="gper" role="group" aria-label="Periode grondstoffen"></div>
+      <p class="hint" style="margin-bottom:0">Koersen van het eerstvolgende termijncontract, in dollar (koolzaad in Canadese dollar), via Yahoo Finance. Is er geen betrouwbare gratis koers, dan staat er een link naar de bron.</p></div>
+    <div id="glist"></div>
   </section>
 
   <section class="pane" data-pane="sectoren" hidden>
@@ -562,7 +564,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <button type="button" data-tab="inflatie"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V14M10 20V10M15 20V12M20 20V5"/></svg><span>Inflatie</span></button>
   <button type="button" data-tab="vastgoed"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/></svg><span>Vastgoed</span></button>
   <button type="button" data-tab="watchlist"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Watchlist</span></button>
-  <button type="button" data-tab="portfolio"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Portfolio</span></button>
+  <button type="button" data-tab="grondstoffen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Grondstof</span></button>
 </nav>
 <script>
 (function(){
@@ -1086,7 +1088,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Tabbladen ----------
   var tab="overzicht";
-  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste","rentes","inflatie","vastgoed","watchlist","portfolio"].indexOf(st)>=0)tab=st;}catch(e){}
+  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","grootste","rentes","inflatie","vastgoed","watchlist","grondstoffen"].indexOf(st)>=0)tab=st;}catch(e){}
   function showTab(t){
     tab=t;try{localStorage.setItem("tab",t)}catch(e){}
     Array.prototype.forEach.call(document.querySelectorAll(".pane"),function(p){p.hidden=p.dataset.pane!==t});
@@ -1094,7 +1096,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     document.body.className="t-"+t;
     if(t==="grootste")renderAssets();
     if(t==="watchlist")renderWatch();
-    if(t==="portfolio")renderPortfolio();
+    if(t==="grondstoffen")renderGrond();
   }
   $("tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;showTab(b.dataset.tab);window.scrollTo({top:0})});
   document.addEventListener("click",function(e){
@@ -1224,7 +1226,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
     }).join("");
     if(tab==="watchlist")renderWatch();
-    if(tab==="portfolio")renderPortfolio();
+    if(tab==="grondstoffen")renderGrond();
     renderMacro();
   }
   $("ovchips").addEventListener("click",function(e){
@@ -1353,44 +1355,30 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(openTicker){var oc=document.querySelector('#wlist .card.open .chart');if(oc)drawChart(oc);}
   }
 
-  // ---------- Portfolio (alleen op dit apparaat) ----------
-  var port=[];
-  try{port=JSON.parse(localStorage.getItem("portfolio")||"[]")||[];}catch(e){port=[]}
-  function savePort(){try{localStorage.setItem("portfolio",JSON.stringify(port))}catch(e){}}
-  function universe(){
-    var u={};
-    rows.forEach(function(r){u[r.ticker]={t:r.ticker,name:r.name,price:r.price,cur:r.currency,usd:r.usd,d1:r.d1}});
-    extras.forEach(function(x){u[x.ticker]={t:x.ticker,name:x.label+" · "+x.name,price:x.price,cur:"EUR",usd:eurusd,d1:x.d1,icon:x.ticker==="BTC-EUR"?"₿":"🌐"}});
-    assets.forEach(function(a){if(a.kind==="crypto"||a.kind==="metaal")u[a.ticker]={t:a.ticker,name:a.name+(a.kind==="metaal"?" (per ons)":""),price:a.price,cur:"USD",usd:1,d1:a.d1,icon:a.icon}});
-    return u;
+  // ---------- Grondstoffen ----------
+  var grond=[],gper="d1";
+  var GPER=[{k:"d1",l:"Vandaag"},{k:"m1",l:"1 mnd"},{k:"m3",l:"3 mnd"},{k:"ytd",l:"Sinds 1 jan"},{k:"y1",l:"1 jaar"}];
+  try{var gs=localStorage.getItem("gper");if(GPER.some(function(p){return p.k===gs}))gper=gs;}catch(e){}
+  function gPrice(v,c){if(v==null)return "–";var d=v>=1000?0:v>=100?1:v>=1?2:3;
+    return (c==="CAD"?"C$":"$")+v.toLocaleString("nl-NL",{minimumFractionDigits:d,maximumFractionDigits:d})}
+  function renderGrond(){
+    $("gper").innerHTML=GPER.map(function(p){return '<button type="button" data-k="'+p.k+'" aria-pressed="'+(p.k===gper)+'">'+p.l+'</button>'}).join("");
+    var dates=[];
+    $("glist").innerHTML=grond.map(function(g){
+      return '<div class="panel"><div class="ph"><span class="emo">'+g.icon+'</span><h2>'+esc(g.group)+'</h2></div><ul class="glist">'+
+        g.items.map(function(it){
+          if(it.price==null)return '<li><a class="gr glink" href="'+esc(it.link)+'" target="_blank" rel="noopener"><span class="gn">'+esc(it.name)+
+            '<small>'+esc(it.linklabel||"geen betrouwbare gratis koers")+'</small></span><span class="gv gl">koers bekijken ↗</span></a></li>';
+          if(it.date)dates.push(it.date);
+          var v=it[gper],c=v==null||Math.abs(v)<0.05?"flat":v>0?"up":"down2";
+          return '<li class="gr"><span class="gn">'+esc(it.name)+'<small>'+esc(it.unit)+' · <a class="src" href="'+esc(it.src)+'" target="_blank" rel="noopener">bron ↗</a></small></span>'+
+            '<span class="gs">'+spark(it.spark)+'</span><span class="gv"><b>'+gPrice(it.price,it.currency)+'</b><span class="pp '+c+'">'+fmtPct(v)+'</span></span></li>';
+        }).join("")+'</ul></div>';
+    }).join("")||'<div class="panel"><p class="hint">Nog geen gegevens; ze komen bij de volgende update.</p></div>';
+    dates.sort();$("gdate").textContent=dates.length?"t/m "+fdateS(dates[dates.length-1]):"";
   }
-  function toEur(amount,a){if(amount==null||!a||a.usd==null||!eurusd)return null;return amount*a.usd/eurusd}
-  function fmtEurS(v){return v==null?"–":(v<0?"−":"")+"€ "+Math.abs(v).toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
-  function renderPortfolio(){
-    var u=universe(),tot=0,cost=0,costVal=0,ok=true;
-    $("palist").innerHTML=Object.keys(u).map(function(t){return '<option value="'+esc(u[t].name+" ("+t+")")+'"></option>'}).join("");
-    $("plist").innerHTML=port.map(function(p,i){
-      var a=u[p.t];if(!a)return '<li><span></span><span class="pn">'+esc(p.t)+'<small>niet meer in de lijst</small></span><span></span><button type="button" class="pdel" data-i="'+i+'" aria-label="Verwijderen">×</button></li>';
-      var val=toEur(p.q*a.price,a);if(val==null)ok=false;else tot+=val;
-      var pl=null,plp=null;
-      if(p.c){pl=toEur(p.q*(a.price-p.c),a);plp=(a.price/p.c-1)*100;if(pl!=null){cost+=pl;costVal+=val-pl}}
-      var av=a.icon?'<span class="av-ic" style="background:none;font-size:1.1rem">'+a.icon+'</span>':avatar(a.name,a.t);
-      return '<li>'+av+'<span class="pn">'+esc(a.name)+'<small>'+nf2.format(p.q).replace(/,00$/,"")+' × '+fmtPrice(a.price,a.cur)+'</small></span>'+
-        '<span class="pv">'+fmtEurS(val)+(pl!=null?'<small class="'+(pl>=0?"up":"down2")+'">'+(pl>=0?"+":"")+fmtEurS(pl)+' ('+fmtPct(plp)+')</small>':'<small class="'+chgCls(a.d1)+'">'+fmtPct(a.d1)+' vandaag</small>')+'</span>'+
-        '<button type="button" class="pdel" data-i="'+i+'" aria-label="Verwijderen">×</button></li>';
-    }).join("");
-    var plTxt=costVal?'<b class="'+(cost>=0?"up":"down2")+'">'+(cost>=0?"+":"")+fmtEurS(cost)+'</b><span>winst/verlies ('+fmtPct(cost/costVal*100)+')</span>':'<b>–</b><span>vul een aankoopprijs in voor winst/verlies</span>';
-    $("ptot").innerHTML=port.length?'<div><b>'+(ok?fmtEurS(tot):"–")+'</b><span>totale waarde</span></div><div>'+plTxt+'</div>':'';
-  }
-  $("padd").addEventListener("submit",function(e){
-    e.preventDefault();
-    var u=universe(),txt=$("pa").value.trim(),m=txt.match(/\(([^)]+)\)\s*$/),t=m?m[1]:txt.toUpperCase();
-    if(!u[t]){var low=txt.toLowerCase();for(var k in u){if(u[k].name.toLowerCase()===low||k.toLowerCase()===low){t=k;break}}}
-    var q=parseFloat(String($("pq").value).replace(",",".")),c=parseFloat(String($("pc").value).replace(",","."));
-    if(!u[t]||!(q>0)){$("pa").setCustomValidity(!u[t]?"Kies een asset uit de lijst":"");$("pa").reportValidity();$("pa").setCustomValidity("");return}
-    port.push({t:t,q:q,c:c>0?c:null});savePort();$("pa").value="";$("pq").value="";$("pc").value="";renderPortfolio();
-  });
-  $("plist").addEventListener("click",function(e){var b=e.target.closest(".pdel");if(!b)return;port.splice(+b.dataset.i,1);savePort();renderPortfolio()});
+  function fdateS(d){var p=String(d).split("-");return p.length===3?(+p[2])+" "+["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"][+p[1]-1]:d}
+  $("gper").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;gper=b.dataset.k;try{localStorage.setItem("gper",gper)}catch(err){}renderGrond()});
 
   function render(){
     renderHeat();renderRatingFilter();renderCapFilter();if(tab==="grootste")renderAssets();renderOverview();
@@ -1462,7 +1450,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
       extras=data.extras||[];renderExtras();liveBitcoin();
-      assets=data.assets||[];eurusd=data.eurusd||null;macro=data.macro||{};
+      assets=data.assets||[];eurusd=data.eurusd||null;macro=data.macro||{};grond=data.commodities||[];
       if(!rows.length||!data.asof){$("upd").textContent="Nog geen gegevens.";$("list").innerHTML="";return}
       if(!sectorsDone){
         sectorsDone=true;
@@ -1487,7 +1475,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-7";
+  var BUILD="2026-11-05-8";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

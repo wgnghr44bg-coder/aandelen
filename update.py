@@ -14,6 +14,7 @@ import pandas as pd
 import yfinance as yf
 
 import fundamentals as fund
+import grondstoffen
 import macro
 
 ROOT = Path(__file__).parent
@@ -441,6 +442,14 @@ def main():
     bewaar_markt_hist(extras)
     uit["extras"] = extras
     uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
+    try:
+        uit["commodities"] = grondstoffen.haal_grondstoffen(bereken, spark)
+    except Exception as e:  # noqa: BLE001
+        print(f"grondstoffen mislukt: {e}")
+        try:
+            uit["commodities"] = json.loads(OUT.read_text()).get("commodities") or []
+        except Exception:  # noqa: BLE001
+            pass
     uit["eurusd"] = schoon(fx.get("EURUSD=X"), 6)  # 1 euro in dollar, voor de portfolio in euro's
     try:
         vorige = json.loads(OUT.read_text()).get("macro") if OUT.exists() else None

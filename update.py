@@ -197,8 +197,8 @@ def http_json(url, pogingen=3):
     return None
 
 
-def hist(close, days=400):
-    """Slotkoersen van de laatste ~13 maanden als [[datum, koers], …] (voor D/W/M/YTD/Y op de site)."""
+def hist(close, days=5 * 366 + 10):
+    """Slotkoersen van de laatste ~5 jaar als [[datum, koers], …] (voor D/W/M/YTD/Y en per jaar op de site)."""
     c = close.dropna()
     c = c[c.index >= c.index[-1] - pd.Timedelta(days=days)]
     return [[pd.Timestamp(d).strftime("%Y-%m-%d"), schoon(v, 4)] for d, v in c.items()]

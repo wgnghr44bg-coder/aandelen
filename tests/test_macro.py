@@ -45,6 +45,7 @@ def test_macro_parsing(monkeypatch):
     hyp = {h["code"]: h for h in m["mortgage_nl"]}
     assert set(hyp) == {"F", "P"}                      # 'A' (totaal) niet als vaste periode
     assert hyp["P"]["value"] == 3.65 and hyp["P"]["prev"] == 3.70
+    assert m["mortgage_hist"]["P"] == [["2026-08", 3.70], ["2026-09", 3.65]]   # grafiekdata = echte reeks
     assert m["hicp"]["NL"] == [["2026-09", 2.9], ["2026-10", 2.8]]   # ECB (actueler) wint
     assert m["hicp"]["EA20"][-1] == ["2026-09", 2.2]
     assert m["euribor3m"] == {"value": 2.0}            # bron faalde -> vorige waarde

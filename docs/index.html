@@ -406,6 +406,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .b3d{border-top:1px solid var(--line);padding:8px 0}.b3d summary{cursor:pointer;display:flex;justify-content:space-between;font-size:.85rem}
 .b3d summary span{color:var(--muted);font-size:.72rem}.b3d ul{margin:6px 0 0;padding-left:18px;font-size:.74rem}.b3d li{margin:3px 0}
 .b3src{list-style:none;margin-left:-18px!important;color:var(--muted);font-size:.68rem}
+.tcr{margin:0 0 4px}.tcread{min-height:1.1em;font-size:.68rem;color:var(--muted);text-align:center}
 .vgh{margin:14px 4px 6px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .rt2 tr.bgrp td{padding-top:12px;font-size:.68em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .more.inl{display:inline;padding:0;border:0;background:none;cursor:pointer;font-weight:600;font-size:inherit!important;color:var(--accent)!important}
@@ -502,6 +503,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="panel"><div class="ph"><span class="emo">🇪🇺</span><h2>ECB-rente</h2></div><table class="rt2 big" id="r_ecb"></table></div>
     <div class="panel"><div class="ph"><span class="emo"><svg class="tri acc" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h2>Marktrentes</h2></div><table class="rt2 big" id="r_mkt"></table></div>
     <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Hypotheekrente NL</h2><span class="pmeta">maandgemiddelde</span></div><table class="rt2 big" id="r_hyp"></table>
+      <div class="lchart" id="r_hypchart"></div>
       <p class="hint">Dit is de <b>gemiddelde rente op afgesloten</b> nieuwe hypotheken in Nederland in die maand (met en zonder NHG, alle LTV's, inclusief heronderhandelde leningen). Het gaat alleen om <b>banken</b>; verzekeraars, pensioenfondsen en andere hypotheekverstrekkers zitten er niet in. Bron: DNB, gepubliceerd via het ECB Data Portal (MIR-statistiek). Dit is <b>niet</b> de rente die nu wordt aangeboden; die staat bij Hypotheekrente.nl en Independer hieronder.</p>
 </div>
     <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Vastgoedfinanciering</h2><button type="button" class="more" data-go="vastgoed">Vastgoed ›</button></div>
@@ -1323,6 +1325,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(m.nl10y)mk.push(row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),meta(m.nl10y),ppTag(m.nl10y.value,m.nl10y.prev,true),m.nl10y.src));
     if(m.us10y)mk.push(row("Staatsrente VS 10 jaar",pct2(m.us10y.value),"actuele marktkoers (^TNX) · bij elke update (±30 min)","","https://finance.yahoo.com/quote/%5ETNX/"));
     $("r_mkt").innerHTML=mk.join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    var HC={F:"#e0482f",I:"#f59e0b",O:"#16a34a",P:"#2f7bff"},mh=m.mortgage_hist||{};
+    tChart("r_hypchart",hyp.map(function(x){return {n:SHORTFIX[x.code],c:HC[x.code],d:mh[x.code]||[]}}),{label:"Hypotheekrente NL",mlabel:true,def:"10J",ranges:[["2J",24],["5J",60],["10J",120],["Alles",0]]});
     $("r_hyp").innerHTML=hyp.map(function(x){return row(x.label,pct2(x.value),meta(x),ppTag(x.value,x.prev,true),x.src)}).join("")||'<tr><td>Nog geen gegevens</td></tr>';
     // tabblad Inflatie
     $("itiles").innerHTML=th;
@@ -1331,8 +1335,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     // tabblad Vastgoed
     var hp=m.house_prices_nl;
     var cbs=m.house_prices_cbs,cs=cbs&&cbs.series;
-    var hser=cs&&cs.length?[{n:"CBS (maand)",c:"#2fd26b",d:cs}]:hp?[{n:"Eurostat (kwartaal)",c:"#2fd26b",d:hp}]:null;
-    $("hchart").innerHTML=hser?lineChart(hser,{zero:true,suffix:"%"})+'<p class="srcline">Grafiek: '+esc(hser[0].n)+'</p>':'<p class="hint">Nog geen gegevens.</p>';
+    tChart("hchart",[{n:"CBS bestaande koopwoningen (maand)",c:"#16a34a",d:cs||[]},{n:"Eurostat alle woningen (kwartaal)",c:"#2f7bff",d:hp||[]}],
+      {label:"Woningprijzen NL",zero:true,mlabel:true,def:"10J",ranges:[["2J",24],["5J",60],["10J",120],["Alles",0]]});
     var hr=[];
     function sg(v){return (v>0?"+":"")+pct2(v)}
     if(cs&&cs.length){var c1=cs[cs.length-1],c0=cs[cs.length-2]||null;
@@ -1367,6 +1371,65 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     return leg+'<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Grafiek">'+g+lines+lab+'</svg>';
   }
   $("vlist").addEventListener("click",cardClick);
+
+  // ---------- Tijdgrafiek: meerdere reeksen op een echte tijd-as, periodeknoppen, waarde bij aanraken ----------
+  // series: [{n, c, d:[[periode, waarde], …]}]; periode = "JJJJ-MM", "JJJJ-Qn" of "JJJJ-MM-DD"
+  var tcState={};
+  function tParse(d){d=String(d);var m;
+    if((m=d.match(/^(\d{4})-Q(\d)$/)))return Date.UTC(+m[1],+m[2]*3-2,15);
+    if((m=d.match(/^(\d{4})-(\d{2})$/)))return Date.UTC(+m[1],+m[2]-1,15);
+    return Date.parse(d.slice(0,10))}
+  function tLabel(d){d=String(d);if(/Q/.test(d))return d.replace("-"," ");var p=d.split("-");
+    return p.length===2?MON3L[+p[1]-1]+" "+p[0]:(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]}
+  function tChart(id,series,o){
+    o=o||{};var box=$(id);if(!box)return;
+    series=series.filter(function(s){return s.d&&s.d.length});
+    if(!series.length){box.innerHTML='<p class="hint">'+(o.empty||"Nog geen gegevens.")+'</p>';return}
+    var R=o.ranges||[["2J",24],["5J",60],["10J",120],["Alles",0]];
+    var st=tcState[id]||(tcState[id]=o.def||R[R.length-1][0]);
+    var mon=0;R.forEach(function(r){if(r[0]===st)mon=r[1]});
+    var xmax=Math.max.apply(null,series.map(function(s){return tParse(s.d[s.d.length-1][0])}));
+    if(o.until)xmax=Math.max(xmax,tParse(o.until));
+    var xmin0=Math.min.apply(null,series.map(function(s){return tParse(s.d[0][0])}));
+    var xmin=mon?Math.max(xmin0,xmax-mon*30.44*864e5):xmin0;
+    var S=series.map(function(s){var d=s.d.filter(function(p){return tParse(p[0])>=xmin});
+      if(o.step){var prev=s.d.filter(function(p){return tParse(p[0])<xmin}).pop();if(prev)d.unshift([null,prev[1],xmin])}
+      return {n:s.n,c:s.c,d:d}}).filter(function(s){return s.d.length});
+    var ys=[];S.forEach(function(s){s.d.forEach(function(p){ys.push(p[1])})});if(o.zero)ys.push(0);
+    var lo=Math.min.apply(null,ys),hi=Math.max.apply(null,ys),sp=(hi-lo)||0.5;lo-=sp*.08;hi+=sp*.1;
+    var W=340,H=180,pl=4,pr=38,pt=10,pb=22;if(xmax<=xmin)xmax=xmin+864e5;
+    function X(t){return pl+(t-xmin)/(xmax-xmin)*(W-pl-pr)}function Y(v){return pt+(1-(v-lo)/(hi-lo))*(H-pt-pb)}
+    function px(p){return p[2]!=null?p[2]:tParse(p[0])}
+    var g="";for(var k=0;k<4;k++){var v=lo+(hi-lo)*k/3,y=Y(v);g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(y+3).toFixed(1)+'">'+nf1.format(v)+'%</text>'}
+    if(o.zero&&lo<0)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'"/>';
+    var lines=S.map(function(s){var dd="";
+      s.d.forEach(function(p,i){var xx=X(px(p)).toFixed(1),yy=Y(p[1]).toFixed(1);dd+=i?(o.step?"H"+xx+"V"+yy:"L"+xx+" "+yy):"M"+xx+" "+yy});
+      if(o.step)dd+="H"+X(xmax).toFixed(1);
+      var lp=s.d[s.d.length-1];
+      return '<path d="'+dd+'" fill="none" stroke="'+s.c+'" stroke-width="2" stroke-linejoin="round"/>'+
+        '<circle cx="'+X(o.step?xmax:px(lp)).toFixed(1)+'" cy="'+Y(lp[1]).toFixed(1)+'" r="3" fill="'+s.c+'"/>'}).join("");
+    var d0=new Date(xmin).toISOString().slice(0,10),d1=new Date(xmax).toISOString().slice(0,10);
+    var lab='<text class="ax" x="'+pl+'" y="'+(H-5)+'">'+tLabel(o.mlabel?d0.slice(0,7):d0)+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-5)+'">'+tLabel(o.mlabel?d1.slice(0,7):d1)+'</text>';
+    var chips=R.length>1?'<div class="gper tcr">'+R.map(function(r){return '<button type="button" data-r="'+r[0]+'" aria-pressed="'+(r[0]===st)+'">'+r[0]+'</button>'}).join("")+'</div>':'';
+    function legend(at){return S.map(function(s){var p=null;s.d.forEach(function(q){if(px(q)<=at+1)p=q});if(!o.step&&p&&Math.abs(px(p)-at)>95*864e5)p=null;
+      return '<span><i style="background:'+s.c+'"></i>'+esc(s.n)+' <b>'+(p?nf2.format(p[1])+"%":"–")+'</b></span>'}).join("")}
+    box.innerHTML=chips+'<div class="tcread"></div><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(o.label||"Grafiek")+'">'+g+lines+lab+
+      '<line class="tg tcx" y1="'+pt+'" y2="'+(H-pb)+'" style="display:none"/></svg><div class="lleg">'+legend(xmax)+'</div>';
+    var svg=box.querySelector("svg"),cx=box.querySelector(".tcx"),rd=box.querySelector(".tcread"),lg=box.querySelector(".lleg");
+    function show(clientX){var rc=svg.getBoundingClientRect(),x=(clientX-rc.left)*W/rc.width;x=Math.max(pl,Math.min(W-pr,x));
+      var t=xmin+(x-pl)/(W-pl-pr)*(xmax-xmin);
+      // dichtstbijzijnde echte meetpunt
+      var best=null;S.forEach(function(s){s.d.forEach(function(p){if(p[0]&&(best==null||Math.abs(px(p)-t)<Math.abs(px(best)-t)))best=p})});
+      if(best&&!o.step)t=px(best);
+      cx.setAttribute("x1",X(t));cx.setAttribute("x2",X(t));cx.style.display="";
+      rd.textContent=best?(o.step?tLabel(new Date(t).toISOString().slice(0,10)):tLabel(best[0])):"";lg.innerHTML=legend(t)}
+    function reset(){cx.style.display="none";rd.textContent="";lg.innerHTML=legend(xmax)}
+    svg.addEventListener("pointermove",function(e){show(e.clientX)});svg.addEventListener("pointerdown",function(e){show(e.clientX)});
+    svg.addEventListener("pointerleave",reset);
+    svg.addEventListener("touchmove",function(e){if(e.touches[0])show(e.touches[0].clientX)},{passive:true});
+    svg.addEventListener("touchend",function(){setTimeout(reset,1500)});
+    var cb=box.querySelector(".tcr");if(cb)cb.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;tcState[id]=b.dataset.r;tChart(id,series,o)});
+  }
 
   // ---------- Watchlist (alleen op dit apparaat) ----------
   var watch=[];
@@ -1494,27 +1557,14 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("b3ltv").innerHTML=B3LTV.map(function(l){return '<button type="button" data-v="'+l+'" aria-pressed="'+(l===b3ltv)+'">≤'+l+'%</button>'}).join("");
     var fixL=B3FIX.filter(function(f){return f[0]===b3fix})[0][1].toLowerCase();
     $("b3hsub").textContent=B3SEG[b3seg].toLowerCase()+" · "+fixL+(b3fix==="var"?"":" vast");
-    var ser=[],ci=0,allX=[];
+    var ser=[],ci=0;
     (b3&&b3.lenders||[]).forEach(function(x){
       var rk=(b3h||{})[x.id+"|"+b3seg];if(!rk)return;
       var d=rk.map(function(p){var v=(p[1][b3fix]||{})[String(b3ltv)];return v==null?null:[p[0],v]}).filter(Boolean);
-      if(!d.length)return;ser.push({n:x.name,c:B3COL[ci++%B3COL.length],d:d});d.forEach(function(p){allX.push(p[0])});
+      ser.push({n:x.name,c:B3COL[ci++%B3COL.length],d:d});
     });
-    if(!ser.length){$("b3chart").innerHTML='<p class="hint">Nog geen historie voor deze keuze.</p>';return}
-    allX.sort();var x0=Date.parse(allX[0]),x1=Math.max(Date.parse(new Date().toISOString().slice(0,10)),Date.parse(allX[allX.length-1]));if(x1<=x0)x1=x0+864e5;
-    var ys=[];ser.forEach(function(s){s.d.forEach(function(p){ys.push(p[1])})});
-    var lo=Math.min.apply(null,ys),hi=Math.max.apply(null,ys),sp=(hi-lo)||0.5;lo-=sp*.1;hi+=sp*.1;
-    var W=340,H=180,pl=4,pr=36,pt=10,pb=22;
-    function X(d){return pl+(Date.parse(d)-x0)/(x1-x0)*(W-pl-pr)}function Y(v){return pt+(1-(v-lo)/(hi-lo))*(H-pt-pb)}
-    var g="";for(var k=0;k<3;k++){var v=lo+(hi-lo)*(k+.5)/3;g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(Y(v)+3).toFixed(1)+'">'+nf2.format(v)+'%</text>'}
-    var end=new Date(x1).toISOString().slice(0,10);
-    var paths=ser.map(function(s){ // trapgrafiek: een tarief geldt tot het volgende tarief
-      var dd="";s.d.forEach(function(p,i){var xx=X(p[0]).toFixed(1),yy=Y(p[1]).toFixed(1);dd+=(i?"H"+xx+"V"+yy:"M"+xx+" "+yy)});dd+="H"+X(end).toFixed(1);
-      var lp=s.d[s.d.length-1];
-      return '<path d="'+dd+'" fill="none" stroke="'+s.c+'" stroke-width="2"/>'+(s.d.length===1?'<circle cx="'+X(lp[0]).toFixed(1)+'" cy="'+Y(lp[1]).toFixed(1)+'" r="3" fill="'+s.c+'"/>':'')}).join("");
-    var lab='<text class="ax" x="'+pl+'" y="'+(H-4)+'">'+fdateS(allX[0])+' '+allX[0].slice(0,4)+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-4)+'">'+fdateS(end)+' '+end.slice(0,4)+'</text>';
-    $("b3chart").innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Rentehistorie">'+g+paths+lab+'</svg>'+
-      '<div class="lleg">'+ser.map(function(s){var lp=s.d[s.d.length-1];return '<span><i style="background:'+s.c+'"></i>'+esc(s.n)+' '+b3fmt(lp[1])+(s.d.length>1?' · sinds '+fdateS(s.d[0][0])+' '+s.d[0][0].slice(0,4):'')+'</span>'}).join("")+'</div>';
+    tChart("b3chart",ser,{label:"Rentehistorie vastgoedfinanciering",step:true,until:new Date().toISOString().slice(0,10),def:"Alles",
+      ranges:[["1J",12],["3J",36],["Alles",0]],empty:"Nog geen historie voor deze keuze."});
   }
   ["b3seg","b3fix","b3ltv"].forEach(function(id){$(id).addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
     if(id==="b3seg")b3seg=b.dataset.v;else if(id==="b3fix")b3fix=b.dataset.v;else b3ltv=+b.dataset.v;b3save();renderBox3()})});
@@ -1617,7 +1667,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-15";
+  var BUILD="2026-11-05-16";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -145,7 +145,7 @@ CBS_OData = "https://opendata.cbs.nl/ODataApi/odata/85773NED"
 CBS_LINK = "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85773NED/table"
 
 
-def cbs_woningprijzen(n=25):
+def cbs_woningprijzen(n=400):
     """CBS 85773NED (bestaande koopwoningen): per maand de verandering t.o.v. een jaar eerder (%).
     Kolommen worden op hun officiële titel gezocht (niet op een vermoede naam).
     Geeft {"series": [[JJJJ-MM, %], …], "updated": JJJJ-MM-DD, "title": …} of None."""
@@ -227,11 +227,13 @@ def haal_macro(vorige=None):
 
     # Hypotheekrente NL, nieuwe leningen per rentevaste periode
     hyp = []
-    for k, s in sorted(ecb_series(HYP_KEY, 2).items()):
+    hyp_hist = {}
+    for k, s in sorted(ecb_series(HYP_KEY, 241).items()):  # ±20 jaar maandcijfers voor de grafiek
         parts = k.split(".")
         code = parts[parts.index("A2C") + 1] if "A2C" in parts and parts.index("A2C") + 1 < len(parts) else ""
         last = _last(s)
         if last and code in FIXATIE:
+            hyp_hist[code] = s["obs"]
             hyp.append({"code": code, "label": FIXATIE[code], "title": s.get("title") or "",
                         "src": ecb_link("MIR/" + ".".join(parts[parts.index("M"):]) if "M" in parts else "MIR/" + k), **last})
             print(f"  hypotheek {code}: {s.get('title')!r} -> {last['value']} ({last['date']})")
@@ -242,6 +244,7 @@ def haal_macro(vorige=None):
         for h in hyp:
             h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd, "upd_how": "gezien"})
     zet("mortgage_nl", hyp)
+    zet("mortgage_hist", hyp_hist if len(hyp_hist) == len(hyp) and hyp else None)
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP
     # volgens COICOP 2018 in nieuwe datasets; we proberen nieuw én oud (Eurostat en ECB) en nemen per land
@@ -277,7 +280,7 @@ def haal_macro(vorige=None):
     zet("hicp", hicp if heeft else None)
 
     # Woningprijzen NL (jaar op jaar, per kwartaal)
-    hpi = eurostat("prc_hpi_q", {"geo": "NL", "purchase": "TOTAL", "unit": "RCH_A"}, 12).get("NL")
+    hpi = eurostat("prc_hpi_q", {"geo": "NL", "purchase": "TOTAL", "unit": "RCH_A"}, 90).get("NL")  # sinds ±2005
     zet("house_prices_nl", hpi)
     if hpi:
         m["house_prices_src"] = EUROSTAT_LINK.format("prc_hpi_q")

@@ -1071,7 +1071,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   function renderHeat(){
     var groups={};
     rows.forEach(function(r){
-      var keys=[sec(r.sector)];if(r.ai)keys.push("AI");
+      var keys=r.sector&&r.sector!=="Overig"?[sec(r.sector)]:[];if(r.ai)keys.push("AI");  // geen aparte tegel "Overig"
       keys.forEach(function(k){(groups[k]=groups[k]||[]).push(r)});
     });
     var tiles=Object.keys(groups).map(function(k){
@@ -1678,7 +1678,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-19";
+  var BUILD="2026-11-05-20";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

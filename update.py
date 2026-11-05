@@ -23,6 +23,14 @@ ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
 SP500_FILE = ROOT / "sp500.txt"   # huidige S&P 500-samenstelling (bijgewerkt bij elke run, terugval op dit bestand)
 SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
+SP500_SECTOR_FILE = ROOT / "sp500_sectoren.json"  # officiële GICS-sector per S&P-lid (terugval als Yahoo geen sector geeft)
+# GICS-sectornamen -> de sectornamen die Yahoo (en de site) gebruikt
+GICS_NAAR_YAHOO = {
+    "Information Technology": "Technology", "Health Care": "Healthcare", "Financials": "Financial Services",
+    "Consumer Discretionary": "Consumer Cyclical", "Consumer Staples": "Consumer Defensive",
+    "Communication Services": "Communication Services", "Energy": "Energy", "Industrials": "Industrials",
+    "Materials": "Basic Materials", "Utilities": "Utilities", "Real Estate": "Real Estate",
+}
 AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
@@ -458,7 +466,11 @@ def sp500_tickers():
         with urllib.request.urlopen(req, timeout=30) as r:
             rijen = list(csv.DictReader(io.StringIO(r.read().decode("utf-8"))))
         sym = sorted({(x.get("Symbol") or "").strip().replace(".", "-") for x in rijen} - {""})
+        sectoren = {(x.get("Symbol") or "").strip().replace(".", "-"): GICS_NAAR_YAHOO.get((x.get("GICS Sector") or "").strip())
+                    for x in rijen}
         if len(sym) >= 480:  # anders onvolledig antwoord: niet gebruiken
+            SP500_SECTOR_FILE.write_text(json.dumps({k: v for k, v in sorted(sectoren.items()) if k and v},
+                                                    indent=0) + "\n")
             SP500_FILE.write_text("# S&P 500-leden, bron: github.com/datasets/s-and-p-500-companies "
                                   f"(opgehaald {datetime.now(timezone.utc):%Y-%m-%d})\n" + "\n".join(sym) + "\n")
             print(f"S&P 500: {len(sym)} leden opgehaald")
@@ -471,6 +483,10 @@ def sp500_tickers():
 
 def main():
     sp500 = set(sp500_tickers())
+    try:
+        gics = json.loads(SP500_SECTOR_FILE.read_text())
+    except Exception:  # noqa: BLE001
+        gics = {}
     tickers = lees_tickers()
     tickers += [t for t in sorted(sp500) if t not in set(tickers)]
     ai = set(lees_tickers(AI_FILE))
@@ -480,6 +496,12 @@ def main():
     # Fundamentele data (info dagelijks, jaarcijfers wekelijks) uit de cache, aangevuld waar nodig
     cache = fund.load_cache()
     fund.refresh(cache, tickers, info_only=WERELD_EXTRA)
+    # Geen sector van Yahoo? Dan de officiële GICS-sector uit de S&P 500-lijst (ook voor de waarderingsengine)
+    for t, c in cache.items():
+        i = (c or {}).get("info")
+        if i is not None and not i.get("sector") and gics.get(t):
+            i["sector"] = gics[t]
+            print(f"  {t}: sector uit S&P-lijst ({gics[t]})")
 
     rijen, prijzen, alle_closes = [], {}, {}
     rf, fx = fund.market_data(cache)
@@ -517,7 +539,7 @@ def main():
             rijen.append({
                 "ticker": t,
                 "name": info.get("shortName") or info.get("longName") or t,
-                "sector": info.get("sector") or ("Financial Services" if t == "BRK-B" else "Overig"),
+                "sector": info.get("sector") or gics.get(t) or ("Financial Services" if t == "BRK-B" else "Overig"),
                 "marketCap": int(mcap_q * usd),
                 "_ff": mcap_q * usd * fund.free_float(info),
                 "currency": info.get("currency") or "USD",

@@ -398,6 +398,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .b3t td:first-child{white-space:normal;overflow-wrap:anywhere}.b3t td small{display:block;color:var(--muted);font-size:.6rem;font-weight:400}
 .b3t td.b3best,b.b3best{color:var(--up);font-weight:800}
 .b3t td.b3best{background:color-mix(in oklab,var(--up) 14%,transparent);border-radius:6px}
+.b3t td.b3geen{text-align:left;white-space:normal;color:var(--muted);font-size:.66rem}
 .b3best-line{font-size:.7rem;color:var(--muted);margin:4px 0 8px}.b3best-line b{color:var(--up)}
 .b3none{list-style:none;margin:0;padding:0}
 .b3none a{display:grid;grid-template-columns:1fr auto;gap:0 8px;padding:8px 0;border-top:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.8rem}
@@ -1460,7 +1461,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var h='<thead><tr><th>Aanbieder</th>'+B3LTV.map(function(l){return '<th>≤'+l+'%</th>'}).join("")+'</tr></thead><tbody>';
     h+=rowsL.map(function(r){
       var lab=r.s.rows.filter(function(w){return w.fix===b3fix})[0];
-      return '<tr><td><b>'+esc(r.x.name)+'</b><small>'+esc(r.s.name)+(lab&&!/^\d+\s*jaar( vast)?$/i.test(lab.label)&&!/^variabel$/i.test(lab.label)?' · '+esc(lab.label):'')+'</small></td>'+
+      var kop='<td><b>'+esc(r.x.name)+'</b><small>'+esc(r.s.name)+(lab&&!/^\d+\s*jaar( vast)?$/i.test(lab.label)&&!/^variabel$/i.test(lab.label)?' · '+esc(lab.label):'')+'</small></td>';
+      if(!lab){var wel=r.s.rows.map(function(w){return w.fix==="var"?"variabel":w.fix+" jr"}).join(", ");
+        return '<tr>'+kop+'<td class="b3geen" colspan="'+B3LTV.length+'">publiceert geen '+(b3fix==="var"?"variabele rente":b3fix+" jaar vast")+'<br>wel: '+esc(wel)+'</td></tr>'}
+      return '<tr>'+kop+
         B3LTV.map(function(l,i){var v=b3rate(r.s,l);return '<td'+(v!=null&&v===mins[i]?' class="b3best"':'')+'>'+b3fmt(v)+'</td>'}).join("")+'</tr>'}).join("");
     h+='</tbody>';
     $("b3t").innerHTML=rowsL.length?h:'<tr><td>Geen aanbieder publiceert een tarief voor deze keuze.</td></tr>';
@@ -1613,7 +1617,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-14";
+  var BUILD="2026-11-05-15";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

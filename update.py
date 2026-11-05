@@ -510,7 +510,10 @@ def index_leden(naam):
         req = urllib.request.Request(b["url"], headers={"User-Agent": "investmarket/1.0 (koersoverzicht)"})
         with urllib.request.urlopen(req, timeout=30) as r:
             html = r.read().decode("utf-8")
-        for tab in pd.read_html(io.StringIO(html)):
+        tabellen = pd.read_html(io.StringIO(html))
+        for tab in tabellen:
+            if isinstance(tab.columns, pd.MultiIndex):
+                tab.columns = [" ".join(str(x) for x in c) for c in tab.columns]
             cols = [str(c) for c in tab.columns]
             tc = next((c for c in cols if "ticker" in c.lower() or c.lower() == "symbol"), None)
             nc = next((c for c in cols if any(w in c.lower() for w in ("company", "security", "name"))), None)
@@ -518,14 +521,20 @@ def index_leden(naam):
                 continue
             leden = {}
             for _, rij in tab.iterrows():
-                t = str(rij[tc]).strip().split()[0].replace(".", "-")
-                if t and t != "nan":
-                    leden[t + b["suffix"] if b["suffix"] and "." not in t else t] = str(rij[nc]).strip()
+                t = str(rij[tc]).strip().split()[0] if str(rij[tc]).strip() else ""
+                if not t or t == "nan":
+                    continue
+                if b["suffix"]:   # bv. AEX: "ABN.AS" staat er al zo; "ABN" krijgt ".AS"
+                    t = t if t.upper().endswith(b["suffix"].upper()) else t.replace(".", "-") + b["suffix"]
+                else:             # VS: BRK.B -> BRK-B (Yahoo-notatie)
+                    t = t.replace(".", "-")
+                leden[t] = str(rij[nc]).strip()
             if b["min"] <= len(leden) <= b["max"]:
                 b["file"].write_text(json.dumps(leden, ensure_ascii=False, indent=0, sort_keys=True) + "\n")
                 print(f"{naam}: {len(leden)} leden opgehaald")
                 return leden
-        print(f"{naam}: geen passende tabel gevonden, vorige lijst gebruikt")
+        print(f"{naam}: geen passende tabel gevonden, vorige lijst gebruikt. Tabellen: "
+              + "; ".join(f"{len(t)} rijen {list(map(str, t.columns))[:6]}" for t in tabellen if len(t) >= 10))
     except Exception as e:  # noqa: BLE001
         print(f"{naam} ophalen mislukt ({e}), vorige lijst gebruikt")
     try:

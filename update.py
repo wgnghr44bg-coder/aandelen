@@ -497,7 +497,9 @@ def sp500_tickers():
 # Samenstelling van indexen voor "Stijgers & dalers per index" (Wikipedia houdt deze tabellen bij).
 INDEX_BRONNEN = {
     "Nasdaq 100": {"url": "https://en.wikipedia.org/wiki/Nasdaq-100", "file": ROOT / "nasdaq100.json", "min": 95,
-                   "max": 110, "suffix": ""},
+                   "max": 110, "suffix": "",
+                   # officiële lijst van Nasdaq zelf; Wikipedia als reserve
+                   "api": "https://api.nasdaq.com/api/quote/list-type/nasdaq100"},
     "AEX": {"url": "https://en.wikipedia.org/wiki/AEX_index", "file": ROOT / "aex.json", "min": 20, "max": 30,
             "suffix": ".AS"},
 }
@@ -506,6 +508,24 @@ INDEX_BRONNEN = {
 def index_leden(naam):
     """{ticker: bedrijfsnaam} van een index. Lukt ophalen niet of is de lijst onlogisch: vorige lijst."""
     b = INDEX_BRONNEN[naam]
+    if b.get("api"):
+        try:
+            req = urllib.request.Request(b["api"], headers={
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36",
+                "Accept": "application/json, text/plain, */*", "Origin": "https://www.nasdaq.com",
+                "Referer": "https://www.nasdaq.com/"})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                js = json.loads(r.read().decode("utf-8"))
+            rows = ((js.get("data") or {}).get("data") or {}).get("rows") or []
+            leden = {str(x.get("symbol", "")).strip().replace(".", "-").replace("/", "-"): str(x.get("companyName", "")).strip()
+                     for x in rows if x.get("symbol")}
+            if b["min"] <= len(leden) <= b["max"]:
+                b["file"].write_text(json.dumps(leden, ensure_ascii=False, indent=0, sort_keys=True) + "\n")
+                print(f"{naam}: {len(leden)} leden opgehaald (Nasdaq)")
+                return leden
+            print(f"{naam}: Nasdaq-lijst onvolledig ({len(leden)})")
+        except Exception as e:  # noqa: BLE001
+            print(f"{naam}: Nasdaq-lijst mislukt ({e})")
     try:
         req = urllib.request.Request(b["url"], headers={"User-Agent": "investmarket/1.0 (koersoverzicht)"})
         with urllib.request.urlopen(req, timeout=30) as r:

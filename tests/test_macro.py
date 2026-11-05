@@ -67,11 +67,13 @@ STRUCT_XML = """<?xml version="1.0"?>
  xmlns:c="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"><m:Structures>
 <s:Codelists>
  <s:Codelist id="CL_AMOUNT_CAT"><s:Code id="A"><c:Name xml:lang="en">Total</c:Name></s:Code>
-  <s:Code id="1"><c:Name xml:lang="en">Up to and including EUR 1 million</c:Name></s:Code>
-  <s:Code id="2"><c:Name xml:lang="en">Over EUR 1 million</c:Name></s:Code></s:Codelist>
+  <s:Code id="0"><c:Name xml:lang="en">Up to and including EUR 1 million</c:Name></s:Code>
+  <s:Code id="1"><c:Name xml:lang="en">Over EUR 1 million</c:Name></s:Code>
+  <s:Code id="2"><c:Name xml:lang="en">Up to and including EUR 0.25 million</c:Name></s:Code></s:Codelist>
  <s:Codelist id="CL_MAT"><s:Code id="A"><c:Name xml:lang="en">Total</c:Name></s:Code>
   <s:Code id="F"><c:Name xml:lang="en">Floating rate and up to 1 year</c:Name></s:Code>
-  <s:Code id="P"><c:Name xml:lang="en">Over 10 years</c:Name></s:Code></s:Codelist>
+  <s:Code id="P"><c:Name xml:lang="en">Over 10 years</c:Name></s:Code>
+  <s:Code id="J"><c:Name xml:lang="en">Over 5 years</c:Name></s:Code></s:Codelist>
  <s:Codelist id="CL_X"><s:Code id="M"><c:Name xml:lang="en">Monthly</c:Name></s:Code></s:Codelist>
 </s:Codelists>
 <s:DataStructures><s:DataStructure id="ECB_MIR1"><s:DataStructureComponents><s:DimensionList>
@@ -85,12 +87,15 @@ STRUCT_XML = """<?xml version="1.0"?>
 <s:TimeDimension id="TIME_PERIOD" position="11"/></s:DimensionList></s:DataStructureComponents>
 </s:DataStructure></s:DataStructures></m:Structures></m:Structure>"""
 NFC_CSV = """KEY,TIME_PERIOD,OBS_VALUE,TITLE
-MIR.M.NL.B.A2A.F.R.2.2240.EUR.N,2026-08,3.30,x
-MIR.M.NL.B.A2A.F.R.2.2240.EUR.N,2026-09,3.20,x
-MIR.M.NL.B.A2A.P.R.1.2240.EUR.N,2026-09,4.05,x
+MIR.M.NL.B.A2A.F.R.1.2240.EUR.N,2026-08,3.30,x
+MIR.M.NL.B.A2A.F.R.1.2240.EUR.N,2026-09,3.20,x
+MIR.M.NL.B.A2A.P.R.0.2240.EUR.N,2026-09,4.05,x
+MIR.M.NL.B.A2A.J.R.0.2240.EUR.N,2026-09,4.10,dubbel met P
+MIR.M.NL.B.A2A.J.R.1.2240.EUR.N,2026-09,3.80,alleen J
 MIR.M.NL.B.A2A.A.R.A.2240.EUR.N,2026-09,3.16,x
-MIR.M.NL.B.A2A.P.R.2.2240.EUR.N,2025-12,3.90,gestopt
-MIR.M.NL.B.A2A.Z.R.2.2240.EUR.N,2026-09,9.99,onbekende code
+MIR.M.NL.B.A2A.F.R.2.2240.EUR.N,2026-09,4.40,deelbucket
+MIR.M.NL.B.A2A.P.R.1.2240.EUR.N,2025-12,3.90,gestopt
+MIR.M.NL.B.A2A.Z.R.1.2240.EUR.N,2026-09,9.99,onbekende code
 """
 
 
@@ -99,12 +104,12 @@ def test_zakelijk_per_bedrag(monkeypatch):
                         else NFC_CSV if "A2A" in url else None)
     rij = macro.zakelijk_nl()
     sleutels = [(r["amount"], r["fix"]) for r in rij]
-    assert sleutels == [("A", "A"), ("1", "P"), ("2", "F")]   # gestopte en onbekende reeks weg, codelijst-volgorde
-    groot = rij[2]
+    assert sleutels == [("0", "P"), ("1", "F"), ("1", "J"), ("A", "A")]  # gestopt/onbekend/deelbucket/dubbel weg
+    groot = rij[1]
     assert groot["amount_label"] == "boven €1 mln" and groot["fix_label"] == "variabel tot 1 jaar"
     assert groot["value"] == 3.20 and groot["prev"] == 3.30
-    assert rij[1]["amount_label"] == "tot en met €1 mln" and rij[1]["fix_label"] == "boven 10 jaar"
-    assert groot["src"].endswith("MIR.M.NL.B.A2A.F.R.2.2240.EUR.N")
+    assert rij[0]["amount_label"] == "tot en met €1 mln" and rij[0]["fix_label"] == "boven 10 jaar"
+    assert groot["src"].endswith("MIR.M.NL.B.A2A.F.R.1.2240.EUR.N")
 
 
 def test_zakelijk_zonder_codelijst_toont_niets(monkeypatch):

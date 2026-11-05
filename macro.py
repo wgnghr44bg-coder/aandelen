@@ -211,7 +211,14 @@ def zakelijk_nl():
                       "fix": v, "fix_label": nl_label(vnaam), "fix_en": vnaam, "fix_ord": vi,
                       "src": ecb_link("MIR/" + ".".join(delen)), **last})
         print(f"  zakelijk {b}/{v}: {bnaam!r} / {vnaam!r} -> {last['value']} ({last['date']})")
-    rijen.sort(key=lambda r: (r["amount_ord"], r["fix_ord"]))
+    # Overzichtelijke selectie (codes volgens de ECB-codelijst, gecontroleerd in de logs):
+    # bedrag 0 = t/m €1 mln, 1 = boven €1 mln, A = totaal; vast A = alle, F = tot 1 jaar, I = 1-5 jaar,
+    # O = 5-10 jaar, P = boven 10 jaar; J (boven 5 jaar) alleen als O/P ontbreken.
+    bedragen, vast = ["0", "1", "A"], ["A", "F", "I", "O", "P", "J"]
+    rijen = [r for r in rijen if r["amount"] in bedragen and r["fix"] in vast]
+    heeft_op = {r["amount"] for r in rijen if r["fix"] in ("O", "P")}
+    rijen = [r for r in rijen if not (r["fix"] == "J" and r["amount"] in heeft_op)]
+    rijen.sort(key=lambda r: (bedragen.index(r["amount"]), vast.index(r["fix"])))
     return rijen or None
 
 

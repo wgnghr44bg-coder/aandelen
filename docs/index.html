@@ -390,11 +390,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .gv{text-align:right;font-variant-numeric:tabular-nums}.gv b{display:block;font-size:.9rem}.gv .pp{margin-top:3px}
 .gv.gl{color:var(--accent);font-size:.74rem;font-weight:600}
 .b3wrap{overflow-x:auto;margin:4px -4px 6px;padding:0 4px}
-.b3t{width:100%;border-collapse:collapse;font-size:.72rem;font-variant-numeric:tabular-nums;min-width:330px}
+.b3t{width:100%;border-collapse:collapse;font-size:.68rem;font-variant-numeric:tabular-nums;table-layout:fixed}
+.b3t th:not(:first-child),.b3t td:not(:first-child){width:13%}
 .b3t th{font-weight:600;color:var(--muted);font-size:.64rem;text-align:right;padding:4px 2px;white-space:nowrap}
 .b3t th:first-child,.b3t td:first-child{text-align:left}
-.b3t td{border-top:1px solid var(--line);padding:7px 2px;text-align:right;white-space:nowrap}
-.b3t td:first-child{white-space:normal;max-width:96px}.b3t td small{display:block;color:var(--muted);font-size:.6rem;font-weight:400}
+.b3t td{border-top:1px solid var(--line);padding:7px 1px;text-align:right;white-space:nowrap}
+.b3t td:first-child{white-space:normal;overflow-wrap:anywhere}.b3t td small{display:block;color:var(--muted);font-size:.6rem;font-weight:400}
 .b3t td.b3best,b.b3best{color:var(--up);font-weight:800}
 .b3t td.b3best{background:color-mix(in oklab,var(--up) 14%,transparent);border-radius:6px}
 .b3best-line{font-size:.7rem;color:var(--muted);margin:4px 0 8px}.b3best-line b{color:var(--up)}
@@ -1456,7 +1457,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("b3fix").innerHTML=B3FIX.map(function(f){return '<button type="button" data-v="'+f[0]+'" aria-pressed="'+(f[0]===b3fix)+'">'+f[1]+'</button>'}).join("");
     var rowsL=ok.map(function(x){var sg=null;x.segments.forEach(function(s){if(s.seg===b3seg&&!sg)sg=s});return {x:x,s:sg}}).filter(function(r){return r.s});
     var mins=B3LTV.map(function(l){var m=null;rowsL.forEach(function(r){var v=b3rate(r.s,l);if(v!=null&&(m==null||v<m))m=v});return m});
-    var h='<thead><tr><th>Aanbieder</th>'+B3LTV.map(function(l){return '<th>t/m '+l+'%</th>'}).join("")+'</tr></thead><tbody>';
+    var h='<thead><tr><th>Aanbieder</th>'+B3LTV.map(function(l){return '<th>≤'+l+'%</th>'}).join("")+'</tr></thead><tbody>';
     h+=rowsL.map(function(r){
       var lab=r.s.rows.filter(function(w){return w.fix===b3fix})[0];
       return '<tr><td><b>'+esc(r.x.name)+'</b><small>'+esc(r.s.name)+(lab&&!/^\d+\s*jaar( vast)?$/i.test(lab.label)&&!/^variabel$/i.test(lab.label)?' · '+esc(lab.label):'')+'</small></td>'+
@@ -1465,14 +1466,14 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("b3t").innerHTML=rowsL.length?h:'<tr><td>Geen aanbieder publiceert een tarief voor deze keuze.</td></tr>';
     // laagste rente per LTV-klasse, met naam
     var low=B3LTV.map(function(l,i){if(mins[i]==null)return null;var who=rowsL.filter(function(r){return b3rate(r.s,l)===mins[i]}).map(function(r){return r.x.name});
-      return 't/m '+l+'%: <b>'+b3fmt(mins[i])+'</b> '+esc(who.join(", "))}).filter(Boolean);
+      return '≤'+l+'%: <b>'+b3fmt(mins[i])+'</b> '+esc(who.join(", "))}).filter(Boolean);
     $("b3low").innerHTML=low.length?'Laagste rente · '+low.join(" · "):"";
     // aanbieders zonder (leesbaar) tarief voor deze keuze
     var zonder=L.filter(function(x){return !rowsL.some(function(r){return r.x===x})});
     $("b3none").innerHTML=zonder.map(function(x){
       var why=x.status==="ok"?"geen tarief voor "+B3SEG[b3seg].toLowerCase()+" gepubliceerd":(x.reason||"geen openbare rentetabel");
       return '<li><a href="'+esc(x.url)+'" target="_blank" rel="noopener"><b>'+esc(x.name)+'</b> <span>Tarief op aanvraag</span><small>'+esc(why)+'</small><i>↗</i></a></li>'}).join("");
-    $("b3date").textContent=b3.updated?"gecontroleerd "+fdateS(b3.updated.slice(0,10)):"";
+    $("b3date").textContent=b3.updated?fdateS(b3.updated.slice(0,10)):"";
     // details per aanbieder
     $("b3det").innerHTML=L.map(function(x){
       var segs2=(x.segments||[]).map(function(s){var fx=s.rows.map(function(w){return w.fix==="var"?"variabel":w.fix+" jr"}).join(", ");
@@ -1486,7 +1487,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     renderB3Chart();
   }
   function renderB3Chart(){
-    $("b3ltv").innerHTML=B3LTV.map(function(l){return '<button type="button" data-v="'+l+'" aria-pressed="'+(l===b3ltv)+'">t/m '+l+'%</button>'}).join("");
+    $("b3ltv").innerHTML=B3LTV.map(function(l){return '<button type="button" data-v="'+l+'" aria-pressed="'+(l===b3ltv)+'">≤'+l+'%</button>'}).join("");
     var fixL=B3FIX.filter(function(f){return f[0]===b3fix})[0][1].toLowerCase();
     $("b3hsub").textContent=B3SEG[b3seg].toLowerCase()+" · "+fixL+(b3fix==="var"?"":" vast");
     var ser=[],ci=0,allX=[];
@@ -1612,7 +1613,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-13";
+  var BUILD="2026-11-05-14";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

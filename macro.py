@@ -52,7 +52,7 @@ def _status_get(url):
     """Eén poging: (HTTP-status, tekst). Voor vragen waarbij 'geen resultaat' een geldig antwoord is."""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "investmarket/1.0", "Accept": "*/*"})
-        with urllib.request.urlopen(req, timeout=40) as r:
+        with urllib.request.urlopen(req, timeout=25) as r:
             return r.status, r.read().decode("utf-8")
     except urllib.error.HTTPError as e:
         return e.code, ""
@@ -66,9 +66,9 @@ def ecb_bijgewerkt(key, periode, vorige=None, max_dagen=150, vandaag=None):
     Gevonden met de officiële API-parameter `updatedAfter` (geeft alleen gewijzigde waarnemingen terug),
     via binair zoeken op dagen. Eén keer per nieuwe meetperiode; daarna uit `vorige` (cache).
     Geeft "JJJJ-MM-DD" of None (onbekend)."""
-    if vorige and vorige.get("date") == periode and vorige.get("upd"):
-        return vorige["upd"]
     vandaag = vandaag or date.today()
+    if vorige and vorige.get("date") == periode and (vorige.get("upd") or vorige.get("upd_try") == vandaag.isoformat()):
+        return vorige.get("upd")  # al bekend, of vandaag al (vergeefs) gezocht
 
     def gewijzigd_na(d):
         st, txt = _status_get(f"{ECB}{key}?updatedAfter={d.isoformat()}T00:00:00%2B00:00&format=csvdata"
@@ -369,7 +369,8 @@ def haal_macro(vorige=None):
         last = _last(st)
         if last:
             last.update({"src": ecb_link(key), "title": st.get("title") or "", "kind": kind, "freq": MAAND,
-                         "upd": ecb_bijgewerkt(key, last["date"], vorige.get(naam))})
+                         "upd": ecb_bijgewerkt(key, last["date"], vorige.get(naam)),
+                         "upd_try": date.today().isoformat()})
             print(f"  {naam}: {last['title']!r} -> {last['value']} ({last['date']}, bijgewerkt {last['upd']})")
         zet(naam, last)
 
@@ -389,7 +390,8 @@ def haal_macro(vorige=None):
         oud = (vorige.get("mortgage_nl") or [{}])[0]
         upd = ecb_bijgewerkt("MIR/M.NL.B.A2C..R.A.2250.EUR.N", hyp[0]["date"], oud)
         for h in hyp:
-            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd})
+            h.update({"kind": "maandgemiddelde nieuw afgesloten hypotheken", "freq": MAAND, "upd": upd,
+                      "upd_try": date.today().isoformat()})
     zet("mortgage_nl", hyp)
 
     # Bedrijfsleningen NL per bedrag en rentevaste periode (basis voor bancaire vastgoedfinanciering)
@@ -398,7 +400,8 @@ def haal_macro(vorige=None):
         oud = (vorige.get("business_nl") or [{}])[0]
         upd = ecb_bijgewerkt("MIR/M.NL.B.A2A..R..2240.EUR.N", biz[0]["date"], oud)
         for b in biz:
-            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd})
+            b.update({"kind": "maandgemiddelde nieuw afgesloten leningen", "freq": MAAND, "upd": upd,
+                      "upd_try": date.today().isoformat()})
     zet("business_nl", biz)
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP

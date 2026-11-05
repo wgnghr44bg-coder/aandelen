@@ -39,6 +39,7 @@ def fake_get(url, tries=3):
 
 def test_macro_parsing(monkeypatch):
     monkeypatch.setattr(macro, "_get", fake_get)
+    monkeypatch.setattr(macro, "_status_get", lambda url: (404, ""))   # geen echte netwerkvragen in tests
     m = macro.haal_macro({"euribor3m": {"value": 2.0}})
     assert m["ecb_deposit"]["value"] == 2.0 and m["ecb_deposit"]["prev"] == 2.25
     assert m["ecb_deposit"]["since"] == "2025-06-11"
@@ -133,6 +134,8 @@ def test_ecb_bijgewerkt_binair_zoeken(monkeypatch):
     # cache: zelfde periode -> geen nieuwe vragen
     gezien.clear()
     assert macro.ecb_bijgewerkt("MIR/X", "2026-09", {"date": "2026-09", "upd": "2026-11-03"}) == "2026-11-03"
+    assert macro.ecb_bijgewerkt("MIR/X", "2026-09", {"date": "2026-09", "upd": None, "upd_try": "2026-11-05"},
+                                vandaag=date(2026, 11, 5)) is None   # vandaag al gezocht
     assert not gezien
     # ouder dan het zoekvenster -> onbekend (niet gokken)
     monkeypatch.setattr(macro, "_status_get", lambda url: (404, ""))

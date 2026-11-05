@@ -135,6 +135,7 @@ def bereken(df):
     return {
         "price": schoon(laatste),
         "d1": pct(laatste, vorige),
+        "w1": periode(pd.DateOffset(days=7)),
         "m1": periode(pd.DateOffset(months=1)),
         "m3": periode(pd.DateOffset(months=3)),
         "ytd": ytd,
@@ -493,6 +494,77 @@ def sp500_tickers():
     return lees_tickers(SP500_FILE) if SP500_FILE.exists() else []
 
 
+# Samenstelling van indexen voor "Stijgers & dalers per index" (Wikipedia houdt deze tabellen bij).
+INDEX_BRONNEN = {
+    "Nasdaq 100": {"url": "https://en.wikipedia.org/wiki/Nasdaq-100", "file": ROOT / "nasdaq100.json", "min": 95,
+                   "max": 110, "suffix": ""},
+    "AEX": {"url": "https://en.wikipedia.org/wiki/AEX_index", "file": ROOT / "aex.json", "min": 20, "max": 30,
+            "suffix": ".AS"},
+}
+
+
+def index_leden(naam):
+    """{ticker: bedrijfsnaam} van een index. Lukt ophalen niet of is de lijst onlogisch: vorige lijst."""
+    b = INDEX_BRONNEN[naam]
+    try:
+        req = urllib.request.Request(b["url"], headers={"User-Agent": "investmarket/1.0 (koersoverzicht)"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            html = r.read().decode("utf-8")
+        for tab in pd.read_html(io.StringIO(html)):
+            cols = [str(c) for c in tab.columns]
+            tc = next((c for c in cols if "ticker" in c.lower() or c.lower() == "symbol"), None)
+            nc = next((c for c in cols if any(w in c.lower() for w in ("company", "security", "name"))), None)
+            if not tc or not nc or not (b["min"] <= len(tab) <= b["max"]):
+                continue
+            leden = {}
+            for _, rij in tab.iterrows():
+                t = str(rij[tc]).strip().split()[0].replace(".", "-")
+                if t and t != "nan":
+                    leden[t + b["suffix"] if b["suffix"] and "." not in t else t] = str(rij[nc]).strip()
+            if b["min"] <= len(leden) <= b["max"]:
+                b["file"].write_text(json.dumps(leden, ensure_ascii=False, indent=0, sort_keys=True) + "\n")
+                print(f"{naam}: {len(leden)} leden opgehaald")
+                return leden
+        print(f"{naam}: geen passende tabel gevonden, vorige lijst gebruikt")
+    except Exception as e:  # noqa: BLE001
+        print(f"{naam} ophalen mislukt ({e}), vorige lijst gebruikt")
+    try:
+        return json.loads(b["file"].read_text())
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def index_lijsten(rijen):
+    """Leden per index + koersen van leden die niet in de hoofdlijst staan (bv. AEX-aandelen in Amsterdam)."""
+    bekend = {r["ticker"] for r in rijen}
+    lijsten = {"WEBN": [r["ticker"] for r in rijen if r.get("top")],
+               "S&P 500": [r["ticker"] for r in rijen if r.get("sp")]}
+    namen = {}
+    for naam in INDEX_BRONNEN:
+        leden = index_leden(naam)
+        lijsten[naam] = list(leden)
+        namen.update(leden)
+    extra = sorted({t for naam in INDEX_BRONNEN for t in lijsten[naam] if t not in bekend})
+    koersen = {}
+    if extra:
+        try:
+            data = yf.download(extra, period="3mo", interval="1d", auto_adjust=True, group_by="ticker", progress=False)
+            for t in extra:
+                try:
+                    st = bereken(data[t] if len(extra) > 1 else data)
+                    if st:
+                        koersen[t] = {"name": namen.get(t, t), "price": st["price"], "d1": st["d1"], "w1": st["w1"],
+                                      "currency": "EUR" if t.endswith(".AS") else "USD"}
+                except Exception as e:  # noqa: BLE001
+                    print(f"  index-lid {t}: {e}")
+        except Exception as e:  # noqa: BLE001
+            print(f"index-leden download mislukt: {e}")
+    for naam in INDEX_BRONNEN:  # alleen leden met een koers
+        lijsten[naam] = [t for t in lijsten[naam] if t in bekend or t in koersen]
+    print("indexlijsten: " + ", ".join(f"{k} {len(v)}" for k, v in lijsten.items()) + f" (extra koersen: {len(koersen)})")
+    return lijsten, koersen
+
+
 def main():
     sp500 = set(sp500_tickers())
     try:
@@ -591,6 +663,10 @@ def main():
     extras, extra_closes = haal_extras()
     bewaar_markt_hist(extras)
     uit["extras"] = extras
+    try:
+        uit["lijsten"], uit["lijst_koersen"] = index_lijsten(rijen)
+    except Exception as e:  # noqa: BLE001
+        print(f"indexlijsten mislukt: {e}")
     try:
         indices, index_closes = reeksen(INDICES, index=True)
         uit["indices"] = indices

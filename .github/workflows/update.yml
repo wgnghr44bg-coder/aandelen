@@ -46,6 +46,14 @@ jobs:
           key: fundamentals-${{ github.run_id }}
           restore-keys: fundamentals-
 
+      # Vaak wisselende data staat op de branch "live" (altijd één versie, zodat de repo niet groeit)
+      - name: Live-data ophalen
+        run: |
+          git fetch -q origin live || true
+          for f in data.json history.json grond_hist.json intra.json; do
+            if git show origin/live:$f > "$RUNNER_TEMP/$f" 2>/dev/null; then mv "$RUNNER_TEMP/$f" docs/$f; fi
+          done
+
       - name: Haal koersen op
         env:
           # Grafieken altijd vernieuwen bij de avond-update en bij handmatig starten
@@ -62,12 +70,33 @@ jobs:
           path: .cache
           key: fundamentals-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - name: Commit data als die veranderd is
+      - name: Live-data publiceren (branch live, overschreven)
         run: |
-          git add docs/data.json
-          if [ -f docs/history.json ]; then git add docs/history.json; fi
+          export GIT_INDEX_FILE="$RUNNER_TEMP/live.idx"
+          git read-tree --empty
+          for f in data.json history.json grond_hist.json intra.json; do
+            if [ -f docs/$f ]; then
+              git update-index --add --cacheinfo 100644,$(git hash-object -w docs/$f),$f
+            fi
+          done
+          c=$(git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit-tree $(git write-tree) -m "Live-data $(date -u +'%Y-%m-%d %H:%M') UTC")
+          unset GIT_INDEX_FILE
+          for i in 1 2 3; do git push -q -f origin $c:refs/heads/live && exit 0; sleep 5; done
+          exit 1
+
+      - name: Commit data als die veranderd is
+        env:
+          VOLLEDIG: ${{ github.event.schedule == '45 22 * * 1-5' || inputs.volledig == true }}
+        run: |
+          # data.json/history.json alleen 1x per dag in de gewone geschiedenis (reserve voor de site);
+          # de rest van de dag staan ze alleen op de branch "live".
+          if [ "$VOLLEDIG" = "true" ]; then
+            git add docs/data.json
+            if [ -f docs/history.json ]; then git add docs/history.json; fi
+            if [ -f docs/grond_hist.json ]; then git add docs/grond_hist.json; fi
+          fi
           if [ -f docs/markt_hist.json ]; then git add docs/markt_hist.json; fi
-          if [ -f docs/grond_hist.json ]; then git add docs/grond_hist.json; fi
           if [ -f analyse/analysis.json ]; then git add analyse/analysis.json; fi
           if [ -f sp500.txt ]; then git add sp500.txt sp500_sectoren.json; fi
           for f in nasdaq100.json aex.json; do if [ -f $f ]; then git add $f; fi; done
@@ -78,6 +107,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Koersen bijgewerkt $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git stash -q --include-untracked || true   # niet-gecommitte live-bestanden opzij voor de pull
           for i in 1 2 3; do
             git pull --rebase -X theirs origin main && git push && exit 0
             sleep 5

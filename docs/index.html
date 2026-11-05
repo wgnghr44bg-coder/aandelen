@@ -829,6 +829,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   var range="1J";
   try{var sr=localStorage.getItem("bereik");if(sr&&(sr==="1D"||sr==="1W"||RANGES.some(function(x){return x.k===sr})))range=sr;}catch(e){}
   function chLabel(d,withYear){return /:/.test(d)?d:shortDate(d,withYear)}  // "UU:MM" (binnen de dag) of datum
+  var intraP=null;
+  function loadIntra(){if(!intraP)intraP=getJSON("intra.json").catch(function(e){intraP=null;throw e});return intraP}
   var histP=null;
   function loadHist(){
     if(!histP)histP=getJSON("history.json");
@@ -853,13 +855,16 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var ex=null;if(box.dataset.intra)allX().forEach(function(x){if(x.ticker===t)ex=x});
     var intra=ex&&ex.i&&ex.i.pts&&ex.i.pts.length>1?ex.i:null;
     var wk=ex&&ex.w&&ex.w.pts&&ex.w.pts.length>1?ex.w:null;
-    var RR=box.dataset.intra?[{k:"1D"},{k:"1W"}].concat(RANGES):RANGES;
-    var eff=(range==="1D"||range==="1W")&&!box.dataset.intra?"1M":range;
-    (box.dataset.src==="g"?loadGHist().then(function(g){
+    var isG=box.dataset.src==="g";   // grondstoffen: geen koersen binnen de dag
+    var RR=isG?RANGES:[{k:"1D"},{k:"1W"}].concat(RANGES);
+    var eff=(range==="1D"||range==="1W")&&isG?"1M":range;
+    var kort=(eff==="1D"||eff==="1W")&&!ex;   // aandelen: koersen binnen de dag uit intra.json
+    (kort?loadIntra().then(function(I){var x=I[t]||{};intra=x.d&&x.d.pts&&x.d.pts.length>1?x.d:null;wk=x.w&&x.w.pts&&x.w.pts.length>1?x.w:null;return {}}).catch(function(){return {}}):
+     isG?loadGHist().then(function(g){
       var x=g[t],o={};if(!x)return {days:[],weeks:[],series:{}};o[t]={d:x.d,w:x.w};return {days:x.days,weeks:x.weeks,series:o}}):loadHist()).then(function(h){
       var pts=eff==="1D"?(intra?intra.pts.map(function(p){return {d:p[0],v:p[1]}}):null):
         eff==="1W"?(wk?wk.pts.map(function(p){return {d:p[0],v:p[1]}}):null):pickSeries(h,t,eff);
-      if(pts&&eff==="1D"&&ex.live&&ex.price&&intra.h24){var nu=new Date();pts.push({d:String(nu.getDate()).padStart(2,"0")+"-"+String(nu.getMonth()+1).padStart(2,"0")+" "+String(nu.getHours()).padStart(2,"0")+":"+String(nu.getMinutes()).padStart(2,"0"),v:ex.price})}
+      if(pts&&eff==="1D"&&ex&&ex.live&&ex.price&&intra.h24){var nu=new Date();pts.push({d:String(nu.getDate()).padStart(2,"0")+"-"+String(nu.getMonth()+1).padStart(2,"0")+" "+String(nu.getHours()).padStart(2,"0")+":"+String(nu.getMinutes()).padStart(2,"0"),v:ex.price})}
       var head='<div class="chart-top"><div class="chart-read"></div><div class="ranges" role="group" aria-label="Bereik grafiek">'+
         RR.map(function(x){return '<button type="button" data-r="'+x.k+'" aria-pressed="'+(x.k===eff)+'">'+x.k+'</button>'}).join("")+'</div></div>';
       if(!pts){box.innerHTML=head+'<div class="chart-msg">'+(eff==="1D"||eff==="1W"?"Nog geen koersen voor deze periode; ze komen bij de volgende update.":"Geen koersgeschiedenis beschikbaar.")+'</div>';return}
@@ -1732,10 +1737,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   // Gegevens rechtstreeks uit de repo halen: nieuwe updates zijn dan meteen zichtbaar,
   // ook als GitHub Pages nog bezig is met klaarzetten. Lukt dat niet, dan de kopie op de site zelf.
   var RAW="https://raw.githubusercontent.com/wgnghr44bg-coder/aandelen/main/docs/";
+  // vaak wisselende data staat op de branch "live" (altijd één versie); de rest op main
+  var RAW_LIVE="https://raw.githubusercontent.com/wgnghr44bg-coder/aandelen/live/";
+  var LIVE={"data.json":1,"history.json":1,"grond_hist.json":1,"intra.json":1};
   function getJSON(name){
     var t="?t="+Date.now();
     function get(u){return fetch(u+t,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
-    return Promise.all([get(RAW+name).catch(function(){return null}),get(name).catch(function(){return null})]).then(function(a){
+    return Promise.all([get((LIVE[name]?RAW_LIVE:RAW)+name).catch(function(){return null}),get(name).catch(function(){return null})]).then(function(a){
       var x=a[0],y=a[1];
       if(!x&&!y)throw new Error("laden mislukt");
       if(!x||!y)return x||y;
@@ -1744,6 +1752,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   }
   function load(manual){
     var btn=$("refresh");btn.classList.add("busy");btn.disabled=true;
+    intraP=null;   // koersen binnen de dag opnieuw laden bij een verversing
     return getJSON("data.json").then(function(data){
       rows=data.rows||[];
       var oldBtc=null;extras.forEach(function(x){if(x.ticker==="BTC-EUR"&&x.live)oldBtc=x});
@@ -1774,7 +1783,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-24";
+  var BUILD="2026-11-05-26";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

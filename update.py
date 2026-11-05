@@ -307,6 +307,67 @@ def intraday_etfs(tickers):
     return uit, week
 
 
+INTRA = ROOT / "docs" / "intra.json"   # koersen binnen de dag van alle aandelen (alleen geladen bij 1D/1W)
+
+
+def intraday_alle(tickers, budget_s=240):
+    """Per aandeel: 1D = per 15 min op de laatste handelsdag, 1W = per 30 min over ±7 dagen (Nederlandse tijd).
+    Eén download in blokken; duurt het te lang, dan stopt het en blijft de rest van de vorige keer staan."""
+    try:
+        oud = json.loads(INTRA.read_text())
+    except Exception:  # noqa: BLE001
+        oud = {}
+    uit, start = {}, time.time()
+    for i in range(0, len(tickers), 150):
+        if time.time() - start > budget_s:
+            print(f"intraday: tijdsbudget op na {i} aandelen; rest van de vorige update")
+            break
+        blok = tickers[i:i + 150]
+        try:
+            data = yf.download(blok, period="5d", interval="15m", auto_adjust=True, group_by="ticker",
+                               progress=False, threads=True)
+        except Exception as e:  # noqa: BLE001
+            print(f"intraday blok {i}: {e}")
+            continue
+        for t in blok:
+            try:
+                c = (data[t] if len(blok) > 1 else data)["Close"].dropna()
+                d = intraday_reeks_stil(c)
+                w = week_reeks_stil(c)
+                if d or w:
+                    uit[t] = {"d": d, "w": w}
+            except Exception:  # noqa: BLE001
+                pass
+    for t in tickers:
+        if t not in uit and t in oud:
+            uit[t] = oud[t]
+    INTRA.write_text(json.dumps(uit, separators=(",", ":")) + "\n")
+    print(f"intraday: {len(uit)} van {len(tickers)} aandelen ({INTRA.stat().st_size // 1024} kB)")
+
+
+def _nl(c):
+    idx = pd.DatetimeIndex(c.index)
+    c.index = (idx.tz_localize("UTC") if idx.tz is None else idx).tz_convert(TZ_NL)
+    return c
+
+
+def intraday_reeks_stil(c):
+    if c.empty:
+        return None
+    c = _nl(c)
+    dag = c.index[-1].date()
+    c = c[[x.date() == dag for x in c.index]]
+    return {"date": str(dag), "pts": [[x.strftime("%H:%M"), schoon(v, 4)] for x, v in c.items()]} if len(c) >= 2 else None
+
+
+def week_reeks_stil(c):
+    if c.empty:
+        return None
+    c = _nl(c)
+    c = c[c.index > c.index[-1] - pd.Timedelta(days=7)].resample("30min").last().dropna()
+    return {"pts": [[x.strftime("%d-%m %H:%M"), schoon(v, 4)] for x, v in c.items()]} if len(c) >= 2 else None
+
+
 def intraday_bitcoin():
     """Bitcoin per 5 minuten over de laatste 24 uur (Bitvavo)."""
     candles = http_json(f"{BITVAVO}/BTC-EUR/candles?interval=5m&limit=288")
@@ -700,6 +761,10 @@ def main():
         extra_closes.update(lijst_slot)
     except Exception as e:  # noqa: BLE001
         print(f"indexlijsten mislukt: {e}")
+    try:
+        intraday_alle([r["ticker"] for r in rijen] + sorted(uit.get("lijst_koersen") or {}))
+    except Exception as e:  # noqa: BLE001
+        print(f"intraday mislukt: {e}")
     try:
         indices, index_closes = reeksen(INDICES, index=True)
         uit["indices"] = indices

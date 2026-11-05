@@ -414,6 +414,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .wlh{margin:12px 0 2px;font-size:.78rem}.wlh.up{color:var(--up)}.wlh.down{color:var(--down-strong)}
 .wlt{width:100%;border-collapse:collapse;font-size:.76rem;font-variant-numeric:tabular-nums;table-layout:fixed}
 .wlt th{font-size:.62rem;font-weight:600;color:var(--muted);text-align:right;padding:4px 2px;text-transform:uppercase}
+.wlt tr.open td{background:color-mix(in oklab,var(--accent) 10%,transparent)}
+.wlt tr.wldet td{white-space:normal;padding:6px 0 12px;text-align:left}
+.wlbox .wlbh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:4px 0}.wlbox .wlbh b{font-size:.9rem}
+.wlbox .grid{font-size:.74rem}.wlgo{margin-top:8px}
 .wlt th[data-k]{cursor:pointer;user-select:none}
 .wlt th:first-child,.wlt td:first-child{text-align:left;width:44%}.wlt th.on{color:var(--text)}
 .wlt td{padding:9px 2px;border-top:1px solid var(--line);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1090,7 +1094,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   // ---------- Stijgers & dalers per index ----------
   var lijsten={},lkoers={},wlIdx="WEBN",wlSort="d1",wlAll=false;
   // sortering per tabel: kolom + richting (-1 = hoog naar laag, 1 = laag naar hoog); tik op een kolomkop om te wisselen
-  var wlOrd={up:{k:"d1",dir:-1},down:{k:"d1",dir:1}};
+  var wlOrd={up:{k:"d1",dir:-1},down:{k:"d1",dir:1}},wlOpen=null;
   try{var wls=JSON.parse(localStorage.getItem("wl")||"{}");if(wls.i)wlIdx=wls.i;if(wls.s)wlSort=wls.s}catch(e){}
   var WLIDX=["WEBN","Nasdaq 100","S&P 500","AEX"];
   var WLHINT={"WEBN":"Benadering: de 500 grootste bedrijven uit ontwikkelde landen (zoals de grootste posities in WEBN).",
@@ -1103,7 +1107,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("wlidx").innerHTML=idx.map(function(k){return '<button type="button" data-v="'+esc(k)+'" aria-pressed="'+(k===wlIdx)+'">'+esc(k)+'</button>'}).join("");
     $("wlsort").innerHTML=[["d1","Vandaag (1D)"],["w1","Week (7D)"]].map(function(x){return '<button type="button" data-v="'+x[0]+'" aria-pressed="'+(x[0]===wlSort)+'">'+x[1]+'</button>'}).join("");
     var byT={};rows.forEach(function(r){byT[r.ticker]=r});
-    var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,
+    var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,m1:r.m1,m3:r.m3,ytd:r.ytd,y1:r.y1,
+      high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,
       pu:r.price==null?null:r.price*(r.usd!=null?r.usd:(r.currency==="EUR"&&eurusd?eurusd:(r.currency==="USD"?1:null)))}:null})
       .filter(function(x){return x&&x[wlSort]!=null});
     function srt(list,o){return list.sort(function(a,b){var kk=o.k==="price"?"pu":o.k,x=a[kk],y=b[kk];  // koers vergeleken in dollars
@@ -1117,8 +1122,18 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       var o=wlOrd[which];
       function th(k,l){var on=o.k===k;return '<th data-k="'+k+'" data-w="'+which+'"'+(on?' class="on"':'')+' role="button" tabindex="0" aria-sort="'+(on?(o.dir<0?"descending":"ascending"):"none")+'">'+(on?(o.dir<0?"↓ ":"↑ "):"")+l+'</th>'}
       return '<thead><tr>'+th("name","Naam")+th("price","Koers")+th("d1","1D")+th("w1","7D")+'</tr></thead><tbody>'+
-        list.slice(0,n).map(function(x){return '<tr data-t="'+esc(x.t)+'"'+(x.inRows?' class="go"':'')+'><td>'+esc(x.name)+'</td><td>'+(x.price>=1000?sym(x.cur)+Math.round(x.price).toLocaleString("nl-NL"):fmtPrice(x.price,x.cur))+'</td>'+pc(x.d1)+pc(x.w1)+'</tr>'}).join("")+'</tbody>'}
+        list.slice(0,n).map(function(x){var op=wlOpen===which+"|"+x.t;
+          return '<tr data-t="'+esc(x.t)+'" data-w="'+which+'" class="go'+(op?' open':'')+'"><td>'+esc(x.name)+'</td><td>'+(x.price>=1000?sym(x.cur)+Math.round(x.price).toLocaleString("nl-NL"):fmtPrice(x.price,x.cur))+'</td>'+pc(x.d1)+pc(x.w1)+'</tr>'+
+            (op?'<tr class="wldet"><td colspan="4">'+wlDetail(x)+'</td></tr>':'')}).join("")+'</tbody>'}
+    function wlDetail(x){
+      var it=[["1 maand",fmtPct(x.m1)],["3 maanden",fmtPct(x.m3)],["Sinds 1 jan",fmtPct(x.ytd)],["1 jaar",fmtPct(x.y1)],
+        ["Onder jaartop",x.fromHigh==null?"–":fmtPct(x.fromHigh,"fromHigh")],["Jaartop",x.high52==null?"–":fmtPrice(x.high52,x.cur)]];
+      return '<div class="wlbox"><div class="wlbh"><b>'+esc(x.name)+'</b><span class="tk">'+esc(x.t)+'</span>'+(x.rating?' '+ratingTag(x):'')+'</div>'+
+        '<div class="chart" data-t="'+esc(x.t)+'" data-cur="'+esc(x.cur||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div>'+
+        '<dl class="grid">'+it.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>'+
+        (x.inRows?'<button type="button" class="wlmore wlgo" data-t="'+esc(x.t)+'">Rating en alle cijfers ›</button>':'')+'</div>'}
     $("wlup").innerHTML=tab(up,"up");$("wldown").innerHTML=tab(down,"down");
+    var oc=document.querySelector('#wlpanel tr.wldet .chart');if(oc)drawChart(oc);
     var mx=Math.max(up.length,down.length);
     $("wlmore").style.display=mx<=7?"none":"";$("wlmore").textContent=wlAll?"Toon minder":"Toon alle ("+up.length+" stijgers, "+down.length+" dalers)";
     $("wlhint").textContent=(WLHINT[wlIdx]||"")+" "+L.length+" aandelen met koers.";
@@ -1132,7 +1147,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(th){var o=wlOrd[th.dataset.w],k=th.dataset.k;
       if(o.k===k)o.dir=-o.dir;else{o.k=k;o.dir=k==="name"?1:(th.dataset.w==="down"&&(k==="d1"||k==="w1")?1:-1)}
       renderWL();return}
-    var tr=e.target.closest("tr.go");if(tr)gotoCard(tr.dataset.t)})});
+    var g=e.target.closest(".wlgo");if(g){gotoCard(g.dataset.t);return}
+    if(e.target.closest("tr.wldet"))return;                 // klikken in de grafiek/details
+    var tr=e.target.closest("tr.go");if(!tr)return;
+    var key=tr.dataset.w+"|"+tr.dataset.t;wlOpen=wlOpen===key?null:key;renderWL()})});
   function gotoCard(t){
     showTab("aandelen");
     statFilter=null;ratingFilter=null;capFilter=null;$("sector").value="";$("q").value="";openTicker=t;render();
@@ -1756,7 +1774,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-23";
+  var BUILD="2026-11-05-24";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

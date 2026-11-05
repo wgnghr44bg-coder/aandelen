@@ -574,16 +574,19 @@ def index_lijsten(rijen):
         lijsten[naam] = list(leden)
         namen.update(leden)
     extra = sorted({t for naam in INDEX_BRONNEN for t in lijsten[naam] if t not in bekend})
-    koersen = {}
+    koersen, slot = {}, {}
     if extra:
         try:
-            data = yf.download(extra, period="3mo", interval="1d", auto_adjust=True, group_by="ticker", progress=False)
+            data = yf.download(extra, period="5y", interval="1d", auto_adjust=True, group_by="ticker", progress=False)
             for t in extra:
                 try:
-                    st = bereken(data[t] if len(extra) > 1 else data)
+                    df = data[t] if len(extra) > 1 else data
+                    st = bereken(df)
                     if st:
-                        koersen[t] = {"name": namen.get(t, t), "price": st["price"], "d1": st["d1"], "w1": st["w1"],
-                                      "currency": "EUR" if t.endswith(".AS") else "USD"}
+                        koersen[t] = {"name": namen.get(t, t), "currency": "EUR" if t.endswith(".AS") else "USD",
+                                      **{k: st[k] for k in ("price", "d1", "w1", "m1", "m3", "ytd", "y1", "high52",
+                                                            "fromHigh")}}
+                        slot[t] = df["Close"].dropna()  # voor de koersgrafiek (history.json)
                 except Exception as e:  # noqa: BLE001
                     print(f"  index-lid {t}: {e}")
         except Exception as e:  # noqa: BLE001
@@ -591,7 +594,7 @@ def index_lijsten(rijen):
     for naam in INDEX_BRONNEN:  # alleen leden met een koers
         lijsten[naam] = [t for t in lijsten[naam] if t in bekend or t in koersen]
     print("indexlijsten: " + ", ".join(f"{k} {len(v)}" for k, v in lijsten.items()) + f" (extra koersen: {len(koersen)})")
-    return lijsten, koersen
+    return lijsten, koersen, slot
 
 
 def main():
@@ -693,7 +696,8 @@ def main():
     bewaar_markt_hist(extras)
     uit["extras"] = extras
     try:
-        uit["lijsten"], uit["lijst_koersen"] = index_lijsten(rijen)
+        uit["lijsten"], uit["lijst_koersen"], lijst_slot = index_lijsten(rijen)
+        extra_closes.update(lijst_slot)
     except Exception as e:  # noqa: BLE001
         print(f"indexlijsten mislukt: {e}")
     try:

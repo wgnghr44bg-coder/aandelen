@@ -377,6 +377,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .xlink b{font-size:.95rem}
 .xlink span{grid-column:1;color:var(--muted);font-size:.78rem;line-height:1.3}
 .xlink i{grid-row:1/3;grid-column:2;font-style:normal;font-size:1.2rem;color:var(--accent)}
+.vgh{margin:14px 4px 6px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rt2 tr.bgrp td{padding-top:12px;font-size:.68em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.more.inl{display:inline;padding:0;border:0;background:none;cursor:pointer;font-weight:600;font-size:inherit!important;color:var(--accent)!important}
 .mlink{display:block;margin:6px 0 0 auto;font-size:.72rem!important;color:var(--accent)!important}
 .hsub{color:var(--muted);font-size:.66rem;margin:-6px 0 4px}
 
@@ -431,7 +434,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="mtiles" id="mtiles" hidden></div>
     <div class="mpanels" id="mpanels" hidden>
       <div class="panel mp"><div class="ph"><h2>🏠 Hypotheek</h2><button type="button" class="more" data-go="rentes" aria-label="Naar rentes">›</button></div><p class="hsub" id="hypsub">gem. afgesloten</p><table class="rt2" id="hypmini"></table></div>
-      <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table><button type="button" class="more mlink" data-go="vastgoed">Rentes per aanbieder ›</button></div>
+      <div class="panel mp"><div class="ph"><h2>🏢 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="rt2" id="vgmini"></table><button type="button" class="more mlink" data-go="vastgoed">Vastgoedrentes per aanbieder ›</button></div>
     </div>
     <div class="panel">
       <div class="ph"><h2>Sectoren</h2><span class="pmeta">– beste <span id="secPer"></span></span><button type="button" class="more" data-go="sectoren">Alle sectoren ›</button></div>
@@ -472,8 +475,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Hypotheekrente NL</h2></div><table class="rt2 big" id="r_hyp"></table>
       <p class="hint">Dit is de <b>gemiddelde rente op afgesloten</b> nieuwe hypotheken in Nederland in die maand (alle banken, met en zonder NHG, alle LTV's, inclusief rente-aanpassingen). Bron: DNB/ECB, maandelijks, ±6 weken vertraging. Dit is <b>niet</b> de rente die banken nu aanbieden.</p>
 </div>
-    <div class="panel"><div class="ph"><span class="emo">🏭</span><h2>Zakelijke leningen NL</h2></div><table class="rt2 big" id="r_nfc"></table>
-      <p class="hint">Gemiddelde rente op nieuwe leningen aan bedrijven in Nederland. Bron: DNB/ECB.</p></div>
+    <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Zakelijk &amp; vastgoed</h2><button type="button" class="more" data-go="vastgoed">Vastgoed ›</button></div>
+      <p class="hint" style="margin:0">Rentes voor bedrijfs- en vastgoedfinanciering (verhuurhypotheek, beleggingspanden) staan onder <b>Vastgoed</b>.</p></div>
   <div class="panel"><div class="ph"><span class="emo">🔗</span><h2>Actueel bekijken</h2></div><div class="xlinks"><a class="xlink" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html" target="_blank" rel="noopener"><b>ECB – officiële rentes</b><span>Depositorente, herfinancieringsrente en historie</span><i>↗</i></a><a class="xlink" href="https://www.euribor-rates.eu/nl/" target="_blank" rel="noopener"><b>Euribor-rates.eu</b><span>Actuele Euribor (1, 3, 6 en 12 maanden)</span><i>↗</i></a><a class="xlink" href="https://www.hypotheekrente.nl/" target="_blank" rel="noopener"><b>Hypotheekrente.nl</b><span>Aangeboden hypotheekrentes per bank, met en zonder NHG</span><i>↗</i></a><a class="xlink" href="https://www.independer.nl/" target="_blank" rel="noopener"><b>Independer</b><span>Hypotheken vergelijken en actuele rentes</span><i>↗</i></a><a class="xlink" href="https://www.dnb.nl/statistieken/" target="_blank" rel="noopener"><b>DNB – statistieken</b><span>Officiële rentecijfers van De Nederlandsche Bank</span><i>↗</i></a></div><p class="hint">Externe sites met de nieuwste cijfers; ze openen in een nieuw venster.</p></div>
   </section>
 
@@ -486,16 +489,20 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   </section>
 
   <section class="pane" data-pane="vastgoed" hidden>
-    <div class="panel"><div class="ph"><span class="emo">🏘️</span><h2>Woningprijzen NL</h2><span class="pmeta">jaar op jaar</span></div>
-      <div class="lchart" id="hchart"></div>
-      <p class="hint">Verandering van de prijzen van woningen in Nederland ten opzichte van een jaar eerder, per kwartaal. Bron: Eurostat.</p></div>
-    <div class="panel"><div class="ph"><span class="emo">🏦</span><h2>Vastgoedrentes per aanbieder</h2></div>
+    <h3 class="vgh">Vastgoedfinanciering</h3>
+    <div class="panel"><div class="ph"><span class="emo">🏦</span><h2>Actuele rentes per aanbieder</h2></div>
       <div class="xlinks">
         <a class="xlink" href="https://www.realtyinsights.nl/" target="_blank" rel="noopener"><b>Realty Insights</b><span>Verhuurhypotheek vergelijken · o.a. NIBC, RNHB, Domivest, Nestr, DCMF, Mogelijk, SolidBriq</span><i>↗</i></a>
         <a class="xlink" href="https://www.financieren.nl/" target="_blank" rel="noopener"><b>Financieren.nl</b><span>Actuele vastgoedrentes per geldverstrekker en financieringspercentage</span><i>↗</i></a>
       </div>
-      <p class="hint">Rentes voor verhuur- en vastgoedfinanciering verschillen per geldverstrekker, LTV, leningbedrag en aflossingsvorm. Deze vergelijkers tonen de actuele tarieven; ze openen in een nieuw venster.</p></div>
-    <div class="panel"><div class="ph"><span class="emo">🏠</span><h2>Rente &amp; financiering</h2></div><table class="rt2 big" id="v_rt"></table></div>
+      <p class="hint">De rente voor verhuur- en vastgoedfinanciering hangt af van de geldverstrekker, LTV, het leenbedrag en de aflossingsvorm. Deze vergelijkers tonen de tarieven van vandaag (opent in een nieuw venster).</p></div>
+    <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Bankrente zakelijk NL</h2><span class="pmeta" id="v_bizd"></span></div><table class="rt2 big" id="v_biz"></table>
+      <p class="hint">Gemiddelde rente die Nederlandse banken rekenden op <b>nieuw afgesloten</b> leningen aan bedrijven (daar valt bancaire vastgoedfinanciering onder), per leenbedrag en rentevaste periode. Bron: DNB/ECB, maandelijks, ±6 weken vertraging. Particuliere hypotheken staan bij <button type="button" class="more inl" data-go="rentes">Rentes ›</button></p></div>
+    <h3 class="vgh">Woningmarkt</h3>
+    <div class="panel"><div class="ph"><span class="emo">🏘️</span><h2>Woningprijzen NL</h2><span class="pmeta">jaar op jaar</span></div>
+      <div class="lchart" id="hchart"></div>
+      <p class="hint">Verandering van de prijzen van woningen in Nederland ten opzichte van een jaar eerder, per kwartaal. Bron: Eurostat.</p></div>
+    <h3 class="vgh">Beleggen</h3>
     <div class="panel"><div class="ph"><span class="emo">🏢</span><h2>Vastgoed-aandelen</h2><span class="pmeta" id="vgcount"></span></div><ul id="vlist"></ul></div>
     <div class="panel"><div class="ph"><span class="emo">🔗</span><h2>Actueel bekijken</h2></div><div class="xlinks"><a class="xlink" href="https://www.cbs.nl/nl-nl/cijfers/detail/85773NED" target="_blank" rel="noopener"><b>CBS – woningprijzen</b><span>Prijsindex bestaande koopwoningen, per maand</span><i>↗</i></a><a class="xlink" href="https://www.nvm.nl/" target="_blank" rel="noopener"><b>NVM</b><span>Woningmarktcijfers van makelaars</span><i>↗</i></a><a class="xlink" href="https://www.kadaster.nl/" target="_blank" rel="noopener"><b>Kadaster</b><span>Woningverkopen en vastgoedgegevens</span><i>↗</i></a></div><p class="hint">Externe sites met de nieuwste cijfers; ze openen in een nieuw venster.</p></div>
   </section>
@@ -1256,9 +1263,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("hypmini").innerHTML=hyp.map(function(x){return '<tr><td>'+SHORTFIX[x.code]+'</td><td>'+pct2(x.value)+'</td><td>'+ppTag(x.value,x.prev,true,true)+'</td></tr>'}).join("");
     var vg=[];
     if(last(m.house_prices_nl))vg.push(["Woningprijzen NL",(last(m.house_prices_nl)[1]>0?"+":"")+pct2(last(m.house_prices_nl)[1])]);
-    if(m.nfc_loans_nl)vg.push(["Zakelijke lening",pct2(m.nfc_loans_nl.value)]);
-    if(m.nl10y)vg.push(["Staatsrente 10j",pct2(m.nl10y.value)]);
-    if(m.euribor3m)vg.push(["Euribor 3 mnd",pct2(m.euribor3m.value)]);
+    var biz=(m.business_nl||[]).filter(function(x){return x.fix_label==="totaal"&&x.amount_label!=="totaal"});
+    if(biz.length)biz.forEach(function(x){vg.push(["Bedrijfslening "+x.amount_label.replace(/^tot en met /,"≤ ").replace(/^boven /,"> "),pct2(x.value)])});
+    else if(m.nfc_loans_nl)vg.push(["Zakelijke lening",pct2(m.nfc_loans_nl.value)]);
     $("vgmini").innerHTML=vg.map(function(x){return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td></tr>'}).join("");
     $("mpanels").hidden=!(hyp.length||vg.length);
     // tabblad Rentes
@@ -1276,7 +1283,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(m.us10y)mk.push(row("Staatsrente VS 10 jaar",pct2(m.us10y.value),"actueel","","https://finance.yahoo.com/quote/%5ETNX/"));
     $("r_mkt").innerHTML=mk.join("")||'<tr><td>Nog geen gegevens</td></tr>';
     $("r_hyp").innerHTML=hyp.map(function(x){return row(x.label,pct2(x.value),pdate(x.date)+(x.prev!=null?" · vorige maand "+pct2(x.prev):""),ppTag(x.value,x.prev,true),x.src)}).join("")||'<tr><td>Nog geen gegevens</td></tr>';
-    $("r_nfc").innerHTML=m.nfc_loans_nl?row("Nieuwe leningen aan bedrijven",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),ppTag(m.nfc_loans_nl.value,m.nfc_loans_nl.prev,true),m.nfc_loans_nl.src):'<tr><td>Nog geen gegevens</td></tr>';
     // tabblad Inflatie
     $("itiles").innerHTML=th;
     var ser=[];if(nl)ser.push({n:"Nederland",c:"#ff8a00",d:nl});if(ea)ser.push({n:"Eurozone",c:"#3b86ff",d:ea});if(eu)ser.push({n:"EU",c:"#a78bfa",d:eu});
@@ -1284,9 +1290,16 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     // tabblad Vastgoed
     var hp=m.house_prices_nl;
     $("hchart").innerHTML=hp?lineChart([{n:"Woningprijzen NL",c:"#2fd26b",d:hp}],{zero:true,suffix:"%"})+(m.house_prices_src?'<p class="srcline">Cijfers: <a class="src" href="'+esc(m.house_prices_src)+'" target="_blank" rel="noopener">Eurostat woningprijsindex ↗</a></p>':''):'<p class="hint">Nog geen gegevens.</p>';
-    $("v_rt").innerHTML=(hyp.map(function(x){return row("Hypotheek "+x.label,pct2(x.value),pdate(x.date),ppTag(x.value,x.prev,true),x.src)}).join("")+
-      (m.nfc_loans_nl?row("Zakelijke lening (bedrijven)",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),"",m.nfc_loans_nl.src):"")+
-      (m.nl10y?row("Staatsrente NL 10 jaar",pct2(m.nl10y.value),"basis voor lange rentes","",m.nl10y.src):""))||'<tr><td>Nog geen gegevens</td></tr>';
+    // zakelijke leningen per leenbedrag (groep) en rentevaste periode
+    var bz=m.business_nl||[],bh=[],grp=null;
+    function cap(t){return t.charAt(0).toUpperCase()+t.slice(1)}
+    bz.forEach(function(x){
+      if(x.amount_label!==grp){grp=x.amount_label;bh.push('<tr class="bgrp"><td colspan="3">'+(grp==="totaal"?"Alle leenbedragen":"Leningen "+esc(grp))+'</td></tr>')}
+      var l=x.fix_label==="totaal"?"Gemiddeld (alle looptijden)":/^variabel/.test(x.fix_label)?cap(x.fix_label):cap(x.fix_label)+" vast";
+      bh.push(row(esc(l),pct2(x.value),x.prev!=null?"vorige maand "+pct2(x.prev):"",ppTag(x.value,x.prev,true),x.src))});
+    if(!bh.length&&m.nfc_loans_nl)bh.push(row("Nieuwe leningen aan bedrijven",pct2(m.nfc_loans_nl.value),pdate(m.nfc_loans_nl.date),ppTag(m.nfc_loans_nl.value,m.nfc_loans_nl.prev,true),m.nfc_loans_nl.src));
+    $("v_biz").innerHTML=bh.join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    $("v_bizd").textContent=bz.length?pdate(bz[0].date):(m.nfc_loans_nl?pdate(m.nfc_loans_nl.date):"");
     var re=rows.filter(function(r){return r.sector==="Real Estate"}).sort(function(a,b){return b.marketCap-a.marketCap});
     $("vgcount").textContent="("+re.length+")";
     var mx=Math.max.apply(null,re.map(function(r){return Math.abs(drop(r,period)||0)}).concat([1]));
@@ -1474,7 +1487,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-5";
+  var BUILD="2026-11-05-6";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -9,8 +9,10 @@ Alles is optioneel: lukt een bron niet, dan blijft de vorige waarde staan (of on
 import csv
 import io
 import json
+import re
 import time
 import urllib.request
+import xml.etree.ElementTree as ET
 
 ECB = "https://data-api.ecb.europa.eu/service/data/"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
@@ -113,6 +115,104 @@ def ecb_link(key):
 
 
 EUROSTAT_LINK = "https://ec.europa.eu/eurostat/databrowser/view/{}/default/table"
+ECB_STRUCT = "https://data-api.ecb.europa.eu/service/"
+
+
+def _tag(el):
+    return el.tag.rsplit("}", 1)[-1]
+
+
+def mir_structuur():
+    """Officiële betekenis van de codes in de MIR-reeksen, uit de ECB-structuur (SDMX):
+    ([dimensie-id's in volgorde], {dimensie: {code: (volgnummer, Engelse naam)}})."""
+    for pad in ("dataflow/ECB/MIR/latest?references=descendants", "datastructure/ECB/ECB_MIR1?references=children"):
+        txt = _get(ECB_STRUCT + pad, tries=2)
+        if not txt:
+            continue
+        try:
+            root = ET.fromstring(txt.encode("utf-8"))
+        except ET.ParseError as e:
+            print(f"  mir-structuur {pad}: niet te lezen ({e})")
+            continue
+        lijsten = {}
+        for cl in root.iter():
+            if _tag(cl) != "Codelist":
+                continue
+            codes = {}
+            for code in cl:
+                if _tag(code) != "Code":
+                    continue
+                namen = [n for n in code if _tag(n) == "Name"]
+                en = next((n.text for n in namen if n.get("{http://www.w3.org/XML/1998/namespace}lang") == "en"), None)
+                codes[code.get("id")] = (len(codes), (en or (namen[0].text if namen else "") or "").strip())
+            lijsten[cl.get("id")] = codes
+        dims = []
+        for d in root.iter():
+            if _tag(d) != "Dimension" or not d.get("id"):
+                continue
+            ref = next((r.get("id") for r in d.iter() if _tag(r) == "Ref" and r.get("id") in lijsten), None)
+            dims.append((int(d.get("position") or len(dims) + 1), d.get("id"), lijsten.get(ref, {})))
+        dims.sort()
+        if dims and lijsten:
+            return [d[1] for d in dims], {d[1]: d[2] for d in dims}
+    return None, None
+
+
+def nl_label(en):
+    """Engelse ECB-omschrijving van een bedrag of rentevaste periode -> kort Nederlands."""
+    t = (en or "").strip()
+    low = t.lower()
+    if low in ("total", "total amount", "all amounts", "total maturity", "total initial rate fixation"):
+        return "totaal"
+    t = re.sub(r"(?i)floating rate and up to", "variabel tot", t)
+    t = re.sub(r"(?i)\s*and up to and including\s*", " – ", t)
+    t = re.sub(r"(?i)\s*and up to\s*", " – ", t)
+    t = re.sub(r"(?i)up to and including", "tot en met", t)
+    t = re.sub(r"(?i)\bup to\b", "tot", t)
+    t = re.sub(r"(?i)\bover\b", "boven", t)
+    t = re.sub(r"(?i)\beur\s*", "€", t)
+    t = re.sub(r"(?i)\s*millions?\b", " mln", t)
+    t = re.sub(r"(?i)\byears?\b", "jaar", t)
+    t = re.sub(r"(?i)\bmonths?\b", "maanden", t)
+    t = re.sub(r"(\d)\.(\d)", r"\1,\2", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    return t[:1].lower() + t[1:]
+
+
+def zakelijk_nl():
+    """Rente op nieuwe bedrijfsleningen NL (hieronder valt ook bancaire vastgoedfinanciering), per
+    leningbedrag en rentevaste periode. De omschrijvingen komen uit de officiële ECB-codelijsten;
+    zonder die lijsten tonen we niets (niets gokken)."""
+    reeksen = ecb_series("MIR/M.NL.B.A2A..R..2240.EUR.N", 2)
+    if not reeksen:
+        return None
+    dims, lijsten = mir_structuur()
+    if not dims or "AMOUNT_CAT" not in dims:
+        print("  zakelijk: ECB-codelijsten niet beschikbaar")
+        return None
+    i_bedrag = dims.index("AMOUNT_CAT")
+    i_vast = next((i for i, d in enumerate(dims) if d.startswith("MATURITY")), None)
+    if i_vast is None:
+        return None
+    rijen, nieuwste = [], max((s["obs"][-1][0] for s in reeksen.values() if s["obs"]), default="")
+    for k, s in reeksen.items():
+        delen = k.split(".")
+        if delen and delen[0] == "MIR":
+            delen = delen[1:]
+        last = _last(s)
+        if len(delen) != len(dims) or not last or last["date"] < nieuwste:
+            continue  # verouderde/stopgezette reeks
+        b, v = delen[i_bedrag], delen[i_vast]
+        bi, bnaam = lijsten[dims[i_bedrag]].get(b, (None, None))
+        vi, vnaam = lijsten[dims[i_vast]].get(v, (None, None))
+        if bnaam is None or vnaam is None:
+            continue
+        rijen.append({"amount": b, "amount_label": nl_label(bnaam), "amount_en": bnaam, "amount_ord": bi,
+                      "fix": v, "fix_label": nl_label(vnaam), "fix_en": vnaam, "fix_ord": vi,
+                      "src": ecb_link("MIR/" + ".".join(delen)), **last})
+        print(f"  zakelijk {b}/{v}: {bnaam!r} / {vnaam!r} -> {last['value']} ({last['date']})")
+    rijen.sort(key=lambda r: (r["amount_ord"], r["fix_ord"]))
+    return rijen or None
 
 
 def haal_macro(vorige=None):
@@ -165,6 +265,9 @@ def haal_macro(vorige=None):
     order = list(FIXATIE)
     hyp.sort(key=lambda h: order.index(h["code"]))
     zet("mortgage_nl", hyp)
+
+    # Bedrijfsleningen NL per bedrag en rentevaste periode (basis voor bancaire vastgoedfinanciering)
+    zet("business_nl", zakelijk_nl())
 
     # Inflatie (HICP, jaar op jaar) – 25 maanden voor een grafiek. Sinds 2026 publiceert Eurostat de HICP
     # volgens COICOP 2018 in nieuwe datasets; we proberen nieuw én oud (Eurostat en ECB) en nemen per land

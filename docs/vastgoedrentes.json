@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T14:32:49Z",
+ "updated": "2026-11-05T14:38:04Z",
  "lenders": [
   {
    "id": "rnhb",
@@ -112,6 +112,204 @@
         7.2,
         7.4,
         7.85
+       ]
+      }
+     ]
+    },
+    {
+     "seg": "residentieel",
+     "name": "saldo € 1–2,5 mln",
+     "src": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
+     "ltv": [
+      50,
+      60,
+      70,
+      75,
+      80,
+      85
+     ],
+     "rows": [
+      {
+       "fix": "1",
+       "label": "1 jaar",
+       "rates": [
+        6.15,
+        6.15,
+        6.2,
+        6.3,
+        6.5,
+        6.85
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar",
+       "rates": [
+        5.95,
+        5.95,
+        6.1,
+        6.1,
+        6.3,
+        6.8
+       ]
+      },
+      {
+       "fix": "3",
+       "label": "3 jaar",
+       "rates": [
+        5.9,
+        5.9,
+        6.05,
+        6.05,
+        6.25,
+        6.75
+       ]
+      },
+      {
+       "fix": "5",
+       "label": "5 jaar",
+       "rates": [
+        6.05,
+        6.05,
+        6.1,
+        6.2,
+        6.4,
+        6.9
+       ]
+      },
+      {
+       "fix": "7",
+       "label": "7 jaar",
+       "rates": [
+        6.3,
+        6.3,
+        6.35,
+        6.45,
+        6.65,
+        7.15
+       ]
+      },
+      {
+       "fix": "10",
+       "label": "10 jaar",
+       "rates": [
+        6.35,
+        6.45,
+        6.65,
+        6.75,
+        6.95,
+        7.6
+       ]
+      },
+      {
+       "fix": "15",
+       "label": "15 jaar",
+       "rates": [
+        6.6,
+        6.7,
+        6.9,
+        7.0,
+        7.2,
+        7.65
+       ]
+      }
+     ]
+    },
+    {
+     "seg": "residentieel",
+     "name": "saldo boven € 2,5 mln",
+     "src": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
+     "ltv": [
+      50,
+      60,
+      70,
+      75,
+      80,
+      85
+     ],
+     "rows": [
+      {
+       "fix": "1",
+       "label": "1 jaar",
+       "rates": [
+        6.05,
+        6.05,
+        6.1,
+        6.2,
+        6.4,
+        6.75
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar",
+       "rates": [
+        5.85,
+        5.85,
+        6.0,
+        6.0,
+        6.2,
+        6.7
+       ]
+      },
+      {
+       "fix": "3",
+       "label": "3 jaar",
+       "rates": [
+        5.8,
+        5.8,
+        5.95,
+        5.95,
+        6.15,
+        6.65
+       ]
+      },
+      {
+       "fix": "5",
+       "label": "5 jaar",
+       "rates": [
+        5.95,
+        5.95,
+        6.0,
+        6.1,
+        6.3,
+        6.8
+       ]
+      },
+      {
+       "fix": "7",
+       "label": "7 jaar",
+       "rates": [
+        6.2,
+        6.2,
+        6.25,
+        6.35,
+        6.55,
+        7.05
+       ]
+      },
+      {
+       "fix": "10",
+       "label": "10 jaar",
+       "rates": [
+        6.25,
+        6.35,
+        6.55,
+        6.65,
+        6.85,
+        7.5
+       ]
+      },
+      {
+       "fix": "15",
+       "label": "15 jaar",
+       "rates": [
+        6.5,
+        6.6,
+        6.8,
+        6.9,
+        7.1,
+        7.55
        ]
       }
      ]
@@ -411,6 +609,10 @@
    ],
    "facts": [
     {
+     "t": "Financiering tot 85% van de waarde.",
+     "src": "https://dcmf.nl/verhuurhypotheek/"
+    },
+    {
      "t": "Tarieven zonder renteopslagen; kunnen wijzigen tijdens het aanvraagproces.",
      "src": "https://dcmf.nl/verhuurhypotheek/"
     }
@@ -428,6 +630,10 @@
     {
      "t": "Variabele rente = 1-maands Euribor + opslag: woningen 2,90% (t/m 65% LTV) tot 4,00% (t/m 85% LTV); commercieel 3,75–3,85%.",
      "src": "https://www.solidbriq.nl/vaststelling-variabele-rente/"
+    },
+    {
+     "t": "Anti-speculatieboete bij aflossen binnen 3 jaar: 3% / 2% / 1%.",
+     "src": "https://www.solidbriq.nl/hoe-financieren/flexibel-in-de-toekomst/"
     }
    ],
    "status": "aanvraag",

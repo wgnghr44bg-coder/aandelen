@@ -42,12 +42,12 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:normal;color:var(--text);margin-top:2px}
 .chart{margin:0 0 12px}
 .chart-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-height:38px}
-.chart-read{font-size:.8rem;color:var(--muted);line-height:1.25}
+.chart-read{font-size:.8rem;color:var(--muted);line-height:1.25;height:5.4em;overflow:hidden;flex:1;min-width:0}  /* vaste hoogte: grafiek springt niet */
 .chart-read b{display:block;color:var(--text);font-size:.95rem;font-variant-numeric:tabular-nums}
 .ranges{display:flex;gap:2px;background:var(--chip);border-radius:8px;padding:2px;flex:0 0 auto}
 .ranges button{border:0;background:none;color:var(--muted);font:inherit;font-size:.78rem;font-weight:600;padding:5px 9px;border-radius:6px;cursor:pointer}
 .ranges button[aria-pressed=true]{background:var(--card);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.plot{position:relative;touch-action:pan-y;margin-top:6px}
+.plot{position:relative;touch-action:none;margin-top:6px}  /* vinger op de grafiek: pagina staat stil */
 .plot svg{display:block;width:100%;height:170px;overflow:visible}
 .plot .grid-l{stroke:var(--line);stroke-width:1}
 .plot .ax{fill:var(--muted);font-size:10px;font-family:inherit}
@@ -408,7 +408,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .b3d{border-top:1px solid var(--line);padding:8px 0}.b3d summary{cursor:pointer;display:flex;justify-content:space-between;font-size:.85rem}
 .b3d summary span{color:var(--muted);font-size:.72rem}.b3d ul{margin:6px 0 0;padding-left:18px;font-size:.74rem}.b3d li{margin:3px 0}
 .b3src{list-style:none;margin-left:-18px!important;color:var(--muted);font-size:.68rem}
-.tcr{margin:0 0 4px}.tcread{min-height:1.1em;font-size:.68rem;color:var(--muted);text-align:center}
+.tcr{margin:0 0 4px}.lchart svg{touch-action:none}.tcread{min-height:1.1em;font-size:.68rem;color:var(--muted);text-align:center}
 .sptag{font-size:.6rem;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 3px;color:var(--muted)}
 .wlmore{display:block;margin:10px auto 0;border:1px solid var(--line);background:none;color:var(--accent);font:inherit;font-size:.74rem;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer}
 .wlh{margin:12px 0 2px;font-size:.78rem}.wlh.up{color:var(--up)}.wlh.down{color:var(--down-strong)}
@@ -1783,7 +1783,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-05-26";
+  var BUILD="2026-11-05-27";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

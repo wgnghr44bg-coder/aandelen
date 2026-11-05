@@ -197,6 +197,13 @@ def http_json(url, pogingen=3):
     return None
 
 
+def hist(close, days=400):
+    """Slotkoersen van de laatste ~13 maanden als [[datum, koers], …] (voor D/W/M/YTD/Y op de site)."""
+    c = close.dropna()
+    c = c[c.index >= c.index[-1] - pd.Timedelta(days=days)]
+    return [[pd.Timestamp(d).strftime("%Y-%m-%d"), schoon(v, 4)] for d, v in c.items()]
+
+
 def spark(close, n=30):
     """Laatste n slotkoersen voor een mini-grafiekje."""
     return [schoon(v, 4) for v in close.dropna().iloc[-n:].tolist()]
@@ -219,7 +226,7 @@ def bitcoin():
         return None, None
     stats.pop("_date")
     return {"ticker": "BTC-EUR", "label": "Bitcoin", "beurs": "Bitvavo", "name": "Bitcoin",
-            "currency": "EUR", "spark": spark(df["Close"]), **stats}, df["Close"]
+            "currency": "EUR", "spark": spark(df["Close"]), "h": hist(df["Close"]), **stats}, df["Close"]
 
 
 def haal_extras():
@@ -247,7 +254,7 @@ def haal_extras():
             naam = info.get("shortName") or info.get("longName") or e["label"]
             print(f"  extra {e['ticker']}: {naam} ({info.get('currency')}, {info.get('exchange')}) {stats['price']}")
             rijen.append({**e, "name": naam, "currency": info.get("currency") or "EUR",
-                          "spark": spark(df["Close"]), **stats})
+                          "spark": spark(df["Close"]), "h": hist(df["Close"]), **stats})
             closes[e["ticker"]] = df["Close"]
         except Exception as ex:  # noqa: BLE001
             print(f"  extra {e['ticker']}: overgeslagen ({ex})")

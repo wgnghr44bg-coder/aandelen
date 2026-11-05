@@ -49,3 +49,13 @@ def test_macro_parsing(monkeypatch):
     assert m["hicp"]["EA20"][-1] == ["2026-09", 2.2]
     assert m["euribor3m"] == {"value": 2.0}            # bron faalde -> vorige waarde
     assert "nl10y" not in m                            # geen vorige -> ontbreekt (niet verzonnen)
+
+
+def test_markt_archief_wist_niets(tmp_path, monkeypatch):
+    import update
+    monkeypatch.setattr(update, "MARKT_HIST", tmp_path / "m.json")
+    update.bewaar_markt_hist([{"ticker": "X", "h": [["2020-12-31", 1.0], ["2021-12-31", 2.0]]}])
+    # later geeft de bron alleen recente jaren terug
+    ex = [{"ticker": "X", "h": [["2027-01-04", 3.0], ["2021-12-31", 2.5]]}]
+    update.bewaar_markt_hist(ex)
+    assert ex[0]["h"] == [["2020-12-31", 1.0], ["2021-12-31", 2.5], ["2027-01-04", 3.0]]

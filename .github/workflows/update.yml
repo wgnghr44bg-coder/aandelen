@@ -66,6 +66,7 @@ jobs:
         run: |
           git add docs/data.json
           if [ -f docs/history.json ]; then git add docs/history.json; fi
+          if [ -f docs/markt_hist.json ]; then git add docs/markt_hist.json; fi
           if [ -f analyse/analysis.json ]; then git add analyse/analysis.json; fi
           if git diff --cached --quiet; then
             echo "Geen wijzigingen."

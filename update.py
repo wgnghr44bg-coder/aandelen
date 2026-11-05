@@ -21,6 +21,7 @@ TICKERS_FILE = ROOT / "tickers.txt"
 AI_FILE = ROOT / "ai.txt"
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
+MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL/Bitcoin (wordt nooit ingekort)
 TOP_N = 500
 
 # Extra koersen bovenaan de site (in euro's).
@@ -269,6 +270,26 @@ def haal_extras():
     return rijen, closes
 
 
+def bewaar_markt_hist(extras):
+    """Voegt de nieuwe dagkoersen van WEBN, VALL en Bitcoin toe aan een blijvend archief, zodat oude jaren
+    (bv. 2026 in 2030) niet verdwijnen als de bron maar een paar jaar teruggeeft. Niets wordt gewist."""
+    try:
+        archief = json.loads(MARKT_HIST.read_text()) if MARKT_HIST.exists() else {}
+    except Exception:  # noqa: BLE001
+        archief = {}
+    for x in extras:
+        t = x.get("ticker")
+        oud = {d: v for d, v in archief.get(t, [])}
+        for d, v in x.get("h") or []:
+            if v is not None:
+                oud[d] = v  # nieuwste waarde voor een datum wint
+        if oud:
+            archief[t] = [[d, oud[d]] for d in sorted(oud)]
+            x["h"] = archief[t]
+    MARKT_HIST.write_text(json.dumps(archief, separators=(",", ":")) + "\n")
+    print("markt-archief: " + ", ".join(f"{t} {v[0][0]}→{v[-1][0]} ({len(v)})" for t, v in archief.items() if v))
+
+
 def haal_wereld_bedrijven(cache, fx):
     """Grote bedrijven uit opkomende markten voor het wereldoverzicht (marktwaarde in USD)."""
     uit = []
@@ -417,6 +438,7 @@ def main():
         "rows": rijen,
     }
     extras, extra_closes = haal_extras()
+    bewaar_markt_hist(extras)
     uit["extras"] = extras
     uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
     uit["eurusd"] = schoon(fx.get("EURUSD=X"), 6)  # 1 euro in dollar, voor de portfolio in euro's

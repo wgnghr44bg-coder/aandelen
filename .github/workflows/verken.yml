@@ -12,4 +12,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -u tools/verken_aanbieders.py
+      - run: python -u tools/verken_tabellen.py

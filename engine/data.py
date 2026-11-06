@@ -22,7 +22,7 @@ MIN_YEARS = 3                     # minimaal 3 jaar historie
 INFO_FIELDS = (
     "shortName", "longName", "sector", "industry", "marketCap", "currentPrice", "regularMarketPrice",
     "trailingPE", "forwardPE", "trailingEps", "forwardEps", "beta", "currency", "financialCurrency",
-    "sharesOutstanding", "mostRecentQuarter", "lastFiscalYearEnd", "country", "floatShares",
+    "sharesOutstanding", "mostRecentQuarter", "lastFiscalYearEnd", "country", "floatShares", "exchange",
 )
 
 # Rijnamen in yfinance (met terugvalopties)

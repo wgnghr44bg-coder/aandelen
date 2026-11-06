@@ -40,6 +40,9 @@ MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL
 MIN_CAP = 50e9    # alleen beursbedrijven met een beurswaarde boven $50 miljard (wereldwijd)
 VOOR_CAP = 40e9   # voorselectie met marge: van deze bedrijven worden koersen opgehaald
 SCREENER_FILE = ROOT / "screener.json"  # laatst gevonden kandidaten van de Yahoo-screener (terugval)
+# Over-the-counter-noteringen (bv. CGXYY, BACHY): onofficiële Amerikaanse handel in buitenlandse aandelen, vaak met een
+# verkeerde beurswaarde. Die slaan we over; het bedrijf komt via zijn echte beurs (Hongkong, Shanghai, ...) in de lijst.
+OTC_BEURZEN = {"PNK", "OTC", "OQB", "OQX", "OEM", "OGM", "PINX", "OBB", "OTCPK"}
 # Yahoo-screener per land: de grootste bedrijven op beurswaarde (in eigen valuta, dus per land sorteren)
 SCREENER_REGIOS = {"us": 500, "jp": 120, "cn": 120, "hk": 120, "in": 120, "gb": 80, "ca": 80, "de": 80, "fr": 80,
                    "ch": 60, "tw": 60, "kr": 60, "au": 60, "nl": 40, "se": 40, "dk": 40, "es": 40, "it": 40,
@@ -527,7 +530,8 @@ def screener_kandidaten():
                     res = yf.screen(q, offset=offset, size=min(250, n - offset),
                                     sortField="intradaymarketcap", sortAsc=False)
                     quotes = (res or {}).get("quotes") or []
-                    gevonden += [x["symbol"] for x in quotes if x.get("symbol") and x.get("quoteType", "EQUITY") == "EQUITY"]
+                    gevonden += [x["symbol"] for x in quotes if x.get("symbol") and x.get("quoteType", "EQUITY") == "EQUITY"
+                                 and str(x.get("exchange") or "").upper() not in OTC_BEURZEN]
                     if len(quotes) < min(250, n - offset):
                         break
                 except Exception as e:  # noqa: BLE001
@@ -556,6 +560,15 @@ def bedrijfssleutel(naam):
     """Naam zonder rechtsvorm/leestekens: om dubbele noteringen van hetzelfde bedrijf te herkennen."""
     n = re.sub(r"[^a-z0-9 ]", " ", (naam or "").lower())
     return " ".join(_RECHTSVORM.sub(" ", n).split())
+
+
+def is_otc(ticker, info=None):
+    """True voor een OTC-notering. Beurscode uit de info; zonder code: Amerikaans symbool van 5 letters op F of Y
+    (de OTC-vorm voor buitenlandse aandelen, bv. BYDDF, PNGAY)."""
+    beurs = str((info or {}).get("exchange") or "").upper()
+    if beurs:
+        return beurs in OTC_BEURZEN
+    return bool(re.fullmatch(r"[A-Z]{4}[FY]", ticker or ""))
 
 
 def usd_beurswaarde(info, fx):
@@ -718,6 +731,10 @@ def main():
     fund.refresh(cache, [], info_only=kandidaten)
     rf, fx = fund.market_data(cache)
     # Voorselectie: alleen bedrijven die (bijna) boven de grens zitten krijgen koersen en jaarcijfers
+    otc = [t for t in kandidaten if is_otc(t, (cache.get(t) or {}).get("info"))]
+    if otc:
+        print(f"OTC-noteringen overgeslagen ({len(otc)}): {', '.join(otc[:30])}")
+    kandidaten = [t for t in kandidaten if t not in set(otc)]
     tickers = [t for t in kandidaten if (usd_beurswaarde((cache.get(t) or {}).get("info") or {}, fx) or 0) >= VOOR_CAP]
     print(f"voorselectie (> ${VOOR_CAP / 1e9:.0f} mld): {len(tickers)} aandelen")
     data = download(tickers)

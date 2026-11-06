@@ -18,6 +18,7 @@ import pandas as pd
 import yfinance as yf
 
 import fundamentals as fund
+from engine.uitleg import waarom
 import grondstoffen
 import macro
 
@@ -808,6 +809,13 @@ def main():
         print(f"waarderingsengine mislukt: {e}")
     for r in rijen:
         r["rating"] = (analyse or {}).get(r["ticker"], {}).get("rating", "NO RATING")
+        try:
+            uitleg = waarom((analyse or {}).get(r["ticker"]))
+        except Exception as e:  # noqa: BLE001
+            print(f"  uitleg {r['ticker']}: {e}")
+            uitleg = None
+        if uitleg:
+            r["why"] = uitleg  # waarom BUY: reden in gewone taal, uit de berekende cijfers
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(uit, ensure_ascii=False, indent=1) + "\n")
     nieuwe_dag = historie_nodig(uit["asof"])

@@ -181,6 +181,11 @@ ul{list-style:none;margin:0;padding:0}
 .fill{height:100%;border-radius:2px;margin-left:auto}
 .detail{display:none;border-top:1px solid var(--line);padding:12px;font-size:.88rem}
 .card.open .detail{display:block}
+.why{margin:12px 0 4px;padding:10px 12px;border-radius:12px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.35);line-height:1.4}
+.why h4{margin:0 0 6px;font-size:.92rem}
+.why ul{margin:0 0 8px;padding-left:18px}
+.why li{margin:3px 0}
+.why ul.watch{margin-bottom:0;color:var(--muted)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px}
 .grid div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:3px 0}
 .grid dt{color:var(--muted)}.grid dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
@@ -819,6 +824,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var c=r.rating==="NO RATING"?"NO":r.rating;
     return '<span class="rt rt-'+c+'">'+r.rating+'</span>';
   }
+  // Waarom BUY: uitleg uit de berekende cijfers (data.json: why.why / why.watch)
+  function whyBox(r){
+    if(r.rating!=="BUY"||!r.why||!(r.why.why||[]).length)return "";
+    return '<div class="why"><h4>✅ Waarom een BUY?</h4><ul>'+r.why.why.map(function(t){return '<li>'+esc(t)+'</li>'}).join("")+'</ul>'+
+      ((r.why.watch||[]).length?'<h4>⚠️ Let op</h4><ul class="watch">'+r.why.watch.map(function(t){return '<li>'+esc(t)+'</li>'}).join("")+'</ul>':'')+'</div>';
+  }
   function detail(r){
     var items=[
       ["Koers",fmtPrice(r.price,r.currency)],["Beurswaarde",fmtCap(r.marketCap)],
@@ -828,7 +839,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       ["Sinds 1 jan",fmtPct(r.ytd)],["1 jaar",fmtPct(r.y1)],
       ["5 jaar",fmtPct(r.y5)],["Jaartop",fmtPrice(r.high52,r.currency)]
     ];
-    var h='<div class="advies"><span>'+(r.rating?'Advies '+ratingTag(r):'')+'</span>'+starBtn(r.ticker)+'</div>'+'<div class="chart" data-t="'+esc(r.ticker)+'" data-cur="'+esc(r.currency||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>';
+    var h='<div class="advies"><span>'+(r.rating?'Advies '+ratingTag(r):'')+'</span>'+starBtn(r.ticker)+'</div>'+'<div class="chart" data-t="'+esc(r.ticker)+'" data-cur="'+esc(r.currency||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div><dl class="grid">'+items.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>'+whyBox(r);
     var d=drop(r,period);
     if(r.y1!=null&&r.y1>50&&d!=null&&d>15)h+='<div class="warn">⚠️ Deze daling volgt op een grote stijging: het aandeel steeg het afgelopen jaar '+fmtPct(r.y1)+'.</div>';
     if(r.pe!=null&&r.pe>100)h+='<div class="warn">⚠️ Zeer hoge K/W ('+nf1.format(r.pe)+'): beleggers betalen veel voor de huidige winst.</div>';
@@ -1125,7 +1136,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("wlsort").innerHTML=[["d1","Vandaag (1D)"],["w1","Week (7D)"]].map(function(x){return '<button type="button" data-v="'+x[0]+'" aria-pressed="'+(x[0]===wlSort)+'">'+x[1]+'</button>'}).join("");
     var byT={};rows.forEach(function(r){byT[r.ticker]=r});
     var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,m1:r.m1,m3:r.m3,ytd:r.ytd,y1:r.y1,sector:r.sector,ai:!!r.ai,
-      high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,
+      high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,why:r.why,
       pu:r.price==null?null:r.price*(r.usd!=null?r.usd:(r.currency==="EUR"&&eurusd?eurusd:(r.currency==="USD"?1:null)))}:null})
       .filter(function(x){return x&&x[wlSort]!=null});
     // sectoren in deze index (met aantal); daarna filteren op de gekozen sector
@@ -1156,7 +1167,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         ["Onder jaartop",x.fromHigh==null?"–":fmtPct(x.fromHigh,"fromHigh")],["Jaartop",x.high52==null?"–":fmtPrice(x.high52,x.cur)]];
       return '<div class="wlbox"><div class="wlbh"><b>'+esc(x.name)+'</b><span class="tk">'+esc(x.t)+'</span>'+(x.rating?' '+ratingTag(x):'')+'</div>'+
         '<div class="chart" data-t="'+esc(x.t)+'" data-cur="'+esc(x.cur||"USD")+'"><div class="chart-msg">Grafiek laden…</div></div>'+
-        '<dl class="grid">'+it.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>'+
+        '<dl class="grid">'+it.map(function(i){return '<div><dt>'+i[0]+'</dt><dd>'+i[1]+'</dd></div>'}).join("")+'</dl>'+whyBox(x)+
         (x.inRows?'<button type="button" class="wlmore wlgo" data-t="'+esc(x.t)+'">Rating en alle cijfers ›</button>':'')+'</div>'}
     $("wlup").innerHTML=tab(up,"up");$("wldown").innerHTML=tab(down,"down");
     var oc=document.querySelector('#wlpanel tr.wldet .chart');if(oc)drawChart(oc);
@@ -1806,7 +1817,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-6";
+  var BUILD="2026-11-06-7";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

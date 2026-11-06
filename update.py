@@ -577,18 +577,26 @@ def is_otc(ticker, info=None):
     return bool(re.fullmatch(r"[A-Z]{4}[FY]", ticker or ""))
 
 
+def is_certificaat(ticker, naam=""):
+    """Certificaten op een buitenlands aandeel (Braziliaanse BDR's zoals L1TM34.SA, 'DRN'/'BDR' in de naam):
+    geen echt aandeel en Yahoo geeft er vaak een onzinnige beurswaarde bij."""
+    if re.fullmatch(r"[A-Z0-9]{4}3[1-9]\.SA", ticker or ""):
+        return True
+    return bool(re.search(r"\b(DRN|BDR|CDR|DRC)\b", (naam or "").upper()))
+
+
 def omzet_past(df, mcap_q, min_ratio=1e-5):
     """Controle op een foute beurswaarde bij Yahoo (bv. Quhuo: $242 mld bij een paar ton handel per dag).
     Een echt groot bedrijf verhandelt elke dag minstens 0,001% van zijn beurswaarde (mediaan van 3 maanden,
-    in dezelfde valuta). Geen volumedata = geen oordeel."""
+    in dezelfde valuta). Zonder bruikbare handelsdata kunnen we de beurswaarde niet controleren: niet tonen."""
     try:
         v = (df["Close"] * df["Volume"]).dropna().tail(63)
         v = v[v > 0]
         if len(v) < 20 or not mcap_q:
-            return True
+            return False
         return float(v.median()) >= min_ratio * float(mcap_q)
     except Exception:  # noqa: BLE001
-        return True
+        return False
 
 
 def usd_beurswaarde(info, fx):
@@ -796,6 +804,9 @@ def main():
             mcap_q, usd = fund.market_cap_quote(info, stats["price"]), fund.usd_rate(info, fx)
             if not mcap_q or not usd:
                 print(f"  {t}: beurswaarde of wisselkoers onbekend")
+                continue
+            if is_certificaat(t, info.get("shortName") or info.get("longName")):
+                print(f"  {t}: certificaat (geen echt aandeel), overgeslagen")
                 continue
             if not omzet_past(df, mcap_q):
                 print(f"  {t}: beurswaarde {mcap_q * usd / 1e9:.0f} mld past niet bij de handel, overgeslagen")

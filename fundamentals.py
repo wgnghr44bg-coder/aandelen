@@ -120,6 +120,8 @@ def refresh(cache, tickers, info_only=()):
             c["info"] = extract_info(info)
             c["info_fetched"] = now().isoformat()
             n_info += 1
+            if n_info % 25 == 0:
+                save_cache(cache)  # tussentijds bewaren: een afgebroken run verliest niets
         time.sleep(0.3)
     if n_info:
         save_cache(cache)

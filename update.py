@@ -577,6 +577,20 @@ def is_otc(ticker, info=None):
     return bool(re.fullmatch(r"[A-Z]{4}[FY]", ticker or ""))
 
 
+def omzet_past(df, mcap_q, min_ratio=1e-5):
+    """Controle op een foute beurswaarde bij Yahoo (bv. Quhuo: $242 mld bij een paar ton handel per dag).
+    Een echt groot bedrijf verhandelt elke dag minstens 0,001% van zijn beurswaarde (mediaan van 3 maanden,
+    in dezelfde valuta). Geen volumedata = geen oordeel."""
+    try:
+        v = (df["Close"] * df["Volume"]).dropna().tail(63)
+        v = v[v > 0]
+        if len(v) < 20 or not mcap_q:
+            return True
+        return float(v.median()) >= min_ratio * float(mcap_q)
+    except Exception:  # noqa: BLE001
+        return True
+
+
 def usd_beurswaarde(info, fx):
     """Beurswaarde in USD op basis van de (dagelijks opgehaalde) info."""
     p = info.get("currentPrice") or info.get("regularMarketPrice") or info.get("previousClose")
@@ -782,6 +796,9 @@ def main():
             mcap_q, usd = fund.market_cap_quote(info, stats["price"]), fund.usd_rate(info, fx)
             if not mcap_q or not usd:
                 print(f"  {t}: beurswaarde of wisselkoers onbekend")
+                continue
+            if not omzet_past(df, mcap_q):
+                print(f"  {t}: beurswaarde {mcap_q * usd / 1e9:.0f} mld past niet bij de handel, overgeslagen")
                 continue
             rijen.append({
                 "ticker": t,

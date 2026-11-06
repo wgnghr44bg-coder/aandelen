@@ -1119,17 +1119,19 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("wlidx").innerHTML=idx.map(function(k){return '<button type="button" data-v="'+esc(k)+'" aria-pressed="'+(k===wlIdx)+'">'+esc(k)+'</button>'}).join("");
     $("wlsort").innerHTML=[["d1","Vandaag (1D)"],["w1","Week (7D)"]].map(function(x){return '<button type="button" data-v="'+x[0]+'" aria-pressed="'+(x[0]===wlSort)+'">'+x[1]+'</button>'}).join("");
     var byT={};rows.forEach(function(r){byT[r.ticker]=r});
-    var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,m1:r.m1,m3:r.m3,ytd:r.ytd,y1:r.y1,sector:r.sector,
+    var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,m1:r.m1,m3:r.m3,ytd:r.ytd,y1:r.y1,sector:r.sector,ai:!!r.ai,
       high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,
       pu:r.price==null?null:r.price*(r.usd!=null?r.usd:(r.currency==="EUR"&&eurusd?eurusd:(r.currency==="USD"?1:null)))}:null})
       .filter(function(x){return x&&x[wlSort]!=null});
     // sectoren in deze index (met aantal); daarna filteren op de gekozen sector
     var cnt={};L.forEach(function(x){if(x.sector&&x.sector!=="Overig")cnt[x.sector]=(cnt[x.sector]||0)+1});
     var secs=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]});
-    if(wlSec&&!cnt[wlSec])wlSec="";
+    var nAI=L.filter(function(x){return x.ai}).length;
+    if(wlSec&&wlSec!=="AI"&&!cnt[wlSec])wlSec="";if(wlSec==="AI"&&!nAI)wlSec="";
     $("wlsec").innerHTML='<button type="button" data-v="" aria-pressed="'+(!wlSec)+'">Alle sectoren <span class="n">'+L.length+'</span></button>'+
+      (nAI?'<button type="button" data-v="AI" aria-pressed="'+(wlSec==="AI")+'">🤖 AI <span class="n">'+nAI+'</span></button>':'')+
       secs.map(function(k){return '<button type="button" data-v="'+esc(k)+'" aria-pressed="'+(k===wlSec)+'">'+esc(sec(k))+' <span class="n">'+cnt[k]+'</span></button>'}).join("");
-    var Lall=L.length;if(wlSec)L=L.filter(function(x){return x.sector===wlSec});
+    var Lall=L.length;if(wlSec)L=L.filter(function(x){return wlSec==="AI"?x.ai:x.sector===wlSec});
     function srt(list,o){return list.sort(function(a,b){var kk=o.k==="price"?"pu":o.k,x=a[kk],y=b[kk];  // koers vergeleken in dollars
       if(o.k==="name")return o.dir*String(x).localeCompare(String(y),"nl");
       if(x==null)return 1;if(y==null)return -1;return o.dir*(x-y)})}
@@ -1155,7 +1157,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var oc=document.querySelector('#wlpanel tr.wldet .chart');if(oc)drawChart(oc);
     var mx=Math.max(up.length,down.length);
     $("wlmore").style.display=mx<=7?"none":"";$("wlmore").textContent=wlAll?"Toon minder":"Toon alle ("+up.length+" stijgers, "+down.length+" dalers)";
-    $("wlhint").textContent=(WLHINT[wlIdx]||"")+" "+(wlSec?L.length+" van "+Lall+" aandelen in "+sec(wlSec)+".":Lall+" aandelen met koers.");
+    $("wlhint").textContent=(WLHINT[wlIdx]||"")+" "+(wlSec?L.length+" van "+Lall+" aandelen "+(wlSec==="AI"?"met AI-label":"in "+sec(wlSec))+".":Lall+" aandelen met koers.");
   }
   $("wlidx").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;wlIdx=b.dataset.v;wlAll=false;try{localStorage.setItem("wl",JSON.stringify({i:wlIdx,s:wlSort}))}catch(err){}renderWL()});
   $("wlsort").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;wlSort=b.dataset.v;
@@ -1798,7 +1800,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-1";
+  var BUILD="2026-11-06-2";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -738,9 +738,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   var statFilter=null,topTicker=null,ratingFilter=null;
   var RATINGS=["BUY","HOLD","SELL","NO RATING"];
-  var CAPS=[{k:"top",l:"🌍 Top 500",test:function(r){return r.top!==false}},{k:"sp",l:"🇺🇸 S&P 500",test:function(r){return !!r.sp}},
+  var CAPS=[{k:"sp",l:"🇺🇸 S&P 500",test:function(r){return !!r.sp}},
             {k:"xl",l:"> $500 mld",min:5e11,max:Infinity},{k:"l",l:"$100–500 mld",min:1e11,max:5e11},
-            {k:"m",l:"$50–100 mld",min:5e10,max:1e11},{k:"s",l:"< $50 mld",min:0,max:5e10}];
+            {k:"m",l:"$50–100 mld",min:5e10,max:1e11}];
   var capFilter=null;
   function capDef(k){for(var i=0;i<CAPS.length;i++)if(CAPS[i].k===k)return CAPS[i];return null}
   function inCap(r,c){return c.test?c.test(r):r.marketCap>=c.min&&r.marketCap<c.max}
@@ -1105,12 +1105,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   $("aview").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aView=b.dataset.v;try{localStorage.setItem("aview",aView)}catch(err){}renderAssets()});
   $("afilt").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;aKind=b.dataset.k;renderAssets()});
   // ---------- Stijgers & dalers per index ----------
-  var lijsten={},lkoers={},wlIdx="WEBN",wlSort="d1",wlAll=false;
+  var lijsten={},lkoers={},wlIdx="Wereld",wlSort="d1",wlAll=false;
   // sortering per tabel: kolom + richting (-1 = hoog naar laag, 1 = laag naar hoog); tik op een kolomkop om te wisselen
   var wlOrd={up:{k:"d1",dir:-1},down:{k:"d1",dir:1}},wlOpen=null,wlSec="";
   try{var wls=JSON.parse(localStorage.getItem("wl")||"{}");if(wls.i)wlIdx=wls.i;if(wls.s)wlSort=wls.s}catch(e){}
-  var WLIDX=["WEBN","Nasdaq 100","S&P 500","AEX"];
-  var WLHINT={"WEBN":"Benadering: de 500 grootste bedrijven uit ontwikkelde landen (zoals de grootste posities in WEBN).",
+  var WLIDX=["Wereld","Nasdaq 100","S&P 500","AEX"];
+  var WLHINT={"Wereld":"Alle beursbedrijven ter wereld met een beurswaarde boven $50 miljard.",
     "Nasdaq 100":"De 100 grootste niet-financiële bedrijven op de Nasdaq.","S&P 500":"De 500 grote Amerikaanse bedrijven in de S&P 500.",
     "AEX":"De 25 grootste bedrijven op Euronext Amsterdam, koersen in euro's."};
   function renderWL(){
@@ -1802,7 +1802,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-3";
+  var BUILD="2026-11-06-4";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

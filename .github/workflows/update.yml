@@ -99,6 +99,7 @@ jobs:
           if [ -f docs/markt_hist.json ]; then git add docs/markt_hist.json; fi
           if [ -f analyse/analysis.json ]; then git add analyse/analysis.json; fi
           if [ -f sp500.txt ]; then git add sp500.txt sp500_sectoren.json; fi
+          if [ -f screener.json ]; then git add screener.json; fi
           for f in nasdaq100.json aex.json; do if [ -f $f ]; then git add $f; fi; done
           if git diff --cached --quiet; then
             echo "Geen wijzigingen."

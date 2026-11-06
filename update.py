@@ -6,6 +6,7 @@ import csv
 import io
 import json
 import os
+import re
 import urllib.request
 import math
 import time
@@ -36,7 +37,14 @@ OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
 GROND_HIST = ROOT / "docs" / "grond_hist.json"  # grafieken grondstoffen
 MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL/Bitcoin (wordt nooit ingekort)
-TOP_N = 500
+MIN_CAP = 50e9    # alleen beursbedrijven met een beurswaarde boven $50 miljard (wereldwijd)
+VOOR_CAP = 40e9   # voorselectie met marge: van deze bedrijven worden koersen opgehaald
+SCREENER_FILE = ROOT / "screener.json"  # laatst gevonden kandidaten van de Yahoo-screener (terugval)
+# Yahoo-screener per land: de grootste bedrijven op beurswaarde (in eigen valuta, dus per land sorteren)
+SCREENER_REGIOS = {"us": 500, "jp": 120, "cn": 120, "hk": 120, "in": 120, "gb": 80, "ca": 80, "de": 80, "fr": 80,
+                   "ch": 60, "tw": 60, "kr": 60, "au": 60, "nl": 40, "se": 40, "dk": 40, "es": 40, "it": 40,
+                   "br": 40, "sa": 40, "sg": 30, "be": 30, "fi": 30, "no": 30, "ie": 30, "mx": 30, "za": 30,
+                   "id": 30, "th": 30, "my": 30, "qa": 20, "kw": 20, "il": 20, "pl": 20, "at": 20, "pt": 20}
 
 # Extra koersen bovenaan de site (in euro's).
 EXTRAS = [
@@ -462,33 +470,6 @@ def bewaar_markt_hist(extras):
     print("markt-archief: " + ", ".join(f"{t} {v[0][0]}→{v[-1][0]} ({len(v)})" for t, v in archief.items() if v))
 
 
-def haal_wereld_bedrijven(cache, fx):
-    """Grote bedrijven uit opkomende markten voor het wereldoverzicht (marktwaarde in USD)."""
-    uit = []
-    try:
-        data = yf.download(WERELD_EXTRA, period="5y", interval="1d", auto_adjust=True,
-                           group_by="ticker", progress=False)
-    except Exception as e:  # noqa: BLE001
-        print(f"wereldbedrijven download mislukt: {e}")
-        return uit
-    for t in WERELD_EXTRA:
-        try:
-            info = (cache.get(t) or {}).get("info") or {}
-            stats = bereken(data[t]) if t in data.columns.get_level_values(0) else None
-            if not info or not stats:
-                continue
-            stats.pop("_date")
-            mcap_q, usd = fund.market_cap_quote(info, stats["price"]), fund.usd_rate(info, fx)
-            if not mcap_q or not usd:
-                continue
-            uit.append({"ticker": t, "name": info.get("shortName") or info.get("longName") or t,
-                        "kind": "bedrijf", "country": info.get("country"), "marketCap": int(mcap_q * usd), **stats})
-        except Exception as e:  # noqa: BLE001
-            print(f"  wereld {t}: overgeslagen ({e})")
-    print(f"wereldbedrijven (opkomende markten): {len(uit)}")
-    return uit
-
-
 def haal_assets():
     """Goud, zilver, bitcoin en ethereum met marktwaarde in USD en koersveranderingen."""
     uit = []
@@ -531,6 +512,57 @@ def historie_nodig(asof):
         return not dagen or dagen[-1] != asof
     except Exception:  # noqa: BLE001
         return True
+
+
+def screener_kandidaten():
+    """Tickers van de grootste beursbedrijven per land via de gratis Yahoo-screener (geen sleutel).
+    Zo komen ook nieuwe bedrijven die de $50 mld passeren vanzelf in de lijst. Mislukt het: vorige lijst."""
+    gevonden = []
+    try:
+        from yfinance import EquityQuery
+        for regio, n in SCREENER_REGIOS.items():
+            for offset in range(0, n, 250):
+                try:
+                    q = EquityQuery("eq", ["region", regio])
+                    res = yf.screen(q, offset=offset, size=min(250, n - offset),
+                                    sortField="intradaymarketcap", sortAsc=False)
+                    quotes = (res or {}).get("quotes") or []
+                    gevonden += [x["symbol"] for x in quotes if x.get("symbol") and x.get("quoteType", "EQUITY") == "EQUITY"]
+                    if len(quotes) < min(250, n - offset):
+                        break
+                except Exception as e:  # noqa: BLE001
+                    print(f"  screener {regio}: {e}")
+                    break
+                time.sleep(0.3)
+    except Exception as e:  # noqa: BLE001
+        print(f"screener niet beschikbaar: {e}")
+    gevonden = list(dict.fromkeys(gevonden))
+    if len(gevonden) >= 300:
+        SCREENER_FILE.write_text(json.dumps(gevonden) + "\n")
+        print(f"screener: {len(gevonden)} kandidaten")
+        return gevonden
+    print(f"screener: maar {len(gevonden)} gevonden, vorige lijst gebruikt")
+    try:
+        return json.loads(SCREENER_FILE.read_text())
+    except Exception:  # noqa: BLE001
+        return gevonden
+
+
+_RECHTSVORM = re.compile(r"\b(inc|incorporated|corp|corporation|co|company|ltd|limited|plc|ag|se|sa|nv|n v|ab|asa|as|"
+                         r"spa|s p a|holdings?|group|groep|the|class [a-z]|adr|ads)\b")
+
+
+def bedrijfssleutel(naam):
+    """Naam zonder rechtsvorm/leestekens: om dubbele noteringen van hetzelfde bedrijf te herkennen."""
+    n = re.sub(r"[^a-z0-9 ]", " ", (naam or "").lower())
+    return " ".join(_RECHTSVORM.sub(" ", n).split())
+
+
+def usd_beurswaarde(info, fx):
+    """Beurswaarde in USD op basis van de (dagelijks opgehaalde) info."""
+    p = info.get("currentPrice") or info.get("regularMarketPrice") or info.get("previousClose")
+    mc, usd = fund.market_cap_quote(info, p), fund.usd_rate(info, fx)
+    return mc * usd if (mc and usd) else None
 
 
 def sp500_tickers():
@@ -624,17 +656,19 @@ def index_leden(naam):
         return {}
 
 
-def index_lijsten(rijen, cache=None):
+def index_lijsten(rijen, cache=None, fx=None):
     """Leden per index + koersen van leden die niet in de hoofdlijst staan (bv. AEX-aandelen in Amsterdam)."""
     bekend = {r["ticker"] for r in rijen}
-    lijsten = {"WEBN": [r["ticker"] for r in rijen if r.get("top")],
+    lijsten = {"Wereld": [r["ticker"] for r in rijen],
                "S&P 500": [r["ticker"] for r in rijen if r.get("sp")]}
     namen = {}
     for naam in INDEX_BRONNEN:
         leden = index_leden(naam)
         lijsten[naam] = list(leden)
         namen.update(leden)
-    extra = sorted({t for naam in INDEX_BRONNEN for t in lijsten[naam] if t not in bekend})
+    # leden buiten de hoofdlijst alleen als ze zelf boven de grens zitten (bv. ASML in Amsterdam)
+    extra = sorted({t for naam in INDEX_BRONNEN for t in lijsten[naam] if t not in bekend
+                    and (usd_beurswaarde(((cache or {}).get(t) or {}).get("info") or {}, fx or {}) or 0) >= MIN_CAP})
     koersen, slot = {}, {}
     if extra:
         try:
@@ -666,22 +700,28 @@ def main():
         gics = json.loads(SP500_SECTOR_FILE.read_text())
     except Exception:  # noqa: BLE001
         gics = {}
-    tickers = lees_tickers()
-    tickers += [t for t in sorted(sp500) if t not in set(tickers)]
-    ai = set(lees_tickers(AI_FILE))
-    print(f"{len(tickers)} tickers")
-    data = download(tickers)
-
-    # Fundamentele data (info dagelijks, jaarcijfers wekelijks) uit de cache, aangevuld waar nodig
-    cache = fund.load_cache()
-    # info (o.a. sector) ook voor indexleden die niet in de hoofdlijst staan (bv. AEX-aandelen in Amsterdam)
-    index_extra = []
+    # Kandidaten, in volgorde van voorkeur (bij dubbele noteringen wint de eerste): eigen lijst,
+    # S&P 500, grote bedrijven uit opkomende markten, Nasdaq 100/AEX-leden en de Yahoo-screener.
+    kandidaten = lees_tickers() + sorted(sp500) + WERELD_EXTRA
     for b in INDEX_BRONNEN.values():
         try:
-            index_extra += [t for t in json.loads(b["file"].read_text()) if t not in tickers]
+            kandidaten += list(json.loads(b["file"].read_text()))
         except Exception:  # noqa: BLE001
             pass
-    fund.refresh(cache, tickers, info_only=WERELD_EXTRA + sorted(set(index_extra)))
+    kandidaten += screener_kandidaten()
+    kandidaten = list(dict.fromkeys(kandidaten))
+    ai = set(lees_tickers(AI_FILE))
+    print(f"{len(kandidaten)} kandidaten")
+
+    # Info (naam, sector, beurswaarde) voor alle kandidaten; ontbrekende eerst (max. INFO_BUDGET per run)
+    cache = fund.load_cache()
+    fund.refresh(cache, [], info_only=kandidaten)
+    rf, fx = fund.market_data(cache)
+    # Voorselectie: alleen bedrijven die (bijna) boven de grens zitten krijgen koersen en jaarcijfers
+    tickers = [t for t in kandidaten if (usd_beurswaarde((cache.get(t) or {}).get("info") or {}, fx) or 0) >= VOOR_CAP]
+    print(f"voorselectie (> ${VOOR_CAP / 1e9:.0f} mld): {len(tickers)} aandelen")
+    data = download(tickers)
+    fund.refresh(cache, tickers)
     # Geen sector van Yahoo? Dan de officiële GICS-sector uit de S&P 500-lijst (ook voor de waarderingsengine)
     for t, c in cache.items():
         i = (c or {}).get("info")
@@ -690,7 +730,6 @@ def main():
             print(f"  {t}: sector uit S&P-lijst ({gics[t]})")
 
     rijen, prijzen, alle_closes = [], {}, {}
-    rf, fx = fund.market_data(cache)
     for t in tickers:
         try:
             if isinstance(data.columns, pd.MultiIndex):
@@ -708,9 +747,6 @@ def main():
             if not info or not info.get("marketCap"):
                 print(f"  {t}: geen info")
                 continue
-            if not fund.is_developed(info):
-                print(f"  {t}: opkomende markt ({info.get('country')}), overgeslagen")
-                continue
             prijzen[t] = stats["price"]
             alle_closes[t] = df["Close"].dropna()
             # Beurswaarde (omgerekend naar USD voor een eerlijke rangschikking) en K/W, meegeschaald
@@ -725,6 +761,8 @@ def main():
             rijen.append({
                 "ticker": t,
                 "name": info.get("shortName") or info.get("longName") or t,
+                "_key": bedrijfssleutel(info.get("longName") or info.get("shortName") or t),
+                "country": info.get("country"),
                 "sector": info.get("sector") or gics.get(t) or ("Financial Services" if t == "BRK-B" else "Overig"),
                 "marketCap": int(mcap_q * usd),
                 "_ff": mcap_q * usd * fund.free_float(info),
@@ -740,19 +778,32 @@ def main():
     if not rijen:
         raise SystemExit("Geen enkele ticker gelukt; data.json niet overschreven.")
 
-    # Rangschikking zoals WEBN: op free-float beurswaarde (alleen vrij verhandelbare aandelen)
+    # Alleen boven $50 mld; per bedrijf één notering (de eerste kandidaat wint, bv. ASML in New York)
+    volgorde = {t: i for i, t in enumerate(tickers)}
+    rijen.sort(key=lambda r: volgorde.get(r["ticker"], 1e9))
+    gezien, uniek = set(), []
+    for r in rijen:
+        if r["marketCap"] < MIN_CAP:
+            continue
+        if r["_key"] in gezien:
+            print(f"  {r['ticker']}: dubbele notering van {r['name']}, overgeslagen")
+            continue
+        gezien.add(r["_key"])
+        uniek.append(r)
+    rijen = uniek
+    if not rijen:
+        raise SystemExit("Geen enkel aandeel boven de grens; data.json niet overschreven.")
+    # Rangschikking op free-float beurswaarde (alleen vrij verhandelbare aandelen)
     rijen.sort(key=lambda r: r["_ff"], reverse=True)
     for i, r in enumerate(rijen, 1):
-        r["rank"] = i  # plaats op free-float beurswaarde binnen alle kandidaten
-    # top 500 plus alle S&P 500-leden die daar buiten vallen
-    rijen = [r for r in rijen if r["rank"] <= TOP_N or r["ticker"] in sp500]
-    for r in rijen:
+        r["rank"] = i
         r.pop("_ff")
-        r["top"] = r["rank"] <= TOP_N
+        r.pop("_key")
         if r["ticker"] in sp500:
             r["sp"] = True
-    print(f"{sum(r['top'] for r in rijen)} in de top {TOP_N}, {len(rijen)} totaal "
-          f"(S&P 500: {sum(1 for r in rijen if r.get('sp'))} van {len(sp500)})")
+    print(f"{len(rijen)} aandelen boven ${MIN_CAP / 1e9:.0f} mld "
+          f"(S&P 500: {sum(1 for r in rijen if r.get('sp'))}, opkomende markten: "
+          f"{sum(1 for r in rijen if r.get('country') in fund.EMERGING_COUNTRIES)})")
     asof = max(r["_date"] for r in rijen)
     for r in rijen:
         r.pop("_date")
@@ -766,7 +817,7 @@ def main():
     bewaar_markt_hist(extras)
     uit["extras"] = extras
     try:
-        uit["lijsten"], uit["lijst_koersen"], lijst_slot = index_lijsten(rijen, cache)
+        uit["lijsten"], uit["lijst_koersen"], lijst_slot = index_lijsten(rijen, cache, fx)
         extra_closes.update(lijst_slot)
     except Exception as e:  # noqa: BLE001
         print(f"indexlijsten mislukt: {e}")
@@ -780,7 +831,7 @@ def main():
         extra_closes.update(index_closes)
     except Exception as e:  # noqa: BLE001
         print(f"indexen mislukt: {e}")
-    uit["assets"] = haal_assets() + haal_wereld_bedrijven(cache, fx)
+    uit["assets"] = haal_assets()   # grote bedrijven (ook opkomende markten) staan nu zelf in de lijst
     try:
         uit["commodities"], g_hist = grondstoffen.haal_grondstoffen(bereken, spark)
         if g_hist:

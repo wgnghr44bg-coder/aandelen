@@ -624,7 +624,7 @@ def index_leden(naam):
         return {}
 
 
-def index_lijsten(rijen):
+def index_lijsten(rijen, cache=None):
     """Leden per index + koersen van leden die niet in de hoofdlijst staan (bv. AEX-aandelen in Amsterdam)."""
     bekend = {r["ticker"] for r in rijen}
     lijsten = {"WEBN": [r["ticker"] for r in rijen if r.get("top")],
@@ -644,7 +644,9 @@ def index_lijsten(rijen):
                     df = data[t] if len(extra) > 1 else data
                     st = bereken(df)
                     if st:
+                        info = ((cache or {}).get(t) or {}).get("info") or {}
                         koersen[t] = {"name": namen.get(t, t), "currency": "EUR" if t.endswith(".AS") else "USD",
+                                      "sector": info.get("sector"),
                                       **{k: st[k] for k in ("price", "d1", "w1", "m1", "m3", "ytd", "y1", "high52",
                                                             "fromHigh")}}
                         slot[t] = df["Close"].dropna()  # voor de koersgrafiek (history.json)
@@ -672,7 +674,14 @@ def main():
 
     # Fundamentele data (info dagelijks, jaarcijfers wekelijks) uit de cache, aangevuld waar nodig
     cache = fund.load_cache()
-    fund.refresh(cache, tickers, info_only=WERELD_EXTRA)
+    # info (o.a. sector) ook voor indexleden die niet in de hoofdlijst staan (bv. AEX-aandelen in Amsterdam)
+    index_extra = []
+    for b in INDEX_BRONNEN.values():
+        try:
+            index_extra += [t for t in json.loads(b["file"].read_text()) if t not in tickers]
+        except Exception:  # noqa: BLE001
+            pass
+    fund.refresh(cache, tickers, info_only=WERELD_EXTRA + sorted(set(index_extra)))
     # Geen sector van Yahoo? Dan de officiële GICS-sector uit de S&P 500-lijst (ook voor de waarderingsengine)
     for t, c in cache.items():
         i = (c or {}).get("info")
@@ -757,7 +766,7 @@ def main():
     bewaar_markt_hist(extras)
     uit["extras"] = extras
     try:
-        uit["lijsten"], uit["lijst_koersen"], lijst_slot = index_lijsten(rijen)
+        uit["lijsten"], uit["lijst_koersen"], lijst_slot = index_lijsten(rijen, cache)
         extra_closes.update(lijst_slot)
     except Exception as e:  # noqa: BLE001
         print(f"indexlijsten mislukt: {e}")

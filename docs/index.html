@@ -172,7 +172,8 @@ ul{list-style:none;margin:0;padding:0}
 .name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .meta{color:var(--muted);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tk{font-weight:600;color:var(--text);opacity:.8}
-.val{text-align:right;flex:0 0 auto;width:84px}
+.val{text-align:right;flex:0 0 auto;width:88px}
+.val .prc{display:block;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:1px}
 .pct{font-weight:700;font-variant-numeric:tabular-nums;font-size:1.02rem}
 .capl{display:block;font-size:.75rem;color:var(--muted);white-space:nowrap;margin-top:2px;font-variant-numeric:tabular-nums}
 .down{color:var(--down)}.down2{color:var(--down-strong)}.up{color:var(--up)}.flat{color:var(--muted)}
@@ -1745,6 +1746,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
           '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+(r.sp?' <span class="sptag">S&amp;P</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
+          '<span class="prc">'+(r.price>=1000?sym(r.currency)+Math.round(r.price).toLocaleString("nl-NL"):fmtPrice(r.price,r.currency))+'</span>'+
           (capLine||'<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span>')+'</span>'+
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
   }
@@ -1800,7 +1802,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-2";
+  var BUILD="2026-11-06-3";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

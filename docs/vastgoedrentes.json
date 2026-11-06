@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-05T14:47:17Z",
+ "updated": "2026-11-06T12:26:28Z",
  "lenders": [
   {
    "id": "rnhb",
    "name": "RNHB",
    "url": "https://www.rnhb.nl/rente",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -15,7 +15,7 @@
    "id": "nibc",
    "name": "NIBC",
    "url": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [
     {
      "seg": "residentieel",
@@ -332,7 +332,7 @@
    "id": "domivest",
    "name": "Domivest",
    "url": "https://www.domivest.nl/",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -342,7 +342,7 @@
    "id": "nestr",
    "name": "Nestr",
    "url": "https://www.nestr.nl/rente",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [
     {
      "seg": "residentieel",
@@ -622,7 +622,7 @@
    "id": "dcmf",
    "name": "DCMF",
    "url": "https://dcmf.nl/verhuurhypotheek/",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [
     {
      "seg": "residentieel",
@@ -723,7 +723,7 @@
    "id": "solidbriq",
    "name": "SolidBriq",
    "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [
     {
      "seg": "residentieel",
@@ -933,7 +933,7 @@
    "id": "mogelijk",
    "name": "Mogelijk",
    "url": "https://www.mogelijk.nl/verhuurhypotheek",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [
     {
      "seg": "residentieel",
@@ -1011,7 +1011,7 @@
    "id": "hyra",
    "name": "Hyra",
    "url": "https://hyra.nl/",
-   "checked": "2026-11-05",
+   "checked": "2026-11-06",
    "segments": [],
    "facts": [],
    "status": "aanvraag",

@@ -1110,7 +1110,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   var wlOrd={up:{k:"d1",dir:-1},down:{k:"d1",dir:1}},wlOpen=null,wlSec="";
   try{var wls=JSON.parse(localStorage.getItem("wl")||"{}");if(wls.i)wlIdx=wls.i;if(wls.s)wlSort=wls.s}catch(e){}
   var WLIDX=["Wereld","Nasdaq 100","S&P 500","AEX"];
-  var WLHINT={"Wereld":"Alle beursbedrijven ter wereld met een beurswaarde boven $50 miljard.",
+  var WLHINT={"Wereld":"Beursbedrijven uit ontwikkelde landen boven $50 miljard, plus mega caps (boven $200 miljard) uit opkomende landen zoals China en India.",
     "Nasdaq 100":"De 100 grootste niet-financiële bedrijven op de Nasdaq.","S&P 500":"De 500 grote Amerikaanse bedrijven in de S&P 500.",
     "AEX":"De 25 grootste bedrijven op Euronext Amsterdam, koersen in euro's."};
   function renderWL(){
@@ -1802,7 +1802,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-4";
+  var BUILD="2026-11-06-5";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

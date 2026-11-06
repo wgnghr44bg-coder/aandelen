@@ -37,7 +37,13 @@ OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
 GROND_HIST = ROOT / "docs" / "grond_hist.json"  # grafieken grondstoffen
 MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL/Bitcoin (wordt nooit ingekort)
-MIN_CAP = 50e9    # alleen beursbedrijven met een beurswaarde boven $50 miljard (wereldwijd)
+MIN_CAP = 50e9    # ontwikkelde landen: beursbedrijven met een beurswaarde boven $50 miljard
+MEGA_CAP = 200e9  # opkomende landen (China, India, ...): alleen mega caps boven $200 miljard
+
+
+def cap_grens(land):
+    """Minimale beurswaarde (USD) voor een bedrijf uit dit land."""
+    return MEGA_CAP if land in fund.EMERGING_COUNTRIES else MIN_CAP
 VOOR_CAP = 40e9   # voorselectie met marge: van deze bedrijven worden koersen opgehaald
 SCREENER_FILE = ROOT / "screener.json"  # laatst gevonden kandidaten van de Yahoo-screener (terugval)
 # Over-the-counter-noteringen (bv. CGXYY, BACHY): onofficiële Amerikaanse handel in buitenlandse aandelen, vaak met een
@@ -679,9 +685,11 @@ def index_lijsten(rijen, cache=None, fx=None):
         leden = index_leden(naam)
         lijsten[naam] = list(leden)
         namen.update(leden)
+    def _i(t):
+        return ((cache or {}).get(t) or {}).get("info") or {}
     # leden buiten de hoofdlijst alleen als ze zelf boven de grens zitten (bv. ASML in Amsterdam)
     extra = sorted({t for naam in INDEX_BRONNEN for t in lijsten[naam] if t not in bekend
-                    and (usd_beurswaarde(((cache or {}).get(t) or {}).get("info") or {}, fx or {}) or 0) >= MIN_CAP})
+                    and (usd_beurswaarde(_i(t), fx or {}) or 0) >= cap_grens(_i(t).get("country"))})
     koersen, slot = {}, {}
     if extra:
         try:
@@ -795,12 +803,12 @@ def main():
     if not rijen:
         raise SystemExit("Geen enkele ticker gelukt; data.json niet overschreven.")
 
-    # Alleen boven $50 mld; per bedrijf één notering (de eerste kandidaat wint, bv. ASML in New York)
+    # Ontwikkelde landen boven $50 mld, opkomende landen boven $200 mld; per bedrijf één notering (de eerste kandidaat wint, bv. ASML in New York)
     volgorde = {t: i for i, t in enumerate(tickers)}
     rijen.sort(key=lambda r: volgorde.get(r["ticker"], 1e9))
     gezien, uniek = set(), []
     for r in rijen:
-        if r["marketCap"] < MIN_CAP:
+        if r["marketCap"] < cap_grens(r.get("country")):
             continue
         if r["_key"] in gezien:
             print(f"  {r['ticker']}: dubbele notering van {r['name']}, overgeslagen")

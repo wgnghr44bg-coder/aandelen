@@ -31,7 +31,7 @@ INFO_BUDGET = 250   # max. info-aanroepen per run (spreiden, zodat Yahoo ons nie
 SUBUNITS = {"GBp": ("GBP", 100.0), "GBX": ("GBP", 100.0), "ZAc": ("ZAR", 100.0), "ILA": ("ILS", 100.0)}
 
 
-# Opkomende en frontiermarkten (MSCI-indeling): deze landen doen niet mee (alleen ontwikkelde landen).
+# Opkomende en frontiermarkten (MSCI-indeling): hieruit alleen mega caps (zie MEGA_CAP in update.py).
 EMERGING_COUNTRIES = {
     "China", "India", "Brazil", "Mexico", "Taiwan", "South Korea", "Korea", "Saudi Arabia", "Indonesia",
     "South Africa", "Turkey", "Argentina", "Uruguay", "Chile", "Colombia", "Peru", "Thailand", "Malaysia",

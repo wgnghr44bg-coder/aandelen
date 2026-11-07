@@ -1,16 +1,15 @@
 # InvestMarket
 
-Een simpele website die de 500 grootste beursgenoteerde bedrijven uit ontwikkelde landen (MSCI-indeling) laat zien (beurswaarde in USD),
-gesorteerd op hoeveel hun koers gezakt is. Handig om snel te zien welke grote bedrijven flink gedaald zijn.
+Een gratis website met koersen, ratings (BUY/HOLD/SELL) en marktdata: de top 100 beursbedrijven ter wereld
+(companiesmarketcap.com), de complete S&P 500, Nasdaq 100 en AEX, plus rentes, inflatie, vastgoed en grondstoffen.
 
-**Geen financieel advies.** Bron: Yahoo Finance (via `yfinance`).
+**Geen financieel advies.** Bronnen: Yahoo Finance (via `yfinance`), companiesmarketcap.com, ECB, Eurostat, CBS, Bitvavo.
 
 ## Hoe het werkt
 
-- `tickers.txt` – ongeveer 620 kandidaten uit ontwikkelde landen (Yahoo-notatie). Het script kiest hieruit elke keer de top 500 op free-float beurswaarde (zoals de index achter WEBN), alleen ontwikkelde landen.
-- `update.py` – haalt 5 jaar dagkoersen en bedrijfsgegevens op en schrijft `docs/data.json`.
-- `docs/index.html` – de website (één bestand), die `data.json` laadt.
-- `.github/workflows/update.yml` – draait elke werkdag om 22:45 UTC en commit `docs/data.json` als die veranderd is.
+- `update.py` – haalt de lijsten, koersen en bedrijfsgegevens op en schrijft `docs/data.json` (zie `CLAUDE.md`).
+- `docs/index.html` – de website (één bestand).
+- `.github/workflows/update.yml` – draait elke 30 minuten (gestart via cron-job.org) en publiceert de data op branch `live`.
   Handmatig starten kan via *Actions → Koersen bijwerken → Run workflow*.
 
 De site draait gratis op GitHub Pages (branch `main`, map `/docs`). Er is geen server en geen API-sleutel nodig.

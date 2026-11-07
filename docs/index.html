@@ -14,12 +14,12 @@
 :root{
   --bg:#f6f7f9;--card:#fff;--text:#16181d;--muted:#6b7280;--line:#e5e7eb;
   --accent:#2563eb;--down:#d9480f;--down-strong:#c92a2a;--up:#2b8a3e;--chip:#eef0f3;
-  --warn-bg:#fff4e6;--warn-text:#9a3412;
+  --warn-bg:#fff4e6;--warn-text:#9a3412;--ema50:#2f6fed;--ema200:#a21caf;
 }
 @media (prefers-color-scheme:dark){:root{
   --bg:#0f1115;--card:#181b21;--text:#e8eaed;--muted:#9aa1ac;--line:#2a2f37;
   --accent:#6ea8fe;--down:#ff8a4c;--down-strong:#ff6b6b;--up:#51cf66;--chip:#232831;
-  --warn-bg:#3a2414;--warn-text:#ffc078;
+  --warn-bg:#3a2414;--warn-text:#ffc078;--ema50:#5b9bff;--ema200:#e879f9;
 }}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -59,6 +59,9 @@ h1{font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
 .plot .hl{fill:var(--muted);font-size:10px;font-family:inherit}
 .plot .cross{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
 .chart-msg{color:var(--muted);font-size:.8rem;padding:20px 0;text-align:center}
+.emaleg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.72rem;color:var(--muted);margin-top:4px;min-height:1.2em}
+.emaleg span{display:inline-flex;align-items:center;gap:5px}.emaleg i{display:inline-block;width:14px;height:3px;border-radius:2px}
+.emaleg b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}.emaleg small{margin-left:auto}
 .extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 0}
 .xt{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-width:0}
 .xt[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
@@ -863,12 +866,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   function shortDate(s,withYear){var p=s.split("-");return (+p[2])+" "+MON3[+p[1]-1]+(withYear?" "+p[0]:"")}
   function pickSeries(h,t,rg){
     rg=rg||range;var s=h.series[t];if(!s)return null;
-    var useW=rg==="5J",dates=useW?h.weeks:h.days,vals=useW?s.w:s.d;
+    var useW=rg==="5J",dates=useW?h.weeks:h.days,vals=useW?s.w:s.d,pre=useW?"w":"d";
+    var e50=s[pre+"50"]||[],e200=s[pre+"200"]||[];   // EMA 50/200 (berekend op dagkoersen in update.py)
     var m=0;for(var i=0;i<RANGES.length;i++)if(RANGES[i].k===rg)m=RANGES[i].m;
     var end=dates[dates.length-1].split("-"),cut=new Date(+end[0],+end[1]-1-m,+end[2]);
     var cs=cut.getFullYear()+"-"+String(cut.getMonth()+1).padStart(2,"0")+"-"+String(cut.getDate()).padStart(2,"0");
     var out=[];
-    for(var j=0;j<dates.length;j++){if(dates[j]>=cs&&vals[j]!=null)out.push({d:dates[j],v:vals[j]})}
+    for(var j=0;j<dates.length;j++){if(dates[j]>=cs&&vals[j]!=null)out.push({d:dates[j],v:vals[j],e50:e50[j]!=null?e50[j]:null,e200:e200[j]!=null?e200[j]:null})}
     return out.length>1?out:null;
   }
   function drawChart(box){
@@ -884,7 +888,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var kort=(eff==="1D"||eff==="1W")&&!ex;   // aandelen: koersen binnen de dag uit intra.json
     (kort?loadIntra().then(function(I){var x=I[t]||{};intra=x.d&&x.d.pts&&x.d.pts.length>1?x.d:null;wk=x.w&&x.w.pts&&x.w.pts.length>1?x.w:null;return {}}).catch(function(){return {}}):
      isG?loadGHist().then(function(g){
-      var x=g[t],o={};if(!x)return {days:[],weeks:[],series:{}};o[t]={d:x.d,w:x.w};return {days:x.days,weeks:x.weeks,series:o}}):loadHist()).then(function(h){
+      var x=g[t],o={};if(!x)return {days:[],weeks:[],series:{}};o[t]=x;return {days:x.days,weeks:x.weeks,series:o}}):loadHist()).then(function(h){
       var pts=eff==="1D"?(intra?intra.pts.map(function(p){return {d:p[0],v:p[1]}}):null):
         eff==="1W"?(wk?wk.pts.map(function(p){return {d:p[0],v:p[1]}}):null):pickSeries(h,t,eff);
       if(pts&&eff==="1D"&&ex&&ex.live&&ex.price&&intra.h24){var nu=new Date();pts.push({d:String(nu.getDate()).padStart(2,"0")+"-"+String(nu.getMonth()+1).padStart(2,"0")+" "+String(nu.getHours()).padStart(2,"0")+":"+String(nu.getMinutes()).padStart(2,"0"),v:ex.price})}
@@ -894,7 +898,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       var W=Math.max(260,box.clientWidth||320),H=170,padL=4,padR=40,padT=14,padB=20;
       var lo=Infinity,hi=-Infinity,hiI=0,loI=0;
       pts.forEach(function(p,i){if(p.v<lo){lo=p.v;loI=i}if(p.v>hi){hi=p.v;hiI=i}});
-      var span=(hi-lo)||hi*0.02||1,y0=lo-span*0.08,y1=hi+span*0.12;
+      // EMA 50 / EMA 200: alleen waar een echte waarde is (nooit geschat); ook in de schaal meenemen
+      var EMAS=[{k:"e50",n:"EMA 50",c:"var(--ema50)"},{k:"e200",n:"EMA 200",c:"var(--ema200)"}].filter(function(e){return pts.some(function(p){return p[e.k]!=null})});
+      var slo=lo,shi=hi;EMAS.forEach(function(e){pts.forEach(function(p){var v=p[e.k];if(v!=null){if(v<slo)slo=v;if(v>shi)shi=v}})});
+      var span=(shi-slo)||shi*0.02||1,y0=slo-span*0.08,y1=shi+span*0.12;
       var X=function(i){return padL+i/(pts.length-1)*(W-padL-padR)};
       var Y=function(v){return padT+(1-(v-y0)/(y1-y0))*(H-padT-padB)};
       var first=pts[0].v,last=pts[pts.length-1].v,chg=(last/first-1)*100;
@@ -902,7 +909,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       var d=pts.map(function(p,i){return (i?"L":"M")+X(i).toFixed(1)+" "+Y(p.v).toFixed(1)}).join("");
       var area=d+"L"+X(pts.length-1).toFixed(1)+" "+(H-padB)+"L"+X(0).toFixed(1)+" "+(H-padB)+"Z";
       // 3 horizontale rasterlijnen met prijs rechts
-      var g="";for(var k=0;k<3;k++){var v=lo+(hi-lo)*k/2,yy=Y(v);
+      var g="";for(var k=0;k<3;k++){var v=slo+(shi-slo)*k/2,yy=Y(v);
         g+='<line class="grid-l" x1="'+padL+'" x2="'+(W-padR)+'" y1="'+yy.toFixed(1)+'" y2="'+yy.toFixed(1)+'"/>'+
            '<text class="ax" x="'+(W-padR+6)+'" y="'+(yy+3).toFixed(1)+'">'+(v>=1000?Math.round(v).toLocaleString("nl-NL"):nf2.format(v).replace(/,00$/,""))+'</text>';}
       var lbl=[0,Math.floor((pts.length-1)/2),pts.length-1].map(function(i,n){
@@ -912,16 +919,21 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Koersgrafiek '+esc(t)+' ('+eff+')">'+
         '<defs><linearGradient id="gf-'+esc(t)+'" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".18"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
         g+'<path d="'+area+'" fill="url(#gf-'+esc(t)+')"/>'+
+        EMAS.map(function(e){var p2="",pen="M";pts.forEach(function(p,i){if(p[e.k]==null){pen="M";return}p2+=pen+X(i).toFixed(1)+" "+Y(p[e.k]).toFixed(1);pen="L"});
+          return '<path class="ema" d="'+p2+'" fill="none" stroke="'+e.c+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>'}).join("")+
         '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'+
         '<circle class="hi" cx="'+hx.toFixed(1)+'" cy="'+hy.toFixed(1)+'" r="4" stroke="'+col+'"/>'+
         '<text class="hl" text-anchor="'+ha+'" x="'+hx.toFixed(1)+'" y="'+(hy-8).toFixed(1)+'">top '+nf2.format(hi)+'</text>'+
         lbl+'<line class="cross" y1="'+padT+'" y2="'+(H-padB)+'" style="display:none"/>'+
         '<circle class="dot" r="4" fill="'+col+'" stroke="var(--card)" stroke-width="2" style="display:none"/></svg>';
-      box.innerHTML=head+'<div class="plot">'+svg+'</div>';
-      var read=box.querySelector(".chart-read"),svgEl=box.querySelector("svg"),cross=box.querySelector(".cross"),dot=box.querySelector(".dot");
+      box.innerHTML=head+'<div class="plot">'+svg+'</div>'+(EMAS.length?'<div class="emaleg"></div>':'');
+      var read=box.querySelector(".chart-read"),svgEl=box.querySelector("svg"),cross=box.querySelector(".cross"),dot=box.querySelector(".dot"),eleg=box.querySelector(".emaleg");
+      function emaLeg(p){if(!eleg)return;   // legenda met de EMA-waarde op het gekozen punt (of de laatste)
+        eleg.innerHTML=EMAS.map(function(e){var v=p[e.k];return '<span><i style="background:'+e.c+'"></i>'+e.n+' <b>'+(v!=null?cur+nf2.format(v):"–")+'</b></span>'}).join("")+
+          (eff==="5J"?'<small>EMA op dagkoersen</small>':'')}
       function showDefault(){
         read.innerHTML='<b class="'+(chg<-0.05?"down":chg>0.05?"up":"flat")+'">'+fmtPct(chg)+'</b>'+(eff==="1D"?(intra.h24?"24 uur":"vandaag "+shortDate(intra.date)):eff==="1W"?"1 week":eff.replace("M"," maand").replace("J"," jaar"))+' · van '+nf2.format(first)+' naar '+nf2.format(last);
-        cross.style.display="none";dot.style.display="none";
+        cross.style.display="none";dot.style.display="none";emaLeg(pts[pts.length-1]);
       }
       function show(clientX){
         var rc=svgEl.getBoundingClientRect(),x=(clientX-rc.left)*W/rc.width;
@@ -930,6 +942,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         cross.setAttribute("x1",cx);cross.setAttribute("x2",cx);cross.style.display="";
         dot.setAttribute("cx",cx);dot.setAttribute("cy",cy);dot.style.display="";
         var fh=(1-p.v/hi)*100;
+        emaLeg(p);
         read.innerHTML='<b>'+cur+nf2.format(p.v)+'</b>'+chLabel(p.d,true)+' · '+fmtPct(c)+' t.o.v. begin'+(fh>0.5?' · '+fmtPct(fh,"fromHigh")+' onder top':'');
       }
       showDefault();
@@ -1817,7 +1830,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-06-7";
+  var BUILD="2026-11-07-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

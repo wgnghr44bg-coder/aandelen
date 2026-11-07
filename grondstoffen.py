@@ -10,6 +10,8 @@ Prijzen in centen (zoals tarwe in dollarcent per bushel) worden omgerekend naar 
 import pandas as pd
 import yfinance as yf
 
+from indicatoren import EMA_PERIODES, ema
+
 MAX_OUD = 10  # dagen
 TE = "https://tradingeconomics.com/commodity/"
 
@@ -102,9 +104,17 @@ def historie(close):
     c = c[~c.index.duplicated(keep="last")]
     d = c[c.index > c.index[-1] - pd.DateOffset(years=1, days=7)]
     w = c.resample("W-FRI").last().dropna()
+    wk = w.index
     w.index = [min(i, c.index[-1]) for i in w.index]
-    return {"days": [i.strftime("%Y-%m-%d") for i in d.index], "weeks": [i.strftime("%Y-%m-%d") for i in w.index],
-            "d": [round(float(v), 4) for v in d.values], "w": [round(float(v), 4) for v in w.values]}
+    uit = {"days": [i.strftime("%Y-%m-%d") for i in d.index], "weeks": [i.strftime("%Y-%m-%d") for i in w.index],
+           "d": [round(float(v), 4) for v in d.values], "w": [round(float(v), 4) for v in w.values]}
+    for n in EMA_PERIODES:  # EMA 50/200 over alle dagkoersen; None zolang er nog geen n koersen zijn
+        e = ema(c, n)
+        if e.notna().any():
+            uit[f"d{n}"] = [None if pd.isna(v) else round(float(v), 4) for v in e.reindex(d.index).values]
+            ew = e.resample("W-FRI").last().reindex(wk)  # EMA op de laatste beursdag van elke week
+            uit[f"w{n}"] = [None if pd.isna(v) else round(float(v), 4) for v in ew.values]
+    return uit
 
 
 def haal_grondstoffen(bereken, spark):

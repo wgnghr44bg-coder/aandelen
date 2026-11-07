@@ -19,6 +19,7 @@ import yfinance as yf
 
 import fundamentals as fund
 from engine.uitleg import waarom
+from indicatoren import EMA_PERIODES, ema
 import grondstoffen
 import macro
 
@@ -180,7 +181,8 @@ def slotkoersen(data, t):
 
 
 def schrijf_historie(alles, closes, asof):
-    """Schrijft docs/history.json: dagkoersen van 1 jaar en weekkoersen van 5 jaar voor de grafieken.
+    """Schrijft docs/history.json: dagkoersen van 1 jaar en weekkoersen van 5 jaar voor de grafieken,
+    plus EMA 50/200 (berekend op dagkoersen) als d50/d200 (dagdatums) en w50/w200 (weekdatums).
 
     alles: handelsdagen (DatetimeIndex), closes: {ticker: Series met slotkoersen}."""
     alles = pd.DatetimeIndex(alles)
@@ -205,7 +207,13 @@ def schrijf_historie(alles, closes, asof):
             close = close[~close.index.duplicated(keep="last")]
             if close.empty:
                 continue
-            uit["series"][t] = {"d": reeks(close, dagen), "w": reeks(close, weken)}
+            rij = {"d": reeks(close, dagen), "w": reeks(close, weken)}
+            for n in EMA_PERIODES:  # EMA over de volledige ~5 jaar dagkoersen, daarna op dag- en weekdatums gezet
+                e = ema(close, n).dropna()
+                if not e.empty:
+                    rij[f"d{n}"] = reeks(e, dagen)
+                    rij[f"w{n}"] = reeks(e, weken)
+            uit["series"][t] = rij
         except Exception as e:  # noqa: BLE001
             print(f"  historie {t}: overgeslagen ({e})")
     HIST.write_text(json.dumps(uit, separators=(",", ":")) + "\n")

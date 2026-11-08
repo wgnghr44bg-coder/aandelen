@@ -139,8 +139,22 @@ def bereken(df):
     if onder_top is not None and onder_top < 0:
         onder_top = 0.0
 
+    # Rendement per volledig kalenderjaar: slot laatste beursdag vorig jaar -> slot laatste beursdag dat jaar
+    jaren = {}
+    for jaar in range(eerste.year + 1, laatste_datum.year):
+        begin = close[close.index < pd.Timestamp(year=jaar, month=1, day=1, tz=laatste_datum.tz)]
+        eind = close[close.index < pd.Timestamp(year=jaar + 1, month=1, day=1, tz=laatste_datum.tz)]
+        if begin.empty or eind.empty or begin.index[-1].year != jaar - 1 or eind.index[-1].year != jaar:
+            continue
+        if begin.index[-1] < pd.Timestamp(year=jaar - 1, month=12, day=20, tz=laatste_datum.tz):
+            continue  # geen koers vlak voor de jaarwisseling (bv. pas later genoteerd)
+        v = pct(float(eind.iloc[-1]), float(begin.iloc[-1]))
+        if v is not None:
+            jaren[str(jaar)] = v
+
     return {
         "price": schoon(laatste),
+        "jaren": jaren or None,
         "d1": pct(laatste, vorige),
         "w1": periode(pd.DateOffset(days=7)),
         "m1": periode(pd.DateOffset(months=1)),

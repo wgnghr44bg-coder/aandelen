@@ -26,6 +26,8 @@
   Beurswaarde van de top 100 = die van companiesmarketcap.
 - **S&P 500** compleet (`sp500_tickers`, datasets-CSV → `sp500.txt` + GICS-sectoren `sp500_sectoren.json`).
 - **Nasdaq 100** compleet (Nasdaq-API, Wikipedia als reserve → `nasdaq100.json`), **AEX** compleet (Wikipedia → `aex.json`).
+- `bereken()` geeft ook `jaren` = rendement per volledig kalenderjaar (slot laatste beursdag vorig jaar → dat jaar);
+  gebruikt in "Stijgers & dalers per index" (knoppen 1D/1W/1M/YTD/1J + keuzelijst Jaar).
 - Alle leden = rijen in `data.json` met vlaggen `w`/`sp`/`nq`/`aex`; rang op beurswaarde. Lijsten volgen vanzelf de bronnen.
 - Bekend: IHC.AE (Abu Dhabi) heeft geen gratis koers → ontbreekt in Wereld (99/100).
 - Filters op de site: `CAPS` in `index.html` (lijsten + groottes); sectoren komen uit de rijen.

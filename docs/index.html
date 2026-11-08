@@ -392,6 +392,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .gper{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 10px}
 .gper button{border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:.72rem;font-weight:600;padding:6px 8px;border-radius:999px;cursor:pointer;white-space:nowrap;flex:0 0 auto}
 .gper button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.gper select{border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:.72rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;flex:0 0 auto}
+.gper select.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .glist{list-style:none;margin:0;padding:0}
 .glist li{border-top:1px solid var(--line)}.glist li:first-child{border-top:0}
 .gitem .gr{cursor:pointer}.gitem.open .gr{border-bottom:0}.gitem .chart{margin:0 0 10px}
@@ -1351,6 +1353,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   var wlOrd={up:{k:"d1",dir:-1},down:{k:"d1",dir:1}},wlOpen=null,wlSec="";
   try{var wls=JSON.parse(localStorage.getItem("wl")||"{}");if(wls.i)wlIdx=wls.i;if(wls.s)wlSort=wls.s}catch(e){}
   var WLIDX=["Wereld","Nasdaq 100","S&P 500","AEX"];
+  // periodes voor Stijgers & dalers per index; jaartallen als "j2025" (rendement over dat kalenderjaar)
+  var WLP=[["d1","1D","vandaag"],["w1","1W","1 week"],["m1","1M","1 maand"],["ytd","YTD","sinds 1 januari"],["y1","1J","1 jaar"]];
+  function wlLabel(k){if(/^j\d{4}$/.test(k))return k.slice(1);if(k==="w1")return "7D";for(var i=0;i<WLP.length;i++)if(WLP[i][0]===k)return WLP[i][1];return k}
+  function wlKeyOk(k,yrs){return WLP.some(function(x){return x[0]===k})||(/^j\d{4}$/.test(k)&&yrs.indexOf(k.slice(1))>=0)}
   var WLHINT={"Wereld":"De 100 grootste beursbedrijven ter wereld volgens companiesmarketcap.com (alleen aandelen, geen ETF\u2019s of grondstoffen).",
     "Nasdaq 100":"De 100 grootste niet-financiële bedrijven op de Nasdaq.","S&P 500":"Alle bedrijven in de S&P 500 (503 noteringen: van Alphabet en een paar andere zijn er twee aandelensoorten).",
     "AEX":"De 25 grootste bedrijven op Euronext Amsterdam, koersen in euro's."};
@@ -1359,11 +1365,18 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("wlpanel").hidden=!idx.length;if(!idx.length)return;
     if(idx.indexOf(wlIdx)<0)wlIdx=idx[0];
     $("wlidx").innerHTML=idx.map(function(k){return '<button type="button" data-v="'+esc(k)+'" aria-pressed="'+(k===wlIdx)+'">'+esc(k)+'</button>'}).join("");
-    $("wlsort").innerHTML=[["d1","Vandaag (1D)"],["w1","Week (7D)"]].map(function(x){return '<button type="button" data-v="'+x[0]+'" aria-pressed="'+(x[0]===wlSort)+'">'+x[1]+'</button>'}).join("");
     var byT={};rows.forEach(function(r){byT[r.ticker]=r});
+    // kalenderjaren waarvoor rendementen zijn (update.py: "jaren"), nieuwste eerst
+    var yrs={};rows.forEach(function(r){if(r.jaren)Object.keys(r.jaren).forEach(function(y){yrs[y]=1})});
+    yrs=Object.keys(yrs).sort().reverse();
+    if(!wlKeyOk(wlSort,yrs))wlSort="d1";
+    $("wlsort").innerHTML=WLP.map(function(x){return '<button type="button" data-v="'+x[0]+'" aria-pressed="'+(x[0]===wlSort)+'" title="'+x[2]+'">'+x[1]+'</button>'}).join("")+
+      (yrs.length?'<select id="wlyear" aria-label="Kies een jaar"'+(/^j\d{4}$/.test(wlSort)?' class="on"':'')+'><option value="">Jaar</option>'+
+        yrs.map(function(y){return '<option value="j'+y+'"'+("j"+y===wlSort?' selected':'')+'>'+y+'</option>'}).join("")+'</select>':'');
     var L=(lijsten[wlIdx]||[]).map(function(t){var r=byT[t]||lkoers[t];return r?{t:t,inRows:!!byT[t],name:r.name,price:r.price,cur:r.currency,d1:r.d1,w1:r.w1,m1:r.m1,m3:r.m3,ytd:r.ytd,y1:r.y1,sector:r.sector,ai:!!r.ai,
-      high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,why:r.why,
+      high52:r.high52,fromHigh:r.fromHigh,rating:r.rating,why:r.why,jaren:r.jaren||{},
       pu:r.price==null?null:r.price*(r.usd!=null?r.usd:(r.currency==="EUR"&&eurusd?eurusd:(r.currency==="USD"?1:null)))}:null})
+      .map(function(x){if(x)Object.keys(x.jaren).forEach(function(y){x["j"+y]=x.jaren[y]});return x})
       .filter(function(x){return x&&x[wlSort]!=null});
     // sectoren in deze index (met aantal); daarna filteren op de gekozen sector
     var cnt={};L.forEach(function(x){if(x.sector&&x.sector!=="Overig")cnt[x.sector]=(cnt[x.sector]||0)+1});
@@ -1382,11 +1395,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var n=wlAll?1e9:7;
     function pc(v){return '<td class="'+(v==null?"":v>0?"up":v<0?"down2":"")+'">'+(v==null?"–":fmtPct(v))+'</td>'}
     function tab(list,which){if(!list.length)return '<tr><td colspan="4" class="hint">Geen.</td></tr>';
-      var o=wlOrd[which];
+      var o=wlOrd[which];if(o.k!=="name"&&o.k!=="price"&&o.k!==wlSort&&o.k!==(wlSort==="d1"?"w1":"d1"))o.k=wlSort;
       function th(k,l){var on=o.k===k;return '<th data-k="'+k+'" data-w="'+which+'"'+(on?' class="on"':'')+' role="button" tabindex="0" aria-sort="'+(on?(o.dir<0?"descending":"ascending"):"none")+'">'+(on?(o.dir<0?"↓ ":"↑ "):"")+l+'</th>'}
-      return '<thead><tr>'+th("name","Naam")+th("price","Koers")+th("d1","1D")+th("w1","7D")+'</tr></thead><tbody>'+
+      var k2=wlSort==="d1"?"w1":"d1";
+      return '<thead><tr>'+th("name","Naam")+th("price","Koers")+th(wlSort,wlLabel(wlSort))+th(k2,wlLabel(k2))+'</tr></thead><tbody>'+
         list.slice(0,n).map(function(x){var op=wlOpen===which+"|"+x.t;
-          return '<tr data-t="'+esc(x.t)+'" data-w="'+which+'" class="go'+(op?' open':'')+'"><td>'+esc(x.name)+'</td><td>'+(x.price>=1000?sym(x.cur)+Math.round(x.price).toLocaleString("nl-NL"):fmtPrice(x.price,x.cur))+'</td>'+pc(x.d1)+pc(x.w1)+'</tr>'+
+          return '<tr data-t="'+esc(x.t)+'" data-w="'+which+'" class="go'+(op?' open':'')+'"><td>'+esc(x.name)+'</td><td>'+(x.price>=1000?sym(x.cur)+Math.round(x.price).toLocaleString("nl-NL"):fmtPrice(x.price,x.cur))+'</td>'+pc(x[wlSort])+pc(x[k2])+'</tr>'+
             (op?'<tr class="wldet"><td colspan="4">'+wlDetail(x)+'</td></tr>':'')}).join("")+'</tbody>'}
     function wlDetail(x){
       var it=[["1 maand",fmtPct(x.m1)],["3 maanden",fmtPct(x.m3)],["Sinds 1 jan",fmtPct(x.ytd)],["1 jaar",fmtPct(x.y1)],
@@ -1402,14 +1416,16 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     $("wlhint").textContent=(WLHINT[wlIdx]||"")+" "+(wlSec?L.length+" van "+Lall+" aandelen "+(wlSec==="AI"?"met AI-label":"in "+sec(wlSec))+".":Lall+" aandelen met koers.");
   }
   $("wlidx").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;wlIdx=b.dataset.v;wlAll=false;try{localStorage.setItem("wl",JSON.stringify({i:wlIdx,s:wlSort}))}catch(err){}renderWL()});
-  $("wlsort").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;wlSort=b.dataset.v;
-    wlOrd={up:{k:wlSort,dir:-1},down:{k:wlSort,dir:1}};try{localStorage.setItem("wl",JSON.stringify({i:wlIdx,s:wlSort}))}catch(err){}renderWL()});
+  function wlSetSort(v){wlSort=v;wlAll=false;wlOpen=null;
+    wlOrd={up:{k:wlSort,dir:-1},down:{k:wlSort,dir:1}};try{localStorage.setItem("wl",JSON.stringify({i:wlIdx,s:wlSort}))}catch(err){}renderWL()}
+  $("wlsort").addEventListener("click",function(e){var b=e.target.closest("button");if(b)wlSetSort(b.dataset.v)});
+  $("wlsort").addEventListener("change",function(e){if(e.target.id==="wlyear")wlSetSort(e.target.value||"d1")});
   $("wlmore").addEventListener("click",function(){wlAll=!wlAll;renderWL()});
   $("wlsec").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;wlSec=b.dataset.v;wlAll=false;wlOpen=null;renderWL()});
   ["wlup","wldown"].forEach(function(id){$(id).addEventListener("click",function(e){
     var th=e.target.closest("th[data-k]");
     if(th){var o=wlOrd[th.dataset.w],k=th.dataset.k;
-      if(o.k===k)o.dir=-o.dir;else{o.k=k;o.dir=k==="name"?1:(th.dataset.w==="down"&&(k==="d1"||k==="w1")?1:-1)}
+      if(o.k===k)o.dir=-o.dir;else{o.k=k;o.dir=k==="name"?1:(th.dataset.w==="down"&&k!=="price"?1:-1)}
       renderWL();return}
     var g=e.target.closest(".wlgo");if(g){gotoCard(g.dataset.t);return}
     if(e.target.closest("tr.wldet"))return;                 // klikken in de grafiek/details
@@ -2122,7 +2138,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-08-4";
+  var BUILD="2026-11-08-5";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

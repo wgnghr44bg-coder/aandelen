@@ -681,10 +681,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <div id="gcchart"></div>
     </div>
     <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><h2>Sectoren <small id="secpl"></small></h2><button type="button" class="more" data-go="sectoren" aria-label="Naar sectoren">›</button></div><div class="pseg sm" id="secseg" role="group" aria-label="Periode sectoren"></div><table class="kv sbar" id="secmini"></table></div>
-    <div class="panel ov">
-      <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste">Alle ›</button></div>
-      <ol class="alist prev" id="aprev"></ol>
-    </div>
     <p class="upd mdate" id="mdate"></p>
     <div class="panel" id="wlpanel" hidden>
       <div class="ph"><span class="emo">📊</span><h2>Stijgers &amp; dalers per index</h2></div>
@@ -1639,16 +1635,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
     var BI={BUY:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',HOLD:'<path d="M8 5v14M16 5v14"/>',SELL:'<path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/>'};
     $("ovchips").innerHTML=["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="b-'+k+'" data-r="'+k+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+BI[k]+'</svg>'+k+' <span class="n">'+(cnt[k]||0)+'</span></button>'}).join("");
-    // grootste assets: top 5
-    var all=allAssets().slice(0,5),max=all.length?all[0].cap:1;
-    $("aprev").innerHTML=all.map(function(x){
-      var c=cls(drop(x.r,period)),sub=x.k==="metaal"?"(edelmetaal)":x.k==="crypto"?"(crypto)":x.k==="bedrijf"?"🌏":esc(x.t);
-      var av=x.icon?'<span class="av-ic" style="background:none;font-size:1rem">'+x.icon+'</span>':avatar(x.name,x.t);
-      return '<li class="'+(x.k==="co"?"co":x.k)+'" data-t="'+esc(x.t)+'"><span class="ar">'+x.rank+'</span>'+
-        '<span class="an">'+av+esc(x.name)+'<span class="ak">'+sub+'</span></span>'+
-        '<span class="av"><b>'+fmtCap(x.cap)+'</b><span class="pct '+c+'">'+fmtPct(x.r[period],period)+'</span></span>'+
-        '<span class="ab"><span style="width:'+Math.max(1.5,x.cap/max*100).toFixed(1)+'%"></span></span></li>';
-    }).join("");
     renderGC();renderSecMini();renderNews();
     if(tab==="watchlist")renderWatch();
     if(tab==="grondstoffen")renderGrond();
@@ -1721,7 +1707,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var b=e.target.closest("button");if(!b)return;
     ratingFilter=b.dataset.r||null;render();scrollToGrp();
   });
-  $("aprev").addEventListener("click",function(e){var li=e.target.closest("li.co");if(li)gotoCard(li.dataset.t);else showTab("grootste")});
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
   var macro={};
@@ -2138,7 +2123,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-08-5";
+  var BUILD="2026-11-08-6";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

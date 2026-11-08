@@ -22,6 +22,7 @@ from engine.uitleg import waarom
 from indicatoren import EMA_PERIODES, ema
 import grondstoffen
 import macro
+import nieuws
 
 ROOT = Path(__file__).parent
 TICKERS_FILE = ROOT / "tickers.txt"
@@ -840,6 +841,16 @@ def main():
         print(f"macro mislukt: {e}")
         if vorige:
             uit["macro"] = vorige
+
+    try:
+        vorig_nieuws = json.loads(OUT.read_text()).get("nieuws") if OUT.exists() else None
+    except Exception:  # noqa: BLE001
+        vorig_nieuws = None
+    try:
+        uit["nieuws"] = nieuws.haal_nieuws(vorig_nieuws)
+    except Exception as e:  # noqa: BLE001
+        print(f"nieuws mislukt: {e}")
+        uit["nieuws"] = vorig_nieuws or []
 
     # Waarderingsengine: analyseert het hele universum (voor sectorvergelijking); op de site alleen het advies
     analyse = None

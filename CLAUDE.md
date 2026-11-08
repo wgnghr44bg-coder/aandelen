@@ -40,9 +40,10 @@
 ## Overige tabs
 - Menu onderaan (5): Overzicht, Aandelen, Sectoren, **Economie** (= panes rentes+inflatie+vastgoed onder elkaar,
   `showTab("rentes")` scrolt ernaartoe) en **Meer** (watchlist, grondstoffen, grootste). Zie `showTab`/`navOf`.
-- Overzicht (dashboard): indexen Nasdaq/S&P 500/AEX + WEBN (2x2, periode 1D–1Y) met VALL eronder, marktsentiment,
-  grondstoffen & crypto, economische indicatoren, vastgoed, sectorprestaties, stijgers & dalers (vandaag, alle
-  aandelen), grootste assets, nieuws, en onderaan stijgers/dalers per index met sectorknoppen en AI-knop (`ai.txt`).
+- Overzicht (dashboard): WEBN/VALL/Bitcoin, indexen Nasdaq/S&P 500/AEX, BUY/HOLD/SELL, Rente & Economie, Vastgoed,
+  Grondstoffen, Sectoren (balkjes), Stijgers & Dalers per index, **Marktontwikkeling = gemiddelde van WEBN, VALL en
+  Bitcoin** (periode 1D–1Y, stuurt ook de tegels en "Index wijzigingen"), grootste assets, nieuws, en onderaan
+  alle stijgers/dalers per index met sectorknoppen en AI-knop (`ai.txt`).
 - Nieuws: `nieuws.py` (RSS NOS Economie + NU.nl Economie, alleen koppen + link; terugval = vorige koppen) → `nieuws`.
 - Rentes/Inflatie/Vastgoed: `macro.py` (ECB, Eurostat, CBS). Vastgoed box 3: `vastgoedrentes.py` (alleen
   gepubliceerde tarieven, anders "Tarief op aanvraag"). Grondstoffen: `grondstoffen.py` (bandbreedte-controle, anders link).

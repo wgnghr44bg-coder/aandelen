@@ -520,7 +520,82 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .ov2 .mlink{border:0;background:none;font:inherit;cursor:pointer;padding:4px 0 0;text-align:right;width:100%}
 .panel.ov .ph .more{font-size:.78rem;color:var(--accent)}
 .gc .gn small{display:inline}
-#secmini td:first-child{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:100%}
+
+/* ================= Overzicht v5 ================= */
+.tag{text-transform:none;letter-spacing:0;font-size:.74rem}
+/* rij 1: WEBN, VALL, Bitcoin – rij 2: indexen */
+.xrow,.irow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0 0}
+.xrow[hidden],.irow[hidden]{display:none}
+.irow{margin-top:6px}
+.xrow .xt,.irow .xt{display:grid;grid-template-columns:1fr;grid-template-areas:"l" "p" "c" "s";gap:1px;padding:8px 8px 6px;border-radius:14px;text-align:left}
+.xrow .xt .xl,.irow .xt .xl{grid-area:l;display:flex;align-items:center;gap:5px;font-size:.8rem;min-width:0}
+.xrow .xt .xl b,.irow .xt .xl b{font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xrow .xt .xl b em{font-style:normal;font-weight:500;color:var(--muted);font-size:.66rem}
+.xrow .xt .xl small{display:none}
+.xrow .xt .xl:has(small){flex-wrap:wrap;row-gap:0}
+.xrow .xt .xl:has(small) small{display:block;flex-basis:100%;font-size:.6rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:-1px 0 0 0}
+.xrow .xt .xp,.irow .xt .xp{grid-area:p;font-size:1.05rem;font-weight:800;margin-top:2px}
+.xrow .xt .xc,.irow .xt .xc{grid-area:c;font-size:.72rem}
+.xt .xc .meta{color:var(--muted);font-weight:500;font-size:.64rem}
+.xrow .xt .spark,.irow .xt .spark{grid-area:s;height:22px;width:100%;margin-top:2px}
+.xt .xico{width:20px;height:20px;font-size:.72rem}
+.panel.ov+.bigr,#xpanel+.bigr{margin-top:10px}
+#ovchips{margin:10px 0}
+/* Rente & Economie, Vastgoed */
+.vgbox{display:grid;gap:6px}
+.vgbig{display:grid;padding:6px 8px;border-radius:10px;background:radial-gradient(120% 120% at 100% 100%,color-mix(in oklab,var(--accent) 22%,transparent),transparent 60%),color-mix(in oklab,var(--bg) 40%,var(--card))}
+.vgbig:empty{display:none}
+.vgbig span{font-size:.74rem;font-weight:600}
+.vgbig b{font-size:1.55rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.vgbig small{color:var(--muted);font-size:.6rem}
+.vghyp>b{display:block;font-size:.74rem;margin:0 0 2px}
+.kv.sm td{padding:2px 0;border-top:0;font-size:.7rem}
+.kv.sm td:first-child{font-weight:500}
+.kv .cap td{color:var(--muted);font-size:.58rem;font-weight:400;padding-top:3px;text-align:left}
+/* Grondstoffen: 4 tegels */
+#gcrow{grid-auto-columns:minmax(136px,1fr)}
+#gcrow .gc{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"i n n" "i b p";align-items:center;gap:0 6px;padding:7px 8px}
+#gcrow .gi{grid-area:i;font-size:1.35rem}
+#gcrow .gn{grid-area:n}
+#gcrow b{grid-area:b;font-size:.86rem}
+#gcrow .gp{grid-area:p;font-size:.72rem;font-weight:700}
+/* Sectoren met balkjes */
+.ph h2 small{color:var(--muted);font-weight:500;font-size:.72rem}
+.kv.sbar td{padding:4px 0}
+.kv.sbar td:first-child{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:50%}
+.kv.sbar td.sb{width:28%;padding:0 4px}
+.kv.sbar td.sb i{display:block;height:7px;border-radius:4px}
+.kv.sbar td.sb i.up{background:linear-gradient(90deg,#16a34a,#2fd26b)}
+.kv.sbar td.sb i.dn{background:linear-gradient(90deg,#ff4d4d,#b91c1c)}
+.kv.sbar td:last-child{text-align:right;font-weight:700;white-space:nowrap;width:22%}
+/* Stijgers & Dalers per index */
+.seg2.sd button{font-size:.62rem;padding:4px 0}
+.sdcols{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sdcols h3{font-size:.68rem;margin:6px 0 2px}
+.sdcols .kv td{font-size:.64rem;padding:3px 0}
+.sdcols .kv td:first-child{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:100%}
+.sdcols .kv td:nth-child(2){font-weight:700;padding-left:2px}
+.sdcols .kv tr[data-t]{cursor:pointer}
+/* Marktontwikkeling + Index wijzigingen */
+.mkbox{display:grid;grid-template-columns:1fr;gap:4px}
+.mkbox .hspark{width:100%;height:64px;display:block}
+.mkv{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.mkv b{font-size:1.25rem;font-weight:800;font-variant-numeric:tabular-nums}
+.mkv small{color:var(--muted);font-size:.58rem;line-height:1.25;text-align:right}
+.tag{white-space:normal;line-height:1.3}
+.top .brand>div{min-width:0}
+.ov2 .ph h2{font-size:.82rem;overflow:visible;hyphens:auto;-webkit-hyphens:auto}
+.ov2 .ph .ic{width:17px;height:17px}
+.kv.sbar{table-layout:fixed}
+.kv.sbar td:first-child{width:auto}
+.kv.sbar td.sb{width:19%}
+.kv.sbar td:last-child{width:46px}
+.seg2.sd button{white-space:nowrap;font-size:.58rem}
+.kv.ich td{padding:6px 0;font-size:.8rem}
+.kv.ich td:first-child{font-weight:700}
+.kv.ich td:nth-child(2){font-weight:700}
+.kv.ich td:nth-child(3){width:1%;padding-left:6px}
+.kv.ich tr{cursor:pointer}
 .tri2{display:inline-block;width:14px;font-size:.62rem}
 .seg2.sd{margin:0 0 4px}.seg2.sd button{flex:1;padding:4px 0;font-size:.72rem}
 .sdt td:first-child{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:100%}
@@ -554,7 +629,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <header class="top">
     <div class="brand">
       <svg class="logo" viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="24" width="6" height="10" rx="1.5" fill="#1fbf6a"/><rect x="11" y="18" width="6" height="16" rx="1.5" fill="#1fbf6a"/><rect x="20" y="12" width="6" height="22" rx="1.5" fill="#22c55e"/><rect x="29" y="16" width="6" height="18" rx="1.5" fill="#2f7bff"/><path d="M3 20L16 9l7 5L39 2" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 2h7v7" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><h1 id="title">Invest<span>Market</span></h1><p class="tag">Wereldwijde financiële markten</p></div>
+      <div><h1 id="title">Invest<span>Market</span></h1><p class="tag">Financiële markten • ETF's • Crypto • Rentes • Vastgoed</p></div>
     </div>
     <button type="button" class="ibtn" id="searchBtn" aria-label="Zoeken"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
   </header>
@@ -571,27 +646,30 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 </div>
 <div class="wrap">
   <section class="pane" data-pane="overzicht">
-    <div class="panel ov">
-      <div class="ph"><h2>Wereldwijde beursindices</h2><div class="pseg" id="mper" role="group" aria-label="Periode indexen"></div></div>
-      <div class="igrid" id="indices"></div>
-      <div class="igrid one" id="extras" hidden></div>
-      <div id="xpanel"></div>
-    </div>
-    <div class="panel ov">
-      <div class="ph"><h2>Marktsentiment</h2><span class="pmeta rt" id="sentsub"></span></div>
-      <div class="bigr" id="ovchips"></div>
+    <div class="xrow" id="extras" hidden></div>
+    <div class="irow" id="indices" hidden></div>
+    <div id="xpanel"></div>
+    <div class="bigr" id="ovchips"></div>
+    <div class="ov2">
+      <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9.7 9v9M14.3 9v9M19 9v9M3 20h18"/></svg><h2>Rente &amp; Economie</h2><button type="button" class="more" data-go="rentes" aria-label="Naar economie">›</button></div><table class="kv" id="ecomini"></table></div>
+      <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><h2>Vastgoed / Woningen</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div>
+        <div class="vgbox"><div class="vgbig" id="vgbig"></div><div class="vghyp"><b>Hypotheekrentes</b><table class="kv sm" id="vgmini"></table></div></div></div>
     </div>
     <div class="panel ov" id="gcpanel" hidden>
-      <div class="ph"><h2>Grondstoffen &amp; crypto</h2><button type="button" class="more" data-go="grondstoffen" aria-label="Naar grondstoffen">1D ›</button></div>
+      <div class="ph"><span class="emo">🪙</span><h2>Grondstoffen</h2><button type="button" class="more" data-go="grondstoffen" aria-label="Naar grondstoffen">›</button></div>
       <div class="gcrow" id="gcrow"></div>
     </div>
     <div class="ov2">
-      <div class="panel ov"><div class="ph"><h2>Economische indicatoren</h2><button type="button" class="more" data-go="rentes" aria-label="Naar economie">›</button></div><table class="kv" id="ecomini"></table></div>
-      <div class="panel ov"><div class="ph"><h2>🏠 Vastgoed</h2><button type="button" class="more" data-go="vastgoed" aria-label="Naar vastgoed">›</button></div><table class="kv" id="vgmini"></table><button type="button" class="more mlink" data-go="rentes">Rentes per looptijd bekijken ›</button></div>
+      <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg><h2>Sectoren <small id="secpl"></small></h2><button type="button" class="more" data-go="sectoren" aria-label="Naar sectoren">›</button></div><div class="pseg sm" id="secseg" role="group" aria-label="Periode sectoren"></div><table class="kv sbar" id="secmini"></table></div>
+      <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M10 20V8M15 20V11M20 20V5"/></svg><h2>Stijgers &amp; Dalers per index <small>(1D)</small></h2><button type="button" class="more" id="sdgo" aria-label="Naar aandelen">›</button></div>
+        <div class="seg2 sd" id="sdseg" role="group" aria-label="Index"></div>
+        <div class="sdcols"><div><h3 class="up">▲ Stijgers</h3><table class="kv sdt" id="sdup"></table></div><div><h3 class="down2">▼ Dalers</h3><table class="kv sdt" id="sddown"></table></div></div></div>
     </div>
     <div class="ov2">
-      <div class="panel ov"><div class="ph"><h2>Sectorprestaties</h2><button type="button" class="more" data-go="sectoren" aria-label="Naar sectoren">›</button></div><div class="pseg sm" id="secseg" role="group" aria-label="Periode sectoren"></div><table class="kv" id="secmini"></table></div>
-      <div class="panel ov"><div class="ph"><h2>Stijgers &amp; dalers</h2><button type="button" class="more" id="sdgo" aria-label="Naar aandelen">›</button></div><div class="seg2 sd" id="sdseg" role="group" aria-label="Stijgers of dalers"><button type="button" data-v="up">Stijgers</button><button type="button" data-v="down">Dalers</button></div><table class="kv sdt" id="sdmini"></table><p class="hsub">vandaag · alle aandelen</p></div>
+      <div class="panel ov mk"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><h2>Markt&shy;ontwikkeling</h2></div>
+        <div class="pseg sm" id="mper" role="group" aria-label="Periode markt"></div>
+        <div class="mkbox"><svg class="hspark" id="hspark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"></svg><div class="mkv"><b id="mToday">–</b><small id="mSub"></small></div></div></div>
+      <div class="panel ov"><div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M10 20V8M15 20V11M20 20V5"/></svg><h2>Index wijzigingen <small id="idxpl"></small></h2></div><table class="kv ich" id="idxchg"></table></div>
     </div>
     <div class="panel ov">
       <div class="ph"><span class="emo">🌍</span><h2>Grootste assets ter wereld</h2><button type="button" class="more" data-go="grootste">Alle ›</button></div>
@@ -604,7 +682,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     </div>
     <p class="upd mdate" id="mdate"></p>
     <div class="panel" id="wlpanel" hidden>
-      <div class="ph"><span class="emo">📊</span><h2>Stijgers &amp; dalers per index</h2></div>
+      <div class="ph"><span class="emo">📊</span><h2>Alle stijgers &amp; dalers per index</h2></div>
       <div class="gper" id="wlidx" role="group" aria-label="Index"></div>
       <div class="gper" id="wlsort" role="group" aria-label="Stijgers en dalers volgens"></div>
       <div class="gper wlsec" id="wlsec" role="group" aria-label="Sector"></div>
@@ -1092,22 +1170,25 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   }
   // lijn voor 1D: koersen binnen de laatste handelsdag (x.i), anders de laatste 30 slotkoersen
   function daySpark(x){return x.i&&x.i.pts&&x.i.pts.length>1?x.i.pts.map(function(p){return p[1]}):x.spark}
+  function perTag(x){var m=null;MP.forEach(function(p){if(p.k===mper)m=p});return mper==="D"&&x.ticker==="BTC-EUR"?"24u":(m?m.b:mper)}
   function tileX(x){
     var c=chgP(x),sp=mper==="D"?daySpark(x):seriesP(x);
     return '<button type="button" class="xt" data-x="'+esc(x.ticker)+'" aria-expanded="'+(openExtra===x.ticker)+'">'+
-      '<span class="xl">'+(XICO[x.ticker]||'')+'<b>'+esc(XNAME[x.ticker]||x.label)+(x.live?'<span class="live" title="live"></span>':'')+'</b><small>'+esc(x.beurs)+'</small></span>'+
+      '<span class="xl">'+(XICO[x.ticker]||'')+'<b>'+esc(XNAME[x.ticker]||x.label)+(XSUB2[x.ticker]?' <em>'+XSUB2[x.ticker]+'</em>':'')+(x.live?'<span class="live" title="live"></span>':'')+'</b>'+
+        (XSUB[x.ticker]?'<small>'+esc(XSUB[x.ticker])+'</small>':'')+'</span>'+
       '<span class="xp">'+fmtX(x,x.price)+'</span>'+
-      '<span class="xc '+chgCls(c)+'">'+(c>0?"▲ ":c<0?"▼ ":"")+(c==null?"n.v.t.":fmtPct(c))+'</span>'+spark(sp,c)+'</button>';
+      '<span class="xc '+chgCls(c)+'">'+(c>0?"▲ ":c<0?"▼ ":"")+(c==null?"n.v.t.":fmtPct(c))+' <span class="meta">('+perTag(x)+')</span></span>'+spark(sp,c)+'</button>';
   }
-  // Volgorde in het blok "Wereldwijde beursindices": Nasdaq, S&P 500, AEX, WEBN (wereld-ETF); VALL eronder
-  var XORD=["^IXIC","^GSPC","^AEX","WEBN.DE"],XNAME={"^IXIC":"Nasdaq","WEBN.DE":"WEBN (wereld)"};
+  // Bovenaan: WEBN, VALL, Bitcoin (samen = Marktontwikkeling); daaronder de indexen
+  var XTOP=["WEBN.DE","VALL.AS","BTC-EUR"],XIDX=["^IXIC","^GSPC","^AEX"];
+  var XNAME={"^IXIC":"Nasdaq"},XSUB={"WEBN.DE":"Amundi World ETF","VALL.AS":"Vanguard All Cap ETF","BTC-EUR":"Bitvavo"},XSUB2={};
+  function pickX(list){return list.map(function(t){var x=null;allX().forEach(function(y){if(y.ticker===t)x=y});return x}).filter(Boolean)}
   function renderExtras(){
     var el=$("extras"),ei=$("indices");
-    var grid=XORD.map(function(t){var x=null;allX().forEach(function(y){if(y.ticker===t)x=y});return x}).filter(Boolean);
-    var rest=extras.filter(function(x){return XORD.indexOf(x.ticker)<0&&x.ticker!=="BTC-EUR"});   // Bitcoin staat bij crypto
-    el.hidden=!rest.length;ei.hidden=!grid.length;
-    el.innerHTML=rest.map(tileX).join("");ei.innerHTML=grid.map(tileX).join("");
-    renderGC();
+    var top=pickX(XTOP),idx=pickX(XIDX);
+    el.hidden=!top.length;ei.hidden=!idx.length;
+    el.innerHTML=top.map(tileX).join("");ei.innerHTML=idx.map(tileX).join("");
+    renderIdxChg();
     var x=null;allX().forEach(function(y){if(y.ticker===openExtra)x=y});
     if(!x){$("xpanel").innerHTML="";return}
     var items=[["1 maand",fmtPct(x.m1)],["3 maanden",fmtPct(x.m3)],["Sinds 1 jan",fmtPct(x.ytd)],["1 jaar",fmtPct(x.y1)],
@@ -1482,23 +1563,64 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(out.length&&!isYear())out[out.length-1]=x.price||out[out.length-1];
     return out.length>1?out:null;
   }
+  // ---------- Marktontwikkeling: gemiddelde van WEBN, VALL en Bitcoin over de gekozen periode ----------
   function renderMarket(){
     $("mper").innerHTML=MP.map(function(m){return '<button type="button" data-k="'+m.k+'" aria-pressed="'+(m.k===mper)+'" title="'+m.l+'">'+m.b+'</button>'}).join("");
+    var mx=pickX(XTOP);
+    var ds=mx.map(chgP).filter(function(d){return d!=null});
+    var mt=ds.length?ds.reduce(function(a,b){return a+b},0)/ds.length:null;
+    $("mToday").textContent=mt==null?"–":fmtPct(mt);$("mToday").className=chgCls(mt);
+    // lijn: gemiddelde van de drie (elk geïndexeerd op 100 aan het begin van de periode), op een gezamenlijke datumas
+    var hs=mx.filter(function(x){return x.h&&x.h.length>1});
+    var v=null;
+    if(hs.length){
+      var lastD=hs.map(function(x){return x.h[x.h.length-1][0]}).sort().pop(),st=startDate(lastD),en=endDate(),dates={};
+      hs=hs.filter(function(x){return x.h[0][0]<=st});   // alleen wat er aan het begin van de periode al was
+      hs.forEach(function(x){x.h.forEach(function(p){if(p[0]>st&&p[0]<=en)dates[p[0]]=1})});
+      var ds2=Object.keys(dates).sort();
+      var bases=hs.map(function(x){return valOn(x.h,st)});
+      v=[100];
+      ds2.forEach(function(d,di){var t=0,n=0;hs.forEach(function(x,i){var b=bases[i],c=valOn(x.h,d);if(di===ds2.length-1&&x.price)c=x.price;if(b&&c){t+=c/b*100;n++}});if(n)v.push(t/n)});
+    }else{
+      var sp=mx.map(function(x){return x.spark}).filter(function(a){return a&&a.length>1});
+      var len=sp.length?Math.min.apply(null,sp.map(function(a){return a.length})):0;
+      if(len>1){v=[];for(var k=0;k<len;k++){var t2=0;sp.forEach(function(a){var b=a.slice(-len);t2+=b[k]/b[0]*100});v.push(t2/sp.length)}}
+    }
+    $("hspark").innerHTML="";
+    if(v&&v.length>1){
+      var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v),spn=(hi-lo)||1,col=(mt!=null&&Math.abs(mt)<0.05)?"var(--muted)":(mt!=null?mt>0:v[v.length-1]>=v[0])?"var(--up)":"var(--down-strong)";
+      var line=v.map(function(y,i){return (i/(v.length-1)*200).toFixed(1)+","+(56-(y-lo)/spn*46).toFixed(1)}).join(" ");
+      $("hspark").innerHTML='<defs><linearGradient id="hg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".35"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+
+        '<polygon points="0,60 '+line+' 200,60" fill="url(#hg)"/><polyline points="'+line+'" fill="none" stroke="'+col+'" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
+    }
+    var namen={"WEBN.DE":"WEBN","VALL.AS":"VALL","BTC-EUR":"Bitcoin"};
+    var mee=mx.filter(function(x){return chgP(x)!=null}).map(function(x){return namen[x.ticker]||x.label});
+    var mis=mx.filter(function(x){return chgP(x)==null}).map(function(x){return namen[x.ticker]||x.label});
+    $("mSub").innerHTML="Wereldmarkt<br>(gem. "+(mee.length?esc(mee.join(", ").replace(/, ([^,]*)$/," en $1")):"–")+")"+
+      (mper==="D"?"<br>lijn: 7 dagen":"")+(mis.length&&mee.length?"<br>"+esc(mis.join(", "))+": nog geen hele periode":"");
   }
   $("mper").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;mper=b.dataset.k;
     try{localStorage.setItem("mper",mper)}catch(err){}
     renderMarket();renderExtras();
   });
+  // ---------- Index wijzigingen (zelfde periode als Marktontwikkeling) ----------
+  function renderIdxChg(){
+    $("idxpl").textContent="("+perTag({})+")";
+    $("idxchg").innerHTML=pickX(XIDX).map(function(x){var c=chgP(x);
+      return '<tr data-x="'+esc(x.ticker)+'"><td>'+esc(x.ticker==="^IXIC"?"Nasdaq":x.label)+'</td><td class="'+chgCls(c)+'">'+(c==null?"–":fmtPct(c))+'</td><td class="'+chgCls(c)+'">'+(c==null?"":c>=0?"▲":"▼")+'</td></tr>'}).join("");
+  }
+  $("idxchg").addEventListener("click",function(e){
+    var tr=e.target.closest("tr[data-x]");if(!tr)return;
+    openExtra=tr.dataset.x;renderExtras();$("xpanel").scrollIntoView({behavior:"smooth",block:"center"});
+  });
   function renderOverview(){
     renderWL();
-    renderMarket();
-    // Marktsentiment: aantal BUY/HOLD/SELL van de waarderingsengine
+    renderMarket();renderIdxChg();
+    // BUY/HOLD/SELL van de waarderingsengine
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
     var BI={BUY:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',HOLD:'<path d="M8 5v14M16 5v14"/>',SELL:'<path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/>'};
     $("ovchips").innerHTML=["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="b-'+k+'" data-r="'+k+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+BI[k]+'</svg>'+k+' <span class="n">'+(cnt[k]||0)+'</span></button>'}).join("");
-    var nA=(cnt.BUY||0)+(cnt.HOLD||0)+(cnt.SELL||0);
-    $("sentsub").textContent=nA?"Analyse van "+nA+" aandelen":"";
     // grootste assets: top 5
     var all=allAssets().slice(0,5),max=all.length?all[0].cap:1;
     $("aprev").innerHTML=all.map(function(x){
@@ -1514,33 +1636,21 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(tab==="grondstoffen")renderGrond();
     renderMacro();
   }
-  // ---------- Grondstoffen & crypto (Overzicht) ----------
-  var GC=[{id:"gold",n:"Goud",i:"🥇"},{id:"silver",n:"Zilver",i:"🥈"},{id:"wti",n:"Olie",s:"(WTI)",i:"🛢️"},{id:"natgas",n:"Aardgas",s:"(VS)",i:"🔥"},
-          {x:"BTC-EUR",n:"Bitcoin",i:"₿",c:"btc"},{a:"ETH-USD",n:"Ethereum",i:"Ξ",c:"eth"}];
+  // ---------- Grondstoffen (Overzicht): goud, olie (Brent), aardgas, zilver – koers en verandering vandaag ----------
+  var GC=[{id:"gold",n:"Goud",i:"🥇"},{id:"brent",n:"Olie",s:"(Brent)",i:"🛢️"},{id:"natgas",n:"Aardgas",s:"(VS)",i:"🔥"},{id:"silver",n:"Zilver",i:"🥈"}];
   function renderGC(){
     var byId={};(grond||[]).forEach(function(g){(g.items||[]).forEach(function(it){byId[it.id]=it})});
     var tiles=GC.map(function(d){
-      var it=null,price="–",go="grondstoffen";
-      if(d.id){it=byId[d.id];if(it)price=gPrice(it.price,it.currency)}
-      else if(d.x){extras.forEach(function(y){if(y.ticker===d.x)it=y});if(it)price=fmtEur(it.price);go="x"}
-      else{assets.forEach(function(y){if(y.ticker===d.a)it=y});if(it)price=it.price>=1000?"$"+Math.round(it.price).toLocaleString("nl-NL"):"$"+nf2.format(it.price);go="grootste"}
-      if(!it||it.price==null)return "";
-      var c=it.d1;
-      return '<button type="button" class="gc" data-go="'+go+'" title="'+esc(d.n+(it.unit?" · "+it.unit:"")+" · verandering vandaag")+'">'+
-        '<span class="gn"><i class="'+(d.c||"")+'">'+d.i+'</i>'+esc(d.n)+(d.s?' <small>'+d.s+'</small>':'')+(it.live?'<span class="live" title="live"></span>':'')+'</span>'+
-        '<b>'+price+'</b><span class="'+chgCls(c)+'">'+(c==null?"–":fmtPct(c))+'</span></button>';
+      var it=byId[d.id];if(!it||it.price==null)return "";
+      return '<button type="button" class="gc" data-go="grondstoffen" title="'+esc(d.n+" "+(d.s||"")+(it.unit?" · "+it.unit:"")+" · verandering vandaag")+'">'+
+        '<span class="gi">'+d.i+'</span><span class="gn">'+esc(d.n)+(d.s?' <small>'+d.s+'</small>':'')+'</span>'+
+        '<b>'+gPrice(it.price,it.currency)+'</b><span class="gp '+chgCls(it.d1)+'">'+(it.d1==null?"–":fmtPct(it.d1))+'</span></button>';
     }).join("");
     $("gcrow").innerHTML=tiles;$("gcpanel").hidden=!tiles;
   }
-  $("gcrow").addEventListener("click",function(e){
-    var b=e.target.closest(".gc");if(!b)return;
-    if(b.dataset.go==="x"){   // Bitcoin: grafiek openen in het indexblok
-      openExtra=openExtra==="BTC-EUR"?null:"BTC-EUR";renderExtras();
-      if(openExtra)$("xpanel").scrollIntoView({behavior:"smooth",block:"center"});return}
-    showTab(b.dataset.go);window.scrollTo({top:0});
-  });
-  // ---------- Sectorprestaties (Overzicht): marktwaarde-gewogen gemiddelde per sector ----------
-  var SP=[["d1","1D"],["w1","7D"],["m1","1M"],["m3","3M"],["ytd","YTD"],["y1","1Y"]],secp="d1";
+  $("gcrow").addEventListener("click",function(e){if(e.target.closest(".gc")){showTab("grondstoffen");window.scrollTo({top:0})}});
+  // ---------- Sectoren (Overzicht): marktwaarde-gewogen gemiddelde per sector, met balkjes ----------
+  var SP=[["d1","1D"],["w1","7D"],["m1","1M"],["m3","3M"],["ytd","YTD"],["y1","1Y"]],secp="m1";
   try{var sp0=localStorage.getItem("secp");if(SP.some(function(x){return x[0]===sp0}))secp=sp0}catch(e){}
   function sectorAvg(k){
     var g={};
@@ -1550,29 +1660,34 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   }
   function renderSecMini(){
     $("secseg").innerHTML=SP.map(function(x){return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===secp)+'">'+x[1]+'</button>'}).join("");
+    var lbl="";SP.forEach(function(x){if(x[0]===secp)lbl=x[1]});$("secpl").textContent="("+lbl+")";
     var L=sectorAvg(secp),show=L.length>6?L.slice(0,3).concat(L.slice(-3)):L;
+    var mx=Math.max.apply(null,show.map(function(t){return Math.abs(t.v)}).concat([0.1]));
     $("secmini").innerHTML=show.map(function(t){var c=chgCls(t.v);
-      return '<tr data-s="'+esc(t.k)+'"><td><span class="tri2 '+c+'">'+(t.v>=0?"▲":"▼")+'</span>'+esc(t.k)+'</td><td class="'+c+'">'+fmtPct(t.v)+'</td></tr>'}).join("");
+      return '<tr data-s="'+esc(t.k)+'"><td>'+esc(t.k)+'</td><td class="sb"><i class="'+(t.v>=0?"up":"dn")+'" style="width:'+Math.max(4,Math.abs(t.v)/mx*100).toFixed(0)+'%"></i></td><td class="'+c+'">'+fmtPct(t.v)+'</td></tr>'}).join("");
   }
   $("secseg").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;secp=b.dataset.k;try{localStorage.setItem("secp",secp)}catch(err){}renderSecMini()});
   $("secmini").addEventListener("click",function(e){
     var tr=e.target.closest("tr[data-s]");if(!tr)return;
     showTab("aandelen");$("sector").value=tr.dataset.s;render();scrollToGrp();
   });
-  // ---------- Stijgers & dalers (Overzicht): vandaag, alle aandelen ----------
-  var sdm="up";
+  // ---------- Stijgers & Dalers per index (Overzicht): vandaag, top 5 per kant ----------
+  var SDIDX=["Nasdaq 100","S&P 500","AEX"],sdIdx="Nasdaq 100";
   function renderSD(){
-    Array.prototype.forEach.call($("sdseg").querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.v===sdm)});
-    var L=rows.filter(function(r){return r.d1!=null&&r.price!=null}).sort(function(a,b){return sdm==="up"?b.d1-a.d1:a.d1-b.d1}).slice(0,5);
-    $("sdmini").innerHTML=L.map(function(r){
-      return '<tr data-t="'+esc(r.ticker)+'"><td>'+esc(NICK[r.ticker]||shortName(r.name))+'</td><td>'+(r.price>=1000?sym(r.currency)+Math.round(r.price).toLocaleString("nl-NL"):fmtPrice(r.price,r.currency))+'</td><td class="'+chgCls(r.d1)+'">'+fmtPct(r.d1)+'</td></tr>'}).join("");
+    var idx=SDIDX.filter(function(k){return (lijsten[k]||[]).length});
+    if(idx.indexOf(sdIdx)<0)sdIdx=idx[0]||sdIdx;
+    $("sdseg").innerHTML=idx.map(function(k){return '<button type="button" data-v="'+esc(k)+'" aria-pressed="'+(k===sdIdx)+'">'+esc(k)+'</button>'}).join("");
+    var byT={};rows.forEach(function(r){byT[r.ticker]=r});
+    var L=(lijsten[sdIdx]||[]).map(function(t){return byT[t]}).filter(function(r){return r&&r.d1!=null});
+    function rij(r){return '<tr data-t="'+esc(r.ticker)+'"><td>'+esc(NICK[r.ticker]||shortName(r.name))+'</td><td class="'+chgCls(r.d1)+'">'+fmtPct(r.d1)+'</td></tr>'}
+    $("sdup").innerHTML=L.filter(function(r){return r.d1>0}).sort(function(a,b){return b.d1-a.d1}).slice(0,5).map(rij).join("")||'<tr><td>–</td></tr>';
+    $("sddown").innerHTML=L.filter(function(r){return r.d1<0}).sort(function(a,b){return a.d1-b.d1}).slice(0,5).map(rij).join("")||'<tr><td>–</td></tr>';
   }
-  $("sdseg").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;sdm=b.dataset.v;renderSD()});
-  $("sdmini").addEventListener("click",function(e){var tr=e.target.closest("tr[data-t]");if(tr)gotoCard(tr.dataset.t)});
+  $("sdseg").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;sdIdx=b.dataset.v;renderSD()});
+  [$("sdup"),$("sddown")].forEach(function(t){t.addEventListener("click",function(e){var tr=e.target.closest("tr[data-t]");if(tr)gotoCard(tr.dataset.t)})});
   $("sdgo").addEventListener("click",function(){
-    // naar Aandelen: stijgers of dalers van vandaag
-    mode=sdm;period="d1";try{localStorage.setItem("modus",mode);localStorage.setItem("periode",period)}catch(err){}
-    renderPeriods();renderMode();showTab("aandelen");render();window.scrollTo({top:0});
+    // naar het uitgebreide blok onderaan, met dezelfde index
+    wlIdx=sdIdx;wlSort="d1";renderWL();var p=$("wlpanel");if(!p.hidden)p.scrollIntoView({behavior:"smooth",block:"start"});
   });
   // ---------- Financieel nieuws (echte koppen uit RSS: NOS, NU.nl) ----------
   var nieuws=[];
@@ -1620,23 +1735,21 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(last(ea))tiles.push(['🇪🇺 Inflatie eurozone',pct2(last(ea)[1]),'jaar op jaar · '+pdate(last(ea)[0]),ppTag(last(ea)[1],prevOf(ea)&&prevOf(ea)[1],true)]);
     if(dep)tiles.push(['🏦 ECB-rente',pct2(dep.value),'depositorente',ppTag(dep.value,dep.prev,true)]);
     var th=tiles.map(function(t){return '<div class="mt"><span class="ml">'+t[0]+'</span><span class="mv">'+t[1]+'</span><span class="ms">'+t[2]+(t[3]?'<br>'+t[3]:'')+'</span></div>'}).join("");
-    // Overzicht: Economische indicatoren (label + meetperiode, waarde, verschil met vorige periode)
+    // Overzicht: Rente & Economie (label + meetperiode, waarde met verschil t.o.v. vorige periode eronder)
     function kv(l,sub,v,tag){return '<tr><td>'+l+(sub?'<small>'+sub+'</small>':'')+'</td><td>'+v+(tag?'<span class="kt">'+tag+'</span>':'')+'</td></tr>'}
     var eco=[];
+    if(dep)eco.push(kv('🇪🇺 ECB-rente','deposito',pct2(dep.value),ppTag(dep.value,dep.prev,true,true)));
     if(last(nl))eco.push(kv('🇳🇱 Inflatie NL','j/j · '+pdate(last(nl)[0]),pct2(last(nl)[1]),ppTag(last(nl)[1],prevOf(nl)&&prevOf(nl)[1],true,true)));
     if(last(ea))eco.push(kv('🇪🇺 Inflatie eurozone','j/j · '+pdate(last(ea)[0]),pct2(last(ea)[1]),ppTag(last(ea)[1],prevOf(ea)&&prevOf(ea)[1],true,true)));
-    if(dep)eco.push(kv('ECB-depositorente','',pct2(dep.value),ppTag(dep.value,dep.prev,true,true)));
-    if(m.nl10y)eco.push(kv('NL 10-jaarsrente','gem. '+pdate(m.nl10y.date),pct2(m.nl10y.value),ppTag(m.nl10y.value,m.nl10y.prev,true,true)));
+    if(m.nl10y)eco.push(kv('🇳🇱 10-jaars rente NL','gem. '+pdate(m.nl10y.date),pct2(m.nl10y.value),ppTag(m.nl10y.value,m.nl10y.prev,true,true)));
     $("ecomini").innerHTML=eco.join("")||'<tr><td>Nog geen gegevens</td></tr>';
-    // Overzicht: Vastgoed (woningprijzen CBS/Eurostat, gemiddelde hypotheekrente)
-    var hyp=m.mortgage_nl||[],vg=[];
-    function sg2(v){return (v>0?"+":"")+pct2(v)}
-    var csr=m.house_prices_cbs&&m.house_prices_cbs.series,hpe=m.house_prices_nl;
-    if(last(csr))vg.push(kv('Woningprijzen','j/j · CBS · '+pdate(last(csr)[0]),'<span class="'+chgCls(last(csr)[1])+'">'+sg2(last(csr)[1])+'</span>',''));
-    if(last(hpe))vg.push(kv('Woningprijzen','j/j · Eurostat · '+pdate(last(hpe)[0]),'<span class="'+chgCls(last(hpe)[1])+'">'+sg2(last(hpe)[1])+'</span>',''));
-    hyp.filter(function(x){return x.code==="F"||x.code==="O"}).forEach(function(x){
-      vg.push(kv('Hypotheekrente',SHORTFIX[x.code]+' vast · gem. '+pdate(x.date),pct2(x.value),ppTag(x.value,x.prev,true,true)))});
-    $("vgmini").innerHTML=vg.join("")||'<tr><td>Nog geen gegevens</td></tr>';
+    // Overzicht: Vastgoed / Woningen – huizenprijzen (CBS, anders Eurostat) + gemiddelde hypotheekrente per rentevaste periode
+    var hyp=m.mortgage_nl||[];
+    var csr=m.house_prices_cbs&&m.house_prices_cbs.series,hpe=m.house_prices_nl,hp1=last(csr)||last(hpe),hpSrc=last(csr)?"CBS":"Eurostat";
+    $("vgbig").innerHTML=hp1?'<span>Huizenprijzen NL</span><b class="'+chgCls(hp1[1])+'">'+(hp1[1]>0?"+":"")+pct2(hp1[1])+'</b><small>(j/j · '+pdate(hp1[0])+' · '+hpSrc+')</small>':'';
+    var HL={F:"Tot 1 jaar",I:"1 – 5 jaar",O:"5 – 10 jaar",P:"> 10 jaar"};
+    $("vgmini").innerHTML=hyp.map(function(x){return '<tr title="'+esc(x.label)+' · gemiddelde '+pdate(x.date)+'"><td>'+(HL[x.code]||esc(x.label))+'</td><td>'+pct2(x.value)+'</td></tr>'}).join("")+
+      (hyp.length?'<tr class="cap"><td colspan="2">gem. afgesloten · '+pdate(hyp[0].date)+'</td></tr>':'');
     // tabblad Rentes
     function row(l,v,sub,tag,src){
       var lk=src?' <a class="src" href="'+esc(src)+'" target="_blank" rel="noopener">bron ↗</a>':'';
@@ -2012,7 +2125,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-08-2";
+  var BUILD="2026-11-08-3";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

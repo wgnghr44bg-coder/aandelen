@@ -558,6 +558,37 @@ def cmc_top(n=CMC_TOP):
         return []
 
 
+# Beurscode van Yahoo (info["exchange"]) -> leesbare naam
+BEURS_CODE = {
+    "NMS": "Nasdaq", "NGM": "Nasdaq", "NCM": "Nasdaq", "NAS": "Nasdaq",
+    "NYQ": "NYSE", "NYS": "NYSE", "ASE": "NYSE American", "PCX": "NYSE Arca", "BTS": "Cboe",
+    "AMS": "Amsterdam", "PAR": "Parijs", "BRU": "Brussel", "LIS": "Lissabon", "MCE": "Madrid", "MIL": "Milaan",
+    "GER": "Xetra", "ETR": "Xetra", "FRA": "Frankfurt", "EBS": "Zürich", "VTX": "Zürich", "LSE": "Londen",
+    "CPH": "Kopenhagen", "STO": "Stockholm", "HEL": "Helsinki", "OSL": "Oslo", "VIE": "Wenen",
+    "HKG": "Hongkong", "SHH": "Shanghai", "SHZ": "Shenzhen", "KSC": "Seoel", "KOE": "Seoel", "TAI": "Taiwan",
+    "JPX": "Tokio", "TYO": "Tokio", "NSI": "India (NSE)", "BSE": "India (BSE)", "SAU": "Saoedi-Arabië",
+    "ASX": "Sydney", "TOR": "Toronto", "SAO": "São Paulo", "ADX": "Abu Dhabi",
+}
+# Terugval op het achtervoegsel van de ticker (geen achtervoegsel = VS, beurs onbekend)
+BEURS_SUFFIX = {
+    "AS": "Amsterdam", "PA": "Parijs", "BR": "Brussel", "LS": "Lissabon", "MC": "Madrid", "MI": "Milaan",
+    "DE": "Xetra", "F": "Frankfurt", "SW": "Zürich", "L": "Londen", "CO": "Kopenhagen", "ST": "Stockholm",
+    "HE": "Helsinki", "OL": "Oslo", "VI": "Wenen", "HK": "Hongkong", "SS": "Shanghai", "SZ": "Shenzhen",
+    "KS": "Seoel", "TW": "Taiwan", "T": "Tokio", "NS": "India (NSE)", "BO": "India (BSE)",
+    "SR": "Saoedi-Arabië", "AX": "Sydney", "TO": "Toronto", "SA": "São Paulo", "AE": "Abu Dhabi",
+}
+
+
+def beurs_naam(ticker, info):
+    """Leesbare naam van de beurs waar deze notering handelt (bv. 'Amsterdam', 'Nasdaq')."""
+    naam = BEURS_CODE.get((info or {}).get("exchange") or "")
+    if naam:
+        return naam
+    if "." in ticker:
+        return BEURS_SUFFIX.get(ticker.rsplit(".", 1)[1].upper())
+    return "VS"
+
+
 def usd_beurswaarde(info, fx):
     """Beurswaarde in USD op basis van de (dagelijks opgehaalde) info."""
     p = info.get("currentPrice") or info.get("regularMarketPrice") or info.get("previousClose")
@@ -735,6 +766,7 @@ def main():
                 "sector": info.get("sector") or gics.get(t) or ("Financial Services" if t == "BRK-B" else "Overig"),
                 "marketCap": int(cap),
                 "currency": info.get("currency") or ("EUR" if t.endswith(".AS") else "USD"),
+                "beurs": beurs_naam(t, info),
                 "usd": schoon(usd, 8),  # koers (beursvaluta) -> USD, voor de portfolio
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,

@@ -422,6 +422,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .b3d summary span{color:var(--muted);font-size:.72rem}.b3d ul{margin:6px 0 0;padding-left:18px;font-size:.74rem}.b3d li{margin:3px 0}
 .b3src{list-style:none;margin-left:-18px!important;color:var(--muted);font-size:.68rem}
 .tcr{margin:0 0 4px}.lchart svg{touch-action:none}.tcread{min-height:1.1em;font-size:.68rem;color:var(--muted);text-align:center}
+.bstag{font-size:.68rem;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 4px;color:var(--text);opacity:.85;margin-left:2px;white-space:nowrap}
 .sptag{font-size:.6rem;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 3px;color:var(--muted)}
 .wlsec{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.wlsec::-webkit-scrollbar{display:none}
 .gper button .n{opacity:.65;font-weight:500;margin-left:2px}
@@ -833,9 +834,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     return '<div class="why"><h4>✅ Waarom een BUY?</h4><ul>'+r.why.why.map(function(t){return '<li>'+esc(t)+'</li>'}).join("")+'</ul>'+
       ((r.why.watch||[]).length?'<h4>⚠️ Let op</h4><ul class="watch">'+r.why.watch.map(function(t){return '<li>'+esc(t)+'</li>'}).join("")+'</ul>':'')+'</div>';
   }
+  // Beurs + valuta van deze notering (bv. ASML.AS = Amsterdam, EUR; ASML = Nasdaq, USD)
+  function valuta(r){return r.currency==="GBp"||r.currency==="GBX"?"GBP":(r.currency||"")}
+  function beursTxt(r){return [r.beurs,valuta(r)].filter(Boolean).join(" · ")}
+  function beursTag(r){var t=beursTxt(r);return t?' <span class="bstag">'+esc(t)+'</span>':''}
   function detail(r){
     var items=[
-      ["Koers",fmtPrice(r.price,r.currency)],["Beurswaarde",fmtCap(r.marketCap)],
+      ["Koers",fmtPrice(r.price,r.currency)],["Beurs",esc(beursTxt(r)||"–")],["Beurswaarde",fmtCap(r.marketCap)],
       ["K/W",r.pe!=null?nf1.format(r.pe):"–"],["Rang in grootte","#"+r.rank],
       ["Vandaag",fmtPct(r.d1)],["Onder jaartop",fmtPct(r.fromHigh,"fromHigh")],
       ["1 maand",fmtPct(r.m1)],["3 maanden",fmtPct(r.m3)],
@@ -1772,7 +1777,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         '<button type="button" class="row" aria-expanded="'+open+'">'+
           '<span class="pos">'+(i+1)+'</span>'+
           '<span class="main"><span class="name" style="display:block">'+esc(r.name)+'</span>'+
-          '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+(r.ai?' <span class="aitag">AI</span>':'')+(r.sp?' <span class="sptag">S&amp;P</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
+          '<span class="meta" style="display:block">'+ratingTag(r)+'<span class="tk">'+esc(r.ticker)+'</span>'+beursTag(r)+(r.ai?' <span class="aitag">AI</span>':'')+(r.sp?' <span class="sptag">S&amp;P</span>':'')+' · '+esc(sec(r.sector))+' · #'+r.rank+'</span></span>'+
           '<span class="val"><span class="pct '+c+'" style="display:block">'+valTxt+'</span>'+
           '<span class="prc">'+(r.price>=1000?sym(r.currency)+Math.round(r.price).toLocaleString("nl-NL"):fmtPrice(r.price,r.currency))+'</span>'+
           (capLine||'<span class="track" style="display:block"><span class="fill" style="display:block;width:'+w.toFixed(1)+'%;background:'+col+'"></span></span>')+'</span>'+
@@ -1830,7 +1835,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-07-1";
+  var BUILD="2026-11-08-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

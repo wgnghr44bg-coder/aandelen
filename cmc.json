@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1687141130640.0,
+1681981697303.0,
 "Saudi Arabia"
 ],
 [
@@ -98,7 +98,7 @@
 [
 "V",
 "Visa",
-789935357952.0,
+788580401152.0,
 "United States"
 ],
 [
@@ -152,7 +152,7 @@
 [
 "0700.HK",
 "Tencent",
-484078470000.0,
+484710780000.0,
 "China"
 ],
 [
@@ -176,7 +176,7 @@
 [
 "CVX",
 "Chevron",
-414802116608.0,
+414856019968.0,
 "United States"
 ],
 [
@@ -284,7 +284,7 @@
 [
 "HSBC",
 "HSBC",
-297725296640.0,
+297661366272.0,
 "United Kingdom"
 ],
 [
@@ -296,13 +296,13 @@
 [
 "MS",
 "Morgan Stanley",
-283953594368.0,
+283598684160.0,
 "United States"
 ],
 [
 "SHEL",
 "Shell",
-280778571776.0,
+280589369344.0,
 "United Kingdom"
 ],
 [
@@ -398,7 +398,7 @@
 [
 "LRCX",
 "Lam Research",
-250835501056.0,
+250383826944.0,
 "United States"
 ],
 [
@@ -438,16 +438,16 @@
 "United States"
 ],
 [
-"MC.PA",
-"LVMH",
-226353090144.0,
-"France"
-],
-[
 "SIE.DE",
 "Siemens",
 226337022707.0,
 "Germany"
+],
+[
+"MC.PA",
+"LVMH",
+225280933869.0,
+"France"
 ],
 [
 "0941.HK",
@@ -518,7 +518,7 @@
 [
 "C",
 "Citigroup",
-197051564032.0,
+197052104704.0,
 "United States"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "MCD",
 "McDonald",
-195677028352.0,
+195163602944.0,
 "United States"
 ],
 [
@@ -570,16 +570,16 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+189698184490.0,
+"India"
+],
+[
 "VZ",
 "Verizon",
 189366681600.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-189125081345.0,
-"India"
 ],
 [
 "ARM",

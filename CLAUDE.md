@@ -40,10 +40,12 @@
 ## Overige tabs
 - Menu onderaan (5): Overzicht, Aandelen, Sectoren, **Economie** (= panes rentes+inflatie+vastgoed onder elkaar,
   `showTab("rentes")` scrolt ernaartoe) en **Meer** (watchlist, grondstoffen, grootste). Zie `showTab`/`navOf`.
-- Overzicht (dashboard): WEBN/VALL/Bitcoin, indexen Nasdaq/S&P 500/AEX, BUY/HOLD/SELL, Rente & Economie, Vastgoed,
-  Grondstoffen, Sectoren (balkjes), Stijgers & Dalers per index, **Marktontwikkeling = gemiddelde van WEBN, VALL en
-  Bitcoin** (periode 1D–1Y, stuurt ook de tegels en "Index wijzigingen"), grootste assets, nieuws, en onderaan
-  alle stijgers/dalers per index met sectorknoppen en AI-knop (`ai.txt`).
+- Overzicht (dashboard): bovenaan compact **Marktontwikkeling = gemiddelde van WEBN, VALL en Bitcoin** (periode
+  1D–1Y, stuurt ook de tegels), WEBN/VALL/Bitcoin, indexen Nasdaq/S&P 500/AEX, BUY/HOLD/SELL, Rente & Economie,
+  Vastgoed, Grondstoffen (tik = grafiek 1D–5J), Sectoren (balkjes), grootste assets, en onderaan stijgers/dalers
+  per index met sectorknoppen en AI-knop (`ai.txt`). Nieuws staat onder Economie (pane `nieuws`).
+- Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
+  Brent, aardgas) → komen in `intra.json`.
 - Nieuws: `nieuws.py` (RSS NOS Economie + NU.nl Economie, alleen koppen + link; terugval = vorige koppen) → `nieuws`.
 - Rentes/Inflatie/Vastgoed: `macro.py` (ECB, Eurostat, CBS). Vastgoed box 3: `vastgoedrentes.py` (alleen
   gepubliceerde tarieven, anders "Tarief op aanvraag"). Grondstoffen: `grondstoffen.py` (bandbreedte-controle, anders link).

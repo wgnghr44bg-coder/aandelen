@@ -324,6 +324,11 @@ def intraday_etfs(tickers):
 INTRA = ROOT / "docs" / "intra.json"   # koersen binnen de dag van alle aandelen (alleen geladen bij 1D/1W)
 
 
+# Grondstoffen met koersen binnen de dag (grafiek 1D/1W op het Overzicht): goud, zilver, Brent, aardgas.
+# Alleen tickers zonder omrekening (geen centen); index.html: GI.
+INTRA_GROND = ["GC=F", "SI=F", "BZ=F", "NG=F"]
+
+
 def intraday_alle(tickers, budget_s=240):
     """Per aandeel: 1D = per 15 min op de laatste handelsdag, 1W = per 30 min over ±7 dagen (Nederlandse tijd).
     Eén download in blokken; duurt het te lang, dan stopt het en blijft de rest van de vorige keer staan."""
@@ -808,7 +813,7 @@ def main():
     uit["extras"] = extras
     uit["lijsten"], uit["lijst_koersen"] = lijsten, {}
     try:
-        intraday_alle([r["ticker"] for r in rijen])
+        intraday_alle([r["ticker"] for r in rijen] + INTRA_GROND)
     except Exception as e:  # noqa: BLE001
         print(f"intraday mislukt: {e}")
     try:

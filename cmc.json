@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-950366465305.0,
+949383719895.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-627918054282.0,
+630046610144.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-473834240141.0,
+473442288749.0,
 "China"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "688825.SS",
 "CXMT",
-424796987981.0,
+427024944211.0,
 "China"
 ],
 [
@@ -200,7 +200,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-386434813671.0,
+385910470682.0,
 "China"
 ],
 [
@@ -252,16 +252,16 @@
 "United States"
 ],
 [
-"601988.SS",
-"Bank of China",
-336462582131.0,
-"China"
-],
-[
 "GE",
 "General Electric",
 335381692416.0,
 "United States"
+],
+[
+"601988.SS",
+"Bank of China",
+335014404212.0,
+"China"
 ],
 [
 "PM",
@@ -320,7 +320,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-270625037972.0,
+270095039571.0,
 "China"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "0857.HK",
 "PetroChina",
-245169774630.0,
+244703208630.0,
 "China"
 ],
 [
@@ -452,7 +452,7 @@
 [
 "0941.HK",
 "China Mobile",
-224277213767.0,
+224415389339.0,
 "China"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-194848353878.0,
+194472840753.0,
 "Australia"
 ],
 [
@@ -570,16 +570,16 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-189698184490.0,
-"India"
-],
-[
 "VZ",
 "Verizon",
 189366681600.0,
 "United States"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+188408696863.0,
+"India"
 ],
 [
 "ARM",

@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-943978265652.0,
+939555759385.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-618339654185.0,
+615146871033.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-473442288749.0,
+475401927889.0,
 "China"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "688825.SS",
 "CXMT",
-427024944211.0,
+424478708519.0,
 "China"
 ],
 [
@@ -186,6 +186,12 @@
 "United States"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+386959156661.0,
+"China"
+],
+[
 "RO.SW",
 "Roche",
 386605943749.0,
@@ -196,12 +202,6 @@
 "Palantir",
 386435252224.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-385910470682.0,
-"China"
 ],
 [
 "PG",
@@ -216,6 +216,12 @@
 "United States"
 ],
 [
+"1398.HK",
+"ICBC",
+362502937712.0,
+"China"
+],
+[
 "ORCL",
 "Oracle",
 361965912064.0,
@@ -226,12 +232,6 @@
 "Merck",
 361725493248.0,
 "United States"
-],
-[
-"1398.HK",
-"ICBC",
-361367295219.0,
-"China"
 ],
 [
 "UNH",
@@ -252,16 +252,16 @@
 "United States"
 ],
 [
+"601988.SS",
+"Bank of China",
+337428047169.0,
+"China"
+],
+[
 "GE",
 "General Electric",
 335381692416.0,
 "United States"
-],
-[
-"601988.SS",
-"Bank of China",
-335014404212.0,
-"China"
 ],
 [
 "PM",
@@ -320,7 +320,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-270095039571.0,
+270342247792.0,
 "China"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "0857.HK",
 "PetroChina",
-244936491630.0,
+244469942336.0,
 "China"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-194848353878.0,
+194766209663.0,
 "Australia"
 ],
 [
@@ -578,7 +578,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-187878580340.0,
+187348441613.0,
 "India"
 ],
 [

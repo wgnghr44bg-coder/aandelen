@@ -188,7 +188,7 @@
 [
 "RO.SW",
 "Roche",
-392984965313.0,
+392598365173.0,
 "Switzerland"
 ],
 [
@@ -332,13 +332,13 @@
 [
 "OR.PA",
 "L'Oréal",
-267645996246.0,
+267586070046.0,
 "France"
 ],
 [
 "NESN.SW",
 "Nestlé",
-266716832040.0,
+266810441265.0,
 "Switzerland"
 ],
 [
@@ -440,7 +440,7 @@
 [
 "SIE.DE",
 "Siemens",
-228053974583.0,
+228096913104.0,
 "Germany"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-219025418998.0,
+219797024032.0,
 "France"
 ],
 [
@@ -480,16 +480,16 @@
 "United States"
 ],
 [
+"ITX.MC",
+"Inditex",
+207014099406.0,
+"Spain"
+],
+[
 "GILD",
 "Gilead Sciences",
 207000109056.0,
 "United States"
-],
-[
-"ITX.MC",
-"Inditex",
-206594192697.0,
-"Spain"
 ],
 [
 "GEV",
@@ -536,7 +536,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-193562949801.0,
+193307324805.0,
 "Germany"
 ],
 [
@@ -560,7 +560,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-191246382745.0,
+191126928414.0,
 "United Arab Emirates"
 ],
 [

@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-08T11:29:37Z",
+ "updated": "2026-11-09T13:19:28Z",
  "lenders": [
   {
    "id": "rnhb",
    "name": "RNHB",
    "url": "https://www.rnhb.nl/rente",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -15,7 +15,7 @@
    "id": "nibc",
    "name": "NIBC",
    "url": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [
     {
      "seg": "residentieel",
@@ -332,7 +332,7 @@
    "id": "domivest",
    "name": "Domivest",
    "url": "https://www.domivest.nl/",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -342,7 +342,7 @@
    "id": "nestr",
    "name": "Nestr",
    "url": "https://www.nestr.nl/rente",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [
     {
      "seg": "residentieel",
@@ -622,7 +622,7 @@
    "id": "dcmf",
    "name": "DCMF",
    "url": "https://dcmf.nl/verhuurhypotheek/",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [
     {
      "seg": "residentieel",
@@ -723,7 +723,7 @@
    "id": "solidbriq",
    "name": "SolidBriq",
    "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [
     {
      "seg": "residentieel",
@@ -756,6 +756,19 @@
        "fix": "1",
        "label": "1 jaar",
        "rates": [
+        5.75,
+        5.75,
+        5.75,
+        5.75,
+        5.8,
+        5.95,
+        6.1
+       ]
+      },
+      {
+       "fix": "2",
+       "label": "2 jaar",
+       "rates": [
         5.9,
         5.9,
         5.9,
@@ -766,68 +779,55 @@
        ]
       },
       {
-       "fix": "2",
-       "label": "2 jaar",
-       "rates": [
-        6.05,
-        6.05,
-        6.05,
-        6.05,
-        6.1,
-        6.25,
-        6.4
-       ]
-      },
-      {
        "fix": "3",
        "label": "3 jaar",
        "rates": [
-        6.05,
-        6.05,
-        6.05,
-        6.05,
+        5.9,
+        5.9,
+        5.9,
+        5.9,
+        5.95,
         6.1,
-        6.25,
-        6.4
+        6.25
        ]
       },
       {
        "fix": "5",
        "label": "5 jaar",
        "rates": [
-        6.05,
-        6.05,
-        6.05,
-        6.05,
-        6.1,
-        6.25,
-        6.4
+        5.95,
+        5.95,
+        5.95,
+        5.95,
+        6.0,
+        6.15,
+        6.3
        ]
       },
       {
        "fix": "7",
        "label": "7 jaar",
        "rates": [
-        6.1,
-        6.1,
-        6.1,
-        6.1,
+        5.95,
+        5.95,
+        5.95,
+        5.95,
+        6.0,
         6.15,
-        6.3,
-        6.45
+        6.3
        ]
       },
       {
        "fix": "10",
        "label": "10 jaar",
        "rates": [
+        6.05,
+        6.05,
+        6.05,
+        6.1,
         6.15,
-        6.15,
-        6.15,
-        6.15,
-        6.2,
-        6.35,
-        6.5
+        6.3,
+        6.4
        ]
       }
      ]
@@ -933,7 +933,7 @@
    "id": "mogelijk",
    "name": "Mogelijk",
    "url": "https://www.mogelijk.nl/verhuurhypotheek",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [
     {
      "seg": "residentieel",
@@ -1011,7 +1011,7 @@
    "id": "hyra",
    "name": "Hyra",
    "url": "https://hyra.nl/",
-   "checked": "2026-11-08",
+   "checked": "2026-11-09",
    "segments": [],
    "facts": [],
    "status": "aanvraag",

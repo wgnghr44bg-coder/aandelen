@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1687141130640.0,
+1683271555638.0,
 "Saudi Arabia"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "0857.HK",
 "PetroChina",
-243770126748.0,
+243303594159.0,
 "China"
 ],
 [
@@ -452,7 +452,7 @@
 [
 "0941.HK",
 "China Mobile",
-224553581618.0,
+224415389339.0,
 "China"
 ],
 [
@@ -560,7 +560,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-191246382745.0,
+191126928414.0,
 "United Arab Emirates"
 ],
 [
@@ -570,16 +570,16 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-189483273586.0,
-"India"
-],
-[
 "VZ",
 "Verizon",
 189366681600.0,
 "United States"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+188709581010.0,
+"India"
 ],
 [
 "ARM",

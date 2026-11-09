@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1683271555638.0,
+1684561413972.0,
 "Saudi Arabia"
 ],
 [
@@ -186,16 +186,16 @@
 "United States"
 ],
 [
+"RO.SW",
+"Roche",
+390472024652.0,
+"Switzerland"
+],
+[
 "601288.SS",
 "Agricultural Bank of China",
 387483460376.0,
 "China"
-],
-[
-"RO.SW",
-"Roche",
-386605943749.0,
-"Switzerland"
 ],
 [
 "PLTR",
@@ -218,7 +218,7 @@
 [
 "1398.HK",
 "ICBC",
-362275802531.0,
+362730072893.0,
 "China"
 ],
 [
@@ -324,21 +324,21 @@
 "China"
 ],
 [
-"OR.PA",
-"L'Oréal",
-269473229997.0,
-"France"
-],
-[
 "SAP",
 "SAP",
 269448986624.0,
 "Germany"
 ],
 [
+"OR.PA",
+"L'Oréal",
+268544631572.0,
+"France"
+],
+[
 "NESN.SW",
 "Nestlé",
-267871306076.0,
+267465685972.0,
 "Switzerland"
 ],
 [
@@ -440,19 +440,13 @@
 [
 "SIE.DE",
 "Siemens",
-226337022707.0,
+227152578529.0,
 "Germany"
-],
-[
-"MC.PA",
-"LVMH",
-225280933869.0,
-"France"
 ],
 [
 "0941.HK",
 "China Mobile",
-224415389339.0,
+224553581618.0,
 "China"
 ],
 [
@@ -460,6 +454,12 @@
 "CrowdStrike",
 222091460608.0,
 "United States"
+],
+[
+"MC.PA",
+"LVMH",
+219411221515.0,
+"France"
 ],
 [
 "ANET",
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-206594192697.0,
+206524199043.0,
 "Spain"
 ],
 [
@@ -578,7 +578,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-188709581010.0,
+188867183820.0,
 "India"
 ],
 [
@@ -588,15 +588,15 @@
 "United Kingdom"
 ],
 [
-"PRX.AS",
-"Prosus",
-184335354101.0,
-"Netherlands"
-],
-[
 "APH",
 "Amphenol",
 184182194176.0,
 "United States"
+],
+[
+"2454.TW",
+"MediaTek",
+183111987983.0,
+"Taiwan"
 ]
 ]

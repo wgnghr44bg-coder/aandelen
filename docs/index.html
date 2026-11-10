@@ -664,6 +664,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfovs{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px;font-size:.76rem;color:var(--muted)}
 .pfovs b{color:var(--text);font-variant-numeric:tabular-nums}.pfovs b.up{color:var(--up)}.pfovs b.down{color:var(--down)}
 .pfov.priv .pfovm b{letter-spacing:.05em}
+.pfov .pseg.sm{margin:8px 0 4px}
+.pfovr{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted)}
+.pfovr b{color:var(--text);font-variant-numeric:tabular-nums}.pfovr b.up{color:var(--up)}.pfovr b.down{color:var(--down)}
+.pfovr .spark{flex:1 1 auto;min-width:0;height:30px;display:block}
 .pfsel{display:block;font-size:.74rem;color:var(--accent);margin:-4px 0 2px;font-weight:600}
 .pfsel:empty{display:none}.pfsel.bad{color:var(--down-strong)}
 .pfact{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -1895,7 +1899,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
   function pfNeedHist(){
     if(pfH||pfHP)return;
     if(!pf.acc.some(function(a){return a.s.some(function(s){return s.pos.some(function(p){return !PFI[p.t]})})}))return;
-    pfHP=true;loadHist().then(function(h){pfH=h;pfSer={};if(tab==="portfolio")renderPortfolio()}).catch(function(){pfHP=false});
+    pfHP=true;loadHist().then(function(h){pfH=h;pfSer={};if(tab==="portfolio")renderPortfolio();renderPfOv()}).catch(function(){pfHP=false});
   }
   // ---- oude formaten (v1/v2) en back-ups omzetten naar v3
   function pfMigrate(x){
@@ -2294,6 +2298,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Overzicht: samenvatting van het portfolio (met oogje om bedragen te verbergen) ----------
   var pfHide=false;try{pfHide=localStorage.getItem("pfhide")==="1"}catch(e){}
+  var pfOvPer="D";try{var po0=localStorage.getItem("pfovper");if(PFP.some(function(x){return x[0]===po0&&po0!=="ALL"}))pfOvPer=po0}catch(e){}
   var EYE='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
   var EYEX='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.5 10.5 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7c1.6 0 3-.4 4.3-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
   function renderPfOv(){
@@ -2301,24 +2306,40 @@ details.pfadv[open]>summary{margin-bottom:10px}
     if(!pf.acc.length){el.hidden=true;return}
     var t=pfToday(),tot=0,inl=0,nI=0,mnd=0;
     pf.acc.forEach(function(a){var v=pfVal(a,t)||0,i=pfInl(a,t);tot+=v;mnd+=a.mb||0;if(i!=null){inl+=i;nI++}});
-    var wv=tot-inl,R=pfRes(pf.acc,pfT0("D"));
+    pfNeedHist();
+    var wv=tot-inl,t0=pfT0(pfOvPer),R=pfRes(pf.acc,t0),st=pfStart(),eff=t0&&st&&t0>st?t0:st;
     function E(v,sg){return pfHide?"€ •••••":(sg?pfSg(v):pfEur(v))}
     var md=null;pf.acc.forEach(function(a){if(a.mb){var d=pfNextDep(a.md);if(!md||d<md)md=d}});
+    // lijntje: resultaat (Δwaarde − Δinleg) per dag binnen de gekozen periode
+    var sv=[];
+    if(R&&eff&&eff<t){
+      var p=eff.split("-").map(Number),d=new Date(p[0],p[1]-1,p[2]),v0=null,i0=0;
+      for(var k=0;k<400;k++){var ds=dstr(d);if(ds>t)break;
+        var v=0,iv=0,ok=false;pf.acc.forEach(function(a){var x=pfVal(a,ds);if(x!=null){v+=x;ok=true;iv+=pfInl(a,ds)||0}});
+        if(ok){if(v0==null){v0=v;i0=iv}sv.push(v-v0-(iv-i0))}
+        d.setDate(d.getDate()+1)}
+    }
+    var lbl=PFP.filter(function(x){return x[0]===pfOvPer})[0][1],since=!t0||!st||t0<st;
     el.hidden=false;el.className="panel ov pfov"+(pfHide?" priv":"");
     el.innerHTML='<div class="ph"><span class="emo">💼</span><h2>Mijn portfolio</h2>'+
         '<button type="button" class="pfeye" aria-pressed="'+pfHide+'" aria-label="'+(pfHide?"Bedragen tonen":"Bedragen verbergen")+'">'+(pfHide?EYEX:EYE)+'</button></div>'+
       '<div class="pfovm"><b>'+E(tot)+'</b>'+
         (nI?'<span class="'+chgCls(wv)+'">'+E(wv,true)+(inl>0?' ('+fmtPct(wv/inl*100)+')':'')+' <small>totaal rendement</small></span>':'')+'</div>'+
+      '<div class="pseg sm" role="group" aria-label="Periode portfolio">'+PFP.filter(function(x){return x[0]!=="ALL"}).map(function(x){
+        return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===pfOvPer)+'">'+x[1]+'</button>'}).join("")+'</div>'+
+      '<div class="pfovr"><span>'+(since&&st&&pfOvPer!=="D"?'Sinds '+pfDateS(st):lbl)+' <b class="'+(R?chgCls(R.r):"flat")+'">'+(R?E(R.r,true)+(R.pct!=null?' ('+fmtPct(R.pct)+')':''):'–')+'</b></span>'+
+        (sv.length>1?spark(sv,R.r):'')+'</div>'+
       '<div class="pfovs">'+
-        (R?'<span>Vandaag <b class="'+chgCls(R.r)+'">'+E(R.r,true)+(R.pct!=null?' ('+fmtPct(R.pct)+')':'')+'</b></span>':'')+
         (mnd?'<span>Elke maand <b>'+E(mnd)+'</b>'+(md?' · volgende '+pfDateS(md):'')+'</span>':'')+
       '</div>';
   }
   $("pfov").addEventListener("click",function(e){
+    var pb=e.target.closest(".pseg button");
+    if(pb){pfOvPer=pb.dataset.k;try{localStorage.setItem("pfovper",pfOvPer)}catch(err){}renderPfOv();return}
     if(e.target.closest(".pfeye")){pfHide=!pfHide;try{localStorage.setItem("pfhide",pfHide?"1":"0")}catch(err){}renderPfOv();return}
     showTab("portfolio");window.scrollTo({top:0});
   });
-  $("pfov").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest(".pfeye")){e.preventDefault();showTab("portfolio")}});
+  $("pfov").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();showTab("portfolio")}});
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
   var macro={};
@@ -2761,7 +2782,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-15";
+  var BUILD="2026-11-10-16";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

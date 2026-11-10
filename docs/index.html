@@ -637,6 +637,23 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .mmenu b{grid-area:b;font-size:.95rem}
 .mmenu small{grid-area:s;color:var(--muted);font-size:.75rem}
 .mmenu i{grid-area:a;font-style:normal;color:var(--muted);font-size:1.2rem}
+/* ================= Portfolio ================= */
+.t-portfolio .bar{display:none}
+.ptot div{display:grid;gap:2px}
+.ptot b.up,.ptot span.up{color:var(--up)}.ptot b.down,.ptot span.down{color:var(--down)}
+.pfl li.pfi{grid-template-columns:12px 1fr auto 18px;cursor:pointer;row-gap:6px}
+.pfl .pdot{width:10px;height:10px;border-radius:50%}
+.pfl .pn{white-space:normal}.pfl .pn small{white-space:normal}
+.pfl .pedit{color:var(--muted);font-size:.9rem;text-align:center}
+.pfl .pbar{grid-column:1/-1;height:4px;background:var(--chip);border-radius:2px;overflow:hidden}
+.pfl .pbar i{display:block;height:100%;border-radius:2px}
+.pfl li.pfe{display:block}
+.pfl .pfform{margin:0}
+.pfl .pfdel,.pfbk button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:10px;font:inherit;font-weight:600;cursor:pointer}
+.pfl .pfdel{color:var(--down-strong)}
+.pfbk{margin-top:4px}
+#pfmsg:empty{display:none}
+#pfquick{margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -722,6 +739,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <section class="pane" data-pane="meer" hidden>
     <div class="panel"><div class="ph"><h2>Meer</h2></div>
       <div class="mmenu">
+        <button type="button" data-to="portfolio"><span>💼</span><b>Portfolio</b><small>Waarde per rekening zelf invullen</small><i>›</i></button>
         <button type="button" data-to="watchlist"><span>⭐</span><b>Watchlist</b><small>Aandelen die je volgt</small><i>›</i></button>
         <button type="button" data-to="grondstoffen"><span>⛏️</span><b>Grondstoffen</b><small>Metalen, energie, landbouw</small><i>›</i></button>
         <button type="button" data-to="grootste"><span>🌍</span><b>Grootste assets</b><small>Bedrijven, goud, zilver en crypto</small><i>›</i></button>
@@ -779,6 +797,28 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <div class="ph"><span class="emo">📰</span><h2>Financieel nieuws</h2></div>
       <ul class="news" id="news"></ul>
       <p class="hint">Koppen van NOS en NU.nl Economie. Tik op een kop om het artikel bij de bron te lezen.</p>
+    </div>
+  </section>
+
+  <section class="pane" data-pane="portfolio" hidden>
+    <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span></div>
+      <div class="ptot" id="pftot"></div>
+      <div class="lchart" id="pfchart"></div>
+      <ul class="plist pfl" id="pflist"></ul>
+      <p class="hint" id="pfempty">Voeg hieronder je rekeningen toe en vul de waarde in. Tik later op een rekening om de waarde bij te werken.</p>
+    </div>
+    <div class="panel"><div class="ph"><span class="emo">➕</span><h2>Rekening toevoegen</h2></div>
+      <div class="gper" id="pfquick" role="group" aria-label="Snel kiezen"><button type="button" data-n="Bitvavo">Bitvavo</button><button type="button" data-n="Saxo">Saxo</button><button type="button" data-n="Interactive Brokers">Interactive Brokers</button><button type="button" data-n="Spaarrekening">Spaarrekening</button></div>
+      <form class="padd" id="pfadd" autocomplete="off">
+        <input id="pfname" placeholder="Naam (bv. Bitvavo)" maxlength="40" required>
+        <div class="prow"><input id="pfval" inputmode="decimal" placeholder="Waarde in €" required><input id="pfin" inputmode="decimal" placeholder="Inleg in € (optioneel)"></div>
+        <button type="submit">Toevoegen</button>
+      </form>
+      <p class="hint" id="pfmsg"></p>
+    </div>
+    <div class="panel"><div class="ph"><span class="emo">🔒</span><h2>Bewaren</h2></div>
+      <p class="hint">Je portfolio staat <b>alleen op dit apparaat</b> (in de browser), niet online. Wis je de websitegegevens of gebruik je een ander toestel, dan is het weg. Maak daarom af en toe een back-up.</p>
+      <div class="prow pfbk"><button type="button" id="pfexp">📋 Back-up kopiëren</button><button type="button" id="pfimp">↩️ Back-up terugzetten</button></div>
     </div>
   </section>
 
@@ -1494,9 +1534,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   // ---------- Tabbladen ----------
   var tab="overzicht";
   // Menu onderaan: 5 knoppen. Economie = Rentes + Inflatie + Vastgoed onder elkaar; Meer = Watchlist, Grondstoffen, Grootste assets.
-  var ECO=["rentes","inflatie","vastgoed","nieuws"],MEER=["meer","watchlist","grondstoffen","grootste"];
+  var ECO=["rentes","inflatie","vastgoed","nieuws"],MEER=["meer","portfolio","watchlist","grondstoffen","grootste"];
   function navOf(t){return ECO.indexOf(t)>=0?"economie":MEER.indexOf(t)>=0?"meer":t}
-  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","economie","meer","grootste","watchlist","grondstoffen"].indexOf(st)>=0)tab=st;
+  try{var st=localStorage.getItem("tab");if(["overzicht","aandelen","sectoren","economie","meer","portfolio","grootste","watchlist","grondstoffen"].indexOf(st)>=0)tab=st;
     else if(ECO.indexOf(st)>=0)tab="economie";}catch(e){}
   function showTab(t){
     var part=ECO.indexOf(t)>=0?t:null;if(part)t="economie";   // bv. "rentes": Economie openen en naar Rentes scrollen
@@ -1510,6 +1550,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     if(t==="watchlist")renderWatch();
     if(t==="grondstoffen")renderGrond();
     if(t==="economie")loadBox3();
+    if(t==="portfolio")renderPortfolio();
     if(part)setTimeout(function(){scrollToPane(part)},30);
   }
   function scrollToPane(p){
@@ -1706,6 +1747,96 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   $("ovchips").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     ratingFilter=b.dataset.r||null;render();scrollToGrp();
+  });
+
+  // ---------- Portfolio: waarde per rekening zelf invullen (alleen op dit apparaat, localStorage "pf") ----------
+  // pf = {acc:[{id,n,v,inl,d}], hist:[[JJJJ-MM-DD, totaal]]}
+  var pf={acc:[],hist:[]},pfEdit=null;
+  try{var pf0=JSON.parse(localStorage.getItem("pf")||"null");if(pf0&&Array.isArray(pf0.acc))pf={acc:pf0.acc,hist:Array.isArray(pf0.hist)?pf0.hist:[]}}catch(e){}
+  function pfToday(){return dstr(new Date())}
+  function pfTotal(){return pf.acc.reduce(function(s,a){return s+(a.v||0)},0)}
+  function pfSave(){
+    // verloop: totaal van vandaag bijwerken (één punt per dag)
+    var d=pfToday(),t=Math.round(pfTotal()*100)/100,h=pf.hist;
+    if(h.length&&h[h.length-1][0]===d)h[h.length-1][1]=t;else h.push([d,t]);
+    if(!pf.acc.length)pf.hist=[];
+    try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}
+    renderPortfolio();
+  }
+  // "12.345,67", "12345,67", "12345.67", "€ 1.000" -> getal; leeg -> null; ongeldig -> NaN
+  function pfNum(s){
+    s=String(s||"").replace(/[€\s]/g,"");if(!s)return null;
+    if(s.indexOf(",")>=0)s=s.replace(/\./g,"").replace(",",".");
+    else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,"");
+    return /^-?\d+(\.\d+)?$/.test(s)?parseFloat(s):NaN;
+  }
+  function pfEur(v){return v==null||isNaN(v)?"–":"€ "+v.toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function pfIn(v){return v==null?"":String(v).replace(".",",")}
+  function pfDate(d){var p=String(d||"").split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]:""}
+  var PFC=["#3b86ff","#2fd26b","#f59e0b","#a78bfa","#ff6a4d","#22d3ee","#f472b6","#94a3b8"];
+  function renderPortfolio(){
+    var tot=pfTotal(),wi=pf.acc.filter(function(a){return a.inl!=null}),inl=wi.reduce(function(s,a){return s+a.inl},0),
+        vwi=wi.reduce(function(s,a){return s+(a.v||0)},0),wv=vwi-inl;
+    $("pfempty").hidden=!!pf.acc.length;
+    var last=pf.acc.map(function(a){return a.d||""}).sort().pop();
+    $("pfdate").textContent=last?"bijgewerkt "+pfDate(last):"";
+    $("pftot").innerHTML=pf.acc.length?'<div><span>Totale waarde</span><b>'+pfEur(tot)+'</b></div>'+
+      (wi.length?'<div><span>Winst/verlies'+(wi.length<pf.acc.length?' (rekeningen met inleg)':'')+'</span><b class="'+chgCls(wv)+'">'+(wv>0?"+":"")+pfEur(wv)+'</b><span class="'+chgCls(wv)+'">'+(inl>0?fmtPct(wv/inl*100):"")+' · inleg '+pfEur(inl)+'</span></div>'
+        :'<div><span>Winst/verlies</span><b class="flat">–</b><span>vul bij een rekening je inleg in</span></div>'):"";
+    // verloop van het totaal
+    var h=pf.hist;
+    $("pfchart").innerHTML=h.length>1?lineChart([{n:"Totaal",c:"#3b86ff",d:h}],{}):
+      (pf.acc.length?'<p class="hint">Het verloop verschijnt zodra je op een andere dag je waarden bijwerkt.</p>':'');
+    $("pflist").innerHTML=pf.acc.map(function(a,i){
+      var c=PFC[i%PFC.length],sh=tot>0?(a.v||0)/tot*100:0,w=a.inl!=null?(a.v||0)-a.inl:null;
+      if(pfEdit===a.id)return '<li class="pfe" data-id="'+a.id+'"><form class="padd pfform" data-id="'+a.id+'">'+
+        '<input name="n" value="'+esc(a.n)+'" maxlength="40" required aria-label="Naam">'+
+        '<div class="prow"><input name="v" inputmode="decimal" value="'+esc(pfIn(a.v))+'" placeholder="Waarde in €" required aria-label="Waarde"><input name="inl" inputmode="decimal" value="'+esc(pfIn(a.inl))+'" placeholder="Inleg in € (optioneel)" aria-label="Inleg"></div>'+
+        '<div class="prow"><button type="submit">Opslaan</button><button type="button" class="pfdel">Verwijderen</button></div></form></li>';
+      return '<li data-id="'+a.id+'" class="pfi" role="button" tabindex="0"><span class="pdot" style="background:'+c+'"></span>'+
+        '<span class="pn">'+esc(a.n)+'<small>'+(a.d?"bijgewerkt "+pfDate(a.d):"")+(a.inl!=null?" · inleg "+pfEur(a.inl):"")+'</small></span>'+
+        '<span class="pv">'+pfEur(a.v)+'<small class="'+(w==null?"flat":chgCls(w))+'">'+(w==null?nf1.format(sh)+"%":(w>0?"+":"")+pfEur(w)+(a.inl>0?" ("+fmtPct(w/a.inl*100)+")":""))+'</small></span>'+
+        '<span class="pedit">✎</span><span class="pbar"><i style="width:'+sh.toFixed(1)+'%;background:'+c+'"></i></span></li>';
+    }).join("");
+  }
+  function pfMsg(t){$("pfmsg").textContent=t||""}
+  $("pfquick").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;$("pfname").value=b.dataset.n;$("pfval").focus()});
+  $("pfadd").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=$("pfname").value.trim(),v=pfNum($("pfval").value),inl=pfNum($("pfin").value);
+    if(!n)return pfMsg("Vul een naam in.");
+    if(v==null||isNaN(v))return pfMsg("Vul een geldige waarde in, bijvoorbeeld 12.345,67.");
+    if(inl!=null&&isNaN(inl))return pfMsg("De inleg is geen geldig bedrag.");
+    pf.acc.push({id:Date.now().toString(36),n:n,v:v,inl:inl,d:pfToday()});
+    $("pfname").value="";$("pfval").value="";$("pfin").value="";pfMsg("✓ "+n+" toegevoegd.");pfSave();
+  });
+  $("pflist").addEventListener("click",function(e){
+    if(e.target.closest("form")){
+      if(e.target.closest(".pfdel")){var id=e.target.closest("form").dataset.id,a=null;pf.acc.forEach(function(x){if(x.id===id)a=x});
+        if(a&&confirm(a.n+" verwijderen?")){pf.acc=pf.acc.filter(function(x){return x.id!==id});pfEdit=null;pfSave()}}
+      return}
+    var li=e.target.closest("li.pfi");if(!li)return;pfEdit=pfEdit===li.dataset.id?null:li.dataset.id;renderPortfolio();
+    var f=document.querySelector('#pflist form [name=v]');if(f)f.focus();
+  });
+  $("pflist").addEventListener("keydown",function(e){var li=e.target.closest("li.pfi");if(li&&(e.key==="Enter"||e.key===" ")){e.preventDefault();li.click()}});
+  $("pflist").addEventListener("submit",function(e){
+    e.preventDefault();var f=e.target,id=f.dataset.id,a=null;pf.acc.forEach(function(x){if(x.id===id)a=x});if(!a)return;
+    var n=f.n.value.trim(),v=pfNum(f.v.value),inl=pfNum(f.inl.value);
+    if(!n||v==null||isNaN(v)||(inl!=null&&isNaN(inl))){alert("Controleer de naam en bedragen (bijvoorbeeld 12.345,67).");return}
+    a.n=n;a.v=v;a.inl=inl;a.d=pfToday();pfEdit=null;pfSave();
+  });
+  $("pfexp").addEventListener("click",function(){
+    var t=JSON.stringify(pf);
+    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(function(){alert("Back-up gekopieerd. Plak hem ergens veilig, bijvoorbeeld in een notitie.")})
+      .catch(function(){prompt("Kopieer deze back-up en bewaar hem veilig:",t)});
+  });
+  $("pfimp").addEventListener("click",function(){
+    var t=prompt("Plak hier je back-up. Je huidige portfolio wordt dan vervangen.");if(!t)return;
+    try{var x=JSON.parse(t);if(!x||!Array.isArray(x.acc))throw 0;
+      pf={acc:x.acc.filter(function(a){return a&&a.n&&typeof a.v==="number"}).map(function(a){return {id:String(a.id||Math.random().toString(36).slice(2)),n:String(a.n).slice(0,40),v:a.v,inl:typeof a.inl==="number"?a.inl:null,d:a.d||null}}),
+        hist:Array.isArray(x.hist)?x.hist.filter(function(p){return Array.isArray(p)&&/^\d{4}-\d{2}-\d{2}$/.test(p[0])&&typeof p[1]==="number"}):[]};
+      try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}renderPortfolio();alert("Back-up teruggezet.");
+    }catch(err){alert("Dit is geen geldige back-up.")}
   });
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
@@ -2123,7 +2254,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-08-6";
+  var BUILD="2026-11-10-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

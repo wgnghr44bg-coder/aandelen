@@ -2544,6 +2544,20 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         '</button><div class="detail">'+(open?detail(r):'')+'</div></li>';
   }
 
+  // portfolio laden via persoonlijke link (#pf=...): bij openen én als de site al openstond
+  function pfFromHash(){
+    var m=location.hash.match(/^#pf=([A-Za-z0-9_\-]+)$/);if(!m)return false;
+    history.replaceState(null,"",location.pathname+location.search);   // gegevens uit de adresbalk halen
+    try{
+      var b=m[1].replace(/-/g,"+").replace(/_/g,"/");while(b.length%4)b+="=";
+      var txt=decodeURIComponent(Array.prototype.map.call(atob(b),function(c){return "%"+("00"+c.charCodeAt(0).toString(16)).slice(-2)}).join(""));
+      var y=pfMigrate(JSON.parse(txt));if(!y||!y.acc.length)throw 0;
+      if(pf.acc.length&&!confirm("Portfolio uit deze link laden? Je huidige portfolio ("+pf.acc.length+" rekening"+(pf.acc.length>1?"en":"")+") wordt vervangen."))return false;
+      pf=y;pfEdit=null;pfMode=null;pfStore();tab="portfolio";return true;
+    }catch(err){alert("Deze portfolio-link is ongeldig.");return false}
+  }
+  pfFromHash();
+  window.addEventListener("hashchange",function(){if(pfFromHash()){showTab("portfolio");window.scrollTo({top:0})}});
   renderPeriods();renderMode();showTab(tab);
   var sectorsDone=false;
   // Gegevens rechtstreeks uit de repo halen: nieuwe updates zijn dan meteen zichtbaar,
@@ -2582,7 +2596,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       }
       var u=new Date(data.updated);
       $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
-      $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo";
+      $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo · versie "+BUILD;
       $("mdate").textContent="Bijgewerkt: "+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
       if(manual)histP=null;
       render();
@@ -2607,7 +2621,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-11";
+  var BUILD="2026-11-10-12";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

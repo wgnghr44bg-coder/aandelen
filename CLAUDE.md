@@ -10,6 +10,7 @@
 ## Hoe de site werkt
 - Repo `wgnghr44bg-coder/aandelen`. Site = GitHub Pages (`main`, map `docs/`), één bestand `docs/index.html`.
   Verhoog `var BUILD="…"` in `index.html` bij elke wijziging aan de site (cache).
+  De site ververst zelf elke 5 min (`autoLoad`), niet als de pagina verborgen is, een invoerveld focus heeft of `pfEdit` open is.
 - **Updates**: `.github/workflows/update.yml` draait `update.py`. cron-job.org start deze workflow elke 30 min
   (:00/:30, workflow_dispatch met de PAT van de eigenaar; die moet de eigenaar zelf op tijd vernieuwen).
   `concurrency: cancel-in-progress` → een handmatige run vlak voor :00/:30 wordt afgebroken.

@@ -2463,12 +2463,24 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       $("upd").textContent="Laden mislukt. Probeer later opnieuw.";
     }).then(function(){btn.classList.remove("busy");btn.disabled=false;});
   }
-  $("refresh").addEventListener("click",function(){load(true)});
+  $("refresh").addEventListener("click",function(){lastLoad=Date.now();load(true)});
+  var lastLoad=Date.now();
   load(false);
+  // Automatisch verversen: elke 5 minuten nieuwe koersen (en live Bitcoin), alleen als de pagina zichtbaar is
+  // en je niet aan het typen of een rekening aan het bewerken bent (anders gaat je invoer verloren).
+  var AUTO_MS=5*60*1000;
+  function autoLoad(){
+    if(document.hidden)return;
+    var ae=document.activeElement;if(ae&&/^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName))return;
+    if(pfEdit)return;
+    lastLoad=Date.now();load(false);
+  }
+  setInterval(autoLoad,AUTO_MS);
+  document.addEventListener("visibilitychange",function(){if(!document.hidden&&Date.now()-lastLoad>=AUTO_MS)autoLoad()});
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-9";
+  var BUILD="2026-11-10-10";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

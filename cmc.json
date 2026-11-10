@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-982798886911.0,
+968548318851.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-652396244130.0,
+636432227089.0,
 "South Korea"
 ],
 [
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-243303594159.0,
+239337950219.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224553581618.0,
+224968158453.0,
 "China"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-197735175702.0,
+198028544612.0,
 "Australia"
 ],
 [
@@ -576,6 +576,12 @@
 "France"
 ],
 [
+"2454.TW",
+"MediaTek",
+193189290157.0,
+"Taiwan"
+],
+[
 "ABT",
 "Abbott Laboratories",
 191396872192.0,
@@ -592,11 +598,5 @@
 "International Holding Company",
 191126928414.0,
 "United Arab Emirates"
-],
-[
-"VZ",
-"Verizon",
-190900207616.0,
-"United States"
 ]
 ]

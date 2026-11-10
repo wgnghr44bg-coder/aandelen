@@ -666,6 +666,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pftodo small{display:block;color:var(--muted);font-size:.72rem}
 .pfov{cursor:pointer;margin-top:10px}
 .pfov .ph{margin-bottom:4px}
+#pfeye2{margin-left:8px;flex:0 0 auto}
 .pfeye{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:36px;height:32px;display:grid;place-items:center;cursor:pointer}
 .pfeye .ic{width:18px;height:18px}
 .pfovm{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px}
@@ -906,7 +907,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
   <section class="pane" data-pane="portfolio" hidden>
     <div class="panel pfactp"><div class="pfact" id="pfact"><button type="button" class="pfqb buy" data-k="koop">➕ Kopen</button><button type="button" class="pfqb sell" data-k="verkoop">➖ Verkopen</button></div>
       <p class="pfqmsg" id="pfqmsg" hidden></p><div id="pfqbox"></div><datalist id="pfdl"></datalist></div>
-    <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span></div>
+    <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span><button type="button" class="pfeye" id="pfeye2"></button></div>
       <div class="ptot" id="pftot"></div>
       <div id="pfperbox" hidden>
         <div class="pfph"><b>Groei en resultaat</b><div class="pseg" id="pfper" role="group" aria-label="Periode portfolio"></div></div>
@@ -1997,10 +1998,10 @@ details.pfadv[open]>summary{margin-bottom:10px}
     else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,"");
     return /^-?\d+(\.\d+)?$/.test(s)?parseFloat(s):NaN;
   }
-  function pfEur(v){if(v!=null&&Math.abs(v)<0.005)v=0;return v==null||isNaN(v)?"–":(v<0?"−":"")+"€ "+Math.abs(v).toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function pfEur(v){if(pfMask&&v!=null&&!isNaN(v))return "€ •••••";if(v!=null&&Math.abs(v)<0.005)v=0;return v==null||isNaN(v)?"–":(v<0?"−":"")+"€ "+Math.abs(v).toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
   function pfSg(v){return (v>0?"+":"")+pfEur(v)}
   function pfIn(v,dec){return v==null?"":String(dec!=null?Math.round(v*Math.pow(10,dec))/Math.pow(10,dec):v).replace(".",",")}
-  function pfQf(q,t){return q==null?"–":q.toLocaleString("nl-NL",{maximumFractionDigits:t==="BTC-EUR"?8:q<100?3:1})}
+  function pfQf(q,t){return q==null?"–":pfMask?"•••":q.toLocaleString("nl-NL",{maximumFractionDigits:t==="BTC-EUR"?8:q<100?3:1})}
   function pfDate(d){var p=String(d||"").split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]:""}
   function pfDateS(d){var p=String(d||"").split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]:""}
   var PFC=["#3b86ff","#2fd26b","#f59e0b","#a78bfa","#ff6a4d","#22d3ee","#f472b6","#94a3b8"];
@@ -2097,7 +2098,10 @@ details.pfadv[open]>summary{margin-bottom:10px}
       f.b.placeholder=t&&q>0&&p?"≈ "+pfIn(q*p,2):"leeg = huidige koers";
       var sel=f.querySelector(".pfsel"),v=f.t.value.trim();if(sel){sel.textContent=!v?"":t?"→ "+pfDesc(t):"Niet gevonden – kies uit de lijst";sel.className="pfsel"+(v&&!t?" bad":"")}}
   }
-  function renderPortfolio(){
+  // bedragen en aantallen verbergen (oogje) tijdens het tekenen van het portfolio
+  var pfMask=false;
+  function renderPortfolio(){pfMask=pfHide;try{renderPortfolio0()}finally{pfMask=false}}
+  function renderPortfolio0(){
     var t=pfToday(),changed=false;
     pfNeedHist();pfDatalist();
     // koers vastleggen bij posities zonder koers (bv. na terugzetten van een back-up)
@@ -2107,6 +2111,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     $("pfempty").hidden=!!has;$("pfperbox").hidden=!has;
     var last=A.map(function(a){return a.s.length?a.s[a.s.length-1].d:""}).sort().pop();
     $("pfdate").textContent=last?"ingevuld "+pfDate(last):"";
+    var eye=$("pfeye2");eye.hidden=!has;eye.setAttribute("aria-pressed",pfHide);eye.setAttribute("aria-label",pfHide?"Bedragen tonen":"Bedragen verbergen");eye.innerHTML=pfHide?EYEX:EYE;
     var tot=0,wv=0,inl=0,nI=0,mnd=0;
     A.forEach(function(a){var v=pfVal(a,t)||0,i=pfInl(a,t);tot+=v;mnd+=a.mb||0;if(i!=null){wv+=v-i;inl+=i;nI++}});
     $("pftot").innerHTML=has?'<div><span>Totale waarde</span><b>'+pfEur(tot)+'</b><span>'+pfDate(t)+'</span></div>'+
@@ -2129,7 +2134,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
         d.setDate(d.getDate()+step)}
       if(pts.length&&pts[pts.length-1][0]!==t){pts.push([t,Math.round(tot*100)/100]);ipts.push([t,Math.round(inl*100)/100])}
     }
-    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{}):
+    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{hide:pfHide}):
       (has?'<div class="pfstart"><div><span>Startpunt '+pfDate(st)+'</span><b>'+pfEur(tot)+'</b><small>waarde · inleg '+pfEur(inl)+'</small></div>'+
         '<p>Je groeigrafiek begint op '+pfDate(st)+'. Vanaf <b>'+pfDate(pfTomorrow())+'</b> tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
     // rekeningen
@@ -2390,9 +2395,10 @@ details.pfadv[open]>summary{margin-bottom:10px}
   $("pfov").addEventListener("click",function(e){
     var pb=e.target.closest(".pseg button");
     if(pb){pfOvPer=pb.dataset.k;try{localStorage.setItem("pfovper",pfOvPer)}catch(err){}renderPfOv();return}
-    if(e.target.closest(".pfeye")){pfHide=!pfHide;try{localStorage.setItem("pfhide",pfHide?"1":"0")}catch(err){}renderPfOv();return}
+    if(e.target.closest(".pfeye")){pfHide=!pfHide;try{localStorage.setItem("pfhide",pfHide?"1":"0")}catch(err){}renderPfOv();renderPortfolio();return}
     showTab("portfolio");window.scrollTo({top:0});
   });
+  $("pfeye2").addEventListener("click",function(){pfHide=!pfHide;try{localStorage.setItem("pfhide",pfHide?"1":"0")}catch(err){}renderPortfolio();renderPfOv()});
   $("pfov").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();showTab("portfolio")}});
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
@@ -2495,7 +2501,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var lo=Math.min.apply(null,all),hi=Math.max.apply(null,all),sp=(hi-lo)||1;lo-=sp*.08;hi+=sp*.08;
     var n=Math.max.apply(null,series.map(function(s){return s.d.length}));
     var X=function(i){return pl+i/(n-1||1)*(W-pl-pr)},Y=function(v){return pt+(1-(v-lo)/(hi-lo))*(H-pt-pb)};
-    var g="";for(var k=0;k<4;k++){var v=lo+(hi-lo)*k/3,y=Y(v);g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(y+3).toFixed(1)+'">'+nf1.format(v)+(o.suffix||"")+'</text>'}
+    var g="";for(var k=0;k<4;k++){var v=lo+(hi-lo)*k/3,y=Y(v);g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(y+3).toFixed(1)+'">'+(o.hide?"":nf1.format(v)+(o.suffix||""))+'</text>'}
     if(o.target!=null)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(o.target).toFixed(1)+'" y2="'+Y(o.target).toFixed(1)+'"/>';
     if(o.zero&&lo<0)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'"/>';
     var ref=series[0].d,lab='<text class="ax" x="'+pl+'" y="'+(H-6)+'">'+pdate(ref[0][0])+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-6)+'">'+pdate(ref[ref.length-1][0])+'</text>';
@@ -2504,7 +2510,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
       var lp=s.d[s.d.length-1];
       return '<polyline points="'+pts+'" fill="none" stroke="'+s.c+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>'+
         '<circle cx="'+X(n-1).toFixed(1)+'" cy="'+Y(lp[1]).toFixed(1)+'" r="3.5" fill="'+s.c+'" stroke="var(--card)" stroke-width="2"/>'}).join("");
-    var leg=series.length>1?'<div class="lleg">'+series.map(function(s){var lp=s.d[s.d.length-1];return '<span><i style="background:'+s.c+'"></i>'+esc(s.n)+' <b>'+nf1.format(lp[1])+(o.suffix||"")+'</b></span>'}).join("")+'</div>':"";
+    var leg=series.length>1?'<div class="lleg">'+series.map(function(s){var lp=s.d[s.d.length-1];return '<span><i style="background:'+s.c+'"></i>'+esc(s.n)+(o.hide?'':' <b>'+nf1.format(lp[1])+(o.suffix||"")+'</b>')+'</span>'}).join("")+'</div>':"";
     return leg+'<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Grafiek">'+g+lines+lab+'</svg>';
   }
   $("vlist").addEventListener("click",cardClick);
@@ -2836,7 +2842,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-17";
+  var BUILD="2026-11-10-18";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

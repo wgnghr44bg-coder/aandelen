@@ -48,7 +48,9 @@
   per index met sectorknoppen en AI-knop (`ai.txt`). Nieuws staat onder Economie (pane `nieuws`).
 - Portfolio (onder Meer, pane `portfolio`): alleen in localStorage (`pf`, v2: `{v:2,acc:[{id,n,ins,mb,md,s:[{d,v,q,inl,p0}]}]}`),
   nooit online. `s` = momentopnamen die de gebruiker invult. Gekoppeld (`ins` = WEBN.DE/VALL.AS/BTC-EUR uit `extras`):
-  waarde(t) = v + q·(P(t)−p0) + Σ maandaankopen mb·P(t)/P(aankoopdag) (aankopen na laatste invoer = geschat, zo getoond).
+  `pfSim`: kas na invoer = v − q·p0; storting op dag `md` → kas; aankoop `kd` dagen later (ETF niet in weekend) tegen
+  slotkoers, met `fee` per aankoop; `hele` = alleen hele stukken van het maandbedrag met ~2% marge (Saxo AutoInvest).
+  Getoetst tegen echte aankopen okt 2026 (IBKR/Saxo/Bitvavo). Aankopen na laatste invoer = geschat, zo getoond.
   inleg(t) = inl + mb per maanddag `md` na d. Resultaat per periode (1D/1W/1M/YTD/1J/Alles) = Δwaarde − Δinleg.
   `pfMigrate` zet het oude v1-formaat en back-ups om (koppeling geraden uit de naam: WEBN/VALL/Bitcoin). Geen broker-API's: repo/site zijn openbaar
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).

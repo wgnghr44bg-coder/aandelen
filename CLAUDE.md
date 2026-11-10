@@ -47,8 +47,11 @@
   1D–1Y, stuurt ook de tegels), WEBN/VALL/Bitcoin, indexen Nasdaq/S&P 500/AEX, BUY/HOLD/SELL, Rente & Economie,
   Vastgoed, Grondstoffen (tik = grafiek 1D–5J), Sectoren (balkjes), grootste assets, en onderaan stijgers/dalers
   per index met sectorknoppen en AI-knop (`ai.txt`). Nieuws staat onder Economie (pane `nieuws`).
-- Portfolio (onder Meer, pane `portfolio`): alleen in localStorage (`pf`, v2: `{v:2,acc:[{id,n,ins,mb,md,s:[{d,v,q,inl,p0}]}]}`),
-  nooit online. `s` = momentopnamen die de gebruiker invult. Gekoppeld (`ins` = WEBN.DE/VALL.AS/BTC-EUR uit `extras`):
+- Portfolio (onder Meer, pane `portfolio`): alleen in localStorage (`pf`, v3: `{v:3,acc:[{id,n,ins,mb,md,kd,hele,fee,
+  s:[{d,v,inl,pos:[{t,q,p0}]}],tx:[{d,k,t,q,b,f}]}]}`), nooit online. Meerdere posities per rekening: WEBN/VALL/Bitcoin
+  (extras) en alle aandelen uit `rows` (koers in € via r.usd/eurusd = wisselkoers van nu; geschiedenis uit history.json).
+  Kas = v − Σ q·p0. Transacties (koop/verkoop/storting/opname) via de rekening → nieuwe momentopname (`pfSnapAt`).
+  `s` = momentopnamen. `ins` = maandelijkse aankoop (WEBN.DE/VALL.AS/BTC-EUR):
   `pfSim`: kas na invoer = v − q·p0; storting op dag `md` → kas; aankoop `kd` dagen later (ETF niet in weekend) tegen
   slotkoers, met `fee` per aankoop; `hele` = alleen hele stukken van het maandbedrag met ~2% marge (Saxo AutoInvest).
   Getoetst tegen echte aankopen okt 2026 (IBKR/Saxo/Bitvavo). Aankopen na laatste invoer = geschat, zo getoond.

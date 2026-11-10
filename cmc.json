@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1670372832521.0,
+1656184390846.0,
 "Saudi Arabia"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-235605589278.0,
+235372306278.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-223724461359.0,
+224000845916.0,
 "China"
 ],
 [
@@ -576,12 +576,6 @@
 "France"
 ],
 [
-"IHC.AE",
-"International Holding Company",
-191604745735.0,
-"United Arab Emirates"
-],
-[
 "ABT",
 "Abbott Laboratories",
 191396872192.0,
@@ -592,6 +586,12 @@
 "Analog Devices",
 191238619136.0,
 "United States"
+],
+[
+"IHC.AE",
+"International Holding Company",
+191186655580.0,
+"United Arab Emirates"
 ],
 [
 "VZ",

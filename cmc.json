@@ -522,6 +522,12 @@
 "Canada"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+200035236710.0,
+"Australia"
+],
+[
 "KLAC",
 "KLA",
 199340228608.0,
@@ -532,12 +538,6 @@
 "McDonald",
 199151304704.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-197840776552.0,
-"Australia"
 ],
 [
 "ALV.DE",

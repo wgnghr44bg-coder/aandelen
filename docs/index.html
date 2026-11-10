@@ -653,6 +653,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfsel{display:block;font-size:.74rem;color:var(--accent);margin:-4px 0 2px;font-weight:600}
+.pfsel:empty{display:none}.pfsel.bad{color:var(--down-strong)}
 .pfact{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .pfqb{border:0;border-radius:14px;padding:14px 6px;font:inherit;font-size:1rem;font-weight:800;color:#fff;cursor:pointer}
 .pfqb.buy{background:linear-gradient(180deg,#1fbf6a,#0f7a40)}.pfqb.sell{background:linear-gradient(180deg,#e0483f,#9e1f1f)}
@@ -1982,11 +1984,21 @@ details.pfadv[open]>summary{margin-bottom:10px}
     dl.innerHTML=L.map(function(o){return '<option value="'+esc(o)+'">'}).join("");dl.dataset.n=String(rows.length);
   }
   function pfParseT(s){
-    s=String(s||"").trim();var m=s.match(/\(([^()]+)\)\s*$/),t=m?m[1].trim():s;
-    if(pfKnown(t))return t;var up=t.toUpperCase();if(pfKnown(up))return up;
-    var hit=null;Object.keys(PFI).forEach(function(k){if(PFI[k].toLowerCase()===s.toLowerCase())hit=k});
-    if(!hit)rows.forEach(function(r){if(!hit&&(pfName(r.ticker).toLowerCase()===s.toLowerCase()||String(r.name).toLowerCase()===s.toLowerCase()))hit=r.ticker});
-    return hit;
+    s=String(s||"").trim();if(!s)return null;
+    var m=s.match(/\(([^()]+)\)\s*$/);if(m&&pfKnown(m[1].trim()))return m[1].trim();
+    var low=s.toLowerCase(),up=s.toUpperCase(),c=[];
+    Object.keys(PFI).forEach(function(k){if(PFI[k].toLowerCase()===low||k===up)c.push(k)});
+    rows.forEach(function(r){var t=r.ticker;
+      if(t===up||t.split(".")[0]===up||pfName(t).toLowerCase()===low||String(r.name).toLowerCase()===low)c.push(t)});
+    if(!c.length)return null;
+    function rank(t){if(PFI[t])return 0;var r=pfRow(t);return r&&r.currency==="EUR"?1:2}
+    c.sort(function(a,b){return rank(a)-rank(b)});
+    return c[0];
+  }
+  // korte omschrijving van een belegging: naam · beurs · koers
+  function pfDesc(t){
+    var x=pfX(t),r=pfRow(t),beurs=x?x.beurs:r?r.beurs:"",p=pfPx(t,pfToday()),cur=r&&r.currency!=="EUR"?r.currency:"";
+    return pfName(t)+" ("+t+")"+(beurs?" · "+beurs:"")+(p!=null?" · "+pfEur(p)+(cur?" (omgerekend uit "+cur+")":""):"");
   }
   // ---- formulier: nieuwe rekening en instellingen/correctie
   function pfSetForm(a){
@@ -2018,7 +2030,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var t=pfToday(),last=a.s[a.s.length-1].d;
     return '<form class="padd pftx" data-id="'+a.id+'" autocomplete="off">'+
       '<div class="pfseg" role="group" aria-label="Soort">'+Object.keys(PFK).map(function(k,i){return '<label><input type="radio" name="k" value="'+k+'"'+(i?'':' checked')+'><span>'+PFK[k]+'</span></label>'}).join("")+'</div>'+
-      '<div class="pftxs"><div class="pfl2">Belegging</div><input name="t" list="pfdl" placeholder="Zoek: bv. Apple, ASML, WEBN" aria-label="Belegging" value="'+(a.ins?esc(pfOpt(a.ins)):"")+'">'+
+      '<div class="pftxs"><div class="pfl2">Belegging</div><input name="t" list="pfdl" placeholder="Zoek: bv. Apple, ASML, WEBN" aria-label="Belegging" value="'+(a.ins?esc(pfOpt(a.ins)):"")+'"><small class="pfsel"></small>'+
       '<div class="prow pfl2"><span>Aantal</span><span>Bedrag (€)</span></div>'+
       '<div class="prow"><input name="q" inputmode="decimal" placeholder="bv. 5" aria-label="Aantal"><input name="b" inputmode="decimal" placeholder="leeg = huidige koers" aria-label="Bedrag in euro"></div>'+
       '<div class="prow pfl2"><span>Kosten (€)</span><span>Datum</span></div>'+
@@ -2034,7 +2046,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
     f.querySelector(".pftxh").textContent=trade?"Bedrag = wat je in totaal betaalde of ontving in euro (zoals in je app). Leeg laten = aantal × huidige koers.":
       (k==="storting"?"Geld dat je op deze rekening hebt gezet. Telt mee als inleg.":"Geld dat je van deze rekening hebt gehaald. Gaat van je inleg af.");
     if(trade){var t=pfParseT(f.t.value),q=pfNum(f.q.value),d=f.d.value||pfToday(),p=t?pfPx(t,d):null;
-      f.b.placeholder=t&&q>0&&p?"≈ "+pfIn(q*p,2):"leeg = huidige koers"}
+      f.b.placeholder=t&&q>0&&p?"≈ "+pfIn(q*p,2):"leeg = huidige koers";
+      var sel=f.querySelector(".pfsel"),v=f.t.value.trim();if(sel){sel.textContent=!v?"":t?"→ "+pfDesc(t):"Niet gevonden – kies uit de lijst";sel.className="pfsel"+(v&&!t?" bad":"")}}
   }
   function renderPortfolio(){
     var t=pfToday(),changed=false;
@@ -2200,7 +2213,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
         (k==="koop"?'<option value="__new"'+(sel==="__new"?' selected':'')+'>+ Nieuwe rekening…</option>':'')+'</select>'+
       (k==="koop"?'<input name="an" placeholder="Naam van de rekening (bv. Interactive Brokers)" maxlength="40" aria-label="Naam nieuwe rekening"'+(sel==="__new"?'':' hidden')+'>':'')+
       '<div class="pfl2">'+(k==="koop"?'Wat heb je gekocht?':'Wat heb je verkocht?')+'</div>'+
-      (k==="koop"?'<input name="t" list="pfdl" placeholder="Typ bv. Apple, ASML, WEBN, Bitcoin" aria-label="Belegging">':'<select name="t" aria-label="Belegging">'+posOpt+'</select>')+
+      (k==="koop"?'<input name="t" list="pfdl" placeholder="Typ bv. Apple, ASML, WEBN, Bitcoin" aria-label="Belegging"><small class="pfsel"></small>':'<select name="t" aria-label="Belegging">'+posOpt+'</select>')+
       '<div class="prow pfl2"><span>Aantal</span><span>Totaalbedrag (€)</span></div>'+
       '<div class="prow"><input name="q" inputmode="decimal" placeholder="bv. 5" aria-label="Aantal"><input name="b" inputmode="decimal" placeholder="optioneel" aria-label="Totaalbedrag in euro"></div>'+
       '<div class="prow pfl2"><span>Kosten (€)</span><span>Datum</span></div>'+
@@ -2216,6 +2229,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
   function pfQUpdate(f){
     var k=f.dataset.k,t=f.t?(k==="koop"?pfParseT(f.t.value):f.t.value):null,q=pfNum(f.q.value),d=f.d.value||pfToday(),p=t?pfPx(t,d):null;
     f.b.placeholder=t&&q>0&&p?"≈ "+pfIn(q*p,2):"optioneel";
+    var sel=f.querySelector(".pfsel");
+    if(sel){var v=f.t.value.trim();sel.textContent=!v?"":t?"→ "+pfDesc(t):"Niet gevonden – kies uit de lijst";sel.className="pfsel"+(v&&!t?" bad":"")}
   }
   $("pfact").addEventListener("click",function(e){var b=e.target.closest(".pfqb");if(!b)return;pfQ=pfQ===b.dataset.k?null:b.dataset.k;pfQRender();
     var f=$("pfqbox").querySelector("form [name=t]");if(f&&pfQ==="koop")f.focus()});
@@ -2706,7 +2721,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-13";
+  var BUILD="2026-11-10-14";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

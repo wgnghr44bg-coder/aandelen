@@ -46,9 +46,11 @@
   1D–1Y, stuurt ook de tegels), WEBN/VALL/Bitcoin, indexen Nasdaq/S&P 500/AEX, BUY/HOLD/SELL, Rente & Economie,
   Vastgoed, Grondstoffen (tik = grafiek 1D–5J), Sectoren (balkjes), grootste assets, en onderaan stijgers/dalers
   per index met sectorknoppen en AI-knop (`ai.txt`). Nieuws staat onder Economie (pane `nieuws`).
-- Portfolio (onder Meer, pane `portfolio`): waarde per rekening zelf invullen, alleen in localStorage (`pf`,
-  `{acc:[{id,n,v,inl,d,mb,md,ms}],hist:[[datum,totaal]]}`), nooit online. `mb` = vast bedrag per maand op dag `md`:
-  inleg = `inl` (op datum `ms`) + mb × maanddagen na ms; winst/verlies = v − inleg t/m `d` (datum van de waarde). Geen broker-API's: repo/site zijn openbaar
+- Portfolio (onder Meer, pane `portfolio`): alleen in localStorage (`pf`, v2: `{v:2,acc:[{id,n,ins,mb,md,s:[{d,v,q,inl,p0}]}]}`),
+  nooit online. `s` = momentopnamen die de gebruiker invult. Gekoppeld (`ins` = WEBN.DE/VALL.AS/BTC-EUR uit `extras`):
+  waarde(t) = v + q·(P(t)−p0) + Σ maandaankopen mb·P(t)/P(aankoopdag) (aankopen na laatste invoer = geschat, zo getoond).
+  inleg(t) = inl + mb per maanddag `md` na d. Resultaat per periode (1D/1W/1M/YTD/1J/Alles) = Δwaarde − Δinleg.
+  `pfMigrate` zet het oude v1-formaat en back-ups om (koppeling geraden uit de naam: WEBN/VALL/Bitcoin). Geen broker-API's: repo/site zijn openbaar
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).
 - Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
   Brent, aardgas) → komen in `intra.json`.

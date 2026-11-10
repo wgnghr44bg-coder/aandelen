@@ -659,6 +659,15 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfnote{margin:-2px 0 0;font-size:.72rem}
 .pfl .pfwarn{display:block;color:var(--warn-text,#b45309);font-weight:600;margin-top:2px}
 .ptot .pfm{grid-column:1/-1}
+.pfph{display:flex;align-items:center;gap:8px;margin:12px 0 6px}
+.pfph b{font-size:.95rem}
+.pfres b{display:block;font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums}
+.pfres b span{font-size:.9rem;font-weight:700}
+.pfres small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
+.pfl .pfr{display:block;font-size:.7rem;font-weight:600}
+.pfform>.pfl2{margin:2px 0 -4px}
+.pfnote2:empty{display:none}
+.pfform .prow button:only-child{grid-column:1/-1}
 #pfquick{margin-bottom:8px}
 </style>
 </head>
@@ -809,19 +818,19 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   <section class="pane" data-pane="portfolio" hidden>
     <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span></div>
       <div class="ptot" id="pftot"></div>
-      <div class="lchart" id="pfchart"></div>
+      <div id="pfperbox" hidden>
+        <div class="pfph"><b>Resultaat</b><div class="pseg" id="pfper" role="group" aria-label="Periode portfolio"></div></div>
+        <div class="pfres" id="pfres"></div>
+        <div class="lchart" id="pfchart"></div>
+      </div>
       <ul class="plist pfl" id="pflist"></ul>
-      <p class="hint" id="pfempty">Voeg hieronder je rekeningen toe en vul de waarde in. Tik later op een rekening om de waarde bij te werken.</p>
+      <p class="hint" id="pfempty">Voeg hieronder je rekeningen toe en vul de waarde in. Tik later op een rekening om hem bij te werken.</p>
+      <p class="hint pfnote2" id="pfnote"></p>
     </div>
     <div class="panel"><div class="ph"><span class="emo">➕</span><h2>Rekening toevoegen</h2></div>
-      <div class="gper" id="pfquick" role="group" aria-label="Snel kiezen"><button type="button" data-n="Bitvavo">Bitvavo</button><button type="button" data-n="Saxo">Saxo</button><button type="button" data-n="Interactive Brokers">Interactive Brokers</button><button type="button" data-n="Spaarrekening">Spaarrekening</button></div>
-      <form class="padd" id="pfadd" autocomplete="off">
-        <input id="pfname" placeholder="Naam (bv. Bitvavo)" maxlength="40" required>
-        <div class="prow"><input id="pfval" inputmode="decimal" placeholder="Waarde in €" required><input id="pfin" inputmode="decimal" placeholder="Inleg tot nu €"></div>
-        <div class="prow"><input id="pfmb" inputmode="decimal" placeholder="Per maand €"><select id="pfmd" aria-label="Dag van de maand"><option value="1">op de 1e</option><option value="2">op de 2e</option><option value="3">op de 3e</option><option value="4">op de 4e</option><option value="5">op de 5e</option><option value="6">op de 6e</option><option value="7">op de 7e</option><option value="8">op de 8e</option><option value="9">op de 9e</option><option value="10">op de 10e</option><option value="11">op de 11e</option><option value="12">op de 12e</option><option value="13">op de 13e</option><option value="14">op de 14e</option><option value="15">op de 15e</option><option value="16">op de 16e</option><option value="17">op de 17e</option><option value="18">op de 18e</option><option value="19">op de 19e</option><option value="20">op de 20e</option><option value="21">op de 21e</option><option value="22">op de 22e</option><option value="23">op de 23e</option><option value="24">op de 24e</option><option value="25">op de 25e</option><option value="26">op de 26e</option><option value="27">op de 27e</option><option value="28">op de 28e</option></select></div>
-        <button type="submit">Toevoegen</button>
-      </form>
-      <p class="hint">Inleg en vast maandbedrag zijn optioneel. Met een maandbedrag telt de site je inleg elke maand vanzelf op; de waarde vul je zelf in.</p>
+      <div class="gper" id="pfquick" role="group" aria-label="Snel kiezen"><button type="button" data-n="Interactive Brokers" data-i="WEBN.DE">Interactive Brokers</button><button type="button" data-n="Saxo" data-i="VALL.AS">Saxo</button><button type="button" data-n="Bitvavo" data-i="BTC-EUR">Bitvavo</button><button type="button" data-n="Spaarrekening" data-i="">Spaarrekening</button></div>
+      <div id="pfaddbox"></div>
+      <p class="hint">Koppel je een rekening aan WEBN, VALL of Bitcoin, dan volgt de waarde vanzelf de koers en zie je je resultaat per dag, week, maand en jaar. Aantal leeg laten = de site rekent het uit (waarde ÷ koers). Inleg en vast maandbedrag zijn optioneel.</p>
       <p class="hint" id="pfmsg"></p>
     </div>
     <div class="panel"><div class="ph"><span class="emo">🔒</span><h2>Bewaren</h2></div>
@@ -1687,6 +1696,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     renderGC();renderSecMini();renderNews();
     if(tab==="watchlist")renderWatch();
     if(tab==="grondstoffen")renderGrond();
+    if(tab==="portfolio")renderPortfolio();
     renderMacro();
   }
   // ---------- Grondstoffen (Overzicht): goud, olie (Brent), aardgas, zilver – koers en verandering vandaag ----------
@@ -1757,92 +1767,188 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     ratingFilter=b.dataset.r||null;render();scrollToGrp();
   });
 
-  // ---------- Portfolio: waarde per rekening zelf invullen (alleen op dit apparaat, localStorage "pf") ----------
-  // pf = {acc:[{id,n,v,inl,d,mb,md,ms}], hist:[[JJJJ-MM-DD, totaal]]}
-  // v = waarde (zelf ingevuld op datum d); inl = inleg op datum ms; mb = vast bedrag per maand op dag md (1-28):
-  // de inleg loopt vanzelf op met mb voor elke maanddag na ms. Winst/verlies = v - inleg t/m d (geen geschatte waarde).
-  var pf={acc:[],hist:[]},pfEdit=null;
-  try{var pf0=JSON.parse(localStorage.getItem("pf")||"null");if(pf0&&Array.isArray(pf0.acc))pf={acc:pf0.acc,hist:Array.isArray(pf0.hist)?pf0.hist:[]}}catch(e){}
+  // ---------- Portfolio (alleen op dit apparaat, localStorage "pf") ----------
+  // pf = {v:2, acc:[{id, n, ins, mb, md, s:[{d, v, q, inl, p0}]}]}
+  //  s   = momentopnamen die je zelf invult: datum d, waarde v (€), aantal q, inleg tot dan inl, koers p0 op dat moment.
+  //  ins = gekoppelde belegging (WEBN.DE, VALL.AS, BTC-EUR): waarde(t) = v + q·(P(t) − p0) + Σ maandaankopen mb·P(t)/P(aankoopdag)
+  //        (maandaankopen na de laatste momentopname zijn GESCHAT tegen de slotkoers van die dag).
+  //        Niet gekoppeld: waarde(t) = v + mb per maanddag na d.
+  //  inleg(t) = inl + mb per maanddag (md) na d.  Resultaat over een periode = Δwaarde − Δinleg.
+  var PFI={"WEBN.DE":"WEBN","VALL.AS":"VALL","BTC-EUR":"Bitcoin"};
+  var PFP=[["D","1D"],["W","1W"],["M","1M"],["YTD","YTD"],["Y","1J"],["ALL","Alles"]];
+  var pf={v:2,acc:[]},pfEdit=null,pfPer="M";
+  try{var pp0=localStorage.getItem("pfper");if(PFP.some(function(x){return x[0]===pp0}))pfPer=pp0}catch(e){}
   function pfToday(){return dstr(new Date())}
-  function pfTotal(){return pf.acc.reduce(function(s,a){return s+(a.v||0)},0)}
-  // aantal maandinleggen (dag md) na datum van (exclusief) t/m datum tot (inclusief); datums als JJJJ-MM-DD
-  function pfCount(md,van,tot){
-    if(!md||!van||!tot||tot<=van)return 0;
-    var p=van.split("-").map(Number),y=p[0],m=p[1],n=0;
-    for(var i=0;i<1200;i++){var d=y+"-"+String(m).padStart(2,"0")+"-"+String(md).padStart(2,"0");
-      if(d>tot)break;if(d>van)n++;m++;if(m>12){m=1;y++}}
-    return n;
+  function pad2(n){return String(n).padStart(2,"0")}
+  // maanddagen (dag md) na datum van (exclusief) t/m datum tot (inclusief)
+  function pfDeps(md,van,tot){
+    var out=[];if(!md||!van||!tot||tot<=van)return out;
+    var p=van.split("-").map(Number),y=p[0],m=p[1];
+    for(var i=0;i<1200;i++){var d=y+"-"+pad2(m)+"-"+pad2(md);if(d>tot)break;if(d>van)out.push(d);m++;if(m>12){m=1;y++}}
+    return out;
   }
-  // inleg t/m een datum (null als er geen inleg en geen maandbedrag is)
-  function pfInl(a,tot){
-    if(a.inl==null&&!a.mb)return null;
-    return (a.inl||0)+(a.mb?a.mb*pfCount(a.md,a.ms||a.d,tot):0);
+  function pfGuessIns(n){n=String(n||"");return /webn/i.test(n)?"WEBN.DE":/vall/i.test(n)?"VALL.AS":/bitcoin|btc/i.test(n)?"BTC-EUR":null}
+  function pfNumOr(x){return typeof x==="number"&&isFinite(x)?x:null}
+  // oud formaat (v1: één waarde per rekening) en back-ups omzetten naar v2
+  function pfMigrate(x){
+    if(!x||!Array.isArray(x.acc))return null;
+    var acc=x.acc.filter(function(a){return a&&a.n}).map(function(a){
+      var md=Math.min(28,Math.max(1,+a.md||1)),mb=pfNumOr(a.mb);
+      var s=Array.isArray(a.s)?a.s.filter(function(t){return t&&/^\d{4}-\d{2}-\d{2}$/.test(t.d)&&typeof t.v==="number"})
+          .map(function(t){return {d:t.d,v:t.v,q:pfNumOr(t.q),inl:pfNumOr(t.inl),p0:pfNumOr(t.p0)}}):null;
+      if(!s){   // v1
+        var d=/^\d{4}-\d{2}-\d{2}$/.test(a.d||"")?a.d:pfToday(),inl=pfNumOr(a.inl);
+        if(mb&&inl!=null)inl+=mb*pfDeps(md,a.ms||d,d).length;
+        s=typeof a.v==="number"?[{d:d,v:a.v,q:pfNumOr(a.q),inl:inl,p0:null}]:[];
+      }
+      s.sort(function(p,q){return p.d<q.d?-1:p.d>q.d?1:0});
+      var ins=a.ins===undefined?pfGuessIns(a.n):(PFI[a.ins]?a.ins:null);
+      return {id:String(a.id||Math.random().toString(36).slice(2)),n:String(a.n).slice(0,40),ins:ins,mb:mb||null,md:md,s:s};
+    }).filter(function(a){return a.s.length});
+    return {v:2,acc:acc};
   }
-  function pfSave(){
-    // verloop: totaal van vandaag bijwerken (één punt per dag)
-    var d=pfToday(),t=Math.round(pfTotal()*100)/100,h=pf.hist;
-    if(h.length&&h[h.length-1][0]===d)h[h.length-1][1]=t;else h.push([d,t]);
-    if(!pf.acc.length)pf.hist=[];
-    try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}
-    renderPortfolio();
+  try{var pfl=pfMigrate(JSON.parse(localStorage.getItem("pf")||"null"));if(pfl)pf=pfl}catch(e){}
+  function pfStore(){try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}}
+  function pfSave(){pfStore();renderPortfolio()}
+  // koers van een gekoppelde belegging op datum t (vandaag = laatste/live koers)
+  function pfX(ins){var r=null;extras.forEach(function(x){if(x.ticker===ins)r=x});return r}
+  function pfP(ins,t){var x=pfX(ins);if(!x)return null;if(t>=pfToday())return x.price||null;
+    return x.h&&x.h.length?valOn(x.h,t):null}
+  function pfSnap(a,t){var r=null;a.s.forEach(function(s){if(s.d<=t)r=s});return r}
+  function pfQ(a,s){if(!a.ins)return null;if(s.q!=null)return s.q;var p=s.p0||pfP(a.ins,s.d);return p?s.v/p:null}
+  function pfVal(a,t){
+    var s=pfSnap(a,t);if(!s)return null;var deps=a.mb?pfDeps(a.md,s.d,t):[];
+    if(a.ins){var p0=s.p0||pfP(a.ins,s.d),pt=pfP(a.ins,t),q=pfQ(a,s);
+      if(p0&&pt&&q!=null){var v=s.v+q*(pt-p0);deps.forEach(function(k){var pk=pfP(a.ins,k);v+=pk?a.mb*pt/pk:a.mb});return v}}
+    return s.v+deps.length*(a.mb||0);
   }
-  // "12.345,67", "12345,67", "12345.67", "€ 1.000" -> getal; leeg -> null; ongeldig -> NaN
+  function pfQNow(a){var t=pfToday(),s=pfSnap(a,t);if(!s||!a.ins)return null;var q=pfQ(a,s);if(q==null)return null;
+    (a.mb?pfDeps(a.md,s.d,t):[]).forEach(function(k){var pk=pfP(a.ins,k);if(pk)q+=a.mb/pk});return q}
+  function pfInl(a,t){var s=pfSnap(a,t);if(!s)return null;if(s.inl==null&&!a.mb)return null;
+    return (s.inl||0)+(a.mb?a.mb*pfDeps(a.md,s.d,t).length:0)}
+  function pfStart(){var d=null;pf.acc.forEach(function(a){if(a.s.length&&(!d||a.s[0].d<d))d=a.s[0].d});return d}
+  function pfT0(k){
+    var n=new Date(),d=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+    if(k==="D")d.setDate(d.getDate()-1);else if(k==="W")d.setDate(d.getDate()-7);else if(k==="M")d.setMonth(d.getMonth()-1);
+    else if(k==="YTD")d=new Date(n.getFullYear()-1,11,31);else if(k==="Y")d.setFullYear(d.getFullYear()-1);else return null;
+    return dstr(d);
+  }
+  // resultaat van een rekening (of alle) tussen t0 en vandaag: {r, pct, v0, dI}
+  function pfRes(list,t0){
+    var t1=pfToday(),r=0,v0=0,dI=0,ok=false;
+    list.forEach(function(a){
+      if(!a.s.length)return;var st=t0&&t0>a.s[0].d?t0:a.s[0].d;
+      var A=pfVal(a,st),B=pfVal(a,t1);if(A==null||B==null)return;
+      var i0=pfInl(a,st),i1=pfInl(a,t1),di=(i0!=null&&i1!=null)?i1-i0:0;
+      r+=B-A-di;v0+=A;dI+=di;ok=true;
+    });
+    if(!ok)return null;var basis=v0+dI/2;
+    return {r:r,pct:basis>0?r/basis*100:null,v0:v0,dI:dI};
+  }
   function pfNum(s){
-    s=String(s||"").replace(/[€\s]/g,"");if(!s)return null;
+    s=String(s==null?"":s).replace(/[€\s]/g,"");if(!s)return null;
     if(s.indexOf(",")>=0)s=s.replace(/\./g,"").replace(",",".");
     else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,"");
     return /^-?\d+(\.\d+)?$/.test(s)?parseFloat(s):NaN;
   }
   function pfEur(v){return v==null||isNaN(v)?"–":(v<0?"−":"")+"€ "+Math.abs(v).toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2})}
-  function pfIn(v){return v==null?"":String(v).replace(".",",")}
+  function pfSg(v){return (v>0?"+":"")+pfEur(v)}
+  function pfIn(v,dec){return v==null?"":String(dec!=null?Math.round(v*Math.pow(10,dec))/Math.pow(10,dec):v).replace(".",",")}
+  function pfQf(q,ins){return q==null?"–":q.toLocaleString("nl-NL",{maximumFractionDigits:ins==="BTC-EUR"?8:q<100?3:1})}
   function pfDate(d){var p=String(d||"").split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]+" "+p[0]:""}
+  function pfDateS(d){var p=String(d||"").split("-");return p.length===3?(+p[2])+" "+MON3L[+p[1]-1]:""}
   var PFC=["#3b86ff","#2fd26b","#f59e0b","#a78bfa","#ff6a4d","#22d3ee","#f472b6","#94a3b8"];
+  // formulier (nieuw of bewerken)
+  function pfForm(a){
+    var t=pfToday(),vN=a?pfVal(a,t):null,iN=a?pfInl(a,t):null,s=a?a.s[a.s.length-1]:null,
+        deps=a&&a.mb?pfDeps(a.md,s.d,t).length:0,qN=a?pfQNow(a):null,qExact=a&&s.q!=null&&!deps;
+    var ins=a?a.ins:"";
+    return '<form class="padd pfform" data-id="'+(a?a.id:"")+'" autocomplete="off">'+
+      '<input name="n" value="'+(a?esc(a.n):"")+'" placeholder="Naam (bv. Interactive Brokers)" maxlength="40" required aria-label="Naam">'+
+      '<div class="pfl2">Belegging (koers volgen)</div>'+
+      '<select name="ins" aria-label="Belegging"><option value="">Geen – waarde zelf bijhouden</option>'+
+        Object.keys(PFI).map(function(k){return '<option value="'+k+'"'+(ins===k?' selected':'')+'>'+PFI[k]+'</option>'}).join("")+'</select>'+
+      '<div class="prow pfl2"><span>Waarde nu (€)</span><span>Aantal stuks</span></div>'+
+      '<div class="prow"><input name="v" inputmode="decimal" value="'+esc(pfIn(vN,2))+'" placeholder="Waarde in €" required aria-label="Waarde nu">'+
+        '<input name="q" inputmode="decimal" value="'+(qExact?esc(pfIn(s.q)):"")+'" placeholder="'+(qN!=null?"≈ "+esc(pfQf(qN,ins))+" (leeg = berekenen)":"leeg = berekenen")+'" aria-label="Aantal stuks"></div>'+
+      '<div class="prow pfl2"><span>Inleg tot nu (€)</span><span>Vast per maand (€)</span></div>'+
+      '<div class="prow"><input name="inl" inputmode="decimal" value="'+esc(pfIn(iN,2))+'" placeholder="optioneel" aria-label="Inleg tot nu">'+
+        '<input name="mb" inputmode="decimal" value="'+esc(pfIn(a&&a.mb))+'" placeholder="optioneel" aria-label="Vast per maand"></div>'+
+      '<div class="pfl2">Dag van inleggen</div>'+
+      '<select name="md" aria-label="Dag van inleggen">'+Array.apply(null,{length:28}).map(function(_,k){return '<option value="'+(k+1)+'"'+(((a&&a.md)||25)===k+1?' selected':'')+'>op de '+(k+1)+'e van de maand</option>'}).join("")+'</select>'+
+      (deps?'<p class="hint pfnote">Waarde en inleg zijn inclusief '+deps+'× maandinleg van '+pfEur(a.mb)+(a.ins?' (aankoop geschat)':'')+' sinds je vorige invoer. Vul de echte waarde'+(a.ins?' en het aantal':'')+' uit je app in.</p>':'')+
+      '<div class="prow"><button type="submit">'+(a?"Opslaan":"Toevoegen")+'</button>'+(a?'<button type="button" class="pfdel">Verwijderen</button>':'')+'</div></form>';
+  }
   function renderPortfolio(){
-    var tot=pfTotal(),wi=pf.acc.filter(function(a){return pfInl(a,a.d)!=null}),inl=wi.reduce(function(s,a){return s+pfInl(a,a.d)},0),
-        mnd=pf.acc.reduce(function(s,a){return s+(a.mb||0)},0),
-        vwi=wi.reduce(function(s,a){return s+(a.v||0)},0),wv=vwi-inl;
-    $("pfempty").hidden=!!pf.acc.length;
-    var last=pf.acc.map(function(a){return a.d||""}).sort().pop();
-    $("pfdate").textContent=last?"bijgewerkt "+pfDate(last):"";
-    $("pftot").innerHTML=pf.acc.length?'<div><span>Totale waarde</span><b>'+pfEur(tot)+'</b></div>'+
-      (wi.length?'<div><span>Winst/verlies'+(wi.length<pf.acc.length?' (rekeningen met inleg)':'')+'</span><b class="'+chgCls(wv)+'">'+(wv>0?"+":"")+pfEur(wv)+'</b><span class="'+chgCls(wv)+'">'+(inl>0?fmtPct(wv/inl*100):"")+' · inleg '+pfEur(inl)+'</span></div>'
+    var t=pfToday(),changed=false;
+    // koers vastleggen bij momentopnamen zonder koers (bv. na terugzetten van een back-up)
+    pf.acc.forEach(function(a){if(a.ins)a.s.forEach(function(s){if(s.p0==null){var p=pfP(a.ins,s.d);if(p){s.p0=p;changed=true}}})});
+    if(changed)pfStore();
+    var A=pf.acc,has=A.length;
+    $("pfempty").hidden=!!has;$("pfperbox").hidden=!has;
+    var last=A.map(function(a){return a.s.length?a.s[a.s.length-1].d:""}).sort().pop();
+    $("pfdate").textContent=last?"ingevuld "+pfDate(last):"";
+    var tot=0,wv=0,inl=0,nI=0,mnd=0;
+    A.forEach(function(a){var v=pfVal(a,t)||0,i=pfInl(a,t);tot+=v;mnd+=a.mb||0;if(i!=null){wv+=v-i;inl+=i;nI++}});
+    $("pftot").innerHTML=has?'<div><span>Totale waarde</span><b>'+pfEur(tot)+'</b><span>'+pfDate(t)+'</span></div>'+
+      (nI?'<div><span>Winst/verlies'+(nI<A.length?' (met inleg)':'')+'</span><b class="'+chgCls(wv)+'">'+pfSg(wv)+'</b><span class="'+chgCls(wv)+'">'+(inl>0?fmtPct(wv/inl*100):"")+' · inleg '+pfEur(inl)+'</span></div>'
         :'<div><span>Winst/verlies</span><b class="flat">–</b><span>vul bij een rekening je inleg in</span></div>')+
-      (mnd?'<div class="pfm"><span>Elke maand ingelegd</span><b>'+pfEur(mnd)+'</b><span>'+pf.acc.filter(function(a){return a.mb}).map(function(a){return esc(a.n)+' '+pfEur(a.mb)+' (op de '+a.md+'e)'}).join(" · ")+'</span></div>':''):"";
-    // verloop van het totaal
-    var h=pf.hist;
-    $("pfchart").innerHTML=h.length>1?lineChart([{n:"Totaal",c:"#3b86ff",d:h}],{}):
-      (pf.acc.length?'<p class="hint">Het verloop verschijnt zodra je op een andere dag je waarden bijwerkt.</p>':'');
-    $("pflist").innerHTML=pf.acc.map(function(a,i){
-      var c=PFC[i%PFC.length],sh=tot>0?(a.v||0)/tot*100:0,ai=pfInl(a,a.d),w=ai!=null?(a.v||0)-ai:null,
-          nieuw=a.mb?pfCount(a.md,a.d,pfToday()):0,inlNu=pfInl(a,pfToday());
-      if(pfEdit===a.id)return '<li class="pfe" data-id="'+a.id+'"><form class="padd pfform" data-id="'+a.id+'">'+
-        '<input name="n" value="'+esc(a.n)+'" maxlength="40" required aria-label="Naam">'+
-        '<div class="prow pfl2"><span>Waarde nu (€)</span><span>Inleg tot nu (€)</span></div>'+
-        '<div class="prow"><input name="v" inputmode="decimal" value="'+esc(pfIn(a.v))+'" placeholder="Waarde in €" required aria-label="Waarde">'+
-        '<input name="inl" inputmode="decimal" value="'+esc(pfIn(inlNu==null?null:Math.round(inlNu*100)/100))+'" placeholder="Inleg tot nu €" aria-label="Inleg tot nu"></div>'+
-        (nieuw?'<p class="hint pfnote">Inleg tot nu is inclusief '+nieuw+'× '+pfEur(a.mb)+' maandinleg sinds je vorige update.</p>':'')+
-        '<div class="prow pfl2"><span>Vast bedrag per maand (€)</span><span>Dag van inleggen</span></div>'+
-        '<div class="prow"><input name="mb" inputmode="decimal" value="'+esc(pfIn(a.mb||null))+'" placeholder="Per maand €" aria-label="Vast bedrag per maand">'+
-        '<select name="md" aria-label="Dag van de maand">'+Array.apply(null,{length:28}).map(function(_,k){return '<option value="'+(k+1)+'"'+((a.md||1)===k+1?' selected':'')+'>op de '+(k+1)+'e</option>'}).join("")+'</select></div>'+
-        '<div class="prow"><button type="submit">Opslaan</button><button type="button" class="pfdel">Verwijderen</button></div></form></li>';
+      (mnd?'<div class="pfm"><span>Elke maand ingelegd</span><b>'+pfEur(mnd)+'</b><span>'+A.filter(function(a){return a.mb}).map(function(a){return esc(a.n)+' '+pfEur(a.mb)+' (op de '+a.md+'e)'}).join(" · ")+'</span></div>':''):"";
+    // resultaat over de gekozen periode
+    var st=pfStart(),t0=pfT0(pfPer),eff=t0&&st&&t0>st?t0:st,since=!t0||!st||t0<st;
+    $("pfper").innerHTML=PFP.map(function(x){return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===pfPer)+'">'+x[1]+'</button>'}).join("");
+    var R=has?pfRes(A,t0):null;
+    $("pfres").innerHTML=R?'<b class="'+chgCls(R.r)+'">'+pfSg(R.r)+(R.pct!=null?' <span>('+fmtPct(R.pct)+')</span>':'')+'</b>'+
+      '<small>'+(since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):'')+'</small>':'';
+    // grafiek: waarde en inleg per dag
+    var pts=[],ipts=[];
+    if(has&&eff&&eff<t){
+      var p=eff.split("-").map(Number),d=new Date(p[0],p[1]-1,p[2]),n=0,days=Math.round((new Date()-d)/864e5),step=days>400?7:1;
+      for(var i=0;i<3000;i++){var ds=dstr(d);if(ds>t)break;
+        var v=0,iv=0,okv=false;A.forEach(function(a){var x=pfVal(a,ds);if(x!=null){v+=x;okv=true;iv+=pfInl(a,ds)||0}});
+        if(okv){pts.push([ds,Math.round(v*100)/100]);ipts.push([ds,Math.round(iv*100)/100])}
+        d.setDate(d.getDate()+step);n++}
+      if(pts.length&&pts[pts.length-1][0]!==t){pts.push([t,Math.round(tot*100)/100]);ipts.push([t,Math.round(inl*100)/100])}
+    }
+    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{}):
+      (has?'<p class="hint">De grafiek vult zich vanaf '+pfDate(st)+'. Kom morgen terug voor de eerste dag.</p>':'');
+    // rekeningen
+    $("pflist").innerHTML=A.map(function(a,i){
+      var c=PFC[i%PFC.length],v=pfVal(a,t),ai=pfInl(a,t),sh=tot>0?(v||0)/tot*100:0,w=ai!=null?(v||0)-ai:null,
+          s=a.s[a.s.length-1],deps=a.mb?pfDeps(a.md,s.d,t).length:0,q=pfQNow(a),pr=a.ins?pfP(a.ins,t):null,rr=pfRes([a],t0);
+      if(pfEdit===a.id)return '<li class="pfe" data-id="'+a.id+'">'+pfForm(a)+'</li>';
+      var sub=[];
+      if(a.ins)sub.push((deps?"≈ ":"")+pfQf(q,a.ins)+" "+PFI[a.ins]+(pr?" à "+fmtEur(pr):""));
+      sub.push("ingevuld "+pfDateS(s.d));if(ai!=null)sub.push("inleg "+pfEur(ai));if(a.mb)sub.push(pfEur(a.mb)+"/mnd op de "+a.md+"e");
       return '<li data-id="'+a.id+'" class="pfi" role="button" tabindex="0"><span class="pdot" style="background:'+c+'"></span>'+
-        '<span class="pn">'+esc(a.n)+'<small>'+(a.d?"bijgewerkt "+pfDate(a.d):"")+(ai!=null?" · inleg "+pfEur(ai):"")+(a.mb?" · "+pfEur(a.mb)+"/mnd":"")+'</small>'+
-          (nieuw?'<small class="pfwarn">'+nieuw+'× maandinleg sinds je update · tik om de waarde bij te werken</small>':'')+'</span>'+
-        '<span class="pv">'+pfEur(a.v)+'<small class="'+(w==null?"flat":chgCls(w))+'">'+(w==null?nf1.format(sh)+"%":(w>0?"+":"")+pfEur(w)+(ai>0?" ("+fmtPct(w/ai*100)+")":""))+'</small></span>'+
+        '<span class="pn">'+esc(a.n)+'<small>'+sub.join(" · ")+'</small>'+
+          (deps?'<small class="pfwarn">'+deps+'× maandinleg '+(a.ins?'(aankoop geschat) ':'')+'sinds je invoer · tik om bij te werken</small>':'')+'</span>'+
+        '<span class="pv">'+pfEur(v)+'<small class="'+(w==null?"flat":chgCls(w))+'">'+(w==null?nf1.format(sh)+"%":pfSg(w)+(ai>0?" ("+fmtPct(w/ai*100)+")":""))+'</small>'+
+          (rr?'<small class="pfr '+chgCls(rr.r)+'">'+PFP.filter(function(x){return x[0]===pfPer})[0][1]+': '+pfSg(rr.r)+'</small>':'')+'</span>'+
         '<span class="pedit">✎</span><span class="pbar"><i style="width:'+sh.toFixed(1)+'%;background:'+c+'"></i></span></li>';
     }).join("");
+    $("pfnote").textContent=A.some(function(a){return a.ins})?"Gekoppelde rekeningen volgen de slotkoers (Bitcoin live via Bitvavo). Maandaankopen na je laatste invoer zijn geschat tegen de slotkoers van die dag; vul na de aankoop de echte waarde en het aantal in. Geen financieel advies.":"";
+    if(!$("pfaddbox").firstChild)$("pfaddbox").innerHTML=pfForm(null);
   }
   function pfMsg(t){$("pfmsg").textContent=t||""}
-  $("pfquick").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;$("pfname").value=b.dataset.n;$("pfval").focus()});
-  $("pfadd").addEventListener("submit",function(e){
-    e.preventDefault();
-    var n=$("pfname").value.trim(),v=pfNum($("pfval").value),inl=pfNum($("pfin").value),mb=pfNum($("pfmb").value),md=+$("pfmd").value||1;
-    if(!n)return pfMsg("Vul een naam in.");
-    if(v==null||isNaN(v))return pfMsg("Vul een geldige waarde in, bijvoorbeeld 12.345,67.");
-    if(inl!=null&&isNaN(inl))return pfMsg("De inleg is geen geldig bedrag.");
-    if(mb!=null&&(isNaN(mb)||mb<0))return pfMsg("Het maandbedrag is geen geldig bedrag.");
-    pf.acc.push({id:Date.now().toString(36),n:n,v:v,inl:inl,d:pfToday(),mb:mb||null,md:md,ms:pfToday()});
-    $("pfname").value="";$("pfval").value="";$("pfin").value="";$("pfmb").value="";pfMsg("✓ "+n+" toegevoegd.");pfSave();
+  $("pfper").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;pfPer=b.dataset.k;try{localStorage.setItem("pfper",pfPer)}catch(err){}renderPortfolio()});
+  $("pfquick").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var f=$("pfaddbox").querySelector("form");
+    f.n.value=b.dataset.n;f.ins.value=b.dataset.i||"";f.v.focus()});
+  // opslaan (nieuw en bewerken)
+  document.addEventListener("submit",function(e){
+    var f=e.target.closest&&e.target.closest("form.pfform");if(!f)return;e.preventDefault();
+    var id=f.dataset.id,n=f.n.value.trim(),ins=PFI[f.ins.value]?f.ins.value:null,v=pfNum(f.v.value),q=pfNum(f.q.value),
+        inl=pfNum(f.inl.value),mb=pfNum(f.mb.value),md=+f.md.value||25,msg=id?function(t){alert(t)}:pfMsg;
+    if(!n)return msg("Vul een naam in.");
+    if(v==null||isNaN(v))return msg("Vul een geldige waarde in, bijvoorbeeld 12.345,67.");
+    if(q!=null&&(isNaN(q)||q<=0))return msg("Het aantal is geen geldig getal.");
+    if(inl!=null&&isNaN(inl))return msg("De inleg is geen geldig bedrag.");
+    if(mb!=null&&(isNaN(mb)||mb<0))return msg("Het maandbedrag is geen geldig bedrag.");
+    var t=pfToday(),p=ins?pfP(ins,t):null,snap={d:t,v:v,q:ins?(q!=null?q:(p?v/p:null)):null,inl:inl,p0:p};
+    if(id){var a=null;pf.acc.forEach(function(x){if(x.id===id)a=x});if(!a)return;
+      a.n=n;a.ins=ins;a.mb=mb||null;a.md=md;a.s=a.s.filter(function(s){return s.d!==t});a.s.push(snap);pfEdit=null}
+    else{pf.acc.push({id:Date.now().toString(36),n:n,ins:ins,mb:mb||null,md:md,s:[snap]});$("pfaddbox").innerHTML="";pfMsg("✓ "+n+" toegevoegd.")}
+    pfSave();
   });
   $("pflist").addEventListener("click",function(e){
     if(e.target.closest("form")){
@@ -1853,12 +1959,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     var f=document.querySelector('#pflist form [name=v]');if(f)f.focus();
   });
   $("pflist").addEventListener("keydown",function(e){var li=e.target.closest("li.pfi");if(li&&(e.key==="Enter"||e.key===" ")){e.preventDefault();li.click()}});
-  $("pflist").addEventListener("submit",function(e){
-    e.preventDefault();var f=e.target,id=f.dataset.id,a=null;pf.acc.forEach(function(x){if(x.id===id)a=x});if(!a)return;
-    var n=f.n.value.trim(),v=pfNum(f.v.value),inl=pfNum(f.inl.value),mb=pfNum(f.mb.value),md=+f.md.value||1;
-    if(!n||v==null||isNaN(v)||(inl!=null&&isNaN(inl))||(mb!=null&&(isNaN(mb)||mb<0))){alert("Controleer de naam en bedragen (bijvoorbeeld 12.345,67).");return}
-    a.n=n;a.v=v;a.inl=inl;a.d=pfToday();a.mb=mb||null;a.md=md;a.ms=pfToday();pfEdit=null;pfSave();
-  });
   $("pfexp").addEventListener("click",function(){
     var t=JSON.stringify(pf);
     (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(function(){alert("Back-up gekopieerd. Plak hem ergens veilig, bijvoorbeeld in een notitie.")})
@@ -1866,11 +1966,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   });
   $("pfimp").addEventListener("click",function(){
     var t=prompt("Plak hier je back-up. Je huidige portfolio wordt dan vervangen.");if(!t)return;
-    try{var x=JSON.parse(t);if(!x||!Array.isArray(x.acc))throw 0;
-      pf={acc:x.acc.filter(function(a){return a&&a.n&&typeof a.v==="number"}).map(function(a){return {id:String(a.id||Math.random().toString(36).slice(2)),n:String(a.n).slice(0,40),v:a.v,inl:typeof a.inl==="number"?a.inl:null,d:a.d||null,mb:typeof a.mb==="number"?a.mb:null,md:Math.min(28,Math.max(1,+a.md||1)),ms:a.ms||a.d||null}}),
-        hist:Array.isArray(x.hist)?x.hist.filter(function(p){return Array.isArray(p)&&/^\d{4}-\d{2}-\d{2}$/.test(p[0])&&typeof p[1]==="number"}):[]};
-      try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}renderPortfolio();alert("Back-up teruggezet.");
-    }catch(err){alert("Dit is geen geldige back-up.")}
+    try{var x=pfMigrate(JSON.parse(t));if(!x)throw 0;pf=x;pfEdit=null;pfStore();renderPortfolio();alert("Back-up teruggezet.")}
+    catch(err){alert("Dit is geen geldige back-up.")}
   });
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
@@ -2288,7 +2385,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-4";
+  var BUILD="2026-11-10-5";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

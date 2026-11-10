@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-396657706396.0,
+397430906677.0,
 "Switzerland"
 ],
 [
@@ -342,16 +342,16 @@
 "United States"
 ],
 [
+"NESN.SW",
+"Nestlé",
+270648300278.0,
+"Switzerland"
+],
+[
 "TXN",
 "Texas Instruments",
 270370471936.0,
 "United States"
-],
-[
-"NESN.SW",
-"Nestlé",
-269774653919.0,
-"Switzerland"
 ],
 [
 "600519.SS",
@@ -362,7 +362,7 @@
 [
 "OR.PA",
 "L'Oréal",
-267645996246.0,
+268334945088.0,
 "France"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "SIE.DE",
 "Siemens",
-237239670798.0,
+236037815528.0,
 "Germany"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-224371531704.0,
+224840008819.0,
 "France"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-211423110645.0,
+212122955159.0,
 "Spain"
 ],
 [
@@ -540,16 +540,16 @@
 "United States"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+198505352069.0,
+"Germany"
+],
+[
 "CBA.AX",
 "Commonwealth Bank",
 198310185205.0,
 "Australia"
-],
-[
-"ALV.DE",
-"Allianz SE",
-198207119840.0,
-"Germany"
 ],
 [
 "KLAC",

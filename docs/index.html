@@ -653,6 +653,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfstart{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:4px 0 8px}
+.pfstart span{display:block;font-size:.72rem;color:var(--muted)}
+.pfstart b{display:block;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.pfstart small{display:block;font-size:.66rem;color:var(--muted)}
+.pfstart p{margin:0;font-size:.74rem;color:var(--muted);line-height:1.35}
+.pfhd summary{cursor:pointer;font-size:.8rem;color:var(--accent);padding:4px 0}
 .pfhist{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
 .pfhist>b{font-size:.85rem}
 .pfhist ul{list-style:none;margin:6px 0 8px;padding:0}
@@ -1919,12 +1925,13 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     return '<div class="pfhist"><b>Standen van '+esc(a.n)+'</b>'+
       '<ul>'+a.s.slice().reverse().map(function(x){return '<li><span>'+pfDate(x.d)+'</span><span>'+pfEur(x.v)+(x.inl!=null?' · inleg '+pfEur(x.inl):'')+(x.q!=null&&a.ins?' · '+pfQf(x.q,a.ins)+' st.':'')+'</span>'+
         (a.s.length>1?'<button type="button" class="pfsdel" data-id="'+a.id+'" data-d="'+x.d+'" aria-label="Stand van '+pfDate(x.d)+' verwijderen">✕</button>':'<i></i>')+'</li>'}).join("")+'</ul>'+
-      '<form class="padd pfhform" data-id="'+a.id+'" autocomplete="off"><div class="pfl2">Eerdere stand toevoegen (bv. eind van een maand, uit je app)</div>'+
+      '<details class="pfhd"><summary>Eerdere stand toevoegen (optioneel)</summary>'+
+      '<form class="padd pfhform" data-id="'+a.id+'" autocomplete="off"><div class="pfl2">Alleen als je je groei van vóór je start wilt zien (waarde uit je app).</div>'+
       '<div class="prow pfl2"><span>Datum</span><span>Waarde toen (€)</span></div>'+
       '<div class="prow"><input type="date" name="d" max="'+t+'" required aria-label="Datum"><input name="v" inputmode="decimal" placeholder="Waarde in €" required aria-label="Waarde toen"></div>'+
       '<div class="prow pfl2"><span>Inleg tot dan (€)</span><span>Aantal stuks toen</span></div>'+
       '<div class="prow"><input name="inl" inputmode="decimal" placeholder="optioneel" aria-label="Inleg tot dan"><input name="q" inputmode="decimal" placeholder="leeg = berekenen" aria-label="Aantal stuks toen"></div>'+
-      '<div class="prow"><button type="submit">Stand toevoegen</button></div></form></div>';
+      '<div class="prow"><button type="submit">Stand toevoegen</button></div></form></details></div>';
   }
   function renderPortfolio(){
     var t=pfToday(),changed=false;
@@ -1958,7 +1965,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       if(pts.length&&pts[pts.length-1][0]!==t){pts.push([t,Math.round(tot*100)/100]);ipts.push([t,Math.round(inl*100)/100])}
     }
     $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{}):
-      (has?'<p class="hint">De groeigrafiek begint bij je eerste stand ('+pfDate(st)+'). Tik op een rekening en vul onder <b>Eerdere stand toevoegen</b> standen uit het verleden in (bv. eind van elke maand uit je app), dan zie je je groei vanaf toen.</p>':'');
+      (has?'<div class="pfstart"><div><span>Startpunt '+pfDate(st)+'</span><b>'+pfEur(tot)+'</b><small>waarde · inleg '+pfEur(inl)+'</small></div>'+
+        '<p>Je groeigrafiek begint vandaag. Vanaf morgen tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
     // rekeningen
     $("pflist").innerHTML=A.map(function(a,i){
       var c=PFC[i%PFC.length],v=pfVal(a,t),ai=pfInl(a,t),sh=tot>0?(v||0)/tot*100:0,w=ai!=null?(v||0)-ai:null,
@@ -2455,7 +2463,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-7";
+  var BUILD="2026-11-10-8";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

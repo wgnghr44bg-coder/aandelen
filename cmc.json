@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1654894532512.0,
+1651024957510.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-395884506115.0,
+396657706396.0,
 "Switzerland"
 ],
 [
@@ -348,28 +348,28 @@
 "United States"
 ],
 [
+"NESN.SW",
+"Nestlé",
+269774653919.0,
+"Switzerland"
+],
+[
 "600519.SS",
 "Kweichow Moutai",
 269501339251.0,
 "China"
 ],
 [
-"NESN.SW",
-"Nestlé",
-269462623166.0,
-"Switzerland"
+"OR.PA",
+"L'Oréal",
+267645996246.0,
+"France"
 ],
 [
 "TMO",
 "Thermo Fisher Scientific",
 267375378432.0,
 "United States"
-],
-[
-"OR.PA",
-"L'Oréal",
-266777287210.0,
-"France"
 ],
 [
 "RTX",
@@ -428,7 +428,7 @@
 [
 "SIE.DE",
 "Siemens",
-237583050130.0,
+237239670798.0,
 "Germany"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-224316427576.0,
+224371531704.0,
 "France"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-211213166493.0,
+211423110645.0,
 "Spain"
 ],
 [
@@ -548,7 +548,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-197994083673.0,
+198207119840.0,
 "Germany"
 ],
 [

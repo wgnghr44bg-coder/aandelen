@@ -51,6 +51,7 @@
   `pfSim`: kas na invoer = v − q·p0; storting op dag `md` → kas; aankoop `kd` dagen later (ETF niet in weekend) tegen
   slotkoers, met `fee` per aankoop; `hele` = alleen hele stukken van het maandbedrag met ~2% marge (Saxo AutoInvest).
   Getoetst tegen echte aankopen okt 2026 (IBKR/Saxo/Bitvavo). Aankopen na laatste invoer = geschat, zo getoond.
+  Eerdere standen (datum, waarde, inleg, aantal) via het bewerkformulier (`pfHistForm`) → groeigrafiek vanaf eerste stand.
   inleg(t) = inl + mb per maanddag `md` na d. Resultaat per periode (1D/1W/1M/YTD/1J/Alles) = Δwaarde − Δinleg.
   `pfMigrate` zet het oude v1-formaat en back-ups om (koppeling geraden uit de naam: WEBN/VALL/Bitcoin). Geen broker-API's: repo/site zijn openbaar
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).

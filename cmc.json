@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-968548318851.0,
+979359024771.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-636432227089.0,
+641753566103.0,
 "South Korea"
 ],
 [
@@ -156,21 +156,21 @@
 "China"
 ],
 [
-"601939.SS",
-"China Construction Bank",
-475793840007.0,
-"China"
-],
-[
 "COST",
 "Costco",
 472455675904.0,
 "United States"
 ],
 [
+"601939.SS",
+"China Construction Bank",
+472266552394.0,
+"China"
+],
+[
 "688825.SS",
 "CXMT",
-424266522211.0,
+431268670365.0,
 "China"
 ],
 [
@@ -212,7 +212,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-387483460376.0,
+385386127692.0,
 "China"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "1398.HK",
 "ICBC",
-362730072893.0,
+362048667350.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-337910760050.0,
+335979869250.0,
 "China"
 ],
 [
@@ -342,16 +342,16 @@
 "United States"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-270623172472.0,
-"China"
-],
-[
 "TXN",
 "Texas Instruments",
 270370471936.0,
 "United States"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+269184832611.0,
+"China"
 ],
 [
 "NESN.SW",
@@ -420,16 +420,16 @@
 "Japan"
 ],
 [
-"0857.HK",
-"PetroChina",
-239337950219.0,
-"China"
-],
-[
 "LIN",
 "Linde",
 238875066368.0,
 "United Kingdom"
+],
+[
+"0857.HK",
+"PetroChina",
+238638117924.0,
+"China"
 ],
 [
 "ANET",
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224968158453.0,
+224000845916.0,
 "China"
 ],
 [
@@ -534,6 +534,12 @@
 "United States"
 ],
 [
+"2454.TW",
+"MediaTek",
+199088199534.0,
+"Taiwan"
+],
+[
 "MCD",
 "McDonald",
 198636060672.0,
@@ -542,7 +548,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-198028544612.0,
+197946400398.0,
 "Australia"
 ],
 [
@@ -574,12 +580,6 @@
 "TotalEnergies",
 193206730752.0,
 "France"
-],
-[
-"2454.TW",
-"MediaTek",
-193189290157.0,
-"Taiwan"
 ],
 [
 "ABT",

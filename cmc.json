@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-977393432669.0,
+979850448117.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-641753566103.0,
+646808835634.0,
 "South Korea"
 ],
 [
@@ -164,13 +164,13 @@
 [
 "601939.SS",
 "China Construction Bank",
-471090776765.0,
+471482688884.0,
 "China"
 ],
 [
 "688825.SS",
 "CXMT",
-431268670365.0,
+429465086750.0,
 "China"
 ],
 [
@@ -212,7 +212,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-385910470682.0,
+385386127692.0,
 "China"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "1398.HK",
 "ICBC",
-362275802531.0,
+363638613618.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-335497117094.0,
+335014404212.0,
 "China"
 ],
 [
@@ -350,7 +350,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-269106167417.0,
+269675518051.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-237938302336.0,
+236538671160.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224139021488.0,
+224000845916.0,
 "China"
 ],
 [
@@ -534,16 +534,16 @@
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+198732657592.0,
+"Australia"
+],
+[
 "MCD",
 "McDonald",
 198636060672.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-198075480878.0,
-"Australia"
 ],
 [
 "KLAC",
@@ -576,12 +576,6 @@
 "France"
 ],
 [
-"2454.TW",
-"MediaTek",
-191960352049.0,
-"Taiwan"
-],
-[
 "ABT",
 "Abbott Laboratories",
 191396872192.0,
@@ -598,5 +592,11 @@
 "International Holding Company",
 191126928414.0,
 "United Arab Emirates"
+],
+[
+"VZ",
+"Verizon",
+190900207616.0,
+"United States"
 ]
 ]

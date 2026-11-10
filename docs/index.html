@@ -2108,7 +2108,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
       if(sim)sim.pos.forEach(function(p){sub.push((sim.buy&&p.t===a.ins?"≈ ":"")+pfQf(p.q,p.t)+" "+esc(pfName(p.t)))});
       if(sim&&sim.pos.length&&Math.abs(sim.c)>=0.5)sub.push((deps?"≈ ":"")+"kas "+pfEur(sim.c));
       sub.push("ingevuld "+pfDateS(s.d));if(ai!=null)sub.push("inleg "+pfEur(ai));
-      if(a.mb)sub.push(pfEur(a.mb)+"/mnd op de "+a.md+"e");
+      if(a.mb)sub.push(pfEur(a.mb)+"/mnd op de "+a.md+"e"+(a.ins?", koop "+(a.kd?"+"+a.kd+"d":"zelfde dag")+(a.hele?", hele stukken":"")+(a.fee?", kosten "+pfEur(a.fee):""):""));
       var head='<div class="pfi" data-id="'+a.id+'" role="button" tabindex="0" aria-expanded="'+open+'"><span class="pdot" style="background:'+c+'"></span>'+
         '<span class="pn">'+esc(a.n)+'<small>'+sub.join(" · ")+'</small>'+
           (a.mb?'<small class="pfnext">Volgende: storting '+pfDateS(pfNextDep(a.md))+(a.ins?' · aankoop '+pfDateS(pfBuyDate(a,pfNextDep(a.md))):'')+'</small>':'')+

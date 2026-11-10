@@ -47,7 +47,8 @@
   Vastgoed, Grondstoffen (tik = grafiek 1D–5J), Sectoren (balkjes), grootste assets, en onderaan stijgers/dalers
   per index met sectorknoppen en AI-knop (`ai.txt`). Nieuws staat onder Economie (pane `nieuws`).
 - Portfolio (onder Meer, pane `portfolio`): waarde per rekening zelf invullen, alleen in localStorage (`pf`,
-  `{acc:[{id,n,v,inl,d}],hist:[[datum,totaal]]}`), nooit online. Geen broker-API's: repo/site zijn openbaar
+  `{acc:[{id,n,v,inl,d,mb,md,ms}],hist:[[datum,totaal]]}`), nooit online. `mb` = vast bedrag per maand op dag `md`:
+  inleg = `inl` (op datum `ms`) + mb × maanddagen na ms; winst/verlies = v − inleg t/m `d` (datum van de waarde). Geen broker-API's: repo/site zijn openbaar
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).
 - Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
   Brent, aardgas) → komen in `intra.json`.

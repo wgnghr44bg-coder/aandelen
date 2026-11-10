@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1683271555638.0,
+1670372832521.0,
 "Saudi Arabia"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "688825.SS",
 "CXMT",
-428828527827.0,
+429146807288.0,
 "China"
 ],
 [
@@ -212,7 +212,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-385910470682.0,
+385386127692.0,
 "China"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "1398.HK",
 "ICBC",
-362730072893.0,
+362957208074.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-335497117094.0,
+335979869250.0,
 "China"
 ],
 [
@@ -350,7 +350,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-270250465186.0,
+269501339251.0,
 "China"
 ],
 [
@@ -426,16 +426,16 @@
 "United Kingdom"
 ],
 [
+"0857.HK",
+"PetroChina",
+235605589278.0,
+"China"
+],
+[
 "ANET",
 "Arista Networks",
 235207622656.0,
 "United States"
-],
-[
-"0857.HK",
-"PetroChina",
-234672490689.0,
-"China"
 ],
 [
 "CRWD",
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224000845916.0,
+223724461359.0,
 "China"
 ],
 [
@@ -576,6 +576,12 @@
 "France"
 ],
 [
+"IHC.AE",
+"International Holding Company",
+191604745735.0,
+"United Arab Emirates"
+],
+[
 "ABT",
 "Abbott Laboratories",
 191396872192.0,
@@ -586,12 +592,6 @@
 "Analog Devices",
 191238619136.0,
 "United States"
-],
-[
-"IHC.AE",
-"International Holding Company",
-191186655580.0,
-"United Arab Emirates"
 ],
 [
 "VZ",

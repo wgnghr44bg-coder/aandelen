@@ -653,6 +653,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfl .pfnext{display:block;color:var(--accent);font-weight:600;margin-top:2px}
 .pfstart{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:4px 0 8px}
 .pfstart span{display:block;font-size:.72rem;color:var(--muted)}
 .pfstart b{display:block;font-size:1.1rem;font-variant-numeric:tabular-nums}
@@ -1796,6 +1797,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   var pf={v:2,acc:[]},pfEdit=null,pfPer="M";
   try{var pp0=localStorage.getItem("pfper");if(PFP.some(function(x){return x[0]===pp0}))pfPer=pp0}catch(e){}
   function pfToday(){return dstr(new Date())}
+  function pfTomorrow(){var d=new Date();d.setDate(d.getDate()+1);return dstr(d)}
+  // eerstvolgende stortingsdatum (dag md) na vandaag
+  function pfNextDep(md){var n=new Date(),d=new Date(n.getFullYear(),n.getMonth(),md);if(dstr(d)<=dstr(n))d=new Date(n.getFullYear(),n.getMonth()+1,md);return dstr(d)}
   function pad2(n){return String(n).padStart(2,"0")}
   // maanddagen (dag md) na datum van (exclusief) t/m datum tot (inclusief)
   function pfDeps(md,van,tot){
@@ -1966,7 +1970,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }
     $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{}):
       (has?'<div class="pfstart"><div><span>Startpunt '+pfDate(st)+'</span><b>'+pfEur(tot)+'</b><small>waarde · inleg '+pfEur(inl)+'</small></div>'+
-        '<p>Je groeigrafiek begint vandaag. Vanaf morgen tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
+        '<p>Je groeigrafiek begint op '+pfDate(st)+'. Vanaf <b>'+pfDate(pfTomorrow())+'</b> tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
     // rekeningen
     $("pflist").innerHTML=A.map(function(a,i){
       var c=PFC[i%PFC.length],v=pfVal(a,t),ai=pfInl(a,t),sh=tot>0?(v||0)/tot*100:0,w=ai!=null?(v||0)-ai:null,
@@ -1979,6 +1983,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       if(a.mb)sub.push(pfEur(a.mb)+"/mnd op de "+a.md+"e"+(a.ins?", koop "+(a.kd?"+"+a.kd+"d":"zelfde dag")+(a.hele?", hele stukken":"")+(a.fee?", kosten "+pfEur(a.fee):""):""));
       return '<li data-id="'+a.id+'" class="pfi" role="button" tabindex="0"><span class="pdot" style="background:'+c+'"></span>'+
         '<span class="pn">'+esc(a.n)+'<small>'+sub.join(" · ")+'</small>'+
+          (a.mb?'<small class="pfnext">Volgende: storting '+pfDateS(pfNextDep(a.md))+(a.ins?' · aankoop '+pfDateS(pfBuyDate(a,pfNextDep(a.md))):'')+'</small>':'')+
           (deps?'<small class="pfwarn">'+deps+'× storting'+(sim&&sim.buy?', '+sim.buy+'× aankoop geschat':'')+' sinds je invoer · tik om bij te werken</small>':'')+'</span>'+
         '<span class="pv">'+pfEur(v)+'<small class="'+(w==null?"flat":chgCls(w))+'">'+(w==null?nf1.format(sh)+"%":pfSg(w)+(ai>0?" ("+fmtPct(w/ai*100)+")":""))+'</small>'+
           (rr?'<small class="pfr '+chgCls(rr.r)+'">'+PFP.filter(function(x){return x[0]===pfPer})[0][1]+': '+pfSg(rr.r)+'</small>':'')+'</span>'+
@@ -2463,7 +2468,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-8";
+  var BUILD="2026-11-10-9";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -59,6 +59,7 @@
   inleg(t) = inl + mb per maanddag `md` na d. Resultaat per periode (1D/1W/1M/YTD/1J/Alles) = Δwaarde − Δinleg.
   `pfMigrate` zet het oude v1-formaat en back-ups om (koppeling geraden uit de naam: WEBN/VALL/Bitcoin). Geen broker-API's: repo/site zijn openbaar
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).
+- Overzicht bovenaan: "Mijn portfolio" (`renderPfOv`), oogje verbergt bedragen (localStorage `pfhide`); alleen als er rekeningen zijn.
 - Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
   Brent, aardgas) → komen in `intra.json`.
 - Nieuws: `nieuws.py` (RSS NOS Economie + NU.nl Economie, alleen koppen + link; terugval = vorige koppen) → `nieuws`.

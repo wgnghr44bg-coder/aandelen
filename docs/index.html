@@ -653,6 +653,17 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfov{cursor:pointer;margin-top:10px}
+.pfov .ph{margin-bottom:4px}
+.pfeye{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:36px;height:32px;display:grid;place-items:center;cursor:pointer}
+.pfeye .ic{width:18px;height:18px}
+.pfovm{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px}
+.pfovm b{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pfovm span{font-size:.9rem;font-weight:700;font-variant-numeric:tabular-nums}
+.pfovm small{color:var(--muted);font-weight:500;font-size:.7rem}
+.pfovs{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px;font-size:.76rem;color:var(--muted)}
+.pfovs b{color:var(--text);font-variant-numeric:tabular-nums}.pfovs b.up{color:var(--up)}.pfovs b.down{color:var(--down)}
+.pfov.priv .pfovm b{letter-spacing:.05em}
 .pfsel{display:block;font-size:.74rem;color:var(--accent);margin:-4px 0 2px;font-weight:600}
 .pfsel:empty{display:none}.pfsel.bad{color:var(--down-strong)}
 .pfact{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -755,6 +766,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 </div>
 <div class="wrap">
   <section class="pane" data-pane="overzicht">
+    <div class="panel ov pfov" id="pfov" role="button" tabindex="0" aria-label="Naar Portfolio" hidden></div>
     <div class="panel ov mk">
       <div class="ph"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><h2>Marktontwikkeling</h2><div class="pseg" id="mper" role="group" aria-label="Periode markt"></div></div>
       <div class="mkbox"><div class="mkv"><b id="mToday">–</b><small id="mSub"></small></div><svg class="hspark" id="hspark" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"></svg></div>
@@ -1756,7 +1768,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var cnt={};rows.forEach(function(r){if(r.rating)cnt[r.rating]=(cnt[r.rating]||0)+1});
     var BI={BUY:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',HOLD:'<path d="M8 5v14M16 5v14"/>',SELL:'<path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/>'};
     $("ovchips").innerHTML=["BUY","HOLD","SELL"].map(function(k){return '<button type="button" class="b-'+k+'" data-r="'+k+'"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+BI[k]+'</svg>'+k+' <span class="n">'+(cnt[k]||0)+'</span></button>'}).join("");
-    renderGC();renderSecMini();renderNews();
+    renderGC();renderSecMini();renderNews();renderPfOv();
     if(tab==="watchlist")renderWatch();
     if(tab==="grondstoffen")renderGrond();
     if(tab==="portfolio")renderPortfolio();
@@ -1913,7 +1925,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
   }
   try{var pfl=pfMigrate(JSON.parse(localStorage.getItem("pf")||"null"));if(pfl)pf=pfl}catch(e){}
   function pfStore(){try{localStorage.setItem("pf",JSON.stringify(pf))}catch(e){}}
-  function pfSave(){pfStore();renderPortfolio()}
+  function pfSave(){pfStore();renderPortfolio();renderPfOv()}
   function pfSnap(a,t){var r=null;a.s.forEach(function(s){if(s.d<=t)r=s});return r}
   // posities en kas bij een momentopname
   function pfBase(s){
@@ -2279,6 +2291,34 @@ details.pfadv[open]>summary{margin-bottom:10px}
     try{var y=pfMigrate(JSON.parse(x));if(!y)throw 0;pf=y;pfEdit=null;pfMode=null;pfStore();renderPortfolio();alert("Back-up teruggezet.")}
     catch(err){alert("Dit is geen geldige back-up.")}
   });
+
+  // ---------- Overzicht: samenvatting van het portfolio (met oogje om bedragen te verbergen) ----------
+  var pfHide=false;try{pfHide=localStorage.getItem("pfhide")==="1"}catch(e){}
+  var EYE='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var EYEX='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.5 10.5 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7c1.6 0 3-.4 4.3-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+  function renderPfOv(){
+    var el=$("pfov");if(!el)return;
+    if(!pf.acc.length){el.hidden=true;return}
+    var t=pfToday(),tot=0,inl=0,nI=0,mnd=0;
+    pf.acc.forEach(function(a){var v=pfVal(a,t)||0,i=pfInl(a,t);tot+=v;mnd+=a.mb||0;if(i!=null){inl+=i;nI++}});
+    var wv=tot-inl,R=pfRes(pf.acc,pfT0("D"));
+    function E(v,sg){return pfHide?"€ •••••":(sg?pfSg(v):pfEur(v))}
+    var md=null;pf.acc.forEach(function(a){if(a.mb){var d=pfNextDep(a.md);if(!md||d<md)md=d}});
+    el.hidden=false;el.className="panel ov pfov"+(pfHide?" priv":"");
+    el.innerHTML='<div class="ph"><span class="emo">💼</span><h2>Mijn portfolio</h2>'+
+        '<button type="button" class="pfeye" aria-pressed="'+pfHide+'" aria-label="'+(pfHide?"Bedragen tonen":"Bedragen verbergen")+'">'+(pfHide?EYEX:EYE)+'</button></div>'+
+      '<div class="pfovm"><b>'+E(tot)+'</b>'+
+        (nI?'<span class="'+chgCls(wv)+'">'+E(wv,true)+(inl>0?' ('+fmtPct(wv/inl*100)+')':'')+' <small>totaal rendement</small></span>':'')+'</div>'+
+      '<div class="pfovs">'+
+        (R?'<span>Vandaag <b class="'+chgCls(R.r)+'">'+E(R.r,true)+(R.pct!=null?' ('+fmtPct(R.pct)+')':'')+'</b></span>':'')+
+        (mnd?'<span>Elke maand <b>'+E(mnd)+'</b>'+(md?' · volgende '+pfDateS(md):'')+'</span>':'')+
+      '</div>';
+  }
+  $("pfov").addEventListener("click",function(e){
+    if(e.target.closest(".pfeye")){pfHide=!pfHide;try{localStorage.setItem("pfhide",pfHide?"1":"0")}catch(err){}renderPfOv();return}
+    showTab("portfolio");window.scrollTo({top:0});
+  });
+  $("pfov").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&!e.target.closest(".pfeye")){e.preventDefault();showTab("portfolio")}});
 
   // ---------- Rentes, inflatie, vastgoed (officiële bronnen: ECB, DNB, Eurostat) ----------
   var macro={};
@@ -2721,7 +2761,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-14";
+  var BUILD="2026-11-10-15";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

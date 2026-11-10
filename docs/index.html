@@ -653,6 +653,17 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfupdb{display:block;width:100%;margin:10px 0 0;border:0;border-radius:12px;padding:12px;font:inherit;font-weight:800;color:#fff;background:linear-gradient(180deg,#1fbf6a,#0f7a40);cursor:pointer}
+.pfupdb[aria-pressed=true]{box-shadow:0 0 0 3px var(--accent)}
+.pfupd input{width:100%;box-sizing:border-box}
+.pfupdh{margin:0;font-size:.85rem}
+.pfupd .pfl2{display:block;margin:4px 0 -4px;font-size:.74rem}
+.pftodo{border:1px solid color-mix(in oklab,var(--up) 50%,var(--line));background:color-mix(in oklab,var(--up) 12%,var(--card));border-radius:12px;padding:10px 12px;margin:0 0 10px}
+.pftodo[hidden]{display:none}
+.pftodo b{font-size:.88rem}
+.pftodob{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
+.pftodob button{border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:.82rem;font-weight:700;color:#fff;background:var(--up);cursor:pointer}
+.pftodo small{display:block;color:var(--muted);font-size:.72rem}
 .pfov{cursor:pointer;margin-top:10px}
 .pfov .ph{margin-bottom:4px}
 .pfeye{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:36px;height:32px;display:grid;place-items:center;cursor:pointer}
@@ -903,6 +914,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
         <div class="lchart" id="pfchart"></div>
       </div>
       <ul class="plist pfl" id="pflist"></ul>
+      <div class="pftodo" id="pftodo" hidden></div>
       <p class="hint" id="pfempty">Nog leeg. Tik bovenaan op <b>➕ Kopen</b> om je eerste aandeel of ETF toe te voegen.</p>
       <p class="hint pfnote2" id="pfnote"></p>
     </div>
@@ -2041,6 +2053,26 @@ details.pfadv[open]>summary{margin-bottom:10px}
       (a?'<p class="hint pfnote">Klopt de waarde niet met je app? Vul de echte totale waarde (en eventueel het aantal) in; het verschil gaat naar de kas.</p>':'')+
       '<div class="prow"><button type="submit">'+(a?"Opslaan":"Toevoegen")+'</button>'+(a?'<button type="button" class="pfdel">Rekening verwijderen</button>':'')+'</div></form>';
   }
+  // ---- formulier: bijwerken met je app (alleen waarde en aantal)
+  function pfWhere(a){
+    var n=a.n.toLowerCase();
+    if(/interactive|ibkr/.test(n))return {v:"bovenaan <b>Portefeuille</b>, het grote bedrag",q:"bij "+esc(pfName(a.ins||""))+": <b>Positie</b>"};
+    if(/saxo/.test(n))return {v:"<b>Vermogen</b> bovenaan",q:"het getal onder de ETF bij <b>Geld &amp; Posities</b>"};
+    if(/bitvavo/.test(n))return {v:"<b>Saldo</b> bij Bitcoin",q:"<b>Aantal</b> (BTC) bij Bitcoin"};
+    return {v:"de totale waarde van deze rekening",q:"het aantal stuks"};
+  }
+  function pfUpdForm(a){
+    var t=pfToday(),sim=pfSim(a,t),w=pfWhere(a),main=null;
+    if(sim&&a.ins)sim.pos.forEach(function(p){if(p.t===a.ins)main=p});
+    return '<form class="padd pfupd" data-id="'+a.id+'" autocomplete="off">'+
+      '<p class="pfupdh">Open je app van <b>'+esc(a.n)+'</b> en neem deze '+(a.ins?'twee getallen':'waarde')+' over:</p>'+
+      '<label class="pfl2">Totale waarde (€) – '+w.v+'</label>'+
+      '<input name="v" inputmode="decimal" placeholder="nu ≈ '+esc(pfIn(sim?sim.v:null,2))+'" required aria-label="Totale waarde">'+
+      (a.ins?'<label class="pfl2">Aantal '+esc(pfName(a.ins))+' – '+w.q+'</label>'+
+        '<input name="q" inputmode="decimal" placeholder="nu ≈ '+esc(main?pfQf(main.q,a.ins):"")+'" aria-label="Aantal">':'')+
+      '<p class="hint pfnote">Je inleg en instellingen regelt de site zelf. Daarna rekent hij weer exact verder.</p>'+
+      '<div class="prow"><button type="submit">Opslaan</button><button type="button" class="pfcancel">Annuleren</button></div></form>';
+  }
   // ---- formulier: koop / verkoop / storting / opname
   function pfTxForm(a){
     var t=pfToday(),last=a.s[a.s.length-1].d;
@@ -2121,13 +2153,19 @@ details.pfadv[open]>summary{margin-bottom:10px}
       var ptab=sim&&sim.pos.length?'<table class="kv pfpos"><tr><th>Positie</th><th>Aantal</th><th>Koers</th><th>Waarde</th></tr>'+sim.pos.map(function(p){
           var px=pfPx(p.t,t);return '<tr><td>'+esc(pfName(p.t))+'<small>'+esc(p.t)+'</small></td><td>'+pfQf(p.q,p.t)+'</td><td>'+(px!=null?pfEur(px):"–")+'</td><td>'+pfEur(pfPosVal(p,t))+'</td></tr>'}).join("")+
           '<tr class="pfkas"><td>Kas</td><td></td><td></td><td>'+pfEur(sim.c)+'</td></tr></table>':'';
-      var btns='<div class="prow pfbtn"><button type="button" class="pfgo" data-m="tx"'+(pfMode==="tx"?' aria-pressed="true"':'')+'>💱 Koop / verkoop / storting</button><button type="button" class="pfgo" data-m="set"'+(pfMode==="set"?' aria-pressed="true"':'')+'>⚙️ Instellingen</button></div>';
-      var panel=pfMode==="tx"?pfTxForm(a):pfMode==="set"?pfSetForm(a):'';
+      var btns='<button type="button" class="pfgo pfupdb" data-m="upd"'+(pfMode==="upd"?' aria-pressed="true"':'')+'>✅ Bijwerken met je app</button>'+
+        '<div class="prow pfbtn"><button type="button" class="pfgo" data-m="tx"'+(pfMode==="tx"?' aria-pressed="true"':'')+'>💱 Koop / verkoop / storting</button><button type="button" class="pfgo" data-m="set"'+(pfMode==="set"?' aria-pressed="true"':'')+'>⚙️ Instellingen</button></div>';
+      var panel=pfMode==="upd"?pfUpdForm(a):pfMode==="tx"?pfTxForm(a):pfMode==="set"?pfSetForm(a):'';
       var txl=(a.tx||[]).slice(-8).reverse();
       var txh=txl.length?'<div class="pftxl"><b>Transacties</b><ul>'+txl.map(function(x){
           return '<li><span>'+pfDateS(x.d)+'</span><span>'+PFK[x.k]+(x.t?' '+esc(pfName(x.t)):'')+(x.q?' '+pfQf(x.q,x.t):'')+'</span><span class="'+(x.k==="verkoop"||x.k==="storting"?"up":"")+'">'+(x.k==="koop"||x.k==="opname"?"−":"+")+pfEur(x.b)+'</span></li>'}).join("")+'</ul></div>':'';
       return '<li data-id="'+a.id+'" class="pfopen">'+head+'<div class="pfbody">'+ptab+btns+panel+txh+'</div></li>';
     }).join("");
+    var todo=A.filter(function(a){var x=pfSim(a,t);return x&&(a.ins?x.buy>0:x.dep>0)});
+    $("pftodo").innerHTML=todo.length?'<b>🛒 Er is gekocht! Werk bij met je app:</b><div class="pftodob">'+
+      todo.map(function(a){return '<button type="button" data-id="'+a.id+'">'+esc(a.n)+'</button>'}).join("")+'</div>'+
+      '<small>Tik op een rekening en neem de waarde en het aantal uit je app over (± 1 minuut).</small>':'';
+    $("pftodo").hidden=!todo.length;
     $("pfnote").textContent=A.some(function(a){return a.s[a.s.length-1].pos.length})?"Posities volgen de slotkoers (Bitcoin live via Bitvavo; aandelen in dollars omgerekend met de wisselkoers van nu). Na een storting staat het geld eerst als kas; de maandaankoop (na je laatste invoer) is geschat tegen de slotkoers van de aankoopdag. Geen financieel advies.":"";
     var ab=$("pfaddbox");if(!ab.firstChild)ab.innerHTML=pfSetForm(null);
   }
@@ -2140,6 +2178,9 @@ details.pfadv[open]>summary{margin-bottom:10px}
     a.s=a.s.filter(function(x){return x.d!==d});a.s.push({d:d,v:Math.round(v*100)/100,inl:inl,pos:pos});
     a.s.sort(function(x,y){return x.d<y.d?-1:x.d>y.d?1:0});
   }
+  $("pftodo").addEventListener("click",function(e){var b=e.target.closest("button[data-id]");if(!b)return;
+    pfEdit=b.dataset.id;pfMode="upd";renderPortfolio();
+    var f=document.querySelector("#pflist form.pfupd");if(f){f.scrollIntoView({behavior:"smooth",block:"center"});f.v.focus()}});
   $("pfper").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;pfPer=b.dataset.k;try{localStorage.setItem("pfper",pfPer)}catch(err){}renderPortfolio()});
   $("pfquick").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var f=$("pfaddbox").querySelector("form");
     f.n.value=b.dataset.n;f.ins.value=b.dataset.i||"";f.kd.value=b.dataset.kd||"1";f.fee.value=b.dataset.fee||"";f.hele.checked=!!b.dataset.hele;f.v.focus()});
@@ -2214,6 +2255,17 @@ details.pfadv[open]>summary{margin-bottom:10px}
     if(err)return alert(err);
     pfMode=null;pfSave();
   });
+  document.addEventListener("submit",function(e){
+    var f=e.target.closest&&e.target.closest("form.pfupd");if(!f)return;e.preventDefault();
+    var a=pfAcc(f.dataset.id);if(!a)return;var t=pfToday(),v=pfNum(f.v.value),q=f.q?pfNum(f.q.value):null;
+    if(v==null||isNaN(v)||v<0)return alert("Vul de totale waarde uit je app in, bijvoorbeeld 8.512,34.");
+    if(q!=null&&(isNaN(q)||q<=0))return alert("Het aantal is geen geldig getal (bijvoorbeeld 660,4123).");
+    var st=pfSim(a,t),inl=pfInl(a,t);
+    var pos=st.pos.map(function(p){var px=pfPx(p.t,t);return {t:p.t,q:p.q,p0:px!=null?px:p.p0}});
+    if(a.ins&&q!=null){var m=null;pos.forEach(function(p){if(p.t===a.ins)m=p});if(m)m.q=q;else pos.push({t:a.ins,q:q,p0:pfPx(a.ins,t)})}
+    a.s=a.s.filter(function(x){return x.d!==t});a.s.push({d:t,v:v,inl:inl,pos:pos.filter(function(p){return p.q>1e-9})});
+    pfMode=null;pfSave();pfMsgTop("✓ "+a.n+" bijgewerkt");
+  });
   // ---- knoppen bovenaan: ➕ Kopen / ➖ Verkopen (makkelijk)
   var pfQ=null;   // "koop" | "verkoop" | null
   function pfQForm(k,keep){
@@ -2282,7 +2334,9 @@ details.pfadv[open]>summary{margin-bottom:10px}
       if(a&&confirm(a.n+" verwijderen?")){pf.acc=pf.acc.filter(function(x){return x.id!==id});pfEdit=null;pfMode=null;pfSave()}return}
     if(e.target.closest(".pfbody"))return;
     var h=e.target.closest(".pfi");if(!h)return;
-    pfEdit=pfEdit===h.dataset.id?null:h.dataset.id;pfMode=null;renderPortfolio();
+    pfEdit=pfEdit===h.dataset.id?null:h.dataset.id;pfMode=null;
+    if(pfEdit){var ac=pfAcc(pfEdit),xs=ac&&pfSim(ac,pfToday());if(xs&&(ac.ins?xs.buy>0:xs.dep>0))pfMode="upd"}
+    renderPortfolio();
   });
   $("pflist").addEventListener("keydown",function(e){var h=e.target.closest(".pfi");if(h&&(e.key==="Enter"||e.key===" ")){e.preventDefault();h.click()}});
   $("pfexp").addEventListener("click",function(){
@@ -2782,7 +2836,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-16";
+  var BUILD="2026-11-10-17";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

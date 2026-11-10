@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1656184390846.0,
+1654894532512.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-396271106255.0,
+397044306536.0,
 "Switzerland"
 ],
 [
@@ -348,28 +348,28 @@
 "United States"
 ],
 [
+"NESN.SW",
+"Nestlé",
+269525029317.0,
+"Switzerland"
+],
+[
 "600519.SS",
 "Kweichow Moutai",
 269501339251.0,
 "China"
 ],
 [
-"NESN.SW",
-"Nestlé",
-268744972309.0,
-"Switzerland"
-],
-[
-"OR.PA",
-"L'Oréal",
-267675940941.0,
-"France"
-],
-[
 "TMO",
 "Thermo Fisher Scientific",
 267375378432.0,
 "United States"
+],
+[
+"OR.PA",
+"L'Oréal",
+267316494172.0,
+"France"
 ],
 [
 "RTX",
@@ -426,10 +426,10 @@
 "United Kingdom"
 ],
 [
-"0857.HK",
-"PetroChina",
-235372306278.0,
-"China"
+"SIE.DE",
+"Siemens",
+236552875324.0,
+"Germany"
 ],
 [
 "ANET",
@@ -438,16 +438,16 @@
 "United States"
 ],
 [
+"0857.HK",
+"PetroChina",
+234905756983.0,
+"China"
+],
+[
 "CRWD",
 "CrowdStrike",
 234051026944.0,
 "United States"
-],
-[
-"SIE.DE",
-"Siemens",
-232646831893.0,
-"Germany"
 ],
 [
 "IBM",
@@ -456,16 +456,16 @@
 "United States"
 ],
 [
+"MC.PA",
+"LVMH",
+224674659624.0,
+"France"
+],
+[
 "0941.HK",
 "China Mobile",
 224000845916.0,
 "China"
-],
-[
-"MC.PA",
-"LVMH",
-221808711215.0,
-"France"
 ],
 [
 "DELL",
@@ -492,16 +492,16 @@
 "Australia"
 ],
 [
+"ITX.MC",
+"Inditex",
+210303359421.0,
+"Spain"
+],
+[
 "GILD",
 "Gilead Sciences",
 210014126080.0,
 "United States"
-],
-[
-"ITX.MC",
-"Inditex",
-208763701490.0,
-"Spain"
 ],
 [
 "DIS",
@@ -552,16 +552,16 @@
 "United States"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+196715866670.0,
+"Germany"
+],
+[
 "SHOP",
 "Shopify",
 195628531712.0,
 "Canada"
-],
-[
-"ALV.DE",
-"Allianz SE",
-194713345104.0,
-"Germany"
 ],
 [
 "PEP",
@@ -590,7 +590,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-191186655580.0,
+191126928414.0,
 "United Arab Emirates"
 ],
 [

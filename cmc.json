@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1665213399184.0,
+1671662690855.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-396657706396.0,
+397044306536.0,
 "Switzerland"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-357506030552.0,
+358187436095.0,
 "China"
 ],
 [
@@ -336,16 +336,16 @@
 "United States"
 ],
 [
+"NESN.SW",
+"Nestlé",
+270149070948.0,
+"Switzerland"
+],
+[
 "SAP",
 "SAP",
 269783711744.0,
 "Germany"
-],
-[
-"NESN.SW",
-"Nestlé",
-269618638542.0,
-"Switzerland"
 ],
 [
 "CAT",
@@ -360,16 +360,16 @@
 "United States"
 ],
 [
+"OR.PA",
+"L'Oréal",
+266807268715.0,
+"France"
+],
+[
 "TMO",
 "Thermo Fisher Scientific",
 266104504320.0,
 "United States"
-],
-[
-"OR.PA",
-"L'Oréal",
-265908614984.0,
-"France"
 ],
 [
 "600519.SS",
@@ -426,9 +426,15 @@
 "United Kingdom"
 ],
 [
+"SIE.DE",
+"Siemens",
+238012288099.0,
+"Germany"
+],
+[
 "0857.HK",
 "PetroChina",
-235838838866.0,
+235605589278.0,
 "China"
 ],
 [
@@ -436,12 +442,6 @@
 "Arista Networks",
 233754705920.0,
 "United States"
-],
-[
-"SIE.DE",
-"Siemens",
-233118971573.0,
-"Germany"
 ],
 [
 "CRWD",
@@ -458,13 +458,13 @@
 [
 "0941.HK",
 "China Mobile",
-223724461359.0,
+223448093508.0,
 "China"
 ],
 [
 "MC.PA",
 "LVMH",
-221009535712.0,
+222552745780.0,
 "France"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-210443328324.0,
+210933210282.0,
 "Spain"
 ],
 [
@@ -536,7 +536,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-197482796871.0,
+197866261972.0,
 "Germany"
 ],
 [
@@ -584,7 +584,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-191675413653.0,
+191546453789.0,
 "India"
 ],
 [

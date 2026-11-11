@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-974445095157.0,
+995083862870.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-644414210289.0,
+664635339055.0,
 "South Korea"
 ],
 [
@@ -164,13 +164,13 @@
 [
 "601939.SS",
 "China Construction Bank",
-471482688884.0,
+470306913255.0,
 "China"
 ],
 [
 "688825.SS",
 "CXMT",
-429146807288.0,
+428934620980.0,
 "China"
 ],
 [
@@ -212,7 +212,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-385386127692.0,
+386434813671.0,
 "China"
 ],
 [
@@ -222,16 +222,16 @@
 "United States"
 ],
 [
-"1398.HK",
-"ICBC",
-367727013466.0,
-"China"
-],
-[
 "MRK",
 "Merck",
 364979617792.0,
 "United States"
+],
+[
+"1398.HK",
+"ICBC",
+363865748799.0,
+"China"
 ],
 [
 "UNH",
@@ -348,12 +348,6 @@
 "Switzerland"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-269501339251.0,
-"China"
-],
-[
 "CAT",
 "Caterpillar",
 267495833600.0,
@@ -364,6 +358,12 @@
 "Palo Alto Networks",
 267107090432.0,
 "United States"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+266984249405.0,
+"China"
 ],
 [
 "TMO",
@@ -426,6 +426,12 @@
 "United Kingdom"
 ],
 [
+"0857.HK",
+"PetroChina",
+239104667218.0,
+"China"
+],
+[
 "ANET",
 "Arista Networks",
 233754705920.0,
@@ -436,12 +442,6 @@
 "Siemens",
 233118971573.0,
 "Germany"
-],
-[
-"0857.HK",
-"PetroChina",
-232806293513.0,
-"China"
 ],
 [
 "CRWD",
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-225244526304.0,
+224415389339.0,
 "China"
 ],
 [
@@ -534,12 +534,6 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-198098960510.0,
-"Australia"
-],
-[
 "ALV.DE",
 "Allianz SE",
 197482796871.0,
@@ -550,6 +544,12 @@
 "Amphenol",
 197417435136.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+195798899502.0,
+"Australia"
 ],
 [
 "PEP",

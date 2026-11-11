@@ -32,7 +32,7 @@
 [
 "TSM",
 "TSMC",
-2143387779072.0,
+2143828574208.0,
 "Taiwan"
 ],
 [
@@ -62,19 +62,19 @@
 [
 "TSLA",
 "Tesla",
-1544802271232.0,
+1544895987712.0,
 "United States"
 ],
 [
 "LLY",
 "Eli Lilly",
-1280673054720.0,
+1280258998272.0,
 "United States"
 ],
 [
 "BRK-B",
 "Berkshire Hathaway",
-1249982152704.0,
+1249727217664.0,
 "United States"
 ],
 [
@@ -98,7 +98,7 @@
 [
 "JPM",
 "JPMorgan Chase",
-911856631808.0,
+911909847040.0,
 "United States"
 ],
 [
@@ -110,13 +110,13 @@
 [
 "V",
 "Visa",
-794271088640.0,
+793991184384.0,
 "United States"
 ],
 [
 "XOM",
 "Exxon Mobil",
-679761608704.0,
+680047214592.0,
 "United States"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "JNJ",
 "Johnson & Johnson",
-674841296896.0,
+675033907200.0,
 "United States"
 ],
 [
@@ -140,13 +140,13 @@
 [
 "MA",
 "Mastercard",
-575167856640.0,
+575612190720.0,
 "United States"
 ],
 [
 "ABBV",
 "AbbVie",
-521225830400.0,
+521411461120.0,
 "United States"
 ],
 [
@@ -164,7 +164,7 @@
 [
 "0700.HK",
 "Tencent",
-464928510000.0,
+463934880000.0,
 "China"
 ],
 [
@@ -182,7 +182,7 @@
 [
 "CVX",
 "Chevron",
-416007258112.0,
+416163364864.0,
 "United States"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "ORCL",
 "Oracle",
-400313679872.0,
+400251387904.0,
 "United States"
 ],
 [
@@ -224,13 +224,13 @@
 [
 "MRK",
 "Merck",
-362686939136.0,
+362834853888.0,
 "United States"
 ],
 [
 "UNH",
 "UnitedHealth",
-360926871552.0,
+361043361792.0,
 "United States"
 ],
 [
@@ -242,19 +242,19 @@
 [
 "GE",
 "General Electric",
-355500032000.0,
+355624550400.0,
 "United States"
 ],
 [
 "HD",
 "Home Depot",
-350488330240.0,
+350498324480.0,
 "United States"
 ],
 [
 "BAC",
 "Bank of America",
-349564600320.0,
+349633576960.0,
 "United States"
 ],
 [
@@ -266,7 +266,7 @@
 [
 "INTC",
 "Intel",
-332022743040.0,
+332187500544.0,
 "United States"
 ],
 [
@@ -278,25 +278,25 @@
 [
 "HSBC",
 "HSBC",
-308294516736.0,
+308362870784.0,
 "United Kingdom"
 ],
 [
 "PM",
 "Philip Morris International",
-306073206784.0,
+306042044416.0,
 "United States"
 ],
 [
 "NVS",
 "Novartis",
-302897463296.0,
+302784151552.0,
 "Switzerland"
 ],
 [
 "MS",
 "Morgan Stanley",
-297806725120.0,
+297931800576.0,
 "United States"
 ],
 [
@@ -308,7 +308,7 @@
 [
 "AZN",
 "AstraZeneca",
-287679709184.0,
+287664209920.0,
 "United Kingdom"
 ],
 [
@@ -326,13 +326,13 @@
 [
 "SHEL",
 "Shell",
-276885110784.0,
+276913389568.0,
 "United Kingdom"
 ],
 [
 "CAT",
 "Caterpillar",
-275348127744.0,
+275293241344.0,
 "United States"
 ],
 [
@@ -344,13 +344,13 @@
 [
 "RTX",
 "RTX",
-271669379072.0,
+271628877824.0,
 "United States"
 ],
 [
 "SAP",
 "SAP",
-270268481536.0,
+270199226368.0,
 "Germany"
 ],
 [
@@ -368,7 +368,7 @@
 [
 "GS",
 "Goldman Sachs",
-267326947328.0,
+267324063744.0,
 "United States"
 ],
 [
@@ -392,7 +392,7 @@
 [
 "WFC",
 "Wells Fargo",
-257588772864.0,
+257558773760.0,
 "United States"
 ],
 [
@@ -404,25 +404,25 @@
 [
 "BABA",
 "Alibaba",
-252605628416.0,
+252555870208.0,
 "China"
 ],
 [
 "TM",
 "Toyota",
-250970898432.0,
+250876674048.0,
 "Japan"
 ],
 [
 "ANET",
 "Arista Networks",
-248536514560.0,
+248485969920.0,
 "United States"
 ],
 [
 "MUFG",
 "Mitsubishi UFJ Financial",
-247007756288.0,
+246951493632.0,
 "Japan"
 ],
 [
@@ -440,7 +440,7 @@
 [
 "DELL",
 "Dell",
-237615939584.0,
+237590495232.0,
 "United States"
 ],
 [
@@ -450,15 +450,15 @@
 "China"
 ],
 [
-"CRWD",
-"CrowdStrike",
-234542514176.0,
+"IBM",
+"IBM",
+234597892096.0,
 "United States"
 ],
 [
-"IBM",
-"IBM",
-234522279936.0,
+"CRWD",
+"CrowdStrike",
+234542514176.0,
 "United States"
 ],
 [
@@ -482,13 +482,13 @@
 [
 "AXP",
 "American Express",
-216531304448.0,
+216662048768.0,
 "United States"
 ],
 [
 "GEV",
 "GE Vernova",
-213909356544.0,
+213922594816.0,
 "United States"
 ],
 [
@@ -512,13 +512,13 @@
 [
 "BHP",
 "BHP Group",
-208528179200.0,
+208553590784.0,
 "Australia"
 ],
 [
 "DIS",
 "Walt Disney",
-206649884672.0,
+206598078464.0,
 "United States"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "TD",
 "Toronto Dominion Bank",
-202934976512.0,
+202951311360.0,
 "Canada"
 ],
 [
@@ -572,19 +572,19 @@
 [
 "MCD",
 "McDonald",
-193999060992.0,
+193949646848.0,
 "United States"
 ],
 [
 "VZ",
 "Verizon",
-193034665984.0,
+193138278400.0,
 "United States"
 ],
 [
 "TTE",
 "TotalEnergies",
-192871301120.0,
+192904200192.0,
 "France"
 ],
 [

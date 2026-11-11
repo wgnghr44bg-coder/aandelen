@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-977393432669.0,
+977147822279.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-644946349254.0,
+643882071323.0,
 "South Korea"
 ],
 [
@@ -522,12 +522,6 @@
 "Canada"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-199554099739.0,
-"Australia"
-],
-[
 "KLAC",
 "KLA",
 199340228608.0,
@@ -538,6 +532,12 @@
 "McDonald",
 199151304704.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+198497930269.0,
+"Australia"
 ],
 [
 "ALV.DE",

@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1671662690855.0,
+1672952688965.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-395497905975.0,
+396271106255.0,
 "Switzerland"
 ],
 [
@@ -344,7 +344,7 @@
 [
 "NESN.SW",
 "Nestlé",
-269369013940.0,
+269181795489.0,
 "Switzerland"
 ],
 [
@@ -362,7 +362,7 @@
 [
 "OR.PA",
 "L'Oréal",
-266627526926.0,
+266387877342.0,
 "France"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "SIE.DE",
 "Siemens",
-237711828883.0,
+236896291466.0,
 "Germany"
 ],
 [
@@ -464,7 +464,7 @@
 [
 "MC.PA",
 "LVMH",
-222222065796.0,
+221918937876.0,
 "France"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-210793259784.0,
+209743483810.0,
 "Spain"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-196886295604.0,
+196715866670.0,
 "Germany"
 ],
 [
@@ -582,16 +582,16 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+191331542885.0,
+"India"
+],
+[
 "ABT",
 "Abbott Laboratories",
 191310266368.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-190987672117.0,
-"India"
 ],
 [
 "ADI",

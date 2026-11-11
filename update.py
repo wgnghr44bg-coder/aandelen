@@ -360,6 +360,21 @@ def kies_na_koers(dag, laatst, reeksen):
     return {"p": schoon(beste[1], 4), "t": beste[0].strftime("%H:%M"), "beurs": beste[2]}
 
 
+def kies_mid(quotes, max_spread=0.01):
+    """Midden van bied en laat: de beurs met de kleinste spread (max 1%). quotes = {ticker: (bied, laat)}.
+    Eén losse avondtransactie kan op de bied- of laatprijs liggen; het midden schommelt minder.
+    Geeft (prijs, beurs) of None."""
+    beste = None
+    for t, (bied, laat) in quotes.items():
+        if not (bied and laat and bied > 0 and laat >= bied):
+            continue
+        mid = (bied + laat) / 2
+        spread = (laat - bied) / mid
+        if spread <= max_spread and (beste is None or spread < beste[0]):
+            beste = (spread, mid, NA_BEURS.get(t.rsplit(".", 1)[-1], t))
+    return (schoon(beste[1], 4), beste[2]) if beste else None
+
+
 def na_koers(e, intra):
     """Haalt de avondkoers (zie kies_na_koers) voor extra e op via yfinance."""
     i = intra.get(e["ticker"])
@@ -368,10 +383,22 @@ def na_koers(e, intra):
     try:
         data = yf.download(e["na"], period="1d", interval="5m", auto_adjust=True, group_by="ticker", progress=False)
         reeksen = {t: (data[t] if len(e["na"]) > 1 else data)["Close"] for t in e["na"]}
-        return kies_na_koers(i["date"], i["pts"][-1][0], reeksen)
+        r = kies_na_koers(i["date"], i["pts"][-1][0], reeksen)
     except Exception as ex:  # noqa: BLE001
         print(f"  na-koers {e['ticker']}: {ex}")
         return None
+    if r:   # er wordt vanavond gehandeld: liever het midden van bied/laat van nu dan de laatste losse transactie
+        quotes = {}
+        for t in e["na"]:
+            try:
+                info = yf.Ticker(t).info or {}
+                quotes[t] = (info.get("bid"), info.get("ask"))
+            except Exception:  # noqa: BLE001
+                pass
+        m = kies_mid(quotes)
+        if m:
+            r = {"p": m[0], "t": pd.Timestamp.now(tz=TZ_NL).strftime("%H:%M"), "beurs": m[1], "mid": True}
+    return r
 
 
 INTRA = ROOT / "docs" / "intra.json"   # koersen binnen de dag van alle aandelen (alleen geladen bij 1D/1W)

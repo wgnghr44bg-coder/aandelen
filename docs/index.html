@@ -1981,6 +1981,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
   function pfQT(t){
     var x=pfX(t),r=x?null:pfRow(t),today=pfToday(),last,d,hm;
     if(x&&x.live)return "live";
+    if(x&&x.na&&x.i&&x.na.t&&x.i.date===today)return x.na.t+" ("+esc(x.na.beurs)+")";   // na sluiting Xetra: andere beurs
     if(x&&x.i&&x.i.pts&&x.i.pts.length){d=x.i.date;hm=x.i.pts[x.i.pts.length-1][0]}
     else if(x&&x.w&&x.w.pts&&x.w.pts.length){
       last=x.w.pts[x.w.pts.length-1][0];   // "DD-MM UU:MM"
@@ -2866,7 +2867,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-11-1";
+  var BUILD="2026-11-11-2";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

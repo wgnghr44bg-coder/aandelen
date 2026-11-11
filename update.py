@@ -51,7 +51,8 @@ CMC_TICKER = {"TCEHY": "0700.HK", "XIACF": "1810.HK", "GMBXF": "GMEXICOB.MX", "G
 
 # Extra koersen bovenaan de site (in euro's).
 EXTRAS = [
-    {"ticker": "WEBN.DE", "label": "WEBN", "beurs": "Xetra"},
+    # "na" = zelfde ETF op beurzen die na de Xetra-slotveiling (±17:35) doorhandelen tot 22:00
+    {"ticker": "WEBN.DE", "label": "WEBN", "beurs": "Xetra", "na": ["WEBN.MU", "WEBN.DU"]},
     {"ticker": "VALL.AS", "label": "VALL", "beurs": "Amsterdam"},
 ]
 # Beursindexen onder WEBN/VALL/Bitcoin (in punten; tellen niet mee in "Markt vandaag")
@@ -335,6 +336,44 @@ def intraday_etfs(tickers):
     return uit, week
 
 
+NA_BEURS = {"MU": "gettex", "DU": "Düsseldorf"}
+NA_VANAF = "17:40"   # pas na de slotveiling van Xetra; overdag blijft de hoofdbeurs leidend
+
+
+def kies_na_koers(dag, laatst, reeksen):
+    """Na sluiting: de nieuwste koers van dezelfde ETF op een andere beurs, als die op dezelfde dag minstens
+    10 minuten na de laatste koers van de hoofdbeurs is. dag/laatst = datum + "UU:MM" van de hoofdbeurs (NL-tijd);
+    reeksen = {ticker: Close-reeks}. Geeft {"p", "t", "beurs"} of None."""
+    grens = pd.Timestamp(f"{dag} {laatst}", tz=TZ_NL) + pd.Timedelta(minutes=10)
+    beste = None
+    for t, c in reeksen.items():
+        c = _nl(c.dropna())
+        if c.empty:
+            continue
+        tijd, prijs = c.index[-1], float(c.iloc[-1])
+        if str(tijd.date()) != dag or tijd < grens or tijd.strftime("%H:%M") < NA_VANAF or not prijs > 0:
+            continue
+        if beste is None or tijd > beste[0]:
+            beste = (tijd, prijs, NA_BEURS.get(t.rsplit(".", 1)[-1], t))
+    if not beste:
+        return None
+    return {"p": schoon(beste[1], 4), "t": beste[0].strftime("%H:%M"), "beurs": beste[2]}
+
+
+def na_koers(e, intra):
+    """Haalt de avondkoers (zie kies_na_koers) voor extra e op via yfinance."""
+    i = intra.get(e["ticker"])
+    if not e.get("na") or not i or not i.get("pts"):
+        return None
+    try:
+        data = yf.download(e["na"], period="1d", interval="5m", auto_adjust=True, group_by="ticker", progress=False)
+        reeksen = {t: (data[t] if len(e["na"]) > 1 else data)["Close"] for t in e["na"]}
+        return kies_na_koers(i["date"], i["pts"][-1][0], reeksen)
+    except Exception as ex:  # noqa: BLE001
+        print(f"  na-koers {e['ticker']}: {ex}")
+        return None
+
+
 INTRA = ROOT / "docs" / "intra.json"   # koersen binnen de dag van alle aandelen (alleen geladen bij 1D/1W)
 
 
@@ -455,6 +494,13 @@ def reeksen(lijst, index=False):
     for e in lijst:
         try:
             df = data[e["ticker"]] if data is not None else None
+            na = na_koers(e, intra) if df is not None else None
+            if na and pd.Timestamp(df["Close"].dropna().index[-1]).date() == pd.Timestamp(intra[e["ticker"]]["date"]).date():
+                df = df.copy()   # avondkoers als laatste koers van vandaag (zoals bij Bitcoin de live prijs)
+                df.loc[df["Close"].dropna().index[-1], "Close"] = na["p"]
+                print(f"  extra {e['ticker']}: na sluiting {na['p']} om {na['t']} ({na['beurs']})")
+            else:
+                na = None
             stats = bereken(df) if df is not None else None
             if not stats:
                 print(f"  extra {e['ticker']}: geen koersdata")
@@ -467,6 +513,10 @@ def reeksen(lijst, index=False):
                 pass
             naam = info.get("shortName") or info.get("longName") or e["label"]
             print(f"  extra {e['ticker']}: {naam} ({info.get('currency')}, {info.get('exchange')}) {stats['price']}")
+            stats["price"] = schoon(df["Close"].dropna().iloc[-1], 4)   # 4 decimalen: telt mee in het portfolio
+            e = {k: v for k, v in e.items() if k != "na"}
+            if na:
+                e["na"] = na
             rijen.append({**e, "name": naam, "currency": "PT" if index else (info.get("currency") or "EUR"),
                           "spark": spark(df["Close"]), "h": hist(df["Close"]), "i": intra.get(e["ticker"]), "w": week.get(e["ticker"]), **stats})
             closes[e["ticker"]] = df["Close"]

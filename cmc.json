@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1001226350849.0,
+1004911823380.0,
 "South Korea"
 ],
 [
@@ -114,16 +114,16 @@
 "United States"
 ],
 [
+"000660.KS",
+"SK Hynix",
+681663583386.0,
+"South Korea"
+],
+[
 "JNJ",
 "Johnson & Johnson",
 675924606976.0,
 "United States"
-],
-[
-"000660.KS",
-"SK Hynix",
-671553044324.0,
-"South Korea"
 ],
 [
 "XOM",
@@ -152,7 +152,7 @@
 [
 "0700.HK",
 "Tencent",
-476219760000.0,
+476129430000.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-359777382363.0,
+360004517544.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-237471769748.0,
+237705019336.0,
 "China"
 ],
 [
@@ -554,7 +554,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-194907018461.0,
+195470322643.0,
 "Australia"
 ],
 [
@@ -566,7 +566,7 @@
 [
 "2454.TW",
 "MediaTek",
-194172447099.0,
+193680868628.0,
 "Taiwan"
 ],
 [
@@ -576,16 +576,16 @@
 "France"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+192004940745.0,
+"India"
+],
+[
 "VZ",
 "Verizon",
 191936348160.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-191474824222.0,
-"India"
 ],
 [
 "ABT",

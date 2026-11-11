@@ -666,6 +666,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pftodo small{display:block;color:var(--muted);font-size:.72rem}
 .pfov{cursor:pointer;margin-top:10px}
 .pfov .ph{margin-bottom:4px}
+.pfqt{margin:6px 0 0;font-size:.74rem}.pfqt:empty{display:none}
 #pfeye2{margin-left:8px;flex:0 0 auto}
 .pfeye{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;width:36px;height:32px;display:grid;place-items:center;cursor:pointer}
 .pfeye .ic{width:18px;height:18px}
@@ -909,6 +910,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
       <p class="pfqmsg" id="pfqmsg" hidden></p><div id="pfqbox"></div><datalist id="pfdl"></datalist></div>
     <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span><button type="button" class="pfeye" id="pfeye2"></button></div>
       <div class="ptot" id="pftot"></div>
+      <p class="hint pfqt" id="pfqt"></p>
       <div id="pfperbox" hidden>
         <div class="pfph"><b>Groei en resultaat</b><div class="pseg" id="pfper" role="group" aria-label="Periode portfolio"></div></div>
         <div class="pfres" id="pfres"></div>
@@ -1974,6 +1976,26 @@ details.pfadv[open]>summary{margin-bottom:10px}
   function pfVal(a,t){var r=pfSim(a,t);return r?r.v:null}
   function pfInl(a,t){var s=pfSnap(a,t);if(!s)return null;if(s.inl==null&&!a.mb)return null;
     return (s.inl||0)+(a.mb?a.mb*pfDeps(a.md,s.d,t).length:0)}
+  // tijdstip van de gebruikte koers: "live", "15:10" (vandaag) of "slot 10 nov"
+  var pfUpd=null;
+  function pfQT(t){
+    var x=pfX(t),r=x?null:pfRow(t),today=pfToday(),last,d,hm;
+    if(x&&x.live)return "live";
+    if(x&&x.i&&x.i.pts&&x.i.pts.length){d=x.i.date;hm=x.i.pts[x.i.pts.length-1][0]}
+    else if(x&&x.w&&x.w.pts&&x.w.pts.length){
+      last=x.w.pts[x.w.pts.length-1][0];   // "DD-MM UU:MM"
+      d=today.slice(0,4)+"-"+last.slice(3,5)+"-"+last.slice(0,2);hm=last.slice(6)}
+    else if(r&&pfUpd){d=dstr(pfUpd);hm=String(pfUpd.getHours()).padStart(2,"0")+":"+String(pfUpd.getMinutes()).padStart(2,"0")}   // aandelen: tijd van de laatste update
+    else return "";
+    return d===today?hm:"slot "+pfDateS(d);
+  }
+  // korte regel met de koerstijden van alles wat je nu hebt
+  function pfQTline(){
+    var t=pfToday(),seen={},out=[];
+    pf.acc.forEach(function(a){var s=pfSim(a,t);if(s)s.pos.forEach(function(p){if(seen[p.t]||!(p.q>1e-9))return;seen[p.t]=1;
+      var q=pfQT(p.t);if(q)out.push(esc(pfName(p.t))+" "+q)})});
+    return out.length?"Koers: "+out.join(" · "):"";
+  }
   function pfStart(){var d=null;pf.acc.forEach(function(a){if(a.s.length&&(!d||a.s[0].d<d))d=a.s[0].d});return d}
   function pfT0(k){
     var n=new Date(),d=new Date(n.getFullYear(),n.getMonth(),n.getDate());
@@ -2111,6 +2133,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     $("pfempty").hidden=!!has;$("pfperbox").hidden=!has;
     var last=A.map(function(a){return a.s.length?a.s[a.s.length-1].d:""}).sort().pop();
     $("pfdate").textContent=last?"ingevuld "+pfDate(last):"";
+    $("pfqt").innerHTML=has?pfQTline():"";
     var eye=$("pfeye2");eye.hidden=!has;eye.setAttribute("aria-pressed",pfHide);eye.setAttribute("aria-label",pfHide?"Bedragen tonen":"Bedragen verbergen");eye.innerHTML=pfHide?EYEX:EYE;
     var tot=0,wv=0,inl=0,nI=0,mnd=0;
     A.forEach(function(a){var v=pfVal(a,t)||0,i=pfInl(a,t);tot+=v;mnd+=a.mb||0;if(i!=null){wv+=v-i;inl+=i;nI++}});
@@ -2390,6 +2413,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
         (sv.length>1?spark(sv,R.r):'')+'</div>'+
       '<div class="pfovs">'+
         (mnd?'<span>Elke maand <b>'+E(mnd)+'</b>'+(md?' · volgende '+pfDateS(md):'')+'</span>':'')+
+        (pfQTline()?'<span>'+pfQTline()+'</span>':'')+
       '</div>';
   }
   $("pfov").addEventListener("click",function(e){
@@ -2815,7 +2839,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
           var o=document.createElement("option");o.value=n;o.textContent=n;$("sector").appendChild(o);
         });
       }
-      var u=new Date(data.updated);
+      var u=new Date(data.updated);pfUpd=isNaN(u)?null:u;
       $("upd").innerHTML="🔄 <b>"+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+"</b> · slot "+shortDate(data.asof,false);
       $("foot").textContent="Geen financieel advies · Yahoo Finance, Bitvavo · versie "+BUILD;
       $("mdate").textContent="Bijgewerkt: "+u.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
@@ -2842,7 +2866,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-10-18";
+  var BUILD="2026-11-11-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

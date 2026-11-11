@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1002454807931.0,
+1001226350849.0,
 "South Korea"
 ],
 [
@@ -120,16 +120,16 @@
 "United States"
 ],
 [
+"000660.KS",
+"SK Hynix",
+671553044324.0,
+"South Korea"
+],
+[
 "XOM",
 "Exxon Mobil",
 670909726720.0,
 "United States"
-],
-[
-"000660.KS",
-"SK Hynix",
-669956678069.0,
-"South Korea"
 ],
 [
 "ASML",
@@ -164,13 +164,13 @@
 [
 "601939.SS",
 "China Construction Bank",
-471874601002.0,
+469131137626.0,
 "China"
 ],
 [
 "688825.SS",
 "CXMT",
-429146807288.0,
+430738204596.0,
 "China"
 ],
 [
@@ -212,7 +212,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-383813137997.0,
+382764491292.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-360913024856.0,
+359777382363.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-335979869250.0,
+335497117094.0,
 "China"
 ],
 [
@@ -374,7 +374,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-264837962070.0,
+264263014935.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-238171585336.0,
+237471769748.0,
 "China"
 ],
 [
@@ -546,22 +546,28 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-195751940239.0,
-"Australia"
-],
-[
 "PEP",
 "Pepsico",
 195703259136.0,
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+194907018461.0,
+"Australia"
+],
+[
 "ARM",
 "Arm Holdings",
 194194309120.0,
 "United Kingdom"
+],
+[
+"2454.TW",
+"MediaTek",
+194172447099.0,
+"Taiwan"
 ],
 [
 "TTE",
@@ -576,27 +582,21 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+191474824222.0,
+"India"
+],
+[
 "ABT",
 "Abbott Laboratories",
 191310266368.0,
 "United States"
 ],
 [
-"2454.TW",
-"MediaTek",
-191222992411.0,
-"Taiwan"
-],
-[
 "IHC.AE",
 "International Holding Company",
 191126928414.0,
 "United Arab Emirates"
-],
-[
-"ADI",
-"Analog Devices",
-190579589120.0,
-"United States"
 ]
 ]

@@ -114,16 +114,16 @@
 "United States"
 ],
 [
-"000660.KS",
-"SK Hynix",
-680599356096.0,
-"South Korea"
-],
-[
 "JNJ",
 "Johnson & Johnson",
 675924606976.0,
 "United States"
+],
+[
+"000660.KS",
+"SK Hynix",
+675810156048.0,
+"South Korea"
 ],
 [
 "XOM",
@@ -164,13 +164,13 @@
 [
 "601939.SS",
 "China Construction Bank",
-469523049745.0,
+469131137626.0,
 "China"
 ],
 [
 "688825.SS",
 "CXMT",
-445697339287.0,
+448455761287.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-360913024856.0,
+360458754494.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-335014404212.0,
+335979869250.0,
 "China"
 ],
 [
@@ -374,7 +374,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-263940892158.0,
+262714178558.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224139021488.0,
+224415389339.0,
 "China"
 ],
 [
@@ -576,6 +576,12 @@
 "France"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+191947632651.0,
+"India"
+],
+[
 "VZ",
 "Verizon",
 191936348160.0,
@@ -586,12 +592,6 @@
 "Abbott Laboratories",
 191310266368.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-191302877736.0,
-"India"
 ],
 [
 "IHC.AE",

@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-998769335401.0,
+1002454807931.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-664635339055.0,
+666231705310.0,
 "South Korea"
 ],
 [
@@ -156,21 +156,21 @@
 "China"
 ],
 [
+"601939.SS",
+"China Construction Bank",
+473050376631.0,
+"China"
+],
+[
 "COST",
 "Costco",
 472437915648.0,
 "United States"
 ],
 [
-"601939.SS",
-"China Construction Bank",
-472266552394.0,
-"China"
-],
-[
 "688825.SS",
 "CXMT",
-427449316827.0,
+426282292134.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-362048667350.0,
+361821565581.0,
 "China"
 ],
 [
@@ -260,7 +260,7 @@
 [
 "601988.SS",
 "Bank of China",
-337428047169.0,
+337910760050.0,
 "China"
 ],
 [
@@ -360,12 +360,6 @@
 "United States"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-266214504785.0,
-"China"
-],
-[
 "TMO",
 "Thermo Fisher Scientific",
 266104504320.0,
@@ -376,6 +370,12 @@
 "L'Oréal",
 265908614984.0,
 "France"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+265864281685.0,
+"China"
 ],
 [
 "GS",
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-224415389339.0,
+224277213767.0,
 "China"
 ],
 [
@@ -548,7 +548,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-196291764790.0,
+196080517098.0,
 "Australia"
 ],
 [
@@ -562,6 +562,12 @@
 "Arm Holdings",
 194194309120.0,
 "United Kingdom"
+],
+[
+"2454.TW",
+"MediaTek",
+192943508990.0,
+"Taiwan"
 ],
 [
 "TTE",
@@ -580,12 +586,6 @@
 "Abbott Laboratories",
 191310266368.0,
 "United States"
-],
-[
-"2454.TW",
-"MediaTek",
-191222992411.0,
-"Taiwan"
 ],
 [
 "IHC.AE",

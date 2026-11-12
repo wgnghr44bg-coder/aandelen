@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1024567845682.0,
+1039309837088.0,
 "South Korea"
 ],
 [
@@ -114,16 +114,16 @@
 "United States"
 ],
 [
+"000660.KS",
+"SK Hynix",
+682727861317.0,
+"South Korea"
+],
+[
 "XOM",
 "Exxon Mobil",
 680047214592.0,
 "United States"
-],
-[
-"000660.KS",
-"SK Hynix",
-675278017083.0,
-"South Korea"
 ],
 [
 "JNJ",
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-467171537761.0,
+465603850014.0,
 "China"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "688825.SS",
 "CXMT",
-446333898210.0,
+449198413364.0,
 "China"
 ],
 [
@@ -218,13 +218,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-380667158607.0,
-"China"
-],
-[
-"1398.HK",
-"ICBC",
-362957208074.0,
+378569786649.0,
 "China"
 ],
 [
@@ -244,6 +238,12 @@
 "General Electric",
 355624550400.0,
 "United States"
+],
+[
+"1398.HK",
+"ICBC",
+355007576972.0,
+"China"
 ],
 [
 "HD",
@@ -386,7 +386,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-262628031726.0,
+260914383323.0,
 "China"
 ],
 [
@@ -444,12 +444,6 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-234905756983.0,
-"China"
-],
-[
 "IBM",
 "IBM",
 234597892096.0,
@@ -462,9 +456,15 @@
 "United States"
 ],
 [
+"0857.HK",
+"PetroChina",
+234439224395.0,
+"China"
+],
+[
 "0941.HK",
 "China Mobile",
-223448093508.0,
+222204413120.0,
 "China"
 ],
 [
@@ -536,20 +536,20 @@
 [
 "2454.TW",
 "MediaTek",
-199579778005.0,
+200808716114.0,
 "Taiwan"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-198603577112.0,
-"Australia"
 ],
 [
 "ADI",
 "Analog Devices",
 198226034688.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+197987472505.0,
+"Australia"
 ],
 [
 "ALV.DE",

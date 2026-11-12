@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1698749855646.0,
+1700039713980.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-402070187859.0,
+402456788000.0,
 "Switzerland"
 ],
 [
@@ -350,7 +350,7 @@
 [
 "NESN.SW",
 "Nestlé",
-270897924880.0,
+271241158708.0,
 "Switzerland"
 ],
 [
@@ -362,7 +362,7 @@
 [
 "OR.PA",
 "L'Oréal",
-269113783229.0,
+269443285302.0,
 "France"
 ],
 [
@@ -414,16 +414,16 @@
 "Japan"
 ],
 [
+"SIE.DE",
+"Siemens",
+248871997669.0,
+"Germany"
+],
+[
 "ANET",
 "Arista Networks",
 248485969920.0,
 "United States"
-],
-[
-"SIE.DE",
-"Siemens",
-247584283762.0,
-"Germany"
 ],
 [
 "MUFG",
@@ -464,7 +464,7 @@
 [
 "MC.PA",
 "LVMH",
-225887189709.0,
+227017026791.0,
 "France"
 ],
 [
@@ -506,7 +506,7 @@
 [
 "ITX.MC",
 "Inditex",
-209533539658.0,
+209323577101.0,
 "Spain"
 ],
 [
@@ -534,16 +534,16 @@
 "Canada"
 ],
 [
-"ALV.DE",
-"Allianz SE",
-201956519571.0,
-"Germany"
-],
-[
 "CBA.AX",
 "Commonwealth Bank",
 201560791837.0,
 "Australia"
+],
+[
+"ALV.DE",
+"Allianz SE",
+200209623001.0,
+"Germany"
 ],
 [
 "ADI",
@@ -590,7 +590,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-191202583021.0,
+190815747834.0,
 "India"
 ],
 [

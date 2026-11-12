@@ -848,6 +848,13 @@ def main():
             i["sector"] = gics[t]
 
     lid = {k: set(v) for k, v in lijst_def.items()}
+    # Laatste slotkoers (+ datum) per aandeel uit de vorige run, voor als Yahoo de laatste beursdag weglaat
+    try:
+        vorige = {r["ticker"]: [[r["pd"], r["price"]]] for r in json.loads(OUT.read_text()).get("rows", [])
+                  if r.get("pd") and r.get("price")}
+    except Exception:  # noqa: BLE001
+        vorige = {}
+    aangevuld = []
     rijen, prijzen, alle_closes = [], {}, {}
     for t in tickers:
         try:
@@ -858,6 +865,10 @@ def main():
                 df = data[t]
             else:
                 df = data
+            n0 = len(df["Close"].dropna())
+            df = vul_aan(df, vorige.get(t))
+            if len(df["Close"].dropna()) > n0:
+                aangevuld.append(t)
             stats = bereken(df)
             if not stats:
                 print(f"  {t}: te weinig data")
@@ -896,6 +907,7 @@ def main():
                 "usd": schoon(usd, 8),  # koers (beursvaluta) -> USD, voor de portfolio
                 "pe": pe if pe and pe > 0 else None,
                 "ai": t in ai,
+                "pd": pd.Timestamp(stats["_date"]).strftime("%Y-%m-%d"),  # datum van de laatste koers
                 **stats,
             }
             for k, naam in (("w", "Wereld"), ("sp", "S&P 500"), ("nq", "Nasdaq 100"), ("aex", "AEX")):
@@ -905,6 +917,9 @@ def main():
         except Exception as e:  # noqa: BLE001
             print(f"  {t}: overgeslagen ({e})")
 
+    if aangevuld:
+        print(f"{len(aangevuld)} aandelen: laatste dag ontbrak bij Yahoo, aangevuld uit vorige run: "
+              + ", ".join(aangevuld[:20]) + (" …" if len(aangevuld) > 20 else ""))
     if not rijen:
         raise SystemExit("Geen enkele ticker gelukt; data.json niet overschreven.")
     # Rangschikking op beurswaarde (zoals companiesmarketcap)

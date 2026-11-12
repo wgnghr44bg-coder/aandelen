@@ -29,6 +29,8 @@
 - **Nasdaq 100** compleet (Nasdaq-API, Wikipedia als reserve → `nasdaq100.json`), **AEX** compleet (Wikipedia → `aex.json`).
 - `bereken()` geeft ook `jaren` = rendement per volledig kalenderjaar (slot laatste beursdag vorig jaar → dat jaar);
   gebruikt in "Stijgers & dalers per index" (knoppen 1D/1W/1M/YTD/1J + keuzelijst Jaar).
+- Yahoo laat rond middernacht soms de laatste beursdag weg → `vul_aan()` vult die aan: aandelen uit de vorige
+  `data.json` (`pd` = datum + `price` per rij), WEBN/VALL/Bitcoin uit `markt_hist.json`. Yahoo wint als die de dag heeft.
 - Alle leden = rijen in `data.json` met vlaggen `w`/`sp`/`nq`/`aex`; rang op beurswaarde. Lijsten volgen vanzelf de bronnen.
 - Bekend: IHC.AE (Abu Dhabi) heeft geen gratis koers → ontbreekt in Wereld (99/100).
 - Filters op de site: `CAPS` in `index.html` (lijsten + groottes); sectoren komen uit de rijen.

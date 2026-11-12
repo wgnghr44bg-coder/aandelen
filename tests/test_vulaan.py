@@ -46,8 +46,17 @@ def test_lege_dag_uit_intraday():
 
 def test_lege_dag_niets_als_geen_lege_rij_of_geen_intraday():
     df = _df([("2026-11-10", 348.51), ("2026-11-11", 355.63)])
-    assert lege_dag(df) is None
+    assert lege_dag(df) == []
     leeg = _df([("2026-11-10", 348.51), ("2026-11-11", float("nan"))])
     assert vul_lege_dag(leeg, None) is leeg
     oud = pd.Series([348.5], index=pd.DatetimeIndex(["2026-11-10 15:55"]).tz_localize("America/New_York"))
     assert pd.isna(vul_lege_dag(leeg, oud)["Close"].iloc[-1])  # geen koers van die dag: niets verzinnen
+
+
+def test_lege_dag_ook_als_andere_beurs_al_verder_is():
+    # download van veel beurzen: rij 12 nov bestaat (Azië), maar is leeg voor AAPL; 11 nov ook leeg
+    df = _df([("2026-11-10", 348.51), ("2026-11-11", float("nan")), ("2026-11-12", float("nan"))])
+    idx = pd.DatetimeIndex(["2026-11-11 15:50", "2026-11-11 15:55"]).tz_localize("America/New_York")
+    uit = vul_lege_dag(df, pd.Series([355.7, 355.79], index=idx))
+    c = uit["Close"].dropna()
+    assert str(c.index[-1].date()) == "2026-11-11" and c.iloc[-1] == 355.79

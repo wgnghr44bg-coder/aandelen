@@ -529,27 +529,31 @@ def vul_aan(df, bewaard):
 
 
 def lege_dag(df):
-    """Datum van een lege laatste dagrij (Yahoo geeft soms een dag zonder slotkoers), anders None."""
+    """Datums van lege dagrijen ná de laatste slotkoers (Yahoo geeft soms een dag zonder slotkoers;
+    bij een download van veel beurzen tegelijk kunnen dat er meer zijn). Leeg = niets aan de hand."""
     if df is None or "Close" not in df:
-        return None
+        return []
     c = df["Close"].dropna()
-    if c.empty or pd.Timestamp(df.index[-1]) <= pd.Timestamp(c.index[-1]):
-        return None
-    return pd.Timestamp(df.index[-1]).date()
+    if c.empty:
+        return []
+    return [pd.Timestamp(x).date() for x in df.index if pd.Timestamp(x) > pd.Timestamp(c.index[-1])]
 
 
 def vul_lege_dag(df, intra):
-    """Lege laatste dagrij invullen met de laatste koers van die dag uit de koersen binnen de dag
-    (beurstijd). Alleen een tijdelijke noodoplossing: geeft Yahoo de slotkoers weer, dan wint die."""
-    dag = lege_dag(df)
-    if dag is None or intra is None:
+    """Lege dagrijen invullen met de laatste koers van die dag uit de koersen binnen de dag (beurstijd).
+    Alleen een tijdelijke noodoplossing: geeft Yahoo de slotkoers weer, dan wint die."""
+    dagen = lege_dag(df)
+    if not dagen or intra is None:
         return df
     c = intra.dropna()
-    c = c[[pd.Timestamp(x).date() == dag for x in c.index]]
-    if c.empty:
+    per_dag = {pd.Timestamp(x).date(): float(v) for x, v in c.items()}  # laatste koers per dag wint
+    rijen = [(x, per_dag[pd.Timestamp(x).date()]) for x in df.index
+             if pd.Timestamp(x).date() in dagen and pd.Timestamp(x).date() in per_dag]
+    if not rijen:
         return df
     df = df.copy()
-    df.loc[df.index[-1], ["Close", "High"]] = float(c.iloc[-1])
+    for x, v in rijen:
+        df.loc[x, ["Close", "High"]] = v
     return df
 
 

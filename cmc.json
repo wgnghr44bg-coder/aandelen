@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1019653814786.0,
+1041766852537.0,
 "South Korea"
 ],
 [
@@ -114,6 +114,12 @@
 "United States"
 ],
 [
+"000660.KS",
+"SK Hynix",
+685388556145.0,
+"South Korea"
+],
+[
 "XOM",
 "Exxon Mobil",
 680047214592.0,
@@ -124,12 +130,6 @@
 "Johnson & Johnson",
 675033907200.0,
 "United States"
-],
-[
-"000660.KS",
-"SK Hynix",
-671553044324.0,
-"South Korea"
 ],
 [
 "ASML",
@@ -534,16 +534,16 @@
 "Canada"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-198967361919.0,
-"Australia"
-],
-[
 "ADI",
 "Analog Devices",
 198226034688.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+197922943763.0,
+"Australia"
 ],
 [
 "ALV.DE",

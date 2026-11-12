@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-11T12:07:04Z",
+ "updated": "2026-11-12T13:12:48Z",
  "lenders": [
   {
    "id": "rnhb",
    "name": "RNHB",
    "url": "https://www.rnhb.nl/rente",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -15,7 +15,7 @@
    "id": "nibc",
    "name": "NIBC",
    "url": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [
     {
      "seg": "residentieel",
@@ -34,84 +34,84 @@
        "fix": "1",
        "label": "1 jaar",
        "rates": [
+        6.2,
+        6.2,
+        6.25,
         6.35,
-        6.35,
-        6.4,
-        6.5,
-        6.7,
-        7.05
+        6.55,
+        6.9
        ]
       },
       {
        "fix": "2",
        "label": "2 jaar",
        "rates": [
+        6.0,
+        6.0,
+        6.1,
         6.15,
-        6.15,
-        6.3,
-        6.3,
-        6.5,
-        7.0
+        6.35,
+        6.85
        ]
       },
       {
        "fix": "3",
        "label": "3 jaar",
        "rates": [
+        5.95,
+        5.95,
+        6.05,
         6.1,
-        6.1,
-        6.25,
-        6.25,
-        6.45,
-        6.95
+        6.3,
+        6.8
        ]
       },
       {
        "fix": "5",
        "label": "5 jaar",
        "rates": [
+        6.1,
+        6.1,
+        6.15,
         6.25,
-        6.25,
-        6.3,
-        6.4,
-        6.6,
-        7.1
+        6.45,
+        6.95
        ]
       },
       {
        "fix": "7",
        "label": "7 jaar",
        "rates": [
+        6.35,
+        6.35,
+        6.4,
         6.5,
-        6.5,
-        6.55,
-        6.65,
-        6.85,
-        7.35
+        6.7,
+        7.2
        ]
       },
       {
        "fix": "10",
        "label": "10 jaar",
        "rates": [
-        6.55,
-        6.65,
-        6.85,
-        6.95,
-        7.15,
-        7.8
+        6.4,
+        6.5,
+        6.7,
+        6.8,
+        7.0,
+        7.65
        ]
       },
       {
        "fix": "15",
        "label": "15 jaar",
        "rates": [
-        6.8,
-        6.9,
-        7.1,
-        7.2,
-        7.4,
-        7.85
+        6.65,
+        6.75,
+        6.95,
+        7.05,
+        7.25,
+        7.7
        ]
       }
      ]
@@ -133,84 +133,84 @@
        "fix": "1",
        "label": "1 jaar",
        "rates": [
+        6.0,
+        6.0,
+        6.05,
         6.15,
-        6.15,
-        6.2,
-        6.3,
-        6.5,
-        6.85
+        6.35,
+        6.7
        ]
       },
       {
        "fix": "2",
        "label": "2 jaar",
        "rates": [
+        5.8,
+        5.8,
+        5.9,
         5.95,
-        5.95,
-        6.1,
-        6.1,
-        6.3,
-        6.8
+        6.15,
+        6.65
        ]
       },
       {
        "fix": "3",
        "label": "3 jaar",
        "rates": [
+        5.75,
+        5.75,
+        5.85,
         5.9,
-        5.9,
-        6.05,
-        6.05,
-        6.25,
-        6.75
+        6.1,
+        6.6
        ]
       },
       {
        "fix": "5",
        "label": "5 jaar",
        "rates": [
+        5.9,
+        5.9,
+        5.95,
         6.05,
-        6.05,
-        6.1,
-        6.2,
-        6.4,
-        6.9
+        6.25,
+        6.75
        ]
       },
       {
        "fix": "7",
        "label": "7 jaar",
        "rates": [
+        6.15,
+        6.15,
+        6.2,
         6.3,
-        6.3,
-        6.35,
-        6.45,
-        6.65,
-        7.15
+        6.5,
+        7.0
        ]
       },
       {
        "fix": "10",
        "label": "10 jaar",
        "rates": [
-        6.35,
-        6.45,
-        6.65,
-        6.75,
-        6.95,
-        7.6
+        6.2,
+        6.3,
+        6.5,
+        6.6,
+        6.8,
+        7.45
        ]
       },
       {
        "fix": "15",
        "label": "15 jaar",
        "rates": [
-        6.6,
-        6.7,
-        6.9,
-        7.0,
-        7.2,
-        7.65
+        6.45,
+        6.55,
+        6.75,
+        6.85,
+        7.05,
+        7.5
        ]
       }
      ]
@@ -232,84 +232,84 @@
        "fix": "1",
        "label": "1 jaar",
        "rates": [
+        5.9,
+        5.9,
+        5.95,
         6.05,
-        6.05,
-        6.1,
-        6.2,
-        6.4,
-        6.75
+        6.25,
+        6.6
        ]
       },
       {
        "fix": "2",
        "label": "2 jaar",
        "rates": [
+        5.7,
+        5.7,
+        5.8,
         5.85,
-        5.85,
-        6.0,
-        6.0,
-        6.2,
-        6.7
+        6.05,
+        6.55
        ]
       },
       {
        "fix": "3",
        "label": "3 jaar",
        "rates": [
+        5.65,
+        5.65,
+        5.75,
         5.8,
-        5.8,
-        5.95,
-        5.95,
-        6.15,
-        6.65
+        6.0,
+        6.5
        ]
       },
       {
        "fix": "5",
        "label": "5 jaar",
        "rates": [
+        5.8,
+        5.8,
+        5.85,
         5.95,
-        5.95,
-        6.0,
-        6.1,
-        6.3,
-        6.8
+        6.15,
+        6.65
        ]
       },
       {
        "fix": "7",
        "label": "7 jaar",
        "rates": [
+        6.05,
+        6.05,
+        6.1,
         6.2,
-        6.2,
-        6.25,
-        6.35,
-        6.55,
-        7.05
+        6.4,
+        6.9
        ]
       },
       {
        "fix": "10",
        "label": "10 jaar",
        "rates": [
-        6.25,
-        6.35,
-        6.55,
-        6.65,
-        6.85,
-        7.5
+        6.1,
+        6.2,
+        6.4,
+        6.5,
+        6.7,
+        7.35
        ]
       },
       {
        "fix": "15",
        "label": "15 jaar",
        "rates": [
-        6.5,
-        6.6,
-        6.8,
-        6.9,
-        7.1,
-        7.55
+        6.35,
+        6.45,
+        6.65,
+        6.75,
+        6.95,
+        7.4
        ]
       }
      ]
@@ -325,14 +325,14 @@
      "src": "https://nibc.nl/vastgoed-hypotheek/rentes-vastgoed-hypotheek"
     }
    ],
-   "source_date": "28 okt.",
+   "source_date": "12 nov.",
    "status": "ok"
   },
   {
    "id": "domivest",
    "name": "Domivest",
    "url": "https://www.domivest.nl/",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [],
    "facts": [],
    "status": "aanvraag",
@@ -342,7 +342,7 @@
    "id": "nestr",
    "name": "Nestr",
    "url": "https://www.nestr.nl/rente",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [
     {
      "seg": "residentieel",
@@ -622,7 +622,7 @@
    "id": "dcmf",
    "name": "DCMF",
    "url": "https://dcmf.nl/verhuurhypotheek/",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [
     {
      "seg": "residentieel",
@@ -723,7 +723,7 @@
    "id": "solidbriq",
    "name": "SolidBriq",
    "url": "https://www.solidbriq.nl/actuele-rentetarieven/",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [
     {
      "seg": "residentieel",
@@ -933,7 +933,7 @@
    "id": "mogelijk",
    "name": "Mogelijk",
    "url": "https://www.mogelijk.nl/verhuurhypotheek",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [
     {
      "seg": "residentieel",
@@ -953,39 +953,39 @@
        "fix": "3",
        "label": "3 jaar vast",
        "rates": [
+        5.9,
+        5.95,
+        6.05,
         6.05,
         6.1,
-        6.2,
-        6.2,
-        6.25,
-        6.45,
-        7.35
+        6.3,
+        7.2
        ]
       },
       {
        "fix": "5",
        "label": "5 jaar vast",
        "rates": [
+        5.8,
+        5.85,
+        5.95,
         5.95,
         6.0,
-        6.1,
-        6.1,
-        6.15,
-        6.35,
-        7.25
+        6.2,
+        7.1
        ]
       },
       {
        "fix": "7",
        "label": "7 jaar vast",
        "rates": [
+        6.0,
+        6.05,
+        6.15,
         6.15,
         6.2,
-        6.3,
-        6.3,
-        6.35,
-        6.55,
-        7.45
+        6.4,
+        7.3
        ]
       }
      ]
@@ -1011,7 +1011,7 @@
    "id": "hyra",
    "name": "Hyra",
    "url": "https://hyra.nl/",
-   "checked": "2026-11-11",
+   "checked": "2026-11-12",
    "segments": [],
    "facts": [],
    "status": "aanvraag",

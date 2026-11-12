@@ -757,9 +757,6 @@ details.pfadv[open]>summary{margin-bottom:10px}
 .pfsp th,.pfsp td{padding:4px 2px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
 .pfsp th:first-child{text-align:left;font-weight:600}
 .pfsp tr:first-child th{color:var(--muted);font-weight:500;font-size:.7rem}
-.pfspo{margin:6px 0 0;font-size:.8rem}
-.pfspo span{color:var(--muted);font-size:.7rem}
-.pfres .pfspo b{display:inline;font-size:inherit;font-weight:700}
 .pfl .pfr{display:block;font-size:.7rem;font-weight:600}
 .pfform>.pfl2{margin:2px 0 -4px}
 .pfnote2:empty{display:none}
@@ -2140,8 +2137,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var r0=v0-i0,r1=tot-inl;
     function rij(l,v,i,r){return '<tr><th>'+l+'</th><td>'+pfEur(v)+'</td><td>'+pfEur(i)+'</td><td class="'+chgCls(r)+'">'+pfSg(r)+'</td></tr>'}
     return '<table class="pfsp"><tr><th></th><th>Waarde</th><th>Inleg</th><th>Rendement</th></tr>'+
-      rij('Start '+pfDateS(st),v0,i0,r0)+rij('Nu',tot,inl,r1)+'</table>'+
-      '<p class="pfspo">Opgebouwd sinds je start: <b class="'+chgCls(r1-r0)+'">'+pfSg(r1-r0)+'</b> <span>(rendement, zonder je eigen stortingen)</span></p>';
+      rij('Start '+pfDateS(st),v0,i0,r0)+rij('Nu',tot,inl,r1)+'</table>';
   }
   function renderPortfolio0(){
     var t=pfToday(),changed=false;
@@ -2166,7 +2162,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
     $("pfper").innerHTML=PFP.map(function(x){return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===pfPer)+'">'+x[1]+'</button>'}).join("");
     var R=has?pfRes(A,t0):null;
     $("pfres").innerHTML=R?'<b class="'+chgCls(R.r)+'">'+pfSg(R.r)+(R.pct!=null?' <span>('+fmtPct(R.pct)+')</span>':'')+'</b>'+
-      '<small>'+(since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):'')+'</small>'+pfStartBox(A,t,tot,inl,nI):'';
+      '<small>'+(pfPer==="ALL"&&st?'opgebouwd sinds je start op '+pfDate(st)+' · zonder je eigen stortingen':
+        (since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):''))+'</small>'+pfStartBox(A,t,tot,inl,nI):'';
     // grafiek: waarde en inleg per dag
     var pts=[],ipts=[];
     if(has&&eff&&eff<t){
@@ -2177,7 +2174,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
         d.setDate(d.getDate()+step)}
       if(pts.length&&pts[pts.length-1][0]!==t){pts.push([t,Math.round(tot*100)/100]);ipts.push([t,Math.round(inl*100)/100])}
     }
-    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{hide:pfHide}):
+    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{hide:pfHide,dag:pts.length<120}):
       (has?'<div class="pfstart"><div><span>Startpunt '+pfDate(st)+'</span><b>'+pfEur(tot)+'</b><small>waarde · inleg '+pfEur(inl)+'</small></div>'+
         '<p>Je groeigrafiek begint op '+pfDate(st)+'. Vanaf <b>'+pfDate(pfTomorrow())+'</b> tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
     // rekeningen
@@ -2548,7 +2545,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var g="";for(var k=0;k<4;k++){var v=lo+(hi-lo)*k/3,y=Y(v);g+='<line class="gl" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/><text class="ax" x="'+(W-pr+4)+'" y="'+(y+3).toFixed(1)+'">'+(o.hide?"":nf1.format(v)+(o.suffix||""))+'</text>'}
     if(o.target!=null)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(o.target).toFixed(1)+'" y2="'+Y(o.target).toFixed(1)+'"/>';
     if(o.zero&&lo<0)g+='<line class="tg" x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'"/>';
-    var ref=series[0].d,lab='<text class="ax" x="'+pl+'" y="'+(H-6)+'">'+pdate(ref[0][0])+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-6)+'">'+pdate(ref[ref.length-1][0])+'</text>';
+    var ref=series[0].d,fd=o.dag?pfDateS:pdate,lab='<text class="ax" x="'+pl+'" y="'+(H-6)+'">'+fd(ref[0][0])+'</text><text class="ax" text-anchor="end" x="'+(W-pr)+'" y="'+(H-6)+'">'+fd(ref[ref.length-1][0])+'</text>';
     var lines=series.map(function(s){var off=n-s.d.length;
       var pts=s.d.map(function(p,i){return X(i+off).toFixed(1)+","+Y(p[1]).toFixed(1)}).join(" ");
       var lp=s.d[s.d.length-1];
@@ -2886,7 +2883,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-12-1";
+  var BUILD="2026-11-12-2";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1041766852537.0,
+1027024861130.0,
 "South Korea"
 ],
 [
@@ -114,16 +114,16 @@
 "United States"
 ],
 [
-"000660.KS",
-"SK Hynix",
-685388556145.0,
-"South Korea"
-],
-[
 "XOM",
 "Exxon Mobil",
 680047214592.0,
 "United States"
+],
+[
+"000660.KS",
+"SK Hynix",
+675810156048.0,
+"South Korea"
 ],
 [
 "JNJ",
@@ -222,6 +222,12 @@
 "China"
 ],
 [
+"1398.HK",
+"ICBC",
+363411478437.0,
+"China"
+],
+[
 "MRK",
 "Merck",
 362834853888.0,
@@ -232,12 +238,6 @@
 "UnitedHealth",
 361043361792.0,
 "United States"
-],
-[
-"1398.HK",
-"ICBC",
-358187436095.0,
-"China"
 ],
 [
 "GE",
@@ -534,6 +534,12 @@
 "Canada"
 ],
 [
+"2454.TW",
+"MediaTek",
+200071356476.0,
+"Taiwan"
+],
+[
 "ADI",
 "Analog Devices",
 198226034688.0,
@@ -542,7 +548,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-197922943763.0,
+198181104724.0,
 "Australia"
 ],
 [
@@ -556,12 +562,6 @@
 "Pepsico",
 196152967168.0,
 "United States"
-],
-[
-"2454.TW",
-"MediaTek",
-196138744846.0,
-"Taiwan"
 ],
 [
 "APH",

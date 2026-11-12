@@ -684,7 +684,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfsel{display:block;font-size:.74rem;color:var(--accent);margin:-4px 0 2px;font-weight:600}
 .pfsel:empty{display:none}.pfsel.bad{color:var(--down-strong)}
 .pfact{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.pfqb{border:0;border-radius:14px;padding:14px 6px;font:inherit;font-size:1rem;font-weight:800;color:#fff;cursor:pointer}
+.pfqb{border:0;border-radius:12px;padding:10px 6px;font:inherit;font-size:.92rem;font-weight:800;color:#fff;cursor:pointer}
 .pfqb.buy{background:linear-gradient(180deg,#1fbf6a,#0f7a40)}.pfqb.sell{background:linear-gradient(180deg,#e0483f,#9e1f1f)}
 .pfqb[aria-pressed=true]{box-shadow:0 0 0 3px var(--accent)}
 #pfqbox:not(:empty){margin-top:10px}
@@ -726,6 +726,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
 .pftxs,.pftxm{display:grid;gap:8px}.pftxs>input{width:100%;box-sizing:border-box}
 .padd .pfcancel,.padd .pfdel{background:var(--card);color:var(--text);border:1px solid var(--line)}.padd .pfdel{color:var(--down-strong)}
 .pfl .pfnext{display:block;color:var(--accent);font-weight:600;margin-top:2px}
+.pfl .pfinfo{margin:0 0 8px;font-size:.74rem;color:var(--muted);line-height:1.45}
+.pfl .pfinfo .pfnext{display:inline}
 .pfstart{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:4px 0 8px}
 .pfstart span{display:block;font-size:.72rem;color:var(--muted)}
 .pfstart b{display:block;font-size:1.1rem;font-variant-numeric:tabular-nums}
@@ -747,7 +749,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
 .padd select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px 10px;font:inherit;font-size:16px;min-width:0}
 .pfnote{margin:-2px 0 0;font-size:.72rem}
 .pfl .pfwarn{display:block;color:var(--warn-text,#b45309);font-weight:600;margin-top:2px}
-.ptot .pfm{grid-column:1/-1}
+.ptot .pfm{grid-column:1/-1;margin:0;font-size:.74rem;color:var(--muted);line-height:1.4}
+.ptot .pfm b{display:inline;font-size:inherit;color:var(--text);font-weight:700}
 .pfph{display:flex;align-items:center;gap:8px;margin:12px 0 6px}
 .pfph b{font-size:.95rem}
 .pfres b{display:block;font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums}
@@ -910,8 +913,6 @@ details.pfadv[open]>summary{margin-bottom:10px}
   </section>
 
   <section class="pane" data-pane="portfolio" hidden>
-    <div class="panel pfactp"><div class="pfact" id="pfact"><button type="button" class="pfqb buy" data-k="koop">➕ Kopen</button><button type="button" class="pfqb sell" data-k="verkoop">➖ Verkopen</button></div>
-      <p class="pfqmsg" id="pfqmsg" hidden></p><div id="pfqbox"></div><datalist id="pfdl"></datalist></div>
     <div class="panel"><div class="ph"><span class="emo">💼</span><h2>Portfolio</h2><span class="pmeta" id="pfdate"></span><button type="button" class="pfeye" id="pfeye2"></button></div>
       <div class="ptot" id="pftot"></div>
       <p class="hint pfqt" id="pfqt"></p>
@@ -922,9 +923,11 @@ details.pfadv[open]>summary{margin-bottom:10px}
       </div>
       <ul class="plist pfl" id="pflist"></ul>
       <div class="pftodo" id="pftodo" hidden></div>
-      <p class="hint" id="pfempty">Nog leeg. Tik bovenaan op <b>➕ Kopen</b> om je eerste aandeel of ETF toe te voegen.</p>
+      <p class="hint" id="pfempty">Nog leeg. Tik hieronder op <b>➕ Kopen</b> om je eerste aandeel of ETF toe te voegen.</p>
       <p class="hint pfnote2" id="pfnote"></p>
     </div>
+    <div class="panel pfactp"><div class="pfact" id="pfact"><button type="button" class="pfqb buy" data-k="koop">➕ Kopen</button><button type="button" class="pfqb sell" data-k="verkoop">➖ Verkopen</button></div>
+      <p class="pfqmsg" id="pfqmsg" hidden></p><div id="pfqbox"></div><datalist id="pfdl"></datalist></div>
     <details class="panel pfadv"><summary class="ph"><span class="emo">⚙️</span><h2>Rekening met vaste maandinleg toevoegen</h2></summary>
       <div class="gper" id="pfquick" role="group" aria-label="Snel kiezen"><button type="button" data-n="Interactive Brokers" data-i="WEBN.DE" data-kd="1" data-fee="1,25">Interactive Brokers</button><button type="button" data-n="Saxo" data-i="VALL.AS" data-kd="3" data-hele="1">Saxo</button><button type="button" data-n="Bitvavo" data-i="BTC-EUR" data-kd="1">Bitvavo</button><button type="button" data-n="Spaarrekening" data-i="">Spaarrekening</button></div>
       <div id="pfaddbox"></div>
@@ -2156,7 +2159,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     $("pftot").innerHTML=has?'<div><span>Totale waarde</span><b>'+pfEur(tot)+'</b><span>'+pfDate(t)+'</span></div>'+
       (nI?'<div><span>Totaal rendement'+(nI<A.length?' (met inleg)':'')+'</span><b class="'+chgCls(wv)+'">'+pfSg(wv)+'</b><span class="'+chgCls(wv)+'">'+(inl>0?fmtPct(wv/inl*100):"")+' · inleg '+pfEur(inl)+'</span></div>'
         :'<div><span>Totaal rendement</span><b class="flat">–</b><span>vul bij een rekening je inleg in</span></div>')+
-      (mnd?'<div class="pfm"><span>Elke maand ingelegd</span><b>'+pfEur(mnd)+'</b><span>'+A.filter(function(a){return a.mb}).map(function(a){return esc(a.n)+' '+pfEur(a.mb)+' (op de '+a.md+'e)'}).join(" · ")+'</span></div>':''):"";
+      (mnd?'<p class="pfm">Elke maand <b>'+pfEur(mnd)+'</b> ingelegd: '+A.filter(function(a){return a.mb}).map(function(a){return esc(a.n)+' '+pfEur(a.mb)}).join(" · ")+'</p>':''):"";
     // resultaat over de gekozen periode
     var st=pfStart(),t0=pfT0(pfPer),eff=t0&&st&&t0>st?t0:st,since=!t0||!st||t0<st;
     $("pfper").innerHTML=PFP.map(function(x){return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===pfPer)+'">'+x[1]+'</button>'}).join("");
@@ -2183,12 +2186,13 @@ details.pfadv[open]>summary{margin-bottom:10px}
           s=a.s[a.s.length-1],deps=sim?sim.dep:0,rr=pfRes([a],t0),open=pfEdit===a.id;
       var sub=[];
       if(sim)sim.pos.forEach(function(p){sub.push((sim.buy&&p.t===a.ins?"≈ ":"")+pfQf(p.q,p.t)+" "+esc(pfName(p.t)))});
-      if(sim&&sim.pos.length&&Math.abs(sim.c)>=0.5)sub.push((deps?"≈ ":"")+"kas "+pfEur(sim.c));
-      sub.push("ingevuld "+pfDateS(s.d));if(ai!=null)sub.push("inleg "+pfEur(ai));
-      if(a.mb)sub.push(pfEur(a.mb)+"/mnd op de "+a.md+"e"+(a.ins?", koop "+(a.kd?"+"+a.kd+"d":"zelfde dag")+(a.hele?", hele stukken":"")+(a.fee?", kosten "+pfEur(a.fee):""):""));
+      if(!sub.length&&sim&&!sim.pos.length)sub.push("kas "+pfEur(sim.c));
+      var info=[];
+      if(sim&&sim.pos.length&&Math.abs(sim.c)>=0.5)info.push((deps?"≈ ":"")+"kas "+pfEur(sim.c));
+      info.push("ingevuld "+pfDateS(s.d));if(ai!=null)info.push("inleg "+pfEur(ai));
+      if(a.mb)info.push(pfEur(a.mb)+"/mnd op de "+a.md+"e"+(a.ins?", koop "+(a.kd?"+"+a.kd+"d":"zelfde dag")+(a.hele?", hele stukken":"")+(a.fee?", kosten "+pfEur(a.fee):""):""));
       var head='<div class="pfi" data-id="'+a.id+'" role="button" tabindex="0" aria-expanded="'+open+'"><span class="pdot" style="background:'+c+'"></span>'+
         '<span class="pn">'+esc(a.n)+'<small>'+sub.join(" · ")+'</small>'+
-          (a.mb?'<small class="pfnext">Volgende: storting '+pfDateS(pfNextDep(a.md))+(a.ins?' · aankoop '+pfDateS(pfBuyDate(a,pfNextDep(a.md))):'')+'</small>':'')+
           (deps?'<small class="pfwarn">'+deps+'× storting'+(sim&&sim.buy?', '+sim.buy+'× aankoop geschat':'')+' sinds je invoer · tik om bij te werken</small>':'')+'</span>'+
         '<span class="pv">'+pfEur(v)+'<small class="'+(w==null?"flat":chgCls(w))+'">'+(w==null?nf1.format(sh)+"%":pfSg(w)+(ai>0?" ("+fmtPct(w/ai*100)+")":""))+'</small>'+
           (rr?'<small class="pfr '+chgCls(rr.r)+'">'+PFP.filter(function(x){return x[0]===pfPer})[0][1]+': '+pfSg(rr.r)+'</small>':'')+'</span>'+
@@ -2204,7 +2208,8 @@ details.pfadv[open]>summary{margin-bottom:10px}
       var txl=(a.tx||[]).slice(-8).reverse();
       var txh=txl.length?'<div class="pftxl"><b>Transacties</b><ul>'+txl.map(function(x){
           return '<li><span>'+pfDateS(x.d)+'</span><span>'+PFK[x.k]+(x.t?' '+esc(pfName(x.t)):'')+(x.q?' '+pfQf(x.q,x.t):'')+'</span><span class="'+(x.k==="verkoop"||x.k==="storting"?"up":"")+'">'+(x.k==="koop"||x.k==="opname"?"−":"+")+pfEur(x.b)+'</span></li>'}).join("")+'</ul></div>':'';
-      return '<li data-id="'+a.id+'" class="pfopen">'+head+'<div class="pfbody">'+ptab+btns+panel+txh+'</div></li>';
+      var inf='<p class="pfinfo">'+info.join(" · ")+(a.mb?'<br><span class="pfnext">Volgende: storting '+pfDateS(pfNextDep(a.md))+(a.ins?' · aankoop '+pfDateS(pfBuyDate(a,pfNextDep(a.md))):'')+'</span>':'')+'</p>';
+      return '<li data-id="'+a.id+'" class="pfopen">'+head+'<div class="pfbody">'+inf+ptab+btns+panel+txh+'</div></li>';
     }).join("");
     var todo=A.filter(function(a){var x=pfSim(a,t);return x&&(a.ins?x.buy>0:x.dep>0)});
     $("pftodo").innerHTML=todo.length?'<b>🛒 Er is gekocht! Werk bij met je app:</b><div class="pftodob">'+
@@ -2883,7 +2888,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-12-2";
+  var BUILD="2026-11-12-3";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

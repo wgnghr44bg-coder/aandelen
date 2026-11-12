@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from update import vul_aan  # noqa: E402
+from update import lege_dag, vul_aan, vul_lege_dag  # noqa: E402
 
 
 def _df(punten, tz=None):
@@ -34,3 +34,20 @@ def test_niets_te_doen():
     df = _df([("2026-11-10", 12.924), ("2026-11-11", 13.1)])
     assert vul_aan(df, [["2026-11-11", 13.185]])["Close"].iloc[-1] == 13.1  # Yahoo heeft de dag: Yahoo wint
     assert vul_aan(df, None) is df
+
+
+def test_lege_dag_uit_intraday():
+    df = _df([("2026-11-09", 350.69), ("2026-11-10", 348.51), ("2026-11-11", float("nan"))])
+    idx = pd.DatetimeIndex(["2026-11-10 15:55", "2026-11-11 15:50", "2026-11-11 15:55"]).tz_localize("America/New_York")
+    intra = pd.Series([348.5, 355.7, 355.79], index=idx)
+    uit = vul_lege_dag(df, intra)
+    assert uit["Close"].iloc[-1] == 355.79 and len(uit["Close"].dropna()) == 3
+
+
+def test_lege_dag_niets_als_geen_lege_rij_of_geen_intraday():
+    df = _df([("2026-11-10", 348.51), ("2026-11-11", 355.63)])
+    assert lege_dag(df) is None
+    leeg = _df([("2026-11-10", 348.51), ("2026-11-11", float("nan"))])
+    assert vul_lege_dag(leeg, None) is leeg
+    oud = pd.Series([348.5], index=pd.DatetimeIndex(["2026-11-10 15:55"]).tz_localize("America/New_York"))
+    assert pd.isna(vul_lege_dag(leeg, oud)["Close"].iloc[-1])  # geen koers van die dag: niets verzinnen

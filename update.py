@@ -528,6 +528,50 @@ def vul_aan(df, bewaard):
     return df.sort_index()
 
 
+def lege_dag(df):
+    """Datum van een lege laatste dagrij (Yahoo geeft soms een dag zonder slotkoers), anders None."""
+    if df is None or "Close" not in df:
+        return None
+    c = df["Close"].dropna()
+    if c.empty or pd.Timestamp(df.index[-1]) <= pd.Timestamp(c.index[-1]):
+        return None
+    return pd.Timestamp(df.index[-1]).date()
+
+
+def vul_lege_dag(df, intra):
+    """Lege laatste dagrij invullen met de laatste koers van die dag uit de koersen binnen de dag
+    (beurstijd). Alleen een tijdelijke noodoplossing: geeft Yahoo de slotkoers weer, dan wint die."""
+    dag = lege_dag(df)
+    if dag is None or intra is None:
+        return df
+    c = intra.dropna()
+    c = c[[pd.Timestamp(x).date() == dag for x in c.index]]
+    if c.empty:
+        return df
+    df = df.copy()
+    df.loc[df.index[-1], ["Close", "High"]] = float(c.iloc[-1])
+    return df
+
+
+def intraday_slot(tickers):
+    """Laatste koers per aandeel (5 minuten, laatste 5 dagen), in blokken. {ticker: Close-reeks}"""
+    uit = {}
+    for i in range(0, len(tickers), 150):
+        blok = tickers[i:i + 150]
+        try:
+            data = yf.download(blok, period="5d", interval="5m", auto_adjust=True, group_by="ticker",
+                               progress=False, threads=True)
+        except Exception as e:  # noqa: BLE001
+            print(f"intraday slot blok {i}: {e}")
+            continue
+        for t in blok:
+            try:
+                uit[t] = (data[t] if len(blok) > 1 else data)["Close"].dropna()
+            except Exception:  # noqa: BLE001
+                pass
+    return uit
+
+
 def reeksen(lijst, index=False):
     """Dag-, week- en 5-jaarskoersen (+ statistieken) voor een lijst tickers via yfinance."""
     rijen, closes = [], {}
@@ -855,6 +899,12 @@ def main():
     except Exception:  # noqa: BLE001
         vorige = {}
     aangevuld = []
+    # Lege laatste dag bij Yahoo (dagrij zonder slotkoers)? Vul die met de laatste koers van die dag.
+    leeg = [t for t in tickers if isinstance(data.columns, pd.MultiIndex) and t in data.columns.get_level_values(0)
+            and lege_dag(data[t])]
+    intra_leeg = intraday_slot(leeg) if leeg else {}
+    if leeg:
+        print(f"{len(leeg)} aandelen met lege laatste dag bij Yahoo; {len(intra_leeg)} aangevuld met koersen binnen de dag")
     rijen, prijzen, alle_closes = [], {}, {}
     for t in tickers:
         try:
@@ -865,6 +915,7 @@ def main():
                 df = data[t]
             else:
                 df = data
+            df = vul_lege_dag(df, intra_leeg.get(t))
             n0 = len(df["Close"].dropna())
             df = vul_aan(df, vorige.get(t))
             if len(df["Close"].dropna()) > n0:

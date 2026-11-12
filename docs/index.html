@@ -753,6 +753,13 @@ details.pfadv[open]>summary{margin-bottom:10px}
 .pfres b{display:block;font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums}
 .pfres b span{font-size:.9rem;font-weight:700}
 .pfres small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
+.pfsp{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:.78rem;font-variant-numeric:tabular-nums}
+.pfsp th,.pfsp td{padding:4px 2px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.pfsp th:first-child{text-align:left;font-weight:600}
+.pfsp tr:first-child th{color:var(--muted);font-weight:500;font-size:.7rem}
+.pfspo{margin:6px 0 0;font-size:.8rem}
+.pfspo span{color:var(--muted);font-size:.7rem}
+.pfres .pfspo b{display:inline;font-size:inherit;font-weight:700}
 .pfl .pfr{display:block;font-size:.7rem;font-weight:600}
 .pfform>.pfl2{margin:2px 0 -4px}
 .pfnote2:empty{display:none}
@@ -2124,6 +2131,18 @@ details.pfadv[open]>summary{margin-bottom:10px}
   // bedragen en aantallen verbergen (oogje) tijdens het tekenen van het portfolio
   var pfMask=false;
   function renderPortfolio(){pfMask=pfHide;try{renderPortfolio0()}finally{pfMask=false}}
+  // bij "Alles": stand op je startdag naast de stand van nu (elke rekening vanaf zijn eigen eerste invoer)
+  function pfStartBox(A,t,tot,inl,nI){
+    if(pfPer!=="ALL"||nI<A.length)return "";
+    var v0=0,i0=0,ok=true,st=pfStart();
+    A.forEach(function(a){if(!a.s.length)return;var v=pfVal(a,a.s[0].d),i=pfInl(a,a.s[0].d);if(v==null||i==null)ok=false;else{v0+=v;i0+=i}});
+    if(!ok||!st||st>=t)return "";
+    var r0=v0-i0,r1=tot-inl;
+    function rij(l,v,i,r){return '<tr><th>'+l+'</th><td>'+pfEur(v)+'</td><td>'+pfEur(i)+'</td><td class="'+chgCls(r)+'">'+pfSg(r)+'</td></tr>'}
+    return '<table class="pfsp"><tr><th></th><th>Waarde</th><th>Inleg</th><th>Rendement</th></tr>'+
+      rij('Start '+pfDateS(st),v0,i0,r0)+rij('Nu',tot,inl,r1)+'</table>'+
+      '<p class="pfspo">Opgebouwd sinds je start: <b class="'+chgCls(r1-r0)+'">'+pfSg(r1-r0)+'</b> <span>(rendement, zonder je eigen stortingen)</span></p>';
+  }
   function renderPortfolio0(){
     var t=pfToday(),changed=false;
     pfNeedHist();pfDatalist();
@@ -2147,7 +2166,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     $("pfper").innerHTML=PFP.map(function(x){return '<button type="button" data-k="'+x[0]+'" aria-pressed="'+(x[0]===pfPer)+'">'+x[1]+'</button>'}).join("");
     var R=has?pfRes(A,t0):null;
     $("pfres").innerHTML=R?'<b class="'+chgCls(R.r)+'">'+pfSg(R.r)+(R.pct!=null?' <span>('+fmtPct(R.pct)+')</span>':'')+'</b>'+
-      '<small>'+(since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):'')+'</small>':'';
+      '<small>'+(since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):'')+'</small>'+pfStartBox(A,t,tot,inl,nI):'';
     // grafiek: waarde en inleg per dag
     var pts=[],ipts=[];
     if(has&&eff&&eff<t){
@@ -2867,7 +2886,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-11-2";
+  var BUILD="2026-11-12-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -508,9 +508,33 @@ def haal_extras():
     return rijen, closes
 
 
+def vul_aan(df, bewaard):
+    """Yahoo laat rond middernacht soms de laatste beursdag weg (dan lijkt 'nu' de slotkoers van eergisteren).
+    Vul dagen die wél in ons archief staan (echte slotkoersen van eerdere runs) achteraan aan."""
+    if df is None or not bewaard:
+        return df
+    c = df["Close"].dropna()
+    if c.empty:
+        return df
+    laatste = pd.Timestamp(c.index[-1]).date()
+    extra = [(pd.Timestamp(d), v) for d, v in bewaard if v is not None and pd.Timestamp(d).date() > laatste]
+    if not extra:
+        return df
+    df = df.copy()
+    for d, v in extra:
+        if c.index.tz is not None:
+            d = d.tz_localize(c.index.tz)
+        df.loc[d, ["Close", "High"]] = v
+    return df.sort_index()
+
+
 def reeksen(lijst, index=False):
     """Dag-, week- en 5-jaarskoersen (+ statistieken) voor een lijst tickers via yfinance."""
     rijen, closes = [], {}
+    try:
+        archief = json.loads(MARKT_HIST.read_text()) if MARKT_HIST.exists() else {}
+    except Exception:  # noqa: BLE001
+        archief = {}
     intra, week = intraday_etfs([e["ticker"] for e in lijst])
     try:
         data = yf.download([e["ticker"] for e in lijst], period="5y", interval="1d",
@@ -521,6 +545,11 @@ def reeksen(lijst, index=False):
     for e in lijst:
         try:
             df = data[e["ticker"]] if data is not None else None
+            if df is not None:
+                n0 = len(df["Close"].dropna())
+                df = vul_aan(df, archief.get(e["ticker"]))
+                if len(df["Close"].dropna()) > n0:
+                    print(f"  extra {e['ticker']}: laatste dag(en) ontbraken bij Yahoo, aangevuld uit markt_hist")
             na = na_koers(e, intra) if df is not None else None
             if na and pd.Timestamp(df["Close"].dropna().index[-1]).date() == pd.Timestamp(intra[e["ticker"]]["date"]).date():
                 df = df.copy()   # avondkoers als laatste koers van vandaag (zoals bij Bitcoin de live prijs)

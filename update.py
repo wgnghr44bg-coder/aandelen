@@ -41,6 +41,7 @@ OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
 GROND_HIST = ROOT / "docs" / "grond_hist.json"  # grafieken grondstoffen
 MARKT_HIST = ROOT / "docs" / "markt_hist.json"  # blijvende dagkoersen WEBN/VALL/Bitcoin (wordt nooit ingekort)
+AVOND = "@avond"  # achtervoegsel in markt_hist.json: laatste avondkoers per dag (WEBN na Xetra), zoals IBKR
 # Wereld = de top 100 beursbedrijven van companiesmarketcap.com (alleen bedrijven, geen ETF's/grondstoffen).
 CMC_URL = "https://companiesmarketcap.com/?download=csv"
 CMC_FILE = ROOT / "cmc.json"   # laatst opgehaalde top (terugval als de site niet bereikbaar is)
@@ -629,6 +630,23 @@ def reeksen(lijst, index=False):
     return rijen, closes
 
 
+def avond_bijwerken(avond, extras):
+    """Onthoudt per dag de laatste avondkoers (na de Xetra-sluiting). De nieuwste van een dag wint."""
+    for x in extras:
+        na, i = x.get("na"), x.get("i") or {}
+        if na and na.get("p") and i.get("date"):
+            avond.setdefault(x["ticker"] + AVOND, {})[i["date"]] = na["p"]
+    return avond
+
+
+def met_avond(oud, avond_t, vandaag):
+    """Voor afgelopen dagen de avondkoers als slot gebruiken (zo rekent ook de broker-app 'vandaag')."""
+    for d, v in (avond_t or {}).items():
+        if d < vandaag and d in oud:
+            oud[d] = v
+    return oud
+
+
 def bewaar_markt_hist(extras):
     """Voegt de nieuwe dagkoersen van WEBN, VALL en Bitcoin toe aan een blijvend archief, zodat oude jaren
     (bv. 2026 in 2030) niet verdwijnen als de bron maar een paar jaar teruggeeft. Niets wordt gewist."""
@@ -636,6 +654,11 @@ def bewaar_markt_hist(extras):
         archief = json.loads(MARKT_HIST.read_text()) if MARKT_HIST.exists() else {}
     except Exception:  # noqa: BLE001
         archief = {}
+    avond = {k: dict(v) for k, v in archief.items() if k.endswith(AVOND)}
+    avond_bijwerken(avond, extras)
+    for k, v in avond.items():
+        archief[k] = [[d, v[d]] for d in sorted(v)]
+    vandaag = pd.Timestamp.now(tz=TZ_NL).strftime("%Y-%m-%d")
     for x in extras:
         t = x.get("ticker")
         oud = {d: v for d, v in archief.get(t, [])}
@@ -643,8 +666,10 @@ def bewaar_markt_hist(extras):
             if v is not None:
                 oud[d] = v  # nieuwste waarde voor een datum wint
         if oud:
+            # archief zelf houdt de officiële slotkoers; de site krijgt voor oude dagen de avondkoers
             archief[t] = [[d, oud[d]] for d in sorted(oud)]
-            x["h"] = archief[t]
+            oud = met_avond(dict(oud), avond.get(t + AVOND), vandaag)
+            x["h"] = [[d, oud[d]] for d in sorted(oud)]
     MARKT_HIST.write_text(json.dumps(archief, separators=(",", ":")) + "\n")
     print("markt-archief: " + ", ".join(f"{t} {v[0][0]}→{v[-1][0]} ({len(v)})" for t, v in archief.items() if v))
 

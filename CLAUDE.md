@@ -65,6 +65,9 @@
 - Na een (geschatte) maandaankoop: melding bovenaan Portfolio (`pftodo`) → "✅ Bijwerken met je app" (`pfUpdForm`: alleen
   waarde + aantal, uitleg per broker via `pfWhere`; inleg blijft `pfInl`).
 - Overzicht bovenaan: "Mijn portfolio" (`renderPfOv`), oogje verbergt bedragen (localStorage `pfhide`); alleen als er rekeningen zijn.
+- WEBN 's avonds = midden bied/laat op gettex/Düsseldorf (`na_koers`). Die avondkoers wordt per dag bewaard in
+  `markt_hist.json` (sleutel `WEBN.DE@avond`); voor afgelopen dagen krijgt de site (`h`) de avondkoers, zodat 'vandaag' begint bij de koers van
+  gisteravond (zoals IBKR). `markt_hist.json` houdt de officiële slotkoersen.
 - Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
   Brent, aardgas) → komen in `intra.json`.
 - Nieuws: `nieuws.py` (RSS NOS Economie + NU.nl Economie, alleen koppen + link; terugval = vorige koppen) → `nieuws`.

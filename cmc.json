@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1698749855646.0,
+1696170138978.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-402263487929.0,
+401876887789.0,
 "Switzerland"
 ],
 [
@@ -356,13 +356,13 @@
 [
 "NESN.SW",
 "Nestlé",
-270055481596.0,
+269837060069.0,
 "Switzerland"
 ],
 [
 "OR.PA",
 "L'Oréal",
-268664465566.0,
+268275037293.0,
 "France"
 ],
 [
@@ -414,16 +414,16 @@
 "Japan"
 ],
 [
-"SIE.DE",
-"Siemens",
-249687571895.0,
-"Germany"
-],
-[
 "ANET",
 "Arista Networks",
 248485969920.0,
 "United States"
+],
+[
+"SIE.DE",
+"Siemens",
+247369664778.0,
+"Germany"
 ],
 [
 "MUFG",
@@ -464,7 +464,7 @@
 [
 "MC.PA",
 "LVMH",
-226465893484.0,
+226824125532.0,
 "France"
 ],
 [
@@ -498,16 +498,16 @@
 "United States"
 ],
 [
-"ITX.MC",
-"Inditex",
-209813477464.0,
-"Spain"
-],
-[
 "KLAC",
 "KLA",
 209789976576.0,
 "United States"
+],
+[
+"ITX.MC",
+"Inditex",
+209393570755.0,
+"Spain"
 ],
 [
 "BHP",
@@ -542,7 +542,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-199996605239.0,
+200422659168.0,
 "Germany"
 ],
 [

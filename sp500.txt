@@ -1,4 +1,4 @@
-# S&P 500-leden, bron: github.com/datasets/s-and-p-500-companies (opgehaald 2026-11-11)
+# S&P 500-leden, bron: github.com/datasets/s-and-p-500-companies (opgehaald 2026-11-12)
 A
 AAPL
 ABBV

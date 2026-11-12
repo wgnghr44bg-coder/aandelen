@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1033167349109.0,
+1031938790744.0,
 "South Korea"
 ],
 [
@@ -116,7 +116,7 @@
 [
 "000660.KS",
 "SK Hynix",
-681131495062.0,
+685388556145.0,
 "South Korea"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "1398.HK",
 "ICBC",
-354326204840.0,
+354553306609.0,
 "China"
 ],
 [
@@ -464,7 +464,7 @@
 [
 "0941.HK",
 "China Mobile",
-222342588692.0,
+222204413120.0,
 "China"
 ],
 [
@@ -536,7 +536,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-199319395412.0,
+199601036005.0,
 "Australia"
 ],
 [
@@ -558,16 +558,16 @@
 "United States"
 ],
 [
-"2454.TW",
-"MediaTek",
-196138744846.0,
-"Taiwan"
-],
-[
 "APH",
 "Amphenol",
 195837116416.0,
 "United States"
+],
+[
+"2454.TW",
+"MediaTek",
+195647166375.0,
+"Taiwan"
 ],
 [
 "MCD",
@@ -588,15 +588,15 @@
 "France"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+192033605894.0,
+"India"
+],
+[
 "SHOP",
 "Shopify",
 192026263552.0,
 "Canada"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-191446159073.0,
-"India"
 ]
 ]

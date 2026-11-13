@@ -80,7 +80,7 @@
 [
 "005930.KS",
 "Samsung",
-1013511326807.0,
+1020882373151.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-649203410337.0,
+646010627185.0,
 "South Korea"
 ],
 [
@@ -516,12 +516,6 @@
 "United States"
 ],
 [
-"2454.TW",
-"MediaTek",
-204741327744.0,
-"Taiwan"
-],
-[
 "BHP",
 "BHP Group",
 204614303744.0,
@@ -532,6 +526,12 @@
 "Walt Disney",
 204146196480.0,
 "United States"
+],
+[
+"2454.TW",
+"MediaTek",
+204003951969.0,
+"Taiwan"
 ],
 [
 "TD",
@@ -548,7 +548,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-200193660980.0,
+199824012014.0,
 "Australia"
 ],
 [
@@ -590,7 +590,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-190887399605.0,
+192778633321.0,
 "India"
 ],
 [

@@ -338,7 +338,7 @@
 [
 "NESN.SW",
 "Nestlé",
-272270840318.0,
+271958809565.0,
 "Switzerland"
 ],
 [
@@ -350,7 +350,7 @@
 [
 "OR.PA",
 "L'Oréal",
-269832676766.0,
+269233598818.0,
 "France"
 ],
 [
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-236424114976.0,
+237239670798.0,
 "Germany"
 ],
 [
@@ -462,16 +462,16 @@
 "United States"
 ],
 [
-"MC.PA",
-"LVMH",
-223021222895.0,
-"France"
-],
-[
 "0941.HK",
 "China Mobile",
 222204413120.0,
 "China"
+],
+[
+"MC.PA",
+"LVMH",
+222029164538.0,
+"France"
 ],
 [
 "GEV",
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-210933210282.0,
+210583297227.0,
 "Spain"
 ],
 [
@@ -528,16 +528,16 @@
 "United States"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+203192110936.0,
+"Germany"
+],
+[
 "2454.TW",
 "MediaTek",
 202529232693.0,
 "Taiwan"
-],
-[
-"ALV.DE",
-"Allianz SE",
-202339966267.0,
-"Germany"
 ],
 [
 "TD",
@@ -590,7 +590,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-191704056599.0,
+191947632651.0,
 "India"
 ],
 [

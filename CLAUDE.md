@@ -6,6 +6,10 @@
   betrouwbare bron (bv. "Tarief op aanvraag" of "bekijk bij …"). Linken naar actuele bronnen mag altijd.
 - Alles gratis en zonder API-sleutels (Yahoo via `yfinance`, ECB, Eurostat, CBS, Bitvavo, Wikipedia, Nasdaq,
   companiesmarketcap).
+- **Portfolio moet gelijk lopen met de broker-apps** (IBKR, Saxo, Bitvavo). Verander de koersbron of slotkoers-regels
+  niet zonder eerst te toetsen tegen een screenshot van de app van de eigenaar. **Niet doen:** de avondkoers
+  (gettex/Düsseldorf) in de koersgeschiedenis `h` of buiten het avondvenster gebruiken — dat gaf op 14-11-2026 een
+  fout van ± € 38 bij IBKR. Test: `tests/test_avond.py` (faalt als dit terugkomt).
 
 ## Hoe de site werkt
 - Repo `wgnghr44bg-coder/aandelen`. Site = GitHub Pages (`main`, map `docs/`), één bestand `docs/index.html`.

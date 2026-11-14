@@ -4,6 +4,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd  # noqa: E402
+import json  # noqa: E402
+import update  # noqa: E402
 from update import TZ_NL, avond_bijwerken, avond_venster, met_avond  # noqa: E402
 
 
@@ -28,3 +30,16 @@ def test_avondkoers_alleen_op_de_avond_van_de_handelsdag():
     assert not avond_venster("2026-11-13", nu("2026-11-13 16:00"))      # overdag: Xetra
     assert not avond_venster("2026-11-13", nu("2026-11-13 23:10"))      # na de avondhandel: officiële slot
     assert not avond_venster("2026-11-13", nu("2026-11-14 12:30"))      # zaterdag: officiële slot (zoals IBKR)
+
+
+def test_koersgeschiedenis_houdt_officiele_slotkoersen(tmp_path, monkeypatch):
+    """De site (h) moet voor afgelopen dagen de officiële slotkoers krijgen, niet de avondkoers.
+    Zo rekent IBKR: 14-11-2026 was de waarde € 8.306,52 = kas + 633,6984 × 13,094 (officiële slot 13-11)."""
+    mh = tmp_path / "markt_hist.json"
+    mh.write_text(json.dumps({"WEBN.DE@avond": [["2026-11-12", 13.13], ["2026-11-13", 13.154]]}))
+    monkeypatch.setattr(update, "MARKT_HIST", mh)
+    x = {"ticker": "WEBN.DE", "h": [["2026-11-12", 13.212], ["2026-11-13", 13.094]], "i": {"date": "2026-11-13"}}
+    update.bewaar_markt_hist([x])
+    assert x["h"] == [["2026-11-12", 13.212], ["2026-11-13", 13.094]]
+    opgeslagen = json.loads(mh.read_text())
+    assert opgeslagen["WEBN.DE"][-1] == ["2026-11-13", 13.094]

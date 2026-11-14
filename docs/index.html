@@ -2011,10 +2011,19 @@ details.pfadv[open]>summary{margin-bottom:10px}
     else if(k==="YTD")d=new Date(n.getFullYear()-1,11,31);else if(k==="Y")d.setFullYear(d.getFullYear()-1);else return null;
     return dstr(d);
   }
+  // laatste beursdag met een koers voor de hoofdbelegging (ETF's: niet in het weekend; Bitcoin: vandaag)
+  function pfLastDay(a){
+    var x=a.ins&&a.ins!=="BTC-EUR"?pfX(a.ins):null,t=pfToday();
+    if(x&&x.h&&x.h.length){var l=x.h[x.h.length-1][0];return l<t?l:t}
+    return t;
+  }
   function pfRes(list,t0){
-    var t1=pfToday(),r=0,v0=0,dI=0,ok=false;
+    var t1=pfToday(),r=0,v0=0,dI=0,ok=false,isD=t0===pfT0("D");
     list.forEach(function(a){
-      if(!a.s.length)return;var st=t0&&t0>a.s[0].d?t0:a.s[0].d;
+      if(!a.s.length)return;var s0=t0;
+      // 1D: vanaf de slotkoers vóór de laatste beursdag (in het weekend dus de verandering van vrijdag, zoals IBKR)
+      if(isD){var p=pfLastDay(a).split("-").map(Number);s0=dstr(new Date(p[0],p[1]-1,p[2]-1))}
+      var st=s0&&s0>a.s[0].d?s0:a.s[0].d;
       var A=pfVal(a,st),B=pfVal(a,t1);if(A==null||B==null)return;
       var i0=pfInl(a,st),i1=pfInl(a,t1),di=(i0!=null&&i1!=null)?i1-i0:0;
       r+=B-A-di;v0+=A;dI+=di;ok=true;
@@ -2166,7 +2175,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
     var R=has?pfRes(A,t0):null;
     $("pfres").innerHTML=R?'<b class="'+chgCls(R.r)+'">'+pfSg(R.r)+(R.pct!=null?' <span>('+fmtPct(R.pct)+')</span>':'')+'</b>'+
       '<small>'+(pfPer==="ALL"&&st?'opgebouwd sinds je start op '+pfDate(st)+' · zonder je eigen stortingen':
-        (since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):''))+'</small>'+pfStartBox(A,t,tot,inl,nI):'';
+        (pfPer==="D"?'laatste beursdag, t.o.v. de slotkoers ervoor':since&&st?'sinds je start op '+pfDate(st):'sinds '+pfDate(eff))+' · waarde '+pfSg(tot-R.v0)+(R.dI?' waarvan inleg '+pfSg(R.dI):''))+'</small>'+pfStartBox(A,t,tot,inl,nI):'';
     // grafiek: waarde en inleg per dag
     var pts=[],ipts=[];
     if(has&&eff&&eff<t){
@@ -2888,7 +2897,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-12-3";
+  var BUILD="2026-11-14-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

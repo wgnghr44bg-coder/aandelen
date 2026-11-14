@@ -65,9 +65,12 @@
 - Na een (geschatte) maandaankoop: melding bovenaan Portfolio (`pftodo`) → "✅ Bijwerken met je app" (`pfUpdForm`: alleen
   waarde + aantal, uitleg per broker via `pfWhere`; inleg blijft `pfInl`).
 - Overzicht bovenaan: "Mijn portfolio" (`renderPfOv`), oogje verbergt bedragen (localStorage `pfhide`); alleen als er rekeningen zijn.
-- WEBN 's avonds = midden bied/laat op gettex/Düsseldorf (`na_koers`). Die avondkoers wordt per dag bewaard in
-  `markt_hist.json` (sleutel `WEBN.DE@avond`); voor afgelopen dagen krijgt de site (`h`) de avondkoers, zodat 'vandaag' begint bij de koers van
-  gisteravond (zoals IBKR). `markt_hist.json` houdt de officiële slotkoersen.
+- WEBN 's avonds = midden bied/laat op gettex/Düsseldorf (`na_koers`), maar alleen op de handelsdag zelf tussen
+  17:40 en 22:30 (`avond_venster`). Daarbuiten (nacht, weekend) en voor alle eerdere dagen: officiële Xetra-slotkoers.
+  Getoetst 14-11-2026: IBKR-waarde € 8.306,52 = kas + 633,6984 × 13,094 (officiële slot); IBKR 'W&V vandaag' rekent
+  vanaf de officiële slot van de vorige dag. De avondkoers wordt alleen bewaard (`WEBN.DE@avond`), niet gebruikt in `h`.
+- Portfolio 1D (`pfRes`): vanaf de slot vóór de laatste beursdag van de hoofdbelegging (`pfLastDay`), dus in het
+  weekend de verandering van vrijdag (zoals IBKR); Bitcoin: t.o.v. gisteren.
 - Grondstoffen met koersen binnen de dag (1D/1W): `INTRA_GROND` in update.py = `GI` in index.html (goud, zilver,
   Brent, aardgas) → komen in `intra.json`.
 - Nieuws: `nieuws.py` (RSS NOS Economie + NU.nl Economie, alleen koppen + link; terugval = vorige koppen) → `nieuws`.

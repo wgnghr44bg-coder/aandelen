@@ -339,6 +339,13 @@ def intraday_etfs(tickers):
 
 NA_BEURS = {"MU": "gettex", "DU": "Düsseldorf"}
 NA_VANAF = "17:40"   # pas na de slotveiling van Xetra; overdag blijft de hoofdbeurs leidend
+NA_TOT = "22:30"     # na de avondhandel (gettex tot 22:00) en in het weekend: weer de officiële slotkoers
+
+
+def avond_venster(dag, nu):
+    """True als nu (NL-tijd) de avond van handelsdag dag is (tussen NA_VANAF en NA_TOT). Daarbuiten rekenen
+    broker-apps zoals IBKR met de officiële Xetra-slotkoers (bv. za 14-11: 13,094 = IBKR, avond-midden was 13,154)."""
+    return nu.strftime("%Y-%m-%d") == dag and NA_VANAF <= nu.strftime("%H:%M") <= NA_TOT
 
 
 def kies_na_koers(dag, laatst, reeksen):
@@ -380,6 +387,8 @@ def na_koers(e, intra):
     """Haalt de avondkoers (zie kies_na_koers) voor extra e op via yfinance."""
     i = intra.get(e["ticker"])
     if not e.get("na") or not i or not i.get("pts"):
+        return None
+    if not avond_venster(i["date"], pd.Timestamp.now(tz=TZ_NL)):
         return None
     try:
         data = yf.download(e["na"], period="1d", interval="5m", auto_adjust=True, group_by="ticker", progress=False)
@@ -666,9 +675,9 @@ def bewaar_markt_hist(extras):
             if v is not None:
                 oud[d] = v  # nieuwste waarde voor een datum wint
         if oud:
-            # archief zelf houdt de officiële slotkoers; de site krijgt voor oude dagen de avondkoers
+            # archief en site: officiële slotkoersen voor afgelopen dagen (zo rekent IBKR 'vandaag' en de waarde);
+            # de avondkoers wordt alleen bewaard (WEBN.DE@avond) en geldt alleen 's avonds als koers van vandaag
             archief[t] = [[d, oud[d]] for d in sorted(oud)]
-            oud = met_avond(dict(oud), avond.get(t + AVOND), vandaag)
             x["h"] = [[d, oud[d]] for d in sorted(oud)]
     MARKT_HIST.write_text(json.dumps(archief, separators=(",", ":")) + "\n")
     print("markt-archief: " + ", ".join(f"{t} {v[0][0]}→{v[-1][0]} ({len(v)})" for t, v in archief.items() if v))

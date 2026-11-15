@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1702619430648.0,
+1720677587101.0,
 "Saudi Arabia"
 ],
 [
@@ -56,7 +56,7 @@
 [
 "META",
 "Meta Platforms (Facebook)",
-1640694153216.0,
+1640314437632.0,
 "United States"
 ],
 [
@@ -164,7 +164,7 @@
 [
 "0700.HK",
 "Tencent",
-449572410000.0,
+449301420000.0,
 "China"
 ],
 [
@@ -218,7 +218,7 @@
 [
 "CSCO",
 "Cisco",
-377069010944.0,
+376532795392.0,
 "United States"
 ],
 [
@@ -278,7 +278,7 @@
 [
 "HSBC",
 "HSBC",
-306371100672.0,
+306353176576.0,
 "United Kingdom"
 ],
 [
@@ -312,16 +312,16 @@
 "United States"
 ],
 [
-"SHEL",
-"Shell",
-280164270080.0,
-"United Kingdom"
-],
-[
 "RY",
 "Royal Bank Of Canada",
 280083988480.0,
 "Canada"
+],
+[
+"SHEL",
+"Shell",
+280064360448.0,
+"United Kingdom"
 ],
 [
 "TXN",
@@ -374,7 +374,7 @@
 [
 "PANW",
 "Palo Alto Networks",
-263735115776.0,
+263840972800.0,
 "United States"
 ],
 [
@@ -404,7 +404,7 @@
 [
 "TM",
 "Toyota",
-250205306880.0,
+249308872704.0,
 "Japan"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "MUFG",
 "Mitsubishi UFJ Financial",
-245713354752.0,
+245774024704.0,
 "Japan"
 ],
 [

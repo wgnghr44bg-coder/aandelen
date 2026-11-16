@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1720677587101.0,
+1716808012099.0,
 "Saudi Arabia"
 ],
 [
@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-398204106957.0,
+400137147408.0,
 "Switzerland"
 ],
 [
@@ -330,16 +330,16 @@
 "United States"
 ],
 [
+"NESN.SW",
+"Nestlé",
+274673397616.0,
+"Switzerland"
+],
+[
 "CAT",
 "Caterpillar",
 274648023040.0,
 "United States"
-],
-[
-"NESN.SW",
-"Nestlé",
-273706142032.0,
-"Switzerland"
 ],
 [
 "600519.SS",
@@ -348,16 +348,16 @@
 "China"
 ],
 [
+"OR.PA",
+"L'Oréal",
+271540113332.0,
+"France"
+],
+[
 "SAP",
 "SAP",
 271122579456.0,
 "Germany"
-],
-[
-"OR.PA",
-"L'Oréal",
-270311975933.0,
-"France"
 ],
 [
 "RTX",
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-242137229277.0,
+242370495571.0,
 "China"
 ],
 [
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-239858018727.0,
+235823196543.0,
 "Germany"
 ],
 [
@@ -458,13 +458,13 @@
 [
 "MC.PA",
 "LVMH",
-222359862927.0,
+223737723801.0,
 "France"
 ],
 [
 "0941.HK",
 "China Mobile",
-222342588692.0,
+222480780971.0,
 "China"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-208693726240.0,
+210933210282.0,
 "Spain"
 ],
 [
@@ -528,16 +528,16 @@
 "Australia"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+200987228017.0,
+"Germany"
+],
+[
 "CBA.AX",
 "Commonwealth Bank",
 200833222222.0,
 "Australia"
-],
-[
-"ALV.DE",
-"Allianz SE",
-200483100704.0,
-"Germany"
 ],
 [
 "TTE",
@@ -576,16 +576,16 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-192076570312.0,
-"India"
-],
-[
 "MCD",
 "McDonald",
 191952289792.0,
 "United States"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+191704056599.0,
+"India"
 ],
 [
 "SHOP",

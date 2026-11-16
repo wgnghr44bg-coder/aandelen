@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-602907776109.0,
+602641706626.0,
 "South Korea"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-201830704112.0,
+201150070763.0,
 "Australia"
 ],
 [
@@ -570,12 +570,6 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-192463427702.0,
-"India"
-],
-[
 "VZ",
 "Verizon",
 192143572992.0,
@@ -588,9 +582,15 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+191847337936.0,
+"India"
+],
+[
 "2454.TW",
 "MediaTek",
-189748256998.0,
+191222992411.0,
 "Taiwan"
 ],
 [

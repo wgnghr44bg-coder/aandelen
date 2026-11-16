@@ -68,6 +68,7 @@
   (Bitvavo en IBKR blokkeren browser-CORS; zou via Actions-secrets + versleuteling moeten).
 - Na een (geschatte) maandaankoop: melding bovenaan Portfolio (`pftodo`) → "✅ Bijwerken met je app" (`pfUpdForm`: alleen
   waarde + aantal, uitleg per broker via `pfWhere`; inleg blijft `pfInl`).
+- Portfolio-grafiek aanraken (`pfTouch`): per dag waarde, inleg, rendement en verandering sinds begin periode (`#pfcur`).
 - Overzicht bovenaan: "Mijn portfolio" (`renderPfOv`), oogje verbergt bedragen (localStorage `pfhide`); alleen als er rekeningen zijn.
 - WEBN 's avonds = midden bied/laat op gettex/Düsseldorf (`na_koers`), maar alleen op de handelsdag zelf tussen
   17:40 en 22:30 (`avond_venster`). Daarbuiten (nacht, weekend) en voor alle eerdere dagen: officiële Xetra-slotkoers.

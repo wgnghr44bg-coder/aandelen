@@ -653,6 +653,14 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .pfl .pfdel{color:var(--down-strong)}
 .pfbk{margin-top:4px}
 #pfmsg:empty{display:none}
+.pfcur{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;min-height:2.4em;margin:2px 0 4px;padding:6px 8px;border-radius:10px;
+  background:color-mix(in oklab,var(--bg) 40%,var(--card));font-size:.74rem;color:var(--muted)}
+.pfcur.on{color:var(--text)}
+.pfcur>b{width:100%;font-size:.8rem}
+.pfcur span b{font-variant-numeric:tabular-nums}
+.pfhov line{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.pfhov circle{stroke:var(--card);stroke-width:2}
+#pfchart svg{cursor:crosshair;-webkit-user-select:none;user-select:none}
 .pfupdb{display:block;width:100%;margin:10px 0 0;border:0;border-radius:12px;padding:12px;font:inherit;font-weight:800;color:#fff;background:linear-gradient(180deg,#1fbf6a,#0f7a40);cursor:pointer}
 .pfupdb[aria-pressed=true]{box-shadow:0 0 0 3px var(--accent)}
 .pfupd input{width:100%;box-sizing:border-box}
@@ -2139,6 +2147,39 @@ details.pfadv[open]>summary{margin-bottom:10px}
   }
   // bedragen en aantallen verbergen (oogje) tijdens het tekenen van het portfolio
   var pfMask=false;
+  // ---- grafiek aanraken: per dag waarde, inleg en rendement (zelfde maten als lineChart)
+  function pfTouch(pts,ipts){
+    var box=$("pfchart"),svg=box&&box.querySelector("svg"),cur=$("pfcur");if(!svg||!cur)return;
+    var W=340,H=170,pl=6,pr=34,pt=10,pb=22,n=pts.length,all=pts.map(function(x){return x[1]});
+    if(ipts)ipts.forEach(function(x){all.push(x[1])});
+    var lo=Math.min.apply(null,all),hi=Math.max.apply(null,all),sp=(hi-lo)||1;lo-=sp*.08;hi+=sp*.08;
+    function X(i){return pl+i/(n-1||1)*(W-pl-pr)}
+    function Y(v){return pt+(1-(v-lo)/(hi-lo))*(H-pt-pb)}
+    var NS="http://www.w3.org/2000/svg",g=document.createElementNS(NS,"g");g.setAttribute("class","pfhov");g.style.display="none";
+    var ln=document.createElementNS(NS,"line");ln.setAttribute("y1",pt);ln.setAttribute("y2",H-pb);g.appendChild(ln);
+    var c1=document.createElementNS(NS,"circle");c1.setAttribute("r","4.5");c1.setAttribute("fill","#3b86ff");g.appendChild(c1);
+    var c2=null;if(ipts){c2=document.createElementNS(NS,"circle");c2.setAttribute("r","3.5");c2.setAttribute("fill","#94a3b8");g.appendChild(c2)}
+    svg.appendChild(g);
+    function E(v,sg){return pfHide?"€ •••••":(sg?pfSg(v):pfEur(v))}
+    function show(clientX){
+      var r=svg.getBoundingClientRect();if(!r.width)return;
+      var x=(clientX-r.left)/r.width*W,i=Math.round((x-pl)/(W-pl-pr)*(n-1));i=Math.max(0,Math.min(n-1,i));
+      var d=pts[i][0],v=pts[i][1],iv=ipts?ipts[i][1]:null,xx=X(i);
+      g.style.display="";ln.setAttribute("x1",xx);ln.setAttribute("x2",xx);
+      c1.setAttribute("cx",xx);c1.setAttribute("cy",Y(v));
+      if(c2){c2.setAttribute("cx",xx);c2.setAttribute("cy",Y(iv))}
+      var d0=pts[0][1]-(ipts?ipts[0][1]:0),rr=iv!=null?v-iv:null,ch=rr!=null?rr-d0:v-pts[0][1];
+      cur.innerHTML='<b>'+pfDate(d)+(d===pfToday()?' (nu)':'')+'</b>'+
+        '<span>Waarde <b>'+E(v)+'</b></span>'+(iv!=null?'<span>Inleg <b>'+E(iv)+'</b></span>':'')+
+        (rr!=null?'<span>Rendement <b class="'+chgCls(rr)+'">'+E(rr,true)+'</b></span>':'')+
+        (i>0?'<span>sinds '+pfDateS(pts[0][0])+' <b class="'+chgCls(ch)+'">'+E(ch,true)+'</b></span>':'');
+      cur.classList.add("on");
+    }
+    svg.style.touchAction="pan-y";
+    svg.addEventListener("pointerdown",function(e){show(e.clientX)});
+    svg.addEventListener("pointermove",function(e){if(e.pointerType==="mouse"||e.buttons||e.pressure>0)show(e.clientX)});
+    svg.addEventListener("touchmove",function(e){if(e.touches[0])show(e.touches[0].clientX)},{passive:true});
+  }
   function renderPortfolio(){pfMask=pfHide;try{renderPortfolio0()}finally{pfMask=false}}
   // bij "Alles": stand op je startdag naast de stand van nu (elke rekening vanaf zijn eigen eerste invoer)
   function pfStartBox(A,t,tot,inl,nI){
@@ -2186,9 +2227,11 @@ details.pfadv[open]>summary{margin-bottom:10px}
         d.setDate(d.getDate()+step)}
       if(pts.length&&pts[pts.length-1][0]!==t){pts.push([t,Math.round(tot*100)/100]);ipts.push([t,Math.round(inl*100)/100])}
     }
-    $("pfchart").innerHTML=pts.length>1?lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{hide:pfHide,dag:pts.length<120}):
+    $("pfchart").innerHTML=pts.length>1?'<div class="pfcur" id="pfcur">👆 Schuif met je vinger over de grafiek om een dag te bekijken</div>'+
+      lineChart([{n:"Waarde",c:"#3b86ff",d:pts}].concat(nI?[{n:"Inleg",c:"#94a3b8",d:ipts}]:[]),{hide:pfHide,dag:pts.length<120}):
       (has?'<div class="pfstart"><div><span>Startpunt '+pfDate(st)+'</span><b>'+pfEur(tot)+'</b><small>waarde · inleg '+pfEur(inl)+'</small></div>'+
         '<p>Je groeigrafiek begint op '+pfDate(st)+'. Vanaf <b>'+pfDate(pfTomorrow())+'</b> tekent de site elke dag vanzelf de lijn van je waarde en inleg (met de echte koersen), ook als je de site niet opent.</p></div>':'');
+    if(pts.length>1)pfTouch(pts,nI?ipts:null);
     // rekeningen
     $("pflist").innerHTML=A.map(function(a,i){
       var c=PFC[i%PFC.length],sim=pfSim(a,t),v=sim?sim.v:null,ai=pfInl(a,t),sh=tot>0?(v||0)/tot*100:0,w=ai!=null?(v||0)-ai:null,
@@ -2897,7 +2940,7 @@ details.pfadv[open]>summary{margin-bottom:10px}
 
   // ---------- Automatisch nieuwe versie van de pagina laden ----------
   // Telefoons bewaren de pagina soms lang. Bij openen kijken we of er een nieuwere versie online staat.
-  var BUILD="2026-11-14-1";
+  var BUILD="2026-11-16-1";
   function checkVersion(){
     fetch("index.html?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       var m=t.match(/var BUILD="([^"]+)"/);

@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-963634287955.0,
+959211680405.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-599182853991.0,
+595457881233.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-482064590996.0,
+481280727485.0,
 "China"
 ],
 [
@@ -182,7 +182,7 @@
 [
 "688825.SS",
 "CXMT",
-413445020520.0,
+412914554750.0,
 "China"
 ],
 [
@@ -198,16 +198,16 @@
 "Switzerland"
 ],
 [
-"601288.SS",
-"Agricultural Bank of China",
-394299840693.0,
-"China"
-],
-[
 "PG",
 "Procter & Gamble",
 393559572480.0,
 "United States"
+],
+[
+"601288.SS",
+"Agricultural Bank of China",
+393251154714.0,
+"China"
 ],
 [
 "ORCL",
@@ -224,7 +224,7 @@
 [
 "1398.HK",
 "ICBC",
-365909932017.0,
+365228526473.0,
 "China"
 ],
 [
@@ -240,16 +240,16 @@
 "United States"
 ],
 [
-"601988.SS",
-"Bank of China",
-352392657060.0,
-"China"
-],
-[
 "BAC",
 "Bank of America",
 352048676864.0,
 "United States"
+],
+[
+"601988.SS",
+"Bank of China",
+351427192023.0,
+"China"
 ],
 [
 "HD",
@@ -348,16 +348,16 @@
 "Germany"
 ],
 [
+"600519.SS",
+"Kweichow Moutai",
+270748651900.0,
+"China"
+],
+[
 "OR.PA",
 "L'Oréal",
 270311975933.0,
 "France"
-],
-[
-"600519.SS",
-"Kweichow Moutai",
-269954577231.0,
-"China"
 ],
 [
 "RTX",
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-242603761865.0,
+241903946277.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-223309917936.0,
+223171725657.0,
 "China"
 ],
 [
@@ -584,7 +584,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-191661069977.0,
+191231248169.0,
 "India"
 ],
 [

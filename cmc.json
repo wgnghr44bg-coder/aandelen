@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-400330487228.0,
+399750547268.0,
 "Switzerland"
 ],
 [
@@ -330,16 +330,16 @@
 "United States"
 ],
 [
-"NESN.SW",
-"Nestlé",
-274829412993.0,
-"Switzerland"
-],
-[
 "CAT",
 "Caterpillar",
 274648023040.0,
 "United States"
+],
+[
+"NESN.SW",
+"Nestlé",
+274611011340.0,
+"Switzerland"
 ],
 [
 "600519.SS",
@@ -356,7 +356,7 @@
 [
 "OR.PA",
 "L'Oréal",
-269563100892.0,
+269682916481.0,
 "France"
 ],
 [
@@ -432,16 +432,16 @@
 "United Kingdom"
 ],
 [
-"SIE.DE",
-"Siemens",
-234878861969.0,
-"Germany"
-],
-[
 "BABA",
 "Alibaba",
 234793369600.0,
 "China"
+],
+[
+"SIE.DE",
+"Siemens",
+234363765363.0,
+"Germany"
 ],
 [
 "IBM",
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-223572374606.0,
+223076345428.0,
 "France"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-211493085894.0,
+211773042104.0,
 "Spain"
 ],
 [
@@ -536,7 +536,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-200104973010.0,
+199852918556.0,
 "Germany"
 ],
 [

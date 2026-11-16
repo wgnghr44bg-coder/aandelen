@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-993855405787.0,
+980341871463.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-621532487978.0,
+616211148964.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-474618064378.0,
+480104991130.0,
 "China"
 ],
 [
@@ -182,7 +182,7 @@
 [
 "688825.SS",
 "CXMT",
-424160429058.0,
+414930324673.0,
 "China"
 ],
 [
@@ -204,16 +204,16 @@
 "United States"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+392202508008.0,
+"China"
+],
+[
 "ORCL",
 "Oracle",
 390804701184.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-386434813671.0,
-"China"
 ],
 [
 "CSCO",
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-352054853029.0,
+362957208074.0,
 "China"
 ],
 [
@@ -246,16 +246,16 @@
 "United States"
 ],
 [
+"601988.SS",
+"Bank of China",
+348530796912.0,
+"China"
+],
+[
 "HD",
 "Home Depot",
 347884388352.0,
 "United States"
-],
-[
-"601988.SS",
-"Bank of China",
-346599906111.0,
-"China"
 ],
 [
 "GE",
@@ -356,7 +356,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-268800893051.0,
+268759694954.0,
 "China"
 ],
 [
@@ -420,16 +420,16 @@
 "Japan"
 ],
 [
-"0857.HK",
-"PetroChina",
-242603761865.0,
-"China"
-],
-[
 "LIN",
 "Linde",
 241505615872.0,
 "United Kingdom"
+],
+[
+"0857.HK",
+"PetroChina",
+241437413689.0,
+"China"
 ],
 [
 "SIE.DE",
@@ -456,16 +456,16 @@
 "United States"
 ],
 [
+"0941.HK",
+"China Mobile",
+223309917936.0,
+"China"
+],
+[
 "MC.PA",
 "LVMH",
 222359862927.0,
 "France"
-],
-[
-"0941.HK",
-"China Mobile",
-222204413120.0,
-"China"
 ],
 [
 "DELL",
@@ -530,7 +530,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-201525583888.0,
+201560791837.0,
 "Australia"
 ],
 [
@@ -560,7 +560,7 @@
 [
 "2454.TW",
 "MediaTek",
-196138744846.0,
+194172447099.0,
 "Taiwan"
 ],
 [

@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1723257163993.0,
+1720677587101.0,
 "Saudi Arabia"
 ],
 [
@@ -224,7 +224,7 @@
 [
 "1398.HK",
 "ICBC",
-367045574510.0,
+367499878284.0,
 "China"
 ],
 [
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-242370495571.0,
+242137229277.0,
 "China"
 ],
 [
@@ -456,16 +456,16 @@
 "United States"
 ],
 [
-"0941.HK",
-"China Mobile",
-222618973249.0,
-"China"
-],
-[
 "MC.PA",
 "LVMH",
 222359862927.0,
 "France"
+],
+[
+"0941.HK",
+"China Mobile",
+222342588692.0,
+"China"
 ],
 [
 "DELL",
@@ -576,16 +576,16 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+192076570312.0,
+"India"
+],
+[
 "MCD",
 "McDonald",
 191952289792.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-191732699544.0,
-"India"
 ],
 [
 "SHOP",

@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-959211680405.0,
+965108456711.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-595457881233.0,
+595990020198.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-481280727485.0,
+482456542388.0,
 "China"
 ],
 [
@@ -180,16 +180,16 @@
 "United States"
 ],
 [
-"688825.SS",
-"CXMT",
-412914554750.0,
-"China"
-],
-[
 "PLTR",
 "Palantir",
 404771504128.0,
 "United States"
+],
+[
+"688825.SS",
+"CXMT",
+404427102443.0,
+"China"
 ],
 [
 "RO.SW",
@@ -198,16 +198,16 @@
 "Switzerland"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+395348487398.0,
+"China"
+],
+[
 "PG",
 "Procter & Gamble",
 393559572480.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-393251154714.0,
-"China"
 ],
 [
 "ORCL",
@@ -224,7 +224,7 @@
 [
 "1398.HK",
 "ICBC",
-365228526473.0,
+365682796836.0,
 "China"
 ],
 [
@@ -240,16 +240,16 @@
 "United States"
 ],
 [
+"601988.SS",
+"Bank of China",
+352875369942.0,
+"China"
+],
+[
 "BAC",
 "Bank of America",
 352048676864.0,
 "United States"
-],
-[
-"601988.SS",
-"Bank of China",
-351427192023.0,
-"China"
 ],
 [
 "HD",
@@ -342,16 +342,16 @@
 "Switzerland"
 ],
 [
+"600519.SS",
+"Kweichow Moutai",
+271454714238.0,
+"China"
+],
+[
 "SAP",
 "SAP",
 271122579456.0,
 "Germany"
-],
-[
-"600519.SS",
-"Kweichow Moutai",
-270748651900.0,
-"China"
 ],
 [
 "OR.PA",
@@ -420,16 +420,16 @@
 "Japan"
 ],
 [
-"0857.HK",
-"PetroChina",
-241903946277.0,
-"China"
-],
-[
 "LIN",
 "Linde",
 241505615872.0,
 "United Kingdom"
+],
+[
+"0857.HK",
+"PetroChina",
+241437413689.0,
+"China"
 ],
 [
 "SIE.DE",
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-223171725657.0,
+222895357806.0,
 "China"
 ],
 [
@@ -576,16 +576,16 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+192019262218.0,
+"India"
+],
+[
 "MCD",
 "McDonald",
 191952289792.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-191231248169.0,
-"India"
 ],
 [
 "SHOP",

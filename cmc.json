@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-979359024771.0,
+977393432669.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-610889809950.0,
+610357670985.0,
 "South Korea"
 ],
 [
@@ -198,16 +198,16 @@
 "Switzerland"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+393775497703.0,
+"China"
+],
+[
 "PG",
 "Procter & Gamble",
 393559572480.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-392726811724.0,
-"China"
 ],
 [
 "ORCL",
@@ -222,6 +222,12 @@
 "United States"
 ],
 [
+"1398.HK",
+"ICBC",
+365455661654.0,
+"China"
+],
+[
 "UNH",
 "UnitedHealth",
 365093355520.0,
@@ -234,12 +240,6 @@
 "United States"
 ],
 [
-"1398.HK",
-"ICBC",
-363865748799.0,
-"China"
-],
-[
 "BAC",
 "Bank of America",
 352048676864.0,
@@ -248,7 +248,7 @@
 [
 "601988.SS",
 "Bank of China",
-351427192023.0,
+350461766260.0,
 "China"
 ],
 [
@@ -356,7 +356,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-269804728480.0,
+269417077557.0,
 "China"
 ],
 [
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-242837028159.0,
+243770126748.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-222895357806.0,
+223171725657.0,
 "China"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-201877640378.0,
+201854160747.0,
 "Australia"
 ],
 [
@@ -570,10 +570,10 @@
 "United States"
 ],
 [
-"2454.TW",
-"MediaTek",
-192697711686.0,
-"Taiwan"
+"RELIANCE.NS",
+"Reliance Industries",
+192477749175.0,
+"India"
 ],
 [
 "VZ",
@@ -588,10 +588,10 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-191947632651.0,
-"India"
+"2454.TW",
+"MediaTek",
+190977195107.0,
+"Taiwan"
 ],
 [
 "SHOP",

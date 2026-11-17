@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-953314904099.0,
+949875143241.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-595990020198.0,
+597586437095.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-480496903248.0,
+478145351991.0,
 "China"
 ],
 [
@@ -180,12 +180,6 @@
 "United States"
 ],
 [
-"688825.SS",
-"CXMT",
-406761151828.0,
-"China"
-],
-[
 "PG",
 "Procter & Gamble",
 401022844928.0,
@@ -200,7 +194,13 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-397970202346.0,
+396921516367.0,
+"China"
+],
+[
+"688825.SS",
+"CXMT",
+389467967751.0,
 "China"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "1398.HK",
 "ICBC",
-365682796836.0,
+364547120930.0,
 "China"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "601988.SS",
 "Bank of China",
-353358122098.0,
+352392657060.0,
 "China"
 ],
 [
@@ -326,7 +326,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-272291872141.0,
+270201785451.0,
 "China"
 ],
 [
@@ -414,6 +414,12 @@
 "United Kingdom"
 ],
 [
+"0857.HK",
+"PetroChina",
+240037765807.0,
+"China"
+],
+[
 "MUFG",
 "Mitsubishi UFJ Financial",
 238681145344.0,
@@ -424,12 +430,6 @@
 "Arista Networks",
 236281511936.0,
 "United States"
-],
-[
-"0857.HK",
-"PetroChina",
-234672490689.0,
-"China"
 ],
 [
 "SIE.DE",
@@ -464,7 +464,7 @@
 [
 "0941.HK",
 "China Mobile",
-222066220841.0,
+222618973249.0,
 "China"
 ],
 [
@@ -504,16 +504,16 @@
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+201197007029.0,
+"Australia"
+],
+[
 "C",
 "Citigroup",
 200809414656.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-200340356934.0,
-"Australia"
 ],
 [
 "ALV.DE",
@@ -566,7 +566,7 @@
 [
 "2454.TW",
 "MediaTek",
-190731413940.0,
+190977195107.0,
 "Taiwan"
 ],
 [

@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1700039713980.0,
+1698749855646.0,
 "Saudi Arabia"
 ],
 [
@@ -188,7 +188,7 @@
 [
 "RO.SW",
 "Roche",
-400137147408.0,
+399363947128.0,
 "Switzerland"
 ],
 [
@@ -320,7 +320,7 @@
 [
 "NESN.SW",
 "Nestlé",
-273581329730.0,
+273113283601.0,
 "Switzerland"
 ],
 [
@@ -336,16 +336,16 @@
 "Germany"
 ],
 [
-"OR.PA",
-"L'Oréal",
-268904096745.0,
-"France"
-],
-[
 "TXN",
 "Texas Instruments",
 268840353792.0,
 "United States"
+],
+[
+"OR.PA",
+"L'Oréal",
+268754318056.0,
+"France"
 ],
 [
 "LRCX",
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-233247768730.0,
+234063306147.0,
 "Germany"
 ],
 [
@@ -464,7 +464,7 @@
 [
 "MC.PA",
 "LVMH",
-217895581916.0,
+217620006060.0,
 "France"
 ],
 [
@@ -476,7 +476,7 @@
 [
 "ITX.MC",
 "Inditex",
-210163390518.0,
+210023421616.0,
 "Spain"
 ],
 [
@@ -522,16 +522,16 @@
 "United States"
 ],
 [
-"ALV.DE",
-"Allianz SE",
-199096681573.0,
-"Germany"
-],
-[
 "TD",
 "Toronto Dominion Bank",
 198836109312.0,
 "Canada"
+],
+[
+"ALV.DE",
+"Allianz SE",
+198592535855.0,
+"Germany"
 ],
 [
 "TTE",
@@ -582,16 +582,16 @@
 "United States"
 ],
 [
+"IHC.AE",
+"International Holding Company",
+187543298507.0,
+"United Arab Emirates"
+],
+[
 "ARM",
 "Arm Holdings",
 187303510016.0,
 "United Kingdom"
-],
-[
-"IHC.AE",
-"International Holding Company",
-186946026855.0,
-"United Arab Emirates"
 ],
 [
 "APH",

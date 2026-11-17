@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-938081489346.0,
+942012673550.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-594393653943.0,
+592265098081.0,
 "South Korea"
 ],
 [
@@ -506,7 +506,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-201003374810.0,
+201079654866.0,
 "Australia"
 ],
 [
@@ -546,6 +546,12 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+192119556934.0,
+"India"
+],
+[
 "VZ",
 "Verizon",
 192060686336.0,
@@ -558,12 +564,6 @@
 "Australia"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-191546453789.0,
-"India"
-],
-[
 "SHOP",
 "Shopify",
 190160814080.0,
@@ -572,7 +572,7 @@
 [
 "2454.TW",
 "MediaTek",
-189502475831.0,
+189010897360.0,
 "Taiwan"
 ],
 [

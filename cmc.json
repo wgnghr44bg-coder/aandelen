@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-953806327445.0,
+948892296549.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-609825532019.0,
+601843498178.0,
 "South Korea"
 ],
 [
@@ -180,6 +180,12 @@
 "United States"
 ],
 [
+"688825.SS",
+"CXMT",
+401668680443.0,
+"China"
+],
+[
 "PG",
 "Procter & Gamble",
 401022844928.0,
@@ -192,15 +198,9 @@
 "Switzerland"
 ],
 [
-"688825.SS",
-"CXMT",
-399440724213.0,
-"China"
-],
-[
 "601288.SS",
 "Agricultural Bank of China",
-393251154714.0,
+393775497703.0,
 "China"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "601988.SS",
 "Bank of China",
-352875369942.0,
+351909944179.0,
 "China"
 ],
 [
@@ -324,12 +324,6 @@
 "Switzerland"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-270492076906.0,
-"China"
-],
-[
 "SAP",
 "SAP",
 269887586304.0,
@@ -340,6 +334,12 @@
 "L'Oréal",
 269682916481.0,
 "France"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+269647417729.0,
+"China"
 ],
 [
 "TXN",
@@ -410,7 +410,7 @@
 [
 "0857.HK",
 "PetroChina",
-241437413689.0,
+241903946277.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "0941.HK",
 "China Mobile",
-223724461359.0,
+223448093508.0,
 "China"
 ],
 [
@@ -512,7 +512,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-200340356934.0,
+200328628616.0,
 "Australia"
 ],
 [
@@ -546,10 +546,10 @@
 "United States"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-192678338606.0,
-"India"
+"2454.TW",
+"MediaTek",
+192451930519.0,
+"Taiwan"
 ],
 [
 "VZ",
@@ -564,16 +564,16 @@
 "Australia"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+191790029842.0,
+"India"
+],
+[
 "SHOP",
 "Shopify",
 190160814080.0,
 "Canada"
-],
-[
-"2454.TW",
-"MediaTek",
-189994054302.0,
-"Taiwan"
 ],
 [
 "KLAC",

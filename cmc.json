@@ -504,12 +504,6 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-198556617849.0,
-"Australia"
-],
-[
 "C",
 "Citigroup",
 198525222912.0,
@@ -520,6 +514,12 @@
 "TotalEnergies",
 198255345664.0,
 "France"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+197969857032.0,
+"Australia"
 ],
 [
 "ARM",

@@ -186,16 +186,16 @@
 "China"
 ],
 [
-"RO.SW",
-"Roche",
-398010806887.0,
-"Switzerland"
-],
-[
 "PG",
 "Procter & Gamble",
 398009696256.0,
 "United States"
+],
+[
+"RO.SW",
+"Roche",
+397430906677.0,
+"Switzerland"
 ],
 [
 "688825.SS",
@@ -278,7 +278,7 @@
 [
 "HSBC",
 "HSBC",
-298354212864.0,
+298284449792.0,
 "United Kingdom"
 ],
 [
@@ -308,7 +308,7 @@
 [
 "SHEL",
 "Shell",
-274765496320.0,
+274669060096.0,
 "United Kingdom"
 ],
 [
@@ -332,7 +332,7 @@
 [
 "NESN.SW",
 "Nestlé",
-268152133753.0,
+267902509151.0,
 "Switzerland"
 ],
 [
@@ -344,7 +344,7 @@
 [
 "OR.PA",
 "L'Oréal",
-265878651884.0,
+265489242016.0,
 "France"
 ],
 [
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-228998309157.0,
+228053974583.0,
 "Germany"
 ],
 [
@@ -464,7 +464,7 @@
 [
 "MC.PA",
 "LVMH",
-214147765001.0,
+213183258709.0,
 "France"
 ],
 [
@@ -482,7 +482,7 @@
 [
 "ITX.MC",
 "Inditex",
-208133850629.0,
+207433987710.0,
 "Spain"
 ],
 [
@@ -498,16 +498,16 @@
 "United States"
 ],
 [
-"DIS",
-"Walt Disney",
-201918758912.0,
-"United States"
-],
-[
 "CBA.AX",
 "Commonwealth Bank",
 200528101998.0,
 "Australia"
+],
+[
+"DIS",
+"Walt Disney",
+199736999936.0,
+"United States"
 ],
 [
 "C",
@@ -528,12 +528,6 @@
 "United Kingdom"
 ],
 [
-"ALV.DE",
-"Allianz SE",
-195483606584.0,
-"Germany"
-],
-[
 "TD",
 "Toronto Dominion Bank",
 195439443968.0,
@@ -544,6 +538,12 @@
 "Reliance Industries",
 195285979008.0,
 "India"
+],
+[
+"ALV.DE",
+"Allianz SE",
+194895442714.0,
+"Germany"
 ],
 [
 "MCD",

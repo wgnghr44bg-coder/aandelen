@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-953314904099.0,
+956754664957.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-612486176206.0,
+608761254088.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-479321127620.0,
+481672678877.0,
 "China"
 ],
 [
@@ -182,7 +182,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-401116181735.0,
+402164867714.0,
 "China"
 ],
 [
@@ -200,7 +200,7 @@
 [
 "688825.SS",
 "CXMT",
-393393414444.0,
+393181228136.0,
 "China"
 ],
 [
@@ -218,7 +218,7 @@
 [
 "1398.HK",
 "ICBC",
-359095976820.0,
+360458754494.0,
 "China"
 ],
 [
@@ -228,16 +228,16 @@
 "United States"
 ],
 [
+"601988.SS",
+"Bank of China",
+354323587135.0,
+"China"
+],
+[
 "MRK",
 "Merck",
 353442267136.0,
 "United States"
-],
-[
-"601988.SS",
-"Bank of China",
-353358122098.0,
-"China"
 ],
 [
 "UNH",
@@ -318,6 +318,12 @@
 "Canada"
 ],
 [
+"600519.SS",
+"Kweichow Moutai",
+271610159489.0,
+"China"
+],
+[
 "NESN.SW",
 "Nestlé",
 270617117077.0,
@@ -328,12 +334,6 @@
 "Texas Instruments",
 270348075008.0,
 "United States"
-],
-[
-"600519.SS",
-"Kweichow Moutai",
-270265448097.0,
-"China"
 ],
 [
 "OR.PA",
@@ -410,7 +410,7 @@
 [
 "0857.HK",
 "PetroChina",
-244469942336.0,
+243770126748.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-221928045269.0,
+222204413120.0,
 "China"
 ],
 [
@@ -540,16 +540,16 @@
 "Canada"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-194927786767.0,
-"India"
-],
-[
 "MCD",
 "McDonald",
 194669559808.0,
 "United States"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+194411991716.0,
+"India"
 ],
 [
 "2454.TW",
@@ -590,7 +590,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-187543298507.0,
+186946026855.0,
 "United Arab Emirates"
 ],
 [

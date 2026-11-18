@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-949875143241.0,
+944469688999.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-613018315171.0,
+608761254088.0,
 "South Korea"
 ],
 [
@@ -506,7 +506,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-199272459146.0,
+199419155100.0,
 "Australia"
 ],
 [
@@ -522,12 +522,6 @@
 "France"
 ],
 [
-"2454.TW",
-"MediaTek",
-196384526013.0,
-"Taiwan"
-],
-[
 "ARM",
 "Arm Holdings",
 196227301376.0,
@@ -540,16 +534,22 @@
 "Germany"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-195945033192.0,
-"India"
-],
-[
 "TD",
 "Toronto Dominion Bank",
 195439443968.0,
 "Canada"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+195242992387.0,
+"India"
+],
+[
+"2454.TW",
+"MediaTek",
+195155587904.0,
+"Taiwan"
 ],
 [
 "MCD",

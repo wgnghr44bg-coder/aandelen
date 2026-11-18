@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1701329572314.0,
+1700039713980.0,
 "Saudi Arabia"
 ],
 [
@@ -186,16 +186,16 @@
 "China"
 ],
 [
-"RO.SW",
-"Roche",
-398784046917.0,
-"Switzerland"
-],
-[
 "PG",
 "Procter & Gamble",
 398009696256.0,
 "United States"
+],
+[
+"RO.SW",
+"Roche",
+397624206747.0,
+"Switzerland"
 ],
 [
 "688825.SS",
@@ -332,7 +332,7 @@
 [
 "NESN.SW",
 "Nestlé",
-269774653919.0,
+269400217016.0,
 "Switzerland"
 ],
 [
@@ -344,7 +344,7 @@
 [
 "OR.PA",
 "L'Oréal",
-265039924353.0,
+266088338368.0,
 "France"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "SIE.DE",
 "Siemens",
-230844021381.0,
+231402019697.0,
 "Germany"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-215773649667.0,
+215856324264.0,
 "France"
 ],
 [
@@ -482,7 +482,7 @@
 [
 "ITX.MC",
 "Inditex",
-209183608198.0,
+208553738933.0,
 "Spain"
 ],
 [
@@ -522,28 +522,28 @@
 "France"
 ],
 [
-"RELIANCE.NS",
-"Reliance Industries",
-196919337403.0,
-"India"
-],
-[
-"ALV.DE",
-"Allianz SE",
-196281861844.0,
-"Germany"
-],
-[
 "ARM",
 "Arm Holdings",
 196227301376.0,
 "United Kingdom"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+195693679569.0,
+"Germany"
+],
+[
 "TD",
 "Toronto Dominion Bank",
 195439443968.0,
 "Canada"
+],
+[
+"RELIANCE.NS",
+"Reliance Industries",
+195271657535.0,
+"India"
 ],
 [
 "MCD",
@@ -590,7 +590,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-187005754021.0,
+186946026855.0,
 "United Arab Emirates"
 ],
 [

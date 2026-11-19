@@ -86,7 +86,7 @@
 [
 "005930.KS",
 "Samsung",
-961668695853.0,
+952823480753.0,
 "South Korea"
 ],
 [
@@ -128,7 +128,7 @@
 [
 "000660.KS",
 "SK Hynix",
-619936071081.0,
+615679009999.0,
 "South Korea"
 ],
 [
@@ -500,7 +500,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-201772016532.0,
+201725080266.0,
 "Australia"
 ],
 [
@@ -518,7 +518,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-195429260345.0,
+194870478673.0,
 "India"
 ],
 [
@@ -570,12 +570,6 @@
 "United States"
 ],
 [
-"2454.TW",
-"MediaTek",
-188519318889.0,
-"Taiwan"
-],
-[
 "APH",
 "Amphenol",
 188478717952.0,
@@ -592,6 +586,12 @@
 "Analog Devices",
 185094324224.0,
 "United States"
+],
+[
+"2454.TW",
+"MediaTek",
+184340926092.0,
+"Taiwan"
 ],
 [
 "WELL",

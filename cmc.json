@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1702619430648.0,
+1700039713980.0,
 "Saudi Arabia"
 ],
 [
@@ -192,16 +192,16 @@
 "China"
 ],
 [
+"RO.SW",
+"Roche",
+395304566155.0,
+"Switzerland"
+],
+[
 "PG",
 "Procter & Gamble",
 394695245824.0,
 "United States"
-],
-[
-"RO.SW",
-"Roche",
-393951465664.0,
-"Switzerland"
 ],
 [
 "CSCO",
@@ -318,12 +318,6 @@
 "China"
 ],
 [
-"NESN.SW",
-"Nestlé",
-268432941556.0,
-"Switzerland"
-],
-[
 "TXN",
 "Texas Instruments",
 267213848576.0,
@@ -342,16 +336,22 @@
 "United States"
 ],
 [
-"OR.PA",
-"L'Oréal",
-265429334221.0,
-"France"
+"NESN.SW",
+"Nestlé",
+265499931978.0,
+"Switzerland"
 ],
 [
 "LRCX",
 "Lam Research",
 264412004352.0,
 "United States"
+],
+[
+"OR.PA",
+"L'Oréal",
+263901639444.0,
+"France"
 ],
 [
 "RY",
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-236771937454.0,
+236072121866.0,
 "China"
 ],
 [
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-228354452204.0,
+232775592241.0,
 "Germany"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-223171725657.0,
+223033516673.0,
 "China"
 ],
 [
@@ -458,7 +458,7 @@
 [
 "MC.PA",
 "LVMH",
-213899759615.0,
+215580748408.0,
 "France"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-207713943920.0,
+207014099406.0,
 "Spain"
 ],
 [
@@ -512,7 +512,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-195787452586.0,
+195816095531.0,
 "India"
 ],
 [
@@ -530,7 +530,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-193929169555.0,
+193761114848.0,
 "Germany"
 ],
 [
@@ -578,7 +578,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-186348755204.0,
+186707118195.0,
 "United Arab Emirates"
 ],
 [

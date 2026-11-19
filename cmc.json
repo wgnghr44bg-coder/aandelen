@@ -38,7 +38,7 @@
 [
 "TSM",
 "TSMC",
-1825674756096.0,
+1826105196544.0,
 "Taiwan"
 ],
 [
@@ -74,13 +74,13 @@
 [
 "BRK-B",
 "Berkshire Hathaway",
-1215649939456.0,
+1215309938688.0,
 "United States"
 ],
 [
 "LLY",
 "Eli Lilly",
-1203574669312.0,
+1203503366144.0,
 "United States"
 ],
 [
@@ -98,7 +98,7 @@
 [
 "JPM",
 "JPMorgan Chase",
-850565201920.0,
+850379341824.0,
 "United States"
 ],
 [
@@ -116,19 +116,19 @@
 [
 "V",
 "Visa",
-751049834496.0,
+750518075392.0,
 "United States"
 ],
 [
 "XOM",
 "Exxon Mobil",
-648392409088.0,
+648310816768.0,
 "United States"
 ],
 [
 "JNJ",
 "Johnson & Johnson",
-642799960064.0,
+643088908288.0,
 "United States"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "MA",
 "Mastercard",
-546018361344.0,
+545791836160.0,
 "United States"
 ],
 [
@@ -152,7 +152,7 @@
 [
 "ABBV",
 "AbbVie",
-501136916480.0,
+501189935104.0,
 "United States"
 ],
 [
@@ -170,13 +170,13 @@
 [
 "KO",
 "Coca-Cola",
-413412818944.0,
+413369794560.0,
 "United States"
 ],
 [
 "CVX",
 "Chevron",
-403089981440.0,
+402933874688.0,
 "United States"
 ],
 [
@@ -188,7 +188,7 @@
 [
 "0700.HK",
 "Tencent",
-400342560000.0,
+399258600000.0,
 "China"
 ],
 [
@@ -206,7 +206,7 @@
 [
 "PG",
 "Procter & Gamble",
-389178949632.0,
+389039882240.0,
 "United States"
 ],
 [
@@ -236,31 +236,31 @@
 [
 "ORCL",
 "Oracle",
-344537923584.0,
+344724963328.0,
 "United States"
 ],
 [
 "HD",
 "Home Depot",
-336141582336.0,
+335902113792.0,
 "United States"
 ],
 [
 "BAC",
 "Bank of America",
-335074164736.0,
+335143141376.0,
 "United States"
 ],
 [
 "GE",
 "General Electric",
-329566912512.0,
+329515270144.0,
 "United States"
 ],
 [
 "MRK",
 "Merck",
-327236714496.0,
+327409270784.0,
 "United States"
 ],
 [
@@ -278,7 +278,7 @@
 [
 "UNH",
 "UnitedHealth",
-296027947008.0,
+296117567488.0,
 "United States"
 ],
 [
@@ -290,19 +290,19 @@
 [
 "NVS",
 "Novartis",
-285654319104.0,
+285597663232.0,
 "Switzerland"
 ],
 [
 "HSBC",
 "HSBC",
-284887646208.0,
+284853469184.0,
 "United Kingdom"
 ],
 [
 "MS",
 "Morgan Stanley",
-273642094592.0,
+273501405184.0,
 "United States"
 ],
 [
@@ -314,7 +314,7 @@
 [
 "AZN",
 "AstraZeneca",
-272061972480.0,
+272046473216.0,
 "United Kingdom"
 ],
 [
@@ -326,7 +326,7 @@
 [
 "SHEL",
 "Shell",
-265573679104.0,
+265545449472.0,
 "United Kingdom"
 ],
 [
@@ -350,19 +350,19 @@
 [
 "RTX",
 "RTX",
-261008785408.0,
+261035769856.0,
 "United States"
 ],
 [
 "RY",
 "Royal Bank Of Canada",
-259926704128.0,
+259857481728.0,
 "Canada"
 ],
 [
 "TMO",
 "Thermo Fisher Scientific",
-255263211520.0,
+255192809472.0,
 "United States"
 ],
 [
@@ -380,19 +380,19 @@
 [
 "TM",
 "Toyota",
-247513251840.0,
+247595417600.0,
 "Japan"
 ],
 [
 "CAT",
 "Caterpillar",
-245836742656.0,
+245897379840.0,
 "United States"
 ],
 [
 "GS",
 "Goldman Sachs",
-244604059648.0,
+244456980480.0,
 "United States"
 ],
 [
@@ -410,7 +410,7 @@
 [
 "ANET",
 "Arista Networks",
-239680077824.0,
+239528443904.0,
 "United States"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "SAP",
 "SAP",
-234661265408.0,
+234568925184.0,
 "Germany"
 ],
 [
@@ -452,7 +452,7 @@
 [
 "MUFG",
 "Mitsubishi UFJ Financial",
-221342973952.0,
+221230383104.0,
 "Japan"
 ],
 [
@@ -464,19 +464,19 @@
 [
 "IBM",
 "IBM",
-211584188416.0,
+211593658368.0,
 "United States"
 ],
 [
 "AXP",
 "American Express",
-208702603264.0,
+208615424000.0,
 "United States"
 ],
 [
 "BABA",
 "Alibaba",
-207229173760.0,
+207254028288.0,
 "China"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "DIS",
 "Walt Disney",
-205424721920.0,
+205390577664.0,
 "United States"
 ],
 [
@@ -506,13 +506,13 @@
 [
 "GEV",
 "GE Vernova",
-200265269248.0,
+200169979904.0,
 "United States"
 ],
 [
 "DELL",
 "Dell",
-198767771648.0,
+198716915712.0,
 "United States"
 ],
 [
@@ -524,7 +524,7 @@
 [
 "MCD",
 "McDonald",
-192291061760.0,
+192220479488.0,
 "United States"
 ],
 [
@@ -536,13 +536,13 @@
 [
 "C",
 "Citigroup",
-190745755648.0,
+190811963392.0,
 "United States"
 ],
 [
 "VZ",
 "Verizon",
-189636100096.0,
+189573939200.0,
 "United States"
 ],
 [
@@ -566,7 +566,7 @@
 [
 "TD",
 "Toronto Dominion Bank",
-188009201664.0,
+187960213504.0,
 "Canada"
 ],
 [
@@ -578,7 +578,7 @@
 [
 "APH",
 "Amphenol",
-186725548032.0,
+186700857344.0,
 "United States"
 ],
 [

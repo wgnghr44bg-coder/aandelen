@@ -206,7 +206,7 @@
 [
 "CSCO",
 "Cisco",
-382595727360.0,
+383127126016.0,
 "United States"
 ],
 [
@@ -336,28 +336,28 @@
 "United States"
 ],
 [
-"NESN.SW",
-"Nestlé",
-264501453444.0,
-"Switzerland"
-],
-[
 "LRCX",
 "Lam Research",
 264412004352.0,
 "United States"
 ],
 [
-"OR.PA",
-"L'Oréal",
-263302543092.0,
-"France"
+"NESN.SW",
+"Nestlé",
+264127036415.0,
+"Switzerland"
 ],
 [
 "RY",
 "Royal Bank Of Canada",
 263207796736.0,
 "Canada"
+],
+[
+"OR.PA",
+"L'Oréal",
+262343981566.0,
+"France"
 ],
 [
 "TMO",
@@ -434,7 +434,7 @@
 [
 "SIE.DE",
 "Siemens",
-232775592241.0,
+232904352588.0,
 "Germany"
 ],
 [
@@ -452,7 +452,7 @@
 [
 "MC.PA",
 "LVMH",
-216931075623.0,
+217068854349.0,
 "France"
 ],
 [
@@ -488,7 +488,7 @@
 [
 "ITX.MC",
 "Inditex",
-207294037212.0,
+206034317085.0,
 "Spain"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-193214950851.0,
+193256969129.0,
 "Germany"
 ],
 [

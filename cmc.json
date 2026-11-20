@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-392405025353.0,
+390858624792.0,
 "Switzerland"
 ],
 [
@@ -326,7 +326,7 @@
 [
 "NESN.SW",
 "Nestlé",
-266872827541.0,
+266404801287.0,
 "Switzerland"
 ],
 [
@@ -338,7 +338,7 @@
 [
 "OR.PA",
 "L'Oréal",
-263302543092.0,
+262134295082.0,
 "France"
 ],
 [
@@ -438,12 +438,6 @@
 "United Kingdom"
 ],
 [
-"SIE.DE",
-"Siemens",
-221701263686.0,
-"Germany"
-],
-[
 "0941.HK",
 "China Mobile",
 221237117289.0,
@@ -456,9 +450,15 @@
 "Japan"
 ],
 [
+"SIE.DE",
+"Siemens",
+221143265370.0,
+"Germany"
+],
+[
 "MC.PA",
 "LVMH",
-213183258709.0,
+212218752416.0,
 "France"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-202535094513.0,
+201205380733.0,
 "Spain"
 ],
 [
@@ -518,7 +518,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-196274582488.0,
+197363480683.0,
 "India"
 ],
 [
@@ -536,7 +536,7 @@
 [
 "ALV.DE",
 "Allianz SE",
-190568167425.0,
+189601875861.0,
 "Germany"
 ],
 [
@@ -570,16 +570,16 @@
 "Canada"
 ],
 [
-"IHC.AE",
-"International Holding Company",
-186886299690.0,
-"United Arab Emirates"
-],
-[
 "APH",
 "Amphenol",
 186700857344.0,
 "United States"
+],
+[
+"IHC.AE",
+"International Holding Company",
+186647391030.0,
+"United Arab Emirates"
 ],
 [
 "KLAC",

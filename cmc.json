@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-909580353226.0,
+909088929880.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-590668681184.0,
+592797237046.0,
 "South Korea"
 ],
 [
@@ -182,7 +182,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-402689171430.0,
+401640524725.0,
 "China"
 ],
 [
@@ -206,7 +206,7 @@
 [
 "688825.SS",
 "CXMT",
-381617074367.0,
+380874422290.0,
 "China"
 ],
 [
@@ -224,13 +224,13 @@
 [
 "1398.HK",
 "ICBC",
-357051793602.0,
+355461847334.0,
 "China"
 ],
 [
 "601988.SS",
 "Bank of China",
-356254517209.0,
+355289052172.0,
 "China"
 ],
 [
@@ -312,16 +312,16 @@
 "United Kingdom"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-269701713600.0,
-"China"
-],
-[
 "AMAT",
 "Applied Materials",
 268973981696.0,
 "United States"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+268887039883.0,
+"China"
 ],
 [
 "SHEL",
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-236771937454.0,
+236072121866.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-222895357806.0,
+222757148822.0,
 "China"
 ],
 [
@@ -498,16 +498,16 @@
 "Spain"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-200621997526.0,
-"Australia"
-],
-[
 "GEV",
 "GE Vernova",
 200169979904.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+199894404915.0,
+"Australia"
 ],
 [
 "DELL",

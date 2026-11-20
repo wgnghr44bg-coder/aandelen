@@ -44,7 +44,7 @@
 [
 "TSM",
 "TSMC",
-1656196300800.0,
+1652980711424.0,
 "Taiwan"
 ],
 [
@@ -68,13 +68,13 @@
 [
 "BRK-B",
 "Berkshire Hathaway",
-1210721107968.0,
+1210976043008.0,
 "United States"
 ],
 [
 "LLY",
 "Eli Lilly",
-1201000415232.0,
+1199931523072.0,
 "United States"
 ],
 [
@@ -98,13 +98,13 @@
 [
 "JPM",
 "JPMorgan Chase",
-824566808576.0,
+824646434816.0,
 "United States"
 ],
 [
 "V",
 "Visa",
-750452736000.0,
+749809041408.0,
 "United States"
 ],
 [
@@ -122,13 +122,13 @@
 [
 "XOM",
 "Exxon Mobil",
-652655198208.0,
+652634816512.0,
 "United States"
 ],
 [
 "JNJ",
 "Johnson & Johnson",
-651598692352.0,
+651105206272.0,
 "United States"
 ],
 [
@@ -140,13 +140,13 @@
 [
 "MA",
 "Mastercard",
-545138475008.0,
+544999112704.0,
 "United States"
 ],
 [
 "ABBV",
 "AbbVie",
-506236436480.0,
+505891782656.0,
 "United States"
 ],
 [
@@ -182,19 +182,19 @@
 [
 "CVX",
 "Chevron",
-406777856000.0,
+406582722560.0,
 "United States"
 ],
 [
 "PG",
 "Procter & Gamble",
-392806301696.0,
+392562900992.0,
 "United States"
 ],
 [
 "0700.HK",
 "Tencent",
-383089530000.0,
+383812170000.0,
 "China"
 ],
 [
@@ -236,49 +236,49 @@
 [
 "HD",
 "Home Depot",
-338281627648.0,
+338256691200.0,
 "United States"
 ],
 [
 "MRK",
 "Merck",
-330096377856.0,
+329652666368.0,
 "United States"
 ],
 [
 "BAC",
 "Bank of America",
-324758339584.0,
+324585848832.0,
 "United States"
 ],
 [
 "GE",
 "General Electric",
-319899926528.0,
+319946424320.0,
 "United States"
 ],
 [
 "ORCL",
 "Oracle",
-315418509312.0,
+315480899584.0,
 "United States"
 ],
 [
 "UNH",
 "UnitedHealth",
-304916463616.0,
+304513286144.0,
 "United States"
 ],
 [
 "PM",
 "Philip Morris International",
-287010848768.0,
+286932893696.0,
 "United States"
 ],
 [
 "NVS",
 "Novartis",
-284143419392.0,
+284181200896.0,
 "Switzerland"
 ],
 [
@@ -296,7 +296,7 @@
 [
 "HSBC",
 "HSBC",
-273421484032.0,
+273438572544.0,
 "United Kingdom"
 ],
 [
@@ -308,13 +308,13 @@
 [
 "AZN",
 "AstraZeneca",
-270542077952.0,
+270402502656.0,
 "United Kingdom"
 ],
 [
 "SHEL",
 "Shell",
-264165605376.0,
+264137392128.0,
 "United Kingdom"
 ],
 [
@@ -326,13 +326,13 @@
 [
 "MS",
 "Morgan Stanley",
-258918203392.0,
+258949464064.0,
 "United States"
 ],
 [
 "RTX",
 "RTX",
-256798539776.0,
+256623099904.0,
 "United States"
 ],
 [
@@ -344,19 +344,19 @@
 [
 "RY",
 "Royal Bank Of Canada",
-254029037568.0,
+253973643264.0,
 "Canada"
 ],
 [
 "TMO",
 "Thermo Fisher Scientific",
-248705073152.0,
+248075190272.0,
 "United States"
 ],
 [
 "TM",
 "Toyota",
-243575816192.0,
+243511279616.0,
 "Japan"
 ],
 [
@@ -374,7 +374,7 @@
 [
 "WFC",
 "Wells Fargo",
-236080513024.0,
+236005490688.0,
 "United States"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "SAP",
 "SAP",
-229617401856.0,
+229605851136.0,
 "Germany"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "GS",
 "Goldman Sachs",
-228125802496.0,
+228062347264.0,
 "United States"
 ],
 [
@@ -446,19 +446,19 @@
 [
 "IBM",
 "IBM",
-212066222080.0,
+212122927104.0,
 "United States"
 ],
 [
 "ANET",
 "Arista Networks",
-211809402880.0,
+211771506688.0,
 "United States"
 ],
 [
 "MUFG",
 "Mitsubishi UFJ Financial",
-210365890560.0,
+210309611520.0,
 "Japan"
 ],
 [
@@ -476,19 +476,19 @@
 [
 "AXP",
 "American Express",
-202298834944.0,
+202305552384.0,
 "United States"
 ],
 [
 "BABA",
 "Alibaba",
-201756114944.0,
+201706373120.0,
 "China"
 ],
 [
 "DIS",
 "Walt Disney",
-201479176192.0,
+201513353216.0,
 "United States"
 ],
 [
@@ -506,13 +506,13 @@
 [
 "MCD",
 "McDonald",
-192855687168.0,
+192848625664.0,
 "United States"
 ],
 [
 "VZ",
 "Verizon",
-192806715392.0,
+192640925696.0,
 "United States"
 ],
 [
@@ -536,7 +536,7 @@
 [
 "TTE",
 "TotalEnergies",
-186680754176.0,
+186636926976.0,
 "France"
 ],
 [
@@ -548,31 +548,31 @@
 [
 "GEV",
 "GE Vernova",
-185009274880.0,
+185096617984.0,
 "United States"
 ],
 [
 "TD",
 "Toronto Dominion Bank",
-184383913984.0,
+184318607360.0,
 "Canada"
 ],
 [
 "C",
 "Citigroup",
-183198040064.0,
+183098720256.0,
 "United States"
 ],
 [
 "ABT",
 "Abbott Laboratories",
-178736365568.0,
+178389991424.0,
 "United States"
 ],
 [
 "DELL",
 "Dell",
-176743235584.0,
+176768647168.0,
 "United States"
 ],
 [
@@ -590,7 +590,7 @@
 [
 "NEE",
 "Nextera Energy",
-175198470144.0,
+175020195840.0,
 "United States"
 ],
 [

@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-845918499892.0,
+843498906204.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-562830626697.0,
+557590118719.0,
 "South Korea"
 ],
 [
@@ -216,16 +216,16 @@
 "China"
 ],
 [
-"1398.HK",
-"ICBC",
-358584599071.0,
-"China"
-],
-[
 "CSCO",
 "Cisco",
 357343494144.0,
 "United States"
+],
+[
+"1398.HK",
+"ICBC",
+353809538306.0,
+"China"
 ],
 [
 "PLTR",
@@ -384,16 +384,16 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-235166223600.0,
-"China"
-],
-[
 "CRWD",
 "CrowdStrike",
 234931617792.0,
 "United States"
+],
+[
+"0857.HK",
+"PetroChina",
+233998582161.0,
+"China"
 ],
 [
 "CAT",
@@ -434,7 +434,7 @@
 [
 "0941.HK",
 "China Mobile",
-221482427936.0,
+221344082428.0,
 "China"
 ],
 [
@@ -534,16 +534,16 @@
 "France"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-185456563042.0,
-"Australia"
-],
-[
 "ALV.DE",
 "Allianz SE",
 185437448278.0,
 "Germany"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+185384515145.0,
+"Australia"
 ],
 [
 "GEV",
@@ -594,9 +594,9 @@
 "United States"
 ],
 [
-"3968.HK",
-"CM Bank",
-172967892843.0,
-"China"
+"APH",
+"Amphenol",
+172156895232.0,
+"United States"
 ]
 ]

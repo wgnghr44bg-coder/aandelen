@@ -2,43 +2,43 @@
 [
 "AAPL",
 "Apple",
-5093094064128.0,
+5103702507520.0,
 "United States"
 ],
 [
 "NVDA",
 "NVIDIA",
-4010575134720.0,
+4016249503744.0,
 "United States"
 ],
 [
 "MSFT",
 "Microsoft",
-3689185542144.0,
+3693584842752.0,
 "United States"
 ],
 [
 "GOOG",
 "Alphabet (Google)",
-3453200105472.0,
+3451909308416.0,
 "United States"
 ],
 [
 "AMZN",
 "Amazon",
-2773137227776.0,
+2779246755840.0,
 "United States"
 ],
 [
 "TSM",
 "TSMC",
-1893866536960.0,
+1891143647232.0,
 "Taiwan"
 ],
 [
 "SPCX",
 "SpaceX",
-1825227145216.0,
+1818776043520.0,
 "United States"
 ],
 [
@@ -50,43 +50,43 @@
 [
 "META",
 "Meta Platforms (Facebook)",
-1532185411584.0,
+1536147587072.0,
 "United States"
 ],
 [
 "TSLA",
 "Tesla",
-1531258994688.0,
+1536002228224.0,
 "United States"
 ],
 [
 "AVGO",
 "Broadcom",
-1484598935552.0,
+1491234324480.0,
 "United States"
 ],
 [
 "BRK-B",
 "Berkshire Hathaway",
-1219760881664.0,
+1220993220608.0,
 "United States"
 ],
 [
 "LLY",
 "Eli Lilly",
-1214448795648.0,
+1216788955136.0,
 "United States"
 ],
 [
 "ANT",
 "Anthropic",
-1146724286464.0,
+1155880452096.0,
 "United States"
 ],
 [
 "WMT",
 "Walmart",
-1026230124544.0,
+1027182100480.0,
 "United States"
 ],
 [
@@ -98,37 +98,37 @@
 [
 "JPM",
 "JPMorgan Chase",
-843726979072.0,
+844775948288.0,
 "United States"
 ],
 [
 "MU",
 "Micron Technology",
-796919332864.0,
+802495791104.0,
 "United States"
 ],
 [
 "V",
 "Visa",
-766396071936.0,
+766050893824.0,
 "United States"
 ],
 [
 "AMD",
 "AMD",
-747295211520.0,
+746418012160.0,
 "United States"
 ],
 [
 "JNJ",
 "Johnson & Johnson",
-653127385088.0,
+651731140608.0,
 "United States"
 ],
 [
 "XOM",
 "Exxon Mobil",
-642457141248.0,
+639499763712.0,
 "United States"
 ],
 [
@@ -140,25 +140,25 @@
 [
 "MA",
 "Mastercard",
-555705827328.0,
+555461902336.0,
 "United States"
 ],
 [
 "ASML",
 "ASML",
-532539375616.0,
+533955805184.0,
 "Netherlands"
 ],
 [
 "ABBV",
 "AbbVie",
-510841094144.0,
+510752751616.0,
 "United States"
 ],
 [
 "COST",
 "Costco",
-487092191232.0,
+487074496512.0,
 "United States"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "KO",
 "Coca-Cola",
-414122639360.0,
+412660006912.0,
 "United States"
 ],
 [
@@ -182,19 +182,25 @@
 [
 "0700.HK",
 "Tencent",
-403142790000.0,
+402239490000.0,
 "China"
 ],
 [
 "CVX",
 "Chevron",
-402611929088.0,
+401255792640.0,
 "United States"
 ],
 [
 "PG",
 "Procter & Gamble",
-394869112832.0,
+394451910656.0,
+"United States"
+],
+[
+"PLTR",
+"Palantir",
+383688409088.0,
 "United States"
 ],
 [
@@ -212,13 +218,7 @@
 [
 "CSCO",
 "Cisco",
-380801056768.0,
-"United States"
-],
-[
-"PLTR",
-"Palantir",
-380242821120.0,
+381688119296.0,
 "United States"
 ],
 [
@@ -242,79 +242,79 @@
 [
 "HD",
 "Home Depot",
-345759318016.0,
+346218233856.0,
 "United States"
 ],
 [
 "MRK",
 "Merck",
-334509178880.0,
+334040793088.0,
 "United States"
 ],
 [
 "BAC",
 "Bank of America",
-333384318976.0,
+333487800320.0,
 "United States"
 ],
 [
 "GE",
 "General Electric",
-330667458560.0,
+332108988416.0,
 "United States"
 ],
 [
 "INTC",
 "Intel",
-311659364352.0,
+313478676480.0,
 "United States"
 ],
 [
 "UNH",
 "UnitedHealth",
-300221333504.0,
+300346769408.0,
 "United States"
 ],
 [
 "PANW",
 "Palo Alto Networks",
-290387722240.0,
+291931160576.0,
 "United States"
 ],
 [
 "NVS",
 "Novartis",
-287675154432.0,
+287240749056.0,
 "Switzerland"
 ],
 [
 "PM",
 "Philip Morris International",
-285467770880.0,
+284922249216.0,
 "United States"
 ],
 [
 "HSBC",
 "HSBC",
-284510519296.0,
-"United Kingdom"
-],
-[
-"AZN",
-"AstraZeneca",
-274969952256.0,
+284561768448.0,
 "United Kingdom"
 ],
 [
 "AMAT",
 "Applied Materials",
-272799121408.0,
+275592577024.0,
 "United States"
+],
+[
+"AZN",
+"AstraZeneca",
+274993217536.0,
+"United Kingdom"
 ],
 [
 "MS",
 "Morgan Stanley",
-270413316096.0,
+271672639488.0,
 "United States"
 ],
 [
@@ -326,32 +326,32 @@
 [
 "TXN",
 "Texas Instruments",
-264084193280.0,
-"United States"
-],
-[
-"SHEL",
-"Shell",
-262768443392.0,
-"United Kingdom"
-],
-[
-"RY",
-"Royal Bank Of Canada",
-261643403264.0,
-"Canada"
-],
-[
-"RTX",
-"RTX",
-261568806912.0,
+265267511296.0,
 "United States"
 ],
 [
 "LRCX",
 "Lam Research",
-260558323712.0,
+262563250176.0,
 "United States"
+],
+[
+"RTX",
+"RTX",
+262439190528.0,
+"United States"
+],
+[
+"SHEL",
+"Shell",
+261942542336.0,
+"United Kingdom"
+],
+[
+"RY",
+"Royal Bank Of Canada",
+261318066176.0,
+"Canada"
 ],
 [
 "NESN.SW",
@@ -362,7 +362,7 @@
 [
 "TMO",
 "Thermo Fisher Scientific",
-255318786048.0,
+255600361472.0,
 "United States"
 ],
 [
@@ -374,49 +374,49 @@
 [
 "CAT",
 "Caterpillar",
-249933365248.0,
+251102576640.0,
 "United States"
 ],
 [
 "TM",
 "Toyota",
-248980258816.0,
+249379307520.0,
 "Japan"
 ],
 [
 "AMGN",
 "Amgen",
-243834781696.0,
+243929432064.0,
 "United States"
 ],
 [
 "WFC",
 "Wells Fargo",
-240898490368.0,
+241108926464.0,
 "United States"
 ],
 [
 "NFLX",
 "Netflix",
-239645196288.0,
+239686238208.0,
 "United States"
 ],
 [
 "GS",
 "Goldman Sachs",
-237589331968.0,
+238366670848.0,
 "United States"
 ],
 [
 "LIN",
 "Linde",
-236262883328.0,
+236643893248.0,
 "United Kingdom"
 ],
 [
 "SAP",
 "SAP",
-235365335040.0,
+235284545536.0,
 "Germany"
 ],
 [
@@ -428,13 +428,13 @@
 [
 "ANET",
 "Arista Networks",
-226136391680.0,
+226616475648.0,
 "United States"
 ],
 [
 "IBM",
 "IBM",
-221923819520.0,
+221767876608.0,
 "United States"
 ],
 [
@@ -444,39 +444,39 @@
 "Germany"
 ],
 [
+"MUFG",
+"Mitsubishi UFJ Financial",
+218359463936.0,
+"Japan"
+],
+[
 "0941.HK",
 "China Mobile",
 218292974242.0,
 "China"
 ],
 [
-"MUFG",
-"Mitsubishi UFJ Financial",
-218190577664.0,
-"Japan"
+"DELL",
+"Dell",
+215864786944.0,
+"United States"
 ],
 [
 "BABA",
 "Alibaba",
-215388962816.0,
+214418751488.0,
 "China"
 ],
 [
-"DELL",
-"Dell",
-214631317504.0,
+"CRWD",
+"CrowdStrike",
+212517683200.0,
 "United States"
 ],
 [
 "GILD",
 "Gilead Sciences",
-211902545920.0,
-"United States"
-],
-[
-"CRWD",
-"CrowdStrike",
-210265030656.0,
+211800211456.0,
 "United States"
 ],
 [
@@ -488,19 +488,19 @@
 [
 "AXP",
 "American Express",
-206080737280.0,
+206436122624.0,
 "United States"
 ],
 [
 "DIS",
 "Walt Disney",
-204861079552.0,
+205390397440.0,
 "United States"
 ],
 [
 "GEV",
 "GE Vernova",
-200632500224.0,
+201358376960.0,
 "United States"
 ],
 [
@@ -518,49 +518,49 @@
 [
 "MCD",
 "McDonald",
-194930704384.0,
+195378872320.0,
 "United States"
 ],
 [
 "VZ",
 "Verizon",
-192558039040.0,
+192678215680.0,
 "United States"
 ],
 [
 "PEP",
 "Pepsico",
-191478743040.0,
+191206195200.0,
+"United States"
+],
+[
+"APH",
+"Amphenol",
+190960320512.0,
 "United States"
 ],
 [
 "C",
 "Citigroup",
-190083678208.0,
-"United States"
-],
-[
-"TD",
-"Toronto Dominion Bank",
-189552410624.0,
-"Canada"
-],
-[
-"APH",
-"Amphenol",
-189466427392.0,
+190356783104.0,
 "United States"
 ],
 [
 "ARM",
 "Arm Holdings",
-189058301952.0,
+189614702592.0,
 "United Kingdom"
+],
+[
+"TD",
+"Toronto Dominion Bank",
+189527916544.0,
+"Canada"
 ],
 [
 "KLAC",
 "KLA",
-187496284160.0,
+188297609216.0,
 "United States"
 ],
 [
@@ -576,27 +576,27 @@
 "Germany"
 ],
 [
-"TTE",
-"TotalEnergies",
-184347787264.0,
-"France"
-],
-[
 "CBA.AX",
 "Commonwealth Bank",
 184159722630.0,
 "Australia"
 ],
 [
+"TTE",
+"TotalEnergies",
+183811096576.0,
+"France"
+],
+[
 "ADI",
 "Analog Devices",
-181760507904.0,
+182312910848.0,
 "United States"
 ],
 [
 "BHP",
 "BHP Group",
-180190707712.0,
+180305068032.0,
 "Australia"
 ]
 ]

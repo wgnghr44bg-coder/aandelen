@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-886085171470.0,
+845918499892.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-583268602825.0,
+562830626697.0,
 "South Korea"
 ],
 [
@@ -534,6 +534,12 @@
 "France"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+185456563042.0,
+"Australia"
+],
+[
 "ALV.DE",
 "Allianz SE",
 185437448278.0,
@@ -544,12 +550,6 @@
 "GE Vernova",
 185096617984.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-184414659669.0,
-"Australia"
 ],
 [
 "TD",

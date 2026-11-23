@@ -38,7 +38,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1694338240254.0,
+1693048794430.0,
 "Saudi Arabia"
 ],
 [
@@ -320,7 +320,7 @@
 [
 "NESN.SW",
 "Nestlé",
-261430904185.0,
+261706986545.0,
 "Switzerland"
 ],
 [
@@ -440,7 +440,7 @@
 [
 "SIE.DE",
 "Siemens",
-218028707764.0,
+218365096331.0,
 "Germany"
 ],
 [
@@ -470,7 +470,7 @@
 [
 "MC.PA",
 "LVMH",
-206170510411.0,
+206359484446.0,
 "France"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-200331391214.0,
+200468510528.0,
 "Spain"
 ],
 [
@@ -522,15 +522,9 @@
 "United States"
 ],
 [
-"IHC.AE",
-"International Holding Company",
-186886299690.0,
-"United Arab Emirates"
-],
-[
 "ALV.DE",
 "Allianz SE",
-186729605928.0,
+186894239256.0,
 "Germany"
 ],
 [
@@ -538,6 +532,12 @@
 "TotalEnergies",
 186636926976.0,
 "France"
+],
+[
+"IHC.AE",
+"International Holding Company",
+186527936699.0,
+"United Arab Emirates"
 ],
 [
 "GEV",

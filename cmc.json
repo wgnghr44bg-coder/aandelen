@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-856285786540.0,
+857735451194.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-559918854526.0,
+561488735273.0,
 "South Korea"
 ],
 [
@@ -150,12 +150,6 @@
 "United States"
 ],
 [
-"601939.SS",
-"China Construction Bank",
-490775104700.0,
-"China"
-],
-[
 "COST",
 "Costco",
 488395014144.0,
@@ -168,6 +162,12 @@
 "Netherlands"
 ],
 [
+"601939.SS",
+"China Construction Bank",
+487639126274.0,
+"China"
+],
+[
 "KO",
 "Coca-Cola",
 417241497600.0,
@@ -176,7 +176,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-412201316099.0,
+411676878848.0,
 "China"
 ],
 [
@@ -206,13 +206,13 @@
 [
 "688825.SS",
 "CXMT",
-367678864315.0,
+366299405372.0,
 "China"
 ],
 [
 "601988.SS",
 "Bank of China",
-359215438093.0,
+357766999834.0,
 "China"
 ],
 [
@@ -224,7 +224,7 @@
 [
 "1398.HK",
 "ICBC",
-355151159556.0,
+353559585366.0,
 "China"
 ],
 [
@@ -300,16 +300,16 @@
 "United States"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-270643717397.0,
-"China"
-],
-[
 "AZN",
 "AstraZeneca",
 270402502656.0,
 "United Kingdom"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+269576007776.0,
+"China"
 ],
 [
 "SHEL",
@@ -384,16 +384,16 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-235151215095.0,
-"China"
-],
-[
 "CRWD",
 "CrowdStrike",
 234931617792.0,
 "United States"
+],
+[
+"0857.HK",
+"PetroChina",
+234217141492.0,
+"China"
 ],
 [
 "CAT",
@@ -434,7 +434,7 @@
 [
 "0941.HK",
 "China Mobile",
-218839979468.0,
+218286666200.0,
 "China"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-198751790273.0,
+198328263360.0,
 "India"
 ],
 [
@@ -540,16 +540,16 @@
 "Germany"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-185435144600.0,
-"Australia"
-],
-[
 "GEV",
 "GE Vernova",
 185096617984.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+184391949129.0,
+"Australia"
 ],
 [
 "TD",

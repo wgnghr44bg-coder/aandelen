@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-843498906204.0,
+851241845390.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-557590118719.0,
+563878738267.0,
 "South Korea"
 ],
 [
@@ -152,7 +152,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-501031294383.0,
+488858909461.0,
 "China"
 ],
 [
@@ -174,16 +174,16 @@
 "United States"
 ],
 [
-"601288.SS",
-"Agricultural Bank of China",
-408172598473.0,
-"China"
-],
-[
 "CVX",
 "Chevron",
 406582722560.0,
 "United States"
+],
+[
+"601288.SS",
+"Agricultural Bank of China",
+406071330772.0,
+"China"
 ],
 [
 "PG",
@@ -206,13 +206,7 @@
 [
 "688825.SS",
 "CXMT",
-373723395752.0,
-"China"
-],
-[
-"601988.SS",
-"Bank of China",
-365144712774.0,
+368408785459.0,
 "China"
 ],
 [
@@ -222,9 +216,15 @@
 "United States"
 ],
 [
+"601988.SS",
+"Bank of China",
+356439264135.0,
+"China"
+],
+[
 "1398.HK",
 "ICBC",
-353809538306.0,
+351763088470.0,
 "China"
 ],
 [
@@ -288,12 +288,6 @@
 "United States"
 ],
 [
-"600519.SS",
-"Kweichow Moutai",
-278778923434.0,
-"China"
-],
-[
 "HSBC",
 "HSBC",
 273422565376.0,
@@ -310,6 +304,12 @@
 "AstraZeneca",
 270402502656.0,
 "United Kingdom"
+],
+[
+"600519.SS",
+"Kweichow Moutai",
+268686027442.0,
+"China"
 ],
 [
 "SHEL",
@@ -392,7 +392,7 @@
 [
 "0857.HK",
 "PetroChina",
-233998582161.0,
+233765040494.0,
 "China"
 ],
 [
@@ -434,7 +434,7 @@
 [
 "0941.HK",
 "China Mobile",
-221344082428.0,
+218715618125.0,
 "China"
 ],
 [
@@ -534,16 +534,16 @@
 "France"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+185572943092.0,
+"Australia"
+],
+[
 "ALV.DE",
 "Allianz SE",
 185437448278.0,
 "Germany"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-185384515145.0,
-"Australia"
 ],
 [
 "GEV",

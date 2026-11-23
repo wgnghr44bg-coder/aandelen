@@ -194,7 +194,7 @@
 [
 "RO.SW",
 "Roche",
-384281242908.0,
+385041431749.0,
 "Switzerland"
 ],
 [
@@ -320,7 +320,7 @@
 [
 "NESN.SW",
 "Nestlé",
-261400226196.0,
+262075122412.0,
 "Switzerland"
 ],
 [
@@ -330,16 +330,16 @@
 "United States"
 ],
 [
+"OR.PA",
+"L'Oréal",
+257355140307.0,
+"France"
+],
+[
 "RTX",
 "RTX",
 256623099904.0,
 "United States"
-],
-[
-"OR.PA",
-"L'Oréal",
-256474800048.0,
-"France"
 ],
 [
 "RY",
@@ -432,16 +432,16 @@
 "United States"
 ],
 [
+"SIE.DE",
+"Siemens",
+219206094796.0,
+"Germany"
+],
+[
 "0941.HK",
 "China Mobile",
 218405479780.0,
 "China"
-],
-[
-"SIE.DE",
-"Siemens",
-217313848250.0,
-"Germany"
 ],
 [
 "IBM",
@@ -462,16 +462,16 @@
 "Japan"
 ],
 [
+"MC.PA",
+"LVMH",
+206521449312.0,
+"France"
+],
+[
 "GILD",
 "Gilead Sciences",
 206429536256.0,
 "United States"
-],
-[
-"MC.PA",
-"LVMH",
-206170510411.0,
-"France"
 ],
 [
 "AXP",
@@ -494,13 +494,13 @@
 [
 "ITX.MC",
 "Inditex",
-200605647874.0,
+201154125133.0,
 "Spain"
 ],
 [
 "RELIANCE.NS",
 "Reliance Industries",
-197449906020.0,
+196837289645.0,
 "India"
 ],
 [
@@ -524,13 +524,13 @@
 [
 "ALV.DE",
 "Allianz SE",
-186976546906.0,
+187388103182.0,
 "Germany"
 ],
 [
 "IHC.AE",
 "International Holding Company",
-186826572525.0,
+186886299690.0,
 "United Arab Emirates"
 ],
 [

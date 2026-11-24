@@ -68,7 +68,7 @@
 [
 "LLY",
 "Eli Lilly",
-1256057339904.0,
+1253803819008.0,
 "United States"
 ],
 [
@@ -146,7 +146,7 @@
 [
 "ABBV",
 "AbbVie",
-531097976832.0,
+530779799552.0,
 "United States"
 ],
 [
@@ -182,13 +182,13 @@
 [
 "CVX",
 "Chevron",
-407733960704.0,
+407285170176.0,
 "United States"
 ],
 [
 "PG",
 "Procter & Gamble",
-399910273024.0,
+399748038656.0,
 "United States"
 ],
 [
@@ -248,7 +248,7 @@
 [
 "ORCL",
 "Oracle",
-341420212224.0,
+341389017088.0,
 "United States"
 ],
 [
@@ -320,7 +320,7 @@
 [
 "MS",
 "Morgan Stanley",
-263841808384.0,
+263826161664.0,
 "United States"
 ],
 [
@@ -476,19 +476,19 @@
 [
 "BABA",
 "Alibaba",
-211134922752.0,
+211110051840.0,
 "China"
 ],
 [
 "DIS",
 "Walt Disney",
-209267785728.0,
+209250713600.0,
 "United States"
 ],
 [
 "AXP",
 "American Express",
-207012806656.0,
+206952464384.0,
 "United States"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "C",
 "Citigroup",
-188577447936.0,
+188445032448.0,
 "United States"
 ],
 [
@@ -550,6 +550,12 @@
 "Commonwealth Bank",
 187966697972.0,
 "Australia"
+],
+[
+"DELL",
+"Dell",
+187742781440.0,
+"United States"
 ],
 [
 "ALV.DE",
@@ -570,15 +576,9 @@
 "United Arab Emirates"
 ],
 [
-"DELL",
-"Dell",
-184703598592.0,
-"United States"
-],
-[
 "ABT",
 "Abbott Laboratories",
-182563979264.0,
+182529327104.0,
 "United States"
 ],
 [

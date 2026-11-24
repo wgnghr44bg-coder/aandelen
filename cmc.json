@@ -32,7 +32,7 @@
 [
 "TSM",
 "TSMC",
-1813502099456.0,
+1811116457984.0,
 "Taiwan"
 ],
 [
@@ -74,7 +74,7 @@
 [
 "BRK-B",
 "Berkshire Hathaway",
-1226644389888.0,
+1226293772288.0,
 "United States"
 ],
 [
@@ -98,7 +98,7 @@
 [
 "JPM",
 "JPMorgan Chase",
-842492149760.0,
+842093821952.0,
 "United States"
 ],
 [
@@ -110,7 +110,7 @@
 [
 "MU",
 "Micron Technology",
-712879112192.0,
+712559034368.0,
 "United States"
 ],
 [
@@ -122,13 +122,13 @@
 [
 "JNJ",
 "Johnson & Johnson",
-665669402624.0,
+665525026816.0,
 "United States"
 ],
 [
 "XOM",
 "Exxon Mobil",
-646189678592.0,
+645455347712.0,
 "United States"
 ],
 [
@@ -140,13 +140,13 @@
 [
 "MA",
 "Mastercard",
-564112719872.0,
+564034273280.0,
 "United States"
 ],
 [
 "ABBV",
 "AbbVie",
-530903564288.0,
+531097976832.0,
 "United States"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "KO",
 "Coca-Cola",
-420424941568.0,
+419951706112.0,
 "United States"
 ],
 [
@@ -182,19 +182,19 @@
 [
 "CVX",
 "Chevron",
-407636410368.0,
+407733960704.0,
 "United States"
 ],
 [
 "PG",
 "Procter & Gamble",
-399840739328.0,
+399910273024.0,
 "United States"
 ],
 [
 "0700.HK",
 "Tencent",
-393748470000.0,
+394200120000.0,
 "China"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "HD",
 "Home Depot",
-353010155520.0,
+352930365440.0,
 "United States"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "MRK",
 "Merck",
-349152772096.0,
+349004857344.0,
 "United States"
 ],
 [
@@ -254,25 +254,25 @@
 [
 "BAC",
 "Bank of America",
-335212183552.0,
+335074164736.0,
 "United States"
 ],
 [
 "GE",
 "General Electric",
-328647245824.0,
+328636923904.0,
 "United States"
 ],
 [
 "UNH",
 "UnitedHealth",
-306493489152.0,
+306332205056.0,
 "United States"
 ],
 [
 "NVS",
 "Novartis",
-291612917760.0,
+291622387712.0,
 "Switzerland"
 ],
 [
@@ -290,13 +290,13 @@
 [
 "PM",
 "Philip Morris International",
-286777049088.0,
+286714691584.0,
 "United States"
 ],
 [
 "AZN",
 "AstraZeneca",
-284066086912.0,
+284128116736.0,
 "United Kingdom"
 ],
 [
@@ -326,19 +326,19 @@
 [
 "RTX",
 "RTX",
-263680671744.0,
+263586217984.0,
 "United States"
 ],
 [
 "SHEL",
 "Shell",
-263515815936.0,
+263487602688.0,
 "United Kingdom"
 ],
 [
 "RY",
 "Royal Bank Of Canada",
-261857984512.0,
+261837225984.0,
 "Canada"
 ],
 [
@@ -350,7 +350,7 @@
 [
 "TMO",
 "Thermo Fisher Scientific",
-257816068096.0,
+257738244096.0,
 "United States"
 ],
 [
@@ -368,13 +368,13 @@
 [
 "CAT",
 "Caterpillar",
-247375396864.0,
+247389143040.0,
 "United States"
 ],
 [
 "TM",
 "Toyota",
-246488694784.0,
+246421815296.0,
 "Japan"
 ],
 [
@@ -386,7 +386,7 @@
 [
 "WFC",
 "Wells Fargo",
-243780272128.0,
+243720241152.0,
 "United States"
 ],
 [
@@ -398,7 +398,7 @@
 [
 "SAP",
 "SAP",
-240882434048.0,
+240940138496.0,
 "Germany"
 ],
 [
@@ -416,7 +416,7 @@
 [
 "GS",
 "Goldman Sachs",
-232478277632.0,
+232484061184.0,
 "United States"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "IBM",
 "IBM",
-222661017600.0,
+222689361920.0,
 "United States"
 ],
 [
@@ -440,7 +440,7 @@
 [
 "MUFG",
 "Mitsubishi UFJ Financial",
-219485323264.0,
+219203846144.0,
 "Japan"
 ],
 [
@@ -464,7 +464,7 @@
 [
 "ANET",
 "Arista Networks",
-212940144640.0,
+212959100928.0,
 "United States"
 ],
 [
@@ -482,7 +482,7 @@
 [
 "DIS",
 "Walt Disney",
-209284874240.0,
+209267785728.0,
 "United States"
 ],
 [
@@ -500,7 +500,7 @@
 [
 "MCD",
 "McDonald",
-198219661312.0,
+198113787904.0,
 "United States"
 ],
 [
@@ -518,7 +518,7 @@
 [
 "VZ",
 "Verizon",
-195417817088.0,
+195459252224.0,
 "United States"
 ],
 [
@@ -530,19 +530,19 @@
 [
 "GEV",
 "GE Vernova",
-190623596544.0,
+190739546112.0,
 "United States"
 ],
 [
 "TD",
 "Toronto Dominion Bank",
-188874719232.0,
+188956360704.0,
 "Canada"
 ],
 [
 "C",
 "Citigroup",
-188593995776.0,
+188577447936.0,
 "United States"
 ],
 [
@@ -560,7 +560,7 @@
 [
 "TTE",
 "TotalEnergies",
-186724548608.0,
+186636926976.0,
 "France"
 ],
 [
@@ -578,25 +578,25 @@
 [
 "ABT",
 "Abbott Laboratories",
-182581280768.0,
+182563979264.0,
 "United States"
 ],
 [
 "APH",
 "Amphenol",
-181540077568.0,
+181416624128.0,
 "United States"
 ],
 [
 "WELL",
 "Welltower",
-179767427072.0,
+179837124608.0,
 "United States"
 ],
 [
 "NVO",
 "Novo Nordisk",
-177637752832.0,
+177615732736.0,
 "Denmark"
 ]
 ]

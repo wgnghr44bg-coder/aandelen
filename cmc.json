@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-920204743387.0,
+918265434440.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-610596473296.0,
+607971406239.0,
 "South Korea"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-416709018075.0,
+415132580235.0,
 "China"
 ],
 [
@@ -198,16 +198,16 @@
 "United States"
 ],
 [
-"688825.SS",
-"CXMT",
-385324410195.0,
-"China"
-],
-[
 "PLTR",
 "Palantir",
 383977553920.0,
 "United States"
+],
+[
+"688825.SS",
+"CXMT",
+383942175832.0,
+"China"
 ],
 [
 "RO.SW",
@@ -224,7 +224,7 @@
 [
 "601988.SS",
 "Bank of China",
-361389518815.0,
+362840910639.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-350858422595.0,
+351312908436.0,
 "China"
 ],
 [
@@ -314,7 +314,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-273470617751.0,
+273845991957.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-224981706244.0,
+223931468223.0,
 "China"
 ],
 [
@@ -576,16 +576,16 @@
 "Australia"
 ],
 [
+"IHC.AE",
+"International Holding Company",
+186826572525.0,
+"United Arab Emirates"
+],
+[
 "ALV.DE",
 "Allianz SE",
 186527736653.0,
 "Germany"
-],
-[
-"IHC.AE",
-"International Holding Company",
-186348755204.0,
-"United Arab Emirates"
 ],
 [
 "TTE",

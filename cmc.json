@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1695627686078.0,
+1695582542222.0,
 "Saudi Arabia"
 ],
 [
@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-917671029310.0,
+918511611846.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-607577858460.0,
+608134397046.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-488132238599.0,
+488895493779.0,
 "China"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-416627705669.0,
+417279154660.0,
 "China"
 ],
 [
@@ -200,20 +200,20 @@
 [
 "688825.SS",
 "CXMT",
-385461831811.0,
+386064549101.0,
 "China"
+],
+[
+"RO.SW",
+"Roche",
+384232754770.0,
+"Switzerland"
 ],
 [
 "PLTR",
 "Palantir",
 383977553920.0,
 "United States"
-],
-[
-"RO.SW",
-"Roche",
-382748676834.0,
-"Switzerland"
 ],
 [
 "CSCO",
@@ -224,7 +224,7 @@
 [
 "601988.SS",
 "Bank of China",
-363253786151.0,
+363821778411.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-349261979150.0,
+349288696744.0,
 "China"
 ],
 [
@@ -314,7 +314,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-273980226560.0,
+274408628560.0,
 "China"
 ],
 [
@@ -342,16 +342,16 @@
 "United Kingdom"
 ],
 [
+"NESN.SW",
+"Nestlé",
+262174517452.0,
+"Switzerland"
+],
+[
 "LRCX",
 "Lam Research",
 262026084352.0,
 "United States"
-],
-[
-"NESN.SW",
-"Nestlé",
-261199337028.0,
-"Switzerland"
 ],
 [
 "RY",
@@ -360,16 +360,16 @@
 "Canada"
 ],
 [
+"OR.PA",
+"L'Oréal",
+255274333175.0,
+"France"
+],
+[
 "TMO",
 "Thermo Fisher Scientific",
 254944575488.0,
 "United States"
-],
-[
-"OR.PA",
-"L'Oréal",
-254128400273.0,
-"France"
 ],
 [
 "CAT",
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-223344306915.0,
+223361392149.0,
 "China"
 ],
 [
@@ -438,21 +438,21 @@
 "United States"
 ],
 [
+"SIE.DE",
+"Siemens",
+217946736682.0,
+"Germany"
+],
+[
 "MUFG",
 "Mitsubishi UFJ Financial",
 217852837888.0,
 "Japan"
 ],
 [
-"SIE.DE",
-"Siemens",
-217775799134.0,
-"Germany"
-],
-[
 "0941.HK",
 "China Mobile",
-217743887789.0,
+217760544606.0,
 "China"
 ],
 [
@@ -482,7 +482,7 @@
 [
 "MC.PA",
 "LVMH",
-207580478554.0,
+209038743956.0,
 "France"
 ],
 [
@@ -506,7 +506,7 @@
 [
 "ITX.MC",
 "Inditex",
-197434472511.0,
+198575024482.0,
 "Spain"
 ],
 [
@@ -518,7 +518,7 @@
 [
 "2454.TW",
 "MediaTek",
-196726755684.0,
+196523535552.0,
 "Taiwan"
 ],
 [
@@ -572,20 +572,20 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-187692329519.0,
+187418760870.0,
 "Australia"
-],
-[
-"IHC.AE",
-"International Holding Company",
-186473293849.0,
-"United Arab Emirates"
 ],
 [
 "ALV.DE",
 "Allianz SE",
-186242858969.0,
+186956175656.0,
 "Germany"
+],
+[
+"IHC.AE",
+"International Holding Company",
+186338606017.0,
+"United Arab Emirates"
 ],
 [
 "TTE",

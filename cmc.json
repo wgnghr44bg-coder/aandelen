@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-925326016868.0,
+933332235523.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-619504145827.0,
+621605910738.0,
 "South Korea"
 ],
 [
@@ -164,7 +164,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-484692671458.0,
+483513362216.0,
 "China"
 ],
 [
@@ -176,7 +176,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-408632622002.0,
+410210339076.0,
 "China"
 ],
 [
@@ -192,16 +192,16 @@
 "China"
 ],
 [
-"688825.SS",
-"CXMT",
-394256462035.0,
-"China"
-],
-[
 "PG",
 "Procter & Gamble",
 393096003584.0,
 "United States"
+],
+[
+"688825.SS",
+"CXMT",
+392341046026.0,
+"China"
 ],
 [
 "PLTR",
@@ -224,7 +224,7 @@
 [
 "601988.SS",
 "Bank of China",
-358293512744.0,
+357809349142.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-352247463109.0,
+351792944214.0,
 "China"
 ],
 [
@@ -314,7 +314,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-270953723730.0,
+271737028035.0,
 "China"
 ],
 [
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-226748564880.0,
+226631859565.0,
 "China"
 ],
 [
@@ -570,16 +570,16 @@
 "Canada"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+186979672856.0,
+"Australia"
+],
+[
 "IHC.AE",
 "International Holding Company",
 186826572525.0,
 "United Arab Emirates"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-186691273595.0,
-"Australia"
 ],
 [
 "ALV.DE",

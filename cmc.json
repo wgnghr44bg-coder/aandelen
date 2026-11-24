@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-922628904552.0,
+920204743387.0,
 "South Korea"
 ],
 [
@@ -170,7 +170,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-416183565034.0,
+416709018075.0,
 "China"
 ],
 [
@@ -200,7 +200,7 @@
 [
 "688825.SS",
 "CXMT",
-385537061635.0,
+385324410195.0,
 "China"
 ],
 [
@@ -224,7 +224,7 @@
 [
 "601988.SS",
 "Bank of China",
-361873329210.0,
+361389518815.0,
 "China"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-350403936755.0,
+350858422595.0,
 "China"
 ],
 [
@@ -314,7 +314,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-273583226077.0,
+273470617751.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-224514918933.0,
+224981706244.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-218023987990.0,
+218162245819.0,
 "China"
 ],
 [
@@ -576,16 +576,16 @@
 "Australia"
 ],
 [
-"IHC.AE",
-"International Holding Company",
-186826572525.0,
-"United Arab Emirates"
-],
-[
 "ALV.DE",
 "Allianz SE",
 186527736653.0,
 "Germany"
+],
+[
+"IHC.AE",
+"International Holding Company",
+186348755204.0,
+"United Arab Emirates"
 ],
 [
 "TTE",

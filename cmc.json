@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-915136274941.0,
+929693063409.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-615825969724.0,
+630013120396.0,
 "South Korea"
 ],
 [
@@ -228,16 +228,16 @@
 "China"
 ],
 [
+"1398.HK",
+"ICBC",
+354520057582.0,
+"China"
+],
+[
 "ORCL",
 "Oracle",
 354421047296.0,
 "United States"
-],
-[
-"1398.HK",
-"ICBC",
-353156500898.0,
-"China"
 ],
 [
 "HD",
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-232233463952.0,
+229899474661.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-218316363509.0,
+218454631393.0,
 "China"
 ],
 [
@@ -510,6 +510,12 @@
 "Spain"
 ],
 [
+"2454.TW",
+"MediaTek",
+196990383286.0,
+"Taiwan"
+],
+[
 "RELIANCE.NS",
 "Reliance Industries",
 196796221239.0,
@@ -570,16 +576,16 @@
 "United Arab Emirates"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+186691273595.0,
+"Australia"
+],
+[
 "ALV.DE",
 "Allianz SE",
 186487037667.0,
 "Germany"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-185837118764.0,
-"Australia"
 ],
 [
 "TTE",
@@ -592,11 +598,5 @@
 "Analog Devices",
 183529177088.0,
 "United States"
-],
-[
-"BHP",
-"BHP Group",
-179428261888.0,
-"Australia"
 ]
 ]

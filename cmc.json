@@ -534,12 +534,6 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-189485154072.0,
-"Australia"
-],
-[
 "TD",
 "Toronto Dominion Bank",
 188956360704.0,
@@ -550,6 +544,12 @@
 "Citigroup",
 188445032448.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+188041751998.0,
+"Australia"
 ],
 [
 "DELL",

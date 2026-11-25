@@ -98,7 +98,7 @@
 [
 "005930.KS",
 "Samsung",
-830847827372.0,
+837634196108.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-553270614276.0,
+555370282763.0,
 "South Korea"
 ],
 [
@@ -218,7 +218,7 @@
 [
 "688825.SS",
 "CXMT",
-368492949926.0,
+368918093220.0,
 "China"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "1398.HK",
 "ICBC",
-347675723291.0,
+347221239191.0,
 "China"
 ],
 [
@@ -308,7 +308,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-274578156991.0,
+274812692591.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-218990903757.0,
+218576165287.0,
 "China"
 ],
 [
@@ -492,6 +492,12 @@
 "United States"
 ],
 [
+"RELIANCE.NS",
+"Reliance Industries",
+202564653305.0,
+"India"
+],
+[
 "ITX.MC",
 "Inditex",
 198953809530.0,
@@ -502,12 +508,6 @@
 "McDonald",
 198113787904.0,
 "United States"
-],
-[
-"RELIANCE.NS",
-"Reliance Industries",
-196796221239.0,
-"India"
 ],
 [
 "VZ",
@@ -540,16 +540,16 @@
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+187787583192.0,
+"Australia"
+],
+[
 "DELL",
 "Dell",
 187742781440.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-187621662135.0,
-"Australia"
 ],
 [
 "TTE",
@@ -566,7 +566,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-186353836261.0,
+186348755204.0,
 "United Arab Emirates"
 ],
 [

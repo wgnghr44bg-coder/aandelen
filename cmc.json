@@ -44,7 +44,7 @@
 [
 "2222.SR",
 "Saudi Aramco",
-1695989246854.0,
+1695492153993.0,
 "Saudi Arabia"
 ],
 [
@@ -98,7 +98,7 @@
 [
 "005930.KS",
 "Samsung",
-835852801674.0,
+830847827372.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-556604983275.0,
+553270614276.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-484335912094.0,
+486081109974.0,
 "China"
 ],
 [
@@ -176,7 +176,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-410767103413.0,
+411299782091.0,
 "China"
 ],
 [
@@ -200,7 +200,7 @@
 [
 "RO.SW",
 "Roche",
-393146719829.0,
+392864559599.0,
 "Switzerland"
 ],
 [
@@ -218,13 +218,13 @@
 [
 "688825.SS",
 "CXMT",
-370447991766.0,
+368492949926.0,
 "China"
 ],
 [
 "601988.SS",
 "Bank of China",
-357836219947.0,
+358352298221.0,
 "China"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "1398.HK",
 "ICBC",
-347501664851.0,
+347675723291.0,
 "China"
 ],
 [
@@ -308,13 +308,13 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-274952953802.0,
+274578156991.0,
 "China"
 ],
 [
 "NESN.SW",
 "Nestlé",
-265664873550.0,
+265474206662.0,
 "Switzerland"
 ],
 [
@@ -342,16 +342,16 @@
 "Canada"
 ],
 [
-"OR.PA",
-"L'Oréal",
-257912209542.0,
-"France"
-],
-[
 "TMO",
 "Thermo Fisher Scientific",
 257738244096.0,
 "United States"
+],
+[
+"OR.PA",
+"L'Oréal",
+257601402810.0,
+"France"
 ],
 [
 "AMAT",
@@ -420,16 +420,16 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-224781853525.0,
-"China"
-],
-[
 "IBM",
 "IBM",
 222689361920.0,
 "United States"
+],
+[
+"0857.HK",
+"PetroChina",
+221830175838.0,
+"China"
 ],
 [
 "GILD",
@@ -438,16 +438,16 @@
 "United States"
 ],
 [
-"0941.HK",
-"China Mobile",
-219439243156.0,
-"China"
-],
-[
 "MUFG",
 "Mitsubishi UFJ Financial",
 219203846144.0,
 "Japan"
+],
+[
+"0941.HK",
+"China Mobile",
+218990903757.0,
+"China"
 ],
 [
 "CRWD",
@@ -458,7 +458,7 @@
 [
 "SIE.DE",
 "Siemens",
-213455393249.0,
+213198160862.0,
 "Germany"
 ],
 [
@@ -470,7 +470,7 @@
 [
 "MC.PA",
 "LVMH",
-212407298879.0,
+212151329538.0,
 "France"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "ITX.MC",
 "Inditex",
-199193855519.0,
+198953809530.0,
 "Spain"
 ],
 [
@@ -540,28 +540,28 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-187919622663.0,
-"Australia"
-],
-[
 "DELL",
 "Dell",
 187742781440.0,
 "United States"
 ],
 [
-"ALV.DE",
-"Allianz SE",
-186771487810.0,
-"Germany"
+"CBA.AX",
+"Commonwealth Bank",
+187621662135.0,
+"Australia"
 ],
 [
 "TTE",
 "TotalEnergies",
 186636926976.0,
 "France"
+],
+[
+"ALV.DE",
+"Allianz SE",
+186546411859.0,
+"Germany"
 ],
 [
 "IHC.AE",

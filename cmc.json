@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-852613595624.0,
+848241205886.0,
 "South Korea"
 ],
 [
@@ -132,16 +132,16 @@
 "United States"
 ],
 [
-"000660.KS",
-"SK Hynix",
-565022479374.0,
-"South Korea"
-],
-[
 "MA",
 "Mastercard",
 564034273280.0,
 "United States"
+],
+[
+"000660.KS",
+"SK Hynix",
+559235466451.0,
+"South Korea"
 ],
 [
 "ABBV",
@@ -234,16 +234,16 @@
 "United States"
 ],
 [
-"1398.HK",
-"ICBC",
-349319879520.0,
-"China"
-],
-[
 "MRK",
 "Merck",
 349004857344.0,
 "United States"
+],
+[
+"1398.HK",
+"ICBC",
+347728941685.0,
+"China"
 ],
 [
 "ORCL",
@@ -420,16 +420,16 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-223381332754.0,
-"China"
-],
-[
 "IBM",
 "IBM",
 222689361920.0,
 "United States"
+],
+[
+"0857.HK",
+"PetroChina",
+221747416930.0,
+"China"
 ],
 [
 "GILD",
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-217779985196.0,
+217918263658.0,
 "China"
 ],
 [
@@ -510,12 +510,6 @@
 "India"
 ],
 [
-"2454.TW",
-"MediaTek",
-196249275385.0,
-"Taiwan"
-],
-[
 "VZ",
 "Verizon",
 195459252224.0,
@@ -552,6 +546,18 @@
 "United States"
 ],
 [
+"2454.TW",
+"MediaTek",
+187284809303.0,
+"Taiwan"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+187042480334.0,
+"Australia"
+],
+[
 "ALV.DE",
 "Allianz SE",
 186771487810.0,
@@ -568,12 +574,6 @@
 "International Holding Company",
 186353836261.0,
 "United Arab Emirates"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-185765616285.0,
-"Australia"
 ],
 [
 "ABT",

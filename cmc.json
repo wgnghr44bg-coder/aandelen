@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-854071025492.0,
+852613595624.0,
 "South Korea"
 ],
 [
@@ -134,7 +134,7 @@
 [
 "000660.KS",
 "SK Hynix",
-565548576010.0,
+565022479374.0,
 "South Korea"
 ],
 [
@@ -564,16 +564,16 @@
 "France"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-186454005365.0,
-"Australia"
-],
-[
 "IHC.AE",
 "International Holding Company",
 186353836261.0,
 "United Arab Emirates"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+185765616285.0,
+"Australia"
 ],
 [
 "ABT",

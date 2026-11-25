@@ -98,7 +98,7 @@
 [
 "005930.KS",
 "Samsung",
-839496426411.0,
+835852801674.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-558709369816.0,
+556604983275.0,
 "South Korea"
 ],
 [
@@ -156,16 +156,16 @@
 "Netherlands"
 ],
 [
+"601939.SS",
+"China Construction Bank",
+484335912094.0,
+"China"
+],
+[
 "COST",
 "Costco",
 483768729600.0,
 "United States"
-],
-[
-"601939.SS",
-"China Construction Bank",
-478832121324.0,
-"China"
 ],
 [
 "KO",
@@ -176,7 +176,7 @@
 [
 "601288.SS",
 "Agricultural Bank of China",
-408137351221.0,
+410767103413.0,
 "China"
 ],
 [
@@ -210,21 +210,21 @@
 "United States"
 ],
 [
-"688825.SS",
-"CXMT",
-373427751539.0,
-"China"
-],
-[
 "CSCO",
 "Cisco",
 370550702080.0,
 "United States"
 ],
 [
+"688825.SS",
+"CXMT",
+370447991766.0,
+"China"
+],
+[
 "601988.SS",
 "Bank of China",
-356867780630.0,
+357836219947.0,
 "China"
 ],
 [
@@ -242,7 +242,7 @@
 [
 "1398.HK",
 "ICBC",
-345228929948.0,
+347501664851.0,
 "China"
 ],
 [
@@ -308,7 +308,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-272600934074.0,
+274952953802.0,
 "China"
 ],
 [
@@ -422,7 +422,7 @@
 [
 "0857.HK",
 "PetroChina",
-224198299025.0,
+224781853525.0,
 "China"
 ],
 [
@@ -438,16 +438,16 @@
 "United States"
 ],
 [
+"0941.HK",
+"China Mobile",
+219439243156.0,
+"China"
+],
+[
 "MUFG",
 "Mitsubishi UFJ Financial",
 219203846144.0,
 "Japan"
-],
-[
-"0941.HK",
-"China Mobile",
-219024424487.0,
-"China"
 ],
 [
 "CRWD",
@@ -540,16 +540,16 @@
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+187919622663.0,
+"Australia"
+],
+[
 "DELL",
 "Dell",
 187742781440.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-187486588986.0,
-"Australia"
 ],
 [
 "ALV.DE",

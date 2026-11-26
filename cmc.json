@@ -90,16 +90,16 @@
 "United States"
 ],
 [
+"005930.KS",
+"Samsung",
+842442107701.0,
+"South Korea"
+],
+[
 "JPM",
 "JPMorgan Chase",
 841137782784.0,
 "United States"
-],
-[
-"005930.KS",
-"Samsung",
-840987141874.0,
-"South Korea"
 ],
 [
 "V",
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-559865602203.0,
+560915966575.0,
 "South Korea"
 ],
 [
@@ -230,7 +230,7 @@
 [
 "1398.HK",
 "ICBC",
-355882773123.0,
+355427964830.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-227827142637.0,
+227710363014.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-217763605945.0,
+218040334513.0,
 "China"
 ],
 [
@@ -500,7 +500,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-199589766649.0,
+199793908064.0,
 "India"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-188472144233.0,
+188588771675.0,
 "Australia"
 ],
 [
@@ -576,6 +576,12 @@
 "Germany"
 ],
 [
+"2454.TW",
+"MediaTek",
+181183750417.0,
+"Taiwan"
+],
+[
 "WELL",
 "Welltower",
 180600061952.0,
@@ -591,12 +597,6 @@
 "QCOM",
 "QUALCOMM",
 180466204672.0,
-"United States"
-],
-[
-"APH",
-"Amphenol",
-180453621760.0,
 "United States"
 ]
 ]

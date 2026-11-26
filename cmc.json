@@ -90,16 +90,16 @@
 "United States"
 ],
 [
-"005930.KS",
-"Samsung",
-844382095458.0,
-"South Korea"
-],
-[
 "JPM",
 "JPMorgan Chase",
 841137782784.0,
 "United States"
+],
+[
+"005930.KS",
+"Samsung",
+836137122499.0,
+"South Korea"
 ],
 [
 "V",
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-559865602203.0,
+554088373242.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-498895802109.0,
+500465889168.0,
 "China"
 ],
 [
@@ -168,16 +168,16 @@
 "United States"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+421160188841.0,
+"China"
+],
+[
 "KO",
 "Coca-Cola",
 419822632960.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-418534461416.0,
-"China"
 ],
 [
 "CVX",
@@ -218,7 +218,7 @@
 [
 "601988.SS",
 "Bank of China",
-362117882547.0,
+363084825208.0,
 "China"
 ],
 [
@@ -230,13 +230,13 @@
 [
 "1398.HK",
 "ICBC",
-356564985564.0,
+357929376993.0,
 "China"
 ],
 [
 "688825.SS",
 "CXMT",
-351174517004.0,
+347136806975.0,
 "China"
 ],
 [
@@ -308,7 +308,7 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-274869430511.0,
+275871045911.0,
 "China"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-228761329443.0,
+228644549820.0,
 "China"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-202126914072.0,
+201266623191.0,
 "India"
 ],
 [
@@ -566,7 +566,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-186702039764.0,
+186642314223.0,
 "United Arab Emirates"
 ],
 [

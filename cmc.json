@@ -92,7 +92,7 @@
 [
 "005930.KS",
 "Samsung",
-847221767947.0,
+847706472195.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-569471199140.0,
+568946335966.0,
 "South Korea"
 ],
 [
@@ -236,7 +236,7 @@
 [
 "1398.HK",
 "ICBC",
-348308766167.0,
+352401154152.0,
 "China"
 ],
 [
@@ -426,6 +426,12 @@
 "United States"
 ],
 [
+"0857.HK",
+"PetroChina",
+223928726702.0,
+"China"
+],
+[
 "MUFG",
 "Mitsubishi UFJ Financial",
 220217114624.0,
@@ -438,15 +444,9 @@
 "United States"
 ],
 [
-"0857.HK",
-"PetroChina",
-218674913509.0,
-"China"
-],
-[
 "0941.HK",
 "China Mobile",
-217028386377.0,
+216890074887.0,
 "China"
 ],
 [
@@ -528,16 +528,16 @@
 "Canada"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-189253946369.0,
-"Australia"
-],
-[
 "GEV",
 "GE Vernova",
 189244112896.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+189176396814.0,
+"Australia"
 ],
 [
 "DELL",
@@ -576,6 +576,12 @@
 "Germany"
 ],
 [
+"2454.TW",
+"MediaTek",
+181754296182.0,
+"Taiwan"
+],
+[
 "WELL",
 "Welltower",
 180600061952.0,
@@ -591,12 +597,6 @@
 "QCOM",
 "QUALCOMM",
 180466204672.0,
-"United States"
-],
-[
-"APH",
-"Amphenol",
-180453621760.0,
 "United States"
 ]
 ]

@@ -90,16 +90,16 @@
 "United States"
 ],
 [
+"005930.KS",
+"Samsung",
+847221767947.0,
+"South Korea"
+],
+[
 "JPM",
 "JPMorgan Chase",
 841137782784.0,
 "United States"
-],
-[
-"005930.KS",
-"Samsung",
-834620106832.0,
-"South Korea"
 ],
 [
 "V",
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-556874582865.0,
+569471199140.0,
 "South Korea"
 ],
 [
@@ -528,6 +528,12 @@
 "Canada"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+189253946369.0,
+"Australia"
+],
+[
 "GEV",
 "GE Vernova",
 189244112896.0,
@@ -538,12 +544,6 @@
 "Dell",
 188874522624.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-187968460961.0,
-"Australia"
 ],
 [
 "C",

@@ -36,16 +36,16 @@
 "Taiwan"
 ],
 [
-"2222.SR",
-"Saudi Aramco",
-1748820317132.0,
-"Saudi Arabia"
-],
-[
 "SPCX",
 "SpaceX",
 1730770894848.0,
 "United States"
+],
+[
+"2222.SR",
+"Saudi Aramco",
+1696305779480.0,
+"Saudi Arabia"
 ],
 [
 "META",
@@ -98,7 +98,7 @@
 [
 "005930.KS",
 "Samsung",
-830802131176.0,
+830573252868.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-553037958889.0,
+552885602043.0,
 "South Korea"
 ],
 [
@@ -158,7 +158,7 @@
 [
 "601939.SS",
 "China Construction Bank",
-498895802109.0,
+499853312764.0,
 "China"
 ],
 [
@@ -168,16 +168,16 @@
 "United States"
 ],
 [
+"601288.SS",
+"Agricultural Bank of China",
+421305570785.0,
+"China"
+],
+[
 "KO",
 "Coca-Cola",
 419822632960.0,
 "United States"
-],
-[
-"601288.SS",
-"Agricultural Bank of China",
-419584752386.0,
-"China"
 ],
 [
 "CVX",
@@ -200,7 +200,7 @@
 [
 "RO.SW",
 "Roche",
-393821878084.0,
+393670399004.0,
 "Switzerland"
 ],
 [
@@ -218,7 +218,7 @@
 [
 "601988.SS",
 "Bank of China",
-362601373544.0,
+363210159888.0,
 "China"
 ],
 [
@@ -230,7 +230,13 @@
 [
 "1398.HK",
 "ICBC",
-357474602151.0,
+357182930800.0,
+"China"
+],
+[
+"688825.SS",
+"CXMT",
+347469220908.0,
 "China"
 ],
 [
@@ -238,12 +244,6 @@
 "Merck",
 345849298944.0,
 "United States"
-],
-[
-"688825.SS",
-"CXMT",
-344692929852.0,
-"China"
 ],
 [
 "BAC",
@@ -308,13 +308,13 @@
 [
 "600519.SS",
 "Kweichow Moutai",
-274906935284.0,
+275636032432.0,
 "China"
 ],
 [
 "NESN.SW",
 "Nestlé",
-269589381543.0,
+269485687071.0,
 "Switzerland"
 ],
 [
@@ -428,7 +428,7 @@
 [
 "0857.HK",
 "PetroChina",
-228994888689.0,
+228603417668.0,
 "China"
 ],
 [
@@ -446,7 +446,7 @@
 [
 "0941.HK",
 "China Mobile",
-218040334513.0,
+217724431228.0,
 "China"
 ],
 [
@@ -494,7 +494,7 @@
 [
 "RELIANCE.NS",
 "Reliance Industries",
-200975008738.0,
+201399857168.0,
 "India"
 ],
 [
@@ -542,7 +542,7 @@
 [
 "CBA.AX",
 "Commonwealth Bank",
-188816497747.0,
+188753795102.0,
 "Australia"
 ],
 [
@@ -566,7 +566,7 @@
 [
 "IHC.AE",
 "International Holding Company",
-186403412061.0,
+186328457935.0,
 "United Arab Emirates"
 ],
 [

@@ -198,16 +198,16 @@
 "United States"
 ],
 [
+"RO.SW",
+"Roche",
+393886150444.0,
+"Switzerland"
+],
+[
 "0700.HK",
 "Tencent",
 393477480000.0,
 "China"
-],
-[
-"RO.SW",
-"Roche",
-393123186323.0,
-"Switzerland"
 ],
 [
 "688825.SS",
@@ -314,7 +314,7 @@
 [
 "NESN.SW",
 "Nestlé",
-267126870809.0,
+267650280984.0,
 "Switzerland"
 ],
 [
@@ -344,7 +344,7 @@
 [
 "OR.PA",
 "L'Oréal",
-257767936794.0,
+258148080097.0,
 "France"
 ],
 [
@@ -456,6 +456,12 @@
 "China"
 ],
 [
+"MC.PA",
+"LVMH",
+214862553884.0,
+"France"
+],
+[
 "BABA",
 "Alibaba",
 214592897024.0,
@@ -468,15 +474,9 @@
 "United States"
 ],
 [
-"MC.PA",
-"LVMH",
-214512846480.0,
-"France"
-],
-[
 "SIE.DE",
 "Siemens",
-211397281227.0,
+211732489357.0,
 "Germany"
 ],
 [
@@ -492,16 +492,16 @@
 "United States"
 ],
 [
+"ITX.MC",
+"Inditex",
+201268055861.0,
+"Spain"
+],
+[
 "RELIANCE.NS",
 "Reliance Industries",
 201226012561.0,
 "India"
-],
-[
-"ITX.MC",
-"Inditex",
-200994797543.0,
-"Spain"
 ],
 [
 "MCD",
@@ -522,6 +522,12 @@
 "United States"
 ],
 [
+"ALV.DE",
+"Allianz SE",
+189724459526.0,
+"Germany"
+],
+[
 "TD",
 "Toronto Dominion Bank",
 189527916544.0,
@@ -532,12 +538,6 @@
 "GE Vernova",
 189244112896.0,
 "United States"
-],
-[
-"ALV.DE",
-"Allianz SE",
-189150291857.0,
-"Germany"
 ],
 [
 "CBA.AX",

@@ -522,6 +522,12 @@
 "United States"
 ],
 [
+"CBA.AX",
+"Commonwealth Bank",
+189641958668.0,
+"Australia"
+],
+[
 "TD",
 "Toronto Dominion Bank",
 189527916544.0,
@@ -538,12 +544,6 @@
 "Dell",
 188874522624.0,
 "United States"
-],
-[
-"CBA.AX",
-"Commonwealth Bank",
-188754522818.0,
-"Australia"
 ],
 [
 "ALV.DE",

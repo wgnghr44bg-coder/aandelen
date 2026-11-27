@@ -98,7 +98,7 @@
 [
 "005930.KS",
 "Samsung",
-830567062597.0,
+832021666721.0,
 "South Korea"
 ],
 [
@@ -140,7 +140,7 @@
 [
 "000660.KS",
 "SK Hynix",
-552881481381.0,
+546580828465.0,
 "South Korea"
 ],
 [
@@ -522,12 +522,6 @@
 "United States"
 ],
 [
-"CBA.AX",
-"Commonwealth Bank",
-189641958668.0,
-"Australia"
-],
-[
 "TD",
 "Toronto Dominion Bank",
 189527916544.0,
@@ -544,6 +538,12 @@
 "Dell",
 188874522624.0,
 "United States"
+],
+[
+"CBA.AX",
+"Commonwealth Bank",
+188621398745.0,
+"Australia"
 ],
 [
 "ALV.DE",
